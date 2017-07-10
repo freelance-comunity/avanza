@@ -162,7 +162,10 @@ return [
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
-        'Mitul\Generator\GeneratorServiceProvider'
+        'Mitul\Generator\GeneratorServiceProvider',
+
+        //AdminLTE
+        Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
 
         ],
 
@@ -217,7 +220,10 @@ return [
     //Crud Generator
     'Form'  => 'Illuminate\Html\FormFacade',
     'HTML'  => 'Illuminate\Html\HtmlFacade',
-    'Flash' => 'Laracasts\Flash\Flash'
+    'Flash' => 'Laracasts\Flash\Flash',
+
+    //AdminLTE
+    'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
 
     ],
 

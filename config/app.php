@@ -157,6 +157,12 @@ return [
         App\Providers\RouteServiceProvider::class,
         //laravel collective
         Collective\Html\HtmlServiceProvider::class,
+        
+        //Crud Generator
+        'Illuminate\View\ViewServiceProvider',
+        'Illuminate\Html\HtmlServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
+        'Mitul\Generator\GeneratorServiceProvider'
 
         ],
 
@@ -207,6 +213,11 @@ return [
     //laravel collective
     'Form' => Collective\Html\FormFacade::class,
     'Html' => Collective\Html\HtmlFacade::class,
+
+    //Crud Generator
+    'Form'  => 'Illuminate\Html\FormFacade',
+    'HTML'  => 'Illuminate\Html\HtmlFacade',
+    'Flash' => 'Laracasts\Flash\Flash'
 
     ],
 

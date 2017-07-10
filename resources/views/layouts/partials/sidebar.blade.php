@@ -34,9 +34,29 @@
             <li class="header">Menú</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
-            <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
+            <li><a href="#"><i class='fa fa-calculator'></i> <span>Cotizador</span></a></li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-money'></i>  <span>Créditos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                </ul>
+            </li>
+             <li class="treeview">
+                <a href="#"><i class='fa fa-book'></i>  <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
+            <li><a href="#"><i class="fa fa-th"></i> <span>Corte de Caja</span></a></li>
+            <li><a href="#"><i class="fa fa-calendar"></i> <span>Cobranza del día</span></a></li>
+            <li><a href="#"><i class="fa fa-dollar"></i> <span>Gastos</span></a></li>
+            <li><a href="#"><i class="fa fa-line-chart"></i> <span>Inversiones</span></a></li>
+            <li><a href="#"><i class="fa fa-university"></i> <span>Retiros</span></a></li>
+             <li class="treeview">
+                <a href="#"><i class='fa fa-cogs'></i>  <span>Configuración</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
                     <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>

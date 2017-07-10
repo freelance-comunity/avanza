@@ -3217,14 +3217,14 @@ table.text-center th {
 }
 .login-box-body,
 .register-box-body {
-  background: #fff;
+  background: rgb(60,60,60);
   padding: 20px;
   border-top: 0;
-  color: #666;
+  color: #fff;
 }
 .login-box-body .form-control-feedback,
 .register-box-body .form-control-feedback {
-  color: #777;
+  color: rgb(194, 71, 54);;
 }
 .login-box-msg,
 .register-box-msg {

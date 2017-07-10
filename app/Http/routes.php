@@ -12,9 +12,19 @@
 */
 
 Route::get('/', function () {
-    return redirect('login');
+	return redirect('login');
 });
 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+
+
+
+Route::resource('roles', 'RoleController');
+
+Route::get('roles/{id}/delete', [
+    'as' => 'roles.delete',
+    'uses' => 'RoleController@destroy',
+]);

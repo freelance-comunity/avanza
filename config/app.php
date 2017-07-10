@@ -167,6 +167,9 @@ return [
         //AdminLTE
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
 
+        //Entrust
+        Zizaco\Entrust\EntrustServiceProvider::class,
+
         ],
 
     /*
@@ -224,6 +227,9 @@ return [
 
     //AdminLTE
     'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
+
+    //Entrust
+    'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 

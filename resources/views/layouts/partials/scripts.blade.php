@@ -12,10 +12,10 @@
       user experience. Slimscroll is required when using the
       fixed layout. -->
 
-<<<<<<< HEAD
+
  <link rel="stylesheet" href="{{ asset('css/gmaps/jquery-gmaps-latlon-picker.css') }}">
       <script src="{{ asset('js/gmaps/jquery-gmaps-latlon-picker.js')}}"></script>
-=======
+
       <!-- Toastr --> 
       <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
       {!! Toastr::message() !!}
@@ -38,4 +38,4 @@
       	});
       </script>
       <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
->>>>>>> remotes/origin/master
+

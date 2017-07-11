@@ -11,3 +11,6 @@
       Both of these plugins are recommended to enhance the
       user experience. Slimscroll is required when using the
       fixed layout. -->
+
+ <link rel="stylesheet" href="{{ asset('css/gmaps/jquery-gmaps-latlon-picker.css') }}">
+      <script src="{{ asset('js/gmaps/jquery-gmaps-latlon-picker.js')}}"></script>

@@ -8,6 +8,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
 
 class RoleController extends AppBaseController
 {
@@ -65,7 +66,7 @@ class RoleController extends AppBaseController
 
 		$role = Role::create($input);
 
-		Flash::message('Role saved successfully.');
+		Toastr::success('Rol creado exitosamente.', 'Title', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('roles.index'));
 	}
@@ -131,7 +132,7 @@ class RoleController extends AppBaseController
 		$role->fill($request->all());
 		$role->save();
 
-		Flash::message('Role updated successfully.');
+		Toastr::info('Rol editado exitosamente.', 'Title', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('roles.index'));
 	}
@@ -156,7 +157,7 @@ class RoleController extends AppBaseController
 
 		$role->delete();
 
-		Flash::message('Role deleted successfully.');
+		Toastr::success('Rol eliminado exitosamente.', 'Roles del Sistema', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('roles.index'));
 	}

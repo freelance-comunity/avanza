@@ -1,23 +1,28 @@
-<!--- Name Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('name', 'Name:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
-</div>
+<div class="box box-danger">
+	<div class="box-header with-border">
+		<h3 class="box-title">Rol</h3>
+	</div>
+	<div class="box-body">
 
-<!--- Display Name Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('display_name', 'Display Name:') !!}
-    {!! Form::text('display_name', null, ['class' => 'form-control']) !!}
-</div>
+		<div class="form-group col-sm-6 col-lg-4">
+			{!! Form::label('name', 'Nombre Rol:') !!}
+			{!! Form::text('name', null, ['class' => 'form-control input-lg']) !!}
+		</div>
 
-<!--- Description Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('description', 'Description:') !!}
-    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
-</div>
+		<div class="form-group col-sm-6 col-lg-4">
+			{!! Form::label('display_name', 'Nombre Secundario Rol:') !!}
+			{!! Form::text('display_name', null, ['class' => 'form-control input-lg']) !!}
+		</div>
 
+		<div class="form-group col-sm-6 col-lg-4"></div>
 
-<!--- Submit Field --->
-<div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+		<div class="form-group col-sm-12 col-lg-12">
+			{!! Form::label('description', 'Descripción:') !!}
+			{!! Form::textarea('description', null, ['class' => 'form-control input-lg']) !!}
+		</div>
+
+		<div class="form-group col-sm-12">
+			{!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary']) !!}
+		</div>
+	</div>
 </div>

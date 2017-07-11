@@ -19,3 +19,11 @@ Route::get('roles/{id}/delete', [
     'as' => 'roles.delete',
     'uses' => 'RoleController@destroy',
 ]);
+
+
+Route::resource('branches', 'BranchController');
+
+Route::get('branches/{id}/delete', [
+    'as' => 'branches.delete',
+    'uses' => 'BranchController@destroy',
+]);

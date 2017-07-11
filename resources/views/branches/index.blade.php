@@ -15,38 +15,33 @@
         @if($branches->isEmpty())
         <div class="well text-center">No se encontraron sucursales</div>
         @else
-        <table class="table">
+        <div class="table-responsive">
+        <table class="table"  id="example">
             <thead>
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Dirección</th>
-                <th>Latitude</th>
-                <th>Length</th>
                 <th width="50px">Acción</th>
             </thead>
             <tbody>
 
                 @foreach($branches as $branch)
+                @include('branches.show')
                 <tr>
                     <td>{!! $branch->name !!}</td>
                     <td>{!! $branch->phone !!}</td>
                     <td>{!! $branch->address !!}</td>
-                    <td>{!! $branch->latitude !!}</td>
-                    <td>{!! $branch->length !!}</td>
                     <td>
-                        <a href="{!! route('branches.edit', [$branch->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="{!! route('branches.delete', [$branch->id]) !!}" onclick="return confirm('Are you sure wants to delete this Branch?')"><i class="glyphicon glyphicon-remove"></i></a>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myMapModal" id="trigger-btn">Pantalla completa</button>
-                        @include('branches.modal-map')
-                        
+                        <a href="{!! route('branches.edit', [$branch->id]) !!}"><i class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Editar"></i></a>
+                        <a href="{!! route('branches.delete', [$branch->id]) !!}" onclick="return confirm('Are you sure wants to delete this Branch?')"><i class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Eliminar"></i></a>
+                         <a data-toggle="tooltip" title="Ver"><i class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#myMapModal{{$branch->id}}"></i></a>
                     </td>
                 </tr>
                 
                 @endforeach
             </tbody>
         </table>
+        </div>
         @endif
     </div>
 </div>

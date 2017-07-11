@@ -17,11 +17,7 @@
             <div class="col-md-4">
               <label for="exampleInputEmail1">Teléfono</label>
               {!! Form::text('phone', null, ['class' => 'form-control input-lg']) !!}
-            </div>
-            <div class="col-md-4">
-              <label for="exampleInputEmail1">Dirección</label>
-              {!! Form::text('address', null, ['class' => 'form-control input-lg']) !!}
-            </div>         
+            </div>       
           </div>
           <!-- /.box-body -->
 
@@ -29,8 +25,8 @@
         
           <div class="box-body">
             <div class="gllpLatlonPicker">
-             {!! Form::label('location', '* Introduce la Dirección de la Sucursal:') !!}
-             <input type="text" class="gllpSearchField form-control input-lg" placeholder="Escribe la Direccion de la Sucursal">
+            <label for="exampleInputEmail1">Dirección</label>
+             {!! Form::text('address', null, ['class' => 'form-control input-lg gllpSearchField']) !!}
              <input type="button" class="gllpSearchButton btn bg-orange" value="Buscar">
              <br/><br/>
              <div class="gllpMap">Google Maps</div>
@@ -41,7 +37,7 @@
            </div>
          </div>
          
-       <div >
+       <div class="box-body" >
         {!! Form::submit('GUARDAR', ['class' => 'btn btn-primary']) !!}
       </div> 
 

@@ -14,6 +14,7 @@
         @if($roles->isEmpty())
         <div class="well text-center">No hay roles registrados.</div>
         @else
+        <div class="table-responsive">
         <table class="table"  id="example">
             <thead>
                 <th>Nombre Rol</th>
@@ -37,6 +38,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
         @endif
     </div>
 </div>

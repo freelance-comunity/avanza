@@ -1,9 +1,9 @@
- <div class="modal fade" id="myMapModal">
+ <div class="modal fade" id="myMapModal{{$branch->id}}">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Ubicación Google Maps</h4>
+        <h4 class="modal-title">Sucursal {{$branch->name}}</h4>
       </div>
       <div class="modal-body">
         <div class="container">
@@ -53,12 +53,6 @@
     map=new google.maps.Map(document.getElementById("map-canvas"),mapProp);
     marker.setMap(map);
     
-    google.maps.event.addListener(marker, 'click', function() {
-
-      infowindow.setContent(contentString);
-      infowindow.open(map, marker);
-
-    }); 
   };
   google.maps.event.addDomListener(window, 'load', initialize);
 

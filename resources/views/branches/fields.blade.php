@@ -26,7 +26,7 @@
           <!-- /.box-body -->
 
         </form>
-        <form class="form-horizontal">
+        
           <div class="box-body">
             <div class="gllpLatlonPicker">
              {!! Form::label('location', '* Introduce la Dirección de la Sucursal:') !!}
@@ -40,7 +40,7 @@
              <input type="hidden" class="gllpZoom" value="12"/>
            </div>
          </div>
-       </form>    
+         
        <div >
         {!! Form::submit('GUARDAR', ['class' => 'btn btn-primary']) !!}
       </div> 

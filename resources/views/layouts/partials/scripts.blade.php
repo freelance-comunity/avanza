@@ -11,3 +11,26 @@
       Both of these plugins are recommended to enhance the
       user experience. Slimscroll is required when using the
       fixed layout. -->
+
+      <!-- Toastr --> 
+      <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+      {!! Toastr::message() !!}
+
+      <!-- Tootip -->
+      <script>
+      	$(document).ready(function(){
+      		$('[data-toggle="tooltip"]').tooltip(); 
+      	});
+      </script>
+
+      {{-- Datatables --}}
+      <script>
+      	$(document).ready(function() {
+      		$('#example').DataTable( {
+      			"language": {
+      				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+      			}
+      		} );
+      	});
+      </script>
+      <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>

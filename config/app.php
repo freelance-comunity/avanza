@@ -170,6 +170,9 @@ return [
         //Entrust
         Zizaco\Entrust\EntrustServiceProvider::class,
 
+        //Toastr
+        Whossun\Toastr\ToastrServiceProvider::class,
+
         ],
 
     /*
@@ -230,6 +233,9 @@ return [
 
     //Entrust
     'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+
+    //Toastr
+    'Toastr'  => Whossun\Toastr\Facades\Toastr::class,
 
     ],
 

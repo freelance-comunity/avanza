@@ -1,4 +1,4 @@
-psc<div class="box box-danger">
+<div class="box box-danger">
 	<div class="box-header with-border">
 		<h3 class="box-title">Rol</h3>
 	</div>

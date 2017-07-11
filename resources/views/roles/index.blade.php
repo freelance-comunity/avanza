@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('main-content')
-@section('contentheader_title')
-Roles
-@endsection
+
 <div class="container">
 
     @include('flash::message')

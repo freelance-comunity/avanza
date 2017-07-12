@@ -28,8 +28,6 @@ Route::get('branches/{id}/delete', [
     'uses' => 'BranchController@destroy',
 ]);
 
-
-
 Route::get('charts','BranchController@charts');
 
 
@@ -43,4 +41,3 @@ Route::get('employees/{id}/delete', [
 Route::get('formwizard', function(){
 	return view('wizard');
 });
-

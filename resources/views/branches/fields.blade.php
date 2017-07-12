@@ -1,5 +1,4 @@
-<div class="row setup-content">
- <!-- Main content -->
+<!-- Main content -->
  <section class="content">
   <div class="row">
     <!-- left column -->
@@ -35,7 +34,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="box-body" >
          <div class="col-md-4">
           {!! Form::submit('GUARDAR', ['class' => 'btn btn-lg btn-primary','required'=>'required' ]) !!}
@@ -48,8 +47,3 @@
 
   <!-- /.row -->
 </section>
-
-
-
-
-</div>

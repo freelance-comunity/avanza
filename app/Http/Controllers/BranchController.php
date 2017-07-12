@@ -8,6 +8,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
 
 class BranchController extends AppBaseController
 {
@@ -22,24 +23,24 @@ class BranchController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Branch::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $branches = $query->get();
+		$branches = $query->get();
 
-        return view('branches.index')
-            ->with('branches', $branches)
-            ->with('attributes', $attributes);
+		return view('branches.index')
+		->with('branches', $branches)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -61,11 +62,11 @@ class BranchController extends AppBaseController
 	 */
 	public function store(CreateBranchRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$branch = Branch::create($input);
 
-		Flash::message('Branch saved successfully.');
+		Toastr::success('Sucursal creada exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('branches.index'));
 	}
@@ -88,6 +89,18 @@ class BranchController extends AppBaseController
 		}
 
 		return view('branches.show')->with('branch', $branch);
+	}
+	public function charts()
+	{
+		$branch = Branch::all();
+
+		if(empty($branch))
+		{
+			Flash::error('Branch not found');
+			return redirect(route('branches.index'));
+		}
+
+		return view('branches.charts')->with('branch', $branch);
 	}
 
 	/**
@@ -131,7 +144,7 @@ class BranchController extends AppBaseController
 		$branch->fill($request->all());
 		$branch->save();
 
-		Flash::message('Branch updated successfully.');
+		Toastr::info('Sucursal editada exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('branches.index'));
 	}
@@ -155,8 +168,7 @@ class BranchController extends AppBaseController
 		}
 
 		$branch->delete();
-
-		Flash::message('Branch deleted successfully.');
+		Toastr::success('Sucursal eliminada exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('branches.index'));
 	}

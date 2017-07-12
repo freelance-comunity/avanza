@@ -28,3 +28,5 @@ Route::get('branches/{id}/delete', [
     'uses' => 'BranchController@destroy',
 ]);
 
+
+Route::get('charts','BranchController@charts');

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('main-content')
+@section('contentheader_title')
+Crear nueva sucursal
+@endsection
 <div class="container">
 
     @include('common.errors')

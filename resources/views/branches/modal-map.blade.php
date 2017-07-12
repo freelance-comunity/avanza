@@ -1,4 +1,4 @@
- <div class="modal fade" id="myMapModal{{$branch->id}}">
+ <div class="modal fade" id="myMapBranch">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -58,7 +58,7 @@
 
   google.maps.event.addDomListener(window, "resize", resizingMap());
 
-  $('#myMapModal').on('show.bs.modal', function() {
+  $('#myMapBranch').on('show.bs.modal', function() {
    //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
    resizeMap();
  })

@@ -29,4 +29,18 @@ Route::get('branches/{id}/delete', [
 ]);
 
 
+
 Route::get('charts','BranchController@charts');
+
+
+Route::resource('employees', 'EmployeeController');
+
+Route::get('employees/{id}/delete', [
+    'as' => 'employees.delete',
+    'uses' => 'EmployeeController@destroy',
+]);
+
+Route::get('formwizard', function(){
+	return view('wizard');
+});
+

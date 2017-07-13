@@ -97,7 +97,7 @@
         </div>
 
         <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('no_economic_dependent', '´No. de Dependientes Economicos') !!}
+            {!! Form::label('no_economic_dependent', 'No. de Dependientes Economicos') !!}
             {!! Form::select('no_economic_dependent',['1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
         </div>
 

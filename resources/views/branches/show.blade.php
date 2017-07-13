@@ -13,8 +13,8 @@ Detalles de la {{$branch->name}}
               <div class="box box-widget widget-user-2 bg-navy">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header ">
-                  <h3 class="widget-user-username">{{$branch->name}}</h3>
-                  <h5 class="widget-user-desc">{{$branch->address}}</h5>
+                  <h3 class="widget-user-username">{{strtoupper($branch->name)}}</h3>
+                  <h5 class="widget-user-desc">{{strtoupper($branch->address) }}</h5>
               </div>
               <div class="box-footer no-padding">
                   <ul class="nav nav-stacked">

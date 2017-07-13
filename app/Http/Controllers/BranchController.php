@@ -172,4 +172,18 @@ class BranchController extends AppBaseController
 
 		return redirect(route('branches.index'));
 	}
+	/*public function client($id)
+	{
+		$branch = Branch::find($id);
+		$client = $branch->client;
+		if (Empty($client)) {
+			return view ('clients.create')
+		->with('branch', $branch);
+		}
+		else
+		{
+			Toastr::info('aguas.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('branches.index', [$branch->id])); 
+		}
+	}*/
 }

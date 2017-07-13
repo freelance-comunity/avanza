@@ -27,4 +27,9 @@ class Branch extends Model
 		"length" => "required"
 	];
 
+	public function clients()
+    {
+        return $this->hasMany('App\Models\Client');
+    }
+
 }

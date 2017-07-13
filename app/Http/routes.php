@@ -41,3 +41,16 @@ Route::get('employees/{id}/delete', [
 Route::get('formwizard', function(){
 	return view('wizard');
 });
+
+
+Route::resource('clients', 'ClientController');
+
+Route::get('clients/{id}/delete', [
+    'as' => 'clients.delete',
+    'uses' => 'ClientController@destroy',
+]);
+
+ Route::get('client/{id}/',[
+    'as' => 'branch.client',
+    'uses' => 'BranchController@client',
+    ]);

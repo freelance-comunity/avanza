@@ -54,3 +54,19 @@ Route::get('clients/{id}/delete', [
     'as' => 'branch.client',
     'uses' => 'BranchController@client',
     ]);
+
+Route::resource('employeelocations', 'EmployeelocationController');
+
+Route::get('employeelocations/{id}/delete', [
+    'as' => 'employeelocations.delete',
+    'uses' => 'EmployeelocationController@destroy',
+]);
+
+
+Route::resource('employeecredentials', 'EmployeecredentialsController');
+
+Route::get('employeecredentials/{id}/delete', [
+    'as' => 'employeecredentials.delete',
+    'uses' => 'EmployeecredentialsController@destroy',
+]);
+

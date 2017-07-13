@@ -23,7 +23,6 @@
         </div>
     </div>
     <div class="box-body">
-     <form role="form">
         <div class="row setup-content" id="step-1">
             <div class="col-xs-12">
                 <div class="col-md-12">
@@ -34,11 +33,6 @@
                     </div>
 
                     <div class="form-group col-sm-6 col-lg-4">
-                        {!! Form::label('email', 'Correo Electrónico:') !!}
-                        <input type="email" class="form-control input-lg" placeholder="example@gmail.com" name="email" value="{{ old('email') }}" required="required" />
-                    </div>
-
-                    <div class="form-group col-sm-6 col-lg-4">
                         {!! Form::label('mother_last_name', 'Apellido Paterno:') !!}
                         {!! Form::text('mother_last_name', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO', 'required' => 'required']) !!}
                     </div>
@@ -46,6 +40,11 @@
                     <div class="form-group col-sm-6 col-lg-4">
                         {!! Form::label('father_last_name', 'Apellido Materno:') !!}
                         {!! Form::text('father_last_name', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO', 'required' => 'required']) !!}
+                    </div>
+
+                    <div class="form-group col-sm-6 col-lg-4">
+                        {!! Form::label('email', 'Correo Electrónico:') !!}
+                        <input type="email" class="form-control input-lg" placeholder="EJEMPLO@GMAIL.COM" name="email" value="{{ old('email') }}" required="required" />
                     </div>
 
                     <div class="form-group col-sm-6 col-lg-4">
@@ -102,6 +101,12 @@
                         {!! Form::label('avatar', 'Foto:') !!}
                         {!! Form::file('avatar') !!}
                     </div>
+
+                    <div class="form-group col-sm-12 col-lg-12">
+                    {!! Form::label('branch_id', 'Sucursal:') !!}
+                    {!! Form::select('branch_id',$branches, null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+                    </div>
+
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
                 </div>
             </div>
@@ -217,11 +222,10 @@
                         @endforeach
                     </div>
                     <div class="form-group col-sm-12">
-                        <button class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
+                        <button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
-</div>
+    </div>
 </div>

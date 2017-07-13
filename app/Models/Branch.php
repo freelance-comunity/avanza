@@ -27,9 +27,16 @@ class Branch extends Model
 		"length" => "required"
 	];
 
+<<<<<<< HEAD
 	public function clients()
     {
         return $this->hasMany('App\Models\Client');
     }
+=======
+	public function users()
+	{
+		return $this->hasMany('App\User');
+	}
+>>>>>>> remotes/origin/master
 
 }

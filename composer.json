@@ -12,7 +12,8 @@
         "acacha/admin-lte-template-laravel": "2.*",
         "yohang88/letter-avatar": "^1.0",
         "zizaco/entrust": "5.2.x-dev",
-        "whossun/laravel-toastr": "^1.0"
+        "whossun/laravel-toastr": "^1.0",
+        "intervention/image": "^2.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

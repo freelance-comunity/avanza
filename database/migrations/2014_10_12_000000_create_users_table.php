@@ -17,8 +17,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('father_last_name');
             $table->string('mother_last_name');  
-            $table->string('email')->unique();
-            $table->string('password');
             $table->date('birthdate');
             $table->string('birth_entity');
             $table->string('place_of_birth');
@@ -30,6 +28,9 @@ class CreateUsersTable extends Migration
             $table->string('phone_1');
             $table->string('phone_2');
             $table->string('avatar');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->integer('branch_id')->unsigned()->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

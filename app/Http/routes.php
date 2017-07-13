@@ -41,3 +41,19 @@ Route::get('employees/{id}/delete', [
 Route::get('formwizard', function(){
 	return view('wizard');
 });
+
+
+Route::resource('employeelocations', 'EmployeelocationController');
+
+Route::get('employeelocations/{id}/delete', [
+    'as' => 'employeelocations.delete',
+    'uses' => 'EmployeelocationController@destroy',
+]);
+
+
+Route::resource('employeecredentials', 'EmployeecredentialsController');
+
+Route::get('employeecredentials/{id}/delete', [
+    'as' => 'employeecredentials.delete',
+    'uses' => 'EmployeecredentialsController@destroy',
+]);

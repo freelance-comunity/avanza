@@ -21,14 +21,8 @@
                     <th>Nombre</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
+                    <th>Correo Electrónico</th>
                     <th>Fecha de Nacimiento</th>
-                    <th>Entidad de Nacimiento</th>
-                    <th>Lugar de Nacimiento</th>
-                    <th>Género</th>
-                    <th>Estado Civil</th>
-                    <th>País de Nacimiento</th>
-                    <th>Nacionalidad</th>
-                    <th>Escolaridad</th>
                     <th>Teléfono 1</th>
                     <th>Teléfono 2</th>
                     <th>Foto</th>
@@ -37,24 +31,23 @@
                 <tbody>
 
                     @foreach($employees as $employee)
+                    @php
+                        $credential = $employee->credential;
+                    @endphp
+                    @include('employees.show')
                     <tr>
                         <td>{!! $employee->name !!}</td>
                         <td>{!! $employee->father_last_name !!}</td>
                         <td>{!! $employee->mother_last_name !!}</td>
+                        <td>{!! $employee->email !!}</td>
                         <td>{!! $employee->birthdate !!}</td>
-                        <td>{!! $employee->birth_entity !!}</td>
-                        <td>{!! $employee->place_of_birth !!}</td>
-                        <td>{!! $employee->gender !!}</td>
-                        <td>{!! $employee->civil_status !!}</td>
-                        <td>{!! $employee->country_of_birth !!}</td>
-                        <td>{!! $employee->nationality !!}</td>
-                        <td>{!! $employee->scholarship !!}</td>
                         <td>{!! $employee->phone_1 !!}</td>
                         <td>{!! $employee->phone_2 !!}</td>
-                        <td>{!! $employee->avatar !!}</td>
+                        <td><img src="{{ asset('/uploads/avatars') }}/{!! $employee->avatar !!}" style="width: 50px; height: 50px;"></td>
                         <td>
-                            <a href="{!! route('employees.edit', [$employee->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a href="{!! route('employees.delete', [$employee->id]) !!}" onclick="return confirm('Are you sure wants to delete this Employee?')"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a data-toggle="tooltip" title="Editar" href="{!! route('employees.edit', [$employee->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a data-toggle="tooltip" title="Eliminar" href="{!! route('employees.delete', [$employee->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar este empleado?')"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a data-toggle="tooltip" title="Ver"><i class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#detail{{ $employee->id }}"></i></a>
                         </td>
                     </tr>
                     @endforeach

@@ -27,4 +27,9 @@ class Branch extends Model
 		"length" => "required"
 	];
 
+	public function users()
+	{
+		return $this->hasMany('App\User');
+	}
+
 }

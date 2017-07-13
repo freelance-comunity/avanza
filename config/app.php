@@ -173,6 +173,10 @@ return [
         //Toastr
         Whossun\Toastr\ToastrServiceProvider::class,
 
+        /* Intervention Image */
+        Intervention\Image\ImageServiceProvider::class,
+        
+
         ],
 
     /*
@@ -236,6 +240,10 @@ return [
 
     //Toastr
     'Toastr'  => Whossun\Toastr\Facades\Toastr::class,
+
+    /* Intervention Image */
+    'Image' => Intervention\Image\Facades\Image::class,
+    
 
     ],
 

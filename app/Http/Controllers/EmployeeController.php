@@ -3,12 +3,17 @@
 use App\Http\Requests;
 use App\Http\Requests\CreateEmployeeRequest;
 use App\User;
+use App\Models\Branch;
+use App\Models\Employeelocation;
+use App\Models\Employeecredentials;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
 use Toastr;
+use Image;
+use Hash;
 
 class EmployeeController extends AppBaseController
 {
@@ -23,24 +28,24 @@ class EmployeeController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = User::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $employees = $query->get();
+		$employees = $query->get();
 
-        return view('employees.index')
-            ->with('employees', $employees)
-            ->with('attributes', $attributes);
+		return view('employees.index')
+		->with('employees', $employees)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -49,8 +54,10 @@ class EmployeeController extends AppBaseController
 	 * @return Response
 	 */
 	public function create()
-	{
-		return view('employees.create');
+	{	
+		$branches = Branch::pluck('name', 'id');
+		return view('employees.create')
+		->with('branches', $branches);
 	}
 
 	/**
@@ -62,11 +69,50 @@ class EmployeeController extends AppBaseController
 	 */
 	public function store(CreateEmployeeRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
+		$input['password'] = Hash::make($request->input('name').$request->input('father_last_name'));
 
+		/* Save avatar employee */
+		if($request->hasFile('avatar')){
+			$avatar = $request->file('avatar');
+			$filename = time() . '.' . $avatar->getClientOriginalExtension();
+			Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+			$input['avatar'] = $filename;
+		}
+
+		/* Save new employee */		
 		$employee = User::create($input);
 
-		Toastr::success('Personal creado exitosamente.', 'Title', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		/* Get employee location data  */		
+		$data_location['country'] = $request->input('country');
+		$data_location['state']   = $request->input('state');
+		$data_location['municipality'] = $request->input('municipality');
+		$data_location['colony']  = $request->input('colony');
+		$data_location['type_of_road'] = $request->input('type_of_road');
+		$data_location['name_road'] = $request->input('name_road');
+		$data_location['outdoor_number'] = $request->input('outdoor_number');
+		$data_location['interior_number'] = $request->input('interior_number');
+		$data_location['postal_code'] = $request->input('postal_code');
+		$data_location['user_id'] = $employee->id;
+
+		/* Save employee location data */
+		$location = Employeelocation::create($data_location);
+
+		/* Get employee credentials data */
+		$data_credentials['ine'] = $request->input('ine');
+		$data_credentials['curp'] = $request->input('curp');
+		$data_credentials['rfc'] = $request->input('rfc');
+		$data_credentials['passport'] = $request->input('passport');
+		$data_credentials['number_imss'] = $request->input('number_imss');
+		$data_credentials['driver_license'] = $request->input('driver_license');
+		$data_credentials['professional_id'] = $request->input('professional_id');
+		$data_credentials['user_id'] = $employee->id;
+
+		/* Save employee credentials data */	
+		$credentials = Employeecredentials::create($data_credentials);
+		
+		
+		Toastr::success('Personal creado exitosamente.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('employees.index'));
 	}
@@ -84,7 +130,7 @@ class EmployeeController extends AppBaseController
 
 		if(empty($employee))
 		{
-			Flash::error('Employee not found');
+			Toastr::error('Personal no encontrado en nuestros registros.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('employees.index'));
 		}
 
@@ -103,7 +149,7 @@ class EmployeeController extends AppBaseController
 
 		if(empty($employee))
 		{
-			Flash::error('Employee not found');
+			Toastr::error('Personal no encontrado en nuestros registros.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('employees.index'));
 		}
 
@@ -125,14 +171,14 @@ class EmployeeController extends AppBaseController
 
 		if(empty($employee))
 		{
-			Flash::error('Employee not found');
+			Toastr::error('Personal no encontrado en nuestros registros.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('employees.index'));
 		}
 
 		$employee->fill($request->all());
 		$employee->save();
 
-		Flash::message('Employee updated successfully.');
+		Toastr::info('Personal editado exitosamente.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('employees.index'));
 	}
@@ -151,13 +197,13 @@ class EmployeeController extends AppBaseController
 
 		if(empty($employee))
 		{
-			Flash::error('Employee not found');
+			Toastr::error('Personal no encontrado en nuestros registros.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('employees.index'));
 		}
 
 		$employee->delete();
 
-		Flash::message('Employee deleted successfully.');
+		Toastr::info('Personal eliminado exitosamente.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('employees.index'));
 	}

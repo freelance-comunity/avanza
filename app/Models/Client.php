@@ -47,7 +47,7 @@ class Client extends Model
 		"phone_two" => "required",
 		"no_children" => "required",
 		"no_economic_dependent" => "required",
-		"avatar" => "required"
+	
 	];
 	public function branch()
     {

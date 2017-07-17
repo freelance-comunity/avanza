@@ -219,15 +219,20 @@ class ClientController extends AppBaseController
 	 */
 	public function edit($id)
 	{
-		$client = Client::find($id);
 
+		$client = Client::find($id);
+		$clientLocation = ClientLocation::find($id);
+		$clientcompany = ClientCompany::find($id);
 		if(empty($client))
 		{
 			Flash::error('Client not found');
 			return redirect(route('clients.index'));
 		}
 
-		return view('clients.edit')->with('client', $client);
+		return view('clients.edit')
+		->with('client', $client)
+		->with('clientLocation',$clientLocation)
+		->with('clientcompany',$clientcompany);
 	}
 
 	/**

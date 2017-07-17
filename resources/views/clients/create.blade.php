@@ -8,7 +8,7 @@ Crear Nuevo Cliente
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'clients.store']) !!}
+    {!! Form::open(['route' => 'clients.store', 'files' => 'true']) !!}
 
         @include('clients.fields')
 

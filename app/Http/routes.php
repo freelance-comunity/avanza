@@ -42,7 +42,6 @@ Route::get('formwizard', function(){
 	return view('wizard');
 });
 
-
 Route::resource('clients', 'ClientController');
 
 Route::get('clients/{id}/delete', [
@@ -69,8 +68,6 @@ Route::get('employeecredentials/{id}/delete', [
     'as' => 'employeecredentials.delete',
     'uses' => 'EmployeecredentialsController@destroy',
 ]);
-
-
 
 Route::resource('clientLocations', 'ClientLocationController');
 

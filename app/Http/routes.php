@@ -70,3 +70,51 @@ Route::get('employeecredentials/{id}/delete', [
     'uses' => 'EmployeecredentialsController@destroy',
 ]);
 
+
+
+Route::resource('clientLocations', 'ClientLocationController');
+
+Route::get('clientLocations/{id}/delete', [
+    'as' => 'clientLocations.delete',
+    'uses' => 'ClientLocationController@destroy',
+]);
+
+
+Route::resource('clientCredentials', 'ClientCredentialController');
+
+Route::get('clientCredentials/{id}/delete', [
+    'as' => 'clientCredentials.delete',
+    'uses' => 'ClientCredentialController@destroy',
+]);
+
+
+Route::resource('clientAvals', 'ClientAvalController');
+
+Route::get('clientAvals/{id}/delete', [
+    'as' => 'clientAvals.delete',
+    'uses' => 'ClientAvalController@destroy',
+]);
+
+
+Route::resource('spouses', 'SpouseController');
+
+Route::get('spouses/{id}/delete', [
+    'as' => 'spouses.delete',
+    'uses' => 'SpouseController@destroy',
+]);
+
+
+Route::resource('clientCompanies', 'ClientCompanyController');
+
+Route::get('clientCompanies/{id}/delete', [
+    'as' => 'clientCompanies.delete',
+    'uses' => 'ClientCompanyController@destroy',
+]);
+
+
+Route::resource('clientReferences', 'ClientReferencesController');
+
+Route::get('clientReferences/{id}/delete', [
+    'as' => 'clientReferences.delete',
+    'uses' => 'ClientReferencesController@destroy',
+]);

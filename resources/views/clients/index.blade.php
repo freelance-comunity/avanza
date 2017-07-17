@@ -27,16 +27,8 @@ Todos los Clientes
                     <th>Fecha de Nacimiento</th>
                     <th>Entidad de Nacimiento</th>
                     <th>Genero</th>
-                    <th>Civil Status</th>
-                    <th>Country</th>
-                    <th>Nationality</th>
-                    <th>Scholarship</th>
-                    <th>Phone One</th>
-                    <th>Phone Two</th>
-                    <th>No Children</th>
-                    <th>No Economic Dependent</th>
                     <th>Sucursal</th>
-                    <th>Avatar</th>
+                    <th>Imagen</th>
                     <th width="50px">Action</th>
                 </thead>
                 <tbody>
@@ -54,20 +46,12 @@ Todos los Clientes
                         <td>{!! $client->birthdate !!}</td>
                         <td>{!! $client->birth_entity !!}</td>
                         <td>{!! $client->gender !!}</td>
-                        <td>{!! $client->civil_status !!}</td>
-                        <td>{!! $client->country !!}</td>
-                        <td>{!! $client->nationality !!}</td>
-                        <td>{!! $client->scholarship !!}</td>
-                        <td>{!! $client->phone_one !!}</td>
-                        <td>{!! $client->phone_two !!}</td>
-                        <td>{!! $client->no_children !!}</td>
-                        <td>{!! $client->no_economic_dependent !!}</td>
                         <td>{{$branch->name}}</td>
-                        <td>{!! $client->avatar !!}</td>
+                        <td><img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" style="width: 50px; height: 50px;"></td>
                         <td>
                             <a href="{!! route('clients.edit', [$client->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                             <a href="{!! route('clients.delete', [$client->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar este cliente?')"><i class="glyphicon glyphicon-remove"></i></a>
-                            <a  data-toggle="tooltip" title="Ver"><i class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#exampleModalLong{{$client->id}}"></i></a>                           
+                            <a  data-toggle="tooltip" title="Ver"><i class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#detail{{$client->id}}"></i></a>                           
                         </td>
                     </tr>
                     @endforeach

@@ -101,10 +101,21 @@
                         {!! Form::label('avatar', 'Foto:') !!}
                         {!! Form::file('avatar') !!}
                     </div>
-
+                    @php
+                    $count = App\Models\Branch::all();
+                    @endphp
                     <div class="form-group col-sm-12 col-lg-12">
-                    {!! Form::label('branch_id', 'Sucursal:') !!}
-                    {!! Form::select('branch_id',$branches, null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+                        {!! Form::label('branch_id', '* Sucursal:') !!}
+                        <select name="branch_id" value="" class="form-control input-lg" id="branch">
+                            @if($count ->isEmpty())
+                            <option value="">No hay sucursales registradas en el sistema</option>
+                            @else 
+                            <option selected value="">Seleccione Sucursal</option>
+                            @foreach($count as $branches)
+                            <option value="{{ $branches->id}}">{{$branches->name}}</option>
+                            @endforeach
+                            @endif
+                        </select>
                     </div>
 
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>

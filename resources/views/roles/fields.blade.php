@@ -6,19 +6,19 @@
 
 		<div class="form-group col-sm-6 col-lg-4">
 			{!! Form::label('name', 'Nombre Rol:') !!}
-			{!! Form::text('name', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE ROL', 'required' => 'required']) !!}
+			{!! Form::text('name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'NOMBRE ROL', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 		</div>
 
 		<div class="form-group col-sm-6 col-lg-4">
 			{!! Form::label('display_name', 'Nombre Secundario Rol:') !!}
-			{!! Form::text('display_name', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE SECUNDARIO', 'required' => 'required']) !!}
+			{!! Form::text('display_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'NOMBRE SECUNDARIO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 		</div>
 
 		<div class="form-group col-sm-6 col-lg-4"></div>
 
 		<div class="form-group col-sm-12 col-lg-12">
 			{!! Form::label('description', 'Descripción:') !!}
-			{!! Form::textarea('description', null, ['class' => 'form-control input-lg', 'placeholder' => 'DESCRIPCIÓN...', 'required' => 'required']) !!}
+			{!! Form::textarea('description', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'DESCRIPCIÓN...', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 		</div>
 
 		<div class="form-group col-sm-12">

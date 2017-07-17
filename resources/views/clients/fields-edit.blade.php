@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="box-body">
-           <div class="row setup-content" id="step-1">
+         <div class="row setup-content" id="step-1">
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('folio', 'Folio:') !!}
                 {!! Form::text('folio', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE','required'=>'required']) !!}
@@ -63,41 +63,7 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('birth_entity', 'Entidad de Nacimiento:') !!}
-                <select name="birth_entity" class="form-control input-lg" required="required">
-                    <option value="Todo México">Todo México</option>
-                    <option value="Aguascalientes">Aguascalientes</option>
-                    <option value="Baja California">Baja California</option>
-                    <option value="Baja California Sur">Baja California Sur</option>
-                    <option value="Campeche">Campeche</option>
-                    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-                    <option value="Colima">Colima</option>
-                    <option value="Chiapas">Chiapas</option>
-                    <option value="Chihuahua">Chihuahua</option>
-                    <option value="Distrito Federal">Distrito Federal</option>
-                    <option value="Durango">Durango</option>
-                    <option value="Guanajuato">Guanajuato</option>
-                    <option value="Guerrero">Guerrero</option>
-                    <option value="Hidalgo">Hidalgo</option>
-                    <option value="Jalisco">Jalisco</option>
-                    <option value="México">México</option>
-                    <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
-                    <option value="Morelos">Morelos</option>
-                    <option value="Nayarit">Nayarit</option>
-                    <option value="Nuevo León">Nuevo León</option>
-                    <option value="Oaxaca">Oaxaca</option>
-                    <option value="Puebla">Puebla</option>
-                    <option value="Querétaro">Querétaro</option>
-                    <option value="Quintana Roo">Quintana Roo</option>
-                    <option value="San Luis Potosí">San Luis Potosí</option>
-                    <option value="Sinaloa">Sinaloa</option>
-                    <option value="Sonora">Sonora</option>
-                    <option value="Tabasco">Tabasco</option>
-                    <option value="Tamaulipas">Tamaulipas</option>
-                    <option value="Tlaxcala">Tlaxcala</option>
-                    <option value="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
-                    <option value="Yucatán">Yucatán</option>
-                    <option value="Zacatecas">Zacatecas</option>
-                </select>
+                {!! Form::text('birth_entity', null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
             </div>
 
 
@@ -172,40 +138,40 @@
                 <div class="gllpLatlonPicker">
                   <label for="exampleInputEmail1">DIRECCIÓN DEL CLIENTE</label>
                   <div class="input-group">
-                   <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
-                   <div class="input-group-btn">
-                     <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
-                 </div>
-             </div>
-             <br/><br/>
-             <div class="gllpMap">Google Maps</div>
-             <br/>
-             <input type="hidden" name="latitude" class="gllpLatitude" value="16.753239967660058"/>
-             <input type="hidden" name="lenght" class="gllpLongitude" value="-93.11789682636714"/>
-             <input type="hidden" class="gllpZoom" value="12"/>
-         </div>
-     </div>
-     <div class="col-md-6">
-        <div class="gllpLatlonPicker">
-          <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
-          <div class="input-group">
-           <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
-           <div class="input-group-btn">
-             <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
-         </div>
-     </div>
-     <br/><br/>
-     <div class="gllpMap">Google Maps</div>
-     <br/>
-     <input type="hidden" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
-     <input type="hidden" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
-     <input type="hidden" class="gllpZoom" value="12"/>
- </div>
-</div>
+                     <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
+                     <div class="input-group-btn">
+                       <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+                   </div>
+               </div>
+               <br/><br/>
+               <div class="gllpMap">Google Maps</div>
+               <br/>
+               <input type="hidden" name="latitude" class="gllpLatitude" value="{{$clientLocation->latitude}}"/>
+               <input type="hidden" name="lenght" class="gllpLongitude" value="-93.11789682636714"/>
+               <input type="hidden" class="gllpZoom" value="12"/>
+           </div>
+       </div>
+        <div class="col-md-6">
+                <div class="gllpLatlonPicker">
+                  <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
+                  <div class="input-group">
+                     <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
+                     <div class="input-group-btn">
+                       <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+                   </div>
+               </div>
+               <br/><br/>
+               <div class="gllpMap">Google Maps</div>
+               <br/>
+               <input type="hidden" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
+               <input type="hidden" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+               <input type="hidden" class="gllpZoom" value="12"/>
+           </div>
+       </div>
 
-<div class="form-group col-sm-6">
-    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-</div>
+       <div class="form-group col-sm-6">
+        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+    </div>
 </div>
 
 <!-- CLIENTS LOCATION-->
@@ -215,46 +181,12 @@
             <h3> Ubicación </h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('country', 'País:') !!}
-                 {!! Form::select('country',['MÉXICO' => 'MÉXICO'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+                {!! Form::text('country', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE PAÍS', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('state', 'Estado:') !!}
-                <select name="state" class="form-control input-lg" required="required">
-                    <option value="Todo México">Todo México</option>
-                    <option value="Aguascalientes">Aguascalientes</option>
-                    <option value="Baja California">Baja California</option>
-                    <option value="Baja California Sur">Baja California Sur</option>
-                    <option value="Campeche">Campeche</option>
-                    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-                    <option value="Colima">Colima</option>
-                    <option value="Chiapas">Chiapas</option>
-                    <option value="Chihuahua">Chihuahua</option>
-                    <option value="Distrito Federal">Distrito Federal</option>
-                    <option value="Durango">Durango</option>
-                    <option value="Guanajuato">Guanajuato</option>
-                    <option value="Guerrero">Guerrero</option>
-                    <option value="Hidalgo">Hidalgo</option>
-                    <option value="Jalisco">Jalisco</option>
-                    <option value="México">México</option>
-                    <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
-                    <option value="Morelos">Morelos</option>
-                    <option value="Nayarit">Nayarit</option>
-                    <option value="Nuevo León">Nuevo León</option>
-                    <option value="Oaxaca">Oaxaca</option>
-                    <option value="Puebla">Puebla</option>
-                    <option value="Querétaro">Querétaro</option>
-                    <option value="Quintana Roo">Quintana Roo</option>
-                    <option value="San Luis Potosí">San Luis Potosí</option>
-                    <option value="Sinaloa">Sinaloa</option>
-                    <option value="Sonora">Sonora</option>
-                    <option value="Tabasco">Tabasco</option>
-                    <option value="Tamaulipas">Tamaulipas</option>
-                    <option value="Tlaxcala">Tlaxcala</option>
-                    <option value="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
-                    <option value="Yucatán">Yucatán</option>
-                    <option value="Zacatecas">Zacatecas</option>
-                </select>
+                {!! Form::text('state', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE ESTADO', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -339,7 +271,7 @@
             <h3>Aval </h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('name_aval', 'Nombre(s):') !!}
-                {!! Form::text('name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL AVA', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -353,7 +285,7 @@
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('birthdate_aval', 'Fecha de nacimiento:') !!}
-                <input type="date" name="birthdate_aval" class="form-control input-lg" required="required">
+                 <input type="date" name="birthdate_aval" class="form-control input-lg" required="required">
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('curp_aval', 'CURP:') !!}
@@ -373,41 +305,7 @@
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('state_aval', 'Estado:') !!}
-               <select name="state_aval" class="form-control input-lg" required="required">
-                    <option value="Todo México">Todo México</option>
-                    <option value="Aguascalientes">Aguascalientes</option>
-                    <option value="Baja California">Baja California</option>
-                    <option value="Baja California Sur">Baja California Sur</option>
-                    <option value="Campeche">Campeche</option>
-                    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-                    <option value="Colima">Colima</option>
-                    <option value="Chiapas">Chiapas</option>
-                    <option value="Chihuahua">Chihuahua</option>
-                    <option value="Distrito Federal">Distrito Federal</option>
-                    <option value="Durango">Durango</option>
-                    <option value="Guanajuato">Guanajuato</option>
-                    <option value="Guerrero">Guerrero</option>
-                    <option value="Hidalgo">Hidalgo</option>
-                    <option value="Jalisco">Jalisco</option>
-                    <option value="México">México</option>
-                    <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
-                    <option value="Morelos">Morelos</option>
-                    <option value="Nayarit">Nayarit</option>
-                    <option value="Nuevo León">Nuevo León</option>
-                    <option value="Oaxaca">Oaxaca</option>
-                    <option value="Puebla">Puebla</option>
-                    <option value="Querétaro">Querétaro</option>
-                    <option value="Quintana Roo">Quintana Roo</option>
-                    <option value="San Luis Potosí">San Luis Potosí</option>
-                    <option value="Sinaloa">Sinaloa</option>
-                    <option value="Sonora">Sonora</option>
-                    <option value="Tabasco">Tabasco</option>
-                    <option value="Tamaulipas">Tamaulipas</option>
-                    <option value="Tlaxcala">Tlaxcala</option>
-                    <option value="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
-                    <option value="Yucatán">Yucatán</option>
-                    <option value="Zacatecas">Zacatecas</option>
-                </select>
+                {!! Form::text('state_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE ESTADO', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -446,7 +344,7 @@
             <h3> Conyugue </h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('firts_name_spouse', 'Nombre(s):') !!}
-                {!! Form::text('firts_name_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL CONYUGUE', 'required' => 'required']) !!}
+                {!! Form::text('firts_name_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL AVA', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -480,41 +378,7 @@
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('state_spouse', 'Estado:') !!}
-               <select name="state_spouse" class="form-control input-lg" required="required">
-                    <option value="Todo México">Todo México</option>
-                    <option value="Aguascalientes">Aguascalientes</option>
-                    <option value="Baja California">Baja California</option>
-                    <option value="Baja California Sur">Baja California Sur</option>
-                    <option value="Campeche">Campeche</option>
-                    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-                    <option value="Colima">Colima</option>
-                    <option value="Chiapas">Chiapas</option>
-                    <option value="Chihuahua">Chihuahua</option>
-                    <option value="Distrito Federal">Distrito Federal</option>
-                    <option value="Durango">Durango</option>
-                    <option value="Guanajuato">Guanajuato</option>
-                    <option value="Guerrero">Guerrero</option>
-                    <option value="Hidalgo">Hidalgo</option>
-                    <option value="Jalisco">Jalisco</option>
-                    <option value="México">México</option>
-                    <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
-                    <option value="Morelos">Morelos</option>
-                    <option value="Nayarit">Nayarit</option>
-                    <option value="Nuevo León">Nuevo León</option>
-                    <option value="Oaxaca">Oaxaca</option>
-                    <option value="Puebla">Puebla</option>
-                    <option value="Querétaro">Querétaro</option>
-                    <option value="Quintana Roo">Quintana Roo</option>
-                    <option value="San Luis Potosí">San Luis Potosí</option>
-                    <option value="Sinaloa">Sinaloa</option>
-                    <option value="Sonora">Sonora</option>
-                    <option value="Tabasco">Tabasco</option>
-                    <option value="Tamaulipas">Tamaulipas</option>
-                    <option value="Tlaxcala">Tlaxcala</option>
-                    <option value="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
-                    <option value="Yucatán">Yucatán</option>
-                    <option value="Zacatecas">Zacatecas</option>
-                </select>
+                {!! Form::text('state_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE ESTADO', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -566,41 +430,7 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('state_company', 'Estado:') !!}
-                 <select name="state_company" class="form-control input-lg" required="required">
-                    <option value="Todo México">Todo México</option>
-                    <option value="Aguascalientes">Aguascalientes</option>
-                    <option value="Baja California">Baja California</option>
-                    <option value="Baja California Sur">Baja California Sur</option>
-                    <option value="Campeche">Campeche</option>
-                    <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
-                    <option value="Colima">Colima</option>
-                    <option value="Chiapas">Chiapas</option>
-                    <option value="Chihuahua">Chihuahua</option>
-                    <option value="Distrito Federal">Distrito Federal</option>
-                    <option value="Durango">Durango</option>
-                    <option value="Guanajuato">Guanajuato</option>
-                    <option value="Guerrero">Guerrero</option>
-                    <option value="Hidalgo">Hidalgo</option>
-                    <option value="Jalisco">Jalisco</option>
-                    <option value="México">México</option>
-                    <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
-                    <option value="Morelos">Morelos</option>
-                    <option value="Nayarit">Nayarit</option>
-                    <option value="Nuevo León">Nuevo León</option>
-                    <option value="Oaxaca">Oaxaca</option>
-                    <option value="Puebla">Puebla</option>
-                    <option value="Querétaro">Querétaro</option>
-                    <option value="Quintana Roo">Quintana Roo</option>
-                    <option value="San Luis Potosí">San Luis Potosí</option>
-                    <option value="Sinaloa">Sinaloa</option>
-                    <option value="Sonora">Sonora</option>
-                    <option value="Tabasco">Tabasco</option>
-                    <option value="Tamaulipas">Tamaulipas</option>
-                    <option value="Tlaxcala">Tlaxcala</option>
-                    <option value="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
-                    <option value="Yucatán">Yucatán</option>
-                    <option value="Zacatecas">Zacatecas</option>
-                </select>
+                {!! Form::text('state_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE ESTADO', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -642,13 +472,13 @@
                 {!! Form::label('references_company', 'Referencias:') !!}
                 {!! Form::text('references_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required']) !!}
             </div>
-
-            <div class="form-group col-sm-6">
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-            </div>
-
-        </div>
+           
+       <div class="form-group col-sm-6">
+        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
     </div>
+
+</div>
+</div>
 </div>
 <!-- CLIENTS LOCATION-->
 <div class="row setup-content" id="step-7">

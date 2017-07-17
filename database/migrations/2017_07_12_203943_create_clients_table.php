@@ -32,7 +32,8 @@ class CreateClientsTable extends Migration
 			$table->string('no_children');
 			$table->string('no_economic_dependent');
 			$table->string('avatar');
-			$table->integer('branch_id')->unsigned()->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+			$table->integer('branch_id')->unsigned();
+			$table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

@@ -21,7 +21,7 @@
             </ul>
         </div>
     @endif
-
+   
     <div class="login-box-body">
     <p class="login-box-msg">Introduce tus credenciales de acceso</p>
     <form action="{{ url('/login') }}" method="post">

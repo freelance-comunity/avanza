@@ -207,4 +207,5 @@ class EmployeeController extends AppBaseController
 
 		return redirect(route('employees.index'));
 	}
+
 }

@@ -25,7 +25,8 @@ class CreateEmployeelocationsTable extends Migration
 			$table->string('outdoor_number');
 			$table->string('interior_number');
 			$table->string('postal_code');
-			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

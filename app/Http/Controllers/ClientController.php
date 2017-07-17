@@ -59,8 +59,14 @@ class ClientController extends AppBaseController
 	public function create()
 	{
 		$branch = Branch::all();
+		if ($branch->count()==0) {			
+		Toastr::info('Actualmente no se cuenta con sucursales.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		return redirect(route('clients.index'));
+		}else{
+		$branch = Branch::all();
 		return view('clients.create')
 		->with('branch', $branch);
+	}
 	}
 
 	/**
@@ -72,6 +78,7 @@ class ClientController extends AppBaseController
 	 */
 	public function store(CreateClientRequest $request)
 	{
+		
         $input = $request->all();
         /* Save avatar client */
 		if($request->hasFile('avatar')){
@@ -155,7 +162,6 @@ class ClientController extends AppBaseController
 
 		/* Get COMPANY location data  */
 		$data_location_company['name_company'] = $request->input('name_company');		
-		$data_location_company['country_company'] = $request->input('country_company');
 		$data_location_company['state_company']   = $request->input('state_company');
 		$data_location_company['municipality_company'] = $request->input('municipality_company');
 		$data_location_company['colony_company']  = $request->input('colony_company');

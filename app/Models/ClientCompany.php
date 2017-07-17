@@ -13,7 +13,6 @@ class ClientCompany extends Model
 
 	public $fillable = [
 	    "name_company",
-		"country_company",
 		"state_company",
 		"municipality_company",
 		"colony_company",
@@ -29,7 +28,6 @@ class ClientCompany extends Model
 
 	public static $rules = [
 	    "name_company" => "required",
-		"country_company" => "required",
 		"state_company" => "required",
 		"municipality_company" => "required",
 		"colony_company" => "required",

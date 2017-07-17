@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="box-body">
-           <div class="row setup-content" id="step-1">
+         <div class="row setup-content" id="step-1">
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('folio', 'Folio:') !!}
                 {!! Form::text('folio', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE','required'=>'required']) !!}
@@ -148,7 +148,7 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('avatar', 'Imagen:') !!}
-                {!! Form::file('avatar', ['class' => 'form-control input-lg', 'required'=>'required']) !!}
+                {!! Form::file('avatar') !!}
             </div>
 
             @php
@@ -172,40 +172,40 @@
                 <div class="gllpLatlonPicker">
                   <label for="exampleInputEmail1">DIRECCIÓN DEL CLIENTE</label>
                   <div class="input-group">
-                   <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
-                   <div class="input-group-btn">
-                     <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
-                 </div>
-             </div>
-             <br/><br/>
-             <div class="gllpMap">Google Maps</div>
-             <br/>
-             <input type="hidden" name="latitude" class="gllpLatitude" value="16.753239967660058"/>
-             <input type="hidden" name="lenght" class="gllpLongitude" value="-93.11789682636714"/>
-             <input type="hidden" class="gllpZoom" value="12"/>
-         </div>
-     </div>
-     <div class="col-md-6">
+                     <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
+                     <div class="input-group-btn">
+                       <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+                   </div>
+               </div>
+               <br/><br/>
+               <div class="gllpMap">Google Maps</div>
+               <br/>
+               <input type="hidden" name="latitude" class="gllpLatitude" value="16.753239967660058"/>
+               <input type="hidden" name="lenght" class="gllpLongitude" value="-93.11789682636714"/>
+               <input type="hidden" class="gllpZoom" value="12"/>
+           </div>
+       </div>
+       <div class="col-md-6">
         <div class="gllpLatlonPicker">
           <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
           <div class="input-group">
-           <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
-           <div class="input-group-btn">
-             <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
-         </div>
-     </div>
-     <br/><br/>
-     <div class="gllpMap">Google Maps</div>
-     <br/>
-     <input type="hidden" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
-     <input type="hidden" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
-     <input type="hidden" class="gllpZoom" value="12"/>
- </div>
+             <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
+             <div class="input-group-btn">
+               <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+           </div>
+       </div>
+       <br/><br/>
+       <div class="gllpMap">Google Maps</div>
+       <br/>
+       <input type="hidden" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
+       <input type="hidden" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+       <input type="hidden" class="gllpZoom" value="12"/>
+   </div>
 </div>
 
-<div class="form-group col-sm-6">
-    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-</div>
+
+<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+
 </div>
 
 <!-- CLIENTS LOCATION-->
@@ -215,7 +215,7 @@
             <h3> Ubicación </h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('country', 'País:') !!}
-                 {!! Form::select('country',['MÉXICO' => 'MÉXICO'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+                {!! Form::select('country',['MÉXICO' => 'MÉXICO'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -295,12 +295,8 @@
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('references', 'Referencias:') !!}
                 {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required']) !!}
-            </div>
-
-
-            <div class="form-group col-sm-6">
+            </div>            
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-            </div>
         </div>
     </div>
 </div>
@@ -324,10 +320,7 @@
                 {!! Form::label('rfc', 'RFC:') !!}
                 {!! Form::text('rfc', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE RFC', 'required' => 'required']) !!}
             </div>
-
-            <div class="form-group col-sm-6">
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-            </div>
         </div>
     </div>
 </div>
@@ -373,7 +366,7 @@
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('state_aval', 'Estado:') !!}
-               <select name="state_aval" class="form-control input-lg" required="required">
+                <select name="state_aval" class="form-control input-lg" required="required">
                     <option value="Todo México">Todo México</option>
                     <option value="Aguascalientes">Aguascalientes</option>
                     <option value="Baja California">Baja California</option>
@@ -431,10 +424,7 @@
                 {!! Form::label('postal_code_aval', 'Código Postal:') !!}
                 {!! Form::text('postal_code_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
             </div>
-
-            <div class="form-group col-sm-6">
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-            </div>
         </div>
 
     </div>
@@ -480,7 +470,7 @@
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('state_spouse', 'Estado:') !!}
-               <select name="state_spouse" class="form-control input-lg" required="required">
+                <select name="state_spouse" class="form-control input-lg" required="required">
                     <option value="Todo México">Todo México</option>
                     <option value="Aguascalientes">Aguascalientes</option>
                     <option value="Baja California">Baja California</option>
@@ -538,12 +528,7 @@
                 {!! Form::label('postal_code_spouse', 'Código Postal:') !!}
                 {!! Form::text('postal_code_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
             </div>
-
-            <div class="form-group col-sm-6">
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-            </div>
-
-            <!--<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>-->
         </div>
 
     </div>
@@ -560,13 +545,8 @@
                 {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO', 'required' => 'required']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('country_company', 'País:') !!}
-                {!! Form::text('country_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE PAÍS', 'required' => 'required']) !!}
-            </div>
-
-            <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('state_company', 'Estado:') !!}
-                 <select name="state_company" class="form-control input-lg" required="required">
+                <select name="state_company" class="form-control input-lg" required="required">
                     <option value="Todo México">Todo México</option>
                     <option value="Aguascalientes">Aguascalientes</option>
                     <option value="Baja California">Baja California</option>
@@ -642,11 +622,7 @@
                 {!! Form::label('references_company', 'Referencias:') !!}
                 {!! Form::text('references_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required']) !!}
             </div>
-
-            <div class="form-group col-sm-6">
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-            </div>
-
         </div>
     </div>
 </div>

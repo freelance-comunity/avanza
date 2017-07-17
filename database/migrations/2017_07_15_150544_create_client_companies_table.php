@@ -17,7 +17,6 @@ class CreateClientCompaniesTable extends Migration
 		{
 			$table->increments('id');
 			$table->string('name_company');
-			$table->string('country_company');
 			$table->string('state_company');
 			$table->string('municipality_company');
 			$table->string('colony_company');

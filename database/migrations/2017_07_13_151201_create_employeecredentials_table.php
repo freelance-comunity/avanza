@@ -23,7 +23,8 @@ class CreateEmployeecredentialsTable extends Migration
 			$table->string('number_imss');
 			$table->string('driver_license');
 			$table->string('professional_id');
-			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

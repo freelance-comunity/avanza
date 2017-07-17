@@ -37,23 +37,23 @@
          <div class="row setup-content" id="step-1">
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('folio', 'Folio:') !!}
-                {!! Form::text('folio', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE','required'=>'required']) !!}
+                {!! Form::text('folio', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('firts_name', 'Nombre(s):') !!}
-                {!! Form::text('firts_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required']) !!}
+                {!! Form::text('firts_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('last_name', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required']) !!}
+                {!! Form::text('last_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('mothers_last_name', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_last_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO MATERNO','required'=>'required']) !!}
+                {!! Form::text('mothers_last_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO MATERNO','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -128,12 +128,12 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('phone_one', 'Teléfono 1:') !!}
-                {!! Form::text('phone_one', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO 1', 'required' => 'required']) !!}
+                {!! Form::text('phone_one', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO 1', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('phone_two', 'Teléfono 2:') !!}
-                {!! Form::text('phone_two', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO 1', 'required' => 'required']) !!}
+                {!! Form::text('phone_two', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO 1', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -259,12 +259,12 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('municipality', 'Municipio:') !!}
-                {!! Form::text('municipality', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required']) !!}
+                {!! Form::text('municipality', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('colony', 'Colonia:') !!}
-                {!! Form::text('colony', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('colony', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -274,27 +274,27 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('name_road', 'Nombre Vialidad:') !!}
-                {!! Form::text('name_road', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE VIALIDAD', 'required' => 'required']) !!}
+                {!! Form::text('name_road', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE VIALIDAD', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('outdoor_number', 'Nº E.:') !!}
-                {!! Form::text('outdoor_number', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO EXTERIOR', 'required' => 'required']) !!}
+                {!! Form::text('outdoor_number', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO EXTERIOR', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('interior_number', 'Nº I.:') !!}
-                {!! Form::text('interior_number', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO INTERIOR', 'required' => 'required']) !!}
+                {!! Form::text('interior_number', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO INTERIOR', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('postal_code', 'Código Postal:') !!}
-                {!! Form::text('postal_code', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 'required' => 'required']) !!}
+                {!! Form::text('postal_code', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('references', 'Referencias:') !!}
-                {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required']) !!}
+                {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>            
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
@@ -308,17 +308,17 @@
             <h3> Identificaciones </h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('ine', 'INE:') !!}
-                {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE INE', 'required' => 'required']) !!}
+                {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE INE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('curp', 'CURP:') !!}
-                {!! Form::text('curp', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CURP', 'required' => 'required']) !!}
+                {!! Form::text('curp', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CURP', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('rfc', 'RFC:') !!}
-                {!! Form::text('rfc', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE RFC', 'required' => 'required']) !!}
+                {!! Form::text('rfc', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE RFC', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
@@ -332,17 +332,17 @@
             <h3>Aval </h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('name_aval', 'Nombre(s):') !!}
-                {!! Form::text('name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL AVAL', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('last_name_aval', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('last_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO DEL AVAL', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('mothers_name_aval', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('mothers_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO DEL AVAL', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('birthdate_aval', 'Fecha de nacimiento:') !!}
@@ -350,11 +350,11 @@
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('curp_aval', 'CURP:') !!}
-                {!! Form::text('curp_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CURP DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('curp_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CURP DEL AVAL', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('phone_aval', 'Teléfono:') !!}
-                {!! Form::text('phone_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE TELÉFONO DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('phone_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE TELÉFONO DEL AVAL', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('civil_status_aval', 'Estado Civil:') !!}
@@ -405,24 +405,24 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('municipality_aval', 'Municipio:') !!}
-                {!! Form::text('municipality_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required']) !!}
+                {!! Form::text('municipality_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('colony_aval', 'Colonia:') !!}
-                {!! Form::text('colony_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('colony_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('street_aval', 'Calle:') !!}
-                {!! Form::text('street_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('street_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('number_aval', 'Número de casa:') !!}
-                {!! Form::text('number_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('number_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('postal_code_aval', 'Código Postal:') !!}
-                {!! Form::text('postal_code_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('postal_code_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
@@ -436,17 +436,17 @@
             <h3> Conyugue </h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('firts_name_spouse', 'Nombre(s):') !!}
-                {!! Form::text('firts_name_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL CONYUGUE', 'required' => 'required']) !!}
+                {!! Form::text('firts_name_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL CONYUGUE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('last_name_spouse', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('last_name_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO DEL AVAL', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('mothers_name_spouse', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_name_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('mothers_name_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO DEL AVAL', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('birthdate_spouse', 'Fecha de nacimiento:') !!}
@@ -454,15 +454,15 @@
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('curp_spouse', 'CURP:') !!}
-                {!! Form::text('curp_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CURP DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('curp_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CURP DEL AVAL', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('phone_spouse', 'Teléfono:') !!}
-                {!! Form::text('phone_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE TELÉFONO DEL AVAL', 'required' => 'required']) !!}
+                {!! Form::text('phone_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE TELÉFONO DEL AVAL', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('civil_status_spouse', 'Estado Civil:') !!}
-                {!! Form::select('civil_status_spouse',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+                {!! Form::select('civil_status_spouse',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('scholarship_spouse', 'Grado Escolar:') !!}
@@ -509,24 +509,24 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('municipality_spouse', 'Municipio:') !!}
-                {!! Form::text('municipality_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required']) !!}
+                {!! Form::text('municipality_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('colony_spouse', 'Colonia:') !!}
-                {!! Form::text('colony_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('colony_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('street_spouse', 'Calle:') !!}
-                {!! Form::text('street_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('street_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('number_spouse', 'Número de casa:') !!}
-                {!! Form::text('number_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('number_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('postal_code_spouse', 'Código Postal:') !!}
-                {!! Form::text('postal_code_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('postal_code_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
@@ -542,7 +542,7 @@
             <h3> Datos del Negocio</h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('name_company', 'Nombre del Negocio:') !!}
-                {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO', 'required' => 'required']) !!}
+                {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('state_company', 'Estado:') !!}
@@ -585,12 +585,12 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('municipality_company', 'Municipio:') !!}
-                {!! Form::text('municipality_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required']) !!}
+                {!! Form::text('municipality_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('colony_company', 'Colonia:') !!}
-                {!! Form::text('colony_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required']) !!}
+                {!! Form::text('colony_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -600,27 +600,27 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('name_road_company', 'Nombre Vialidad:') !!}
-                {!! Form::text('name_road_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE VIALIDAD', 'required' => 'required']) !!}
+                {!! Form::text('name_road_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE VIALIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('outdoor_number_company', 'Nº E.:') !!}
-                {!! Form::text('outdoor_number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO EXTERIOR', 'required' => 'required']) !!}
+                {!! Form::text('outdoor_number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO EXTERIOR', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('interior_number_company', 'Nº I.:') !!}
-                {!! Form::text('interior_number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO INTERIOR', 'required' => 'required']) !!}
+                {!! Form::text('interior_number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO INTERIOR', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('postal_code_company', 'Código Postal:') !!}
-                {!! Form::text('postal_code_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 'required' => 'required']) !!}
+                {!! Form::text('postal_code_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('references_company', 'Referencias:') !!}
-                {!! Form::text('references_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required']) !!}
+                {!! Form::text('references_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
@@ -633,16 +633,16 @@
             <h3> Referencias Personales</h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('firts_name_reference', 'Nombre(s):') !!}
-                {!! Form::text('firts_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DE LA REFERENCIA', 'required' => 'required']) !!}
+                {!! Form::text('firts_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DE LA REFERENCIA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('last_name_reference', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO PATERNO DE LA REFERENCUA', 'required' => 'required']) !!}
+                {!! Form::text('last_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO PATERNO DE LA REFERENCUA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('mothers_last_name_reference', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_last_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO MATERNO DE LA REFERENCIA ', 'required' => 'required']) !!}
+                {!! Form::text('mothers_last_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO MATERNO DE LA REFERENCIA ', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">

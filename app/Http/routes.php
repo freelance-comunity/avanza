@@ -2,7 +2,10 @@
 /*===================================
 =            Test Routes            =
 ===================================*/
-
+Route::get('pdf', function(){
+    $pdf = PDF::loadView('clients.documents');
+    return $pdf->download('documents.pdf');
+});
 /*=====  End of Test Routes  ======*/
 
 
@@ -146,4 +149,4 @@ Route::resource('clientdocuments', 'ClientdocumentsController');
 Route::get('clientdocuments/{id}/delete', [
     'as' => 'clientdocuments.delete',
     'uses' => 'ClientdocumentsController@destroy',
-]);
+    ]);

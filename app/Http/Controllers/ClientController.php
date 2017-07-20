@@ -183,7 +183,7 @@ class ClientController extends AppBaseController
 		if($request->hasFile('ine')){
 			$ine = $request->file('ine');
 			$filename_ine = time() . '.' . $ine->getClientOriginalExtension();
-			Image::make($ine)->resize(600, 600)->save( public_path('/uploads/documents/' . $filename_ine ) );
+			Image::make($ine)->resize(400, 600)->save( public_path('/uploads/documents/' . $filename_ine ) );
 			$documents['ine'] = $filename_ine;
 		}
 
@@ -197,7 +197,7 @@ class ClientController extends AppBaseController
 		if($request->hasFile('proof_of_addres')){
 			$proof_of_addres = $request->file('proof_of_addres');
 			$filename_proof_of_addres = time() . '.' . $proof_of_addres->getClientOriginalExtension();
-			Image::make($proof_of_addres)->resize(600, 600)->save( public_path('/uploads/documents/' . $filename_proof_of_addres ) );
+			Image::make($proof_of_addres)->resize(800, 600)->save( public_path('/uploads/documents/' . $filename_proof_of_addres ) );
 			$documents['proof_of_addres'] = $filename_proof_of_addres;
 		}
 		$documents['client_id'] = $client->id;

@@ -175,6 +175,10 @@ return [
 
         /* Intervention Image */
         Intervention\Image\ImageServiceProvider::class,
+
+        /* DOMPDF */
+        Barryvdh\DomPDF\ServiceProvider::class,
+        
         
 
         ],
@@ -243,6 +247,10 @@ return [
 
     /* Intervention Image */
     'Image' => Intervention\Image\Facades\Image::class,
+
+    /* DOMPDF */
+    'PDF' => Barryvdh\DomPDF\Facade::class,
+    
     
 
     ],

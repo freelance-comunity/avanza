@@ -6,7 +6,7 @@ $branch= $client->branch;
 
 @section('main-content')
 @section('contentheader_title')
-Detalles del cliente {{$client->firts_name}}
+DETALLES DEL CLIENTE
 @endsection
 <div class="container">
   <div class="box box-danger">
@@ -98,88 +98,102 @@ Detalles del cliente {{$client->firts_name}}
 </div>
 
 
-<!--IZQUIERDO-->
-</div>
-<div class="col-md-4">
-    <ul class="timeline">
-        <li>
-            <!-- timeline icon -->
-            <i class="fa fa-map-marker bg-blue"></i>
-            <div class="timeline-item">
-                <h3 class="timeline-header"><a href="#">UBICACIÓN DE CASA</a></h3>
-
-                <div class="timeline-body">
-                  CALLE: {{$clientLocation->street}}<br>
-                  NÚMERO: {{$clientLocation->number}}<br>
-                  COLONIA: {{$clientLocation->colony}}<br>
-                  MUNICIPIO: {{$clientLocation->municipality}}<br>
-                  ESTADO: {{$clientLocation->state}}<br>
-                  CODIGO POSTAL: {{$clientLocation->postal_code}}<br>
-                  REFERENCIAS: {{$clientLocation->references}}
-              </div>
-          </div>
-      </li>
-
-  </ul>
-</div>  
-
-<div class="timeline-item">
-    <div class="timeline-body">
-        <div class="container" style="width: 100%;
-        margin: 0 auto;
-        margin-top:5px;">
-        <div id="map_container" style="position: relative;"></div>
-        <div id="map" style=" height: 0;
-        overflow: hidden;
-        padding-bottom: 22.25%;
-        padding-top: 30px;
-        position: relative;"></div>
-    </div>  
-    @include('clientLocations.script-map')
-
-</div>
-</div> 
-
-<div class="col-md-4">
-    <ul class="timeline">
-        <li>
-            <!-- timeline icon -->
-            <i class="fa fa-map-marker bg-red"></i>
-            <div class="timeline-item">
-                <h3 class="timeline-header"><a href="#">UBICACIÓN DEL NEGOCIO</a></h3>
-
-                <div class="timeline-body">
-                  CALLE: {{$clientCompany->street_company}}<br>
-                  NÚMERO: {{$clientCompany->number_company}}<br>
-                  COLONIA: {{$clientCompany->colony_company}}<br>
-                  MUNICIPIO: {{$clientCompany->municipality_company}}<br>
-                  ESTADO: {{$clientCompany->state_company}}<br>
-                  CODIGO POSTAL: {{$clientCompany->postal_code_company}}<br>
-                  TELÉFONO: {{$clientCompany->phone_company}}
-              </div>
-          </div>
-      </li>
-
-  </ul>
-</div>  
-
-<div class="timeline-item">
-    <div class="timeline-body">
-        <div class="container" style="width: 100%;
-        margin: 0 auto;
-        margin-top:5px;">
-        <div id="map_container" style="position: relative;"></div>
-        <div id="map" style=" height: 0;
-        overflow: hidden;
-        padding-bottom: 22.25%;
-        padding-top: 30px;
-        position: relative;"></div>
-    </div>  
-    @include('clientCompanies.script-map')
 
 </div>
 </div>
+</div>
+</div>
+<div class="container">
+  <div class="box box-danger">
+      <div class="box-header with-border">
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="timeline">
+                    <li>
+                        <!-- timeline icon -->
+                        <i class="fa fa-map-marker bg-blue"></i>
+                        <div class="timeline-item">
+                            <h3 class="timeline-header"><a href="#">UBICACIÓN DE CASA</a></h3>
 
+                            <div class="timeline-body">
+                              CALLE: {{$clientLocation->street}}<br>
+                              NÚMERO: {{$clientLocation->number}}<br>
+                              COLONIA: {{$clientLocation->colony}}<br>
+                              MUNICIPIO: {{$clientLocation->municipality}}<br>
+                              ESTADO: {{$clientLocation->state}}<br>
+                              CODIGO POSTAL: {{$clientLocation->postal_code}}<br>
+                              REFERENCIAS: {{$clientLocation->references}}
+                          </div>
+                      </div>
+                  </li>
+
+              </ul>
+          </div> 
+          <div class="timeline-item">
+            <div class="timeline-body">
+                <div class="container" style="width: 100%;
+                margin: 0 auto;
+                margin-top:5px;">
+                <div id="map_container" style="position: relative;"></div>
+                <div id="map" style=" height: 0;
+                overflow: hidden;
+                padding-bottom: 22.25%;
+                padding-top: 30px;
+                position: relative;"></div>
+            </div>  
+            @include('clientLocations.script-map')
+
+        </div>
+    </div> 
+</div>
+</div>
+</div>
+</div>
+
+<div class="container">
+  <div class="box box-danger">
+      <div class="box-header with-border">
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="timeline">
+                    <li>
+                        <!-- timeline icon -->
+                        <i class="fa fa-map-marker bg-red"></i>
+                        <div class="timeline-item">
+                            <h3 class="timeline-header"><a href="#">UBICACIÓN DEL NEGOCIO</a></h3>
+
+                            <div class="timeline-body">
+                              CALLE: {{$clientCompany->street_company}}<br>
+                              NÚMERO: {{$clientCompany->number_company}}<br>
+                              COLONIA: {{$clientCompany->colony_company}}<br>
+                              MUNICIPIO: {{$clientCompany->municipality_company}}<br>
+                              ESTADO: {{$clientCompany->state_company}}<br>
+                              CODIGO POSTAL: {{$clientCompany->postal_code_company}}<br>
+                              TELÉFONO: {{$clientCompany->phone_company}}
+                          </div>
+                      </div>
+                  </li>
+
+              </ul>
+          </div>  
+
+          <div class="timeline-item">
+            <div class="timeline-body">
+                <div class="container" style="width: 100%;
+                margin: 0 auto;
+                margin-top:5px;">
+                <div id="map_container" style="position: relative;"></div>
+                <div id="mapa" style=" height: 0;
+                overflow: hidden;
+                padding-bottom: 22.25%;
+                padding-top: 30px;
+                position: relative;"></div>
+            </div>  
+            @include('clientCompanies.script-map')
+
+        </div>
+    </div>
+</div>
 </div>
 </div>
 </div>

@@ -23,6 +23,10 @@
                     <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
                     <p>Referencias</p>
                 </div>
+                <div class="stepwizard-step">
+                    <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                    <p>Digitalización</p>
+                </div>
             </div>
         </div>
         <div class="box-body">
@@ -221,99 +225,99 @@
                 {!! Form::label('name_company', 'Nombre del Negocio:') !!}
                 {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
-             <div class="form-group col-sm-12 col-lg-12">
+            <div class="form-group col-sm-12 col-lg-12">
                 <h3 style="text-align: center;"> 
                    <span class="label label-danger">Activos</span> 
-                </h3>                
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('inventory', 'Inventario ($):') !!}
-                {!! Form::text('inventory', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DEL INVENTARIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('machinery_equipment', 'Maq y Equip($):') !!}
-                {!! Form::text('machinery_equipment', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DE LA MAQUINARIA Y EQUIPO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('vehicles', 'Vehículos($):') !!}
-                {!! Form::text('vehicles', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DE VEHÍCULOS', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('property', 'Inmuebles($):') !!}
-                {!! Form::text('property', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DEL INMUEBLE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('box_benck', 'Caja, Bancos($):') !!}
-                {!! Form::text('box_benck', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('accounts', 'Ctas/Cobrar($):') !!}
-                {!! Form::text('accounts', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-             <div class="form-group col-sm-12 col-lg-12">
-                <h3 style="text-align: center;"> 
-                   <span class="label label-danger">Pasivos</span> 
-                </h3>                
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('suppliers', 'Proveedores($):') !!}
-                {!! Form::text('suppliers', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('credits', 'Créditos($):') !!}
-                {!! Form::text('credits', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('payments', 'Pago al mes($):') !!}
-                {!! Form::text('payments', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('specify', 'Especifica:') !!}
-                {!! Form::text('specify', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESPECIFICA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-             <div class="form-group col-sm-12 col-lg-12">
-                <h3 style="text-align: center;"> 
-                   <span class="label label-danger">Ingresos</span> 
-                </h3>                
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('weekday', 'Entre semana:') !!}
-                {!! Form::text('weekday', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('weekend', 'Fines de Semana:') !!}
-                {!! Form::text('weekend', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('utility', 'Utilidad:') !!}
-                {!! Form::text('utility', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('other_income', 'Otros Ingresos:') !!}
-                {!! Form::text('other_income', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-             <div class="form-group col-sm-12 col-lg-12">
-                <h3 style="text-align: center;"> 
-                   <span class="label label-danger">Costos</span> 
-                </h3>                
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('rent', 'Renta:') !!}
-                {!! Form::text('rent', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('salary', 'Sueldos:') !!}
-                {!! Form::text('salary', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('others', 'Otros Luz/Agua:') !!}
-                {!! Form::text('others', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-
-
-            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+               </h3>                
+           </div>
+           <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('inventory', 'Inventario ($):') !!}
+            {!! Form::text('inventory', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DEL INVENTARIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('machinery_equipment', 'Maq y Equip($):') !!}
+            {!! Form::text('machinery_equipment', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DE LA MAQUINARIA Y EQUIPO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('vehicles', 'Vehículos($):') !!}
+            {!! Form::text('vehicles', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DE VEHÍCULOS', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('property', 'Inmuebles($):') !!}
+            {!! Form::text('property', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DEL INMUEBLE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('box_benck', 'Caja, Bancos($):') !!}
+            {!! Form::text('box_benck', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('accounts', 'Ctas/Cobrar($):') !!}
+            {!! Form::text('accounts', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-12 col-lg-12">
+            <h3 style="text-align: center;"> 
+               <span class="label label-danger">Pasivos</span> 
+           </h3>                
+       </div>
+       <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('suppliers', 'Proveedores($):') !!}
+        {!! Form::text('suppliers', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
     </div>
+    <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('credits', 'Créditos($):') !!}
+        {!! Form::text('credits', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+    <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('payments', 'Pago al mes($):') !!}
+        {!! Form::text('payments', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+    <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('specify', 'Especifica:') !!}
+        {!! Form::text('specify', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESPECIFICA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+    <div class="form-group col-sm-12 col-lg-12">
+        <h3 style="text-align: center;"> 
+           <span class="label label-danger">Ingresos</span> 
+       </h3>                
+   </div>
+   <div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('weekday', 'Entre semana:') !!}
+    {!! Form::text('weekday', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+</div>
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('weekend', 'Fines de Semana:') !!}
+    {!! Form::text('weekend', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+</div>
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('utility', 'Utilidad:') !!}
+    {!! Form::text('utility', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+</div>
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('other_income', 'Otros Ingresos:') !!}
+    {!! Form::text('other_income', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+</div>
+<div class="form-group col-sm-12 col-lg-12">
+    <h3 style="text-align: center;"> 
+       <span class="label label-danger">Costos</span> 
+   </h3>                
+</div>
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('rent', 'Renta:') !!}
+    {!! Form::text('rent', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+</div>
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('salary', 'Sueldos:') !!}
+    {!! Form::text('salary', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+</div>
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('others', 'Otros Luz/Agua:') !!}
+    {!! Form::text('others', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+</div>
+
+
+<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+</div>
+</div>
 </div>
 
 <!-- CLIENTS AVAL-->
@@ -391,57 +395,79 @@
     <div class="col-xs-12">
         <div class="col-md-12">
             <h3> Referencias Personales</h3>
-             <div class="form-group col-sm-12 col-lg-12">
-                <h3 style="text-align: center;"> 
-                   <span class="label label-danger">Referencia 1</span> 
-                </h3>                
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('firts_name_reference_1', 'Nombre(s):') !!}
-                {!! Form::text('firts_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('last_name_reference_1', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO PATERNO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('mothers_last_name_reference_1', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_last_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO MATERNO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('phone_reference_1', 'Teléfono:') !!}
-                {!! Form::text('phone_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL TELÉFONO', 'required' => 'required']) !!}
-            </div>
-            <hr>
-
             <div class="form-group col-sm-12 col-lg-12">
                 <h3 style="text-align: center;"> 
-                   <span class="label label-danger">Referencia 2</span> 
-                </h3>                
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('firts_name_reference_2', 'Nombre(s):') !!}
-                {!! Form::text('firts_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('last_name_reference_2', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO PATERNO ', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
+                   <span class="label label-danger">Referencia 1</span> 
+               </h3>                
+           </div>
+           <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('firts_name_reference_1', 'Nombre(s):') !!}
+            {!! Form::text('firts_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('last_name_reference_1', 'Apellido Paterno:') !!}
+            {!! Form::text('last_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO PATERNO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
 
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('mothers_last_name_reference_2', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_last_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO MATERNO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('mothers_last_name_reference_1', 'Apellido Materno:') !!}
+            {!! Form::text('mothers_last_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO MATERNO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
 
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('phone_reference_2', 'Teléfono:') !!}
-                {!! Form::text('phone_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL TELÉFONO', 'required' => 'required']) !!}
-            </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('phone_reference_1', 'Teléfono:') !!}
+            {!! Form::text('phone_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL TELÉFONO', 'required' => 'required']) !!}
+        </div>
+        <hr>
 
+        <div class="form-group col-sm-12 col-lg-12">
+            <h3 style="text-align: center;"> 
+               <span class="label label-danger">Referencia 2</span> 
+           </h3>                
+       </div>
+       <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('firts_name_reference_2', 'Nombre(s):') !!}
+        {!! Form::text('firts_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+    <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('last_name_reference_2', 'Apellido Paterno:') !!}
+        {!! Form::text('last_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO PATERNO ', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+
+    <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('mothers_last_name_reference_2', 'Apellido Materno:') !!}
+        {!! Form::text('mothers_last_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO MATERNO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+
+    <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('phone_reference_2', 'Teléfono:') !!}
+        {!! Form::text('phone_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL TELÉFONO', 'required' => 'required']) !!}
+    </div>
+
+    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+
+</div>
+</div>
+</div>
+
+<!-- CLIENTS DOCUMENTS-->
+<div class="row setup-content" id="step-6">
+    <div class="col-xs-12">
+        <div class="col-md-12">
+            <h3> Digitalización</h3>
+            <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('ine', 'INE:') !!}
+                {!! Form::file('ine') !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('curp', 'CURP:') !!}
+                {!! Form::file('curp') !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('proof_of_addres', 'Comprobante de Domicilio:') !!}
+                {!! Form::file('proof_of_addres') !!}
+            </div>
             <button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
-
         </div>
     </div>
 </div>

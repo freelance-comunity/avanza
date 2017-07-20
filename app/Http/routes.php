@@ -1,9 +1,13 @@
 <?php
-Route::get('/toastr', function(){
-	Toastr::success('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
-
-    return view('toastr');
+/*===================================
+=            Test Routes            =
+===================================*/
+Route::get('pdf', function(){
+    $pdf = PDF::loadView('clients.documents');
+    return $pdf->download('documents.pdf');
 });
+/*=====  End of Test Routes  ======*/
+
 
 Route::get('/', function () {
 	return redirect('login');
@@ -137,4 +141,12 @@ Route::resource('clientReferences', 'ClientReferencesController');
 Route::get('clientReferences/{id}/delete', [
     'as' => 'clientReferences.delete',
     'uses' => 'ClientReferencesController@destroy',
+    ]);
+
+
+Route::resource('clientdocuments', 'ClientdocumentsController');
+
+Route::get('clientdocuments/{id}/delete', [
+    'as' => 'clientdocuments.delete',
+    'uses' => 'ClientdocumentsController@destroy',
     ]);

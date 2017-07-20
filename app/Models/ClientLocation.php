@@ -12,14 +12,11 @@ class ClientLocation extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "country",
-		"state",
-		"municipality",
+	    "street",
+		"number",
 		"colony",
-		"type_of_road",
-		"name_road",
-		"outdoor_number",
-		"interior_number",
+		"municipality",
+		"state",
 		"postal_code",
 		"references",
 		"latitude",
@@ -28,16 +25,13 @@ class ClientLocation extends Model
 	];
 
 	public static $rules = [
-	    "country" => "required",
-		"state" => "required",
-		"municipality" => "required",
+	    "street" => "required",
+		"number" => "required",
 		"colony" => "required",
-		"type_of_road" => "required",
-		"name_road" => "required",
-		"outdoor_number" => "required",
-		"interior_number" => "required",
+		"municipality" => "required",
+		"state" => "required",
 		"postal_code" => "required",
-		"references"=>"references",
+		"references" => "required",
 		"latitude" => "required",
 		"lenght" => "required"
 	];

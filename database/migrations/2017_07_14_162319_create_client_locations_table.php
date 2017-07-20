@@ -16,14 +16,11 @@ class CreateClientLocationsTable extends Migration
 		Schema::create('client_locations', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('country');
-			$table->string('state');
-			$table->string('municipality');
+			$table->string('street');
+			$table->string('number');
 			$table->string('colony');
-			$table->string('type_of_road');
-			$table->string('name_road');
-			$table->string('outdoor_number');
-			$table->string('interior_number');
+			$table->string('municipality');
+			$table->string('state');
 			$table->string('postal_code');
 			$table->string('references');
 			$table->string('latitude');

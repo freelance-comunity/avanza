@@ -77,9 +77,15 @@
           if (isValid)
             nextStepWizard.removeAttr('disabled').trigger('click');
         });
+<<<<<<< HEAD
 
         $('div.setup-panel div a.btn-primary').trigger('click');
       });
     </script>
 
+=======
+>>>>>>> remotes/origin/master
 
+        $('div.setup-panel div a.btn-primary').trigger('click');
+      });
+    </script>

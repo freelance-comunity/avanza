@@ -23,12 +23,12 @@ class CreateClientAvalsTable extends Migration
 			$table->string('curp_aval');
 			$table->string('phone_aval');
 			$table->string('civil_status_aval');
-			$table->string('scholarship_aval');
-			$table->string('state_aval');
-			$table->string('municipality_aval');
-			$table->string('colony_aval');
+			$table->string('scholarship_aval');			
 			$table->string('street_aval');
 			$table->string('number_aval');
+			$table->string('colony_aval');
+			$table->string('municipality_aval');
+			$table->string('state_aval');
 			$table->string('postal_code_aval');
 			$table->integer('client_id')->unsigned();
 			$table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

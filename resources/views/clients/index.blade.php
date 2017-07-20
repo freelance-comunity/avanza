@@ -24,9 +24,9 @@ Todos los Clientes
                     <th>Nombre</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Entidad de Nacimiento</th>
-                    <th>Genero</th>
+                    <th>Curp</th>
+                    <th>Ine</th>
+                    <th>Estado Civil</th>
                     <th>Sucursal</th>
                     <th>Imagen</th>
                     <th width="50px">Action</th>
@@ -43,9 +43,9 @@ Todos los Clientes
                         <td>{!! $client->firts_name !!}</td>
                         <td>{!! $client->last_name !!}</td>
                         <td>{!! $client->mothers_last_name !!}</td>
-                        <td>{!! $client->birthdate !!}</td>
-                        <td>{!! $client->birth_entity !!}</td>
-                        <td>{!! $client->gender !!}</td>
+                        <td>{!! $client->curp !!}</td>
+                        <td>{!! $client->ine !!}</td>
+                        <td>{!! $client->civil_status !!}</td>
                         <td>{{$branch->name}}</td>
                         <td><img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" style="width: 50px; height: 50px;"></td>
                         <td>

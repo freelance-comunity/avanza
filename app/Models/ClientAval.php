@@ -20,11 +20,11 @@ class ClientAval extends Model
 		"phone_aval",
 		"civil_status_aval",
 		"scholarship_aval",
-		"state_aval",
-		"municipality_aval",
-		"colony_aval",
 		"street_aval",
 		"number_aval",
+		"colony_aval",
+		"municipality_aval",
+		"state_aval",
 		"postal_code_aval",
 		"client_id"
 	];
@@ -37,12 +37,12 @@ class ClientAval extends Model
 		"curp_aval" => "required",
 		"phone_aval" => "require",
 		"civil_status_aval" => "required",
-		"scholarship_aval" => "required",
-		"state_aval" => "required",
-		"municipality_aval" => "required",
-		"colony_aval" => "required",
+		"scholarship_aval" => "required",		
 		"street_aval" => "required",
 		"number_aval" => "required",
+		"colony_aval" => "required",
+		"municipality_aval" => "required",
+		"state_aval" => "required",
 		"postal_code_aval" => "required"
 	];
 	public function client()

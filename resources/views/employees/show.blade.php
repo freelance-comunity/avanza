@@ -23,7 +23,11 @@ $credential = $user->credential;
                 </div>
                 <div class="box-body">
                  <div class="col-md-6">
+                   @if (is_null($branch))
+                   SUCURSAL: SIN ASIGNAR
+                   @else
                    SUCURSAL: {{ $branch->name }}
+                   @endif
                    <br>
                    TELÉFONO 1: {{ $employee->phone_1 }}
                    <br>
@@ -48,6 +52,11 @@ $credential = $user->credential;
               <div class="box-header with-border">
                 <h3>IDENTIFICACIONES</h3>
               </div>
+              @if (is_null($credential))
+              <div class="box-body">
+                Este empleado no tiene datos registrados.
+              </div>
+              @else
               <div class="box-body">
                <div class="col-md-6">
                  INE: {{ $credential->ine }}
@@ -63,8 +72,9 @@ $credential = $user->credential;
                  <br>
                  CEDULA PROFESIONAL: {{ $credential->professional_id }}
                </div>
-             </div>
+             </div>    
              <a data-toggle="tooltip" title="Editar" href="{!! route('employeecredentials.edit', [$credential->id]) !!}"><i class="fa fa-pencil fa-2x"></i></a>
+             @endif
            </div>
          </div>
        </center>
@@ -74,6 +84,11 @@ $credential = $user->credential;
             <div class="box-header with-border">
               <h3>DATOS DOMICILIARIOS</h3>
             </div>
+            @if (is_null($location))
+            <div class="box-body">
+              Este empleado no tiene datos registrados.
+            </div>
+            @else
             <div class="box-body">
              <div class="col-md-6">
                MUNICIPIO: {{ $location->municipality }}
@@ -89,13 +104,14 @@ $credential = $user->credential;
              </div>
            </div>
            <a data-toggle="tooltip" title="Editar" href="{!! route('employeelocations.edit', [$location->id]) !!}"><i class="fa fa-pencil fa-2x"></i></a>
+           @endif
          </div>
        </div>
      </center>
- </div>
- <div class="modal-footer">
-  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-</div>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+  </div>
 </div>
 <!-- /.modal-content -->
 </div>

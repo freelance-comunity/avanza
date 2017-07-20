@@ -73,12 +73,12 @@
                 {!! Form::select('no_economic_dependent',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('no_familys', 'No. de Dependientes Economicos') !!}
+                {!! Form::label('no_familys', 'No. Familias') !!}
                 {!! Form::select('no_familys',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
-                {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTEA' => ' RENTEA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+                {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">

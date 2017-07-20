@@ -34,7 +34,6 @@ Todos los Clientes
                 <tbody>
 
                     @foreach($clients as $client)
-                    @include('clients.show')
                     @php
                     $branch = $client->branch;
                     @endphp
@@ -49,9 +48,9 @@ Todos los Clientes
                         <td>{{$branch->name}}</td>
                         <td><img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" style="width: 50px; height: 50px;"></td>
                         <td>
-                            <a href="{!! route('clients.edit', [$client->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a href="{!! route('clients.delete', [$client->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar este cliente?')"><i class="glyphicon glyphicon-remove"></i></a>
-                            <a  data-toggle="tooltip" title="Ver"><i class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#detail{{$client->id}}"></i></a>                           
+                            
+                            <a href="{!! route('clients.show', [$client->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>   
+                            <a href="{!! route('clients.delete', [$client->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar este cliente?')"><i class="fa fa-trash fa-2x"></i></a>                            
                         </td>
                     </tr>
                     @endforeach

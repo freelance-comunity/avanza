@@ -194,14 +194,22 @@ class ClientController extends AppBaseController
 	public function show($id)
 	{
 		$client = Client::find($id);
-
+		$clientLocation = ClientLocation::find($id);
+		$clientCompany = ClientCompany::find($id);
+		$clientAval = ClientAval::find($id);
+		$clientReferences = ClientReferences::find($id);
 		if(empty($client))
 		{
 			Flash::error('Client not found');
 			return redirect(route('clients.index'));
 		}
 
-		return view('clients.show')->with('client', $client);
+		return view('clients.show')
+		->with('client', $client)
+		->with('clientLocation',$clientLocation)
+		->with('clientCompany',$clientCompany)
+		->with('clientAval',$clientAval)
+		->with('clientReferences',$clientReferences);
 	}
 
 	/**

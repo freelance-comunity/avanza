@@ -33,13 +33,13 @@
                     </div>
 
                     <div class="form-group col-sm-6 col-lg-4">
-                        {!! Form::label('mother_last_name', 'Apellido Paterno:') !!}
-                        {!! Form::text('mother_last_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                        {!! Form::label('father_last_name', 'Apellido Paterno:') !!}
+                        {!! Form::text('father_last_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                     </div>
 
                     <div class="form-group col-sm-6 col-lg-4">
-                        {!! Form::label('father_last_name', 'Apellido Materno:') !!}
-                        {!! Form::text('father_last_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                        {!! Form::label('mother_last_name', 'Apellido Materno:') !!}
+                        {!! Form::text('mother_last_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                     </div>
 
                     <div class="form-group col-sm-6 col-lg-4">
@@ -228,7 +228,7 @@
                     <div class="btn-group btn-group" data-toggle="buttons">
                         @foreach ($roles as $role) 
                         <label class="btn active">
-                            <input type="checkbox" name='roles[]'><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i><span> {{ $role->name }}
+                            <input type="checkbox" name='roles[]' value="{{ $role->id }}"><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i><span> {{ $role->name }}
                         </label>
                         @endforeach
                     </div>

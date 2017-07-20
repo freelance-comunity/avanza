@@ -6,12 +6,12 @@
 
 		<div class="form-group col-sm-6 col-lg-4">
 			{!! Form::label('name', 'Nombre Rol:') !!}
-			{!! Form::text('name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'NOMBRE ROL', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+			{!! Form::text('name', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE ROL', 'required' => 'required']) !!}
 		</div>
 
 		<div class="form-group col-sm-6 col-lg-4">
 			{!! Form::label('display_name', 'Nombre Secundario Rol:') !!}
-			{!! Form::text('display_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'NOMBRE SECUNDARIO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+			{!! Form::text('display_name', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE SECUNDARIO', 'required' => 'required']) !!}
 		</div>
 
 		<div class="form-group col-sm-6 col-lg-4"></div>

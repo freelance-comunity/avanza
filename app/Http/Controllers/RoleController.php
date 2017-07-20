@@ -9,6 +9,7 @@ use Response;
 use Flash;
 use Schema;
 use Toastr;
+use Illuminate\Support\Str;
 
 class RoleController extends AppBaseController
 {
@@ -63,6 +64,8 @@ class RoleController extends AppBaseController
 	public function store(CreateRoleRequest $request)
 	{
         $input = $request->all();
+       	$name = Str::lower($request->input('name'));
+        $input['name'] = str_slug($name);
 
 		$role = Role::create($input);
 

@@ -8,6 +8,8 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use App\User;
+use Toastr;
 
 class EmployeecredentialsController extends AppBaseController
 {
@@ -131,9 +133,9 @@ class EmployeecredentialsController extends AppBaseController
 		$employeecredentials->fill($request->all());
 		$employeecredentials->save();
 
-		Flash::message('Employeecredentials updated successfully.');
+		Toastr::info('Personal editado exitosamente.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('employeecredentials.index'));
+		return redirect(route('employees.index'));
 	}
 
 	/**

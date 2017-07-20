@@ -7,7 +7,7 @@
 
     {!! Form::model($employee, ['route' => ['employees.update', $employee->id], 'method' => 'patch']) !!}
 
-        @include('employees.fields')
+        @include('employees.fields-edit')
 
     {!! Form::close() !!}
 </div>

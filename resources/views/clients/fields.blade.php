@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="box-body">
-         <div class="row setup-content" id="step-1">
+           <div class="row setup-content" id="step-1">
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('folio', 'Folio:') !!}
                 {!! Form::text('folio', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
@@ -138,35 +138,35 @@
                 <div class="gllpLatlonPicker">
                   <label for="exampleInputEmail1">DIRECCIÓN DEL CLIENTE</label>
                   <div class="input-group">
-                     <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
-                     <div class="input-group-btn">
-                       <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
-                   </div>
-               </div>
-               <br/><br/>
-               <div class="gllpMap">Google Maps</div>
-               <br/>
-               <input type="hidden" name="latitude" class="gllpLatitude" value="16.753239967660058"/>
-               <input type="hidden" name="lenght" class="gllpLongitude" value="-93.11789682636714"/>
-               <input type="hidden" class="gllpZoom" value="12"/>
-           </div>
-       </div>
-       <div class="col-md-6">
+                   <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
+                   <div class="input-group-btn">
+                     <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+                 </div>
+             </div>
+             <br/><br/>
+             <div class="gllpMap">Google Maps</div>
+             <br/>
+             <input type="hidden" name="latitude" class="gllpLatitude" value="16.753239967660058"/>
+             <input type="hidden" name="lenght" class="gllpLongitude" value="-93.11789682636714"/>
+             <input type="hidden" class="gllpZoom" value="12"/>
+         </div>
+     </div>
+     <div class="col-md-6">
         <div class="gllpLatlonPicker">
           <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
           <div class="input-group">
-             <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
-             <div class="input-group-btn">
-               <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
-           </div>
-       </div>
-       <br/><br/>
-       <div class="gllpMap">Google Maps</div>
-       <br/>
-       <input type="hidden" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
-       <input type="hidden" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
-       <input type="hidden" class="gllpZoom" value="12"/>
-   </div>
+           <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
+           <div class="input-group-btn">
+             <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+         </div>
+     </div>
+     <br/><br/>
+     <div class="gllpMap">Google Maps</div>
+     <br/>
+     <input type="hidden" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
+     <input type="hidden" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+     <input type="hidden" class="gllpZoom" value="12"/>
+ </div>
 </div>
 
 
@@ -262,7 +262,7 @@
                 {!! Form::label('references', 'Referencias:') !!}
                 {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>            
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
     </div>
 </div>
@@ -286,7 +286,7 @@
                 {!! Form::label('rfc', 'RFC:') !!}
                 {!! Form::text('rfc', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE RFC', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
     </div>
 </div>
@@ -390,7 +390,7 @@
                 {!! Form::label('postal_code_aval', 'Código Postal:') !!}
                 {!! Form::text('postal_code_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
 
     </div>
@@ -494,7 +494,7 @@
                 {!! Form::label('postal_code_spouse', 'Código Postal:') !!}
                 {!! Form::text('postal_code_spouse', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
 
     </div>
@@ -588,7 +588,7 @@
                 {!! Form::label('references_company', 'Referencias:') !!}
                 {!! Form::text('references_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
     </div>
 </div>

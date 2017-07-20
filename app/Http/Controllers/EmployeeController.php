@@ -70,7 +70,7 @@ class EmployeeController extends AppBaseController
 	public function store(CreateEmployeeRequest $request)
 	{
 		$input = $request->all();
-		$input['password'] = Hash::make($request->input('name').$request->input('father_last_name'));
+		$input['password'] = Hash::make('micontraseña');
 
 		/* Save avatar employee */
 		if($request->hasFile('avatar')){
@@ -82,6 +82,10 @@ class EmployeeController extends AppBaseController
 
 		/* Save new employee */		
 		$employee = User::create($input);
+
+		/* Attach roles */
+		$employee->roles()->sync($request->input('roles', []));
+		
 
 		/* Get employee location data  */		
 		$data_location['country'] = $request->input('country');

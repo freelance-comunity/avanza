@@ -8,6 +8,8 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use App\User;
+use Toastr;
 
 class EmployeelocationController extends AppBaseController
 {
@@ -22,24 +24,24 @@ class EmployeelocationController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Employeelocation::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $employeelocations = $query->get();
+		$employeelocations = $query->get();
 
-        return view('employeelocations.index')
-            ->with('employeelocations', $employeelocations)
-            ->with('attributes', $attributes);
+		return view('employeelocations.index')
+		->with('employeelocations', $employeelocations)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -61,7 +63,7 @@ class EmployeelocationController extends AppBaseController
 	 */
 	public function store(CreateEmployeelocationRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$employeelocation = Employeelocation::create($input);
 
@@ -131,9 +133,9 @@ class EmployeelocationController extends AppBaseController
 		$employeelocation->fill($request->all());
 		$employeelocation->save();
 
-		Flash::message('Employeelocation updated successfully.');
+		Toastr::info('Personal editado exitosamente.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('employeelocations.index'));
+		return redirect(route('employees.index'));
 	}
 
 	/**

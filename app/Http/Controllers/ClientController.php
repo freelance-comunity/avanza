@@ -189,6 +189,14 @@ class ClientController extends AppBaseController
 		Toastr::success('Cliente creado exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('clients.index'));
+
+
+		$data_reference_1['firts_name_reference'] = $request->input('firts_name_reference_1');
+		$data_reference_1['last_name_reference']  = $request->input('last_name_reference_1');
+		$data_reference_1['client_id'] = $client->id;
+		$reference_1 = ClientReferences::create($data_reference_1);
+
+		$data_reference_2 = 
 	}
 
 	/**

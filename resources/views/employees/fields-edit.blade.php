@@ -1,26 +1,21 @@
-@extends('layouts.app')
-@section('main-content')
 <div class="box box-danger">
 	<div class="box-header with-border">
-		<h3 class="box-title">
-			Editar Datos Personales
-		</h3>
+		<h3 class="box-title">Rol</h3>
 	</div>
 	<div class="box-body">
-		{!! Form::model($employee, ['route' => ['employee.update', $employee->id], 'method' => 'patch']) !!}
 		<div class="form-group col-sm-6 col-lg-4">
 			{!! Form::label('name', 'Nombre:') !!}
 			{!! Form::text('name', null, ['style' => 'text-transform:uppercase','style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 		</div>
 
 		<div class="form-group col-sm-6 col-lg-4">
-			{!! Form::label('mother_last_name', 'Apellido Paterno:') !!}
-			{!! Form::text('mother_last_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+			{!! Form::label('father_last_name', 'Apellido Paterno:') !!}
+			{!! Form::text('father_last_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 		</div>
 
 		<div class="form-group col-sm-6 col-lg-4">
-			{!! Form::label('father_last_name', 'Apellido Materno:') !!}
-			{!! Form::text('father_last_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+			{!! Form::label('mother_last_name', 'Apellido Materno:') !!}
+			{!! Form::text('mother_last_name', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 		</div>
 
 		<div class="form-group col-sm-6 col-lg-4">
@@ -77,31 +72,8 @@
 			{!! Form::label('phone_2', 'Teléfono 2:') !!}
 			{!! Form::text('phone_2', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO 2', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 		</div>
-
-		@php
-		$count = App\Models\Branch::all();
-		@endphp
-		<div class="form-group col-sm-6 col-lg-4">
-			{!! Form::label('branch_id', '* Sucursal:') !!}
-			<select name="branch_id" value="" class="form-control input-lg" id="branch">
-				@if($count ->isEmpty())
-				<option value="">No hay sucursales registradas en el sistema</option>
-				@else 
-				<option selected value="">Seleccione Sucursal</option>
-				@foreach($count as $element)
-				<option value="{{$element->id}}" {{ ($element->id == $employee->branch_id) ? 'selected=selected' : '' }}>
-					{{$element->name}}
-				</option>
-				@endforeach
-				@endif
-			</select>
-		</div>
-
 		<div class="form-group col-sm-12">
-			{!! Form::submit('Actualizar', ['class' => 'uppercase btn btn-primary']) !!}
+			{!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary']) !!}
 		</div>
-		{!! Form::close() !!}
-
 	</div>
 </div>
-@endsection

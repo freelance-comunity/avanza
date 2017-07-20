@@ -29,7 +29,8 @@ class User extends Authenticatable
     "scholarship",
     "phone_1",
     "phone_2",
-    "avatar"
+    "avatar",
+    "branch_id"
     ];
 
     public static $rules = [
@@ -47,7 +48,6 @@ class User extends Authenticatable
     "scholarship" => "required",
     "phone_1" => "required",
     "phone_2" => "required",
-    "avatar" => "required",
     "branch_id",
     ];
 

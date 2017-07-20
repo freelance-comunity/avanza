@@ -75,4 +75,9 @@ class Client extends Model
         return $this->hasMany('App\Models\ClientReferences');
     }
 
+    public function document()
+    {
+    	return $this->hasOne('App\Models\Clientdocuments');
+    }
+
 }

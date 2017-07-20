@@ -10,46 +10,97 @@ DETALLES DEL CLIENTE
 @endsection
 <div class="container">
   <div class="box box-danger">
-      <div class="box-header with-border">
-        <div class="row">
-            <div class="col-md-6">
-              <!-- Widget: user widget style 1 -->
-              <div class="box box-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-black" style="background: url('../img/b.jpeg') center center;">
-                  <h3 class="widget-user-username"><strong>{{$client->firts_name}}  {{$client->last_name}} {{$client->mothers_last_name}}</strong></h3>
-                  <h5 class="widget-user-desc">{{$branch->name}}</h5>
-              </div>
-              <div class="widget-user-image">
-                 <img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" width="140" height="140" border="0" class="img-circle">
-             </div>
-             <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                      <h5 class="description-header">CURP</h5>
-                      <span class="description-text">{{$client->curp}}</span>
-                  </div>
-                  <!-- /.description-block -->
+    <div class="box-header with-border">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-black" style="background: url('../img/b.jpeg') center center;">
+              <h3 class="widget-user-username"><strong>{{$client->firts_name}}  {{$client->last_name}} {{$client->mothers_last_name}}</strong></h3>
+              <h5 class="widget-user-desc">{{$branch->name}}</h5>
+            </div>
+            <div class="widget-user-image">
+             <img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" width="140" height="140" border="0" class="img-circle">
+           </div>
+           <div class="box-footer">
+            <div class="row">
+              <div class="col-sm-4 border-right">
+                <div class="description-block">
+                  <h5 class="description-header">CURP</h5>
+                  <span class="description-text">{{$client->curp}}</span>
+                </div>
+                <!-- /.description-block -->
               </div>
               <!-- /.col -->
               <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">INE</h5>
-                    <span class="description-text">{{$client->ine}}</span>
+                <div class="description-block">
+                  <h5 class="description-header">INE</h5>
+                  <span class="description-text">{{$client->ine}}</span>
                 </div>
                 <!-- /.description-block -->
+              </div>
+              <!-- /.col -->
+              <div class="col-sm-4">
+                <div class="description-block">
+                  <h5 class="description-header">TELÉFONO</h5>
+                  <span class="description-text">{{$client->phone}}</span>
+                </div>
+                <!-- /.description-block -->
+              </div>
+              <!-- /.col -->
             </div>
-            <!-- /.col -->
-            <div class="col-sm-4">
-              <div class="description-block">
-                <h5 class="description-header">TELÉFONO</h5>
-                <span class="description-text">{{$client->phone}}</span>
-            </div>
-            <!-- /.description-block -->
+            <!-- /.row -->
+          </div>
         </div>
-        <!-- /.col -->
+        <!-- /.widget-user -->
+      </div>
+
+
+      <div class="col-md-6">           
+        <h3 class="box-title">DATOS PERSONALES</h3>
+        <!-- /.box-header -->
+        <table class="table">
+          <tr>
+            <th style="width: 10px">1.</th>
+            <th>ESTADO CIVIL</th>
+            <th>{{$client->civil_status}}</th>
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>ESCOLARIDAD</td>
+            <td>
+              {{$client->scholarship}}
+            </td>
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>DEPENDIENTES</td>
+            <td>
+              {{$client->no_economic_dependent}}
+            </td>
+          </tr>
+          <tr>
+            <td>4.</td>
+            <td>NO. FAMILIAS</td>
+            <td>
+              {{$client->no_familys}}
+            </td>
+          </tr>
+          <tr>
+            <td>5.</td>
+            <td>TIPO DE VIVIENDA</td>
+            <td>
+              {{$client->type_of_housing}}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+
+      <!--IZQUIERDO-->
     </div>
+
     <!-- /.row -->
 </div>
 </div>
@@ -57,52 +108,7 @@ DETALLES DEL CLIENTE
 </div>
 
 
-<div class="col-md-6">           
-  <h3 class="box-title">DATOS PERSONALES</h3>
-  <!-- /.box-header -->
-  <table class="table">
-    <tr>
-      <th style="width: 10px">1.</th>
-      <th>ESTADO CIVIL</th>
-      <th>{{$client->civil_status}}</th>
-  </tr>
-  <tr>
-      <td>2.</td>
-      <td>ESCOLARIDAD</td>
-      <td>
-        {{$client->scholarship}}
-    </td>
-</tr>
-<tr>
-  <td>3.</td>
-  <td>DEPENDIENTES</td>
-  <td>
-    {{$client->no_economic_dependent}}
-</td>
-</tr>
-<tr>
-  <td>4.</td>
-  <td>NO. FAMILIAS</td>
-  <td>
-    {{$client->no_familys}}
-</td>
-</tr>
-<tr>
-  <td>5.</td>
-  <td>TIPO DE VIVIENDA</td>
-  <td>
-    {{$client->type_of_housing}}
-</td>
-</tr>
-</table>
-</div>
 
-
-
-</div>
-</div>
-</div>
-</div>
 <div class="container">
   <div class="box box-danger">
       <div class="box-header with-border">
@@ -147,8 +153,7 @@ DETALLES DEL CLIENTE
     </div> 
 </div>
 </div>
-</div>
-</div>
+
 
 <div class="container">
   <div class="box box-danger">

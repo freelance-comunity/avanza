@@ -1,6 +1,11 @@
 @php
     $branch = $client->branch;
     $references = $client->references;
+    $location = $client->location;
+    $company= $client->company;
+    $aval= $client->aval;
+    $document= $client->document;
+
 @endphp
 @extends('layouts.app')
 
@@ -107,42 +112,42 @@ Detalles del Cliente
                   <table class="table table-striped">
                 <tr>
                   <th style="width: 10px">CALLE:</th>
-                  <th>{{$clientLocation->street}}</th>
+                  <th>{{$location->street}}</th>
                 </tr>
                 <tr>
                   <td>NÚMERO:</td>
                   <td>
-                    {{$clientLocation->number}}
+                    {{$location->number}}
                   </td>
                 </tr>
                 <tr>
                   <td>COLONIA:</td>
                   <td>
-                    {{$clientLocation->colony}}
+                    {{$location->colony}}
                   </td>
                 </tr>
                 <tr>
                   <td>MUNICIPIO:</td>
                   <td>
-                   {{$clientLocation->municipality}}
+                   {{$location->municipality}}
                   </td>
                 </tr>
                 <tr>
                   <td>ESTADO:</td>
                   <td>
-                    {{$clientLocation->state}}
+                    {{$location->state}}
                   </td>
                 </tr>
                 <tr>
                   <td>COGIDO POSTAL:</td>
                   <td>
-                    {{$clientLocation->postal_code}}
+                    {{$location->postal_code}}
                   </td>
                 </tr>
                 <tr>
                   <td>REFERENCIAS:</td>
                   <td>
-                    {{$clientLocation->references}}
+                    {{$location->references}}
                   </td>
                 </tr>
               </table>
@@ -150,7 +155,7 @@ Detalles del Cliente
                 </div>
                   </div>  
             
-             <h3><span class="label label-danger">DOMICILIO DEL NEGOCIO: {{$clientCompany->name_company}}</span></h3>
+             <h3><span class="label label-danger">DOMICILIO DEL NEGOCIO: {{$company->name_company}}</span></h3>
 
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -167,40 +172,40 @@ Detalles del Cliente
                   <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">TELÉFONO:</th>
-                  <th>{{$clientCompany->phone_company}}</th>
+                  <th>{{$company->phone_company}}</th>
                 </tr>
                 <tr>
                   <th style="width: 10px">CALLE:</th>
-                  <th>{{$clientCompany->street_company}}</th>
+                  <th>{{$company->street_company}}</th>
                 </tr>
                 <tr>
                   <td>NÚMERO:</td>
                   <td>
-                    {{$clientCompany->number_company}}
+                    {{$company->number_company}}
                   </td>
                 </tr>
                 <tr>
                   <td>COLONIA:</td>
                   <td>
-                    {{$clientCompany->colony_company}}
+                    {{$company->colony_company}}
                   </td>
                 </tr>
                 <tr>
                   <td>MUNICIPIO:</td>
                   <td>
-                   {{$clientCompany->municipality_company}}
+                   {{$company->municipality_company}}
                   </td>
                 </tr>
                 <tr>
                   <td>ESTADO:</td>
                   <td>
-                    {{$clientCompany->state_company}}
+                    {{$company->state_company}}
                   </td>
                 </tr>
                 <tr>
                   <td>COGIDO POSTAL:</td>
                   <td>
-                    {{$clientCompany->postal_code_company}}
+                    {{$company->postal_code_company}}
                   </td>
                 </tr>
               </table>
@@ -213,34 +218,34 @@ Detalles del Cliente
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">INVENTARIO:</th>
-                  <th>{{$clientCompany->inventory}}</th>
+                  <th>{{$company->inventory}}</th>
                 </tr>
                 <tr>
                   <th style="width: 10px">MAQ Y EQUIP:</th>
-                  <th>{{$clientCompany->machinery_equipment}}</th>
+                  <th>{{$company->machinery_equipment}}</th>
                 </tr>
                 <tr>
                   <td>VEHÍCULOS:</td>
                   <td>
-                    {{$clientCompany->vehicles}}
+                    {{$company->vehicles}}
                   </td>
                 </tr>
                 <tr>
                   <td>INMUEBLES:</td>
                   <td>
-                    {{$clientCompany->property}}
+                    {{$company->property}}
                   </td>
                 </tr>
                 <tr>
                   <td>CAJA, BANCOS:</td>
                   <td>
-                   {{$clientCompany->box_benck}}
+                   {{$company->box_benck}}
                   </td>
                 </tr>
                 <tr>
                   <td>CTAS/COBRAR:</td>
                   <td>
-                    {{$clientCompany->accounts}}
+                    {{$company->accounts}}
                   </td>
                 </tr>
               </table>
@@ -251,22 +256,22 @@ Detalles del Cliente
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">PROVEEDORES:</th>
-                  <th>{{$clientCompany->suppliers}}</th>
+                  <th>{{$company->suppliers}}</th>
                 </tr>
                 <tr>
                   <th style="width: 10px">CRÉDITOS:</th>
-                  <th>{{$clientCompany->credits}}</th>
+                  <th>{{$company->credits}}</th>
                 </tr>
                 <tr>
                   <td>PAGO AL MES:</td>
                   <td>
-                    {{$clientCompany->payments}}
+                    {{$company->payments}}
                   </td>
                 </tr>
                 <tr>
                   <td>ESPECIFICA:</td>
                   <td>
-                    {{$clientCompany->specify}}
+                    {{$company->specify}}
                   </td>
                 </tr>
               </table>
@@ -277,22 +282,22 @@ Detalles del Cliente
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">ENTRE SEMANA:</th>
-                  <th>{{$clientCompany->weekday}}</th>
+                  <th>{{$company->weekday}}</th>
                 </tr>
                 <tr>
                   <th style="width: 10px">FIN DE SEMANA:</th>
-                  <th>{{$clientCompany->weekend}}</th>
+                  <th>{{$company->weekend}}</th>
                 </tr>
                 <tr>
                   <td>UTILIDAD:</td>
                   <td>
-                    {{$clientCompany->utility}}
+                    {{$company->utility}}
                   </td>
                 </tr>
                 <tr>
                   <td>OTROS INGRESOS:</td>
                   <td>
-                    {{$clientCompany->other_income}}
+                    {{$company->other_income}}
                   </td>
                 </tr>
               </table>
@@ -302,16 +307,16 @@ Detalles del Cliente
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">RENTA:</th>
-                  <th>{{$clientCompany->rent}}</th>
+                  <th>{{$company->rent}}</th>
                 </tr>
                 <tr>
                   <th style="width: 10px">SUELDO:</th>
-                  <th>{{$clientCompany->salary}}</th>
+                  <th>{{$company->salary}}</th>
                 </tr>
                 <tr>
                   <td>OTROS LUZ/AGUA:</td>
                   <td>
-                    {{$clientCompany->others}}
+                    {{$company->others}}
                   </td>
                 </tr>
               </table>
@@ -331,15 +336,16 @@ Detalles del Cliente
                   <th>ESTADO CIVIL:</th>
                   <th>ESCOLARIDAD</th>
                 </tr>
-                <tr>
-                  <th style="width: 10px">{{$clientAval->name_aval}}</th>
-                  <th>{{$clientAval->last_name_aval}}</th>
-                  <th>{{$clientAval->mothers_name_aval}}</th>
-                  <th>{{$clientAval->birthdate_aval}}</th>
-                  <th>{{$clientAval->curp_aval}}</th>
-                  <th>{{$clientAval->phone_aval}}</th>
-                  <th>{{$clientAval->civil_status_aval}}</th>
-                  <th>{{$clientAval->scholarship_aval}}</th>
+                @foreach ($aval  as $aval)
+                     <tr>
+                  <th style="width: 10px">{{$aval->name_aval}}</th>
+                  <th>{{$aval->last_name_aval}}</th>
+                  <th>{{$aval->mothers_name_aval}}</th>
+                  <th>{{$aval->birthdate_aval}}</th>
+                  <th>{{$aval->curp_aval}}</th>
+                  <th>{{$aval->phone_aval}}</th>
+                  <th>{{$aval->civil_status_aval}}</th>
+                  <th>{{$aval->scholarship_aval}}</th>
                 </tr>
     
               </table>
@@ -354,13 +360,15 @@ Detalles del Cliente
                   <th>CODIGO POSTAL:</th>
                 </tr>
                 <tr>
-                  <th style="width: 10px">{{$clientAval->street_aval}}</th>
-                  <th>{{$clientAval->number_aval}}</th>
-                  <th>{{$clientAval->colony_aval}}</th>
-                  <th>{{$clientAval->municipality_aval}}</th>
-                  <th>{{$clientAval->state_aval}}</th>
-                  <th>{{$clientAval->postal_code_aval}}</th>
+                  <th style="width: 10px">{{$aval->street_aval}}</th>
+                  <th>{{$aval->number_aval}}</th>
+                  <th>{{$aval->colony_aval}}</th>
+                  <th>{{$aval->municipality_aval}}</th>
+                  <th>{{$aval->state_aval}}</th>
+                  <th>{{$aval->postal_code_aval}}</th>
                 </tr>
+                @endforeach
+              
     
               </table>
             </div>
@@ -386,6 +394,55 @@ Detalles del Cliente
               </table>
             </div>
 
+               <div class="col-md-6">
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">DOCUMENTOS</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <img src="{{ asset('/uploads/documents') }}/{!! $document->ine !!}" alt="First slide">
+
+                    <div class="carousel-caption">
+                      First Slide
+                    </div>
+                  </div>
+                  <div class="item">
+                    <img src="{{ asset('/uploads/documents') }}/{!! $document->curp !!}"" alt="Second slide">
+
+                    <div class="carousel-caption">
+                      Second Slide
+                    </div>
+                  </div>
+                  <div class="item">
+                    <img src="{{ asset('/uploads/documents') }}/{!! $document->proof_of_addres !!}"" alt="Third slide">
+
+                    <div class="carousel-caption">
+                      Third Slide
+                    </div>
+                  </div>
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                  <span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                  <span class="fa fa-angle-right"></span>
+                </a>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
 
 
 

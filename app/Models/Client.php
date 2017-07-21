@@ -54,17 +54,9 @@ class Client extends Model
         return $this->hasOne('App\Models\ClientLocation');
     }
 
-    public function credential()
-    {
-        return $this->hasOne('App\Models\ClientCredential');
-    }
     public function aval()
     {
         return $this->hasMany('App\Models\ClientAval');
-    }
-    public function spouse()
-    {
-        return $this->hasOne('App\Models\Spouse');
     }
      public function company()
     {

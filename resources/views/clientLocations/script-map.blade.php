@@ -3,7 +3,7 @@
 	//Google Maps JS
 	//Set Map
 	function initialize() {
-		var myLatlng = new google.maps.LatLng({{$clientLocation->latitude}},{{$clientLocation->lenght}});
+		var myLatlng = new google.maps.LatLng({{$location->latitude}},{{$location->lenght}});
 		var imagePath = 'http://m.schuepfen.ch/icons/helveticons/black/60/Pin-location.png'
 		var mapOptions = {
 			zoom: 11,
@@ -13,7 +13,7 @@
 
 		var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 		//Callout Content
-		var contentString = '{{$clientLocation->colony}}';
+		var contentString = '{{$location->colony}}';
 		//Set window width + content
 		var infowindow = new google.maps.InfoWindow({
 			content: contentString,

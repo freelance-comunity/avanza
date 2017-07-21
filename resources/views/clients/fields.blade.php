@@ -456,12 +456,12 @@
         <div class="col-md-12">
             <h3> Digitalización</h3>
             <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('ine', 'INE:') !!}
-                {!! Form::file('ine') !!}
+            {!! Form::label('ine_document', 'INE:') !!}
+                {!! Form::file('ine_document') !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('curp', 'CURP:') !!}
-                {!! Form::file('curp') !!}
+            {!! Form::label('curp_document', 'CURP:') !!}
+                {!! Form::file('curp_document') !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('proof_of_addres', 'Comprobante de Domicilio:') !!}

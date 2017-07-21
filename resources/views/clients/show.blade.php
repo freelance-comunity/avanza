@@ -58,6 +58,7 @@ Detalles del Cliente
         </div>
         <div class="col-md-6">
                 <h3><span class="label label-danger">DATOS PERSONALES</span></h3>
+                 <div class="table-responsive">
                 <table class="table table-striped">
                 <tr>
                   <th style="width: 10px">1</th>
@@ -93,6 +94,7 @@ Detalles del Cliente
                   </td>
                 </tr>
               </table>
+              </div>
         </div>
 
         <h3><span class="label label-danger">DOMICILIO DE LA CASA</span></h3>
@@ -109,6 +111,7 @@ Detalles del Cliente
                 </div>
                 <!-- /.col -->
                 <div class="col-md-4 col-sm-4">
+                 <div class="table-responsive">
                   <table class="table table-striped">
                 <tr>
                   <th style="width: 10px">CALLE:</th>
@@ -151,6 +154,7 @@ Detalles del Cliente
                   </td>
                 </tr>
               </table>
+              </div>
                   </div>
                 </div>
                   </div>  
@@ -169,6 +173,7 @@ Detalles del Cliente
                 </div>
                 <!-- /.col -->
               <div class="col-md-4 col-sm-4">
+               <div class="table-responsive">
                   <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">TELÉFONO:</th>
@@ -212,9 +217,11 @@ Detalles del Cliente
               </div>
               </div>
               </div>
+              </div>
             
             <div class="col-md-3">
                <h4>ACTIVOS</h4>
+                <div class="table-responsive">
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">INVENTARIO:</th>
@@ -249,10 +256,12 @@ Detalles del Cliente
                   </td>
                 </tr>
               </table>
+              </div>
             </div>
 
             <div class="col-md-3">
                <h4>PASIVOS</h4>
+                <div class="table-responsive">
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">PROVEEDORES:</th>
@@ -275,10 +284,12 @@ Detalles del Cliente
                   </td>
                 </tr>
               </table>
+              </div>
             </div>
 
             <div class="col-md-3">
                <h4>INGRESOS</h4>
+                <div class="table-responsive">
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">ENTRE SEMANA:</th>
@@ -301,9 +312,11 @@ Detalles del Cliente
                   </td>
                 </tr>
               </table>
+              </div>
             </div>
             <div class="col-md-3">
                <h4>COSTOS</h4>
+                <div class="table-responsive">
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">RENTA:</th>
@@ -320,11 +333,13 @@ Detalles del Cliente
                   </td>
                 </tr>
               </table>
+              </div>
             </div>
 
            
              <div class="col-md-12">
               <h3> <span class="label label-danger">AVAL DATOS GENERALES</span></h3>
+               <div class="table-responsive">
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">NOMBRE:</th>
@@ -349,7 +364,9 @@ Detalles del Cliente
                 </tr>
     
               </table>
+              </div>
               <H4><span>DIRECCIÓN DEL AVAL</span> </H4>
+               <div class="table-responsive">
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">CALLE:</th>
@@ -371,10 +388,12 @@ Detalles del Cliente
               
     
               </table>
+              </div>
             </div>
 
              <div class="col-md-12">
               <h3><span class="label label-danger">REFERENCIAS</span></h3>
+               <div class="table-responsive">
                <table class="table table-striped">
                   <tr>
                   <th style="width: 10px">NOMBRE:</th>
@@ -392,6 +411,7 @@ Detalles del Cliente
                 @endforeach
                    
               </table>
+              </div>
             </div>
 
                <div class="col-md-6">

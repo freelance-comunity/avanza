@@ -223,7 +223,7 @@ class ClientController extends AppBaseController
 		$clientLocation = ClientLocation::find($id);
 		$clientCompany = ClientCompany::find($id);
 		$clientAval = ClientAval::find($id);
-		$clientReferences = ClientReferences::find($id);
+		$references = ClientReferences::find($id);
 		if(empty($client))
 		{
 			Flash::error('Client not found');
@@ -235,7 +235,7 @@ class ClientController extends AppBaseController
 		->with('clientLocation',$clientLocation)
 		->with('clientCompany',$clientCompany)
 		->with('clientAval',$clientAval)
-		->with('clientReferences',$clientReferences);
+		->with('references',$references);
 	}
 
 	/**

@@ -25,9 +25,6 @@ Detalles de la {{$branch->name}}
                 </ul>
             </div>
         </div>
-
-
-        <!-- /.widget-user -->
     </div>
     <div class="timeline-item">
         <div class="timeline-body">

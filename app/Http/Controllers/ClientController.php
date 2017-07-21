@@ -180,15 +180,15 @@ class ClientController extends AppBaseController
 		/*=============================================
 		=            Save documentation client        =
 		=============================================*/
-		if($request->hasFile('ine')){
-			$ine = $request->file('ine');
+		if($request->hasFile('ine_document')){
+			$ine = $request->file('ine_document');
 			$filename_ine = time() . '.' . $ine->getClientOriginalExtension();
 			Image::make($ine)->resize(400, 600)->save( public_path('/uploads/documents/' . $filename_ine ) );
 			$documents['ine'] = $filename_ine;
 		}
 
-		if($request->hasFile('curp')){
-			$curp = $request->file('curp');
+		if($request->hasFile('curp_document')){
+			$curp = $request->file('curp_document');
 			$filename_curp = time() . '.' . $curp->getClientOriginalExtension();
 			Image::make($curp)->resize(600, 600)->save( public_path('/uploads/documents/' . $filename_curp ) );
 			$documents['curp'] = $filename_curp;

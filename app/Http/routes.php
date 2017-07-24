@@ -2,9 +2,15 @@
 /*===================================
 =            Test Routes            =
 ===================================*/
-Route::get('pdf', function(){
-    $pdf = PDF::loadView('clients.documents');
+Route::get('pdf/{id}', function($id){
+    $client = App\Models\Client::find($id);
+    $document = $client->document;
+    $pdf = PDF::loadView('clients.documents', compact('document'));
     return $pdf->download('documents.pdf');
+});
+
+Route::get('signature', function(){
+    return view('signature');
 });
 /*=====  End of Test Routes  ======*/
 
@@ -63,6 +69,12 @@ Route::post('/updateroles', function(Illuminate\Http\Request  $request) {
 Toastr::success('Privilegios agregados exitosamente.', 'ROLES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 return redirect(route('employees.index'));
 });
+
+Route::get('update', function(){
+    return view('employees.updatepassword');
+});
+
+Route::post('updatepassword', 'EmployeeController@updatePassword');
 /*=====  End of Routes for Employee  ======*/
 
 Route::get('formwizard', function(){

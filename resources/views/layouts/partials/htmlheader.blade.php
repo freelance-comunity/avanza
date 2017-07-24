@@ -41,6 +41,9 @@
 
         {{-- Select List --}}
         <script src="{{ asset('/selectList/js/jquery.selectlistactions.js')}}"></script>
+
+        {{-- Parsley JS --}}
+        <link rel="stylesheet" href="{{ asset('/css/parsley.css') }}">
       </head>
 
       {{-- Form Wizard --}}

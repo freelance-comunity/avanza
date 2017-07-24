@@ -4,7 +4,9 @@
 <script src="{{ asset('/js/bootstrap.min.js') }}" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('/js/app.min.js') }}" type="text/javascript"></script>
-
+{{-- Parsley JS --}}
+<script src="{{ asset('/js/parsley.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/es.js') }}" type="text/javascript"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
@@ -63,7 +65,7 @@
           var curStep = $(this).closest(".setup-content"),
           curStepBtn = curStep.attr("id"),
           nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-          curInputs = curStep.find("input[type='text'],input[type='url']"),
+          curInputs = curStep.find("input[type='text'],input[type='url'],input[type='date'],input[type='email'],input[type='file'], select"),
           isValid = true;
 
           $(".form-group").removeClass("has-error");

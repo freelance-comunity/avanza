@@ -23,7 +23,7 @@ Todas las sucursales
                     <th>Nombre</th>
                     <th>Teléfono</th>
                     <th>Dirección</th>
-                    <th width="50px">Acción</th>
+                    <th width="100px">Acción</th>
                 </thead>
                 <tbody>
 

@@ -33,7 +33,13 @@
            <div class="row setup-content" id="step-1">
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('folio', 'Folio:') !!}
-                {!! Form::text('folio', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('folio', null, [
+                'class' => 'form-control input-lg',
+                'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE',
+                'required'=>'required', 
+                'data-parsley-trigger' => 'input focusin',
+                'onkeyup' => 'javascript:this.value=this.value.toUpperCase();
+                ']) !!}
 
             </div>
 

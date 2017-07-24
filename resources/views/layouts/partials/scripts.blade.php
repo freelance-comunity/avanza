@@ -8,15 +8,6 @@
 <script src="{{ asset('/js/parsley.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/es.js') }}" type="text/javascript"></script>
 
-<script type="text/javascript">
-    // Waiting for the DOM ready...
-    $(function(){
-
-      // Add your custom validators
-      $('#my-form').parsley();
-      
-    });
-  </script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
       user experience. Slimscroll is required when using the

@@ -212,4 +212,15 @@ class EmployeeController extends AppBaseController
 		return redirect(route('employees.index'));
 	}
 
+	public function updatePassword(Request $request)
+	{
+		$user = User::find($request->input('user_id'));
+		$user->password = Hash::make($request->input('password'));
+		$user->save();
+
+		Toastr::info('Contraseña actualizada exitosamente.', 'PERSONAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+		return redirect()->back();
+	}
+
 }

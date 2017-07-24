@@ -10,20 +10,15 @@
 	</style>
 </head>
 <body>
-	@php
-	$client = App\Models\Client::find(3);
-	$document = $client->document;
-	@endphp
-
-	<h1>INE</h1>
+	<h1 style="text-align: center;">INE</h1>
 	<hr>
 	<img src="{{ asset('uploads/documents/') }}/{{ $document->ine }}" alt="">
 	<div class="page-break"></div>
-	<h1>CURP</h1>
+	<h1 style="text-align: center;">CURP</h1>
 	<hr>
 	<img src="{{ asset('uploads/documents/') }}/{{ $document->curp }}" alt="">
 	<div class="page-break"></div>
-	<h1>COMPROBANTE DE DOMICILIO</h1>
+	<h1 style="text-align: center;">COMPROBANTE DE DOMICILIO</h1>
 	<hr>
 	<img src="{{ asset('uploads/documents/') }}/{{ $document->proof_of_addres }}" alt="">
 </body>

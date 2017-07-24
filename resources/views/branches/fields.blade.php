@@ -27,6 +27,7 @@
                 'placeholder'=>'ESCRIBE SU NÚMERO DE TELÉFONO',
                 'required'=>'required',
                 'data-parsley-required-message' => 'Este campo es obligatorio',
+                'data-trigger' => 'keyup',
                 'data-parsley-type' => 'digits',
                 'data-parsley-maxlength' => '10',
                 'data-parsley-maxlength-message' => '

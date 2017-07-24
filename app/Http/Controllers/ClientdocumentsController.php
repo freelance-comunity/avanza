@@ -8,6 +8,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
 
 class ClientdocumentsController extends AppBaseController
 {
@@ -128,12 +129,34 @@ class ClientdocumentsController extends AppBaseController
 			return redirect(route('clientdocuments.index'));
 		}
 
-		$clientdocuments->fill($request->all());
+	elseif($request->hasFile('ine_document')){
+			$ine = $request->file('ine_document');
+			$filename_ine = time() . '.' . $ine->getClientOriginalExtension();
+			Image::make($ine)->resize(400, 600)->save( public_path('/uploads/documents/' . $filename_ine ) );
+			$documents['ine'] = $filename_ine;
+		}
+
+		elseif($request->hasFile('curp_document')){
+			$curp = $request->file('curp_document');
+			$filename_curp = time() . '.' . $curp->getClientOriginalExtension();
+			Image::make($curp)->resize(600, 600)->save( public_path('/uploads/documents/' . $filename_curp ) );
+			$documents['curp'] = $filename_curp;
+		}
+
+		elseif($request->hasFile('proof_of_addres')){
+			$proof_of_addres = $request->file('proof_of_addres');
+			$filename_proof_of_addres = time() . '.' . $proof_of_addres->getClientOriginalExtension();
+			Image::make($proof_of_addres)->resize(800, 600)->save( public_path('/uploads/documents/' . $filename_proof_of_addres ) );
+			$documents['proof_of_addres'] = $filename_proof_of_addres;
+		}
+	
+		$documents= $clientdocuments;
+		
 		$clientdocuments->save();
 
-		Flash::message('Clientdocuments updated successfully.');
+		Toastr::success('Documentos editados exitosamente.', 'DOCUMENTOS CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('clientdocuments.index'));
+		return redirect(route('clients.index'));
 	}
 
 	/**

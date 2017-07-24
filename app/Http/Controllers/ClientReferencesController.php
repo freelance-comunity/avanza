@@ -8,6 +8,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
 
 class ClientReferencesController extends AppBaseController
 {
@@ -22,24 +23,24 @@ class ClientReferencesController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = ClientReferences::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $clientReferences = $query->get();
+		$clientReferences = $query->get();
 
-        return view('clientReferences.index')
-            ->with('clientReferences', $clientReferences)
-            ->with('attributes', $attributes);
+		return view('clientReferences.index')
+		->with('clientReferences', $clientReferences)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -61,7 +62,7 @@ class ClientReferencesController extends AppBaseController
 	 */
 	public function store(CreateClientReferencesRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$clientReferences = ClientReferences::create($input);
 
@@ -131,9 +132,9 @@ class ClientReferencesController extends AppBaseController
 		$clientReferences->fill($request->all());
 		$clientReferences->save();
 
-		Flash::message('ClientReferences updated successfully.');
+		Toastr::success('Referencia editada exitosamente.', 'REFERENCIA CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('clientReferences.index'));
+		return redirect(route('clients.index'));
 	}
 
 	/**

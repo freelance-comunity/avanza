@@ -57,7 +57,7 @@ Detalles del Cliente
              </div>
         </div>
         <div class="col-md-6">
-                <h3><span class="label label-danger">DATOS PERSONALES</span></h3>
+                <a href="{!! route('clients.edit', [$client->id]) !!}"><h3><span class="label label-danger">DATOS PERSONALES</span></h3></a>
                  <div class="table-responsive">
                 <table class="table table-striped">
                 <tr>
@@ -97,7 +97,7 @@ Detalles del Cliente
               </div>
         </div>
 
-        <h3><span class="label label-danger">DOMICILIO DE LA CASA</span></h3>
+        <a href="{!! route('clientLocations.edit', [$location->id]) !!}"><h3><span class="label label-danger">DOMICILIO DE LA CASA</span></h3></a>
 
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -159,7 +159,7 @@ Detalles del Cliente
                 </div>
                   </div>  
             
-             <h3><span class="label label-danger">DOMICILIO DEL NEGOCIO: {{$company->name_company}}</span></h3>
+           <a href="{!! route('clientCompanies.edit', [$company->id]) !!}"><h3><span class="label label-danger">DOMICILIO DEL NEGOCIO: {{$company->name_company}}</span></h3></a>  
 
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -338,7 +338,9 @@ Detalles del Cliente
 
            
              <div class="col-md-12">
-              <h3> <span class="label label-danger">AVAL DATOS GENERALES</span></h3>
+              @foreach ($aval  as $aval)
+             <a href="{!! route('clientAvals.edit', [$aval->id]) !!}">  <h3> <span class="label label-danger">AVAL DATOS GENERALES</span></h3></a>
+            
                <div class="table-responsive">
                <table class="table table-striped">
                   <tr>
@@ -351,7 +353,7 @@ Detalles del Cliente
                   <th>ESTADO CIVIL:</th>
                   <th>ESCOLARIDAD</th>
                 </tr>
-                @foreach ($aval  as $aval)
+               
                      <tr>
                   <th style="width: 10px">{{$aval->name_aval}}</th>
                   <th>{{$aval->last_name_aval}}</th>
@@ -383,16 +385,17 @@ Detalles del Cliente
                   <th>{{$aval->municipality_aval}}</th>
                   <th>{{$aval->state_aval}}</th>
                   <th>{{$aval->postal_code_aval}}</th>
-                </tr>
-                @endforeach
-              
+                </tr>            
     
               </table>
               </div>
+                @endforeach
             </div>
 
              <div class="col-md-12">
-              <h3><span class="label label-danger">REFERENCIAS</span></h3>
+             @foreach ($references as $references)
+             <a href="{!! route('clientReferences.edit', [$references->id]) !!}"><h3><span class="label label-danger">REFERENCIA</span></h3></a>
+           
                <div class="table-responsive">
                <table class="table table-striped">
                   <tr>
@@ -401,23 +404,24 @@ Detalles del Cliente
                   <th>APELLIDO MATERNO:</th>
                   <th>TELÉFONO:</th>
                 </tr>
-                @foreach ($references as $references)
+            
                     <tr>
                   <th style="width: 10px">{{$references->firts_name_reference}}</th>
                   <th>{{$references->last_name_reference}}</th>
                   <th>{{$references->mothers_last_name_reference}}</th>
                   <th>{{$references->phone_reference}}</th>
                 </tr>
-                @endforeach
+             
                    
               </table>
               </div>
+                 @endforeach
             </div>
 
                <div class="col-md-6">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">DOCUMENTOS</h3>
+             <a href="{!! route('clientdocuments.edit', [$document->id]) !!}"><h3 class="box-title"><span class="label label-danger">DOCUMENTOS</span></h3></a> 
             </div>
             <!-- /.box-header -->
             <div class="box-body">

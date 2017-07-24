@@ -8,6 +8,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
 
 class ClientLocationController extends AppBaseController
 {
@@ -22,24 +23,24 @@ class ClientLocationController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = ClientLocation::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $clientLocations = $query->get();
+		$clientLocations = $query->get();
 
-        return view('clientLocations.index')
-            ->with('clientLocations', $clientLocations)
-            ->with('attributes', $attributes);
+		return view('clientLocations.index')
+		->with('clientLocations', $clientLocations)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -61,7 +62,7 @@ class ClientLocationController extends AppBaseController
 	 */
 	public function store(CreateClientLocationRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$clientLocation = ClientLocation::create($input);
 
@@ -130,10 +131,8 @@ class ClientLocationController extends AppBaseController
 
 		$clientLocation->fill($request->all());
 		$clientLocation->save();
-
-		Flash::message('ClientLocation updated successfully.');
-
-		return redirect(route('clientLocations.index'));
+		Toastr::success('Ubicación del cliete editado exitosamente.', 'UBICACIÓN CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		return redirect(route('clients.index'));
 	}
 
 	/**

@@ -241,8 +241,6 @@ class ClientController extends AppBaseController
 	{
 
 		$client = Client::find($id);
-		$clientLocation = ClientLocation::find($id);
-		$clientcompany = ClientCompany::find($id);
 		if(empty($client))
 		{
 			Flash::error('Client not found');
@@ -250,9 +248,7 @@ class ClientController extends AppBaseController
 		}
 
 		return view('clients.edit')
-		->with('client', $client)
-		->with('clientLocation',$clientLocation)
-		->with('clientcompany',$clientcompany);
+		->with('client', $client);
 	}
 
 	/**
@@ -267,44 +263,16 @@ class ClientController extends AppBaseController
 	{
 		/** @var Client $client */
 		$client = Client::find($id);
+		if(empty($client))
+		{
+			Flash::error('Client not found');
+			return redirect(route('clients.index'));
+		}
+
 		$client->fill($request->all());
 		$client->save();
-		/* Get CLIENT location data  */		
-		$location = ClientLocation::find($id);
-		$location->fill($request->all());
-		$location->save();
 		
-
-		/* Get client credentials data */
-		$credential = ClientCredential::find($id);	
-
-		$credential->fill($request->all());
-		$credential->save();
-		
-
-		/* Get client aval data */
-		$aval = ClientAval::find($id);		
-		$aval->fill($request->all());
-		$aval->save();
-		
-		/* Get spouse data */
-		$spouse = Spouse::find($id);		
-		$spouse->fill($request->all());
-		$spouse->save();
-		
-
-		/* Get COMPANY location data  */
-		$company = ClientCompany::find($id);		
-		$company->fill($request->all());
-		$company->save();
-		
-
-		/* Get REFERENCE data  */
-		$reference = ClientReferences::find($id);		
-		$reference->fill($request->all());
-		$reference->save();
-
-		Toastr::info('Cliente editado exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		Toastr::success('Cliente editado exitosamente.', 'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('clients.index'));
 	}

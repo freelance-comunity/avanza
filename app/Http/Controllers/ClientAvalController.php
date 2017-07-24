@@ -8,6 +8,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
 
 class ClientAvalController extends AppBaseController
 {
@@ -22,24 +23,24 @@ class ClientAvalController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = ClientAval::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $clientAvals = $query->get();
+		$clientAvals = $query->get();
 
-        return view('clientAvals.index')
-            ->with('clientAvals', $clientAvals)
-            ->with('attributes', $attributes);
+		return view('clientAvals.index')
+		->with('clientAvals', $clientAvals)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -61,7 +62,7 @@ class ClientAvalController extends AppBaseController
 	 */
 	public function store(CreateClientAvalRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$clientAval = ClientAval::create($input);
 
@@ -131,9 +132,9 @@ class ClientAvalController extends AppBaseController
 		$clientAval->fill($request->all());
 		$clientAval->save();
 
-		Flash::message('ClientAval updated successfully.');
+		Toastr::success('Datos del Aval  editado exitosamente.', 'AVAL CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('clientAvals.index'));
+		return redirect(route('clients.index'));
 	}
 
 	/**

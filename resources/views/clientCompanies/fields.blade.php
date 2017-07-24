@@ -1,77 +1,150 @@
-<!--- Name Company Field --->
+<div class="box box-danger">
+    <div class="box-header with-border">
+    <div>
+      <h3> Datos del Negocio</h3>
+     </div>
+          <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('street_company', 'Calle:') !!}
+                {!! Form::text('street_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE DE LA CALLE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('number_company', 'Número de Casa:') !!}
+                {!! Form::text('number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NÚMERO DE LA CASA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>  
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('colony_company', 'Colonia:') !!}
+                {!! Form::text('colony_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('municipality_company', 'Municipio:') !!}
+                {!! Form::text('municipality_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('state_company', 'Estado:') !!}
+                {!! Form::select('state_company',['placeholder'=>'SELECCIONE UN ESTADO','AGUASCALIENTES' => 'AGUASCALIENTES', 'BAJA CALIFORNIA' => 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR','CAMPECHE' => 'CAMPECHE','COAHUILA' => 'COAHUILA','COLIMA' => 'COLIMA','CHIAPAS' => 'CHIAPAS','CHIHUAHUA' => 'CHIHUAHUA','DISTRITO FEDERAL' => 'DISTRITO FEDERAL','DURANGO' => 'DURANGO','JALISCO' => 'JALISCO','MÉXICO' => 'MÉXICO','MICHOACÁN' => 'MICHOACÁN','MORELOS' => 'MORELOS','NAYARIT' => 'NAYARIT','NUEVO LEÓN' => 'NUEVO LEÓN','OAXACA' => 'OAXACA','PUEBLA' => 'PUEBLA','QUERÉTARO' => 'QUERÉTARO','QUINTANA ROO'=>'QUINTANA ROO','SAN LUIS POTOSÍ'=> 'SAN LUIS POTOSÍ','SINALOA'=>'SINALOA','SONORA','SONORA','TABASCO'=>'TABASCO','TAMAULIPAS'=>'TAMAULIPAS','TLAXCALA'=>'TLAXCALA','VERACRUZ'=>'VERACRUZ','YUCATÁN'=>'YUCATÁN','ZACATECAS'=>'ZACATECAS'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('postal_code_company', 'Código Postal:') !!}
+                {!! Form::text('postal_code_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('phone_company', 'Teléfono del Negocio:') !!}
+                {!! Form::text('phone_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO DEL TELÉFONO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('name_company', 'Nombre del Negocio:') !!}
+                {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-12 col-lg-12">
+                <h3 style="text-align: center;"> 
+                   <span class="label label-danger">Activos</span> 
+               </h3>                
+           </div>
+           <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('inventory', 'Inventario ($):') !!}
+            {!! Form::text('inventory', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DEL INVENTARIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('machinery_equipment', 'Maq y Equip($):') !!}
+            {!! Form::text('machinery_equipment', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DE LA MAQUINARIA Y EQUIPO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('vehicles', 'Vehículos($):') !!}
+            {!! Form::text('vehicles', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DE VEHÍCULOS', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('property', 'Inmuebles($):') !!}
+            {!! Form::text('property', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DEL INMUEBLE', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('box_benck', 'Caja, Bancos($):') !!}
+            {!! Form::text('box_benck', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('accounts', 'Ctas/Cobrar($):') !!}
+            {!! Form::text('accounts', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-12 col-lg-12">
+            <h3 style="text-align: center;"> 
+               <span class="label label-danger">Pasivos</span> 
+           </h3>                
+       </div>
+       <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('suppliers', 'Proveedores($):') !!}
+        {!! Form::text('suppliers', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+    <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('credits', 'Créditos($):') !!}
+        {!! Form::text('credits', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+    <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('payments', 'Pago al mes($):') !!}
+        {!! Form::text('payments', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+    <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('specify', 'Especifica:') !!}
+        {!! Form::text('specify', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESPECIFICA', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+    </div>
+    <div class="form-group col-sm-12 col-lg-12">
+        <h3 style="text-align: center;"> 
+           <span class="label label-danger">Ingresos</span> 
+       </h3>                
+   </div>
+   <div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('weekday', 'Entre semana:') !!}
+    {!! Form::text('weekday', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+</div>
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('name_company', 'Name Company:') !!}
-    {!! Form::text('name_company', null, ['class' => 'form-control']) !!}
+    {!! Form::label('weekend', 'Fines de Semana:') !!}
+    {!! Form::text('weekend', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 </div>
-
-<!--- Country Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('country', 'Country:') !!}
-    {!! Form::text('country', null, ['class' => 'form-control']) !!}
+    {!! Form::label('utility', 'Utilidad:') !!}
+    {!! Form::text('utility', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 </div>
-
-<!--- State Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('state', 'State:') !!}
-    {!! Form::text('state', null, ['class' => 'form-control']) !!}
+    {!! Form::label('other_income', 'Otros Ingresos:') !!}
+    {!! Form::text('other_income', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 </div>
-
-<!--- Municipality Company Field --->
+<div class="form-group col-sm-12 col-lg-12">
+    <h3 style="text-align: center;"> 
+       <span class="label label-danger">Costos</span> 
+   </h3>                
+</div>
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('municipality_company', 'Municipality Company:') !!}
-    {!! Form::text('municipality_company', null, ['class' => 'form-control']) !!}
+    {!! Form::label('rent', 'Renta:') !!}
+    {!! Form::text('rent', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 </div>
-
-<!--- Colony Company Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('colony_company', 'Colony Company:') !!}
-    {!! Form::text('colony_company', null, ['class' => 'form-control']) !!}
+    {!! Form::label('salary', 'Sueldos:') !!}
+    {!! Form::text('salary', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 </div>
-
-<!--- Type Of Road Company Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('type_of_road_company', 'Type Of Road Company:') !!}
-    {!! Form::text('type_of_road_company', null, ['class' => 'form-control']) !!}
-</div>
-
-<!--- Name Road Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('name_road', 'Name Road:') !!}
-    {!! Form::text('name_road', null, ['class' => 'form-control']) !!}
-</div>
-
-<!--- Outdoor Number Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('outdoor_number', 'Outdoor Number:') !!}
-    {!! Form::text('outdoor_number', null, ['class' => 'form-control']) !!}
-</div>
-
-<!--- Interior Number Company Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('interior_number_company', 'Interior Number Company:') !!}
-    {!! Form::text('interior_number_company', null, ['class' => 'form-control']) !!}
-</div>
-
-<!--- Postal Code Company Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('postal_code_company', 'Postal Code Company:') !!}
-    {!! Form::text('postal_code_company', null, ['class' => 'form-control']) !!}
-</div>
-
-<!--- Latitude Company Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('latitude_company', 'Latitude Company:') !!}
-    {!! Form::text('latitude_company', null, ['class' => 'form-control']) !!}
-</div>
-
-<!--- Length Company Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('length_company', 'Length Company:') !!}
-    {!! Form::text('length_company', null, ['class' => 'form-control']) !!}
-</div>
+    {!! Form::label('others', 'Otros Luz/Agua:') !!}
+    {!! Form::text('others', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+</div>  
+              <div class="col-md-12">
+                <div class="gllpLatlonPicker">
+                  <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
+                  <div class="input-group">
+                   <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL NEGOCIO, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
+                   <div class="input-group-btn">
+                     <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+                 </div>
+             </div>
+             <br/><br/>
+             <div class="gllpMap">Google Maps</div>
+             <br/>
+             <input type="hidden" name="latitude_company" class="gllpLatitude" value="{{$clientCompany->latitude_company}}"/>
+             <input type="hidden" name="length_company" class="gllpLongitude" value="{{$clientCompany->length_company}}"/>
+             <input type="hidden" class="gllpZoom" value="12"/>
+         </div>
+     </div>
 
 
-<!--- Submit Field --->
-<div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+            <button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
+
+</div>    
 </div>
+

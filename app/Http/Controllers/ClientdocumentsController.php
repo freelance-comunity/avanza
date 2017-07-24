@@ -23,24 +23,24 @@ class ClientdocumentsController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Clientdocuments::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $clientdocuments = $query->get();
+		$clientdocuments = $query->get();
 
-        return view('clientdocuments.index')
-            ->with('clientdocuments', $clientdocuments)
-            ->with('attributes', $attributes);
+		return view('clientdocuments.index')
+		->with('clientdocuments', $clientdocuments)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -62,7 +62,7 @@ class ClientdocumentsController extends AppBaseController
 	 */
 	public function store(CreateClientdocumentsRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$clientdocuments = Clientdocuments::create($input);
 
@@ -129,28 +129,7 @@ class ClientdocumentsController extends AppBaseController
 			return redirect(route('clientdocuments.index'));
 		}
 
-	elseif($request->hasFile('ine_document')){
-			$ine = $request->file('ine_document');
-			$filename_ine = time() . '.' . $ine->getClientOriginalExtension();
-			Image::make($ine)->resize(400, 600)->save( public_path('/uploads/documents/' . $filename_ine ) );
-			$documents['ine'] = $filename_ine;
-		}
-
-		elseif($request->hasFile('curp_document')){
-			$curp = $request->file('curp_document');
-			$filename_curp = time() . '.' . $curp->getClientOriginalExtension();
-			Image::make($curp)->resize(600, 600)->save( public_path('/uploads/documents/' . $filename_curp ) );
-			$documents['curp'] = $filename_curp;
-		}
-
-		elseif($request->hasFile('proof_of_addres')){
-			$proof_of_addres = $request->file('proof_of_addres');
-			$filename_proof_of_addres = time() . '.' . $proof_of_addres->getClientOriginalExtension();
-			Image::make($proof_of_addres)->resize(800, 600)->save( public_path('/uploads/documents/' . $filename_proof_of_addres ) );
-			$documents['proof_of_addres'] = $filename_proof_of_addres;
-		}
-	
-		$documents= $clientdocuments;
+		$clientdocuments->fill($request->all());
 		
 		$clientdocuments->save();
 

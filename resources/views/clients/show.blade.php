@@ -33,47 +33,6 @@ Detalles del Cliente
           </div>
           <!-- /.description-block -->
         </div>
-<<<<<<< HEAD
-        <div class="col-md-6">
-                <a href="{!! route('clients.edit', [$client->id]) !!}"><h3><span class="label label-danger">DATOS PERSONALES</span></h3></a>
-                 <div class="table-responsive">
-                <table class="table table-striped">
-                <tr>
-                  <th style="width: 10px">1</th>
-                  <th>ESTADO CIVIL:</th>
-                  <th>{{$client->civil_status}}</th>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>ESCOLARIDAD</td>
-                  <td>
-                    {{$client->scholarship}}
-                  </td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>DEPENDIENTES</td>
-                  <td>
-                    {{$client->no_economic_dependent}}
-                  </td>
-                </tr>
-                <tr>
-                  <td>4.</td>
-                  <td>NO. FAMILIAS</td>
-                  <td>
-                   {{$client->no_familys}}
-                  </td>
-                </tr>
-                <tr>
-                  <td>5.</td>
-                  <td>TIPO DE VIVIENDA</td>
-                  <td>
-                    {{$client->type_of_housing}}
-                  </td>
-                </tr>
-              </table>
-              </div>
-=======
         <!-- /.col -->
         <div class="col-sm-4 border-right">
           <div class="description-block">
@@ -81,7 +40,6 @@ Detalles del Cliente
             <span class="description-text">{{ $client->curp}}</span>
           </div>
           <!-- /.description-block -->
->>>>>>> remotes/origin/master
         </div>
         <!-- /.col -->
         <div class="col-sm-4">
@@ -98,7 +56,7 @@ Detalles del Cliente
   </div>
 </div>
 <div class="col-md-6">
-<h3><i class="fa fa-user"></i> DATOS PERSONALES</h3>
+<a href="{!! route('clients.edit', [$client->id]) !!}"><h3 style="color:black;"><i class="fa fa-user"></i> DATOS PERSONALES</h3></a>
   <div class="table-responsive">
     <table class="table table-striped">
       <tr>
@@ -138,72 +96,7 @@ Detalles del Cliente
 </div>
 </div>
 
-<<<<<<< HEAD
-        <a href="{!! route('clientLocations.edit', [$location->id]) !!}"><h3><span class="label label-danger">DOMICILIO DE LA CASA</span></h3></a>
-
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="row">
-                <div class="col-md-8 col-sm-8">
-                  <div class="pad">
-                    <!-- Map will be created here -->
-                    <div id="map" style="height: 325px;"></div>
-                  </div>
-                  @include('clientLocations.script-map')
-                </div>
-                <!-- /.col -->
-                <div class="col-md-4 col-sm-4">
-                 <div class="table-responsive">
-                  <table class="table table-striped">
-                <tr>
-                  <th style="width: 10px">CALLE:</th>
-                  <th>{{$location->street}}</th>
-                </tr>
-                <tr>
-                  <td>NÚMERO:</td>
-                  <td>
-                    {{$location->number}}
-                  </td>
-                </tr>
-                <tr>
-                  <td>COLONIA:</td>
-                  <td>
-                    {{$location->colony}}
-                  </td>
-                </tr>
-                <tr>
-                  <td>MUNICIPIO:</td>
-                  <td>
-                   {{$location->municipality}}
-                  </td>
-                </tr>
-                <tr>
-                  <td>ESTADO:</td>
-                  <td>
-                    {{$location->state}}
-                  </td>
-                </tr>
-                <tr>
-                  <td>COGIDO POSTAL:</td>
-                  <td>
-                    {{$location->postal_code}}
-                  </td>
-                </tr>
-                <tr>
-                  <td>REFERENCIAS:</td>
-                  <td>
-                    {{$location->references}}
-                  </td>
-                </tr>
-              </table>
-              </div>
-                  </div>
-                </div>
-                  </div>  
-            
-           <a href="{!! route('clientCompanies.edit', [$company->id]) !!}"><h3><span class="label label-danger">DOMICILIO DEL NEGOCIO: {{$company->name_company}}</span></h3></a>  
-=======
-<h3><i class="fa fa-home"></i> DOMICILIO DE LA CASA</h3>
+<a href="{!! route('clientLocations.edit', [$location->id]) !!}"><h3 style="color:black;"><i class="fa fa-home"></i> DOMICILIO DEL CLIENTE</h3></a>
 
 <!-- /.box-header -->
 <div class="box-body no-padding">
@@ -264,12 +157,11 @@ Detalles del Cliente
 </div>
 </div>
 </div>  
->>>>>>> remotes/origin/master
 
 <div class="row">
   <div class="container">
-    <h3><i class="fa fa-building"></i> DOMICILIO DEL NEGOCIO: {{$company->name_company}}</h3>
-  </div>
+    <a href="{!! route('clientCompanies.edit', [$company->id]) !!}"><h3 style="color:black;"><i class="fa fa-building"></i> DOMICILIO DEL NEGOCIO: {{$company->name_company}}</h3>
+  </div></a>
 </div>
 
 <!-- /.box-header -->
@@ -370,106 +262,6 @@ Detalles del Cliente
 </div>
 </div>
 
-<<<<<<< HEAD
-           
-             <div class="col-md-12">
-              @foreach ($aval  as $aval)
-             <a href="{!! route('clientAvals.edit', [$aval->id]) !!}">  <h3> <span class="label label-danger">AVAL DATOS GENERALES</span></h3></a>
-            
-               <div class="table-responsive">
-               <table class="table table-striped">
-                  <tr>
-                  <th style="width: 10px">NOMBRE:</th>
-                  <th>APELLIDO PATERNO:</th>
-                  <th>APELLIDO MATERNO:</th>
-                  <th>FECHA DE NACIMIENTO:</th>
-                  <th>CURP:</th>
-                  <th>TELÉFONO:</th>
-                  <th>ESTADO CIVIL:</th>
-                  <th>ESCOLARIDAD</th>
-                </tr>
-               
-                     <tr>
-                  <th style="width: 10px">{{$aval->name_aval}}</th>
-                  <th>{{$aval->last_name_aval}}</th>
-                  <th>{{$aval->mothers_name_aval}}</th>
-                  <th>{{$aval->birthdate_aval}}</th>
-                  <th>{{$aval->curp_aval}}</th>
-                  <th>{{$aval->phone_aval}}</th>
-                  <th>{{$aval->civil_status_aval}}</th>
-                  <th>{{$aval->scholarship_aval}}</th>
-                </tr>
-    
-              </table>
-              </div>
-              <H4><span>DIRECCIÓN DEL AVAL</span> </H4>
-               <div class="table-responsive">
-               <table class="table table-striped">
-                  <tr>
-                  <th style="width: 10px">CALLE:</th>
-                  <th>NÚMERO DE CASA:</th>
-                  <th>COLONIA:</th>
-                  <th>MUNICIPIO:</th>
-                  <th>ESTADO:</th>
-                  <th>CODIGO POSTAL:</th>
-                </tr>
-                <tr>
-                  <th style="width: 10px">{{$aval->street_aval}}</th>
-                  <th>{{$aval->number_aval}}</th>
-                  <th>{{$aval->colony_aval}}</th>
-                  <th>{{$aval->municipality_aval}}</th>
-                  <th>{{$aval->state_aval}}</th>
-                  <th>{{$aval->postal_code_aval}}</th>
-                </tr>            
-    
-              </table>
-              </div>
-                @endforeach
-            </div>
-
-             <div class="col-md-12">
-             @foreach ($references as $references)
-             <a href="{!! route('clientReferences.edit', [$references->id]) !!}"><h3><span class="label label-danger">REFERENCIA</span></h3></a>
-           
-               <div class="table-responsive">
-               <table class="table table-striped">
-                  <tr>
-                  <th style="width: 10px">NOMBRE:</th>
-                  <th>APELLIDO PATERNO:</th>
-                  <th>APELLIDO MATERNO:</th>
-                  <th>TELÉFONO:</th>
-                </tr>
-            
-                    <tr>
-                  <th style="width: 10px">{{$references->firts_name_reference}}</th>
-                  <th>{{$references->last_name_reference}}</th>
-                  <th>{{$references->mothers_last_name_reference}}</th>
-                  <th>{{$references->phone_reference}}</th>
-                </tr>
-             
-                   
-              </table>
-              </div>
-                 @endforeach
-            </div>
-
-               <div class="col-md-6">
-          <div class="box box-solid">
-            <div class="box-header with-border">
-             <a href="{!! route('clientdocuments.edit', [$document->id]) !!}"><h3 class="box-title"><span class="label label-danger">DOCUMENTOS</span></h3></a> 
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                  <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="item active">
-                    <img src="{{ asset('/uploads/documents') }}/{!! $document->ine !!}" alt="First slide">
-=======
 <div class="col-md-3">
  <h4>PASIVOS</h4>
  <div class="table-responsive">
@@ -549,7 +341,8 @@ Detalles del Cliente
 
 
 <div class="col-md-12">
-  <h3><i class="fa fa-male"></i> AVAL DATOS GENERALES</h3>
+@foreach ($aval  as $aval)
+  <a href="{!! route('clientAvals.edit', [$aval->id]) !!}"><h3 style="color:black;"><i class="fa fa-male"></i> AVAL</h3></a>
   <div class="table-responsive">
    <table class="table table-striped">
     <tr>
@@ -562,7 +355,6 @@ Detalles del Cliente
       <th>ESTADO CIVIL:</th>
       <th>ESCOLARIDAD</th>
     </tr>
-    @foreach ($aval  as $aval)
     <tr>
       <th style="width: 10px">{{$aval->name_aval}}</th>
       <th>{{$aval->last_name_aval}}</th>
@@ -595,16 +387,13 @@ Detalles del Cliente
     <th>{{$aval->state_aval}}</th>
     <th>{{$aval->postal_code_aval}}</th>
   </tr>
+  </table>
+</div>
   @endforeach
-
-
-</table>
 </div>
-</div>
->>>>>>> remotes/origin/master
 
 <div class="col-md-12">
-  <h3><i class="fa fa-search"></i> REFERENCIAS</h3>
+  <h3 style="color:black;"><i class="fa fa-search"></i> REFERENCIAS</h3>
   <div class="table-responsive">
    <table class="table table-striped">
     <tr>
@@ -612,6 +401,7 @@ Detalles del Cliente
       <th>APELLIDO PATERNO:</th>
       <th>APELLIDO MATERNO:</th>
       <th>TELÉFONO:</th>
+      <th>EDITAR</th>
     </tr>
     @foreach ($references as $references)
     <tr>
@@ -619,6 +409,8 @@ Detalles del Cliente
       <th>{{$references->last_name_reference}}</th>
       <th>{{$references->mothers_last_name_reference}}</th>
       <th>{{$references->phone_reference}}</th>
+      <th> <a href="{!! route('clientReferences.edit', [$references->id]) !!}"><i class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Editar"></i></a></th>
+
     </tr>
     @endforeach
 
@@ -649,7 +441,6 @@ Detalles del Cliente
           </div>
           <div class="item">
             <img src="{{ asset('/uploads/documents') }}/{!! $document->curp !!}"" alt="Second slide">
-
             <div class="carousel-caption">
               CURP
             </div>

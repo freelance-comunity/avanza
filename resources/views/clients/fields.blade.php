@@ -416,7 +416,7 @@
 
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('phone_reference_1', 'Teléfono:') !!}
-            {!! Form::text('phone_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL TELÉFONO', 'required' => 'required']) !!}
+            {!! Form::text('phone_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL TELÉFONO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
         <hr>
 
@@ -441,7 +441,7 @@
 
     <div class="form-group col-sm-6 col-lg-4">
         {!! Form::label('phone_reference_2', 'Teléfono:') !!}
-        {!! Form::text('phone_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL TELÉFONO', 'required' => 'required']) !!}
+        {!! Form::text('phone_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL TELÉFONO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
     </div>
 
     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>

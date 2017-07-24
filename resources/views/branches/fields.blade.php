@@ -16,7 +16,7 @@
               'class' => 'form-control input-lg', 
               'placeholder'=>'ESCRIBE EL NOMBRE DE LA SUCURSAL',
               'required'=>'required',
-              'data-parsley-required-message' => 'Este campo es obligatorio',
+              'data-parsley-trigger ' => 'input focusin',
               'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="col-md-4">
@@ -26,11 +26,9 @@
                 'class' => 'form-control input-lg',
                 'placeholder'=>'ESCRIBE SU NÚMERO DE TELÉFONO',
                 'required'=>'required',
-                'data-parsley-required-message' => 'Este campo es obligatorio',
+                'data-parsley-trigger ' => 'input focusin',
                 'data-parsley-type' => 'digits',
                 'data-parsley-maxlength' => '10',
-                'data-parsley-maxlength-message' => '
-                Este valor es demasiado largo. Debe tener 10 caracteres o menos.',
                 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
               </div>       
             </div>
@@ -45,7 +43,7 @@
                       'class' => 'form-control input-lg gllpSearchField',
                       'placeholder'=>'ESCRIBE LA DIRECCIÓN DE LA SUCURSAL, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.',
                       'required'=>'required',
-                      'data-parsley-required-message' => 'Este campo es obligatorio',
+                      'data-parsley-trigger ' => 'input focusin',
                       'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                       <div class="input-group-btn">
                        <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">

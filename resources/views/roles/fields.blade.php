@@ -10,7 +10,8 @@
 				'class' => 'form-control input-lg', 
 				'placeholder' => 'NOMBRE ROL',
 				'required' => 'required',
-				'data-parsley-required-message' => 'Este campo es obligatorio']) !!}
+				'data-parsley-trigger ' => 'input focusin',
+				]) !!}
 			</div>
 
 			<div class="form-group col-sm-6 col-lg-4">
@@ -19,7 +20,8 @@
 					'class' => 'form-control input-lg',
 					'placeholder' => 'NOMBRE SECUNDARIO',
 					'required' => 'required',
-					'data-parsley-required-message' => 'Este campo es obligatorio']) !!}
+					'data-parsley-trigger ' => 'input focusin',
+					]) !!}
 				</div>
 
 				<div class="form-group col-sm-6 col-lg-4"></div>
@@ -31,7 +33,7 @@
 						'class' => 'form-control input-lg', 
 						'placeholder' => 'DESCRIPCIÓN...',
 						'required' => 'required',
-						'data-parsley-required-message' => 'Este campo es obligatorio',
+						'data-parsley-trigger ' => 'input focusin',
 						'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 					</div>
 

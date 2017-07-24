@@ -8,7 +8,7 @@ Crear
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'roles.store']) !!}
+    {!! Form::open(['route' => 'roles.store', 'data-parsley-validate' => '']) !!}
 
         @include('roles.fields')
 

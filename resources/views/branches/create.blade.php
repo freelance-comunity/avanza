@@ -8,7 +8,7 @@ Crear nueva sucursal
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'branches.store']) !!}
+    {!! Form::open(['route' => 'branches.store', 'data-parsley-validate' => '']) !!}
 
         @include('branches.fields')
 

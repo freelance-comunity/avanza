@@ -12,6 +12,10 @@ Route::get('pdf/{id}', function($id){
 Route::get('signature', function(){
     return view('signature');
 });
+
+Route::get('validation', function(){
+    return view('validation');
+});
 /*=====  End of Test Routes  ======*/
 
 

@@ -56,7 +56,7 @@ Detalles del Cliente
   </div>
 </div>
 <div class="col-md-6">
-<a href="{!! route('clients.edit', [$client->id]) !!}"><h3 style="color:black;"><i class="fa fa-user"></i> DATOS PERSONALES</h3></a>
+  <a href="{!! route('clients.edit', [$client->id]) !!}"><h3 style="color:black;"><i class="fa fa-user"></i> DATOS PERSONALES</h3></a>
   <div class="table-responsive">
     <table class="table table-striped">
       <tr>
@@ -95,6 +95,11 @@ Detalles del Cliente
   </table>
 </div>
 </div>
+@if (is_null($location))
+<div class="box-body">
+ <h3>Este empleado no tiene datos de ubicación registrados.</h3> 
+</div>
+@else
 
 <a href="{!! route('clientLocations.edit', [$location->id]) !!}"><h3 style="color:black;"><i class="fa fa-home"></i> DOMICILIO DEL CLIENTE</h3></a>
 
@@ -157,68 +162,74 @@ Detalles del Cliente
 </div>
 </div>
 </div>  
+@endif
 
+@if (is_null($company))
+<div class="box-body">
+ <h3>Este empleado no tiene datos del negocio registrados.</h3> 
+</div>
+@else
 <div class="row">
   <div class="container">
     <a href="{!! route('clientCompanies.edit', [$company->id]) !!}"><h3 style="color:black;"><i class="fa fa-building"></i> DOMICILIO DEL NEGOCIO: {{$company->name_company}}</h3>
-  </div></a>
-</div>
-
-<!-- /.box-header -->
-<div class="box-body no-padding">
-  <div class="row">
-    <div class="col-md-8 col-sm-8">
-      <div class="pad">
-        <!-- Map will be created here -->
-        <div id="mapa" style="height: 325px;"></div>
-      </div>
-      @include('clientCompanies.script-map')
-    </div>
-    <!-- /.col -->
-    <div class="col-md-4 col-sm-4">
-     <div class="table-responsive">
-      <table class="table table-striped">
-        <tr>
-          <th style="width: 10px">TELÉFONO:</th>
-          <th>{{$company->phone_company}}</th>
-        </tr>
-        <tr>
-          <th style="width: 10px">CALLE:</th>
-          <th>{{$company->street_company}}</th>
-        </tr>
-        <tr>
-          <td>NÚMERO:</td>
-          <td>
-            {{$company->number_company}}
-          </td>
-        </tr>
-        <tr>
-          <td>COLONIA:</td>
-          <td>
-            {{$company->colony_company}}
-          </td>
-        </tr>
-        <tr>
-          <td>MUNICIPIO:</td>
-          <td>
-           {{$company->municipality_company}}
-         </td>
-       </tr>
-       <tr>
-        <td>ESTADO:</td>
-        <td>
-          {{$company->state_company}}
-        </td>
-      </tr>
-      <tr>
-        <td>COGIDO POSTAL:</td>
-        <td>
-          {{$company->postal_code_company}}
-        </td>
-      </tr>
-    </table>
+    </div></a>
   </div>
-</div>
+
+  <!-- /.box-header -->
+  <div class="box-body no-padding">
+    <div class="row">
+      <div class="col-md-8 col-sm-8">
+        <div class="pad">
+          <!-- Map will be created here -->
+          <div id="mapa" style="height: 325px;"></div>
+        </div>
+        @include('clientCompanies.script-map')
+      </div>
+      <!-- /.col -->
+      <div class="col-md-4 col-sm-4">
+       <div class="table-responsive">
+        <table class="table table-striped">
+          <tr>
+            <th style="width: 10px">TELÉFONO:</th>
+            <th>{{$company->phone_company}}</th>
+          </tr>
+          <tr>
+            <th style="width: 10px">CALLE:</th>
+            <th>{{$company->street_company}}</th>
+          </tr>
+          <tr>
+            <td>NÚMERO:</td>
+            <td>
+              {{$company->number_company}}
+            </td>
+          </tr>
+          <tr>
+            <td>COLONIA:</td>
+            <td>
+              {{$company->colony_company}}
+            </td>
+          </tr>
+          <tr>
+            <td>MUNICIPIO:</td>
+            <td>
+             {{$company->municipality_company}}
+           </td>
+         </tr>
+         <tr>
+          <td>ESTADO:</td>
+          <td>
+            {{$company->state_company}}
+          </td>
+        </tr>
+        <tr>
+          <td>COGIDO POSTAL:</td>
+          <td>
+            {{$company->postal_code_company}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
 </div>
 
@@ -227,33 +238,33 @@ Detalles del Cliente
  <div class="table-responsive">
    <table class="table table-striped">
     <tr>
-      <th style="width: 10px">INVENTARIO:</th>
+      <th style="width: 10px">INVENTARIO($):</th>
       <th>{{$company->inventory}}</th>
     </tr>
     <tr>
-      <th style="width: 10px">MAQ Y EQUIP:</th>
+      <th style="width: 10px">MAQ Y EQUIP($):</th>
       <th>{{$company->machinery_equipment}}</th>
     </tr>
     <tr>
-      <td>VEHÍCULOS:</td>
+      <td>VEHÍCULOS($):</td>
       <td>
         {{$company->vehicles}}
       </td>
     </tr>
     <tr>
-      <td>INMUEBLES:</td>
+      <td>INMUEBLES($):</td>
       <td>
         {{$company->property}}
       </td>
     </tr>
     <tr>
-      <td>CAJA, BANCOS:</td>
+      <td>CAJA, BANCOS($):</td>
       <td>
        {{$company->box_benck}}
      </td>
    </tr>
    <tr>
-    <td>CTAS/COBRAR:</td>
+    <td>CTAS/COBRAR($):</td>
     <td>
       {{$company->accounts}}
     </td>
@@ -267,21 +278,21 @@ Detalles del Cliente
  <div class="table-responsive">
    <table class="table table-striped">
     <tr>
-      <th style="width: 10px">PROVEEDORES:</th>
+      <th style="width: 10px">PROVEEDORES($):</th>
       <th>{{$company->suppliers}}</th>
     </tr>
     <tr>
-      <th style="width: 10px">CRÉDITOS:</th>
+      <th style="width: 10px">CRÉDITOS($):</th>
       <th>{{$company->credits}}</th>
     </tr>
     <tr>
-      <td>PAGO AL MES:</td>
+      <td>PAGO AL MES($):</td>
       <td>
         {{$company->payments}}
       </td>
     </tr>
     <tr>
-      <td>ESPECIFICA:</td>
+      <td>ESPECIFICA($):</td>
       <td>
         {{$company->specify}}
       </td>
@@ -295,21 +306,21 @@ Detalles del Cliente
  <div class="table-responsive">
    <table class="table table-striped">
     <tr>
-      <th style="width: 10px">ENTRE SEMANA:</th>
+      <th style="width: 10px">ENTRE SEMANA($): </th>
       <th>{{$company->weekday}}</th>
     </tr>
     <tr>
-      <th style="width: 10px">FIN DE SEMANA:</th>
+      <th style="width: 10px">FIN DE SEMANA($):</th>
       <th>{{$company->weekend}}</th>
     </tr>
     <tr>
-      <td>UTILIDAD:</td>
+      <td>UTILIDAD($): </td>
       <td>
         {{$company->utility}}
       </td>
     </tr>
     <tr>
-      <td>OTROS INGRESOS:</td>
+      <td>OTROS INGRESOS($):</td>
       <td>
         {{$company->other_income}}
       </td>
@@ -322,15 +333,15 @@ Detalles del Cliente
  <div class="table-responsive">
    <table class="table table-striped">
     <tr>
-      <th style="width: 10px">RENTA:</th>
+      <th style="width: 10px">RENTA($):</th>
       <th>{{$company->rent}}</th>
     </tr>
     <tr>
-      <th style="width: 10px">SUELDO:</th>
+      <th style="width: 10px">SUELDO($):</th>
       <th>{{$company->salary}}</th>
     </tr>
     <tr>
-      <td>OTROS LUZ/AGUA:</td>
+      <td>OTROS LUZ/AGUA($):</td>
       <td>
         {{$company->others}}
       </td>
@@ -338,10 +349,15 @@ Detalles del Cliente
   </table>
 </div>
 </div>
+@endif
 
-
+@if (is_null($aval))
+<div class="box-body">
+ <h3>Este empleado no tiene aval registrado.</h3> 
+</div>
+@else
 <div class="col-md-12">
-@foreach ($aval  as $aval)
+  @foreach ($aval  as $aval)
   <a href="{!! route('clientAvals.edit', [$aval->id]) !!}"><h3 style="color:black;"><i class="fa fa-male"></i> AVAL</h3></a>
   <div class="table-responsive">
    <table class="table table-striped">
@@ -387,12 +403,19 @@ Detalles del Cliente
     <th>{{$aval->state_aval}}</th>
     <th>{{$aval->postal_code_aval}}</th>
   </tr>
-  </table>
+</table>
 </div>
-  @endforeach
+@endforeach
 </div>
+@endif
+
 
 <div class="col-md-12">
+@if (is_null($references))
+<div class="box-body">
+ <h3>Este empleado no tiene referencias registradas.</h3> 
+</div>
+@else
   <h3 style="color:black;"><i class="fa fa-search"></i> REFERENCIAS</h3>
   <div class="table-responsive">
    <table class="table table-striped">
@@ -409,7 +432,7 @@ Detalles del Cliente
       <th>{{$references->last_name_reference}}</th>
       <th>{{$references->mothers_last_name_reference}}</th>
       <th>{{$references->phone_reference}}</th>
-      <th> <a href="{!! route('clientReferences.edit', [$references->id]) !!}"><i class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Editar"></i></a></th>
+      <th> <a href="{!! route('clientReferences.edit', [$references->id]) !!}"><i class="fa fa-edit fa-2x " data-toggle="tooltip" title="Editar"></i></a></th>
 
     </tr>
     @endforeach
@@ -417,7 +440,13 @@ Detalles del Cliente
   </table>
 </div>
 </div>
+@endif
 
+@if (is_null($document))
+<div class="box-body">
+ <h3>Este empleado no tiene documentos registrado.</h3> 
+</div>
+@else
 <div class="col-md-6">
   <div class="box box-solid">
     <div class="box-header with-border">
@@ -465,11 +494,13 @@ Detalles del Cliente
   </div>
   <!-- /.box -->
 </div>
+
 <!-- /.col -->
 <div class="col-md-6">
   <h3>Descarga</h3>
   <a href="{{ url('pdf') }}/{{ $client->id }}"><i class="fa fa-file-pdf-o fa-5x"></i></a>
 </div>
+@endif
 </div>
 </div>
 

@@ -33,9 +33,9 @@ Todas las sucursales
                         <td>{!! $branch->phone !!}</td>
                         <td>{!! $branch->address !!}</td>
                         <td>
-                            <a href="{!! route('branches.edit', [$branch->id]) !!}"><i class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Editar"></i></a>
-                            <a href="{!! route('branches.delete', [$branch->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar esta sucursal?')"><i class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Eliminar"></i></a> 
-                            <a href="{!! route('branches.show', [$branch->id]) !!}"><i class="glyphicon glyphicon-eye-open" data-toggle="tooltip" title="Ver Detalles" ></i></a>    
+                            <a href="{!! route('branches.edit', [$branch->id]) !!}"><i class="fa fa-edit fa-2x" data-toggle="tooltip" title="Editar"></i></a>
+                            <a href="{!! route('branches.delete', [$branch->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar esta sucursal?')"><i class="fa fa-trash fa-2x" data-toggle="tooltip" title="Eliminar"></i></a> 
+                            <a href="{!! route('branches.show', [$branch->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>    
                         </td>
                     </tr>
                     

@@ -153,7 +153,7 @@ class ClientController extends AppBaseController
 		$data_aval['municipality_aval'] = $request->input('municipality_aval');
 		$data_aval['state_aval'] = $request->input('state_aval');		
 		$data_aval['postal_code_aval'] = $request->input('postal_code_aval');
-		$data_aval['client_id'] = $client->id;
+		$data_aval['client_id'] = $client->id;	
 
 		/* Save b aval data */	
 		$aval = ClientAval::create($data_aval);

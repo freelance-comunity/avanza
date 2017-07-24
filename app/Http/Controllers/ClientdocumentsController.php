@@ -8,6 +8,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
 
 class ClientdocumentsController extends AppBaseController
 {
@@ -22,24 +23,24 @@ class ClientdocumentsController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Clientdocuments::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $clientdocuments = $query->get();
+		$clientdocuments = $query->get();
 
-        return view('clientdocuments.index')
-            ->with('clientdocuments', $clientdocuments)
-            ->with('attributes', $attributes);
+		return view('clientdocuments.index')
+		->with('clientdocuments', $clientdocuments)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -61,7 +62,7 @@ class ClientdocumentsController extends AppBaseController
 	 */
 	public function store(CreateClientdocumentsRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$clientdocuments = Clientdocuments::create($input);
 
@@ -129,11 +130,12 @@ class ClientdocumentsController extends AppBaseController
 		}
 
 		$clientdocuments->fill($request->all());
+		
 		$clientdocuments->save();
 
-		Flash::message('Clientdocuments updated successfully.');
+		Toastr::success('Documentos editados exitosamente.', 'DOCUMENTOS CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('clientdocuments.index'));
+		return redirect(route('clients.index'));
 	}
 
 	/**

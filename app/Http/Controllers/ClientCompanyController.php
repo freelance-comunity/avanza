@@ -8,6 +8,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
 
 class ClientCompanyController extends AppBaseController
 {
@@ -131,9 +132,9 @@ class ClientCompanyController extends AppBaseController
 		$clientCompany->fill($request->all());
 		$clientCompany->save();
 
-		Flash::message('ClientCompany updated successfully.');
+		Toastr::success('Datos del Negocio  editado exitosamente.', 'NEGOCIO CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('clientCompanies.index'));
+		return redirect(route('clients.index'));
 	}
 
 	/**

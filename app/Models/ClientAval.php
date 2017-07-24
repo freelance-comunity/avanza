@@ -35,7 +35,7 @@ class ClientAval extends Model
 		"mothers_name_aval" => "required",
 		"birthdate_aval" => "required",
 		"curp_aval" => "required",
-		"phone_aval" => "require",
+		"phone_aval" => "required",
 		"civil_status_aval" => "required",
 		"scholarship_aval" => "required",		
 		"street_aval" => "required",

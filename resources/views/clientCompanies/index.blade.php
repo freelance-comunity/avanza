@@ -35,16 +35,23 @@
                      
                     @foreach($clientCompanies as $clientCompany)
                         <tr>
-                            <td>{!! $clientCompany->name_company !!}</td>
-					<td>{!! $clientCompany->country !!}</td>
-					<td>{!! $clientCompany->state !!}</td>
-					<td>{!! $clientCompany->municipality_company !!}</td>
+                            <td>{!! $clientCompany->street_company !!}</td>
+                            <td>{!! $clientCompany->number_company !!}</td>
 					<td>{!! $clientCompany->colony_company !!}</td>
-					<td>{!! $clientCompany->type_of_road_company !!}</td>
-					<td>{!! $clientCompany->name_road !!}</td>
-					<td>{!! $clientCompany->outdoor_number !!}</td>
-					<td>{!! $clientCompany->interior_number_company !!}</td>
+					<td>{!! $clientCompany->municipality_company !!}</td>
+					<td>{!! $clientCompany->state_company !!}</td>
 					<td>{!! $clientCompany->postal_code_company !!}</td>
+                    <td>{!! $clientCompany->phone_company !!}</td>
+                    <td>{!! $clientCompany->state_company !!}</td>
+                    <td>{!! $clientCompany->name_company !!}</td>
+                    <td>{!! $clientCompany->inventory !!}</td>
+                    <td>{!! $clientCompany->machinery_equipment !!}</td>
+                    <td>{!! $clientCompany->vehicles !!}</td>
+                    <td>{!! $clientCompany->property !!}</td>
+                    <td>{!! $clientCompany->box_benck !!}</td>
+                    <td>{!! $clientCompany->accounts !!}</td>
+
+
 					<td>{!! $clientCompany->latitude_company !!}</td>
 					<td>{!! $clientCompany->length_company !!}</td>
                             <td>

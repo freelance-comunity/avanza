@@ -33,28 +33,37 @@
            <div class="row setup-content" id="step-1">
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('folio', 'Folio:') !!}
-                {!! Form::text('folio', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('folio', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('firts_name', 'Nombre(s):') !!}
-                {!! Form::text('firts_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('firts_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('last_name', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('last_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('mothers_last_name', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_last_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO MATERNO','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('mothers_last_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO MATERNO','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('curp', 'Curp:') !!}
-                {!! Form::text('curp', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA CURP','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('curp', null, [
+            'style' => 'text-transform:uppercase',
+            'class' => 'form-control input-lg', 
+            'id' => 'curp_input',
+            'oninput' => 'validarInput(this)',
+            'placeholder' => 'ESCRIBE CURP', 
+            'required' => 'required',
+            'data-parsley-trigger ' => 'input focusin',
+            'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            <pre id="resultado"></pre>
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('ine', 'Ine:') !!}

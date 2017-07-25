@@ -8,7 +8,7 @@ Editar
 
     @include('common.errors')
 
-    {!! Form::model($role, ['route' => ['roles.update', $role->id], 'method' => 'patch']) !!}
+    {!! Form::model($role, ['route' => ['roles.update', $role->id], 'method' => 'patch', 'data-parsley-validate' => '']) !!}
 
         @include('roles.fields')
 

@@ -214,11 +214,11 @@
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('postal_code', 'Código Postal:') !!}
-                    {!! Form::text('postal_code', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                    {!! Form::text('postal_code', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','data-parsley-maxlength' => '5', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('references', 'Referencias:') !!}
-                    {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required','data-parsley-type' => 'digits','data-parsley-maxlength' => '5', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                    {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                 </div>   
 
 
@@ -312,7 +312,7 @@
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('specify', 'Especifica:') !!}
-            {!! Form::text('specify', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESPECIFICA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            {!! Form::text('specify', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESPECIFICA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
         <div class="form-group col-sm-12 col-lg-12">
             <h3 style="text-align: center;"> 
@@ -459,7 +459,7 @@
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('mothers_last_name_reference_1', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_last_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO MATERNO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('mothers_last_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO MATERNO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">

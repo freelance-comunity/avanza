@@ -8,7 +8,7 @@ Editar Cliente
 
     @include('common.errors')
 
-    {!! Form::model($client, ['route' => ['clients.update', $client->id], 'method' => 'patch']) !!}
+    {!! Form::model($client, ['route' => ['clients.update', $client->id], 'method' => 'patch','data-parsley-validate' => '']) !!}
 
         @include('clients.fields-edit')
 

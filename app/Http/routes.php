@@ -166,3 +166,11 @@ Route::get('clientdocuments/{id}/delete', [
     'as' => 'clientdocuments.delete',
     'uses' => 'ClientdocumentsController@destroy',
     ]);
+
+
+Route::resource('products', 'ProductController');
+
+Route::get('products/{id}/delete', [
+    'as' => 'products.delete',
+    'uses' => 'ProductController@destroy',
+]);

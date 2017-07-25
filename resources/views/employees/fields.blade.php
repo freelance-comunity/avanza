@@ -306,7 +306,7 @@ $count = App\Models\Branch::all();
     <div class="col-md-12">
         <h3> Identificaciones</h3>
         <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('ine', 'INE:') !!}
+            {!! Form::label('ine', 'CLAVE DE ELECTOR INE:') !!}
             {!! Form::text('ine', null, [
             'style' => 'text-transform:uppercase',
             'class' => 'form-control input-lg', 
@@ -318,7 +318,7 @@ $count = App\Models\Branch::all();
         </div>
 
         <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('curp', 'CURP:') !!}
+            {!! Form::label('curp', 'CURP:') !!} <a id="curp" href="#" >CONSULTA CURP</a>
             {!! Form::text('curp', null, [
             'style' => 'text-transform:uppercase',
             'class' => 'form-control input-lg', 

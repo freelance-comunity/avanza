@@ -13,6 +13,16 @@ Route::get('signature', function(){
     return view('signature');
 });
 
+Route::post('save-signature', function(Illuminate\Http\Request  $request){
+    $data_uri = $request->input('signature');
+    $encoded_image = explode(",", $data_uri)[1];
+    $decoded_image = base64_decode($encoded_image);
+    $url = 'signature'. rand(111,9999).'.png';
+
+    file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
+    echo $url;
+});
+
 Route::get('validation', function(){
     return view('validation');
 });
@@ -173,4 +183,4 @@ Route::resource('products', 'ProductController');
 Route::get('products/{id}/delete', [
     'as' => 'products.delete',
     'uses' => 'ProductController@destroy',
-]);
+    ]);

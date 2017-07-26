@@ -11,6 +11,8 @@ use App\Models\ClientCompany;
 use App\Models\ClientReferences;
 use App\Models\Clientdocuments;
 use App\Models\Branch;
+use App\Models\Product;
+use App\Models\Credit;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -32,6 +34,7 @@ class ClientController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Client::query();
+		$products =	Product::all();
 		$columns = Schema::getColumnListing('$TABLE_NAME$');
 		$attributes = array();
 
@@ -49,6 +52,7 @@ class ClientController extends AppBaseController
 
 		return view('clients.index')
 		->with('clients', $clients)
+		->with('products',$products)
 		->with('attributes', $attributes);
 	}
 
@@ -174,6 +178,7 @@ class ClientController extends AppBaseController
 		$data_reference_2['last_name_reference'] = $request->input('last_name_reference_2');
 		$data_reference_2['mothers_last_name_reference']   = $request->input('mothers_last_name_reference_2');
 		$data_reference_2['phone_reference'] = $request->input('phone_reference_2');
+		$data_reference_2['phone_reference'] = $request->hidden('phone_reference_2');
 		$data_reference_2['client_id'] = $client->id;
 
 		$reference_2 = ClientReferences::create($data_reference_2);
@@ -300,5 +305,18 @@ class ClientController extends AppBaseController
 		Toastr::success('Cliente eliminado exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('clients.index'));
+	}
+
+	public function creditsClient($id, $product)
+	{	
+		$product = Product::find($product);
+		$client = Client::find($id);
+		$credit = Credit::all();
+		$credits = $client->credits;
+		return view ('credits.create')
+		->with('credits',$credits)
+		->with('product', $product)
+		->with('client', $client)
+		->with('credit',$credit);
 	}
 }

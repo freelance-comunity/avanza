@@ -71,5 +71,9 @@ class Client extends Model
     {
     	return $this->hasOne('App\Models\Clientdocuments');
     }
+     public function credits()
+    {
+        return $this->hasMany('App\Models\Credit');
+    }
 
 }

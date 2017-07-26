@@ -174,3 +174,17 @@ Route::get('products/{id}/delete', [
     'as' => 'products.delete',
     'uses' => 'ProductController@destroy',
 ]);
+
+
+Route::resource('credits', 'CreditController');
+
+Route::get('credits/{id}/delete', [
+    'as' => 'credits.delete',
+    'uses' => 'CreditController@destroy',
+]);
+
+
+ Route::get('creditsClient/{id}/{product}',[
+    'as' => 'client.creditsClient',
+    'uses' => 'ClientController@creditsClient',
+    ]);

@@ -26,6 +26,19 @@ Route::post('save-signature', function(Illuminate\Http\Request  $request){
 Route::get('validation', function(){
     return view('validation');
 });
+
+Route::get('test-relationship', function(){
+    $client = App\Models\Client::find(3);
+
+    $references = $client->references;
+    echo $client->firts_name;
+    echo "<br>";
+    foreach ($references as $key => $value) {
+        echo $value->firts_name_reference;
+        echo "<br>";
+    }
+
+});
 /*=====  End of Test Routes  ======*/
 
 

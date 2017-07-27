@@ -18,7 +18,7 @@
         <div class="table-responsive">
             <table class="table"  id="example">
                 <thead>
-                <th>Codigo </th>
+                    <th>Codigo </th>
                     <th>Nombre</th>
                     <th>Interés</th>
                     <th>Monto  Máximo</th>

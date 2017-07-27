@@ -4,24 +4,21 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
-  <link rel="stylesheet" href="{{ asset('css/signature.css') }}">
 </head>
 <body>
   <form action="{{ url('save-signature') }}" method="POST">
     {{ csrf_field() }}
-
+    <input type="text" required="">
     <h1>
       FIRMA DIGITAL
     </h1>
-    <div class="wrapper">
       <canvas id="signature-pad" class="signature-pad" width=400 height=200 style="border:1px solid #000000;"></canvas>
-    </div>
     <div>
       <button id="save">Save</button>
       <button id="clear">Clear</button>
     </div>
     <br><br>
-    <input type="text" id="signature" name="signature" readonly required="">
+    <input type="text" id="signature" name="signature" required="">
     <input type="submit" value="enviar">
   </form>
   <!--<textarea name="signature" id="signature" cols="30" rows="10"></textarea>-->

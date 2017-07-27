@@ -21,7 +21,7 @@
 
         {{-- Signature CSS y JS --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
-         <link rel="stylesheet" href="{{ asset('/css/signature.css') }}">
+         <!--<link rel="stylesheet" href="{{ asset('/css/signature.css') }}">-->
 
         <!-- jQuery 2.1.4 -->
         <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>

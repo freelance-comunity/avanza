@@ -89,14 +89,6 @@ Todos los Clientes
 </table>
 </div>
 @endif
- @if($clients->isEmpty('folio'))
- hoola
- @else
- @php
-  $folio= $client->folio+1;
-   echo $folio;
- @endphp
- @endif
 </div>
 </div>
 @endsection

@@ -178,7 +178,6 @@ class ClientController extends AppBaseController
 		$data_reference_2['last_name_reference'] = $request->input('last_name_reference_2');
 		$data_reference_2['mothers_last_name_reference']   = $request->input('mothers_last_name_reference_2');
 		$data_reference_2['phone_reference'] = $request->input('phone_reference_2');
-		$data_reference_2['phone_reference'] = $request->hidden('phone_reference_2');
 		$data_reference_2['client_id'] = $client->id;
 
 		$reference_2 = ClientReferences::create($data_reference_2);

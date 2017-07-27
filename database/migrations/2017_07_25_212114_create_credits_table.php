@@ -86,6 +86,11 @@ class CreateCreditsTable extends Migration
 			$table->string('last_name_reference');
 			$table->string('mothers_last_name_reference');
 			$table->string('phone_reference');
+			$table->string('firts_name_reference2');
+			$table->string('last_name_reference2');
+			$table->string('mothers_last_name_reference2');
+			$table->string('phone_reference2');
+			$table->string('collection_period');
 			$table->string('firm');
 			$table->string('status');
 			$table->integer('client_id')->unsigned();

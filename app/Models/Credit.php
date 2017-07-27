@@ -82,6 +82,11 @@ class Credit extends Model
 		"last_name_reference",
 		"mothers_last_name_reference",
 		"phone_reference",
+		"firts_name_reference2",
+		"last_name_reference2",
+		"mothers_last_name_reference2",
+		"phone_reference2",
+		"collection_period",
 		"firm",
 		"status",
 		"client_id"
@@ -90,7 +95,6 @@ class Credit extends Model
 	public static $rules = [
 	    "adviser" => "required",
 		"date" => "required",
-
 		"branch" => "required",
 		"ammount" => "required",
 		"interest_rate" => "required",
@@ -158,6 +162,7 @@ class Credit extends Model
 		"last_name_reference" => "required",
 		"mothers_last_name_reference" => "required",
 		"phone_reference" => "required",
+		"collection_period" => "required",
 		"status" => "required",
 		"firm" => "required"
 	];

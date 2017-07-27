@@ -24,24 +24,24 @@ class CreditController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Credit::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $credits = $query->get();
+		$credits = $query->get();
 
-        return view('credits.index')
-            ->with('credits', $credits)
-            ->with('attributes', $attributes);
+		return view('credits.index')
+		->with('credits', $credits)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -63,9 +63,10 @@ class CreditController extends AppBaseController
 	 */
 	public function store(CreateCreditRequest $request)
 	{
-        $input = $request->all();
-        $number = Credit::max('id') + 1;
-        $input['folio'] = $request->input('state').$request->input('branch').'00'.$number;
+		$input = $request->all();
+		$number = Credit::max('id') + 1;
+		$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;
+		
 		$credit = Credit::create($input);
 		Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 		return redirect(route('credits.index'));

@@ -235,9 +235,8 @@
                             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                           </div>
                             <input type="hidden" name="type_product" value="{{$product->id}}">
-                          </div>
-                          <div class="form-group col-sm-6 col-lg-4">
-                            {!! Form::label('status', 'status:') !!}
+                             <div class="form-group col-sm-6 col-lg-4">
+                            {!! Form::label('status', 'Estatus:') !!}
                             {!! Form::text('status', null, [
                             'style' => 'text-transform:uppercase',
                             'class' => 'form-control input-lg', 
@@ -246,6 +245,8 @@
                             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                           </div>
 
+                          </div>
+                         
 
 
                           <div class="form-group col-sm-12">

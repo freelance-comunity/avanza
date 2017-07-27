@@ -163,7 +163,6 @@ class Credit extends Model
 		"mothers_last_name_reference" => "required",
 		"phone_reference" => "required",
 		"collection_period" => "required",
-		"status" => "required",
 		"firm" => "required"
 	];
 

@@ -56,7 +56,7 @@ class Client extends Model
 
     public function aval()
     {
-        return $this->hasMany('App\Models\ClientAval');
+        return $this->hasOne('App\Models\ClientAval');
     }
      public function company()
     {

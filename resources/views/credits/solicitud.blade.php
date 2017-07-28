@@ -126,7 +126,22 @@
 				<td align="center">{{$credit->references}}</td>
 			</tr>
 		</table>
+		<label>C. DATOS DEL NEGOCIO</label>
+		<table style="width:100%">
+			<tr>
+				<th align="center">CALLE</th>
+				<th align="center">NÚMERO</th>
+				<th align="center">COLONIA</th>
+			</tr>
+			<tr>
+				<td align="center">{{$credit->street_company}}</td>
+				<td align="center">{{$credit->number_company}}</td>
+				<td align="center">{{$credit->colony_company}}</td>
+			</tr>
+		</table>
+
 	</div>
+
 
 
 	<div class="part2">
@@ -155,7 +170,7 @@
 			</tr>
 		</table>
 		<br><br><br>
-		<label class="hidden"></label>
+		<label class="hidden">HIDDEN</label>
 		<table style="width:100%; float:right;">
 			<tr>
 				<th align="center">APELLIDO MATERNO</th>
@@ -187,6 +202,15 @@
 				<td align="center">{{$credit->municipality}}</td>
 				<td align="center">{{$credit->state}}</td>
 				<td align="center">{{$credit->postal_code}}</td>
+			</tr>
+		</table>
+		<br><br>
+		<table style="width:100%; float:right;">
+			<tr>
+				<th align="center">TIPO DE VIVIENDA</th>				
+			</tr>
+			<tr>
+				<td align="center">{{$credit->type_of_housing}}</td>
 			</tr>
 		</table>
 

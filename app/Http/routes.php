@@ -49,7 +49,14 @@ Route::get('test-relationship', function(){
 
 
 Route::get('/', function () {
-	return redirect('login');
+    if($user = Auth::user())
+    {
+        return view ('home');
+    }
+    if(Auth::guest())
+    {
+        return redirect('login');
+    }   
 });
 
 Route::auth();

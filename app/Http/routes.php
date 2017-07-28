@@ -19,8 +19,31 @@ Route::get('signature', function(){
     return view('signature');
 });
 
+Route::post('save-signature', function(Illuminate\Http\Request  $request){
+    $data_uri = $request->input('signature');
+    $encoded_image = explode(",", $data_uri)[1];
+    $decoded_image = base64_decode($encoded_image);
+    $url = 'signature'. rand(111,9999).'.png';
+
+    file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
+    echo $url;
+});
+
 Route::get('validation', function(){
     return view('validation');
+});
+
+Route::get('test-relationship', function(){
+    $client = App\Models\Client::find(3);
+
+    $references = $client->references;
+    echo $client->firts_name;
+    echo "<br>";
+    foreach ($references as $key => $value) {
+        echo $value->firts_name_reference;
+        echo "<br>";
+    }
+
 });
 /*=====  End of Test Routes  ======*/
 
@@ -195,12 +218,3 @@ Route::get('creditsClient/{id}/{product}',[
     'uses' => 'ClientController@creditsClient',
     ]);
 
-Route::get('referencia',function(){
-
- collect([1, 2, 3, 4])->last(function ($key, $value) {
-    echo $value>1;
-});
-
-
-
-});

@@ -66,28 +66,28 @@ Detalles del Cliente
       </tr>
       <tr>
         <td>2.</td>
-        <td>ESCOLARIDAD</td>
+        <td>ESCOLARIDAD:</td>
         <td>
           {{$client->scholarship}}
         </td>
       </tr>
       <tr>
         <td>3.</td>
-        <td>DEPENDIENTES</td>
+        <td>DEPENDIENTES:</td>
         <td>
           {{$client->no_economic_dependent}}
         </td>
       </tr>
       <tr>
         <td>4.</td>
-        <td>NO. FAMILIAS</td>
+        <td>NO. FAMILIAS:</td>
         <td>
          {{$client->no_familys}}
        </td>
      </tr>
      <tr>
       <td>5.</td>
-      <td>TIPO DE VIVIENDA</td>
+      <td>TIPO DE VIVIENDA:</td>
       <td>
         {{$client->type_of_housing}}
       </td>

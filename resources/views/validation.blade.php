@@ -43,12 +43,15 @@ Parsley JS
 						]) !!}
 					</div>
 
-					<div class="form-group col-sm-6 col-lg-4">
-						{!! Form::label('select', 'selecciona:') !!}
-						{!! Form::select('size', ['L' => 'Large', 'S' => 'Small'], null, [
-						'class' => 'form-control',
-						'required' => 'required',
-						]); !!}
+					<div id="signature-pad" class="m-signature-pad">
+						<div class="m-signature-pad--body">
+							<canvas></canvas>
+						</div>
+						<div class="m-signature-pad--footer">
+							<div class="description">Firma aquí</div>
+							<button type="button" class="button clear" data-action="clear">Limpiar</button>
+							<button type="button" class="button save" data-action="save">Usar</button>
+						</div>
 					</div>
 
 					<div class="form-group col-sm-12">
@@ -59,21 +62,34 @@ Parsley JS
 				</div>
 			</div>
 			@endsection
-<script>
-	// usamos onload para asegurarnos que existan los elementos en nuestro DOM
-        window.onload = function() {
-            var anchor = document.getElementById("anchor");         
-            
-            // le asociamos el evento a nuestro elemento para tener un codigo 
-            // html mas limpio y manejar toda la interaccion
-            // desde nuestro script
-            anchor.onclick = function() {
-                // una variable donde pongo la url a donde quiera ir, 
-                //podria estar de mas pero asi queda mas limpio la funcion window.open()
-                var url = "https://consultas.curp.gob.mx/CurpSP/";
-                window.open(url, "_blank", 'width=500,height=500'); 
-                // el return falase es para eviar que se progrague el evento y se vaya al href de tu anchor.
-                return false;
-            };
-        }
-</script>
+			<script>
+				var wrapper = document.getElementById("signature-pad"),
+				clearButton = wrapper.querySelector("[data-action=clear]"),
+				saveButton = wrapper.querySelector("[data-action=save]"),
+				canvas = wrapper.querySelector("canvas"),
+				signaturePad;
+
+				function resizeCanvas() {
+					var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+					canvas.width = canvas.offsetWidth * ratio;
+					canvas.height = canvas.offsetHeight * ratio;
+					canvas.getContext("2d").scale(ratio, ratio);
+				}
+
+				window.onresize = resizeCanvas;
+				resizeCanvas();
+
+				signaturePad = new SignaturePad(canvas);
+
+				clearButton.addEventListener("click", function (event) {
+					signaturePad.clear();
+				});
+
+				saveButton.addEventListener("click", function (event) {
+					if (signaturePad.isEmpty()) {
+						alert("Por favor dibuja tu firma.");
+					} else {
+						document.getElementById('signature').value=signaturePad.toDataURL('image/png');
+					}
+				});
+			</script>

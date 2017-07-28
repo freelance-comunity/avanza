@@ -7,31 +7,28 @@
 	@include('flash::message')
 
 	<div class="row">
-		<h1 class="pull-left">Credits</h1>
-		<a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('credits.create') !!}">Add New</a>
+		<h1 class="pull-left">Créditos</h1>
 	</div>
 
 	<div class="row">
 		@if($credits->isEmpty())
-		<div class="well text-center">No Credits found.</div>
+		<div class="well text-center">No se encontraron créditos.</div>
 		@else
 		<div class="table-responsive">
 			<table class="table"  id="example">
 				<thead>
-					<th>Adviser</th>
-					<th>Date</th>
+					<th>Promotor</th>
+					<th>Fecha</th>
 					<th>Folio</th>
-					<th>Ammount</th>
-					<th>Interest Rate</th>
-					<th>Dues</th>
-					<th>Branch</th>
-					<th>Periodicity</th>
-					<th>Warranty Type</th>
-					<th>Firts Name</th>
-					<th>Last Name</th>
-					<th>Mothers Last Name</th>
-					<th>Firm</th>
-					<th width="50px">Action</th>
+					<th>Monto</th>
+					<th>Cuotas</th>
+					<th>Sucursal</th>				
+					<th>Tip de Garantía</th>
+					<th>Nombre(s)</th>
+					<th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
+					<th>Firma</th>
+					<th width="50px">Acción</th>
 				</thead>
 				<tbody>
 
@@ -41,10 +38,9 @@
 						<td>{!! $credit->date !!}</td>
 						<td>{!! $credit->folio !!}</td>
 						<td>{!! $credit->ammount !!}</td>
-						<td>{!! $credit->interest_rate !!}</td>
+						
 						<td>{!! $credit->dues !!}</td>
 						<td>{!! $credit->branch !!}</td>
-						<td>{!! $credit->periodicity !!}</td>
 						<td>{!! $credit->warranty_type !!}</td>
 						<td>{!! $credit->firts_name !!}</td>
 						<td>{!! $credit->last_name !!}</td>

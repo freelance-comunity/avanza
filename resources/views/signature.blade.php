@@ -1,50 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Signature Pad demo</title>
-  <meta name="description" content="Signature Pad - HTML5 canvas based smooth signature drawing using variable width spline interpolation.">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <link rel="stylesheet" href="css/signature-pad.css">
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-39365077-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
 </head>
-<body onselectstart="return false">
-  <a id="github" href="https://github.com/szimek/signature_pad">
-    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
-  </a>
-
-  <div id="signature-pad" class="m-signature-pad">
-    <div class="m-signature-pad--body">
-      <canvas></canvas>
+<body>
+  <form action="{{ url('save-signature') }}" method="POST">
+    {{ csrf_field() }}
+    <input type="text" required="">
+    <h1>
+      FIRMA DIGITAL
+    </h1>
+      <canvas id="signature-pad" class="signature-pad" width=400 height=200 style="border:1px solid #000000;"></canvas>
+    <div>
+      <button id="save">Save</button>
+      <button id="clear">Clear</button>
     </div>
-    <div class="m-signature-pad--footer">
-      <div class="description">Sign above</div>
-      <div class="left">
-        <button type="button" class="button clear" data-action="clear">Clear</button>
-      </div>
-      <div class="right">
-        <button type="button" class="button save" data-action="save-png">Save as PNG</button>
-        <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
-      </div>
-    </div>
-  </div>
+    <br><br>
+    <input type="text" id="signature" name="signature" required="">
+    <input type="submit" value="enviar">
+  </form>
+  <!--<textarea name="signature" id="signature" cols="30" rows="10"></textarea>-->
+  
+  <script>
 
-  <script src="js/signature_pad.js"></script>
-  <script src="js/app.js"></script>
+   var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+    backgroundColor: 'rgba(255, 255, 255, 0)',
+    penColor: 'rgb(0, 0, 0)'
+  });
+   var saveButton = document.getElementById('save');
+   var clearButton = document.getElementById('clear');
+
+   clearButton.addEventListener("click", function (event) {
+    signaturePad.clear();
+  });
+
+   saveButton.addEventListener("click", function (event) {
+    if (signaturePad.isEmpty()) {
+      alert("Por favor dibuja tu firma.");
+    } else {
+      document.getElementById('signature').value=signaturePad.toDataURL('image/png');
+    }
+  });
+
+</script>
 </body>
 </html>

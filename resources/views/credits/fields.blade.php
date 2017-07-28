@@ -139,7 +139,7 @@
                           </div>
 
                           <input type="hidden" name="client_id" value="{{ $client->id}}">
-                         
+                          
 
                           
                           <div class="form-group col-sm-6 col-lg-4">
@@ -166,7 +166,10 @@
                                 {!! Form::submit('GUARDAR', ['class' => 'btn btn-primary']) !!}
                               </div>
 
+
                             </div>
 
 
+                            
+                          </div>
 

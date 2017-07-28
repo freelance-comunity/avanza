@@ -357,7 +357,6 @@ Detalles del Cliente
 </div>
 @else
 <div class="col-md-12">
-  @foreach ($aval  as $aval)
   <a href="{!! route('clientAvals.edit', [$aval->id]) !!}"><h3 style="color:black;"><i class="fa fa-male"></i> AVAL</h3></a>
   <div class="table-responsive">
    <table class="table table-striped">
@@ -405,7 +404,6 @@ Detalles del Cliente
   </tr>
 </table>
 </div>
-@endforeach
 </div>
 @endif
 

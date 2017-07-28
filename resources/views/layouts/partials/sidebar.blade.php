@@ -36,13 +36,7 @@
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
             <li><a href="#"><i class='fa fa-calculator'></i> <span>Cotizador</span></a></li>
             <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
-            <li class="treeview">
-                <a href="#"><i class='fa fa-money'></i>  <span>Créditos</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ url('credits') }}">Créditos</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                </ul>
-            </li>
+            <li><a href="{{ url('credits') }}"><i class="fa fa-users"></i> <span>Créditos</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-book'></i>  <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">

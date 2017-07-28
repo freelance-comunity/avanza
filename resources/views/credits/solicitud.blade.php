@@ -190,7 +190,7 @@
 			</tr>
 		</table>
 
-
+<img src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" alt="">
 
 	</div>
 

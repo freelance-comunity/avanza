@@ -67,6 +67,15 @@ class CreditController extends AppBaseController
 	 */
 	public function store(CreateCreditRequest $request)
 	{	
+		/* Get signature */
+		$data_uri = $request->input('firm');
+		$encoded_image = explode(",", $data_uri)[1];
+		$decoded_image = base64_decode($encoded_image);
+		$url = 'signature'. rand(111,9999).'.png';
+
+		file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
+		/* End get signature */
+
 		$client = Client::find($request->input('client_id'));
 		$input = $request->all();
 		$number = Credit::max('id') + 1;
@@ -139,7 +148,7 @@ class CreditController extends AppBaseController
 
 
 
-
+		$input['firm']   = $url;
 		$input['status'] = "MINISTRADO";
 
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "248f0bdcb52cc182c7c2ebe76c29dfb0",
+    "content-hash": "baebbdd7c6eddf71a4376df7d7e84a43",
     "packages": [
         {
             "name": "acacha/admin-lte-template-laravel",
@@ -824,7 +824,7 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "5.2.x-dev",
+            "version": "v5.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
@@ -4008,7 +4008,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravelcollective/html": 20,
         "zizaco/entrust": 20
     },
     "prefer-stable": false,

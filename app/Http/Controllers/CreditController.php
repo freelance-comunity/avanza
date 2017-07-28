@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateCreditRequest;
 use App\Models\Credit;
 use App\Models\Client;
+use App\Models\ClientLocation;
+use App\Models\ClientReferences;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -51,7 +53,9 @@ class CreditController extends AppBaseController
 	 */
 	public function create()
 	{
+		
 		return view('credits.create');
+		
 	}
 
 	/**
@@ -62,11 +66,83 @@ class CreditController extends AppBaseController
 	 * @return Response
 	 */
 	public function store(CreateCreditRequest $request)
-	{
+	{	
+		$client = Client::find($request->input('client_id'));
 		$input = $request->all();
 		$number = Credit::max('id') + 1;
-		$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;
-		
+		$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;	
+		$input['civil_status'] = $client->civil_status;
+		$input['scholarship'] = $client->scholarship;
+		$input['phone'] = $client->phone;
+		$input['dependents'] = $client->no_economic_dependent;
+		$input['no_familys'] = $client->no_familys;
+		$input['type_of_housing'] = $client->type_of_housing;
+		$input['street'] = $client->location->street;
+		$input['number'] = $client->location->number;
+		$input['colony'] = $client->location->colony;
+		$input['municipality'] = $client->location->municipality;
+		$input['state'] = $client->location->state;
+		$input['postal_code'] = $client->location->postal_code;
+		$input['references'] = $client->location->references;
+		$input['street_company'] = $client->company->street_company;
+		$input['number_company'] = $client->company->number_company;
+		$input['colony_company'] = $client->company->colony_company;
+		$input['municipality_company'] = $client->company->municipality_company;
+		$input['state_company'] = $client->company->state_company;
+		$input['postal_code_company'] = $client->company->postal_code_company;
+		$input['phone_company'] = $client->company->phone_company;
+		$input['name_company'] = $client->company->name_company;
+		$input['inventory'] = $client->company->inventory;
+		$input['maq_equi'] = $client->company->machinery_equipment;
+		$input['vehicles'] = $client->company->vehicles;
+		$input['property'] = $client->company->property;
+		$input['box_benck'] = $client->company->box_benck;
+		$input['accounts'] = $client->company->accounts;
+		$input['suppliers'] = $client->company->suppliers;
+		$input['credits'] = $client->company->credits;
+		$input['payments'] = $client->company->payments;
+		$input['specify'] = $client->company->specify;
+		$input['weekday'] = $client->company->weekday;
+		$input['weekend'] = $client->company->weekend;
+		$input['utility'] = $client->company->utility;
+		$input['other_income'] = $client->company->other_income;
+		$input['rent'] = $client->company->rent;
+		$input['salary'] = $client->company->salary;
+		$input['others'] = $client->company->others;
+		$input['name_aval'] = $client->aval->name_aval;
+		$input['last_name_aval'] = $client->aval->last_name_aval;
+		$input['mothers_name_aval'] = $client->aval->mothers_name_aval;
+		$input['birthdate_aval'] = $client->aval->birthdate_aval;
+		$input['curp_aval'] = $client->aval->curp_aval;
+		$input['phone_aval'] = $client->aval->phone_aval;
+		$input['civil_status_aval'] = $client->aval->civil_status_aval;
+		$input['scholarship_aval'] = $client->aval->scholarship_aval;
+		$input['street_aval'] = $client->aval->street_aval;
+		$input['number_aval'] = $client->aval->number_aval;
+		$input['colony_aval'] = $client->aval->colony_aval;
+		$input['municipality_aval'] = $client->aval->municipality_aval;
+		$input['state_aval'] = $client->aval->state_aval;
+		$input['postal_code_aval'] = $client->aval->postal_code_aval;
+
+		$references = $client->references;
+		foreach ($references as $key => $reference) {
+			$input['firts_name_reference'] = $reference->firts_name_reference;
+			$input['last_name_reference'] = $reference->last_name_reference;
+			$input['mothers_last_name_reference'] = $reference->mothers_last_name_reference;
+			$input['phone_reference'] = $reference->phone_reference;
+
+			$input['firts_name_reference2'] = $reference->firts_name_reference;
+			$input['last_name_reference2'] = $reference->last_name_reference;
+			$input['mothers_last_name_reference2'] = $reference->mothers_last_name_reference;
+			$input['phone_reference2'] = $reference->phone_reference;
+		}
+
+
+
+
+		$input['status'] = "MINISTRADO";
+
+
 		$credit = Credit::create($input);
 		Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 		return redirect(route('credits.index'));

@@ -9,6 +9,12 @@ Route::get('pdf/{id}', function($id){
     return $pdf->download('documents.pdf');
 });
 
+Route::get('solicitud/{id}', function($id){
+    $credit = App\Models\Credit::find($id);
+    $pdf = PDF::loadView('credits.solicitud', compact('credit'));
+    return $pdf->download('solicitud.pdf');
+});
+
 Route::get('signature', function(){
     return view('signature');
 });
@@ -173,7 +179,7 @@ Route::resource('products', 'ProductController');
 Route::get('products/{id}/delete', [
     'as' => 'products.delete',
     'uses' => 'ProductController@destroy',
-]);
+    ]);
 
 
 Route::resource('credits', 'CreditController');
@@ -181,10 +187,20 @@ Route::resource('credits', 'CreditController');
 Route::get('credits/{id}/delete', [
     'as' => 'credits.delete',
     'uses' => 'CreditController@destroy',
-]);
+    ]);
 
 
- Route::get('creditsClient/{id}/{product}',[
+Route::get('creditsClient/{id}/{product}',[
     'as' => 'client.creditsClient',
     'uses' => 'ClientController@creditsClient',
     ]);
+
+Route::get('referencia',function(){
+
+ collect([1, 2, 3, 4])->last(function ($key, $value) {
+    echo $value>1;
+});
+
+
+
+});

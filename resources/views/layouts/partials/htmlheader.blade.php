@@ -21,7 +21,6 @@
 
         {{-- Signature CSS y JS --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
-         <!--<link rel="stylesheet" href="{{ asset('/css/signature.css') }}">-->
 
         <!-- jQuery 2.1.4 -->
         <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
@@ -55,6 +54,10 @@
       <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 
       <style>
+        canvas {
+          width: 100%;
+          height: auto;
+        }
         body{
           font-weight: bold;
         }

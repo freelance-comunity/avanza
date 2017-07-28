@@ -155,6 +155,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //laravel collective
+        Collective\Html\HtmlServiceProvider::class,
         
         //Crud Generator
         'Illuminate\View\ViewServiceProvider',
@@ -224,6 +226,10 @@ return [
     'URL' => Illuminate\Support\Facades\URL::class,
     'Validator' => Illuminate\Support\Facades\Validator::class,
     'View' => Illuminate\Support\Facades\View::class,
+
+    //laravel collective
+    'Form' => Collective\Html\FormFacade::class,
+    'Html' => Collective\Html\HtmlFacade::class,
 
     //Crud Generator
     'Form'  => 'Illuminate\Html\FormFacade',

@@ -254,8 +254,8 @@
 			<tr>
 				<td align="center">IMMUEBLE($)</td>
 				<td align="center">{{$credit->property}}</td>
-				<td align="center">ESPECIFICA($)</td>
-				<td align="center">{{$credit->specify}}</td>
+				<td align="center">ESPECIFICA</td>
+				<td align="center" rowspan="3">{{$credit->specify}}</td>
 				<td align="center">OTROS INGRESOS($)</td>
 				<td align="center">{{$credit->other_income}}</td>
 				<td align="center">{{$credit->utility}}</td>
@@ -265,7 +265,7 @@
 					<td align="center"></td>
 					<td align="center"></td>
 					<td align="center"></td>
-					<td align="center"></td>
+					
 					<th align="center">OTROS</th>
 				</tr>
 				<tr>
@@ -274,7 +274,7 @@
 					<td align="center"></td>
 					<td align="center"></td>
 					<td align="center"></td>
-					<td align="center"></td>
+					
 					<td align="center">{{$credit->others}}</td>
 				</tr>
 			</table>

@@ -98,6 +98,7 @@
    	</header><br>
    	<br><br><br>
 
+<<<<<<< HEAD
    	<div class="part1">
    		<label>A. DATOS DEL CRÉDITO</label>
    		<table style="width:203%">
@@ -110,6 +111,190 @@
    				<td align="center">{{$credit->date}}</td>
    			</tr>
    		</table>
+=======
+		<table style="width:203%">
+			<tr>
+				<th align="center">MONTO CRÉDITO</th>
+				<th align="center">TASA INTERÉS</th>
+				<th align="center">NO. CUOTAS</th>	
+				<th align="center">PERIDIOCIDAD</th>
+				<th align="center">TIPO DE GARANTÍA</th>			
+			</tr>
+			<tr>
+				<td align="center">${{$credit->ammount}}</td>
+				<td align="center">{{$credit->interest_rate}}%</td>
+				<td align="center">{{$credit->dues}}</td>
+				<td align="center">{{$credit->periodicity}}</td>
+				<td align="center">{{$credit->warranty_type}}</td>
+			</tr>
+		</table>
+		<label class="visible">B.DATOS GENERALES DEL SOLICITANTE</label>
+		<table style="width:203%">
+			<tr>
+				<th align="center">NOMBRE(S)</th>
+				<th align="center">APELLIDO PATERNO</th>
+				<th align="center">APELLIDO MATERNO</th>
+			</tr>
+			<tr>
+				<td align="center">{{$credit->firts_name}}</td>
+				<td align="center">{{$credit->last_name}}</td>
+				<td align="center">{{$credit->mothers_last_name}}</td>
+			</tr>
+		</table>
+		<table style="width:203%">
+			<tr>
+				<th align="center">CURP</th>
+				<th align="center">INE</th>
+				<th align="center">ESTADO CIVIL</th>
+				<th align="center">ESCOLARIDAD</th>
+			</tr>
+			<tr>
+				<td align="center">{{$credit->curp}}</td>
+				<td align="center">{{$credit->ine}}</td>
+				<td align="center">{{$credit->civil_status}}</td>
+				<td align="center">{{$credit->scholarship}}</td>
+			</tr>
+		</table>
+		<table style="width:203%">
+			<tr>
+				<th align="center">CALLE</th>
+				<th align="center">NÚMERO</th>
+				<th align="center">COLONIA</th>
+				<th align="center">MUNICIPIO</th>
+				<th align="center">ESTADO</th>
+				<th align="center">C.P.</th>
+			</tr>
+			<tr>
+				<td align="center">{{$credit->street}}</td>
+				<td align="center">{{$credit->number}}</td>
+				<td align="center">{{$credit->colony}}</td>
+				<td align="center">{{$credit->municipality}}</td>
+				<td align="center">{{$credit->state}}</td>
+				<td align="center">{{$credit->postal_code}}</td>
+			</tr>
+		</table>
+		<table style="width:203%">
+			<tr>
+				<th align="center">TELÉFONO</th>
+				<th align="center">NO. DEPENDIENTES</th>
+				<th align="center">NO. FAMILIAS</th>
+				<th align="center">TIPO DE VIVIENDA</th>
+			</tr>
+			<tr>
+				<td align="center">{{$credit->phone}}</td>
+				<td align="center">{{$credit->dependents}}</td>
+				<td align="center">{{$credit->no_familys}}</td>
+				<td align="center">{{$credit->type_of_housing}}</td>
+			</tr>
+		</table>
+		<table style="width:203%">
+			<tr>
+				<th align="center">REFERENCIAS DE UBICACIÓN: COLOR DE CASA, ENTRE CALLES, ETC.</th>
+			</tr>
+			<tr>
+				<td align="center">{{$credit->references}}</td>
+			</tr>
+		</table>
+		<label>C. DATOS DEL NEGOCIO</label>
+		<table style="width:203%">
+			<tr>
+				<th align="center">CALLE</th>
+				<th align="center">NÚMERO</th>
+				<th align="center">COLONIA</th>
+				<th align="center">MUNICIPIO</th>
+				<th align="center">ESTADO</th>
+				<th align="center">C.P.</th>
+			</tr>
+			<tr>
+				<td align="center">{{$credit->street_company}}</td>
+				<td align="center">{{$credit->number_company}}</td>
+				<td align="center">{{$credit->colony_company}}</td>
+				<td align="center">{{$credit->municipality_company}}</td>
+				<td align="center">{{$credit->state_company}}</td>
+				<td align="center">{{$credit->postal_code_company}}</td>
+			</tr>
+		</table>
+		<table style="width:203%">
+			<tr>
+				<th align="center">TELÉFONO</th>
+				<th align="center">NOMBRE DEL NEGOCIO</th>
+				
+			</tr>
+			<tr>
+				<td align="center">{{$credit->phone_company}}</td>
+				<td align="center">{{$credit->name_company}}</td>
+			</tr>
+		</table>
+		<table style="width: 203%">
+			<tr>
+				<th align="center" colspan="2">
+					ACTIVOS
+				</th>
+				<th align="center" colspan="2">
+					PASIVOS
+				</th>
+				<th align="center" colspan="2">
+					INGRESOS
+				</th>
+				<th align="center" colspan="1">
+					COSTOS
+				</th>
+			</tr>
+			<tr>
+				<td align="center">INVENTARIO($)</td>
+				<td align="center">{{$credit->inventory}}</td>		
+				<td align="center">PROVEEDORES($)</td>
+				<td align="center">{{$credit->suppliers}}</td>				
+				<td align="center">ENTRE SEMANA</td>
+				<td align="center">FIN DE SEMANA</td>
+				<th align="center">RENTA</th>
+			</tr>
+			<tr>
+				<td align="center">MAQ Y EQUIP($)</td>
+				<td align="center">{{$credit->maq_equi}}</td>	
+				<td align="center">CRÉDITOS($)</td>
+				<td align="center">{{$credit->credits}}</td>	
+				<td align="center">{{$credit->weekday}}</td>			
+				<td align="center">{{$credit->weekend}}</td>
+				<td align="center">{{$credit->rent}}</td>	
+			</tr>
+			<tr>
+				<td align="center">VEHÍCULOS($)</td>
+				<td align="center">{{$credit->vehicles}}</td>
+				<td align="center">PAGOS AL MES($)</td>
+				<td align="center">{{$credit->payments}}</td>
+				<td align="center">UTILIDAD($)</td>
+				<td align="center">{{$credit->utility}}</td>
+				<th align="center">SUELDOS</th>
+			</tr>
+			<tr>
+				<td align="center">IMMUEBLE($)</td>
+				<td align="center">{{$credit->property}}</td>
+				<td align="center">ESPECIFICA</td>
+				<td align="center" rowspan="3">{{$credit->specify}}</td>
+				<td align="center">OTROS INGRESOS($)</td>
+				<td align="center">{{$credit->other_income}}</td>
+				<td align="center">{{$credit->utility}}</td>
+				<tr>
+					<td align="center">CAJA, BANCOS($)</td>
+					<td align="center">{{$credit->box_benck}}</td>
+					<td align="center"></td>
+					<td align="center"></td>
+					<td align="center"></td>
+					
+					<th align="center">OTROS</th>
+				</tr>
+				<tr>
+					<td align="center">CTAS/COBRAR($)</td>
+					<td align="center">{{$credit->accounts}}</td>
+					<td align="center"></td>
+					<td align="center"></td>
+					<td align="center"></td>
+					
+					<td align="center">{{$credit->others}}</td>
+				</tr>
+			</table>
+>>>>>>> remotes/origin/master
 
    		<table style="width:203%">
    			<tr>

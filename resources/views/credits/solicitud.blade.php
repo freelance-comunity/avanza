@@ -68,8 +68,9 @@
 		img {
 			max-width: 50%;
 			height: auto;
-			display: block;
+			display: inline;
 			margin: auto;
+
 		}
 	</style>
 </head>
@@ -105,8 +106,8 @@
 			</tr>
 			<tr>
 				<td align="center">${{$credit->ammount}}</td>
-				<td align="center">{{$credit->interest_rate}}</td>
-				<td align="center">${{$credit->dues}}</td>
+				<td align="center">{{$credit->interest_rate}}%</td>
+				<td align="center">{{$credit->dues}}</td>
 				<td align="center">{{$credit->periodicity}}</td>
 				<td align="center">{{$credit->warranty_type}}</td>
 			</tr>
@@ -115,7 +116,7 @@
 		<table style="width:203%">
 			<tr>
 				<th align="center">NOMBRE(S)</th>
-				<th align="center">PATERNO</th>
+				<th align="center">APELLIDO PATERNO</th>
 				<th align="center">APELLIDO MATERNO</th>
 			</tr>
 			<tr>
@@ -339,7 +340,9 @@
 			<p style="width: 200%">Asimismo, declaro que conozco la naturaleza y alcance de la información que se solicitará, del uso que la Financiera hará de tal información y de que ésta podrá realizar consultas periódicas de mi historial crediticio, consintiendo que esta autorización se encuentre vigente por los siguientes tres años contados a partir de su expedición y en todo caso durante el tiempo que se mantenga 	la relación jurídica entre ambas.</p>
 			<p style="width: 200%">Estoy de acuerdo y acepto que este documento quede bajo propiedad de la Financiera y/o de la Sociedad de Información Crediticia consultada para efectos de control y cumplimiento del artículo 28 de la Ley para Regular las Sociedades de Información Crediticia.</p>
 			<br>
-			<h4 style="text-align:center;width: 200%">{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</h4>		
+			<h4 style="text-align:center;width: 200%">{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</h4>
+
+
 			
 		</div>
 
@@ -437,7 +440,7 @@
 				<br>
 				<br>
 				<br><br>
-				<img  src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" alt="">
+				<!--<img align="center" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" alt="">	-->
 			</div>
 
 

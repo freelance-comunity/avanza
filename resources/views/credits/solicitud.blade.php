@@ -72,6 +72,9 @@
 			margin: auto;
 
 		}
+		.part3{
+			width: 100%;
+		}
 	</style>
 </head>
 <body>
@@ -402,7 +405,7 @@
 				
 
 			</div>
-			<div align="center">
+			<div class="part3" align="center">
 				<br>
 				<br>
 				<br>
@@ -440,13 +443,8 @@
 				<br>
 				<br>
 				<br><br>
-				<!--<img align="center" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" alt="">	-->
+				<img align="center" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" alt="">
 			</div>
-
-
-	<!--<div class="part3">
-		<img src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" alt="">
-	</div>-->
 
 
 </body>

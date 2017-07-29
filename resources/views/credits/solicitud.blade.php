@@ -43,11 +43,6 @@
 			float: left;
 			padding-right: 15px;
 		}
-		.part3{
-			width: 100%;
-			float: center;
-			padding-right: 100px;
-		}
 		span {
 			color: #ff3300;
 		}
@@ -89,12 +84,14 @@
 
 	<div class="part1">
 		<label>A. DATOS DEL CRÉDITO</label>
-		<table style="width:100%">
+		<table style="width:203%">
 			<tr>
 				<th align="center">EJECUTIVO DE CRÉDITO</th>
+				<th  align="center">FECHA</th>
 			</tr>
 			<tr>
 				<td align="center">{{$credit->adviser}}</td>
+				<td align="center">{{$credit->date}}</td>
 			</tr>
 		</table>
 
@@ -211,7 +208,7 @@
 				<td align="center">{{$credit->name_company}}</td>
 			</tr>
 		</table>
-		<table style="width: 100%">
+		<table style="width: 203%">
 			<tr>
 				<th align="center" colspan="2">
 					ACTIVOS
@@ -219,41 +216,65 @@
 				<th align="center" colspan="2">
 					PASIVOS
 				</th>
+				<th align="center" colspan="2">
+					INGRESOS
+				</th>
+				<th align="center" colspan="1">
+					COSTOS
+				</th>
 			</tr>
 			<tr>
 				<td align="center">INVENTARIO($)</td>
 				<td align="center">{{$credit->inventory}}</td>		
 				<td align="center">PROVEEDORES($)</td>
-				<td align="center">{{$credit->suppliers}}</td>
+				<td align="center">{{$credit->suppliers}}</td>				
+				<td align="center">ENTRE SEMANA</td>
+				<td align="center">FIN DE SEMANA</td>
+				<th align="center">RENTA</th>
 			</tr>
 			<tr>
 				<td align="center">MAQ Y EQUIP($)</td>
 				<td align="center">{{$credit->maq_equi}}</td>	
 				<td align="center">CRÉDITOS($)</td>
 				<td align="center">{{$credit->credits}}</td>	
+				<td align="center">{{$credit->weekday}}</td>			
+				<td align="center">{{$credit->weekend}}</td>
+				<td align="center">{{$credit->rent}}</td>	
 			</tr>
 			<tr>
 				<td align="center">VEHÍCULOS($)</td>
 				<td align="center">{{$credit->vehicles}}</td>
 				<td align="center">PAGOS AL MES($)</td>
 				<td align="center">{{$credit->payments}}</td>
+				<td align="center">UTILIDAD($)</td>
+				<td align="center">{{$credit->utility}}</td>
+				<th align="center">SUELDOS</th>
 			</tr>
 			<tr>
 				<td align="center">IMMUEBLE($)</td>
 				<td align="center">{{$credit->property}}</td>
 				<td align="center">ESPECIFICA($)</td>
 				<td align="center">{{$credit->specify}}</td>
+				<td align="center">OTROS INGRESOS($)</td>
+				<td align="center">{{$credit->other_income}}</td>
+				<td align="center">{{$credit->utility}}</td>
 				<tr>
 					<td align="center">CAJA, BANCOS($)</td>
 					<td align="center">{{$credit->box_benck}}</td>
 					<td align="center"></td>
 					<td align="center"></td>
+					<td align="center"></td>
+					<td align="center"></td>
+					<th align="center">OTROS</th>
 				</tr>
 				<tr>
 					<td align="center">CTAS/COBRAR($)</td>
 					<td align="center">{{$credit->accounts}}</td>
 					<td align="center"></td>
 					<td align="center"></td>
+					<td align="center"></td>
+					<td align="center"></td>
+					<td align="center">{{$credit->others}}</td>
 				</tr>
 			</table>
 
@@ -330,18 +351,11 @@
 		<div class="part2">
 			<table style="width:50%; float:right;">
 				<tr>
-					<th align="center">SUCURSAL:{{$credit->branch}} </th>
+					<th align="center">SUCURSAL/PTO VTA:{{$credit->branch}} </th>
 				</tr>
 			</table><br>
 
-			<table style="width:30%; float:right;">
-				<tr>
-					<th align="center">FECHA</th>
-				</tr>
-				<tr>
-					<td align="center">{{$credit->date}}</td>
-				</tr>
-			</table><br><br>
+
 			
 			<br><br>
 
@@ -359,52 +373,34 @@
 			<br>
 			<br>
 			<br>
-			<table style="width: 100%">
+			<!--<table style="width: 100%">
 				<tr>
-					<th align="center" colspan="2">
-						INGRESOS
-					</th>
-					<th align="center" colspan="1">
-						COSTOS
-					</th>
+					
 				</tr>
 				<tr>
 
-					<td align="center">ENTRE SEMANA</td>
-					<td align="center">FIN DE SEMANA</td>
-					<th align="center">RENTA</th>
 
 				</tr>
 				<tr>
-					<td align="center">{{$credit->weekday}}</td>			
-					<td align="center">{{$credit->weekend}}</td>
-					<td align="center">{{$credit->rent}}</td>	
+					
 				</tr>
 				<tr>
-					<td align="center">UTILIDAD($)</td>
-					<td align="center">{{$credit->utility}}</td>
-					<th align="center">SUELDOS</th>
+					
 				</tr>
 				<tr>
-					<td align="center">OTROS INGRESOS($)</td>
-					<td align="center">{{$credit->other_income}}</td>
-					<td align="center">{{$credit->utility}}</td>
+					
 					<tr>
-						<td align="center"></td>
-						<td align="center"></td>
-						<th align="center">OTROS</th>
+						
 					</tr>
 					<tr>
-						<td align="center"></td>
-						<td align="center"></td>
-						<td align="center">{{$credit->others}}</td>
+						
 					</tr>
-				</table>
+				</table>-->
 				
 
 			</div>
-	<div align="center">
-		<br>
+			<div align="center">
+				<br>
 				<br>
 				<br>
 				<br>
@@ -442,7 +438,7 @@
 				<br>
 				<br><br>
 				<img  src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" alt="">
-	</div>
+			</div>
 
 
 	<!--<div class="part3">

@@ -11,7 +11,7 @@ Route::get('pdf/{id}', function($id){
 
 Route::get('solicitud/{id}', function($id){
     $credit = App\Models\Credit::find($id);
-    $pdf = PDF::loadView('credits.solicitud', compact('credit'));
+    $pdf = PDF::loadView('credits.solicitud-2', compact('credit'));
     return $pdf->download('solicitud.pdf');
 });
 

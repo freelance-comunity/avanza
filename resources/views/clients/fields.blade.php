@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="box-body">
-         <div class="row setup-content" id="step-1">
+           <div class="row setup-content" id="step-1">
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('folio', 'Folio:') !!}
                 {!! Form::text('folio', null, [
@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('curp', 'CURP:') !!}
+                    {!! Form::label('curp', 'CURP:') !!} <a id="curp" href="#" >CONSULTA CURP</a>
                     {!! Form::text('curp', null, [
                         'style' => 'text-transform:uppercase',
                         'class' => 'form-control input-lg', 
@@ -151,44 +151,44 @@
                             <div class="gllpLatlonPicker">
                               <label for="exampleInputEmail1">DIRECCIÓN DEL CLIENTE</label>
                               <div class="input-group">
-                                 <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS."  data-parsley-trigger="input focusin">
-                                 <div class="input-group-btn">
-                                   <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
-                               </div>
-                           </div>
-                           <br/><br/>
-                           <div class="gllpMap">Google Maps</div>
-                           <br/>
-                           <input type="hidden" name="latitude" class="gllpLatitude" value="16.753239967660058"/>
-                           <input type="hidden" name="lenght" class="gllpLongitude" value="-93.11789682636714"/>
-                           <input type="hidden" class="gllpZoom" value="12"/>
-                       </div>
-                   </div>
-                   <div class="col-md-6">
+                               <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS."  data-parsley-trigger="input focusin">
+                               <div class="input-group-btn">
+                                 <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+                             </div>
+                         </div>
+                         <br/><br/>
+                         <div class="gllpMap">Google Maps</div>
+                         <br/>
+                         <input type="hidden" name="latitude" class="gllpLatitude" value="16.753239967660058"/>
+                         <input type="hidden" name="lenght" class="gllpLongitude" value="-93.11789682636714"/>
+                         <input type="hidden" class="gllpZoom" value="12"/>
+                     </div>
+                 </div>
+                 <div class="col-md-6">
                     <div class="gllpLatlonPicker">
                       <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
                       <div class="input-group">
-                         <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
-                         <div class="input-group-btn">
-                           <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
-                       </div>
-                   </div>
-                   <br/><br/>
-                   <div class="gllpMap">Google Maps</div>
-                   <br/>
-                   <input type="hidden" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
-                   <input type="hidden" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
-                   <input type="hidden" class="gllpZoom" value="12"/>
-               </div>
-           </div>
+                       <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
+                       <div class="input-group-btn">
+                         <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+                     </div>
+                 </div>
+                 <br/><br/>
+                 <div class="gllpMap">Google Maps</div>
+                 <br/>
+                 <input type="hidden" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
+                 <input type="hidden" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+                 <input type="hidden" class="gllpZoom" value="12"/>
+             </div>
+         </div>
 
 
-           <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
 
-       </div>
+     </div>
 
-       <!-- CLIENTS LOCATION-->
-       <div class="row setup-content" id="step-2">
+     <!-- CLIENTS LOCATION-->
+     <div class="row setup-content" id="step-2">
         <div class="col-xs-12">
             <div class="col-md-12">
                 <h3> Ubicación </h3>
@@ -266,10 +266,10 @@
                 </div>
                 <div class="form-group col-sm-12 col-lg-12">
                     <h3 style="text-align: center;"> 
-                     <span class="label label-danger">Activos</span> 
-                 </h3>                
-             </div>
-             <div class="form-group col-sm-6 col-lg-4">
+                       <span class="label label-danger">Activos</span> 
+                   </h3>                
+               </div>
+               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('inventory', 'Inventario ($):') !!}
                 {!! Form::text('inventory', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DEL INVENTARIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
@@ -295,10 +295,10 @@
             </div>
             <div class="form-group col-sm-12 col-lg-12">
                 <h3 style="text-align: center;"> 
-                 <span class="label label-danger">Pasivos</span> 
-             </h3>                
-         </div>
-         <div class="form-group col-sm-6 col-lg-4">
+                   <span class="label label-danger">Pasivos</span> 
+               </h3>                
+           </div>
+           <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('suppliers', 'Proveedores($):') !!}
             {!! Form::text('suppliers', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
@@ -316,10 +316,10 @@
         </div>
         <div class="form-group col-sm-12 col-lg-12">
             <h3 style="text-align: center;"> 
-             <span class="label label-danger">Ingresos</span> 
-         </h3>                
-     </div>
-     <div class="form-group col-sm-6 col-lg-4">
+               <span class="label label-danger">Ingresos</span> 
+           </h3>                
+       </div>
+       <div class="form-group col-sm-6 col-lg-4">
         {!! Form::label('weekday', 'Entre semana:') !!}
         {!! Form::text('weekday', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
     </div>
@@ -337,10 +337,10 @@
     </div>
     <div class="form-group col-sm-12 col-lg-12">
         <h3 style="text-align: center;"> 
-         <span class="label label-danger">Costos</span> 
-     </h3>                
- </div>
- <div class="form-group col-sm-6 col-lg-4">
+           <span class="label label-danger">Costos</span> 
+       </h3>                
+   </div>
+   <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('rent', 'Renta:') !!}
     {!! Form::text('rent', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 </div>
@@ -445,10 +445,10 @@
                 <h3> Referencias Personales</h3>
                 <div class="form-group col-sm-12 col-lg-12">
                     <h3 style="text-align: center;"> 
-                     <span class="label label-danger">Referencia 1</span> 
-                 </h3>                
-             </div>
-             <div class="form-group col-sm-6 col-lg-4">
+                       <span class="label label-danger">Referencia 1</span> 
+                   </h3>                
+               </div>
+               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('firts_name_reference_1', 'Nombre(s):') !!}
                 {!! Form::text('firts_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
@@ -471,10 +471,10 @@
 
             <div class="form-group col-sm-12 col-lg-12">
                 <h3 style="text-align: center;"> 
-                 <span class="label label-danger">Referencia 2</span> 
-             </h3>                
-         </div>
-         <div class="form-group col-sm-6 col-lg-4">
+                   <span class="label label-danger">Referencia 2</span> 
+               </h3>                
+           </div>
+           <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('firts_name_reference_2', 'Nombre(s):') !!}
             {!! Form::text('firts_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
@@ -594,6 +594,23 @@ function validarI(input) {
     resultados.innerText = "CURP: " + curp + "\nFormato: " + valido;
 }
 </script>
+<script>
+    // usamos onload para asegurarnos que existan los elementos en nuestro DOM
+    window.onload = function() {
+        var anchor = document.getElementById("curp");         
+        
+            // le asociamos el evento a nuestro elemento para tener un codigo 
+            // html mas limpio y manejar toda la interaccion
+            // desde nuestro script
+            anchor.onclick = function() {
+                // una variable donde pongo la url a donde quiera ir, 
+                //podria estar de mas pero asi queda mas limpio la funcion window.open()
+                var url = "https://consultas.curp.gob.mx/CurpSP/";
+                window.open(url, "_blank", 'width=500,height=500'); 
+                // el return falase es para eviar que se progrague el evento y se vaya al href de tu anchor.
+                return false;
+            };
+        }
+    </script>
 
-
-@include('clients.curp')
+    @include('clients.curp')

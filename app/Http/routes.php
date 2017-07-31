@@ -45,6 +45,10 @@ Route::get('test-relationship', function(){
     }
 
 });
+
+Route::get('geolocation', function(){
+    return view('geolocation');
+});
 /*=====  End of Test Routes  ======*/
 
 

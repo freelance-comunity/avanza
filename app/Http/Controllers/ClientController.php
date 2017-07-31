@@ -92,6 +92,8 @@ class ClientController extends AppBaseController
 			Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
 			$input['avatar'] = $filename;
 		}
+		$number = Credit::max('id') + 1;
+		$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;
 		$client = Client::create($input);
 
 

@@ -29,7 +29,6 @@ class Client extends Model
 	];
 
 	public static $rules = [
-		"folio" => "required",
 	    "firts_name" => "required",
 		"last_name" => "required",
 		"mothers_last_name" => "required",

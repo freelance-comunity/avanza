@@ -1,3 +1,23 @@
+<style>
+    #resultado {
+        background-color: red;
+        color: white;
+        font-weight: bold;
+    }
+    #resultado.ok {
+        background-color: green;
+    }
+</style>
+<style>
+    #resultados {
+        background-color: red;
+        color: white;
+        font-weight: bold;
+    }
+    #resultados.ok {
+        background-color: green;
+    }
+</style>
 <div class="box box-danger">
     <div class="box-header with-border">
         <div>
@@ -11,50 +31,60 @@
 
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('firts_name', 'Nombre(s):') !!}
-            {!! Form::text('firts_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            {!! Form::text('firts_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
 
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('last_name', 'Apellido Paterno:') !!}
-            {!! Form::text('last_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            {!! Form::text('last_name',null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
 
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('mothers_last_name', 'Apellido Materno:') !!}
-            {!! Form::text('mothers_last_name', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO MATERNO','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            {!! Form::text('mothers_last_name',null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO MATERNO','required'=>'required', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
 
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('curp', 'Curp:') !!}
-            {!! Form::text('curp', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA CURP','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            {!! Form::text('curp', null, [
+                        'style' => 'text-transform:uppercase',
+                        'class' => 'form-control input-lg', 
+                        'id' => 'curp_input',
+                        'oninput' => 'validarInput(this)',
+                        'placeholder' => 'ESCRIBE CURP', 
+                        'required' => 'required',
+                        'data-parsley-trigger ' => 'input focusin',
+                        'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                        <pre id="resultado"></pre>
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('ine', 'Ine:') !!}
-            {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA INE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA INE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('civil_status', 'Estado Civil:') !!}
-            {!! Form::select('civil_status',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+            {!! Form::select('civil_status',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('scholarship', 'Grado Escolar:') !!}
-            {!! Form::select('scholarship',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+            {!! Form::select('scholarship',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin']) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('phone', 'Teléfono:') !!}
-            {!! Form::text('phone', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();','maxlength' => 10]) !!}
+            {!! Form::text('phone', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();','data-parsley-trigger ' => 'input focusin',
+                        'data-parsley-type' => 'digits', 'data-parsley-maxlength' => '10',]) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('no_economic_dependent', 'No. de Dependientes Economicos') !!}
-            {!! Form::select('no_economic_dependent',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+            {!! Form::select('no_economic_dependent',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'],  null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('no_familys', 'No. Familias') !!}
-            {!! Form::select('no_familys',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+            {!! Form::select('no_familys',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
-            {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'required' => 'required']) !!}
+            {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
         </div>
 
         <input type="hidden" name="avatar" value="{{$client->avatar}}">
@@ -66,7 +96,7 @@
 
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('branch_id', '* Sucursal:') !!}
-            <select name="branch_id" required="required" value="{{ old('branch_id') }}" class="form-control input-lg" ">
+            <select name="branch_id" required="required" data-parsley-trigger="input focusin" value="{{ old('branch_id') }}" class="form-control input-lg" ">
                 @foreach($count as $branches)
                 <option value="{{$branches->id}}" {{ ($branches->id == $client->branch_id) ? 'selected=selected' : '' }}>
                     {{$branches->name}} 
@@ -77,3 +107,68 @@
         </div>    
     </div>
 
+
+<script>
+    //Función para validar una CURP
+    function curpValida(curp) {
+        var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+        validado = curp.match(re);
+
+    if (!validado)  //Coincide con el formato general?
+        return false;
+    
+    //Validar que coincida el dígito verificador
+    function digitoVerificador(curp17) {
+        //Fuente https://consultas.curp.gob.mx/CurpSP/
+        var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
+        lngSuma      = 0.0,
+        lngDigito    = 0.0;
+        for(var i=0; i<17; i++)
+            lngSuma = lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
+        lngDigito = 10 - lngSuma % 10;
+        if (lngDigito == 10) return 0;
+        return lngDigito;
+    }
+
+    if (validado[2] != digitoVerificador(validado[1])) 
+        return false;
+
+    return true; //Validado
+}
+
+
+//Handler para el evento cuando cambia el input
+//Lleva la CURP a mayúsculas para validarlo
+function validarInput(input) {
+    var curp = input.value.toUpperCase(),
+    resultado = document.getElementById("resultado"),
+    valido = "No válido";
+
+    if (curpValida(curp)) { // ⬅️ Acá se comprueba
+        valido = "Válido";
+        resultado.classList.add("ok");
+    } else {
+        resultado.classList.remove("ok");
+    }
+
+    resultado.innerText = "CURP: " + curp + "\nFormato: " + valido;
+}
+
+function validarI(input) {
+    var curp = input.value.toUpperCase(),
+    resultados = document.getElementById("resultados"),
+    valido = "No válido";
+
+    if (curpValida(curp)) { // ⬅️ Acá se comprueba
+        valido = "Válido";
+        resultados.classList.add("ok");
+    } else {
+        resultados.classList.remove("ok");
+    }
+
+    resultados.innerText = "CURP: " + curp + "\nFormato: " + valido;
+}
+</script>
+
+
+@include('clients.curp')

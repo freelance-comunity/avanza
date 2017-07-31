@@ -5,7 +5,7 @@
 
     @include('common.errors')
 
-    {!! Form::model($clientAval, ['route' => ['clientAvals.update', $clientAval->id], 'method' => 'patch']) !!}
+    {!! Form::model($clientAval, ['route' => ['clientAvals.update', $clientAval->id], 'method' => 'patch','data-parsley-validate' => '']) !!}
 
         @include('clientAvals.fields')
 

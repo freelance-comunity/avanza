@@ -51,7 +51,7 @@ Route::get('test-relationship', function(){
 Route::get('/', function () {
     if($user = Auth::user())
     {
-        return view ('home');
+        return view('home');
     }
     if(Auth::guest())
     {

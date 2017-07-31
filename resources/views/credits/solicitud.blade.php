@@ -71,6 +71,7 @@
 			float: ;
 			padding: 15px;
 		}
+		<<<<<<< HEAD
 
 	</style>
 </head>
@@ -283,7 +284,6 @@
 					<td align="center">{{$credit->others}}</td>
 				</tr>
 			</table>
-
 			<label>D. DATOS DEL CONYUGUE Y/O AVAL</label>
 			<table style="width:203%">
 				<tr>
@@ -340,6 +340,7 @@
 					<td align="center">{{$credit->firts_name_reference}} {{$credit->last_name_reference}} {{$credit->mothers_last_name_reference}} | {{$credit->phone_reference}}</td>
 				</tr>
 			</table>
+			
 			<label>E. AUTORIZACION PARA CONSULTA DE SIC</label>
 			<p  style="width: 200%">Autorizo expresamente a CrediEfectivo, para que por conducto de sus servidores públicos facultados lleve a cabo sus investigaciones sobre mi comportamiento crediticio con las Sociedades de Información Crediticia. </p>
 			<p style="width: 200%">Asimismo, declaro que conozco la naturaleza y alcance de la información que se solicitará, del uso que la Financiera hará de tal información y de que ésta podrá realizar consultas periódicas de mi historial crediticio, consintiendo que esta autorización se encuentre vigente por los siguientes tres años contados a partir de su expedición y en todo caso durante el tiempo que se mantenga 	la relación jurídica entre ambas.</p>
@@ -355,10 +356,10 @@
 					<th align="center">SUCURSAL/PTO VTA:{{$credit->branch}} </th>
 				</tr>
 			</table>
-
-
-
 		</div>
+
+
+
 
 
 	</body>

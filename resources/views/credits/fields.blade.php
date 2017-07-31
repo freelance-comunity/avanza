@@ -164,7 +164,7 @@
                               <div class="form-group col-sm-12 col-lg-12">
                                 <div id="signature-pad" class="m-signature-pad">
                                   <div class="m-signature-pad--body">
-                                  <canvas style="border: 1px solid black;"></canvas>
+                                  <canvas style="border: 1px solid black; height: 200px;"></canvas>
                                   </div>
                                   <div class="m-signature-pad--footer">
                                     <button type="button" class="button clear" data-action="clear">Limpiar</button>

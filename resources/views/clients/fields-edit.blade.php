@@ -55,7 +55,7 @@
                         'required' => 'required',
                         'data-parsley-trigger ' => 'input focusin',
                         'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                        <pre id="resultado"></pre>
+                     
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('ine', 'Ine:') !!}

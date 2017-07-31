@@ -180,5 +180,14 @@
           -webkit-box-shadow: none;
           box-shadow: none;
         }
+        canvas {
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 4px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.02) inset;
+        }
+
       </style>
     </head>

@@ -147,8 +147,8 @@
                           <br/><br/>
                           <div class="gllpMap">Google Maps</div>
                           <br/>
-                          <input type="hidden" name="latitude" id="lat" class="gllpLatitude" value="16.753239967660058"/>
-                          <input type="hidden" name="lenght" id="lon" class="gllpLongitude" value="-93.11789682636714"/>
+                          <input type="text" name="latitude" id="lat" class="gllpLatitude" value="16.753239967660058"/>
+                          <input type="text" name="lenght" id="lon" class="gllpLongitude" value="-93.11789682636714"/>
                           <input type="hidden" class="gllpZoom" value="15"/>
                           <input type="button" id="update" class="gllpUpdateButton" style="display: none;" value="Actualizar">
                           <br/>
@@ -161,8 +161,8 @@
                       <br/><br/>
                       <div class="gllpMap">Google Maps</div>
                       <br/>
-                      <input type="hidden" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
-                      <input type="hidden" id="lon_bussines" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+                      <input type="text" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
+                      <input type="text" id="lon_bussines" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
                       <input type="hidden" class="gllpZoom" value="15"/>
                       <input type="button" id="update_bussines" class="gllpUpdateButton" style="display: none;" value="Actualizar">
                   </div>

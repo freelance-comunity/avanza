@@ -65,27 +65,29 @@
 		p.ex1 {
 			margin-bottom: 10cm;
 		}
-		img {
-			max-width: 50%;
-			height: auto;
-			display: inline;
-			margin: auto;
-
-		}
+		
 		.part3{
 			width: 100%;
+			float: ;
+			padding: 15px;
 		}
+
 	</style>
 </head>
 <body>
 	<header class="clearfix">
 		<div id="logo">
-			<img src="{{asset('img/logo.jpg')}}">
+			<img style="max-width: 40%;
+			height: auto;
+			display: inline;
+			margin: auto;" src="{{asset('img/logo.jpg')}}">
 		</div>
+
+
 		<p  style="float: right;">FOLIO: <span>{{$credit->folio}}</span></p>
 	</header><br>
-	<br><br><br>
-
+	<br>
+	<br>
 	<div class="part1">
 		<label>A. DATOS DEL CRÉDITO</label>
 		<table style="width:203%">
@@ -205,7 +207,7 @@
 			<tr>
 				<th align="center">TELÉFONO</th>
 				<th align="center">NOMBRE DEL NEGOCIO</th>
-				
+
 			</tr>
 			<tr>
 				<td align="center">{{$credit->phone_company}}</td>
@@ -257,7 +259,7 @@
 			<tr>
 				<td align="center">IMMUEBLE($)</td>
 				<td align="center">{{$credit->property}}</td>
-				<td align="center">ESPECIFICA</td>
+				<td align="center">ESPECIFICA:</td>
 				<td align="center" rowspan="3">{{$credit->specify}}</td>
 				<td align="center">OTROS INGRESOS($)</td>
 				<td align="center">{{$credit->other_income}}</td>
@@ -268,7 +270,7 @@
 					<td align="center"></td>
 					<td align="center"></td>
 					<td align="center"></td>
-					
+
 					<th align="center">OTROS</th>
 				</tr>
 				<tr>
@@ -277,7 +279,7 @@
 					<td align="center"></td>
 					<td align="center"></td>
 					<td align="center"></td>
-					
+
 					<td align="center">{{$credit->others}}</td>
 				</tr>
 			</table>
@@ -331,7 +333,7 @@
 				<tr>
 					<th align="center">REFERENCIA 1</th>
 					<td align="center">{{$credit->firts_name_reference}} {{$credit->last_name_reference}} {{$credit->mothers_last_name_reference}} | {{$credit->phone_reference}}</td>
-					
+
 				</tr>
 				<tr>
 					<th align="center">REFERENCIA 2</th>
@@ -341,111 +343,23 @@
 			<label>E. AUTORIZACION PARA CONSULTA DE SIC</label>
 			<p  style="width: 200%">Autorizo expresamente a CrediEfectivo, para que por conducto de sus servidores públicos facultados lleve a cabo sus investigaciones sobre mi comportamiento crediticio con las Sociedades de Información Crediticia. </p>
 			<p style="width: 200%">Asimismo, declaro que conozco la naturaleza y alcance de la información que se solicitará, del uso que la Financiera hará de tal información y de que ésta podrá realizar consultas periódicas de mi historial crediticio, consintiendo que esta autorización se encuentre vigente por los siguientes tres años contados a partir de su expedición y en todo caso durante el tiempo que se mantenga 	la relación jurídica entre ambas.</p>
-			<p style="width: 200%">Estoy de acuerdo y acepto que este documento quede bajo propiedad de la Financiera y/o de la Sociedad de Información Crediticia consultada para efectos de control y cumplimiento del artículo 28 de la Ley para Regular las Sociedades de Información Crediticia.</p>
-			<br>
-			<h4 style="text-align:center;width: 200%">{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</h4>
+			<p style="width: 200%">Estoy de acuerdo y acepto que este documento quede bajo propiedad de la Financiera y/o de la Sociedad de Información Crediticia consultada para efectos de control y cumplimiento del artículo 28 de la Ley para Regular las Sociedades de Información Crediticia.</p>					
 
+			<h6 style="text-align: center; width:200%"><img  class="displayed" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" style="height: 45px; max-width: 50%;"><br>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}
+			</h6>
 
-			
 		</div>
-
-
-
-
-
-
 		<div class="part2">
 			<table style="width:50%; float:right;">
 				<tr>
 					<th align="center">SUCURSAL/PTO VTA:{{$credit->branch}} </th>
 				</tr>
-			</table><br>
-
-
-			
-			<br><br>
+			</table>
 
 
 
-			<br>
-			<br>
-
-			<br><br>
-
-			<br><br>	
-			<br><br><br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<!--<table style="width: 100%">
-				<tr>
-					
-				</tr>
-				<tr>
+		</div>
 
 
-				</tr>
-				<tr>
-					
-				</tr>
-				<tr>
-					
-				</tr>
-				<tr>
-					
-					<tr>
-						
-					</tr>
-					<tr>
-						
-					</tr>
-				</table>-->
-				
-
-			</div>
-			<div class="part3" align="center">
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br><br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br><br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br><br>
-				<img align="center" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" alt="">
-			</div>
-
-
-</body>
-</html>
+	</body>
+	</html>

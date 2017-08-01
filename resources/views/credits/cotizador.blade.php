@@ -41,19 +41,20 @@
   </div>
 </div>
 
-  <script>
-          function calcular()
-          {
-            monto = eval(document.getElementById('monto').value);
-            interés = eval(document.getElementById('interés').value);
-            utilidad = monto * interés;
+<script>
+  function calcular()
+  {
+    monto = eval(document.getElementById('monto').value);
+    interés = eval(document.getElementById('interés').value);
+    utilidad = monto * interés;
 
-            document.getElementById('utilidad_bruta').value=utilidad;
-            modalidad = eval(document.getElementById('modalidad').value);
+    document.getElementById('utilidad_bruta').value=utilidad;
+    modalidad = eval(document.getElementById('modalidad').value);
 
-            utilidad_neta = monto + utilidad;
-            total= utilidad_neta/modalidad;
+    utilidad_neta = monto + utilidad;
+    total= utilidad_neta/modalidad;
 
-            document.getElementById('utilidad_neta_mensual').value=Math.ceil(total);
-          }
-        </script>
+    document.getElementById('utilidad_neta_mensual').value=Math.ceil(total);
+  }
+</script>
+

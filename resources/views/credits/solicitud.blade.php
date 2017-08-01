@@ -314,7 +314,7 @@
 			<table style="width:203%">
 				<tr>
 					<th align="center">CALLE</th>
-					<th align="center">NÚMERO CELULAR</th>
+					<th align="center">NÚMERO DE CASA</th>
 					<th align="center">COLONIA</th>
 					<th align="center">MUNICIPIO</th>
 					<th align="center">ESTADO</th>

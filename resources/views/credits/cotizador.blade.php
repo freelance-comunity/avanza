@@ -17,7 +17,7 @@
 
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('interes', 'Tasa Mensual:') !!}
-          {!! Form::select('interes',['0.15'=> '15%', '0.60' =>'60%'],null, ['class' => 'form-control', 'id' => 'interés', 'value' => '15', 'onkeyup' => 'calcular()']) !!}
+          {!! Form::select('interes',['0.15'=> '15%', '0.60' =>'60%'],null, ['class' => 'form-control', 'id' => 'interés', 'value' => '15', 'onchange' => 'calcular()']) !!}
         </div>
 
 
@@ -28,7 +28,7 @@
 
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('Modalidad', 'Modalidad:') !!}         
-          {!! Form::select('Modalidad',['30'=>'Mensual', '1'=>'Semanal'] ,null, ['class' => 'form-control', 'id' => 'modalidad']) !!}
+          {!! Form::select('Modalidad',['30'=>'Diario', '1'=>'Semanal'] ,null, ['class' => 'form-control', 'id' => 'modalidad', 'onchange' => 'calcular()']) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('montly_net_income', 'TOTAL:') !!}  
@@ -41,19 +41,19 @@
   </div>
 </div>
 
-  <script>
-          function calcular()
-          {
-            monto = eval(document.getElementById('monto').value);
-            interés = eval(document.getElementById('interés').value);
-            utilidad = monto * interés;
+<script>
+  function calcular()
+  {
+    monto = eval(document.getElementById('monto').value);
+    interés = eval(document.getElementById('interés').value);
+    utilidad = monto * interés;
 
-            document.getElementById('utilidad_bruta').value=utilidad;
-            modalidad = eval(document.getElementById('modalidad').value);
+    document.getElementById('utilidad_bruta').value=utilidad;
+    modalidad = eval(document.getElementById('modalidad').value);
 
-            utilidad_neta = monto + utilidad;
-            total= utilidad_neta/modalidad;
+    utilidad_neta = monto + utilidad;
+    total= utilidad_neta/modalidad;
 
-            document.getElementById('utilidad_neta_mensual').value=Math.ceil(total);
-          }
-        </script>
+    document.getElementById('utilidad_neta_mensual').value=Math.ceil(total);
+  }
+</script>

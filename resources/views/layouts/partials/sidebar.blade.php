@@ -28,13 +28,14 @@
             </div>
         </form>-->
         <!-- /.search form -->
-
+   
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">Menú</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
-            <li><a href="#"><i class='fa fa-calculator'></i> <span>Cotizador</span></a></li>
+             @include('credits.cotizador')
+            <li><a><i class="fa fa-calculator" data-toggle="modal" data-target="#cotizador"></i><span>Cotizador</span></a></li>
             <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
             <li><a href="{{ url('credits') }}"><i class="fa fa-users"></i> <span>Créditos</span></a></li>
             <li class="treeview">

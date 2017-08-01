@@ -93,7 +93,7 @@ class ClientController extends AppBaseController
 			$input['avatar'] = $filename;
 		}
 		$number = Credit::max('id') + 1;
-		$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;
+		$input['folio'] = $request->input('state').$request->input('branch_id').'00'.$number;
 		$client = Client::create($input);
 
 

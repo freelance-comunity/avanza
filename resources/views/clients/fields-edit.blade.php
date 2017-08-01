@@ -1,20 +1,10 @@
 <style>
-    #resultado {
+    #resultadoedit {
         background-color: red;
         color: white;
         font-weight: bold;
     }
-    #resultado.ok {
-        background-color: green;
-    }
-</style>
-<style>
-    #resultados {
-        background-color: red;
-        color: white;
-        font-weight: bold;
-    }
-    #resultados.ok {
+    #resultadoedit.ok {
         background-color: green;
     }
 </style>
@@ -50,12 +40,12 @@
                         'style' => 'text-transform:uppercase',
                         'class' => 'form-control input-lg', 
                         'id' => 'curp_input',
-                        'oninput' => 'validarInput(this)',
+                        'oninput' => 'validarE(this)',
                         'placeholder' => 'ESCRIBE CURP', 
                         'required' => 'required',
                         'data-parsley-trigger ' => 'input focusin',
                         'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                     
+                     <pre id="resultadoedit"></pre>
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('ine', 'Ine:') !!}
@@ -139,19 +129,19 @@
 
 //Handler para el evento cuando cambia el input
 //Lleva la CURP a mayúsculas para validarlo
-function validarInput(input) {
+function validarE(input) {
     var curp = input.value.toUpperCase(),
-    resultado = document.getElementById("resultado"),
+    resultadoedit = document.getElementById("resultadoedit"),
     valido = "No válido";
 
     if (curpValida(curp)) { // ⬅️ Acá se comprueba
         valido = "Válido";
-        resultado.classList.add("ok");
+        resultadoedit.classList.add("ok");
     } else {
-        resultado.classList.remove("ok");
+        resultadoedit.classList.remove("ok");
     }
 
-    resultado.innerText = "CURP: " + curp + "\nFormato: " + valido;
+    resultadoedit.innerText = "CURP: " + curp + "\nFormato: " + valido;
 }
 
 function validarI(input) {

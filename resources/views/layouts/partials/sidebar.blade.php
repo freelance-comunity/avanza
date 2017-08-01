@@ -80,29 +80,17 @@
         <div class="modal-body">
 
             {!! Form::label('capital', 'Capital:') !!}
-            {!! Form::text('capital', null, ['class' => 'form-control', 'id' => 'capital', 'value' => '0', 'onkeyup' => 'calcular()']) !!}
-
-
-
+            {!! Form::text('capital', null, ['class' => 'form-control input-lg', 'id' => 'capital', 'value' => '0', 'onkeyup' => 'calcular()']) !!}
 
             {!! Form::label('tasa', 'Tasa:') !!}
-            {!! Form::select('tasa',['0.15'=> '15%', '0.60' =>'60%'],null, ['class' => 'form-control', 'id' => 'tasa', 'value' => '15', 'onchange' => 'calcular()']) !!}
-
-
-
-
+            {!! Form::select('tasa',['0.15'=> '15%', '0.60' =>'60%'],null, ['class' => 'form-control input-lg', 'id' => 'tasa', 'value' => '15', 'onchange' => 'calcular()']) !!}
             {!! Form::label('interes', 'Interés:') !!}
-            {!! Form::text('interes', null, ['class' => 'form-control', 'id' => 'interes', 'readonly' => 'readonly']) !!}
-
-
+            {!! Form::text('interes', null, ['class' => 'form-control input-lg', 'id' => 'interes', 'readonly' => 'readonly']) !!}
 
             {!! Form::label('modalidad', 'Modalidad:') !!}         
-            {!! Form::select('modalidad',['30'=>'Diario', '1'=>'Semanal'] ,null, ['class' => 'form-control', 'id' => 'modalidad', 'onchange' => 'calcular()']) !!}
-
-
+            {!! Form::select('modalidad',['30'=>'Diario', '1'=>'Semanal'] ,null, ['class' => 'form-control input-lg', 'id' => 'modalidad', 'onchange' => 'calcular()']) !!}
             {!! Form::label('total', 'TOTAL:') !!}  
-            {!! Form::text('total', null, ['class' => 'form-control', 'id' => 'totaln', 'readonly' => 'readonly']) !!}   
-
+            {!! Form::text('total', null, ['class' => 'form-control input-lg', 'id' => 'totaln', 'readonly' => 'readonly']) !!}  
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>

@@ -59,6 +59,7 @@
                 <ul class="treeview-menu">
                    <li><a href="{{ url('branches') }}">Sucursales</a></li>
                    <li><a href="{{ url('roles') }}">Roles</a></li>
+                   <li><a href="{{ url('permissions') }}">Permisos</a></li>
                    <li><a href="{{ url('employees') }}">Personal</a></li>
                    <li><a href="{{ url('products') }}">Productos</a></li>
                </ul>

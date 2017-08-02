@@ -226,6 +226,7 @@ Route::get('creditsClient/{id}/{product}',[
 
 
 
+
 Route::get('solicitud/{id}', function($id){
     $credit = App\Models\Credit::find($id);
     $pdf = PDF::loadView('credits.solicitud', compact('credit'));
@@ -276,3 +277,11 @@ $credits = App\Models\Credit::first();
  echo  $credits->date->format('l d,F Y');
 
 });
+
+Route::resource('permissions', 'PermissionController');
+
+Route::get('permissions/{id}/delete', [
+    'as' => 'permissions.delete',
+    'uses' => 'PermissionController@destroy',
+]);
+

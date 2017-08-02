@@ -229,3 +229,11 @@ Route::get('creditsClient/{id}/{product}',[
     'uses' => 'ClientController@creditsClient',
     ]);
 
+
+
+Route::resource('permissions', 'PermissionController');
+
+Route::get('permissions/{id}/delete', [
+    'as' => 'permissions.delete',
+    'uses' => 'PermissionController@destroy',
+]);

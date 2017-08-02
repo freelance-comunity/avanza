@@ -48,7 +48,8 @@
             'readonly'=>'readonly',
             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
           </div>
-          <div class="form-group col-sm-6 col-lg-4">
+          @if ($product->name == 'DIARIO')
+             <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('dues', 'No. Cuotas:') !!}
             {!! Form::select('dues', ['25'=>'25','30'=>'30'],null, [
               'style' => 'text-transform:uppercase',
@@ -57,6 +58,18 @@
               'data-parsley-trigger ' => 'input focusin',
               'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
+          @else
+           <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('dues', 'No. Cuotas:') !!}
+            {!! Form::select('dues', ['1'=>'1'],null, [
+              'style' => 'text-transform:uppercase',
+              'class' => 'form-control input-lg', 
+              'required'=>'required',
+              'data-parsley-trigger ' => 'input focusin',
+              'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+          @endif
+         
 
             <div class="form-group col-sm-6 col-lg-4">
               {!! Form::label('periodicity', 'Periodicidad:') !!}

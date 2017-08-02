@@ -20,10 +20,15 @@ use Flash;
 use Schema;
 use Toastr;
 use Image;
+use App\Traits\DatesTranslator;
 
 class ClientController extends AppBaseController
 {
-
+	use  DatesTranslator;
+	public function getSubmitedAtAttribute($created_at)
+	{
+		return new Date($created_at);
+	}
 	/**
 	 * Display a listing of the Post.
 	 *

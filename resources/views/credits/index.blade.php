@@ -51,6 +51,8 @@
 							<!--<a href="{!! route('credits.edit', [$credit->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
 							<a href="{!! route('credits.delete', [$credit->id]) !!}" onclick="return confirm('Are you sure wants to delete this Credit?')"><i class="glyphicon glyphicon-remove"></i></a>-->
 							<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa fa-file-pdf-o fa-2x"></i></a>
+							<a href="{{ url('archive') }}/{{ $credit->id }}"><i class="fa fa-archive fa-2x"></i></a>					
+							
 						</td>
 					</tr>
 					@endforeach

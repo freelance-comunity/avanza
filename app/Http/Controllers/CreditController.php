@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateCreditRequest;
 use App\Models\Credit;
 use App\Models\Client;
+use App\Models\Debt;
+use App\Models\Payment;
 use App\Models\ClientLocation;
 use App\Models\ClientReferences;
 use Illuminate\Http\Request;
@@ -12,6 +14,10 @@ use Response;
 use Flash;
 use Schema;
 use Toastr;
+use Carbon\Carbon;
+use Auth;
+
+
 
 class CreditController extends AppBaseController
 {
@@ -158,6 +164,76 @@ class CreditController extends AppBaseController
 
 
 		$credit = Credit::create($input);
+		
+		$ammount= $credit->ammount;
+		$tasa = $credit->interest_rate;
+		$dues = $credit->dues;
+		$periodicity = $credit->periodicity;
+
+		$interes = $ammount*$tasa;
+		$capital = $ammount/$dues;
+		$total = $ammount + $interes;
+		$pago = $total/$dues;
+		$intpago = $pago-$capital;
+		$date = new Carbon($credit->date);
+		if ($periodicity == 'DIARIO') {
+			$debt = new Debt;
+				$debt->ammount = $credit->ammount;
+				$debt->status = "Pendiente";
+				$debt->credits_id = $credit->id;
+				$debt->save();
+
+
+				for ($i=1; $i <= $credit->dues; $i++) { 
+					$var = $date->addDay();
+
+					$fechaPago[$i] = $date->toDateString();
+					$payment = new Payment;
+					$payment->number = $i;
+					$payment->day = $date;
+					$payment->date =$fechaPago[$i];
+					$payment->ammount = ceil($pago);
+					$payment->capital = ceil($capital);
+					$payment->interest= $intpago;
+					$payment->moratorium = '0';
+					$payment->total = ceil($pago) + 0; 
+					$payment->status = "Pendiente";
+					$payment->debt_id = $debt->id;
+					$payment->user_id = Auth::User()->id;
+					$payment->branch_id = Auth::User()->branch_id;
+					$payment->save();
+
+				}
+		}
+		if ($periodicity == 'SEMANAL') {
+			$debt = new Debt;
+				$debt->ammount = $credit->ammount;
+				$debt->status = "Pendiente";
+				$debt->credits_id = $credit->id;
+				$debt->save();
+
+
+				for ($i=1; $i <= $credit->dues; $i++) { 
+					$var = $date->addWeek();
+
+					$fechaPago[$i] = $date->toDateString();
+					$payment = new Payment;
+					$payment->number = $i;
+					$payment->day = $date;
+					$payment->date =$fechaPago[$i];
+					$payment->ammount = ceil($pago);
+					$payment->capital = ceil($capital);
+					$payment->interest= $intpago;
+					$payment->moratorium = '0';
+					$payment->total = ceil($pago) + 0; 
+					$payment->status = "Pendiente";
+					$payment->debt_id = $debt->id;
+					$payment->user_id = Auth::User()->id;
+					$payment->branch_id = Auth::User()->branch_id;
+					$payment->save();
+
+				}
+		}
 		Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 		return redirect(route('credits.index'));
 	}

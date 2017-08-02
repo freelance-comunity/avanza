@@ -9,11 +9,6 @@ Route::get('pdf/{id}', function($id){
     return $pdf->download('documents.pdf');
 });
 
-Route::get('solicitud/{id}', function($id){
-    $credit = App\Models\Credit::find($id);
-    $pdf = PDF::loadView('credits.solicitud', compact('credit'));
-    return $pdf->download('solicitud.pdf');
-});
 
 Route::get('signature', function(){
     return view('signature');
@@ -229,3 +224,55 @@ Route::get('creditsClient/{id}/{product}',[
     'uses' => 'ClientController@creditsClient',
     ]);
 
+
+
+Route::get('solicitud/{id}', function($id){
+    $credit = App\Models\Credit::find($id);
+    $pdf = PDF::loadView('credits.solicitud', compact('credit'));
+    return $pdf->download('solicitud.pdf');
+});
+
+Route::get('archive/{id}', function($id){
+    $credit = App\Models\Credit::find($id);
+   return view('credits.archive')
+   ->with('credit',$credit);
+});
+
+Route::resource('debts', 'DebtController');
+
+Route::get('debts/{id}/delete', [
+    'as' => 'debts.delete',
+    'uses' => 'DebtController@destroy',
+]);
+
+
+Route::resource('payments', 'PaymentController');
+
+Route::get('payments/{id}/delete', [
+    'as' => 'payments.delete',
+    'uses' => 'PaymentController@destroy',
+]);
+
+Route::get('carbon',function(){
+
+/*$date = \Carbon\Carbon::now()->format('l')->diffForHumans();
+echo $date;*/
+echo $date = \Carbon\Carbon::now()->diffForHumans();
+echo "<br>";
+
+$payment = App\Models\Payment::first();
+ echo $payment->created_at->format('l d,F Y');
+ echo "<br>";
+ echo $payment->updated_at->format('l d,F Y');
+ echo "<br>";
+ echo $payment->day->format('l d,F Y');
+echo "<br>";
+
+$credits = App\Models\Credit::first();
+ echo $credits->created_at->format('l d,F Y');
+ echo "<br>";
+ echo $credits->updated_at->format('l d,F Y');
+ echo "<br>";
+ echo  $credits->date->format('l d,F Y');
+
+});

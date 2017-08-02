@@ -178,6 +178,9 @@ return [
 
         /* DOMPDF */
         Barryvdh\DomPDF\ServiceProvider::class,
+
+        /*carbon español*/
+        Jenssegers\Date\DateServiceProvider::class,
         
         
 
@@ -251,6 +254,8 @@ return [
     /* DOMPDF */
     'PDF' => Barryvdh\DomPDF\Facade::class,
     
+    /*carbon español*/
+    'Date' => Jenssegers\Date\Date::class,
     
 
     ],

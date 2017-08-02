@@ -2,8 +2,11 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Traits\DatesTranslator;	
+
 class Credit extends Model
 {
+	 use DatesTranslator;
     
 	public $table = "credits";
 

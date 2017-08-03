@@ -5,7 +5,7 @@
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'permissions.store']) !!}
+    {!! Form::open(['route' => 'permissions.store', 'data-parsley-validate' => '']) !!}
 
         @include('permissions.fields')
 

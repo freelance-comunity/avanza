@@ -7,13 +7,15 @@ class Permission extends EntrustPermission
  protected $fillable = [
  'name',
  'display_name',
- 'description'
+ 'description',
+ 'code',
  ];
 
  public static $rules = [
  "name" => "required",
  "display_name" => "required",
- "description" => "required"
+ "description" => "required",
+ "code"        => "required",
  ];
  
    //establecemos las relacion de muchos a muchos con el modelo Role, ya que un permiso

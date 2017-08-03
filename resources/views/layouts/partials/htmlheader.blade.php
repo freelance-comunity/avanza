@@ -47,6 +47,9 @@
 
         {{-- Parsley JS --}}
         <link rel="stylesheet" href="{{ asset('/css/parsley.css') }}">
+
+        {{-- Check Toggle --}}
+        <link rel="stylesheet" href="{{ asset('/css/check-toggle.css') }}">
       </head>
 
       {{-- Form Wizard --}}

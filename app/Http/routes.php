@@ -61,7 +61,9 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-
+/*=============================================
+=            Routes for Roles            =
+=============================================*/
 Route::resource('roles', 'RoleController');
 
 Route::get('roles/{id}/delete', [
@@ -69,6 +71,22 @@ Route::get('roles/{id}/delete', [
     'uses' => 'RoleController@destroy',
     ]);
 
+Route::get('permission-to-role/{id}', 'PermissionController@permissions');
+
+Route::Post ('/asignamment', 'PermissionController@addPermission');
+
+Route::Post ('/permissionEdit', 'PermissionController@permissionEdit');
+
+Route::get('/deletepermission/{role}/{permission}', function($role, $permission){
+  $users = App\User::all();
+  $role_quit = App\Role::find($role);
+  $permission = App\Permission::find($permission);
+  $role_quit->permissions()->detach($permission);
+  Toastr::info('Permiso eliminado exitosamente.', 'ROLES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+  return redirect(route('roles.index'));
+});
+/*=====  End of Routes for Roles  ======*/
 
 Route::resource('branches', 'BranchController');
 
@@ -234,6 +252,7 @@ Route::get('solicitud/{id}', function($id){
 });
 
 
+
 Route::resource('debts', 'DebtController');
 
 Route::get('debts/{id}/delete', [
@@ -279,5 +298,3 @@ Route::get('permissions/{id}/delete', [
     'as' => 'permissions.delete',
     'uses' => 'PermissionController@destroy',
     ]);
-
-

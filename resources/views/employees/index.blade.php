@@ -43,7 +43,7 @@
                         <td>{!! $employee->father_last_name !!}</td>
                         <td>{!! $employee->mother_last_name !!}</td>
                         <td>{!! $employee->email !!}</td>
-                        <td>{!! $employee->birthdate !!}</td>
+                        <td>{!! $employee->birthdate->format('l d,F Y') !!}</td>
                         <td>{!! $employee->phone_1 !!}</td>
                         <td>{!! $employee->phone_2 !!}</td>
                         <td><img src="{{ asset('/uploads/avatars') }}/{!! $employee->avatar !!}" style="width: 50px; height: 50px;"></td>

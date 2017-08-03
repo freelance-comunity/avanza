@@ -31,10 +31,54 @@
       			"language": {
       				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
       			}
-      		} );
-      	});
+
+          } );
+        });
+      </script>
+       <script>
+        $(document).ready(function() {
+          $('#payments').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            }
+             searching: false
+          } );
+        });
       </script>
       <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+      <script>
+         var changeDateFormat = $('#date').each(function(i,e) {
+          var dateTD = $(this).find('td:eq(4)');
+          var date = dateTD.text().trim();
+          var parts = date.split('/');
+          dateTD.text(parts[0]+'/'+parts[2]+'/'+parts[1]);
+        });
+
+         $.when(changeDateFormat).done(function() {
+          processDates(); 
+        })
+         /* THIS IS ONLY FOR EXAMPLE TO CHANGE THE DATE FORMAT */
+
+
+         function processDates() {
+          var process = $('#date').each(function(i,e) {
+            var dateTD = $(this).find('td:eq(4)');
+            var date = dateTD.text().trim();
+            var parts = date.split('/');
+            dateTD.prepend('<span>'+parts[0]+parts[2]+parts[1]+'</span>');
+          });
+
+          $.when(process).done(function() {
+            $('#payments').DataTable({ 
+               "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+              "order": [[ 4, "desc" ]] });
+
+          })
+        }
+      </script>
 
       {{-- Form Wizard Validation --}}
 
@@ -79,7 +123,7 @@
           if (isValid)
             nextStepWizard.removeAttr('disabled').trigger('click');
         });
-        
+
         $('div.setup-panel div a.btn-primary').trigger('click');
       });
     </script>

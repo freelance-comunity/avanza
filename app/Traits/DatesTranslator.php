@@ -22,5 +22,9 @@ trait DatesTranslator
 	{
 		return new Date($date);
 	}
+	public function getBirthdateAttribute($birthdate)
+	{
+		return new Date($birthdate);
+	}
 }
 

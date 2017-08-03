@@ -18,8 +18,8 @@ class CreateDebtsTable extends Migration
 			$table->increments('id');
 			$table->string('ammount');
 			$table->string('status');
-			$table->integer('credits_id')->unsigned();
-			$table->foreign('credits_id')->references('id')->on('credits')->onDelete('cascade');
+			$table->integer('credit_id')->unsigned();
+			$table->foreign('credit_id')->references('id')->on('credits')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

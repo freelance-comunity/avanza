@@ -119,4 +119,8 @@ class Credit extends Model
     {
         return $this->belongsTo('App\Models\Client');
     }
+    public function debt()
+	{
+		return $this->hasOne('App\Models\Debt');
+	}
 }

@@ -180,7 +180,7 @@ class CreditController extends AppBaseController
 			$debt = new Debt;
 				$debt->ammount = $credit->ammount;
 				$debt->status = "Pendiente";
-				$debt->credits_id = $credit->id;
+				$debt->credit_id = $credit->id;
 				$debt->save();
 
 
@@ -190,7 +190,7 @@ class CreditController extends AppBaseController
 					$fechaPago[$i] = $date->toDateString();
 					$payment = new Payment;
 					$payment->number = $i;
-					$payment->day = $date;
+					$payment->day = $fechaPago[$i];
 					$payment->date =$fechaPago[$i];
 					$payment->ammount = ceil($pago);
 					$payment->capital = ceil($capital);
@@ -209,7 +209,7 @@ class CreditController extends AppBaseController
 			$debt = new Debt;
 				$debt->ammount = $credit->ammount;
 				$debt->status = "Pendiente";
-				$debt->credits_id = $credit->id;
+				$debt->credit_id = $credit->id;
 				$debt->save();
 
 

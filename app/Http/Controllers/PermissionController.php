@@ -3,11 +3,14 @@
 use App\Http\Requests;
 use App\Http\Requests\CreatePermissionRequest;
 use App\Permission;
+use App\Role;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
+use Illuminate\Support\Str;
 
 class PermissionController extends AppBaseController
 {
@@ -22,24 +25,24 @@ class PermissionController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Permission::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $permissions = $query->get();
+		$permissions = $query->get();
 
-        return view('permissions.index')
-            ->with('permissions', $permissions)
-            ->with('attributes', $attributes);
+		return view('permissions.index')
+		->with('permissions', $permissions)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -61,11 +64,13 @@ class PermissionController extends AppBaseController
 	 */
 	public function store(CreatePermissionRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
+		$name = Str::lower($request->input('name'));
+		$input['name'] = str_slug($name);
 
 		$permission = Permission::create($input);
 
-		Flash::message('Permission saved successfully.');
+		Toastr::success('Permiso creado exitosamente.', 'PERMISOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('permissions.index'));
 	}
@@ -131,7 +136,7 @@ class PermissionController extends AppBaseController
 		$permission->fill($request->all());
 		$permission->save();
 
-		Flash::message('Permission updated successfully.');
+		Toastr::info('Permiso editado exitosamente.', 'PERMISOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('permissions.index'));
 	}
@@ -156,8 +161,52 @@ class PermissionController extends AppBaseController
 
 		$permission->delete();
 
-		Flash::message('Permission deleted successfully.');
+		Toastr::success('Permiso eliminado exitosamente.', 'PERMISOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('permissions.index'));
+	}
+
+	public function permissions($id)
+	{	
+		$role = Role::find($id);
+		$permissions = Permission::all();
+		$permissions_role = $role->permissions;
+		$collection = $permissions;
+		$diff = $collection->diff($permissions_role);
+		$diff->all();
+
+		return view('roles.permission-to-role')
+		->with('permissions', $diff)
+		->with('role', $role);
+	}
+
+	public function addPermission(Request $request)
+	{	
+		$id_role = $request->input('rol_id');
+		$input = $request->all();
+		
+		foreach ($input['rows'] as $row) {
+			$role = Role::find($id_role);
+			$id_permission = $row['id'];
+			$permission = Permission::find($id_permission);
+			$assigmment = $role->attachPermission($permission);
+		}
+		Toastr::success('Permisos asignados correctamente.', 'PERMISOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		return redirect(route('roles.index'));	
+	}
+
+	public function permissionEdit(Request $request)
+	{
+		$id_role = $request->input('rol_id');
+		$input = $request->all();
+		
+		foreach ($input['rows'] as $row) {
+			$role = Role::find($id_role);	
+			$id_permission = $row['id'];
+			$permission = Permission::find($id_permission);
+			$revoke_permission = $role->permissions()->detach($permission);
+		}
+		Alert::success('Se eliminaron lor permisos al Rol.');
+		return redirect(route('roles.index'));
 	}
 }

@@ -19,12 +19,7 @@ class BranchController extends AppBaseController
 	 * @param Request $request
 	 *
 	 * @return Response
-	 */
-	public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
+	 */    
 	public function index(Request $request)
 	{
 		$query = Branch::query();

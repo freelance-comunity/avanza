@@ -61,7 +61,9 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-
+/*=============================================
+=            Routes for Roles            =
+=============================================*/
 Route::resource('roles', 'RoleController');
 
 Route::get('roles/{id}/delete', [
@@ -69,6 +71,22 @@ Route::get('roles/{id}/delete', [
     'uses' => 'RoleController@destroy',
     ]);
 
+Route::get('permission-to-role/{id}', 'PermissionController@permissions');
+
+Route::Post ('/asignamment', 'PermissionController@addPermission');
+
+Route::Post ('/permissionEdit', 'PermissionController@permissionEdit');
+
+Route::get('/deletepermission/{role}/{permission}', function($role, $permission){
+  $users = App\User::all();
+  $role_quit = App\Role::find($role);
+  $permission = App\Permission::find($permission);
+  $role_quit->permissions()->detach($permission);
+  Toastr::info('Permiso eliminado exitosamente.', 'ROLES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+  return redirect(route('roles.index'));
+});
+/*=====  End of Routes for Roles  ======*/
 
 Route::resource('branches', 'BranchController');
 
@@ -235,8 +253,8 @@ Route::get('solicitud/{id}', function($id){
 
 Route::get('archive/{id}', function($id){
     $credit = App\Models\Credit::find($id);
-   return view('credits.archive')
-   ->with('credit',$credit);
+    return view('credits.archive')
+    ->with('credit',$credit);
 });
 
 Route::resource('debts', 'DebtController');
@@ -244,7 +262,7 @@ Route::resource('debts', 'DebtController');
 Route::get('debts/{id}/delete', [
     'as' => 'debts.delete',
     'uses' => 'DebtController@destroy',
-]);
+    ]);
 
 
 Route::resource('payments', 'PaymentController');
@@ -252,7 +270,7 @@ Route::resource('payments', 'PaymentController');
 Route::get('payments/{id}/delete', [
     'as' => 'payments.delete',
     'uses' => 'PaymentController@destroy',
-]);
+    ]);
 
 Route::get('carbon',function(){
 
@@ -262,19 +280,19 @@ echo $date = \Carbon\Carbon::now()->diffForHumans();
 echo "<br>";
 
 $payment = App\Models\Payment::first();
- echo $payment->created_at->format('l d,F Y');
- echo "<br>";
- echo $payment->updated_at->format('l d,F Y');
- echo "<br>";
- echo $payment->day->format('l d,F Y');
+echo $payment->created_at->format('l d,F Y');
+echo "<br>";
+echo $payment->updated_at->format('l d,F Y');
+echo "<br>";
+echo $payment->day->format('l d,F Y');
 echo "<br>";
 
 $credits = App\Models\Credit::first();
- echo $credits->created_at->format('l d,F Y');
- echo "<br>";
- echo $credits->updated_at->format('l d,F Y');
- echo "<br>";
- echo  $credits->date->format('l d,F Y');
+echo $credits->created_at->format('l d,F Y');
+echo "<br>";
+echo $credits->updated_at->format('l d,F Y');
+echo "<br>";
+echo  $credits->date->format('l d,F Y');
 
 });
 
@@ -283,5 +301,5 @@ Route::resource('permissions', 'PermissionController');
 Route::get('permissions/{id}/delete', [
     'as' => 'permissions.delete',
     'uses' => 'PermissionController@destroy',
-]);
+    ]);
 

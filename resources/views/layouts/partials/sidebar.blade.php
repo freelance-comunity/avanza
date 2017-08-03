@@ -107,12 +107,12 @@
   {
     capital = eval(document.getElementById('capital').value);
     tasa = eval(document.getElementById('tasa').value);
-    utilidad = capital * tasa;
+    interes = capital * tasa;
 
-    document.getElementById('interes').value=utilidad;
+    document.getElementById('interes').value=interes;
     modalidad = eval(document.getElementById('modalidad').value);
 
-    utilidad_neta = capital + utilidad;
+    utilidad_neta = capital + interes;
     total= utilidad_neta/modalidad;
 
     document.getElementById('totaln').value=Math.ceil(total);

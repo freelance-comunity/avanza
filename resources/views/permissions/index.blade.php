@@ -15,11 +15,12 @@
         @if($permissions->isEmpty())
         <div class="well text-center">No hay permisos registrados.</div>
         @else
-        <table class="table">
+        <table class="table" id="example">
             <thead>
                 <th>Nombre</th>
                 <th>Nombre Secundario</th>
                 <th>Descripción</th>
+                <th>Código</th>
                 <th width="50px">Acción</th>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@
                     <td>{!! $permission->name !!}</td>
                     <td>{!! $permission->display_name !!}</td>
                     <td>{!! $permission->description !!}</td>
+                    <td>{!! $permission->code !!}</td>
                     <td>
                         <a href="{!! route('permissions.edit', [$permission->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                         <a href="{!! route('permissions.delete', [$permission->id]) !!}" onclick="return confirm('Are you sure wants to delete this Permission?')"><i class="glyphicon glyphicon-remove"></i></a>

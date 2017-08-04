@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="box box-danger">
 		<div class="box-header with-border">
-			<h3 class="box-title">Mi Perfil</h3>
+			<h3 class="box-title">Pérfil de usuario</h3>
 		</div>
 		<div class="box-body">
 			{{-- Start header profile --}}
@@ -116,7 +116,7 @@
 								</div>
 								<div class="form-group">
 									<label for="">Confirmar Contraseña</label>
-									<input type="password" data-parsley-equalto="#anotherfield" name="password" required="" class="form-control input-lg">
+									<input type="password" data-parsley-equalto="#anotherfield" name="confirmpassword" required="" class="form-control input-lg">
 								</div>
 								<input type="hidden" value="{{Auth::user()->id}}" name="user_id">
 								<div class="form-group col-sm-12">

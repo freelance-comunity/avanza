@@ -101,7 +101,7 @@
 				<div class="col-md-6">
 					<div class="box box-danger">
 						<div class="box-header with-border">
-							<h3 class="box-title">Cambiar Contraseña</h3>
+							<h3 class="box-title"><i class="fa fa-key fa-1x"></i> Cambiar Contraseña</h3>
 						</div>
 						<div class="box-body">
 							<form action="{{ url('updatepassword') }}" method="POST" data-parsley-validate>

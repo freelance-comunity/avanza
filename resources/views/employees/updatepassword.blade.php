@@ -9,11 +9,12 @@ Actualizar Contraseña
 		<div class="col-md-10 col-md-offset-1">
 			<img src="{{asset('/uploads/avatars')}}/{{ Auth::user()->avatar }}" style="width: 120px; height: 120px; float: left; border-radius: 50%; margin-right: 25px; " alt="">
 			<h2>{{ Auth::user()->name}} {{Auth::user()->father_last_name}}</h2>
-			<form action="{{ url('updatepassword') }}" method="POST">
+			<!--<form action="{{ url('updatepassword') }}" method="POST">-->
+			{!! Form::open(['url' => 'updatepassword', 'data-parsley-validate' => '']) !!}
 				{{ csrf_field() }}
 				<div class="form-group col-sm-6 col-lg-4">
 					<label for="">Nueva contraseña</label>
-					<input type="password" name="password" class="form-control">
+					<input type="password" name="password" required="" class="form-control">
 				</div>
 				<input type="hidden" value="{{Auth::user()->id}}" name="user_id">
 				<div class="form-group col-sm-12">

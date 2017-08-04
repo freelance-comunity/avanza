@@ -131,6 +131,10 @@ Route::get('update', function(){
     return view('employees.updatepassword');
 });
 
+Route::get('profile', function(){
+    return view('employees.profile');
+});
+
 Route::post('updatepassword', 'EmployeeController@updatePassword');
 /*=====  End of Routes for Employee  ======*/
 

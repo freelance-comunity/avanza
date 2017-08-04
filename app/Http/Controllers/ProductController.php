@@ -68,7 +68,7 @@ class ProductController extends AppBaseController
 	public function store(CreateProductRequest $request)
 	{
         $input = $request->all();
-
+    
 		$product = Product::create($input);
 
 		Toastr::success('Producto creado exitosamente.', 'Productos', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);

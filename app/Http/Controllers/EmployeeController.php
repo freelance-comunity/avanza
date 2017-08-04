@@ -72,7 +72,7 @@ class EmployeeController extends AppBaseController
 	{
 		$input = $request->all();
 		$input['password'] = Hash::make('micontraseña');
-
+		
 		/* Save avatar employee */
 		if($request->hasFile('avatar')){
 			$avatar = $request->file('avatar');
@@ -104,6 +104,7 @@ class EmployeeController extends AppBaseController
 		$location = Employeelocation::create($data_location);
 
 		/* Get employee credentials data */
+
 		$data_credentials['ine'] = $request->input('ine');
 		$data_credentials['curp'] = $request->input('curp');
 		$data_credentials['rfc'] = $request->input('rfc');
@@ -112,7 +113,6 @@ class EmployeeController extends AppBaseController
 		$data_credentials['driver_license'] = $request->input('driver_license');
 		$data_credentials['professional_id'] = $request->input('professional_id');
 		$data_credentials['user_id'] = $employee->id;
-
 		/* Save employee credentials data */	
 		$credentials = Employeecredentials::create($data_credentials);
 		

@@ -34,7 +34,7 @@ $credential = $user->credential;
                    CORREO ELECTRÓNICO: {{ $employee->email }}
                  </div>
                  <div class="col-md-6">
-                   FECHA DE NACIMIENTO: {{ $employee->birthdate }}
+                   FECHA DE NACIMIENTO: {{ $employee->birthdate->format('l, d F Y') }}
                    <br>
                    ESTADO CIVIL: {{ $employee->civil_status }}
                    <br>

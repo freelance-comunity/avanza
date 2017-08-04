@@ -12,7 +12,7 @@
         {!! Form::text('payment', null, ['class' => 'form-control input-lg']) !!}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerraro</button>
         <button type="button" class="btn btn-success">Pagar</button>
       </div>
     </div>

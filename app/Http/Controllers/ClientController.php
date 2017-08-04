@@ -20,6 +20,7 @@ use Flash;
 use Schema;
 use Toastr;
 use Image;
+use Auth;
 use App\Traits\DatesTranslator;
 
 class ClientController extends AppBaseController
@@ -77,7 +78,11 @@ class ClientController extends AppBaseController
 		if ($branch->count()==0) {			
 			Toastr::info('Actualmente no se cuenta con sucursales.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('clients.index'));
-		}else{
+		}elseif (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('clients.index'));
+		}
+		else{
 			$branch = Branch::all();
 			return view('clients.create')
 			->with('branch', $branch);

@@ -47,7 +47,7 @@
 
 					<div class="col-md-12">
 						<div class="table-responsive">
-							<table class="table" id="payments">
+							<table class="table" id="pagoss">
 								<thead>
 									<th>No.</th>
 									<th>Día</th>

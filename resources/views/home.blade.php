@@ -18,7 +18,7 @@ Panel de Control
 					{{ trans('adminlte_lang::message.logged') }}
 					<br>
 					@if (Hash::check('micontraseña', Auth::user()->password))
-					Te invitamos a actualizar tu contraseña en el siguiente <a href="{{ url('update') }}">LINK</a>
+					Te invitamos a actualizar tu contraseña en el siguiente <a href="{{ url('profile') }}">LINK</a>
 					@endif
 				</div>
 			</div>

@@ -48,9 +48,9 @@
 						<td>{!! $credit->dues !!}</td>
 						<td>{!! $credit->branch !!}</td>
 						@if ($late_total==0)
-						<td>${!! number_format($late_total, 2) !!}</td>
+						<td class="success">${!! number_format($late_total, 2) !!}</td>
 						@elseif($late_total > 0)
-						<td class="danger">${!! number_format($late_total, 2) !!}</td>
+						<td class="danger" style="color: red;">${!! number_format($late_total, 2) !!}</td>
 						@endif
 						<td>
 							<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa fa-file-pdf-o fa-2x"></i></a>

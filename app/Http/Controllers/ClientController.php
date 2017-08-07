@@ -203,24 +203,25 @@ class ClientController extends AppBaseController
 		=============================================*/
 		if($request->hasFile('ine_document')){
 			$ine = $request->file('ine_document');
-			$filename_ine = time() . '.' . $ine->getClientOriginalExtension();
-			Image::make($ine)->resize(400, 600)->save( public_path('/uploads/documents/' . $filename_ine ) );
+			$filename_ine = time() . '_'.$client->id.'_ine.' . $ine->getClientOriginalExtension();
+			Image::make($ine)->resize(600, 600)->save( public_path('/uploads/documents/' . $filename_ine ) );
 			$documents['ine'] = $filename_ine;
 		}
 
 		if($request->hasFile('curp_document')){
 			$curp = $request->file('curp_document');
-			$filename_curp = time() . '.' . $curp->getClientOriginalExtension();
+			$filename_curp = time() . '_'.$client->id.'_curp.' . $curp->getClientOriginalExtension();
 			Image::make($curp)->resize(600, 600)->save( public_path('/uploads/documents/' . $filename_curp ) );
 			$documents['curp'] = $filename_curp;
 		}
 
 		if($request->hasFile('proof_of_addres')){
 			$proof_of_addres = $request->file('proof_of_addres');
-			$filename_proof_of_addres = time() . '.' . $proof_of_addres->getClientOriginalExtension();
-			Image::make($proof_of_addres)->resize(800, 600)->save( public_path('/uploads/documents/' . $filename_proof_of_addres ) );
+			$filename_proof_of_addres = time() . '_'.$client->id.'_cfe.' . $proof_of_addres->getClientOriginalExtension();
+			Image::make($proof_of_addres)->resize(600, 600)->save( public_path('/uploads/documents/' . $filename_proof_of_addres ) );
 			$documents['proof_of_addres'] = $filename_proof_of_addres;
 		}
+		
 		$documents['client_id'] = $client->id;
 		$documentation = Clientdocuments::create($documents);
 		/*=====  End of Save documentation client  ======*/

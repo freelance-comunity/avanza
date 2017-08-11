@@ -51,7 +51,7 @@
           @if ($product->name == 'DIARIO')
              <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('dues', 'No. Cuotas:') !!}
-            {!! Form::select('dues', ['25'=>'25','30'=>'30'],null, [
+            {!! Form::select('dues', ['25'=>'25','30'=>'30', '52'=>'52','60'=>'60'],null, [
               'style' => 'text-transform:uppercase',
               'class' => 'form-control input-lg', 
               'required'=>'required',

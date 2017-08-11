@@ -23,7 +23,7 @@
             'id' => 'payment',
             'onkeyup' => 'check()',
             'required' => 'required',
-            'data-parsley-pattern' => '^[0-9]*\.[0-9]{2}$',
+            'data-parsley-type' => 'number',
             'data-parsley-trigger ' => 'input focusin',]) !!}
           </p>
           <p>

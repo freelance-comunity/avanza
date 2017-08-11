@@ -8,6 +8,7 @@
 				<div class="box-header with-border">
 					<i class="fa fa-user"></i>
 					<h3 class="box-title"><strong>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</strong></h3>
+					<a href="" class="btn btn-success">Saldar prestamo</a>
 				</div>
 				<!-- /.box-header -->
 				@php

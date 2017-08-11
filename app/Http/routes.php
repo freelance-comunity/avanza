@@ -44,6 +44,10 @@ Route::get('test-relationship', function(){
 Route::get('geolocation', function(){
     return view('geolocation');
 });
+
+Route::get('divide', function(){
+    echo "pinche puto";
+});
 /*=====  End of Test Routes  ======*/
 
 

@@ -22,9 +22,9 @@
 					<th>Cliente</th>
 					<th>Teléfono</th>
 					<th>Fecha de Contrato</th>
+					<th>Sucursal</th>
 					<th>$ Monto</th>
-					<th>No. Cuotas</th>
-					<th>Sucursal</th>	
+					<th>No. Cuotas</th>	
 					<th>Vencido</th>			
 					<th width="50px">Acción</th>
 				</thead>
@@ -44,9 +44,9 @@
 						<td>{!! $credit->firts_name !!} {!! $credit->last_name !!} {!! $credit->mothers_last_name !!}</td>
 						<td>{!! $credit->phone !!}</td>
 						<td>{!! strtoupper($credit->date->format('d F Y')) !!}</td>
+						<td>{!! $credit->branch !!}</td>
 						<td>${!! number_format($credit->ammount, 2) !!}</td>
 						<td>{!! $credit->dues !!}</td>
-						<td>{!! $credit->branch !!}</td>
 						@if ($late_total==0)
 						<td class="success">${!! number_format($late_total, 2) !!}</td>
 						@elseif($late_total > 0)

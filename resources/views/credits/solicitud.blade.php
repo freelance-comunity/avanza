@@ -112,7 +112,7 @@
 			</tr>
 			<tr>
 				<td align="center">${{$credit->ammount}}</td>
-				<td align="center">{{$credit->interest_rate}}%</td>
+				<td align="center">{{$credit->interest_rate * 100}}%</td>
 				<td align="center">{{$credit->dues}}</td>
 				<td align="center">{{$credit->periodicity}}</td>
 				<td align="center">{{$credit->warranty_type}}</td>

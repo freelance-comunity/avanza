@@ -38,10 +38,10 @@ class ClientController extends AppBaseController
 	 * @return Response
 	 */
 	public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
+	{
+		$this->middleware('auth');
+	}
+
 	public function index(Request $request)
 	{
 		$query = Client::query();
@@ -319,7 +319,7 @@ class ClientController extends AppBaseController
 
 		$client->delete();
 
-		Toastr::success('Cliente eliminado exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		Toastr::success('Cliente eliminado exitosamente.', 'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('clients.index'));
 	}
@@ -330,10 +330,45 @@ class ClientController extends AppBaseController
 		$client = Client::find($id);
 		$credit = Credit::all();
 		$credits = $client->credits;
+		/*foreach ($credits as $value) {
+			$status = 0;
+			$diario = 0;
+			$semanal = 0;
+			if ($value->status == 'MINISTRADO') {
+				$status ++;
+			}
+			if ($value->periodicity == 'DIARIO') {
+				$diario ++;
+			}
+			
+			if ($value->periodicity == 'SEMANAL') {
+				$semanal ++;
+			}
+		}
+		if ($status == 3) {
+			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('clients.index'));
+		}
+		elseif ($diario == 2) {
+			Toastr::error('Este cliente ya cuenta con 2 créditos diarios','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('clients.index'));
+		}
+		elseif ($semanal == 1) {
+			Toastr::error('Este cliente ya cuenta con 1 créditos semanal','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('clients.index'));
+		}
+		else{
+			return view ('credits.create')
+			->with('credits',$credits)
+			->with('product', $product)
+			->with('client', $client)
+			->with('credit',$credit);
+		}*/
 		return view ('credits.create')
-		->with('credits',$credits)
-		->with('product', $product)
-		->with('client', $client)
-		->with('credit',$credit);
+			->with('credits',$credits)
+			->with('product', $product)
+			->with('client', $client)
+			->with('credit',$credit);
+		
 	}
 }

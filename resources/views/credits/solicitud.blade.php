@@ -98,7 +98,7 @@
 			</tr>
 			<tr>
 				<td align="center">{{$credit->adviser}}</td>
-				<td align="center">{{$credit->date}}</td>
+				<td align="center">{{$credit->date->format('d F Y')}}</td>
 			</tr>
 		</table>
 

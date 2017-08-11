@@ -33,9 +33,9 @@
                         <td>{!! $product->code !!}</td>
                         <td>{!! $product->name !!}</td>
                         <td>{!! $product->interest_of_cup !!}</td>
-                        <td>{!! $product->ammount_max !!}</td>
-                        <td>{!! $product->ammount_min !!}</td>
-                        <td>{!! $product->surcharge !!}</td>
+                        <td>MXN {!! number_format($product->ammount_max, 2) !!}</td>
+                        <td>MXN {!! number_format($product->ammount_min, 2) !!}</td>
+                        <td>MXN {!! number_format($product->surcharge, 2) !!}</td>
                         <td>
                             <a href="{!! route('products.edit', [$product->id]) !!}"><i class="fa fa-edit fa-2x" data-toggle="tooltip" title="Editar"></i></a>
                             <a href="{!! route('products.delete', [$product->id]) !!}" onclick="return confirm('¿Esta seguro de eliminar este producto?')"><i class="fa fa-trash fa-2x" data-toggle="tooltip" title="Eliminar"></i></a>

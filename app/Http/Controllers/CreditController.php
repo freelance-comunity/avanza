@@ -179,7 +179,7 @@ class CreditController extends AppBaseController
 		$date = new Carbon($credit->date);
 		if ($periodicity == 'DIARIO' && $dues == 30) {
 			$debt = new Debt;
-			$debt->ammount = $credit->ammount;
+			$debt->ammount = $credit->ammount + $interes;
 			$debt->status = "Pendiente";
 			$debt->credit_id = $credit->id;
 			$debt->save();
@@ -197,6 +197,8 @@ class CreditController extends AppBaseController
 				$payment->interest= $intpago;
 				$payment->moratorium = '0';
 				$payment->total = ceil($pago) + 0; 
+				$payment->payment = 0;
+				$payment->balance = ceil($pago) + 0;
 				$payment->status = "Pendiente";
 				$payment->debt_id = $debt->id;
 				$payment->user_id = Auth::User()->id;
@@ -207,7 +209,7 @@ class CreditController extends AppBaseController
 		}
 		if ($periodicity == 'DIARIO' && $dues == 25) {
 			$debt = new Debt;
-			$debt->ammount = $credit->ammount;
+			$debt->ammount = $credit->ammount +  $interes;
 			$debt->status = "Pendiente";
 			$debt->credit_id = $credit->id;
 			$debt->save();
@@ -228,6 +230,8 @@ class CreditController extends AppBaseController
 				$payment->interest= $intpago;
 				$payment->moratorium = '0';
 				$payment->total = ceil($pago) + 0; 
+				$payment->payment = 0;
+				$payment->balance = ceil($pago) + 0;
 				$payment->status = "Pendiente";
 				$payment->debt_id = $debt->id;
 				$payment->user_id = Auth::User()->id;
@@ -238,7 +242,7 @@ class CreditController extends AppBaseController
 		}
 		if ($periodicity == 'DIARIO' && $dues == 52) {
 			$debt = new Debt;
-			$debt->ammount = $credit->ammount;
+			$debt->ammount = $credit->ammount + $interes; 
 			$debt->status = "Pendiente";
 			$debt->credit_id = $credit->id;
 			$debt->save();
@@ -259,7 +263,9 @@ class CreditController extends AppBaseController
 				$payment->capital = ceil($capital);
 				$payment->interest= $intpago;
 				$payment->moratorium = '0';
-				$payment->total = ceil($pago) + 0; 
+				$payment->total = ceil($pago) + 0;
+				$payment->payment = 0;
+				$payment->balance = ceil($pago) + 0; 
 				$payment->status = "Pendiente";
 				$payment->debt_id = $debt->id;
 				$payment->user_id = Auth::User()->id;
@@ -270,7 +276,7 @@ class CreditController extends AppBaseController
 		}
 		if ($periodicity == 'DIARIO' && $dues == 60) {
 			$debt = new Debt;
-			$debt->ammount = $credit->ammount;
+			$debt->ammount = $credit->ammount + $interes;
 			$debt->status = "Pendiente";
 			$debt->credit_id = $credit->id;
 			$debt->save();
@@ -288,7 +294,9 @@ class CreditController extends AppBaseController
 				$payment->capital = ceil($capital);
 				$payment->interest= $intpago;
 				$payment->moratorium = '0';
-				$payment->total = ceil($pago) + 0; 
+				$payment->total = ceil($pago) + 0;
+				$payment->payment = 0;
+				$payment->balance = ceil($pago) + 0; 
 				$payment->status = "Pendiente";
 				$payment->debt_id = $debt->id;
 				$payment->user_id = Auth::User()->id;
@@ -299,7 +307,7 @@ class CreditController extends AppBaseController
 		}
 		if ($periodicity == 'SEMANAL') {
 			$debt = new Debt;
-			$debt->ammount = $credit->ammount;
+			$debt->ammount = $credit->ammount + $interes;
 			$debt->status = "Pendiente";
 			$debt->credit_id = $credit->id;
 			$debt->save();
@@ -318,6 +326,8 @@ class CreditController extends AppBaseController
 				$payment->interest= $intpago;
 				$payment->moratorium = '0';
 				$payment->total = ceil($pago) + 0; 
+				$payment->payment = 0;
+				$payment->balance = ceil($pago) + 0;
 				$payment->status = "Pendiente";
 				$payment->debt_id = $debt->id;
 				$payment->user_id = Auth::User()->id;

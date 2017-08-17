@@ -14,7 +14,7 @@
       </div>
       <div class="modal-body">
 
-        {!! Form::open(['url' => '#','data-parsley-validate' => '']) !!}  
+        {!! Form::open(['url' => 'process','data-parsley-validate' => '']) !!}  
         <p>
           {!! Form::label('payment', 'Monto:') !!}
           {!! Form::text('payment', null, [
@@ -26,6 +26,9 @@
             'data-parsley-type' => 'number',
             'data-parsley-trigger ' => 'input focusin',]) !!}
           </p>
+          @foreach ($payment_day as $payment)
+            <input type="hidden" value="{{ $payment->id }}" name="payment_id">
+          @endforeach
           <p>
             <div class="table-responsive">
               <table class="table" id="payments">

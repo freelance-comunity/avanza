@@ -8,7 +8,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
-
+use Toastr;
 
 
 class PaymentController extends AppBaseController
@@ -161,5 +161,26 @@ class PaymentController extends AppBaseController
 		Flash::message('Payment deleted successfully.');
 
 		return redirect(route('payments.index'));
+	}
+
+	public function process(Request $request)
+	{
+		$ammount = $request->input('payment');
+		$payment = Payment::find($request->input('payment_id'));
+		$payment->balance = $payment->total - $ammount;
+
+		if ($payment->balance == 0) {
+			$payment->status = "Pagado";
+			$payment->payment = $ammount;
+			Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		}elseif ($payment->balance >= 1) {
+			$payment->status = "Vencido";
+			$payment->payment = $ammount;
+			Toastr::info('Pago confirmado con adeudo.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		}
+		$payment->save();
+
+		return redirect()->back();
+
 	}
 }

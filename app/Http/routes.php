@@ -45,9 +45,7 @@ Route::get('geolocation', function(){
     return view('geolocation');
 });
 
-Route::get('divide', function(){
-    echo "pinche puto";
-});
+Route::post('process', 'PaymentController@process');
 /*=====  End of Test Routes  ======*/
 
 

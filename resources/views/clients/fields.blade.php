@@ -110,6 +110,29 @@
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('ine', 'INE:') !!}
                 {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA INE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+<<<<<<< HEAD
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('civil_status', 'Estado Civil:') !!}
+                {!! Form::select('civil_status',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('scholarship', 'Grado Escolar:') !!}
+                {!! Form::select('scholarship',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('phone', 'Teléfono:') !!}
+                {!! Form::text('phone', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();','data-parsley-trigger ' => 'input focusin',
+                'data-parsley-type' => 'digits', 'data-parsley-maxlength' => '10',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('no_economic_dependent', 'No. de Dependientes Economicos') !!}
+                {!! Form::select('no_economic_dependent',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('no_familys', 'No. Familias') !!}
+                {!! Form::select('no_familys',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
+=======
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('civil_status', 'Estado Civil:') !!}
@@ -135,7 +158,22 @@
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
                 {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
+>>>>>>> remotes/origin/master
             </div>
+
+            <div class="form-group col-sm-6 col-lg-4">
+<<<<<<< HEAD
+                {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
+                {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
+            </div>
+=======
+                {!! Form::label('avatar', 'Imagen:') !!}
+                {!! Form::file('avatar', [
+                    'required' => 'required',
+                    'data-parsley-trigger ' => 'input focusin',
+                    ]) !!}
+                </div>
+>>>>>>> remotes/origin/master
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('avatar', 'Imagen:') !!}
@@ -208,6 +246,71 @@
 
         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
 
+<<<<<<< HEAD
+=======
+                @php
+                $count = App\Models\Branch::all();
+                @endphp
+
+                <div class="form-group col-sm-12 col-lg-12">
+                    {!! Form::label('branch_id', '* Sucursal:') !!}
+                    <select name="branch_id" required="required" value="{{ old('branch_id') }}" class="form-control input-lg" id="branch"  data-parsley-trigger= "input focusin">
+                        @if($count ->isEmpty())
+                        <option value="">No hay sucursales registradas en el sistema</option>
+                        @else 
+                        <option selected value="">Seleccione Sucursal</option>
+                        @foreach($count as $branches)
+                        <option value="{{ $branches->id}}">{{$branches->name}}</option>
+                        @endforeach
+                        @endif
+                    </select>
+                </div>
+                {{-- Geolocation address client --}}
+                <div class="col-md-6">
+                    <div class="gllpLatlonPicker">
+                      <label for="exampleInputEmail1">DIRECCIÓN DEL CLIENTE</label>
+                      <br/><br/>
+                      <div class="gllpMap">Google Maps</div>
+                      <br/>
+                      <input type="hidden" name="latitude" id="lat" class="gllpLatitude" value="16.753239967660058"/>
+                      <input type="hidden" name="lenght" id="lon" class="gllpLongitude" value="-93.11789682636714"/>
+                      <input type="hidden" class="gllpZoom" value="15"/>
+                      <input type="button" id="update" class="gllpUpdateButton" style="display: none;" value="Actualizar">
+                      <br/>
+                  </div>
+              </div>
+              {{-- End Geolocation address client --}}
+              <div class="col-md-6">
+                <div class="gllpLatlonPicker">
+                  <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
+                  <br/><br/>
+                  <div class="gllpMap">Google Maps</div>
+                  <br/>
+                  <input type="hidden" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
+                  <input type="hidden" id="lon_bussines" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+                  <input type="hidden" class="gllpZoom" value="15"/>
+                  <input type="button" id="update_bussines" class="gllpUpdateButton" style="display: none;" value="Actualizar">
+              </div>
+          </div>
+          <script>
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                alert("Este navegador no soporta Geolocalización.");
+            }
+            function showPosition(position) {
+                document.getElementById('lat').value=position.coords.latitude;
+                document.getElementById('lon').value=position.coords.longitude;
+                document.getElementById('lat_bussines').value=position.coords.latitude;
+                document.getElementById('lon_bussines').value=position.coords.longitude;
+                document.getElementById("update").click();
+                document.getElementById("update_bussines").click();
+            }
+        </script>
+
+        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+
+>>>>>>> remotes/origin/master
     </div>
 
     <!-- CLIENTS LOCATION-->
@@ -515,9 +618,15 @@
             {!! Form::label('phone_reference_2', 'Teléfono:') !!}
             {!! Form::text('phone_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL TELÉFONO', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','data-parsley-maxlength' => '10','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
+<<<<<<< HEAD
 
         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
 
+=======
+
+        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+
+>>>>>>> remotes/origin/master
     </div>
 </div>
 </div>
@@ -548,6 +657,7 @@
                             'data-parsley-trigger ' => 'input focusin',
                             ]) !!}
                         </div>
+<<<<<<< HEAD
                         <button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
                     </div>
                 </div>
@@ -557,6 +667,23 @@
     </div>
 
     <script>
+=======
+                        <div class="box-body" >
+                         <div class="col-md-4">
+                            <div class="btn-group">
+                              {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+                          </div>
+                      </div> 
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>    
+</div>
+
+<script>
+>>>>>>> remotes/origin/master
     //Función para validar una CURP
     function curpValida(curp) {
         var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,

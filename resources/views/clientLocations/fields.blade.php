@@ -1,9 +1,9 @@
 <div class="box box-danger">
     <div class="box-header with-border">
         <div>
-         <h3> Ubicación </h3>
-     </div>
-     <div class="form-group col-sm-6 col-lg-4">
+           <h3> Ubicación </h3>
+       </div>
+       <div class="form-group col-sm-6 col-lg-4">
         {!! Form::label('street', 'Calle:') !!}
         {!! Form::text('street', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE DE LA CALLE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
     </div>
@@ -35,22 +35,27 @@
         <div class="gllpLatlonPicker">
           <label for="exampleInputEmail1">DIRECCIÓN DEL CLIENTE</label>
           <div class="input-group">
-           <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
-           <div class="input-group-btn">
-             <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
-         </div>
-     </div>
-     <br/><br/>
-     <div class="gllpMap">Google Maps</div>
-     <br/>
-     <input type="hidden" name="latitude" class="gllpLatitude" value="{{$clientLocation->latitude}}"/>
-     <input type="hidden" name="lenght" class="gllpLongitude" value="{{$clientLocation->lenght}}"/>
-     <input type="hidden" class="gllpZoom" value="12"/>
- </div>
+             <input type="text" class="gllpSearchField col-lg-8  input-lg form-control" placeholder="ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.">
+             <div class="input-group-btn">
+               <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+           </div>
+       </div>
+       <br/><br/>
+       <div class="gllpMap">Google Maps</div>
+       <br/>
+       <input type="hidden" name="latitude" class="gllpLatitude" value="{{$clientLocation->latitude}}"/>
+       <input type="hidden" name="lenght" class="gllpLongitude" value="{{$clientLocation->lenght}}"/>
+       <input type="hidden" class="gllpZoom" value="12"/>
+   </div>
 </div>
 
-
-<button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
+<div class="box-body" >
+ <div class="col-md-4">
+    <div class="btn-group">
+      {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+  </div>
+</div> 
+</div>
 
 </div>    
 </div>

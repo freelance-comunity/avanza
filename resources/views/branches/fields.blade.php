@@ -46,7 +46,7 @@
                       'data-parsley-trigger ' => 'input focusin',
                       'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                       <div class="input-group-btn">
-                       <input type="button" class="gllpSearchButton btn bg-navy input-lg" value="Buscar">
+                       <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
                      </div>
                    </div>
                    <br/><br/>
@@ -61,7 +61,9 @@
 
              <div class="box-body" >
                <div class="col-md-4">
-                {!! Form::submit('GUARDAR', ['class' => 'btn btn-lg btn-primary','required'=>'required' ]) !!}
+                <div class="btn-group">
+                  {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+                </div>
               </div> 
             </div>
 

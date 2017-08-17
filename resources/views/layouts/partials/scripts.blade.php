@@ -34,99 +34,130 @@
       			"language": {
       				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
       			}
-           
+
           } );
         });
       </script>
-       <script>
+      <script>
         $(document).ready(function() {
           $('#pagoss').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             }
-             searching: false
+            searching: false
           } );
         });
       </script>
       <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
       <script>
-         var changeDateFormat = $('#date').each(function(i,e) {
+       var changeDateFormat = $('#date').each(function(i,e) {
+        var dateTD = $(this).find('td:eq(4)');
+        var date = dateTD.text().trim();
+        var parts = date.split('/');
+        dateTD.text(parts[0]+'/'+parts[2]+'/'+parts[1]);
+      });
+
+       $.when(changeDateFormat).done(function() {
+        processDates(); 
+      })
+       /* THIS IS ONLY FOR EXAMPLE TO CHANGE THE DATE FORMAT */
+
+
+       function processDates() {
+        var process = $('#date').each(function(i,e) {
           var dateTD = $(this).find('td:eq(4)');
           var date = dateTD.text().trim();
           var parts = date.split('/');
-          dateTD.text(parts[0]+'/'+parts[2]+'/'+parts[1]);
+          dateTD.prepend('<span>'+parts[0]+parts[2]+parts[1]+'</span>');
         });
 
-         $.when(changeDateFormat).done(function() {
-          processDates(); 
+        $.when(process).done(function() {
+          $('#pagoss').DataTable({ 
+           "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+          },
+          "order": [[ 4, "desc" ]] });
+
         })
-         /* THIS IS ONLY FOR EXAMPLE TO CHANGE THE DATE FORMAT */
+      }
+    </script>
 
+    {{-- Form Wizard Validation --}}
 
-         function processDates() {
-          var process = $('#date').each(function(i,e) {
-            var dateTD = $(this).find('td:eq(4)');
-            var date = dateTD.text().trim();
-            var parts = date.split('/');
-            dateTD.prepend('<span>'+parts[0]+parts[2]+parts[1]+'</span>');
+    <script>
+     $(document).ready(function () {
+
+      var navListItems = $('div.setup-panel div a'),
+      allWells = $('.setup-content'),
+      allNextBtn = $('.nextBtn');
+
+      allWells.hide();
+
+      navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+        $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+          navListItems.removeClass('btn-primary').addClass('btn-default');
+          $item.addClass('btn-primary');
+          allWells.hide();
+          $target.show();
+          $target.find('input:eq(0)').focus();
+        }
+      });
+
+      allNextBtn.click(function(){
+        var curStep = $(this).closest(".setup-content"),
+        curStepBtn = curStep.attr("id"),
+        nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+        curInputs = curStep.find("input[type='text'],input[type='url'],input[type='date'],input[type='email'],input[type='file'], select"),
+        isValid = true;
+
+        $(".form-group").removeClass("has-error");
+        for(var i=0; i<curInputs.length; i++){
+          if (!curInputs[i].validity.valid){
+            isValid = false;
+            $(curInputs[i]).closest(".form-group").addClass("has-error");
+          }
+        }
+
+        if (isValid)
+          nextStepWizard.removeAttr('disabled').trigger('click');
+      });
+
+      $('div.setup-panel div a.btn-primary').trigger('click');
+    });
+  </script>
+
+  <script src="{{ asset('/js/jquery.loader.js') }}"></script>
+  <script type="text/javascript">
+    (function ($) {
+      "use strict";
+
+        $(function () { // short document ready
+
+          $('.btn-group')
+          .on('click', '.btn-info', function () {
+            $('.hero-unit').loader('show');
+          })
+          .on('click', '.btn-warning', function () {
+            $('.hero-unit').loader('hide');
+          })
+          .on('click', '.btn-primary', function () {
+            if ($('body').hasClass('loading')) {
+              $('body').removeClass('loading')
+              .loader('hide');
+            } else {
+              $('body').addClass('loading')
+              .loader('show', {
+                overlay: true
+              });
+            }
           });
 
-          $.when(process).done(function() {
-            $('#pagoss').DataTable({ 
-               "language": {
-              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-            },
-              "order": [[ 4, "desc" ]] });
-
-          })
-        }
-      </script>
-
-      {{-- Form Wizard Validation --}}
-
-      <script>
-       $(document).ready(function () {
-
-        var navListItems = $('div.setup-panel div a'),
-        allWells = $('.setup-content'),
-        allNextBtn = $('.nextBtn');
-
-        allWells.hide();
-
-        navListItems.click(function (e) {
-          e.preventDefault();
-          var $target = $($(this).attr('href')),
-          $item = $(this);
-
-          if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-primary').addClass('btn-default');
-            $item.addClass('btn-primary');
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
-          }
         });
-
-        allNextBtn.click(function(){
-          var curStep = $(this).closest(".setup-content"),
-          curStepBtn = curStep.attr("id"),
-          nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-          curInputs = curStep.find("input[type='text'],input[type='url'],input[type='date'],input[type='email'],input[type='file'], select"),
-          isValid = true;
-
-          $(".form-group").removeClass("has-error");
-          for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-              isValid = false;
-              $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-          }
-
-          if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
-        });
-
-        $('div.setup-panel div a.btn-primary').trigger('click');
-      });
+      } (jQuery));
     </script>
+

@@ -82,7 +82,7 @@ class CreditController extends AppBaseController
 		$data_uri = $request->input('firm');
 		$encoded_image = explode(",", $data_uri)[1];
 		$decoded_image = base64_decode($encoded_image);
-		$url = 'signature'. rand(111,9999).'.png';
+		$url = 'signature'. '-id-'. $request->input('client_id') . rand(111,9999).'.png';
 
 		file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
 		/* End get signature */

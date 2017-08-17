@@ -25,6 +25,7 @@ class CreatePaymentsTable extends Migration
 			$table->string('moratorium');
 			$table->string('total');
 			$table->string('payment');
+			$table->string('balance');
 			$table->string('status');
 			$table->integer('debt_id')->unsigned();
 			$table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');

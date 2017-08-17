@@ -11,6 +11,16 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('roles')->insert(
+            [
+                'name' => 'username',
+                'display_name' => 'testusername',
+                'description' => 'description'
+            ],
+            [
+                'key' => 'password',
+                'value' => 'plain'
+            ]
+        );
     }
 }

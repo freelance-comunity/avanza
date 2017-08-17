@@ -27,28 +27,30 @@
             'data-parsley-trigger ' => 'input focusin',]) !!}
           </p>
           <p>
-            <table class="table" id="payments">
-              <thead>
-                <th>No. Cuota</th>
-                <th>Capital</th>
-                <th>Interés</th>
-                <th>Moratorio</th>
-                <th>Total</th>
-                <th>Pago</th>       
-              </thead>
-              <tbody>
-                @foreach($payment_day as $payment)
-                <tr>
-                  <td>#{{ $payment->number }}</td>
-                  <td>$ {{ number_format($payment->capital) }}</td>
-                  <td>$ {{ number_format($payment->interest) }}</td>
-                  <td>$ {{ number_format($payment->moratorium) }}</td>
-                  <td id="total">$ {{ number_format($payment->total) }}</td>
-                  <td>{{$payment->payment}}</td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table" id="payments">
+                <thead>
+                  <th>No. Cuota</th>
+                  <th>Capital</th>
+                  <th>Interés</th>
+                  <th>Moratorio</th>
+                  <th>Total</th>
+                  <th>Pago</th>       
+                </thead>
+                <tbody>
+                  @foreach($payment_day as $payment)
+                  <tr>
+                    <td>#{{ $payment->number }}</td>
+                    <td>$ {{ number_format($payment->capital) }}</td>
+                    <td>$ {{ number_format($payment->interest) }}</td>
+                    <td>$ {{ number_format($payment->moratorium) }}</td>
+                    <td id="total">$ {{ number_format($payment->total) }}</td>
+                    <td>{{$payment->payment}}</td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </p>
           <p>
             {!! Form::submit('PAGAR', ['class' => 'btn btn-lg btn-block btn-success']) !!}
@@ -63,8 +65,9 @@
     </div>
   </div>
   <script>
-  function check() {
+    function check() {
       payment = eval(document.getElementById('payment').value); 
-      $('#total').html('payment')
+      var txt = 300;
+      $('#total').text(payment)
     }
   </script>

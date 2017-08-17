@@ -59,6 +59,11 @@
         {{-- Form Wizard --}}
         <!-- Ionicons -->
         <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <!--rangeslider-->
+        <link rel="stylesheet" href="{{asset('/rangeSlider/css/normalize.css')}}" />
+        <link rel="stylesheet" href="{{asset('/rangeSlider/css/ion.rangeSlider.css')}}" />
+        <link rel="stylesheet" href="{{asset('/rangeSlider/css/ion.rangeSlider.skinFlat.css')}}" />
+        <script src="{{asset('/rangeSlider/js/ion.rangeSlider.js')}}" type="text/javascript"></script>
 
         <style>
           canvas {

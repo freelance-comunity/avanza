@@ -73,6 +73,7 @@ div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active
     box-shadow: none;
 }
 
+
 .p{
     color:black;
 }
@@ -120,8 +121,8 @@ div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active
         </div>
     </div>
     <div class="box-body">
-     {!! Form::open(['route' => 'employees.store']) !!}
-     <div class="row setup-content" id="step-1">
+       {!! Form::open(['route' => 'employees.store']) !!}
+       <div class="row setup-content" id="step-1">
         <div class="col-xs-12">
             <div class="col-md-12">
                 <h3> Datos </h3>
@@ -205,6 +206,11 @@ div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active
         </div>
     </div>
 </form>
+<input type="range" value="2000" step="25" min="1000" max="20000">
+<small id="helper" class="slideRight">Slide to get started &#x2192;</small>
+<br>
+<br>
+<h2 style="display: inline-block; margin-bottom: 50px;"></h2><output style="display: inline-block">3,825</output>
 </div>
 </div>
 <script>
@@ -217,5 +223,7 @@ div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active
         }
     }
 </script>
+
+
 @include('partials.wizard')
 @endsection

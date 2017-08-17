@@ -28,9 +28,15 @@
       } 
       .p .test {
         white-space: nowrap; 
-        width: 50px; 
+        width: 40px; 
         font-size:70%;
+        overflow: hidden;
     }
+    p.test:hover {
+        text-overflow: inherit;
+        overflow: visible;
+    }
+
 }
 </style>
 <div class="box box-danger">

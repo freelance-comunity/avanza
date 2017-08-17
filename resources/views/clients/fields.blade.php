@@ -546,7 +546,11 @@
                 'data-parsley-trigger ' => 'input focusin',
                 ]) !!}
             </div>
-            <button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
+                <div class="col-md-4">
+                <div class="btn-group">
+                  {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+                </div>
+              </div>
         </div>
     </div>
 </div>

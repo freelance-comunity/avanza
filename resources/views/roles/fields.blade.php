@@ -3,7 +3,6 @@
 		<h3 class="box-title">Rol</h3>
 	</div>
 	<div class="box-body">
-
 		<div class="form-group col-sm-6 col-lg-4">
 			{!! Form::label('name', 'Nombre Rol:') !!}
 			{!! Form::text('name', null, [
@@ -37,8 +36,12 @@
 						'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 					</div>
 
-					<div class="form-group col-sm-12">
-						{!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary']) !!}
+					<div class="box-body" >
+						<div class="col-md-4">
+							<div class="btn-group">
+								{!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+							</div>
+						</div> 
 					</div>
 				</div>
 			</div>

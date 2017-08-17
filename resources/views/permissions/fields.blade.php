@@ -40,8 +40,12 @@
 							]) !!}
 						</div>
 
-						<div class="form-group col-sm-12">
-							{!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+						<div class="box-body" >
+							<div class="col-md-4">
+								<div class="btn-group">
+									{!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+								</div>
+							</div> 
 						</div>
 					</div>
 				</div>

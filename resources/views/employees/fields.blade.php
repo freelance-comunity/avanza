@@ -404,9 +404,13 @@ $count = App\Models\Branch::all();
             </label>
             @endforeach
         </div>
-        <div class="form-group col-sm-12">
-            <button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
-        </div>
+         <div class="box-body" >
+               <div class="col-md-4">
+                <div class="btn-group">
+                  {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+                </div>
+              </div> 
+            </div>
     </div>
 </div>
 </div>

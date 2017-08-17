@@ -49,7 +49,7 @@
             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
           </div>
           @if ($product->name == 'DIARIO')
-             <div class="form-group col-sm-6 col-lg-4">
+          <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('dues', 'No. Cuotas:') !!}
             {!! Form::select('dues', ['25'=>'25','30'=>'30', '52'=>'52','60'=>'60'],null, [
               'style' => 'text-transform:uppercase',
@@ -58,67 +58,55 @@
               'data-parsley-trigger ' => 'input focusin',
               'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
-          @else
-           <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('dues', 'No. Cuotas:') !!}
-            {!! Form::select('dues', ['1'=>'1'],null, [
-              'style' => 'text-transform:uppercase',
-              'class' => 'form-control input-lg', 
-              'required'=>'required',
-              'data-parsley-trigger ' => 'input focusin',
-              'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-          @endif
-         
-
+            @else
             <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('periodicity', 'Periodicidad:') !!}
-              {!! Form::text('periodicity', $product->name, [
+              {!! Form::label('dues', 'No. Cuotas:') !!}
+              {!! Form::select('dues', ['1'=>'1'],null, [
                 'style' => 'text-transform:uppercase',
                 'class' => 'form-control input-lg', 
                 'required'=>'required',
-                'readonly'=>'readonly',
                 'data-parsley-trigger ' => 'input focusin',
                 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
               </div>
-
+              @endif
+              
 
               <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('warranty_type', 'Tipo de Garrantía:') !!}
-                {!! Form::select('warranty_type',['LIQUIDA'=>'LIQUIDA','PRENDARIA'=>'PRENDARIA','AVALES'=>'AVALES'], null, [
+                {!! Form::label('periodicity', 'Periodicidad:') !!}
+                {!! Form::text('periodicity', $product->name, [
                   'style' => 'text-transform:uppercase',
                   'class' => 'form-control input-lg', 
                   'required'=>'required',
+                  'readonly'=>'readonly',
                   'data-parsley-trigger ' => 'input focusin',
                   'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                 </div>
 
+
                 <div class="form-group col-sm-6 col-lg-4">
-                  {!! Form::label('firts_name', 'Nombre:') !!}
-                  {!! Form::text('firts_name', $client->firts_name, [
+                  {!! Form::label('warranty_type', 'Tipo de Garrantía:') !!}
+                  {!! Form::select('warranty_type',['LIQUIDA'=>'LIQUIDA','PRENDARIA'=>'PRENDARIA','AVALES'=>'AVALES'], null, [
                     'style' => 'text-transform:uppercase',
                     'class' => 'form-control input-lg', 
                     'required'=>'required',
                     'data-parsley-trigger ' => 'input focusin',
-                    'readonly' =>'readonly',
                     'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                   </div>
 
                   <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('last_name', 'Apellido Paterno:') !!}
-                    {!! Form::text('last_name',$client->last_name, [
+                    {!! Form::label('firts_name', 'Nombre:') !!}
+                    {!! Form::text('firts_name', $client->firts_name, [
                       'style' => 'text-transform:uppercase',
                       'class' => 'form-control input-lg', 
                       'required'=>'required',
                       'data-parsley-trigger ' => 'input focusin',
-                      'readonly'=>'readonly',
+                      'readonly' =>'readonly',
                       'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                     </div>
 
-
                     <div class="form-group col-sm-6 col-lg-4">
-                      {!! Form::label('mothers_last_name', 'Apellido Materno:') !!}
-                      {!! Form::text('mothers_last_name', $client->mothers_last_name, [
+                      {!! Form::label('last_name', 'Apellido Paterno:') !!}
+                      {!! Form::text('last_name',$client->last_name, [
                         'style' => 'text-transform:uppercase',
                         'class' => 'form-control input-lg', 
                         'required'=>'required',
@@ -129,8 +117,8 @@
 
 
                       <div class="form-group col-sm-6 col-lg-4">
-                        {!! Form::label('curp', 'Curp:') !!}
-                        {!! Form::text('curp', $client->curp, [
+                        {!! Form::label('mothers_last_name', 'Apellido Materno:') !!}
+                        {!! Form::text('mothers_last_name', $client->mothers_last_name, [
                           'style' => 'text-transform:uppercase',
                           'class' => 'form-control input-lg', 
                           'required'=>'required',
@@ -141,8 +129,8 @@
 
 
                         <div class="form-group col-sm-6 col-lg-4">
-                          {!! Form::label('ine', 'Ine:') !!}
-                          {!! Form::text('ine', $client->ine, [
+                          {!! Form::label('curp', 'Curp:') !!}
+                          {!! Form::text('curp', $client->curp, [
                             'style' => 'text-transform:uppercase',
                             'class' => 'form-control input-lg', 
                             'required'=>'required',
@@ -151,45 +139,61 @@
                             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                           </div>
 
-                          <input type="hidden" name="client_id" value="{{ $client->id}}">
-                          
 
-                          
                           <div class="form-group col-sm-6 col-lg-4">
-                            {!! Form::label('collection_period', 'Horario Sugerido de Cobro:') !!}
-                            {!! Form::select('collection_period',['MAÑANA'=>'MAÑANA','MEDIO DÍA'=>'MEDIO DIA','TARDE'=>'TARDE'],null, [
+                            {!! Form::label('ine', 'Ine:') !!}
+                            {!! Form::text('ine', $client->ine, [
                               'style' => 'text-transform:uppercase',
                               'class' => 'form-control input-lg', 
                               'required'=>'required',
                               'data-parsley-trigger ' => 'input focusin',
+                              'readonly'=>'readonly',
                               'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                             </div>
+
+                            <input type="hidden" name="client_id" value="{{ $client->id}}">
+                            
+
+                            
                             <div class="form-group col-sm-6 col-lg-4">
-                              {!! Form::label('firm', 'Firma:') !!}
-                              {!! Form::text('firm',null, [
+                              {!! Form::label('collection_period', 'Horario Sugerido de Cobro:') !!}
+                              {!! Form::select('collection_period',['MAÑANA'=>'MAÑANA','MEDIO DÍA'=>'MEDIO DIA','TARDE'=>'TARDE'],null, [
+                                'style' => 'text-transform:uppercase',
                                 'class' => 'form-control input-lg', 
-                                'id'    => 'signature',
                                 'required'=>'required',
                                 'data-parsley-trigger ' => 'input focusin',
-                                'readonly'
-                                ]) !!}
+                                'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                               </div>
-                              <div class="form-group col-sm-12 col-lg-12">
-                                <div id="signature-pad" class="m-signature-pad">
-                                  <div class="m-signature-pad--body">
-                                  <canvas style="border: 1px solid black; height: 200px;"></canvas>
-                                  </div>
-                                  <div class="m-signature-pad--footer">
-                                    <button type="button" class="button clear" data-action="clear">Limpiar</button>
-                                    <button type="button" class="button save" data-action="save">Usar</button>
-                                  </div>
+                              <div class="form-group col-sm-6 col-lg-4">
+                                {!! Form::label('firm', 'Firma:') !!}
+                                {!! Form::text('firm',null, [
+                                  'class' => 'form-control input-lg', 
+                                  'id'    => 'signature',
+                                  'required'=>'required',
+                                  'data-parsley-trigger ' => 'input focusin',
+                                  'readonly'
+                                  ]) !!}
                                 </div>
+                                <div class="form-group col-sm-12 col-lg-12">
+                                  <div id="signature-pad" class="m-signature-pad">
+                                    <div class="m-signature-pad--body">
+                                      <canvas style="border: 1px solid black; height: 200px;"></canvas>
+                                    </div>
+                                    <div class="m-signature-pad--footer">
+                                      <button type="button" class="button clear" data-action="clear">Limpiar</button>
+                                      <button type="button" class="button save" data-action="save">Usar</button>
+                                    </div>
+                                  </div>
 
-                              </div>
-                              <input type="hidden" name="type_product" value="{{$product->id}}">
+                                </div>
+                                <input type="hidden" name="type_product" value="{{$product->id}}">
 
-                              <div class="form-group col-sm-12">
-                                {!! Form::submit('GUARDAR', ['class' => 'btn btn-primary']) !!}
+                                <div class="box-body" >
+                                 <div class="col-md-4">
+                                  <div class="btn-group">
+                                    {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+                                  </div>
+                                </div> 
                               </div>
                             </div>                            
                           </div>

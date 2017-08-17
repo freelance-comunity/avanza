@@ -61,7 +61,9 @@
 
              <div class="box-body" >
                <div class="col-md-4">
-                {!! Form::submit('GUARDAR', ['class' => 'btn btn-lg btn-primary','required'=>'required' ]) !!}
+                <div class="btn-group">
+                  {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+                </div>
               </div> 
             </div>
 

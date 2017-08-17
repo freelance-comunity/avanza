@@ -31,7 +31,7 @@
       			"language": {
       				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
       			}
-           
+
           } );
         });
       </script>
@@ -128,4 +128,33 @@
     });
   </script>
 
+  <script src="{{ asset('/js/jquery.loader.js') }}"></script>
+  <script type="text/javascript">
+    (function ($) {
+      "use strict";
+
+        $(function () { // short document ready
+
+          $('.btn-group')
+          .on('click', '.btn-info', function () {
+            $('.hero-unit').loader('show');
+          })
+          .on('click', '.btn-warning', function () {
+            $('.hero-unit').loader('hide');
+          })
+          .on('click', '.btn-primary', function () {
+            if ($('body').hasClass('loading')) {
+              $('body').removeClass('loading')
+              .loader('hide');
+            } else {
+              $('body').addClass('loading')
+              .loader('show', {
+                overlay: true
+              });
+            }
+          });
+
+        });
+      } (jQuery));
+    </script>
 

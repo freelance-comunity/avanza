@@ -2,6 +2,8 @@
   <meta charset="UTF-8">
   <title>CREDIEFECTIVO</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+  <link rel="icon" href="{{ asset('/img/icon.png') }}" type="image/x-icon" />
+
   <!-- Bootstrap 3.3.4 -->
   <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <!-- Font Awesome Icons -->
@@ -18,6 +20,9 @@
         <link href="{{ asset('/css/skins/skin-red.css') }}" rel="stylesheet" type="text/css" />
         <!-- iCheck -->
         <link href="{{ asset('/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
+
+        {{-- Loader JS --}}
+        <link rel="stylesheet" href="{{ asset('/css/jquery.loader.css') }}">
 
         {{-- Signature CSS y JS --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>

@@ -23,10 +23,13 @@
             'data-parsley-maxlength' => '10','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
 
-
-
-        <button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
-
-    </div>    
+        <div class="box-body" >
+         <div class="col-md-4">
+            <div class="btn-group">
+              {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+          </div>
+      </div> 
+  </div>
+</div>    
 </div>
 

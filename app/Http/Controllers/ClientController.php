@@ -330,20 +330,27 @@ class ClientController extends AppBaseController
 		$client = Client::find($id);
 		$credit = Credit::all();
 		$credits = $client->credits;
-		/*foreach ($credits as $value) {
-			$status = 0;
-			$diario = 0;
-			$semanal = 0;
+		
+		/*$status = 0;
+		$diario = 0;
+		$semanal = 0;
+		foreach ($credits as $value) {
 			if ($value->status == 'MINISTRADO') {
 				$status ++;
 			}
-			if ($value->periodicity == 'DIARIO') {
+			elseif ($value->periodicity == "DIARIO") {
 				$diario ++;
 			}
 			
-			if ($value->periodicity == 'SEMANAL') {
+			elseif ($value->periodicity == 'SEMANAL') {
 				$semanal ++;
+
 			}
+			if ($semanal == 1 or $diario == 2 or $status == 3) {
+				break;
+			}
+
+			
 		}
 		if ($status == 3) {
 			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
@@ -369,6 +376,7 @@ class ClientController extends AppBaseController
 			->with('product', $product)
 			->with('client', $client)
 			->with('credit',$credit);
+
 		
 	}
 }

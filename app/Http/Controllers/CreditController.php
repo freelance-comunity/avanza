@@ -146,18 +146,19 @@ class CreditController extends AppBaseController
 
 		$references = $client->references;
 		foreach ($references as $key => $reference) {
-			$input['firts_name_reference'] = $reference->firts_name_reference;
-			$input['last_name_reference'] = $reference->last_name_reference;
-			$input['mothers_last_name_reference'] = $reference->mothers_last_name_reference;
-			$input['phone_reference'] = $reference->phone_reference;
-
-			$input['firts_name_reference2'] = $reference->firts_name_reference;
-			$input['last_name_reference2'] = $reference->last_name_reference;
-			$input['mothers_last_name_reference2'] = $reference->mothers_last_name_reference;
-			$input['phone_reference2'] = $reference->phone_reference;
+			if ($key == 0) {
+				$input['firts_name_reference'] = $reference->firts_name_reference;
+				$input['last_name_reference'] = $reference->last_name_reference;
+				$input['mothers_last_name_reference'] = $reference->mothers_last_name_reference;
+				$input['phone_reference'] = $reference->phone_reference;
+			}else
+			{
+				$input['firts_name_reference2'] = $reference->firts_name_reference;
+				$input['last_name_reference2'] = $reference->last_name_reference;
+				$input['mothers_last_name_reference2'] = $reference->mothers_last_name_reference;
+				$input['phone_reference2'] = $reference->phone_reference;	
+			}
 		}
-
-
 
 		$input['firm']   = $url;
 		$input['status'] = "MINISTRADO";
@@ -182,7 +183,6 @@ class CreditController extends AppBaseController
 			$debt->status = "Pendiente";
 			$debt->credit_id = $credit->id;
 			$debt->save();
-
 
 			for ($i=1; $i <= $credit->dues; $i++) { 
 				$var = $date->addDay();
@@ -212,16 +212,11 @@ class CreditController extends AppBaseController
 			$debt->credit_id = $credit->id;
 			$debt->save();
 
-
 			for ($i=1; $i <= $credit->dues; $i++) { 
 				$var = $date->addDay();
 				if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
 					$date->addDay(); 
 				}
-				/*while ($date->isWeekend())
-				{
-					$date->addDay(); 
-				}*/
 
 				$fechaPago[$i] = $date->toDateString();
 				$payment = new Payment;
@@ -254,10 +249,6 @@ class CreditController extends AppBaseController
 				if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
 					$date->addDay(); 
 				}
-				/*while ($date->isWeekend())
-				{
-					$date->addDay(); 
-				}*/
 
 				$fechaPago[$i] = $date->toDateString();
 				$payment = new Payment;

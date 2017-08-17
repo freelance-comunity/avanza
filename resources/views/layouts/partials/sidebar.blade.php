@@ -70,7 +70,7 @@
      </aside>
 
 
-     <div class="modal modal-danger fade" id="cotizador">
+     <div class="modal fade" id="cotizador">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -102,12 +102,16 @@
                 <select id="modalidadr" name="modalidadr" onChange="mostrar(this.value); calcularr()" class="form-control input-lg">
                   <option  value="25">25 días</option>
                   <option value="30">30 días</option>
-                  <option value="45">45 días</option>
+                  <option value="52">52 días</option>
                   <option value="60">60 días</option>
                 </select><br>
                 <input type="hidden" id="tasar" name="tasar" value="0.15">
                 {!! Form::label('capitalr', 'Capital:') !!}
-                {!! Form::text('capitalr', null, ['class' => 'form-control input-lg', 'id' => 'capitalr', 'value' => '0', 'onkeyup' => 'calcularr()']) !!}
+                <div class="range-slider color-3">
+                  <input type="text" id="capitalr" name="capitalr" onChange="calcularr()" />
+                </div>
+                <br>
+                <!-- {!! Form::text('capitalr', null, ['class' => 'form-control input-lg', 'id' => 'capitalr', 'value' => '0', 'onkeyup' => 'calcularr()']) !!}-->
                 <input type="hidden" id="interesr" name="interesr" value="Norway">
 
                 {!! Form::label('totalr', 'TOTAL:') !!}  
@@ -121,19 +125,20 @@
                 <select id="modalidad" name="modalidad"  onChange="mostrar(this.value); calcular()" class="form-control input-lg">
                   <option onChange="calcular()" value="1">1 Semana</option>
                 </select> <br>
-                 <input type="hidden" id="tasa" name="tasa" value="0.60">
+                <input type="hidden" id="tasa" name="tasa" value="0.60">
                 {!! Form::label('capital', 'Capital:') !!}
-                {!! Form::text('capital', null, ['class' => 'form-control input-lg', 'id' => 'capital', 'value' => '0', 'onkeyup' => 'calcular()']) !!}
+                <div class="range-slider color-3">
+                <input type="text" id="capital" name="capital" onChange="calcular()" />
+                </div>
+                <br>
+                <!--{!! Form::text('capital', null, ['class' => 'form-control input-lg', 'id' => 'capital', 'value' => '0', 'onkeyup' => 'calcular()']) !!}-->
 
                 <input type="hidden" id="interes" name="interes">
                 {!! Form::label('total', 'TOTAL:') !!}  
                 {!! Form::text('total', null, ['class' => 'form-control input-lg', 'id' => 'totaln', 'readonly' => 'readonly']) !!}
-
               </div>
-
-
-
             </div>
+            
             <div class="modal-footer">
               <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
             </div>
@@ -142,34 +147,71 @@
         </div>
         <!-- /.modal-dialog -->
       </div>
-
+      <style>
+       
+        .color-3 .irs-min, .irs-max {
+         
+          font-size: 12px; line-height: 1.333;
+          text-shadow: none;
+          top: 0; padding: 1px 3px;
+          background: #e1e4e9;
+          -moz-border-radius: 4px;
+          border-radius: 4px;
+        }
+        .color-3 .irs-from, .irs-to, .irs-single {
+          color: #fff;
+          font-size: 15px; line-height: 1.333;
+          text-shadow: none;
+          padding: 1px 5px;
+          background: black;
+          -moz-border-radius: 4px;
+          border-radius: 4px;
+        }
+      </style>
       <script>
-        function calcular()
-        {
-          capital = eval(document.getElementById('capital').value);
-          tasa = eval(document.getElementById('tasa').value);
-          interes = capital * tasa;
+        $("#capitalr").ionRangeSlider({
+         grid: true,
+         from: 0,
+         values: [0,1000, 1500, 2000, 2500, 3000, 3500, 4000,4500,5000,5500,6000,6500,7000,7500,8000,8500, 9000, 9500,10000,10500,11000,11500, 12000, 12500, 13000, 13500, 14000,14500, 15000,15500,16000,16500, 17000,17500,18000,18500,19000,19500, 20000],
+         prefix: "$"
+       });
+     </script>
+     <script>
+      $("#capital").ionRangeSlider({
+        grid: true,
+         from: 0,
+         values: [0,1000, 1500, 2000, 2500, 3000, 3500, 4000,4500,5000,5500,6000,6500,7000,7500,8000,8500, 9000, 9500,10000,10500,11000,11500, 12000, 12500, 13000, 13500, 14000,14500, 15000,15500,16000,16500, 17000,17500,18000,18500,19000,19500, 20000],
+         prefix: "$"
+      });
+    </script>
+    <script>
+      function calcular()
+      {
+        capital = eval(document.getElementById('capital').value);
+        tasa = eval(document.getElementById('tasa').value);
+        interes = capital * tasa;
 
-          document.getElementById('interes').value=interes;
-          modalidad = eval(document.getElementById('modalidad').value);
+        document.getElementById('interes').value=interes;
+        modalidad = eval(document.getElementById('modalidad').value);
 
-          utilidad_neta = capital + interes;
-          total= utilidad_neta/modalidad;
+        utilidad_neta = capital + interes;
+        total= utilidad_neta/modalidad;
 
-          document.getElementById('totaln').value=Math.ceil(total);         
-        }
-        function calcularr()
-        {
-          capitalr = eval(document.getElementById('capitalr').value);
-          tasar = eval(document.getElementById('tasar').value);
-          interesr = capitalr * tasar;
+        document.getElementById('totaln').value=Math.ceil(total);         
+      }
+      function calcularr()
+      {
+        capitalr = eval(document.getElementById('capitalr').value);
+        tasar = eval(document.getElementById('tasar').value);
+        interesr = capitalr * tasar;
 
-          document.getElementById('interesr').value=interes;
-          modalidadr = eval(document.getElementById('modalidadr').value);
+        document.getElementById('interesr').value=interes;
+        modalidadr = eval(document.getElementById('modalidadr').value);
 
-          utilidad_netar = capitalr + interesr;
-          totalr= utilidad_netar/modalidadr;
+        utilidad_netar = capitalr + interesr;
+        totalr= utilidad_netar/modalidadr;
 
-          document.getElementById('totalnr').value=Math.ceil(totalr);         
-        }
-      </script>
+        document.getElementById('totalnr').value=Math.ceil(totalr);         
+      }
+    </script>
+

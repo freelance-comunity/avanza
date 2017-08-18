@@ -331,27 +331,27 @@ class ClientController extends AppBaseController
 			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('clients.index'));
 		}else{
-		$product = Product::find($product);
-		$client = Client::find($id);
-		$credit = Credit::all();
-		$credits = $client->credits;
-		
-		
-		$status = 0;
-		foreach ($credits as $value) {
-			if ($value->status == 'MINISTRADO') {
-				$status ++;
+			$product = Product::find($product);
+			$client = Client::find($id);
+			$credit = Credit::all();
+			$credits = $client->credits;
+
+
+			$status = 0;
+			foreach ($credits as $value) {
+				if ($value->status == 'MINISTRADO') {
+					$status ++;
+				}
+				if ($status == 3) {
+					break;
+				}
+
 			}
+
 			if ($status == 3) {
-				break;
+				Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+				return redirect(route('clients.index'));
 			}
-			
-		}
-		
-		if ($status == 3) {
-			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-			return redirect(route('clients.index'));
-		}
 		/*elseif ($diario == 2) {
 			Toastr::error('Este cliente ya cuenta con 2 créditos diarios','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
@@ -367,5 +367,7 @@ class ClientController extends AppBaseController
 			->with('client', $client)
 			->with('credit',$credit);
 		}
-			
+		}	
 	}
+
+}

@@ -9,6 +9,7 @@ use Response;
 use Flash;
 use Schema;
 use Toastr;
+use Validator;
 
 
 class PaymentController extends AppBaseController
@@ -24,24 +25,24 @@ class PaymentController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Payment::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $payments = $query->get();
+		$payments = $query->get();
 
-        return view('payments.index')
-            ->with('payments', $payments)
-            ->with('attributes', $attributes);
+		return view('payments.index')
+		->with('payments', $payments)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -63,7 +64,7 @@ class PaymentController extends AppBaseController
 	 */
 	public function store(CreatePaymentRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$payment = Payment::create($input);
 
@@ -164,7 +165,17 @@ class PaymentController extends AppBaseController
 	}
 
 	public function process(Request $request)
-	{
+	{	
+		$validator = Validator::make($request->all(), [
+			'payment' => 'required|numeric',
+			'payment_id' => 'required',
+			]);
+
+		if ($validator->fails()) {
+			Toastr::error('Por favor introduce una cantidad.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		}
+
 		$ammount = $request->input('payment');
 		$payment = Payment::find($request->input('payment_id'));
 		$payment->balance = $payment->total - $ammount;

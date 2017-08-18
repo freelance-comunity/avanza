@@ -1,13 +1,8 @@
-<div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="payment_{{ $payment->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        @php
-        $now = Carbon\Carbon::now()->toDateString();
-        $debt = $credit->debt;
-        $payment_day = App\Models\Payment::where('date', $now)->where('debt_id', $debt->id)->get();
-        @endphp
-        <h5 class="modal-title" id="exampleModalLabel">REALIZAR PAGO {{ $now }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">REALIZAR PAGO # {{ $payment->number }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -21,39 +16,10 @@
             'class' => 'form-control input-lg',
             'placeholder' => 'PAGO',
             'id' => 'payment',
-            'onkeyup' => 'check()',
             'required' => 'required',
             'data-parsley-type' => 'number',
             'data-parsley-trigger ' => 'input focusin',]) !!}
-          </p>
-          @foreach ($payment_day as $payment)
-            <input type="hidden" value="{{ $payment->id }}" name="payment_id">
-          @endforeach
-          <p>
-            <div class="table-responsive">
-              <table class="table" id="payments">
-                <thead>
-                  <th>No. Cuota</th>
-                  <th>Capital</th>
-                  <th>Interés</th>
-                  <th>Moratorio</th>
-                  <th>Total</th>
-                  <th>Pago</th>       
-                </thead>
-                <tbody>
-                  @foreach($payment_day as $payment)
-                  <tr>
-                    <td>#{{ $payment->number }}</td>
-                    <td>$ {{ number_format($payment->capital) }}</td>
-                    <td>$ {{ number_format($payment->interest) }}</td>
-                    <td>$ {{ number_format($payment->moratorium) }}</td>
-                    <td id="total">$ {{ number_format($payment->total) }}</td>
-                    <td>{{$payment->payment}}</td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
+            <input type="hidden"  name="payment_id" value="{{ $payment->id }}">
           </p>
           <p>
             {!! Form::submit('PAGAR', ['class' => 'btn btn-lg btn-block btn-success']) !!}
@@ -67,10 +33,3 @@
       </div>
     </div>
   </div>
-  <script>
-    function check() {
-      payment = eval(document.getElementById('payment').value); 
-      var txt = 300;
-      $('#total').text(payment)
-    }
-  </script>

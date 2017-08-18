@@ -44,7 +44,7 @@
 						<p class="lead" style="color:red;"><strong>CAPITAL:</strong>$ {{ number_format($late_capital, 2) }}</p>
 						<p class="lead" style="color:red;"><strong>MORA:</strong>$ {{ number_format($late_moratorium, 2)	 }}</p>
 						<p class="lead" style="color:red;"><strong>TOTAL:</strong>$ {{ number_format($late_total, 2) }}</p>
-						<button type="button" class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#payment">Pagar</button>
+						<button type="button" class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#payment">Saldar Prestamo</button>
 						<hr>
 					</div>					
 					<div class="col-md-12">
@@ -67,6 +67,7 @@
 								</thead>
 								<tbody>
 									@foreach($payments as $payment)
+									@include('credits.payment')
 									@if ($payment->status == "Pendiente")
 									<tr class="active">
 										<td>Cuota #{{ $payment->number }}</td>
@@ -76,7 +77,7 @@
 										<td>$ {{ number_format($payment->capital, 2) }}</td>
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
-										<td> <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment">$ {{ number_format($payment->total, 2) }}</button></td>
+										<td> <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
 										<td>${{ number_format($payment->payment, 2)}}</td>
 										<td>${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:gray;">{{$payment->status}}</p></td>
@@ -90,7 +91,7 @@
 										<td>$ {{ number_format($payment->capital, 2) }}</td>
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
-										<td> <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#payment">$ {{ number_format($payment->total, 2) }}</button></td>
+										<td> <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
 										<td>${{ number_format($payment->payment, 2)}}</td>
 										<td>${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:red;">{{$payment->status}}</p></td>
@@ -104,7 +105,7 @@
 										<td>$ {{ number_format($payment->capital, 2) }}</td>
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
-										<td> <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment">$ {{ number_format($payment->total, 2) }}</button></td>
+										<td> <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
 										<td>${{ number_format($payment->payment, 2)}}</td>
 										<td>${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:green;">{{$payment->status}}</p></td>
@@ -115,7 +116,6 @@
 							</table>
 						</div>
 					</div>
-					@include('credits.payment')
 				</div>
 				<!-- /.box-body -->
 			</div>

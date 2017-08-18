@@ -11,6 +11,7 @@ use Flash;
 use Schema;
 use Toastr;
 use Illuminate\Support\Str;
+use Auth;
 
 class PermissionController extends AppBaseController
 {
@@ -51,7 +52,10 @@ class PermissionController extends AppBaseController
 	 * @return Response
 	 */
 	public function create()
-	{
+	{	if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('permissions.index'));
+		}
 		return view('permissions.create');
 	}
 
@@ -63,7 +67,11 @@ class PermissionController extends AppBaseController
 	 * @return Response
 	 */
 	public function store(CreatePermissionRequest $request)
-	{
+	{	
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('permissions.index'));
+		}
 		$input = $request->all();
 		$name = Str::lower($request->input('name'));
 		$input['name'] = str_slug($name);
@@ -84,6 +92,10 @@ class PermissionController extends AppBaseController
 	 */
 	public function show($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('permissions.index'));
+		}
 		$permission = Permission::find($id);
 
 		if(empty($permission))
@@ -103,6 +115,10 @@ class PermissionController extends AppBaseController
 	 */
 	public function edit($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('permissions.index'));
+		}
 		$permission = Permission::find($id);
 
 		if(empty($permission))
@@ -124,6 +140,10 @@ class PermissionController extends AppBaseController
 	 */
 	public function update($id, CreatePermissionRequest $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('permissions.index'));
+		}
 		/** @var Permission $permission */
 		$permission = Permission::find($id);
 
@@ -150,6 +170,10 @@ class PermissionController extends AppBaseController
 	 */
 	public function destroy($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('roles.index'));
+		}
 		/** @var Permission $permission */
 		$permission = Permission::find($id);
 

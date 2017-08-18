@@ -10,6 +10,7 @@ use Flash;
 use Schema;
 use Toastr;
 use Illuminate\Support\Str;
+use Auth;
 
 class RoleController extends AppBaseController
 {
@@ -28,6 +29,10 @@ class RoleController extends AppBaseController
     
 	public function index(Request $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return view('home');
+		}
 		$query = Role::query();
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
@@ -55,7 +60,10 @@ class RoleController extends AppBaseController
 	 * @return Response
 	 */
 	public function create()
-	{
+	{	if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('roles.index'));
+		}
 		return view('roles.create');
 	}
 
@@ -68,6 +76,11 @@ class RoleController extends AppBaseController
 	 */
 	public function store(CreateRoleRequest $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('roles.index'));
+		}
+
         $input = $request->all();
        	$name = Str::lower($request->input('name'));
         $input['name'] = str_slug($name);
@@ -88,6 +101,10 @@ class RoleController extends AppBaseController
 	 */
 	public function show($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('roles.index'));
+		}
 		$role = Role::find($id);
 
 		if(empty($role))
@@ -107,6 +124,10 @@ class RoleController extends AppBaseController
 	 */
 	public function edit($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('roles.index'));
+		}
 		$role = Role::find($id);
 
 		if(empty($role))
@@ -127,7 +148,11 @@ class RoleController extends AppBaseController
 	 * @return Response
 	 */
 	public function update($id, CreateRoleRequest $request)
-	{
+	{	
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('roles.index'));
+		}
 		/** @var Role $role */
 		$role = Role::find($id);
 
@@ -154,6 +179,10 @@ class RoleController extends AppBaseController
 	 */
 	public function destroy($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('roles.index'));
+		}
 		/** @var Role $role */
 		$role = Role::find($id);
 

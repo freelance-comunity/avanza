@@ -358,6 +358,10 @@ class CreditController extends AppBaseController
 	 */
 	public function show($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('credits.index'));
+		}
 		$credit = Credit::find($id);
 
 		if(empty($credit))

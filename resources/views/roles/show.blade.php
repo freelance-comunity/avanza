@@ -1,3 +1,4 @@
+
  @php
  $permissions = $role->permissions;
  @endphp

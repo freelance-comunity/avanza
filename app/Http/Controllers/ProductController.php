@@ -9,6 +9,7 @@ use Response;
 use Flash;
 use Schema;
 use Toastr;
+use Auth;
 
 class ProductController extends AppBaseController
 {
@@ -55,6 +56,10 @@ class ProductController extends AppBaseController
 	 */
 	public function create()
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('products.index'));
+		}
 		return view('products.create');
 	}
 
@@ -67,6 +72,10 @@ class ProductController extends AppBaseController
 	 */
 	public function store(CreateProductRequest $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('products.index'));
+		}
         $input = $request->all();
     
 		$product = Product::create($input);
@@ -85,6 +94,10 @@ class ProductController extends AppBaseController
 	 */
 	public function show($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('clients.index'));
+		}
 		$product = Product::find($id);
 
 		if(empty($product))
@@ -104,6 +117,10 @@ class ProductController extends AppBaseController
 	 */
 	public function edit($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('products.index'));
+		}
 		$product = Product::find($id);
 
 		if(empty($product))
@@ -125,6 +142,10 @@ class ProductController extends AppBaseController
 	 */
 	public function update($id, CreateProductRequest $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('clients.index'));
+		}
 		/** @var Product $product */
 		$product = Product::find($id);
 
@@ -151,6 +172,10 @@ class ProductController extends AppBaseController
 	 */
 	public function destroy($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('products.index'));
+		}
 		/** @var Product $product */
 		$product = Product::find($id);
 

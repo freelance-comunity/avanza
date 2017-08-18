@@ -9,6 +9,7 @@ use Response;
 use Flash;
 use Schema;
 use Toastr;
+use Auth;
 
 class BranchController extends AppBaseController
 {
@@ -49,7 +50,10 @@ class BranchController extends AppBaseController
 	 * @return Response
 	 */
 	public function create()
-	{
+	{	if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('branches.index'));
+		}
 		return view('branches.create');
 	}
 
@@ -62,6 +66,10 @@ class BranchController extends AppBaseController
 	 */
 	public function store(CreateBranchRequest $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('branches.index'));
+		}
 		$input = $request->all();
 
 		$branch = Branch::create($input);
@@ -80,6 +88,10 @@ class BranchController extends AppBaseController
 	 */
 	public function show($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('branches.index'));
+		}
 		$branch = Branch::find($id);
 
 		if(empty($branch))
@@ -111,6 +123,10 @@ class BranchController extends AppBaseController
 	 */
 	public function edit($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('branches.index'));
+		}
 		$branch = Branch::find($id);
 
 		if(empty($branch))
@@ -132,6 +148,10 @@ class BranchController extends AppBaseController
 	 */
 	public function update($id, CreateBranchRequest $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('branches.index'));
+		}
 		/** @var Branch $branch */
 		$branch = Branch::find($id);
 
@@ -158,6 +178,10 @@ class BranchController extends AppBaseController
 	 */
 	public function destroy($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('branches.index'));
+		}
 		/** @var Branch $branch */
 		$branch = Branch::find($id);
 

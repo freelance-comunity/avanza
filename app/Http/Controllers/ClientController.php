@@ -241,6 +241,10 @@ class ClientController extends AppBaseController
 	 */
 	public function show($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('clients.index'));
+		}
 		$client = Client::find($id);
 
 		if(empty($client))
@@ -261,7 +265,10 @@ class ClientController extends AppBaseController
 	 */
 	public function edit($id)
 	{
-
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('clients.index'));
+		}
 		$client = Client::find($id);
 		if(empty($client))
 		{
@@ -282,7 +289,11 @@ class ClientController extends AppBaseController
 	 * @return Response
 	 */
 	public function update($id, CreateClientRequest $request)
-	{
+	{	
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('clients.index'));
+		}
 		/** @var Client $client */
 		$client = Client::find($id);
 		if(empty($client))
@@ -307,7 +318,11 @@ class ClientController extends AppBaseController
 	 * @return Response
 	 */
 	public function destroy($id)
-	{
+	{	
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('clients.index'));
+		}
 		/** @var Client $client */
 		$client = Client::find($id);
 

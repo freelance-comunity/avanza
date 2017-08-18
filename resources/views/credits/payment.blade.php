@@ -19,6 +19,7 @@
             'required' => 'required',
             'data-parsley-type' => 'number',
             'data-parsley-trigger ' => 'input focusin','type'=>'return numeros(event)']) !!}
+
             <input type="hidden"  name="payment_id" value="{{ $payment->id }}">
           </p>
           <p>

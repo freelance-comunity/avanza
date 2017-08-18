@@ -172,26 +172,81 @@ class PaymentController extends AppBaseController
 			]);
 
 		if ($validator->fails()) {
-			Toastr::error('Por favor introduce una cantidad.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			Toastr::error('Por favor introduce una cantidad correcta.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();
 		}
 
 		$ammount = $request->input('payment');
 		$payment = Payment::find($request->input('payment_id'));
-		$payment->balance = $payment->total - $ammount;
+		$debt = $payment->debt;
+		if ($ammount > $payment->balance) {
+			$budget = intdiv($ammount, $payment->balance);
+			$r = fmod($ammount, $payment->balance);
+			$count = $payment->id + $budget;
 
-		if ($payment->balance == 0) {
-			$payment->status = "Pagado";
-			$payment->payment = $ammount;
-			Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-		}elseif ($payment->balance >= 1) {
-			$payment->status = "Vencido";
-			$payment->payment = $ammount;
-			Toastr::info('Pago confirmado con adeudo.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			if ($budget >= 1 AND $r >= 1) {
+				for ($i=$payment->id; $i < $count; $i++) { 
+					$payment_process = Payment::find($i);
+					$payment_process->payment = $payment->balance;
+					$payment_process->balance = 0;
+					$payment_process->status = "Pagado";
+					$payment_process->save();
+					$debt->ammount = $debt->ammount - $payment->balance;
+					$debt->save();
+
+				}
+			}else{
+				for ($i=$payment->id; $i < $count; $i++) { 
+					$payment_process = Payment::find($i);
+					$payment_process->payment = $payment->balance;
+					$payment_process->balance = 0;
+					$payment_process->status = "Pagado";
+					$payment_process->save();
+					$debt->ammount = $debt->ammount - $payment->balance;
+					$debt->save();
+				}
+				Toastr::success('Pagos confirmados.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			}
+		}else{
+			if ($payment->status == "Vencido") {
+				$ammount = $request->input('payment');
+				$rest = $payment->balance;
+				$paid_out = $payment->payment;
+				$new_balance = $rest - $ammount;
+				if ($new_balance == 0) {
+					$payment->balance = $new_balance;
+					$payment->status = "Pagado";
+					$payment->payment = $paid_out + $ammount;
+					$debt->ammount = $debt->ammount - $rest;
+					$debt->save();
+					Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				}else{
+					$payment->status = "Vencido";
+					$payment->balance = $new_balance;
+					$payment->payment = $paid_out + $ammount;
+
+					$debt->ammount = $debt->ammount - $ammount;
+					$debt->save();
+					Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				}
+			}else{
+				$payment->balance = $payment->total - $ammount;
+				if ($payment->balance == 0) {
+					$payment->status = "Pagado";
+					$payment->payment = $ammount;
+					$debt->ammount = $debt->ammount - $payment->payment;
+					$debt->save();
+					Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				}elseif ($payment->balance >= 1) {
+					$payment->status = "Vencido";
+					$payment->payment = $ammount;
+					$debt->ammount = $debt->ammount - $payment->payment;
+					$debt->save();
+					Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				}
+			}
+			$payment->save();
 		}
-		$payment->save();
-
-		return redirect()->back();
-
+		return redirect()->back();	
 	}
 }

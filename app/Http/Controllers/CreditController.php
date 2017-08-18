@@ -167,10 +167,19 @@ class CreditController extends AppBaseController
 		$credit = Credit::create($input);
 		
 		$ammount= $credit->ammount;
-		$tasa = $credit->interest_rate;
 		$dues = $credit->dues;
 		$periodicity = $credit->periodicity;
-
+		if ($periodicity == 'DIARIO' && $dues == 30) {
+			$tasa = 0.17;
+		}elseif ($periodicity == 'DIARIO' && $dues == 60) {
+			$tasa = 0.17;
+		}elseif ($periodicity == 'DIARIO' && $dues == 25) {
+			$tasa = 0.15;
+		}elseif ($periodicity == 'DIARIO' && $dues == 52) {
+			$tasa = 0.15;
+		}elseif ($periodicity == 'SEMANAL') {
+			$tasa = 0.60;
+		}
 		$interes = $ammount*$tasa;
 		$capital = $ammount/$dues;
 		$total = $ammount + $interes;

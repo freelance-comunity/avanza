@@ -60,7 +60,8 @@
 									<th>Interés</th>
 									<th>Mora</th>
 									<th>Total</th>
-									<th>Pago</th>				
+									<th>Pagado</th>
+									<th>Balance</th>				
 									<th>Estatus</th>
 
 								</thead>
@@ -76,10 +77,11 @@
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 										<td> <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment">$ {{ number_format($payment->total, 2) }}</button></td>
-										<td>{{$payment->payment}}</td>
+										<td>${{ number_format($payment->payment, 2)}}</td>
+										<td>${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:gray;">{{$payment->status}}</p></td>
 									</tr>
-									@elseif($payment->status == "Atrasado")
+									@elseif($payment->status == "Vencido")
 									<tr class="danger">
 										<td>Cuota #{{ $payment->number }}</td>
 										<td>{{$payment->day->format('l')}}</td>
@@ -89,7 +91,8 @@
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 										<td> <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#payment">$ {{ number_format($payment->total, 2) }}</button></td>
-										<td>{{$payment->payment}}</td>
+										<td>${{ number_format($payment->payment, 2)}}</td>
+										<td>${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:red;">{{$payment->status}}</p></td>
 									</tr>
 									@elseif($payment->status == "Pagado")
@@ -102,7 +105,8 @@
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 										<td> <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment">$ {{ number_format($payment->total, 2) }}</button></td>
-										<td>{{$payment->payment}}</td>
+										<td>${{ number_format($payment->payment, 2)}}</td>
+										<td>${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:green;">{{$payment->status}}</p></td>
 									</tr>
 									@endif

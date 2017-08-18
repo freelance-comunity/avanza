@@ -56,7 +56,7 @@ Todos los Clientes
                   @else
                   @foreach ($products as $product)
                   <div class="form-group col-sm-6 col-lg-6">
-                   <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}" ><button type="button" class="btn btn-block bg-navy">{{mb_strtoupper($product->name)}}</button></a>
+                   <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}" ><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
                  </div>
                  @endforeach
                  @endif

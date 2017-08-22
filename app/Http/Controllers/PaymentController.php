@@ -246,6 +246,35 @@ class PaymentController extends AppBaseController
 						echo "No sabemos que hacer";
 					}
 				}
+			}elseif ($payment->status == "Parcial") {
+				$ammount = $request->input('payment');
+				$rest = $payment->balance;
+				$paid_out = $payment->payment;
+				$new_balance = $rest - $ammount;
+
+				if ($ammount > $payment->balance) {
+					Toastr::warning('Se requiere introducir cantidad exacta o menos para procesar su pago.', 'PAGO VENCIDO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				}
+				else{
+					if ($new_balance == 0) {
+						$payment->balance = $new_balance;
+						$payment->status = "Pagado";
+						$payment->payment = $paid_out + $ammount;
+						$debt->ammount = $debt->ammount - $rest;
+						$debt->save();
+						Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+					}elseif($new_balance < $rest){
+						$payment->status = "Parcial";
+						$payment->balance = $new_balance;
+						$payment->payment = $paid_out + $ammount;
+
+						$debt->ammount = $debt->ammount - $ammount;
+						$debt->save();
+						Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+					}elseif ($new_balance > $rest) {
+						echo "No sabemos que hacer";
+					}
+				}
 			}
 			else{
 				$payment->balance = $payment->total - $ammount;

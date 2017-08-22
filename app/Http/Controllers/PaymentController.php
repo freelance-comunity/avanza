@@ -179,7 +179,7 @@ class PaymentController extends AppBaseController
 		$ammount = $request->input('payment');
 		$payment = Payment::find($request->input('payment_id'));
 		$debt = $payment->debt;
-		if ($ammount > $payment->balance) {
+		if ($ammount > $payment->balance AND $payment->status == "Pendiente") {
 			$budget = intdiv($ammount, $payment->balance);
 			$r = fmod($ammount, $payment->balance);
 			$count = $payment->id + $budget;
@@ -193,9 +193,17 @@ class PaymentController extends AppBaseController
 					$payment_process->save();
 					$debt->ammount = $debt->ammount - $payment->balance;
 					$debt->save();
-
 				}
-			}else{
+				$payment_extra = Payment::find($count);
+				$payment_extra->payment = $r;
+				$payment_extra->balance = $payment_extra->balance - $r;
+				$payment_extra->status = "Parcial";
+				$payment_extra->save();
+				$debt->ammount = $debt->ammount - $r;
+				$debt->save();
+				Toastr::success('Pagos test.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			}
+			else{
 				for ($i=$payment->id; $i < $count; $i++) { 
 					$payment_process = Payment::find($i);
 					$payment_process->payment = $payment->balance;
@@ -207,29 +215,39 @@ class PaymentController extends AppBaseController
 				}
 				Toastr::success('Pagos confirmados.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			}
-		}else{
+		}
+		else{
 			if ($payment->status == "Vencido") {
 				$ammount = $request->input('payment');
 				$rest = $payment->balance;
 				$paid_out = $payment->payment;
 				$new_balance = $rest - $ammount;
-				if ($new_balance == 0) {
-					$payment->balance = $new_balance;
-					$payment->status = "Pagado";
-					$payment->payment = $paid_out + $ammount;
-					$debt->ammount = $debt->ammount - $rest;
-					$debt->save();
-					Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-				}else{
-					$payment->status = "Vencido";
-					$payment->balance = $new_balance;
-					$payment->payment = $paid_out + $ammount;
 
-					$debt->ammount = $debt->ammount - $ammount;
-					$debt->save();
-					Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				if ($ammount > $payment->balance) {
+					Toastr::warning('Se requiere introducir cantidad exacta o menos para procesar su pago.', 'PAGO VENCIDO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				}
-			}else{
+				else{
+					if ($new_balance == 0) {
+						$payment->balance = $new_balance;
+						$payment->status = "Pagado";
+						$payment->payment = $paid_out + $ammount;
+						$debt->ammount = $debt->ammount - $rest;
+						$debt->save();
+						Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+					}elseif($new_balance < $rest){
+						$payment->status = "Vencido";
+						$payment->balance = $new_balance;
+						$payment->payment = $paid_out + $ammount;
+
+						$debt->ammount = $debt->ammount - $ammount;
+						$debt->save();
+						Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+					}elseif ($new_balance > $rest) {
+						echo "No sabemos que hacer";
+					}
+				}
+			}
+			else{
 				$payment->balance = $payment->total - $ammount;
 				if ($payment->balance == 0) {
 					$payment->status = "Pagado";
@@ -240,6 +258,10 @@ class PaymentController extends AppBaseController
 				}elseif ($payment->balance >= 1) {
 					$payment->status = "Vencido";
 					$payment->payment = $ammount;
+					$payment->moratorium = 20;
+					$payment->total = $payment->ammount + $payment->moratorium;
+					$payment->balance = $payment->balance + 20;
+					$debt->ammount = $debt->ammount + 20;
 					$debt->ammount = $debt->ammount - $payment->payment;
 					$debt->save();
 					Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);

@@ -18,6 +18,7 @@
 				$late_moratorium = $late_payments->sum('moratorium');
 				$late_total = $late_interest + $late_capital + $late_moratorium;
 				$pay =  App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pagado')->count();
+				$date_now = Carbon\Carbon::now()->toDateString();
 				@endphp
 				<div class="box-body">
 					<div class="col-md-4">
@@ -135,10 +136,27 @@
 										<td>$ {{ number_format($payment->capital, 2) }}</td>
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
-										<td> <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
+										<td>
+											<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
+											</button>
+										</td>
 										<td>${{ number_format($payment->payment, 2)}}</td>
 										<td>${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:gray;">{{$payment->status}}</p></td>
+									</tr>
+									@elseif($payment->status == "Parcial")
+									<tr class="info">
+										<td>Cuota #{{ $payment->number }}</td>
+										<td>{{$payment->day->format('l')}}</td>
+										<td>{{$payment->date->format('d F Y')}}</td>
+										<td>$ {{ number_format($payment->ammount, 2) }}</td>
+										<td>$ {{ number_format($payment->capital, 2) }}</td>
+										<td>$ {{ number_format($payment->interest, 2) }}</td>
+										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
+										<td> <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
+										<td>${{ number_format($payment->payment, 2)}}</td>
+										<td style="color: blue;">${{ number_format($payment->balance, 2) }}</td>
+										<td><p style="color:blue;">{{$payment->status}}</p></td>
 									</tr>
 									@elseif($payment->status == "Vencido")
 									<tr class="danger">

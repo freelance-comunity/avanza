@@ -2,14 +2,14 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">REALIZAR PAGO # {{ $payment->number }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">REALIZAR PAGO # {{ $payment->number }} cuota: {{ $payment->balance }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-        {!! Form::open(['url' => 'process','data-parsley-validate' => '']) !!}  
+      {!! Form::open(['url' => 'process','data-parsley-validate' => '']) !!}  
         <p>
           {!! Form::label('payment', 'Monto:') !!}
           {!! Form::text('payment', null, [
@@ -19,7 +19,6 @@
             'required' => 'required',
             'data-parsley-type' => 'number',
             'data-parsley-trigger ' => 'input focusin','onKeyPress'=>'return numeros(event)']) !!}
-
             <input type="hidden"  name="payment_id" value="{{ $payment->id }}">
           </p>
           <p>
@@ -53,19 +52,17 @@
       return false;
   }
 </script>
-
-
 <script>
   $(document).ready(function(){
    $( "#cl" ).click(function() {
-       if($("#example").val() === ""){
-         alert("Rellene todos los campos");
-       }else{
-         alert('Pago Guardado');
-         break;
-       }
-      
-    });
+     if($("#example").val() === ""){
+       alert("Rellene todos los campos");
+     }else{
+       alert('Pago Guardado');
+       break;
+     }
+
+   });
  });
 </script>
 

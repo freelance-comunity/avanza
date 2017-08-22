@@ -45,6 +45,14 @@ Route::get('geolocation', function(){
     return view('geolocation');
 });
 
+Route::get('division', function(){
+    $var =  intdiv(100, 39);
+    $r = fmod(100, 39);
+    echo $var;
+    echo "<br>";
+    echo $r;
+});
+
 Route::post('process', 'PaymentController@process');
 /*=====  End of Test Routes  ======*/
 

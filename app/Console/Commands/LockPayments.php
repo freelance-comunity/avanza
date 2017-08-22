@@ -29,7 +29,7 @@ class LockPayments extends Command
      */
     public function __construct()
     {
-        parent::__construct();
+      parent::__construct();
     }
 
     /**
@@ -39,18 +39,23 @@ class LockPayments extends Command
      */
     public function handle()
     {
-        $date_now = Carbon::now()->toDateString();
-        $hour_now = Carbon::now()->toTimeString();
-        $payments = Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
-        foreach ($payments as $key => $value) {
-            if ($hour_now >= '09:00:00') {
-              echo "Estamos listos para bloquear";
-              $payment = Payment::find($value->id);
-              $payment->status = 'Atrasado';
-              $payment->moratorium = 20;
-              $payment->total = $payment->ammount + $payment->moratorium;
-              $payment->save();
-          }
+      $date_now = Carbon::now()->toDateString();
+      $hour_now = Carbon::now()->toTimeString();
+      $payments = Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
+      foreach ($payments as $key => $value) {
+        if ($hour_now >= '09:00:00') {
+          echo "Estamos listos para bloquear";
+          $payment = Payment::find($value->id);
+          $payment->status = 'Vencido';
+          $payment->moratorium = 20;
+          $payment->total = $payment->ammount + $payment->moratorium;
+          $payment->balance = $payment->balance + 20;
+          $payment->save();
+
+          $debt = $payment->debt;
+          $debt->ammount = $debt->ammount + 20;
+          $debt->save();
+        }
       }
+    }
   }
-}

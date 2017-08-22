@@ -341,37 +341,39 @@ class ClientController extends AppBaseController
 
 	public function creditsClient($id, $product)
 	{	
-
 		if (Auth::User()->branch_id == 0) {
 			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('clients.index'));
-		}else{
-			$product = Product::find($product);
-			$client = Client::find($id);
-			$credit = Credit::all();
-			$credits = $client->credits;
-
-
-			$status = 0;
-			foreach ($credits as $value) {
-				if ($value->status == 'MINISTRADO') {
-					$status ++;
-				}
-				if ($status == 3) {
-					break;
-				}
-
+		}
+		$product = Product::find($product);
+		$client = Client::find($id);
+		$credit = Credit::all();
+		$credits = $client->credits;
+		$status = 0;
+		$diario =0;
+		foreach ($credits as $value) {
+			if ($value->status == 'MINISTRADO') {
+				$status ++;
 			}
-
 			if ($status == 3) {
-				Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-				return redirect(route('clients.index'));
+				break;
 			}
-		/*elseif ($diario == 2) {
+			if ($value->periodicity == "DIARIO") {
+				$diario ++;
+			}
+			if ($diario == 2) {
+				break;
+			}
+		}
+		if ($status == 3) {
+			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('clients.index'));
+		}
+		elseif ($diario == 2) {
 			Toastr::error('Este cliente ya cuenta con 2 créditos diarios','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
 		}
-		elseif ($semanal == 1) {
+		/*elseif ($semanal == 1) {
 			Toastr::error('Este cliente ya cuenta con 1 créditos semanal','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
 		}*/
@@ -382,7 +384,7 @@ class ClientController extends AppBaseController
 			->with('client', $client)
 			->with('credit',$credit);
 		}
-		}	
-	}
-
+	}	
 }
+
+

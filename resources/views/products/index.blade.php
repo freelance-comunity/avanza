@@ -32,7 +32,7 @@
                     <tr>
                         <td>{!! $product->code !!}</td>
                         <td>{!! $product->name !!}</td>
-                        <td>{!! $product->interest_of_cup * 100 !!} %</td>
+                        <td>{!! $product->interest_of_cup!!} %</td>
                         <td>MXN {!! number_format($product->ammount_max, 2) !!}</td>
                         <td>MXN {!! number_format($product->ammount_min, 2) !!}</td>
                         <td>MXN {!! number_format($product->surcharge, 2) !!}</td>

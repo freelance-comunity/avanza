@@ -18,7 +18,7 @@
             'id' => 'payment example',
             'required' => 'required',
             'data-parsley-type' => 'number',
-            'data-parsley-trigger ' => 'input focusin','type'=>'return numeros(event)']) !!}
+            'data-parsley-trigger ' => 'input focusin','onKeyPress'=>'return numeros(event)']) !!}
 
             <input type="hidden"  name="payment_id" value="{{ $payment->id }}">
           </p>

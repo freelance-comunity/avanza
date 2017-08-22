@@ -178,7 +178,7 @@ class CreditController extends AppBaseController
 		}elseif ($periodicity == 'DIARIO' && $dues == 52) {
 			$tasa = 0.15;
 		}elseif ($periodicity == 'SEMANAL') {
-			$tasa = 0.60;
+			$tasa = 0.15;
 		}
 		$interes = $ammount*$tasa;
 		$capital = $ammount/$dues;
@@ -442,5 +442,11 @@ class CreditController extends AppBaseController
 		Flash::message('Credit deleted successfully.');
 
 		return redirect(route('credits.index'));
+	}
+	public function renovation(Request $request)
+	{
+		$credit = new Credit;
+		$input = $request->all();
+		$credit->save();
 	}
 }

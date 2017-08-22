@@ -15,7 +15,7 @@ Todos los Clientes
 
   <div class="row">
     @if($clients->isEmpty())
-    <div class="well text-center">No se encontraron cliente en el sistema.</div>
+    <div class="well text-center">No se encontraron clientes en el sistema.</div>
     @else
     <div class="table-responsive">
       <table class="table"  id="example">

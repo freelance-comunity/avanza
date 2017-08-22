@@ -3,9 +3,6 @@
 @section('main-content')
 
 <div class="container">
-
-	@include('flash::message')
-
 	<div class="row">
 		<h1 class="pull-left">Créditos</h1>
 	</div>

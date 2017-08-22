@@ -17,13 +17,15 @@
 				$late_capital = $late_payments->sum('capital');
 				$late_moratorium = $late_payments->sum('moratorium');
 				$late_total = $late_interest + $late_capital + $late_moratorium;
+				$pay =  App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pagado')->count();
 				@endphp
 				<div class="box-body">
 					<div class="col-md-4">
 						<p class="lead"><strong>TIPO DE PRESTAMO:</strong> {{$credit->periodicity}}</p>
 						<p class="lead"><strong>MONTO:</strong>$ {{ number_format($credit->ammount, 2) }}</p>
-						<p class="lead"><strong>INTERÉS:</strong> {{$credit->interest_rate*100}}%</p>
+						<p class="lead"><strong>INTERÉS:</strong> {{$credit->interest_rate*1}}%</p>
 						<p class="lead"><strong>CUOTAS:</strong> {{$credit->dues}}</p>
+						<p class="lead"><strong>CUOTAS ABONADAS:</strong> {{$pay}}</p>
 						<p class="lead"><strong>FECHA DE CONTRATO:</strong> {{strtoupper($credit->date->format('l, d F Y'))}}</p>
 						<hr>
 					</div>
@@ -34,7 +36,9 @@
 						<p class="lead"><strong>GARANTÍA:</strong> {{$credit->warranty_type}}</p>
 						@php
 						$debt = $credit->debt;
-						$payments =$debt->payments;
+						$payments = $debt->payments;
+						$client = $credit->client;
+						$product = App\Models\Product::all();
 						@endphp
 						<p class="lead"><strong>CAPITAL:</strong> ${{ number_format($credit->ammount) }}</p>
 						<hr>
@@ -45,6 +49,60 @@
 						<p class="lead" style="color:red;"><strong>MORA:</strong>$ {{ number_format($late_moratorium, 2)	 }}</p>
 						<p class="lead" style="color:red;"><strong>TOTAL:</strong>$ {{ number_format($late_total, 2) }}</p>
 						<button type="button" class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#payment">Saldar Prestamo</button>
+						<!-- Modal -->
+						<div class="modal fade" id="myModal{{$client->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Elige la modalidad</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="text-center">
+											<h4>Selecciona una modalidad de crédito</h4>
+										</div>
+									</div>
+									<div class="modal-footer">
+
+										@foreach ($product as $product)
+										<div class="form-group col-sm-6 col-lg-6">
+											<a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}" ><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
+										</div>
+										@endforeach
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--MODAL-->
+						<div class="modal fade" id="myModal">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Alerta de Renovación de Crédito</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<h1>Necesitas cubrir todos los pagos para renovar el crédito</h1>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary">Save changes</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--endmodal-->
+						@if ($pay == 20)
+						<button type="button" class="btn btn-lg bg-orange btn-block" data-toggle="modal" data-target="#myModal">Renovar Crédito</button></td>
+						@elseif($debt->status == 'Pagado')
+						<button type="button" class="btn btn-lg bg-blue btn-block" data-toggle="modal" data-target="#myModal{{$client->id}}">Renovar Crédito</button></td>
+						@endif
 						<hr>
 					</div>					
 					<div class="col-md-12">

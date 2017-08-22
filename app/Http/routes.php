@@ -143,7 +143,9 @@ Route::post('updatepassword', 'EmployeeController@updatePassword');
 Route::get('formwizard', function(){
 	return view('wizard');
 });
-
+Route::get('teclado', function(){
+    return view('teclado');
+});
 Route::resource('clients', 'ClientController');
 
 Route::get('clients/{id}/delete', [
@@ -249,7 +251,13 @@ Route::get('creditsClient/{id}/{product}',[
     ]);
 
 
+Route::get('renovate/{id}/{product}', function($id){
+    $client = App\Models\Client::find($id);
+    return view('credits.renovate')
+    ->with('client',$client);
+});
 
+Route::post('renovation', 'CreditController@renovation');
 
 Route::get('solicitud/{id}', function($id){
     $credit = App\Models\Credit::find($id);

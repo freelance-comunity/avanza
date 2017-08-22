@@ -14,6 +14,7 @@ use Schema;
 use Toastr;
 use Image;
 use Hash;
+use Auth;
 
 class EmployeeController extends AppBaseController
 {
@@ -28,6 +29,10 @@ class EmployeeController extends AppBaseController
 	
 	public function index(Request $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return view('home');
+		}
 		$query = User::query();
 		$columns = Schema::getColumnListing('$TABLE_NAME$');
 		$attributes = array();
@@ -56,6 +61,10 @@ class EmployeeController extends AppBaseController
 	 */
 	public function create()
 	{	
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('employees.index'));
+		}
 		$branches = Branch::pluck('name', 'id');
 		return view('employees.create')
 		->with('branches', $branches);
@@ -131,6 +140,10 @@ class EmployeeController extends AppBaseController
 	 */
 	public function show($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('employees.index'));
+		}
 		$employee = User::find($id);
 
 		if(empty($employee))
@@ -150,6 +163,10 @@ class EmployeeController extends AppBaseController
 	 */
 	public function edit($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('employees.index'));
+		}
 		$employee = User::find($id);
 
 		if(empty($employee))
@@ -171,6 +188,10 @@ class EmployeeController extends AppBaseController
 	 */
 	public function update($id, CreateEmployeeRequest $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('employees.index'));
+		}
 		/** @var Employee $employee */
 		$employee = User::find($id);
 
@@ -197,6 +218,10 @@ class EmployeeController extends AppBaseController
 	 */
 	public function destroy($id)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('employees.index'));
+		}
 		/** @var Employee $employee */
 		$employee = User::find($id);
 

@@ -337,7 +337,7 @@
 				</tr>
 				<tr>
 					<th align="center">REFERENCIA 2</th>
-					<td align="center">{{$credit->firts_name_reference}} {{$credit->last_name_reference}} {{$credit->mothers_last_name_reference}} | {{$credit->phone_reference}}</td>
+					<td align="center">{{$credit->firts_name_reference2}} {{$credit->last_name_reference2}} {{$credit->mothers_last_name_reference2}} | {{$credit->phone_reference2}}</td>
 				</tr>
 			</table>
 			

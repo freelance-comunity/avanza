@@ -40,7 +40,7 @@
             <li class="treeview">
               <a href="#"><i class='fa fa-book'></i>  <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-                <li><a href="{{ url('payments') }}">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
                 <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
               </ul>
             </li>
@@ -125,7 +125,7 @@
                 <select id="modalidad" name="modalidad"  onChange="mostrar(this.value); calcular()" class="form-control input-lg">
                   <option onChange="calcular()" value="1">1 Semana</option>
                 </select> <br>
-                <input type="hidden" id="tasa" name="tasa" value="0.60">
+                <input type="hidden" id="tasa" name="tasa" value="0.15">
                 {!! Form::label('capital', 'Capital:') !!}
                 <div class="range-slider color-3">
                 <input type="text" id="capital" name="capital" onChange="calcular()" />

@@ -25,6 +25,10 @@ class PermissionController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return view('home');
+		}
 		$query = Permission::query();
 		$columns = Schema::getColumnListing('$TABLE_NAME$');
 		$attributes = array();

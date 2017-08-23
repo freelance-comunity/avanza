@@ -19,7 +19,7 @@ Todas las sucursales
         @else
         <div class="table-responsive">
             <table class="table"  id="example">
-                <thead>
+            <thead class="thead-inverse">
                     <th>Nombre</th>
                     <th>Teléfono</th>
                     <th>Dirección</th>

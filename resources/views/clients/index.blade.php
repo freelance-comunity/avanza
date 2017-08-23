@@ -19,7 +19,7 @@ Todos los Clientes
     @else
     <div class="table-responsive">
       <table class="table"  id="example">
-        <thead>
+      <thead class="thead-inverse">
           <th>Folio</th>
           <th>Nombre</th>
           <th>Apellido Paterno</th>

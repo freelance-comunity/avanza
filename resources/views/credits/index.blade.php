@@ -13,7 +13,7 @@
 		@else
 		<div class="table-responsive">
 			<table class="table table-hover table-striped"  id="example">
-				<thead>
+				<thead class="thead-inverse">
 					<th>No.</th>
 					<th>Folio</th>
 					<th>Cliente</th>

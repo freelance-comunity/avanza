@@ -42,7 +42,6 @@
 						<p><strong>TOTAL PAGADO:</strong> ${{ number_format($total_payment,2) }}</p>
 						<p><strong>TOTAL RESTANTE:</strong> ${{ number_format($debt->ammount,2) }}</p>
 						<p><strong>ESTATUS DEL CRÉDITO: </strong> {{ strtoupper($debt->status) }}</p>
-						<p>{{ $date_now }}</p>
 					</div>
 					<div class="col-md-4">
 						<p style="color:red;"><strong>INTERÉS:</strong>$ {{ number_format($late_interest, 2) }}</p>
@@ -110,7 +109,7 @@
 						<div class="table-responsive">
 							<table class="table" id="pagoss">
 								<thead class="thead-inverse">
-									<th>No.</th>
+									<th style="width: 15px;">No. Cuota</th>
 									<th>Día</th>
 									<th>Fecha</th>
 									<th>Monto</th>
@@ -127,7 +126,7 @@
 									@include('credits.payment')
 									@if ($payment->status == "Pendiente")
 									<tr class="active">
-										<td>Cuota #{{ $payment->number }}</td>
+										<td>#{{ $payment->number }}</td>
 										<td>{{$payment->day->format('l')}}</td>
 										<td>{{$payment->date->format('d F Y')}}</td>
 										<td>$ {{ number_format($payment->ammount, 2) }}</td>
@@ -149,7 +148,7 @@
 									</tr>
 									@elseif($payment->status == "Parcial")
 									<tr class="info">
-										<td>Cuota #{{ $payment->number }}</td>
+										<td>#{{ $payment->number }}</td>
 										<td>{{$payment->day->format('l')}}</td>
 										<td>{{$payment->date->format('d F Y')}}</td>
 										<td>$ {{ number_format($payment->ammount, 2) }}</td>
@@ -163,7 +162,7 @@
 									</tr>
 									@elseif($payment->status == "Vencido")
 									<tr class="danger">
-										<td>Cuota #{{ $payment->number }}</td>
+										<td>#{{ $payment->number }}</td>
 										<td>{{$payment->day->format('l')}}</td>
 										<td>{{$payment->date->format('d F Y')}}</td>
 										<td>$ {{ number_format($payment->ammount, 2) }}</td>
@@ -177,7 +176,7 @@
 									</tr>
 									@elseif($payment->status == "Pagado")
 									<tr class="success">
-										<td>Cuota #{{ $payment->number }}</td>
+										<td>#{{ $payment->number }}</td>
 										<td>{{$payment->day->format('l')}}</td>
 										<td>{{$payment->date->format('d F Y')}}</td>
 										<td>$ {{ number_format($payment->ammount, 2) }}</td>

@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\CreatePaymentRequest;
 use App\Models\Payment;
+use App\Models\LatePayments;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -241,6 +242,7 @@ class PaymentController extends AppBaseController
 
 						$debt->ammount = $debt->ammount - $ammount;
 						$debt->save();
+
 						Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 					}elseif ($new_balance > $rest) {
 						echo "No sabemos que hacer";
@@ -264,10 +266,23 @@ class PaymentController extends AppBaseController
 					$debt->ammount = $debt->ammount + 20;
 					$debt->ammount = $debt->ammount - $payment->payment;
 					$debt->save();
+
 					Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+					
+
 				}
 			}
 			$payment->save();
+			if ($payment->status ==  "Vencido") {
+				
+				$latePayments = new LatePayments;
+				$latePayments->late_number = $payment->number;
+				$latePayments->late_ammount = $payment->total;
+				$latePayments->late_payment = $payment->payment;
+				$latePayments->payment_id = $payment->id;
+				$latePayments->save();
+			}
+
 		}
 		return redirect()->back();	
 	}

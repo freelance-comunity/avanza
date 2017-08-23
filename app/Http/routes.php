@@ -29,7 +29,7 @@ Route::get('validation', function(){
 });
 
 Route::get('test-relationship', function(){
-    $client = App\Models\Client::find(3);
+    $client = App\Models\Client::find(1);
 
     $references = $client->references;
     echo $client->firts_name;
@@ -320,3 +320,48 @@ Route::get('permissions/{id}/delete', [
     'as' => 'permissions.delete',
     'uses' => 'PermissionController@destroy',
     ]);
+
+
+Route::resource('latePayments', 'LatePaymentsController');
+
+Route::get('latePayments/{id}/delete', [
+    'as' => 'latePayments.delete',
+    'uses' => 'LatePaymentsController@destroy',
+    ]);
+
+Route::get('pagos',function(){
+    $payments = App\Models\Payment::find(602);
+    $latePayments = $payments->latePayments;
+    echo $payments->ammount;
+    echo "<br>";
+    foreach ($latePayments as $key => $value) {
+        echo $value->late_number;
+        echo "<br>";
+    }
+    
+    /*$credit = App\Models\Credit::find(26);
+    echo "Monto de credito: ";
+    echo $credit->ammount;
+    echo "<br>";
+    $debt = $credit->debt;
+    echo "Deuda: ";
+    echo $credit->debt->ammount;
+    echo "<br>";
+    $payments = $debt->payments;
+    foreach ($payments as $key => $value) {
+        echo "Pago:";
+        echo $value->number;
+        echo "<br>";
+    }
+    $latePayments = $payments->latePayments;
+    foreach ($latePayments as $key => $latePayments) {
+        echo "numero de pago atrasado";
+        echo $latePayments->late_number;
+        echo "<br>";
+    }*/
+   
+
+
+});
+
+

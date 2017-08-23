@@ -7,7 +7,9 @@
 			<div class="box box-danger">
 				<div class="box-header with-border">
 					<i class="fa fa-user"></i>
-					<h3 class="box-title"><strong>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</strong></h3>
+					<h3 class="box-title"><strong>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</strong></h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><strong>FECHA DE CONTRATO: {{strtoupper($credit->date->format('l, d F Y'))}}</strong></label>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;					<label><strong>FOLIO: {{$credit->folio}}</strong></label>
+
 				</div>
 				<!-- /.box-header -->
 				@php
@@ -19,29 +21,43 @@
 				$late_total = $late_interest + $late_capital + $late_moratorium;
 				$pay =  App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pagado')->count();
 				$date_now = Carbon\Carbon::now()->toDateString();
+				if ($credit->dues == 25) {
+					$total = 1.5 * $credit->ammount;
+				}	
+				elseif ($credit->dues == 30) {
+					$total = 1.7 * $credit->ammount;
+				}
+				elseif ($credit->dues == 52) {
+					$total = 1.5 * $credit->ammount;
+				}
+				elseif ($credit->dues == 60) {
+					$total = 1.7 * $credit->ammount;
+				}
+				elseif ($credit->periodicity == "SEMANAL") {
+					$total = 1.5 * $credit->ammount;
+				}
+				
+				
 				@endphp
 				<div class="box-body">
 					<div class="col-md-4">
 						<p class="lead"><strong>TIPO DE PRESTAMO:</strong> {{$credit->periodicity}}</p>
-						<p class="lead"><strong>MONTO:</strong>$ {{ number_format($credit->ammount, 2) }}</p>
+						<p class="lead"><strong>TOTAL DE PRESTAMO:</strong> {{$total}}</p>
+						<p class="lead"><strong>CAPITAL:</strong>$ {{ number_format($credit->ammount, 2) }}</p>
 						<p class="lead"><strong>INTERÉS:</strong> {{$credit->interest_rate*1}}%</p>
-						<p class="lead"><strong>CUOTAS:</strong> {{$credit->dues}}</p>
-						<p class="lead"><strong>CUOTAS ABONADAS:</strong> {{$pay}}</p>
-						<p class="lead"><strong>FECHA DE CONTRATO:</strong> {{strtoupper($credit->date->format('l, d F Y'))}}</p>
 						<hr>
 					</div>
 					<div class="col-md-4">
 						<p class="lead"><strong>PROMOTOR:</strong> {{$credit->adviser}}</p>
-						<p class="lead"><strong>FOLIO:</strong> {{$credit->folio}}</p>
 						<p class="lead"><strong>SUCURSAL:</strong> {{$credit->branch}}</p>
-						<p class="lead"><strong>GARANTÍA:</strong> {{$credit->warranty_type}}</p>
+						<p class="lead"><strong>CUOTAS:</strong> {{$credit->dues}}</p>
+						<p class="lead"><strong>CUOTAS ABONADAS:</strong> {{$pay}}</p>
 						@php
 						$debt = $credit->debt;
 						$payments = $debt->payments;
 						$client = $credit->client;
 						$product = App\Models\Product::all();
 						@endphp
-						<p class="lead"><strong>CAPITAL:</strong> ${{ number_format($credit->ammount) }}</p>
 						<hr>
 					</div>
 					<div class="col-md-4">

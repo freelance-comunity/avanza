@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Payment;
+use App\Models\LatePayments;
 use Carbon\Carbon;
 
 class LockPayments extends Command
@@ -55,7 +56,16 @@ class LockPayments extends Command
           $debt = $payment->debt;
           $debt->ammount = $debt->ammount + 20;
           $debt->save();
-        }
-      }
-    }
-  }
+          if ($payment->status == 'Vencido') {
+           $latePayments = new LatePayments;
+           $latePayments->late_number = $payment->number;
+           $latePayments->late_ammount = $payment->total;
+           $latePayments->late_payment = $payment->payment;
+           $latePayments->payment_id = $payment->id;
+           $latePayments->save();
+         }
+         
+       }
+     }
+   }
+ }

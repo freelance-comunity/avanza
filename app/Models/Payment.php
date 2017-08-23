@@ -45,5 +45,9 @@ class Payment extends Model
 	{
 		return $this->belongsTo('App\Models\Debt');
 	}
+	public function latePayments()
+	{
+		return $this->hasMany('App\Models\LatePayments');
+	}
 
 }

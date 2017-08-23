@@ -6,6 +6,7 @@ use App\Models\Credit;
 use App\Models\Client;
 use App\Models\Debt;
 use App\Models\Payment;
+use App\Models\LatePayments;
 use App\Models\ClientLocation;
 use App\Models\ClientReferences;
 use Illuminate\Http\Request;

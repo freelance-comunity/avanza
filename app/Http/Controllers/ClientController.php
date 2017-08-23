@@ -358,22 +358,16 @@ class ClientController extends AppBaseController
 			if ($status == 3) {
 				break;
 			}
-			if ($value->periodicity == "DIARIO") {
-				$diario ++;
-			}
-			if ($diario == 2) {
-				break;
-			}
 		}
 		if ($status == 3) {
 			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
 		}
-		elseif ($diario == 2) {
+		/*elseif ($diario == 2) {
 			Toastr::error('Este cliente ya cuenta con 2 créditos diarios','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
 		}
-		/*elseif ($semanal == 1) {
+		elseif ($semanal == 1) {
 			Toastr::error('Este cliente ya cuenta con 1 créditos semanal','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
 		}*/

@@ -184,36 +184,40 @@ class PaymentController extends AppBaseController
 			$r = fmod($ammount, $payment->balance);
 			$count = $payment->id + $budget;
 
-			if ($budget >= 1 AND $r >= 1) {
-				for ($i=$payment->id; $i < $count; $i++) { 
-					$payment_process = Payment::find($i);
-					$payment_process->payment = $payment->balance;
-					$payment_process->balance = 0;
-					$payment_process->status = "Pagado";
-					$payment_process->save();
-					$debt->ammount = $debt->ammount - $payment->balance;
+			if ($ammount > $debt->ammount) {
+				Toastr::error('Estas introduciendo una cantidad mayor a tu saldo a liquidar.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			}else{
+				if ($budget >= 1 AND $r >= 1) {
+					for ($i=$payment->id; $i < $count; $i++) { 
+						$payment_process = Payment::find($i);
+						$payment_process->payment = $payment->balance;
+						$payment_process->balance = 0;
+						$payment_process->status = "Pagado";
+						$payment_process->save();
+						$debt->ammount = $debt->ammount - $payment->balance;
+						$debt->save();
+					}
+					$payment_extra = Payment::find($count);
+					$payment_extra->payment = $r;
+					$payment_extra->balance = $payment_extra->balance - $r;
+					$payment_extra->status = "Parcial";
+					$payment_extra->save();
+					$debt->ammount = $debt->ammount - $r;
 					$debt->save();
+					Toastr::success('Pagos test.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				}
-				$payment_extra = Payment::find($count);
-				$payment_extra->payment = $r;
-				$payment_extra->balance = $payment_extra->balance - $r;
-				$payment_extra->status = "Parcial";
-				$payment_extra->save();
-				$debt->ammount = $debt->ammount - $r;
-				$debt->save();
-				Toastr::success('Pagos test.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			}
-			else{
-				for ($i=$payment->id; $i < $count; $i++) { 
-					$payment_process = Payment::find($i);
-					$payment_process->payment = $payment->balance;
-					$payment_process->balance = 0;
-					$payment_process->status = "Pagado";
-					$payment_process->save();
-					$debt->ammount = $debt->ammount - $payment->balance;
-					$debt->save();
+				else{
+					for ($i=$payment->id; $i < $count; $i++) { 
+						$payment_process = Payment::find($i);
+						$payment_process->payment = $payment->balance;
+						$payment_process->balance = 0;
+						$payment_process->status = "Pagado";
+						$payment_process->save();
+						$debt->ammount = $debt->ammount - $payment->balance;
+						$debt->save();
+					}
+					Toastr::success('Pagos confirmados.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				}
-				Toastr::success('Pagos confirmados.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			}
 		}
 		else{

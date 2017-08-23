@@ -200,6 +200,9 @@
             border-radius: 4px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.02) inset;
           }
-
+          .thead-inverse th {
+            color: #fff;
+            background-color: #373a3c;
+          }
         </style>
       </head>

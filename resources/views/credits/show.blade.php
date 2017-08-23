@@ -20,7 +20,7 @@
 				$pay =  App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pagado')->count();
 				$total_payment = $debt->payments->sum('payment');
 				$rest = $credit->dues - $pay;
-				$date_now = Carbon\Carbon::now()->toDateString();
+				$date_now = Carbon\Carbon::today();
 				@endphp
 				<div class="box-body">
 					<div class="col-md-4">
@@ -42,6 +42,7 @@
 						<p><strong>TOTAL PAGADO:</strong> ${{ number_format($total_payment,2) }}</p>
 						<p><strong>TOTAL RESTANTE:</strong> ${{ number_format($debt->ammount,2) }}</p>
 						<p><strong>ESTATUS DEL CRÉDITO: </strong> {{ strtoupper($debt->status) }}</p>
+						<p>{{ $date_now }}</p>
 					</div>
 					<div class="col-md-4">
 						<p style="color:red;"><strong>INTERÉS:</strong>$ {{ number_format($late_interest, 2) }}</p>
@@ -108,7 +109,6 @@
 					<div class="col-md-12">
 						<div class="table-responsive">
 							<table class="table" id="pagoss">
-
 								<thead class="thead-inverse">
 									<th>No.</th>
 									<th>Día</th>
@@ -121,7 +121,6 @@
 									<th>Pagado</th>
 									<th>Balance</th>				
 									<th>Estatus</th>
-
 								</thead>
 								<tbody>
 									@foreach($payments as $payment)
@@ -136,8 +135,13 @@
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 										<td>
+											@if ($payment->date == $date_now)
 											<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
 											</button>
+											@else
+											<button type="button" class="btn bg-yellow btn-lg disabled" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
+											</button>
+											@endif
 										</td>
 										<td>${{ number_format($payment->payment, 2)}}</td>
 										<td>${{ number_format($payment->balance, 2) }}</td>
@@ -180,7 +184,7 @@
 										<td>$ {{ number_format($payment->capital, 2) }}</td>
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
-										<td> <button type="button" class="btn btn-default btn-lg disabled" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
+										<td> <button type="button" class="btn bg-default btn-lg disabled" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
 										<td>${{ number_format($payment->payment, 2)}}</td>
 										<td>${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:green;">{{$payment->status}}</p></td>

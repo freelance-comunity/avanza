@@ -43,7 +43,7 @@ class LockPayments extends Command
       $hour_now = Carbon::now()->toTimeString();
       $payments = Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
       foreach ($payments as $key => $value) {
-        if ($hour_now >= '09:00:00') {
+        if ($hour_now >= '11:00:00') {
           echo "Estamos listos para bloquear";
           $payment = Payment::find($value->id);
           $payment->status = 'Vencido';

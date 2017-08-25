@@ -11,10 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-    		'name' => 'socio',
-    		'display_name' => 'socio',
-    		'description' => 'Persona que participa en inversion de recursos, unicamente esta interesado en reportes generales del cartera',
-    		]);
+         $this->call(RolesTableSeeder::class);
+         $this->call(UsersTableSeeder::class);
+         $this->call(PermissionsTableSeeder::class);
     }
 }

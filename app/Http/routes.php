@@ -46,11 +46,12 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
-    $var =  intdiv(100, 39);
-    $r = fmod(100, 39);
-    echo $var;
-    echo "<br>";
-    echo $r;
+   $payment = App\Models\Payment::find(2242);
+   $debt = $payment->debt;
+   echo $debt->ammount;
+   $credit = $debt->credit;
+
+   echo $credit->ammount;
 });
 
 Route::post('process', 'PaymentController@process');

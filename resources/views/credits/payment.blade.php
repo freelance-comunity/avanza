@@ -12,13 +12,7 @@
       {!! Form::open(['url' => 'process','data-parsley-validate' => '']) !!}  
         <p>
           {!! Form::label('payment', 'Monto:') !!}
-          {!! Form::text('payment', null, [
-            'class' => 'form-control input-lg',
-            'placeholder' => 'PAGO',
-            'id' => 'payment example',
-            'required' => 'required',
-            'data-parsley-type' => 'number',
-            'data-parsley-trigger ' => 'input focusin','onKeyPress'=>'return numeros(event)']) !!}
+            <input type="number" name="payment" id=" payment example" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
             <input type="hidden"  name="payment_id" value="{{ $payment->id }}">
           </p>
           <p>

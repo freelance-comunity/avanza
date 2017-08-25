@@ -21,15 +21,7 @@
             </div>
             <div class="col-md-4">
               <label for="exampleInputEmail1">Teléfono</label>
-              {!! Form::text('phone', null, [
-                'style' => 'text-transform:uppercase',
-                'class' => 'form-control input-lg',
-                'placeholder'=>'ESCRIBE SU NÚMERO DE TELÉFONO',
-                'required'=>'required',
-                'data-parsley-trigger ' => 'input focusin',
-                'data-parsley-type' => 'digits',
-                'data-parsley-maxlength' => '10',
-                'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+              <input type="number" name="phone" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
               </div>       
             </div>
             <!-- /.box-body -->        

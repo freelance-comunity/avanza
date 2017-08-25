@@ -151,24 +151,12 @@
 
 <div class="form-group col-sm-6 col-lg-4">
 {!! Form::label('phone_1', 'Teléfono 1:') !!}
-{!! Form::text('phone_1', null, [
-'style' => 'text-transform:uppercase',
-'
-class' => 'form-control input-lg', 
-'placeholder' => 'TELÉFONO 1', 'required' => 'required',
-'data-parsley-type' => 'digits',
-'data-parsley-maxlength' => '10',
-'data-parsley-trigger ' => 'input focusin',
-'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+<input type="number" name="phone_1" class="form-control input-lg" placeholder="TELÉFONO 1" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
 </div>
 
 <div class="form-group col-sm-6 col-lg-4">
 {!! Form::label('phone_2', 'Teléfono 2:') !!}
-{!! Form::text('phone_2', null, [
-'style' => 'text-transform:uppercase',
-'class' => 'form-control input-lg',
-'placeholder' => 'TELÉFONO 2', 
-'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+<input type="number" name="phone_2" class="form-control input-lg" placeholder="TELÉFONO 2" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
 </div>
 
 <div class="form-group col-sm-6 col-lg-4">
@@ -286,15 +274,7 @@ $count = App\Models\Branch::all();
 
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('postal_code', 'Código Postal:') !!}
-            {!! Form::text('postal_code', null, [
-            'style' => 'text-transform:uppercase',
-            'class' => 'form-control input-lg', 
-            'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 
-            'required' => 'required',
-            'data-parsley-type' => 'digits',
-            'data-parsley-maxlength' => '5',
-            'data-parsley-trigger ' => 'input focusin',
-            'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            <input type="number" name="postal_code" class="form-control input-lg" placeholder="ESCRIBE CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
         </div>
 
         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>

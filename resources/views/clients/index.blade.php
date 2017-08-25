@@ -28,7 +28,6 @@ Todos los Clientes
           <th>Ine</th>
           <th>Estado Civil</th>
           <th>Sucursal</th>
-          <th>Imagen</th>
           <th width="50px">Crédito</th>
           <th>Acción</th>
         </thead>
@@ -76,7 +75,6 @@ Todos los Clientes
           <td>{!! $client->ine !!}</td>
           <td>{!! $client->civil_status !!}</td>
           <td>{{$branch->name}}</td>
-          <td><img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" style="width: 50px; height: 50px;"></td>
           <td> <button type="button" class="btn btn-primary btn-block uppercase" data-toggle="modal" data-target="#myModal{{$client->id}}">Nuevo</button></td>
           <td>
 

@@ -29,14 +29,15 @@
       </div>
       <div class="form-group col-sm-6 col-lg-4">
         {!! Form::label('ammount', 'Monto Crédito:') !!}
-        {!! Form::text('ammount',  null, [
+        <!--{!! Form::text('ammount',  null, [
           'style' => 'text-transform:uppercase',
           'class' => 'form-control input-lg', 
           'placeholder' => 'ESCRIBA EL MONTO ', 'required' => 'required',
           'data-parsley-trigger ' => 'input focusin',
           'data-parsley-type' => 'digits',
           'data-parsley-maxlength' => '5',
-          'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}-->
+          <input type="number" name="ammount" placeholder="ESCRIBA EL MONTO" class="form-control input-lg" data-parsley-trigger="input focusin" required="required">
         </div>
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('interest_rate', 'Tasa Interés(%):') !!}

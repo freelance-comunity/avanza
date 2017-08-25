@@ -27,7 +27,8 @@ class Client extends Model
 	"no_familys",
 	"type_of_housing",
 	"avatar",
-	"branch_id"
+	"branch_id",
+	"user_id"
 	];
 
 	public static $rules = [

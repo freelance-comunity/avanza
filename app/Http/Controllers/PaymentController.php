@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Requests\CreatePaymentRequest;
 use App\Models\Payment;
+use App\Models\Client;
+use App\Models\LatePayments;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -245,6 +247,7 @@ class PaymentController extends AppBaseController
 
 						$debt->ammount = $debt->ammount - $ammount;
 						$debt->save();
+
 						Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 					}elseif ($new_balance > $rest) {
 						echo "No sabemos que hacer";
@@ -297,11 +300,35 @@ class PaymentController extends AppBaseController
 					$debt->ammount = $debt->ammount + 20;
 					$debt->ammount = $debt->ammount - $payment->payment;
 					$debt->save();
+
 					Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+					
+
 				}
 			}
 			$payment->save();
+
+			if ($payment->status ==  "Vencido") {
+				$latePayments = new LatePayments;
+				$latePayments->late_number = $payment->number;
+				$latePayments->late_ammount = $payment->total;
+				$latePayments->late_payment = $request->input('payment');
+				$latePayments->status = "Bloqueado";
+				$latePayments->payment_id = $payment->id;
+				$latePayments->debt_id = $payment->debt->id;
+				$latePayments->save();
+
+
+				/*$debt = $payment->debt;
+				$credit = $debt->credit;
+				$client = $credit->client;
+				$client->firts_name ="KEILY";
+				$client->save();*/
+
+			}
+
 		}
 		return redirect()->back();	
 	}
+	
 }

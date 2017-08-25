@@ -21,7 +21,7 @@ class Debt extends Model
 	"ammount" => "required",
 	"status" => "required"
 	];
-	public function credits()
+	public function credit()
 	{
 		return $this->belongsTo('App\Models\Credit');
 	}
@@ -30,4 +30,6 @@ class Debt extends Model
 	{
 		return $this->hasMany('App\Models\Payment');
 	}
+
+	
 }

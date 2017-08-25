@@ -29,7 +29,7 @@ Route::get('validation', function(){
 });
 
 Route::get('test-relationship', function(){
-    $client = App\Models\Client::find(3);
+    $client = App\Models\Client::find(1);
 
     $references = $client->references;
     echo $client->firts_name;
@@ -55,6 +55,7 @@ Route::get('division', function(){
 });
 
 Route::post('process', 'PaymentController@process');
+
 /*=====  End of Test Routes  ======*/
 
 
@@ -147,6 +148,7 @@ Route::get('profile', function(){
 });
 
 Route::post('updatepassword', 'EmployeeController@updatePassword');
+
 /*=====  End of Routes for Employee  ======*/
 
 Route::get('formwizard', function(){
@@ -321,3 +323,48 @@ Route::get('permissions/{id}/delete', [
     'as' => 'permissions.delete',
     'uses' => 'PermissionController@destroy',
     ]);
+
+
+Route::resource('latePayments', 'LatePaymentsController');
+
+Route::get('latePayments/{id}/delete', [
+    'as' => 'latePayments.delete',
+    'uses' => 'LatePaymentsController@destroy',
+    ]);
+
+
+Route::get('cl', function(){
+$latePayments = App\Models\LatePayments::find(54);
+echo $latePayments->id;
+echo "<br>";
+$payment = $latePayments->payment;
+echo $latePayments->payment->id;
+echo "<br>";
+$debt = $payment->debt;
+echo $debt->id;
+echo "<br>";
+$credit = $debt->credit;
+echo $credit->id;
+echo "<br>";
+$client = $credit->client;
+echo $client->id;
+echo "<br>";
+
+$cliente = $payment->debt->credit->client;
+echo $cliente->id;
+
+echo "<br>";
+$latePayments = $payment->latePayments;
+
+foreach ($latePayments as $key => $value) {
+    echo $value->id;
+    echo "<br>";
+}
+});
+
+Route::post('desbloquear' , 'LatePaymentsController@desbloquear');
+
+
+
+
+

@@ -188,6 +188,7 @@
 
                                 </div>
                                 <input type="hidden" name="type_product" value="{{$product->id}}">
+                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                                 <div class="box-body" >
                                  <div class="col-md-4">

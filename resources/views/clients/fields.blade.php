@@ -120,7 +120,7 @@
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('phone', 'Teléfono:') !!}
             {!! Form::text('phone', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();','data-parsley-trigger ' => 'input focusin',
-            'data-parsley-type' => 'digits', 'data-parsley-maxlength' => '10',]) !!}
+            'data-parsley-type' => 'digits', 'data-parsley-maxlength' => '10', 'onKeyPress' => 'return soloNumeros(event)']) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('no_economic_dependent', 'No. de Dependientes Economicos') !!}
@@ -648,5 +648,32 @@ function validarI(input) {
             }
         }
     </script>
+    <script>
+    function numeros(e){
+      key = e.keyCode || e.which;
+      tecla = String.fromCharCode(key).toLowerCase();
+      letras = " 0123456789";
+      especiales = [8,37,39,46];
+
+      tecla_especial = false
+      for(var i in especiales){
+       if(key == especiales[i]){
+         tecla_especial = true;
+         break;
+       } 
+     }
+
+     if(letras.indexOf(tecla)==-1 && !tecla_especial)
+      return false;
+  }
+</script>
+<script type="text/javascript">
+// Solo permite ingresar numeros.
+function soloNumeros(e){
+    var key = window.Event ? e.which : e.keyCode
+    return (key >= 48 && key <= 57)
+}
+</script>
+
 
     @include('clients.curp')

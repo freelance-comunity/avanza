@@ -92,7 +92,8 @@ class Credit extends Model
 		"collection_period",
 		"firm",
 		"status",
-		"client_id"
+		"client_id",
+		"user_id"
 	];
 
 	public static $rules = [
@@ -122,5 +123,9 @@ class Credit extends Model
     public function debt()
 	{
 		return $this->hasOne('App\Models\Debt');
+	}
+	public function user()
+	{
+		return $this->belongsTo('App\User');
 	}
 }

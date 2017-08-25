@@ -37,8 +37,14 @@ class CreditController extends AppBaseController
 	}
 
 	public function index(Request $request)
-	{		
-		$credits = Credit::all();
+	{	
+		if (Auth::user()->hasRole('administrador')) {
+			$credits = Credit::all();
+		}
+		else
+		{
+			$credits = Auth::user()->credits;
+		}
 
 		return view('credits.index')
 		->with('credits', $credits);

@@ -25,6 +25,7 @@
       <li><a data-toggle="modal" data-target="#cotizador"><i class="fa fa-calculator"></i><span>Cotizador</span></a></li>
       <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
       <li><a href="{{ url('credits') }}"><i class="fa fa-money"></i> <span>Créditos</span></a></li>
+      @if(Auth::user()->hasRole(['administrador', 'socio']))
       <li class="treeview">
         <a href="#"><i class='fa fa-book'></i>  <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
@@ -52,6 +53,7 @@
          <li><a href="{{ url('products') }}">Productos</a></li>
        </ul>
      </li>
+     @endif
    </ul><!-- /.sidebar-menu -->
  </section>
  <!-- /.sidebar -->

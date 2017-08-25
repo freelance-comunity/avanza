@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\CreateLatePaymentsRequest;
 use App\Models\LatePayments;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -22,24 +23,24 @@ class LatePaymentsController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = LatePayments::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $latePayments = $query->get();
+		$latePayments = $query->get();
 
-        return view('latePayments.index')
-            ->with('latePayments', $latePayments)
-            ->with('attributes', $attributes);
+		return view('latePayments.index')
+		->with('latePayments', $latePayments)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -61,7 +62,7 @@ class LatePaymentsController extends AppBaseController
 	 */
 	public function store(CreateLatePaymentsRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$latePayments = LatePayments::create($input);
 
@@ -160,4 +161,15 @@ class LatePaymentsController extends AppBaseController
 
 		return redirect(route('latePayments.index'));
 	}
+	public function desbloquear($id, Request $request)
+	{
+		$latePayments = LatePayments::find($id);
+		$latePayments->late_number = 2;
+		$latePayments->late_ammount = 2;
+		$latePayments->late_payment = 2;
+		$latePayments->status = "Acreditado";
+		$latePayments->save();
+	
+	}
+
 }

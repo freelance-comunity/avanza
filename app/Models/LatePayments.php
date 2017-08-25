@@ -15,16 +15,19 @@ class LatePayments extends Model
 	    "late_number",
 	    "late_ammount",
 	    "late_payment",
-	    "payment_id"
+	    "status",
+	    "payment_id",
+	    "debt_id"
 	];
 
 	public static $rules = [
 	    "late_payment" => "required"
 	];
 
-	public function payments()
+	public function payment()
 	{
 		return $this->belongsTo('App\Models\Payment');
 	}
+	
 
 }

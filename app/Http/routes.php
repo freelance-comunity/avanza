@@ -54,6 +54,7 @@ Route::get('division', function(){
 });
 
 Route::post('process', 'PaymentController@process');
+
 /*=====  End of Test Routes  ======*/
 
 
@@ -146,6 +147,7 @@ Route::get('profile', function(){
 });
 
 Route::post('updatepassword', 'EmployeeController@updatePassword');
+
 /*=====  End of Routes for Employee  ======*/
 
 Route::get('formwizard', function(){
@@ -329,39 +331,39 @@ Route::get('latePayments/{id}/delete', [
     'uses' => 'LatePaymentsController@destroy',
     ]);
 
-Route::get('pagos',function(){
-    $payments = App\Models\Payment::find(602);
-    $latePayments = $payments->latePayments;
-    echo $payments->ammount;
-    echo "<br>";
-    foreach ($latePayments as $key => $value) {
-        echo $value->late_number;
-        echo "<br>";
-    }
-    
-    /*$credit = App\Models\Credit::find(26);
-    echo "Monto de credito: ";
-    echo $credit->ammount;
-    echo "<br>";
-    $debt = $credit->debt;
-    echo "Deuda: ";
-    echo $credit->debt->ammount;
-    echo "<br>";
-    $payments = $debt->payments;
-    foreach ($payments as $key => $value) {
-        echo "Pago:";
-        echo $value->number;
-        echo "<br>";
-    }
-    $latePayments = $payments->latePayments;
-    foreach ($latePayments as $key => $latePayments) {
-        echo "numero de pago atrasado";
-        echo $latePayments->late_number;
-        echo "<br>";
-    }*/
-   
 
+Route::get('cl', function(){
+$latePayments = App\Models\LatePayments::find(54);
+echo $latePayments->id;
+echo "<br>";
+$payment = $latePayments->payment;
+echo $latePayments->payment->id;
+echo "<br>";
+$debt = $payment->debt;
+echo $debt->id;
+echo "<br>";
+$credit = $debt->credit;
+echo $credit->id;
+echo "<br>";
+$client = $credit->client;
+echo $client->id;
+echo "<br>";
 
+$cliente = $payment->debt->credit->client;
+echo $cliente->id;
+
+echo "<br>";
+$latePayments = $payment->latePayments;
+
+foreach ($latePayments as $key => $value) {
+    echo $value->id;
+    echo "<br>";
+}
 });
+
+Route::post('desbloquear' , 'LatePaymentsController@desbloquear');
+
+
+
 
 

@@ -161,6 +161,7 @@
                 @endif
             </select>
         </div>
+         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         {{-- Geolocation address client --}}
         <div class="col-md-6">
             <div class="gllpLatlonPicker">

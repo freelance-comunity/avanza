@@ -6,6 +6,7 @@ use App\Models\Credit;
 use App\Models\Client;
 use App\Models\Debt;
 use App\Models\Payment;
+use App\Models\Product;
 use App\Models\LatePayments;
 use App\Models\ClientLocation;
 use App\Models\ClientReferences;
@@ -90,6 +91,14 @@ class CreditController extends AppBaseController
 
 		$client = Client::find($request->input('client_id'));
 		$input = $request->all();
+		$product = Product::find($request->input('type_product'));
+		if ($request->input('ammount') > $product->ammount_max) {
+			Toastr::warning('El monto máximo es de $20,000', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);		
+			return redirect()->back()->withInput($request->all());
+		}elseif ($request->input('ammount') < $product->ammount_min) {
+			Toastr::warning('El monto mínimo es de $1,000', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+			return redirect()->back()->withInput($request->all());
+		}
 		$number = Credit::max('id') + 1;
 		$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;	
 		$input['civil_status'] = $client->civil_status;

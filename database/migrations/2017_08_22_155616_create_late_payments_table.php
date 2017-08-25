@@ -19,8 +19,11 @@ class CreateLatePaymentsTable extends Migration
 			$table->string('late_number');
 			$table->string('late_ammount');
 			$table->string('late_payment');
+			$table->string('status');
 			$table->integer('payment_id')->unsigned();
 			$table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
+			$table->integer('debt_id')->unsigned();
+			$table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

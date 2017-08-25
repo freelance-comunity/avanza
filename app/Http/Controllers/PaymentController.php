@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\CreatePaymentRequest;
 use App\Models\Payment;
+use App\Models\Client;
 use App\Models\LatePayments;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
@@ -185,36 +186,40 @@ class PaymentController extends AppBaseController
 			$r = fmod($ammount, $payment->balance);
 			$count = $payment->id + $budget;
 
-			if ($budget >= 1 AND $r >= 1) {
-				for ($i=$payment->id; $i < $count; $i++) { 
-					$payment_process = Payment::find($i);
-					$payment_process->payment = $payment->balance;
-					$payment_process->balance = 0;
-					$payment_process->status = "Pagado";
-					$payment_process->save();
-					$debt->ammount = $debt->ammount - $payment->balance;
+			if ($ammount > $debt->ammount) {
+				Toastr::error('Estas introduciendo una cantidad mayor a tu saldo a liquidar.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			}else{
+				if ($budget >= 1 AND $r >= 1) {
+					for ($i=$payment->id; $i < $count; $i++) { 
+						$payment_process = Payment::find($i);
+						$payment_process->payment = $payment->balance;
+						$payment_process->balance = 0;
+						$payment_process->status = "Pagado";
+						$payment_process->save();
+						$debt->ammount = $debt->ammount - $payment->balance;
+						$debt->save();
+					}
+					$payment_extra = Payment::find($count);
+					$payment_extra->payment = $r;
+					$payment_extra->balance = $payment_extra->balance - $r;
+					$payment_extra->status = "Parcial";
+					$payment_extra->save();
+					$debt->ammount = $debt->ammount - $r;
 					$debt->save();
+					Toastr::success('Pagos test.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				}
-				$payment_extra = Payment::find($count);
-				$payment_extra->payment = $r;
-				$payment_extra->balance = $payment_extra->balance - $r;
-				$payment_extra->status = "Parcial";
-				$payment_extra->save();
-				$debt->ammount = $debt->ammount - $r;
-				$debt->save();
-				Toastr::success('Pagos test.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			}
-			else{
-				for ($i=$payment->id; $i < $count; $i++) { 
-					$payment_process = Payment::find($i);
-					$payment_process->payment = $payment->balance;
-					$payment_process->balance = 0;
-					$payment_process->status = "Pagado";
-					$payment_process->save();
-					$debt->ammount = $debt->ammount - $payment->balance;
-					$debt->save();
+				else{
+					for ($i=$payment->id; $i < $count; $i++) { 
+						$payment_process = Payment::find($i);
+						$payment_process->payment = $payment->balance;
+						$payment_process->balance = 0;
+						$payment_process->status = "Pagado";
+						$payment_process->save();
+						$debt->ammount = $debt->ammount - $payment->balance;
+						$debt->save();
+					}
+					Toastr::success('Pagos confirmados.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				}
-				Toastr::success('Pagos confirmados.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			}
 		}
 		else{
@@ -248,6 +253,35 @@ class PaymentController extends AppBaseController
 						echo "No sabemos que hacer";
 					}
 				}
+			}elseif ($payment->status == "Parcial") {
+				$ammount = $request->input('payment');
+				$rest = $payment->balance;
+				$paid_out = $payment->payment;
+				$new_balance = $rest - $ammount;
+
+				if ($ammount > $payment->balance) {
+					Toastr::warning('Se requiere introducir cantidad exacta o menos para procesar su pago.', 'PAGO VENCIDO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				}
+				else{
+					if ($new_balance == 0) {
+						$payment->balance = $new_balance;
+						$payment->status = "Pagado";
+						$payment->payment = $paid_out + $ammount;
+						$debt->ammount = $debt->ammount - $rest;
+						$debt->save();
+						Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+					}elseif($new_balance < $rest){
+						$payment->status = "Parcial";
+						$payment->balance = $new_balance;
+						$payment->payment = $paid_out + $ammount;
+
+						$debt->ammount = $debt->ammount - $ammount;
+						$debt->save();
+						Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+					}elseif ($new_balance > $rest) {
+						echo "No sabemos que hacer";
+					}
+				}
 			}
 			else{
 				$payment->balance = $payment->total - $ammount;
@@ -273,17 +307,28 @@ class PaymentController extends AppBaseController
 				}
 			}
 			$payment->save();
+
 			if ($payment->status ==  "Vencido") {
-				
 				$latePayments = new LatePayments;
 				$latePayments->late_number = $payment->number;
 				$latePayments->late_ammount = $payment->total;
-				$latePayments->late_payment = $payment->payment;
+				$latePayments->late_payment = $request->input('payment');
+				$latePayments->status = "Bloqueado";
 				$latePayments->payment_id = $payment->id;
+				$latePayments->debt_id = $payment->debt->id;
 				$latePayments->save();
+
+
+				/*$debt = $payment->debt;
+				$credit = $debt->credit;
+				$client = $credit->client;
+				$client->firts_name ="KEILY";
+				$client->save();*/
+
 			}
 
 		}
 		return redirect()->back();	
 	}
+	
 }

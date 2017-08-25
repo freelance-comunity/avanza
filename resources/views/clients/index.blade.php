@@ -12,11 +12,12 @@ Todos los Clientes
     <h1 class="pull-left">Clientes</h1>
     <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('clients.create') !!}">Agregar Nuevo Cliente</a>
   </div>
-
+ 
   <div class="row">
     @if($clients->isEmpty())
     <div class="well text-center">No se encontraron clientes en el sistema.</div>
     @else
+
     <div class="table-responsive">
       <table class="table"  id="example">
         <thead>
@@ -66,24 +67,24 @@ Todos los Clientes
          </div>
          @php
          $branch = $client->branch;
+         $credits = $client->credits;
          @endphp
          <tr>
-          <td>{!! $client->folio!!}</td>
-          <td>{!! $client->firts_name !!}</td>
-          <td>{!! $client->last_name !!}</td>
-          <td>{!! $client->mothers_last_name !!}</td>
-          <td>{!! $client->curp !!}</td>
-          <td>{!! $client->ine !!}</td>
-          <td>{!! $client->civil_status !!}</td>
-          <td>{{$branch->name}}</td>
-          <td><img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" style="width: 50px; height: 50px;"></td>
-          <td> <button type="button" class="btn btn-primary btn-block uppercase" data-toggle="modal" data-target="#myModal{{$client->id}}">Nuevo</button></td>
-          <td>
 
+           <td>{!! $client->folio!!}</td>
+           <td>{!! $client->firts_name !!}</td>
+           <td>{!! $client->last_name !!}</td>
+           <td>{!! $client->mothers_last_name !!}</td>
+           <td>{!! $client->curp !!}</td>
+           <td>{!! $client->ine !!}</td>
+           <td>{!! $client->civil_status !!}</td>
+           <td>{{$branch->name}}</td>
+           <td><img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" style="width: 50px; height: 50px;"></td>
+           <td> <button type="button" class="btn btn-primary btn-block uppercase" data-toggle="modal" data-target="#myModal{{$client->id}}">Nuevo</button></td>
+           <td>
             <a href="{!! route('clients.show', [$client->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>   
             <a href="{!! route('clients.delete', [$client->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar este cliente?')"><i class="fa fa-trash fa-2x" data-toggle="tooltip" title="Eliminar"></i></a>                            
           </td>
-
         </tr>
         @endforeach
       </tbody>

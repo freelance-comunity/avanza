@@ -13,6 +13,7 @@ use App\Models\Clientdocuments;
 use App\Models\Branch;
 use App\Models\Product;
 use App\Models\Credit;
+use App\Models\LatePayments;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -108,7 +109,9 @@ class ClientController extends AppBaseController
 			$input['avatar'] = $filename;
 		}
 		$number = Credit::max('id') + 1;
+		
 		$input['folio'] = $request->input('state').$request->input('branch_id').'00'.$number;
+
 		$client = Client::create($input);
 
 
@@ -347,10 +350,13 @@ class ClientController extends AppBaseController
 		}
 		$product = Product::find($product);
 		$client = Client::find($id);
-		$credit = Credit::all();
+		$credit = Credit::find($id);
 		$credits = $client->credits;
+		//$LatePayments = LatePayments::where('debt_id', $debt->id)->where('status', 'Bloqueado')->count();
+		
 		$status = 0;
 		$diario =0;
+		$semanal = 0;
 		foreach ($credits as $value) {
 			if ($value->status == 'MINISTRADO') {
 				$status ++;
@@ -363,11 +369,15 @@ class ClientController extends AppBaseController
 			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
 		}
+		/*elseif ($LatePayments >=1){
+			Toastr::error('Este cliente esta Bloqueado','BLOQUADO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('clients.index'));
+		}*/
 		/*elseif ($diario == 2) {
 			Toastr::error('Este cliente ya cuenta con 2 créditos diarios','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
 		}
-		elseif ($semanal == 1) {
+		elseif ($semanal = 1) {
 			Toastr::error('Este cliente ya cuenta con 1 créditos semanal','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
 		}*/

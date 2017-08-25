@@ -77,5 +77,9 @@ class Client extends Model
 	{
 		return $this->hasMany('App\Models\Credit');
 	}
+	public function user()
+	{
+		return $this->belongsTo('App\User');
+	}
 
 }

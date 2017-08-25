@@ -75,4 +75,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Employeecredentials');
     }
+    public function clients()
+    {
+        return $this->hasMany('App\Models\Client');
+    }
 }

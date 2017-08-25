@@ -46,12 +46,12 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
-   $payment = App\Models\Payment::find(2242);
-   $debt = $payment->debt;
-   echo $debt->ammount;
-   $credit = $debt->credit;
+ $payment = App\Models\Payment::find(2242);
+ $debt = $payment->debt;
+ echo $debt->ammount;
+ $credit = $debt->credit;
 
-   echo $credit->ammount;
+ echo $credit->ammount;
 });
 
 Route::post('process', 'PaymentController@process');
@@ -334,33 +334,34 @@ Route::get('latePayments/{id}/delete', [
 
 
 Route::get('cl', function(){
-$latePayments = App\Models\LatePayments::find(54);
-echo $latePayments->id;
-echo "<br>";
-$payment = $latePayments->payment;
-echo $latePayments->payment->id;
-echo "<br>";
-$debt = $payment->debt;
-echo $debt->id;
-echo "<br>";
-$credit = $debt->credit;
-echo $credit->id;
-echo "<br>";
-$client = $credit->client;
-echo $client->id;
-echo "<br>";
-
-$cliente = $payment->debt->credit->client;
-echo $cliente->id;
-
-echo "<br>";
-$latePayments = $payment->latePayments;
-
-foreach ($latePayments as $key => $value) {
-    echo $value->id;
+    $latePayments = App\Models\LatePayments::find(54);
+    echo $latePayments->id;
     echo "<br>";
-}
+    $payment = $latePayments->payment;
+    echo $latePayments->payment->id;
+    echo "<br>";
+    $debt = $payment->debt;
+    echo $debt->id;
+    echo "<br>";
+    $credit = $debt->credit;
+    echo $credit->id;
+    echo "<br>";
+    $client = $credit->client;
+    echo $client->id;
+    echo "<br>";
+
+    $cliente = $payment->debt->credit->client;
+    echo $cliente->id;
+
+    echo "<br>";
+    $latePayments = $payment->latePayments;
+
+    foreach ($latePayments as $key => $value) {
+        echo $value->id;
+        echo "<br>";
+    }
 });
+
 
 Route::post('desbloquear' , 'LatePaymentsController@desbloquear');
 

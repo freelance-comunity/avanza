@@ -17,6 +17,7 @@
 				$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 				$block = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->count();
 				$bloqueado = App\Models\LatePayments::where('debt_id', $debt->id)->where('status', 'Bloqueado')->count();
+				$status = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pagado')->count();
 				$late_interest = $late_payments->sum('interest');
 				$late_capital = $late_payments->sum('capital');
 				$late_moratorium = $late_payments->sum('moratorium');
@@ -83,7 +84,8 @@
 						<p><strong>CUOTAS RESTANTES:</strong> {{ $rest }}</p>
 						<p><strong>TOTAL PAGADO:</strong> ${{ number_format($total_payment,2) }}</p>
 						<p><strong>TOTAL RESTANTE:</strong> ${{ number_format($debt->ammount,2) }}</p>
-						<p><strong>ESTATUS DEL CRÉDITO: </strong> {{ strtoupper($debt->status) }}</p>			
+						<p><strong>ESTATUS DEL CRÉDITO: </strong> {{ strtoupper($debt->status) }}</p>
+									
 					</div>
 					<div class="col-md-4">
 						<p style="color:red;"><strong>INTERÉS:</strong>$ {{ number_format($late_interest, 2) }}</p>

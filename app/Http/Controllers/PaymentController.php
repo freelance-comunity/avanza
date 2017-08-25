@@ -326,7 +326,7 @@ class PaymentController extends AppBaseController
 				$client->save();*/
 
 			}
-
+			
 		}
 		return redirect()->back();	
 	}

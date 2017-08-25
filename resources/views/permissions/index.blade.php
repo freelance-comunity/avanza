@@ -16,7 +16,7 @@
         <div class="well text-center">No hay permisos registrados.</div>
         @else
         <table class="table" id="example">
-            <thead>
+            <thead class="thead-inverse">
                 <th>Nombre</th>
                 <th>Nombre Secundario</th>
                 <th>Descripción</th>

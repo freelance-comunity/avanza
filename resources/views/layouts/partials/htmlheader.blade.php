@@ -204,5 +204,8 @@
             color: #fff;
             background-color: #373a3c;
           }
+          .page-break {
+            page-break-after: always;
+          }
         </style>
       </head>

@@ -17,7 +17,7 @@
         @else
         <div class="table-responsive">
             <table class="table"  id="example">
-                <thead>
+                <thead class="thead-inverse">
                     <th>Codigo </th>
                     <th>Nombre</th>
                     <th>Interés</th>

@@ -44,28 +44,16 @@ class ClientController extends AppBaseController
 	}
 
 	public function index(Request $request)
-	{
-		$query = Client::query();
+	{	
+		if (Auth::user()->hasRole('administrador')) {
+			$clients = Client::all();
+		}else{
+			$clients = Auth::user()->clients;
+		}
 		$products =	Product::all();
-		$columns = Schema::getColumnListing('$TABLE_NAME$');
-		$attributes = array();
-
-		foreach($columns as $attribute){
-			if($request[$attribute] == true)
-			{
-				$query->where($attribute, $request[$attribute]);
-				$attributes[$attribute] =  $request[$attribute];
-			}else{
-				$attributes[$attribute] =  null;
-			}
-		};
-
-		$clients = $query->get();
-
 		return view('clients.index')
 		->with('clients', $clients)
-		->with('products',$products)
-		->with('attributes', $attributes);
+		->with('products',$products);
 	}
 
 	/**

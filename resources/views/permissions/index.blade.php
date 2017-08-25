@@ -32,8 +32,8 @@
                     <td>{!! $permission->description !!}</td>
                     <td>{!! $permission->code !!}</td>
                     <td>
-                        <a href="{!! route('permissions.edit', [$permission->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="{!! route('permissions.delete', [$permission->id]) !!}" onclick="return confirm('Are you sure wants to delete this Permission?')"><i class="glyphicon glyphicon-remove"></i></a>
+                        <a href="{!! route('permissions.edit', [$permission->id]) !!}"><i class="glyphicon glyphicon-edit fa-2x"></i></a>
+                        <a href="{!! route('permissions.delete', [$permission->id]) !!}" onclick="return confirm('Are you sure wants to delete this Permission?')"><i class="glyphicon glyphicon-remove fa-2x"></i></a>
                     </td>
                 </tr>
                 @endforeach

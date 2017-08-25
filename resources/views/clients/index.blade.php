@@ -29,6 +29,7 @@ Todos los Clientes
           <th>Ine</th>
           <th>Estado Civil</th>
           <th>Sucursal</th>
+          <th>Imagen</th>
           <th width="50px">Crédito</th>
           <th>Acción</th>
         </thead>
@@ -69,19 +70,6 @@ Todos los Clientes
          $credits = $client->credits;
          @endphp
          <tr>
-<<<<<<< HEAD
-          <td>{!! $client->folio!!}</td>
-          <td>{!! $client->firts_name !!}</td>
-          <td>{!! $client->last_name !!}</td>
-          <td>{!! $client->mothers_last_name !!}</td>
-          <td>{!! $client->curp !!}</td>
-          <td>{!! $client->ine !!}</td>
-          <td>{!! $client->civil_status !!}</td>
-          <td>{{$branch->name}}</td>
-          <td> <button type="button" class="btn btn-primary btn-block uppercase" data-toggle="modal" data-target="#myModal{{$client->id}}">Nuevo</button></td>
-          <td>
-=======
->>>>>>> remotes/origin/master
 
            <td>{!! $client->folio!!}</td>
            <td>{!! $client->firts_name !!}</td>

@@ -37,26 +37,17 @@ class CreditController extends AppBaseController
 	}
 
 	public function index(Request $request)
-	{
-		$query = Credit::query();
-		$columns = Schema::getColumnListing('$TABLE_NAME$');
-		$attributes = array();
-
-		foreach($columns as $attribute){
-			if($request[$attribute] == true)
-			{
-				$query->where($attribute, $request[$attribute]);
-				$attributes[$attribute] =  $request[$attribute];
-			}else{
-				$attributes[$attribute] =  null;
-			}
-		};
-
-		$credits = $query->get();
+	{	
+		if (Auth::user()->hasRole('administrador')) {
+			$credits = Credit::all();
+		}
+		else
+		{
+			$credits = Auth::user()->credits;
+		}
 
 		return view('credits.index')
-		->with('credits', $credits)
-		->with('attributes', $attributes);
+		->with('credits', $credits);
 	}
 
 	/**

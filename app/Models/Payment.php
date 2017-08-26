@@ -49,6 +49,9 @@ class Payment extends Model
 	{
 		return $this->hasMany('App\Models\LatePayments');
 	}
-
+	public function user()
+	{
+		return $this->belongsTo('App\User');
+	}
 
 }

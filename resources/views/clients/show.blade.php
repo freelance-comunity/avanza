@@ -56,7 +56,7 @@ Detalles del Cliente
   </div>
 </div>
 <div class="col-md-6">
-  <a href="{!! route('clients.edit', [$client->id]) !!}"><h3 style="color:black;"><i class="fa fa-user"></i> DATOS PERSONALES</h3></a>
+  <a href="{!! route('clients.edit', [$client->id]) !!}"><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-user"></i> DATOS PERSONALES</h3></a>
   <div class="table-responsive">
     <table class="table table-striped">
       <tr>
@@ -101,7 +101,7 @@ Detalles del Cliente
 </div>
 @else
 
-<a href="{!! route('clientLocations.edit', [$location->id]) !!}"><h3 style="color:black;"><i class="fa fa-home"></i> DOMICILIO DEL CLIENTE</h3></a>
+<a href="{!! route('clientLocations.edit', [$location->id]) !!}"><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-home"></i> DOMICILIO DEL CLIENTE</h3></a>
 
 <!-- /.box-header -->
 <div class="box-body no-padding">
@@ -171,7 +171,7 @@ Detalles del Cliente
 @else
 <div class="row">
   <div class="container">
-    <a href="{!! route('clientCompanies.edit', [$company->id]) !!}"><h3 style="color:black;"><i class="fa fa-building"></i> DOMICILIO DEL NEGOCIO: {{$company->name_company}}</h3>
+    <a href="{!! route('clientCompanies.edit', [$company->id]) !!}"><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-building"></i> DOMICILIO DEL NEGOCIO: {{$company->name_company}}</h3>
     </div></a>
   </div>
 
@@ -357,7 +357,7 @@ Detalles del Cliente
 </div>
 @else
 <div class="col-md-12">
-  <a href="{!! route('clientAvals.edit', [$aval->id]) !!}"><h3 style="color:black;"><i class="fa fa-male"></i> AVAL</h3></a>
+  <a href="{!! route('clientAvals.edit', [$aval->id]) !!}"><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-male"></i> AVAL</h3></a>
   <div class="table-responsive">
    <table class="table table-striped">
     <tr>
@@ -414,7 +414,7 @@ Detalles del Cliente
  <h3>Este empleado no tiene referencias registradas.</h3> 
 </div>
 @else
-  <h3 style="color:black;"><i class="fa fa-search"></i> REFERENCIAS</h3>
+  <h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-search"></i> REFERENCIAS</h3>
   <div class="table-responsive">
    <table class="table table-striped">
     <tr>

@@ -24,5 +24,8 @@ Panel de Control
 			</div>
 		</div>
 	</div>
+	@role('ejecutivo-de-credito')
+		@include('partials.home.promoter')
+	@endrole
 </div>
 @endsection

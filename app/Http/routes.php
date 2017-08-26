@@ -361,7 +361,10 @@ Route::get('cl', function(){
         echo "<br>";
     }
 });
-
+Route::get('graphics',function(){
+   
+    return view('graphics');
+});
 
 Route::post('desbloquear' , 'LatePaymentsController@desbloquear');
 

@@ -12,7 +12,7 @@ Todos los Clientes
     <h1 class="pull-left">Clientes</h1>
     <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('clients.create') !!}">Agregar Nuevo Cliente</a>
   </div>
- 
+
   <div class="row">
     @if($clients->isEmpty())
     <div class="well text-center">No se encontraron clientes en el sistema.</div>
@@ -20,7 +20,7 @@ Todos los Clientes
 
     <div class="table-responsive">
       <table class="table"  id="example">
-      <thead class="thead-inverse">
+        <thead class="thead-inverse">
           <th>Folio</th>
           <th>Nombre</th>
           <th>Apellido Paterno</th>
@@ -80,7 +80,26 @@ Todos los Clientes
            <td>{!! $client->civil_status !!}</td>
            <td>{{$branch->name}}</td>
            <td><img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" style="width: 50px; height: 50px;"></td>
+          {{-- @php
+           $deuda = false;
+           @endphp 
+           @if (count($client->credits)>0)
+           @foreach ($client->credits as $element)
+           @if (count($element->tests)>0)
+           @php
+           $deuda = true;
+           break;
+           @endphp
+           @endif
+           @endforeach
+           @endif 
+           @if ($deuda)
+         <td> 
+           <a href="" class="btn bg-red btn-block uppercase">Bloqueado</a>
+           <button type="button" class="btn bg-red btn-block uppercase">Bloqueado</button></td>
+          @else--}}
            <td> <button type="button" class="btn btn-primary btn-block uppercase" data-toggle="modal" data-target="#myModal{{$client->id}}">Nuevo</button></td>
+           {{--@endif--}}
            <td>
             <a href="{!! route('clients.show', [$client->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a> 
             @permission('eliminar-cliente')  

@@ -128,4 +128,10 @@ class Credit extends Model
 	{
 		return $this->belongsTo('App\User');
 	}
+	public function tests()
+	{
+		return $this->hasManyThrough(
+			'App\Models\LatePayments', 'App\Models\Debt', 
+			'credit_id','debt_id','id');
+	}
 }

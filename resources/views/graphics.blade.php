@@ -14,6 +14,7 @@
 	$diario_three = App\Models\Credit::where('periodicity','DIARIO')->where('dues','52')->count();
 	$diario_four = App\Models\Credit::where('periodicity','DIARIO')->where('dues','60')->count();
 	$semanal = App\Models\Credit::where('periodicity', 'SEMANAL')->count();
+	
 	@endphp
 
 	<div class="col-md-6">

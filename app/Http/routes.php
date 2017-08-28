@@ -362,12 +362,26 @@ Route::get('cl', function(){
     }
 });
 Route::get('graphics',function(){
-   
+
     return view('graphics');
 });
 
-Route::post('desbloquear' , 'LatePaymentsController@desbloquear');
+Route::get('unlocked/{id}' , 'PaymentController@unlocked');
+Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
 
+Route::get('pagado',function(){
+
+    $payments = App\Models\Payment::where('debt_id',62)->where('status','Pagado')->get();
+    foreach ($payments as  $value) {
+      if ($payments->last() == $value) {
+          echo $value->status;
+      }
+
+    }
+
+
+
+});
 
 
 

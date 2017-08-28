@@ -376,6 +376,17 @@ class ClientController extends AppBaseController
 			->with('client', $client)
 			->with('credit',$credit);
 		}
+	}
+
+	public function unlockedclient($id)
+	{
+		$locked = LatePayments::where('debt_id',$id)->where('status','bloqueado')->get();
+		foreach ($locked as $value)
+		{
+		$value->status = "Acreditado";
+		$value->save();
+		}
+		return redirect()->back();
 	}	
 }
 

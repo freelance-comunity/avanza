@@ -205,6 +205,7 @@ class PaymentController extends AppBaseController
 					$payment_extra->status = "Parcial";
 					$payment_extra->save();
 					$debt->ammount = $debt->ammount - $r;
+					
 					$debt->save();
 					Toastr::success('Pagos test.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				}
@@ -216,10 +217,15 @@ class PaymentController extends AppBaseController
 						$payment_process->status = "Pagado";
 						$payment_process->save();
 						$debt->ammount = $debt->ammount - $payment->balance;
+						
 						$debt->save();
 					}
 					Toastr::success('Pagos confirmados.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				}
+			}
+			if ($debt->ammount == 0) {
+				$debt->status = "Pagado";
+				$debt->save();
 			}
 		}
 		else{
@@ -246,6 +252,7 @@ class PaymentController extends AppBaseController
 						$payment->payment = $paid_out + $ammount;
 
 						$debt->ammount = $debt->ammount - $ammount;
+
 						$debt->save();
 
 						Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
@@ -319,14 +326,28 @@ class PaymentController extends AppBaseController
 				$latePayments->save();
 
 
-				/*$debt = $payment->debt;
-				$credit = $debt->credit;
-				$client = $credit->client;
-				$client->firts_name ="KEILY";
-				$client->save();*/
+			}
 
+
+			if ($debt->ammount == 0) {
+				$debt->status = "Pagado";
+				$debt->save();
+
+				
 			}
 			
+		}
+
+		return redirect()->back();	
+	}
+	
+	public function unlocked($id)
+	{
+		$locked = LatePayments::where('debt_id',$id)->where('status','bloqueado')->get();
+		foreach ($locked as $value)
+		{
+		$value->status = "Acreditado";
+		$value->save();
 		}
 		return redirect()->back();	
 	}

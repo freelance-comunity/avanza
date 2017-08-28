@@ -21,6 +21,8 @@
 				$total_payment = $debt->payments->sum('payment');
 				$rest = $credit->dues - $pay;
 				$date_now = Carbon\Carbon::today();
+				$countlocked = App\Models\LatePayments::where('debt_id',$debt->id)->where('status','Bloqueado')->count();
+				
 				@endphp
 				<div class="box-body">
 					<div class="col-md-4">
@@ -100,8 +102,10 @@
 						<!--endmodal-->
 						@if ($pay == 20)
 						<button type="button" class="btn btn-lg bg-orange btn-block" data-toggle="modal" data-target="#myModal">Renovar Crédito</button></td>
-						@elseif($debt->status == 'Pagado')
+						@elseif($debt->status == 'Pagado' && $countlocked == 0)
 						<button type="button" class="btn btn-lg bg-blue btn-block" data-toggle="modal" data-target="#myModal{{$client->id}}">Renovar Crédito</button></td>
+						@elseif($countlocked >0)
+						<a href="{{ url('unlocked') }}/{{$debt->id}}" class="btn btn-lg bg-red btn-block" onclick="return confirm('¿Estas seguro de desbloquear este cliente?')">Desbloquear</a>
 						@endif
 						<hr>
 					</div>					

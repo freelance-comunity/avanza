@@ -64,6 +64,10 @@
         <link rel="stylesheet" href="{{asset('/rangeSlider/css/ion.rangeSlider.css')}}" />
         <link rel="stylesheet" href="{{asset('/rangeSlider/css/ion.rangeSlider.skinFlat.css')}}" />
         <script src="{{asset('/rangeSlider/js/ion.rangeSlider.js')}}" type="text/javascript"></script>
+        <!--pace-->
+
+        <script src="{{ asset('/pace/pace.js') }}"></script>
+        <link href="{{ asset('/pace/themes/pace-theme-barber-shop.css') }}"  rel="stylesheet" />
 
         <style>
           canvas {

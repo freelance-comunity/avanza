@@ -383,6 +383,10 @@ Route::get('pagado',function(){
 
 });
 
+Route::get('loading', function(){
+    return view('loading');
+});
+
 
 
 

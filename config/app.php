@@ -181,6 +181,14 @@ return [
 
         /*carbon español*/
         Jenssegers\Date\DateServiceProvider::class,
+
+        /**
+         *
+         * Maatwebsite/excel
+         *
+         */
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        
         
         
 
@@ -256,6 +264,15 @@ return [
     
     /*carbon español*/
     'Date' => Jenssegers\Date\Date::class,
+
+    /**
+     *
+     * Maatwebsite/excel
+     *
+     */
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+    
     
 
     ],

@@ -23,6 +23,7 @@ use Toastr;
 use Image;
 use Auth;
 use App\Traits\DatesTranslator;
+use \Excel;
 
 class ClientController extends AppBaseController
 {
@@ -383,11 +384,133 @@ class ClientController extends AppBaseController
 		$locked = LatePayments::where('debt_id',$id)->where('status','bloqueado')->get();
 		foreach ($locked as $value)
 		{
-		$value->status = "Acreditado";
-		$value->save();
+			$value->status = "Acreditado";
+			$value->save();
 		}
 		return redirect()->back();
-	}	
+	}
+
+	public function importClients(Request $request)
+	{
+		\Excel::load($request->excel, function($reader) {
+
+			$excel = $reader->get();
+
+            //iteración
+			$reader->each(function($row) {
+				$client = new Client;
+				$client->folio = $row->folio;
+				$client->firts_name = $row->firts_name;
+				$client->last_name = $row->last_name;
+				$client->mothers_last_name = $row->mothers_last_name;
+				$client->curp = $row->curp_txt;
+				$client->ine = $row->ine_txt;
+				$client->civil_status = $row->civil_status;
+				$client->scholarship = $row->scholarship;
+				$client->phone = $row->phone;
+				$client->no_economic_dependent = $row->no_economic_dependent;
+				$client->no_familys = $row->no_familys;
+				$client->type_of_housing = $row->type_of_housing;
+				$client->avatar = $row->avatar;
+				$client->branch_id = $row->branch_id;
+				$client->user_id = 14;
+				$client->save();
+
+				$location = new ClientLocation;
+				$location->street = $row->street;
+				$location->number = $row->number;
+				$location->colony = $row->colony;
+				$location->municipality = $row->municipality;
+				$location->state = $row->state;
+				$location->postal_code = $row->postal_code;
+				$location->references = $row->references;
+				$location->latitude = $row->latitude;
+				$location->lenght = $row->lenght;
+				$location->client_id = $client->id;
+				$location->save();
+
+				$company = new ClientCompany;
+				$company->street_company = $row->street_company;
+				$company->number_company = $row->number_company;
+				$company->colony_company = $row->colony_company;
+				$company->municipality_company = $row->municipality_company;
+				$company->state_company = $row->state_company;
+				$company->postal_code_company = $row->postal_code_company;
+				$company->phone_company = $row->phone_company;
+				$company->name_company = $row->name_company;
+				$company->inventory = $row->inventory;
+				$company->machinery_equipment = $row->machinery_equipment;
+				$company->vehicles = $row->vehicles;
+				$company->property = $row->property;
+				$company->box_benck = $row->box_benck;
+				$company->accounts = $row->accounts;
+				$company->suppliers = $row->suppliers;
+				$company->credits = $row->credits;
+				$company->payments = $row->payments;
+				$company->specify = $row->specify;
+				$company->weekday = $row->weekday;
+				$company->weekend = $row->weekend;
+				$company->utility = $row->utility;
+				$company->other_income = $row->other_income;
+				$company->rent = $row->rent;
+				$company->salary = $row->salary;
+				$company->others = $row->others;
+				$company->latitude_company = $row->latitude_company;
+				$company->length_company = $row->length_company;
+				$company->client_id = $client->id;
+				$company->save();
+
+				$aval = new ClientAval;
+				$aval->name_aval = $row->name_aval;
+				$aval->last_name_aval = $row->last_name_aval;
+				$aval->mothers_name_aval = $row->mothers_name_aval;
+				$aval->birthdate_aval = $row->birthdate_aval;
+				$aval->curp_aval = $row->curp_aval;
+				$aval->phone_aval = $row->phone_aval;
+				$aval->civil_status_aval = $row->civil_status_aval;
+				$aval->scholarship_aval = $row->scholarship_aval;
+				$aval->street_aval = $row->street_aval;
+				$aval->number_aval = $row->number_aval;
+				$aval->colony_aval = $row->colony_aval;
+				$aval->municipality_aval = $row->municipality_aval;
+				$aval->state_aval = $row->state_aval;
+				$aval->postal_code_aval = $row->postal_code_aval;
+				$aval->client_id = $client->id;
+				$aval->save();
+
+				$reference_1 = new ClientReferences;
+				$reference_1->firts_name_reference = $row->firts_name_reference_1;
+				$reference_1->last_name_reference = $row->last_name_reference_1;
+				$reference_1->mothers_last_name_reference = $row->mothers_last_name_reference_1;
+				$reference_1->phone_reference = $row->phone_reference_1;
+				$reference_1->client_id = $client->id;
+				$reference_1->save();
+
+				$reference_2 = new ClientReferences;
+				$reference_2->firts_name_reference = $row->firts_name_reference_2;
+				$reference_2->last_name_reference = $row->last_name_reference_2;
+				$reference_2->mothers_last_name_reference = $row->mothers_last_name_reference_2;
+				$reference_2->phone_reference = $row->phone_reference_2;
+				$reference_2->client_id = $client->id;
+				$reference_2->save();
+
+				$documents = new Clientdocuments;
+				$documents->ine = $row->ine;
+				$documents->curp = $row->curp;
+				$documents->proof_of_addres = $row->proof_of_addres;
+				$documents->client_id = $client->id;
+				$documents->save();
+
+
+			});
+
+		});
+
+		Toastr::success('Archivo Excel procesado correctamente.', 'CLIENTES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+		return redirect(route('clients.index'));
+	}
+
 }
 
 

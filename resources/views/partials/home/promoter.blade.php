@@ -42,9 +42,15 @@ $payments = Auth::user()->payments;
                     <td>$ {{ number_format($payment->total, 2) }}</td>
                     <td>${{ number_format($payment->payment, 2)}}</td>
                     <td>${{ number_format($payment->balance, 2) }}</td>
-                    <td><p style="color:gray;">{{$payment->status}}</p></td>
                     <td>
-                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-success btn-lg">PAGAR</a>
+                        @if ($payment->status == 'Vencido')
+                        <p style="color:red;">{{$payment->status}}</p>
+                        @else
+                        <p style="color:gray;">{{$payment->status}}</p>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-success btn-lg btn-block">PAGAR</a>
                     </td>
                 </tr>
                 @endif

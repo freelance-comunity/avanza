@@ -8,10 +8,11 @@ Crear nueva sucursal
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'branches.store', 'data-parsley-validate' => '', 'id' => 'demo-form']) !!}
+    {!! Form::open(['route' => 'branches.store', 'data-parsley-validate' => '', 'id' => 'demo-form form']) !!}
 
         @include('branches.fields')
 
     {!! Form::close() !!}
 </div>
+
 @endsection

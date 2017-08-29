@@ -133,6 +133,7 @@
 
   <script src="{{ asset('/js/jquery.loader.js') }}"></script>
   <script type="text/javascript">
+
     (function ($) {
       "use strict";
 
@@ -161,3 +162,17 @@
       } (jQuery));
     </script>
 
+    <script>
+// Bind keyup event on the input
+$('#control').keyup(function() {
+
+  // If value is not empty
+  if ($(this).val().length == 0) {
+    // Hide the element
+    $('.show_hide').hide();
+  } else {
+    // Otherwise show it
+    $('.show_hide').show();
+  }
+}).keyup(); // Trigger the keyup event, thus running the handler on page load
+</script>

@@ -56,6 +56,8 @@ Route::get('division', function(){
 
 Route::post('process', 'PaymentController@process');
 
+Route::post('/import-excel', 'ClientController@importClients');
+
 /*=====  End of Test Routes  ======*/
 
 

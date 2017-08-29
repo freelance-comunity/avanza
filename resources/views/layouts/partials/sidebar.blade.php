@@ -72,7 +72,7 @@
         <div class="modal-body">
           {!! Form::label('modalidad', 'Modalidad:') !!}        
           <select id="status" onChange="mostrar(this.value);" class="form-control input-lg">
-            <option value="" class="selected">Elige Modalidad</option>
+            <option value="" class="selected">PRODUCTO</option>
             <option value="Diario">Diario</option>
             <option value="Semanal">Semanal</option>
           </select>
@@ -90,6 +90,7 @@
           </script>
           <br>
           <div id="diario" style="display: none;" class="form-group col-sm-6 col-lg-12 ">
+           {!! Form::label('modalidad', 'Plazo:') !!}      
             <select id="modalidadr" name="modalidadr" onChange="mostrar(this.value); calcularr()" class="form-control input-lg">
               <option  value="25">25 días</option>
               <option value="30">30 días</option>
@@ -97,7 +98,7 @@
               <option value="60">60 días</option>
             </select><br>
             <input type="hidden" id="tasar" name="tasar" value="0.15">
-            {!! Form::label('capitalr', 'Capital:') !!}
+            {!! Form::label('capitalr', 'Monto solicitado:') !!}
             <div class="range-slider color-3">
               <input type="text" id="capitalr" name="capitalr" onChange="calcularr()" />
             </div>
@@ -113,7 +114,7 @@
               <option onChange="calcular()" value="1">1 Semana</option>
             </select> <br>
             <input type="hidden" id="tasa" name="tasa" value="0.15">
-            {!! Form::label('capital', 'Capital:') !!}
+            {!! Form::label('capital', 'Monto solicitado:') !!}
             <div class="range-slider color-3">
               <input type="text" id="capital" name="capital" onChange="calcular()" />
             </div>

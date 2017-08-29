@@ -72,7 +72,7 @@
         <div class="modal-body">
           {!! Form::label('modalidad', 'Modalidad:') !!}        
           <select id="status" onChange="mostrar(this.value);" class="form-control input-lg">
-            <option value="" class="selected">Elige Modalidad</option>
+            <option value="" class="selected">PRODUCTO</option>
             <option value="Diario">Diario</option>
             <option value="Semanal">Semanal</option>
           </select>
@@ -90,14 +90,12 @@
           </script>
           <br>
           <div id="diario" style="display: none;" class="form-group col-sm-6 col-lg-12 ">
-            <select id="modalidadr" name="modalidadr" onChange="mostrar(this.value); calcularr()" class="form-control input-lg">
-              <option  value="25">25 días</option>
-              <option value="30">30 días</option>
-              <option value="52">52 días</option>
-              <option value="60">60 días</option>
-            </select><br>
+           {!! Form::label('modalidad', 'Plazo:') !!}      
+            <div class="range-slider color-3">
+              <input type="text" id="modalidadr" name="modalidadr" onChange="calcularr()" />
+            </div><br>
             <input type="hidden" id="tasar" name="tasar" value="0.15">
-            {!! Form::label('capitalr', 'Capital:') !!}
+            {!! Form::label('capitalr', 'Monto solicitado:') !!}
             <div class="range-slider color-3">
               <input type="text" id="capitalr" name="capitalr" onChange="calcularr()" />
             </div>
@@ -105,15 +103,18 @@
             <!-- {!! Form::text('capitalr', null, ['class' => 'form-control input-lg', 'id' => 'capitalr', 'value' => '0', 'onkeyup' => 'calcularr()']) !!}-->
             <input type="hidden" id="interesr" name="interesr" value="Norway">
 
-            {!! Form::label('totalr', 'TOTAL:') !!}  
-            {!! Form::text('totalr', null, ['class' => 'form-control input-lg', 'id' => 'totalnr', 'readonly' => 'readonly']) !!}               
+            {!! Form::label('totalr', 'Cuota:') !!}  
+            {!! Form::text('totalr', null, ['class' => 'form-control input-lg', 'id' => 'totalnr', 'readonly' => 'readonly']) !!} 
+
+            {!! Form::label('totalpayment', 'Total a Pagar:') !!}  
+            {!! Form::text('totalpayment', null, ['class' => 'form-control input-lg', 'id' => 'totalnr', 'readonly' => 'readonly']) !!}               
           </div>
           <div id="semanal" style="display: none;" class="form-group col-sm-6 col-lg-12 ">
             <select id="modalidad" name="modalidad"  onChange="mostrar(this.value); calcular()" class="form-control input-lg">
               <option onChange="calcular()" value="1">1 Semana</option>
             </select> <br>
             <input type="hidden" id="tasa" name="tasa" value="0.15">
-            {!! Form::label('capital', 'Capital:') !!}
+            {!! Form::label('capital', 'Monto solicitado:') !!}
             <div class="range-slider color-3">
               <input type="text" id="capital" name="capital" onChange="calcular()" />
             </div>
@@ -156,10 +157,17 @@
     }
   </style>
   <script>
+    $("#modalidadr").ionRangeSlider({
+     grid: true,
+     from: 0,
+     values: [0,10,20,30,40,60],
+   });
+ </script>
+  <script>
     $("#capitalr").ionRangeSlider({
      grid: true,
      from: 0,
-     values: [0,1000, 1500, 2000, 2500, 3000, 3500, 4000,4500,5000,5500,6000,6500,7000,7500,8000,8500, 9000, 9500,10000,10500,11000,11500, 12000, 12500, 13000, 13500, 14000,14500, 15000,15500,16000,16500, 17000,17500,18000,18500,19000,19500, 20000],
+     values: [0,1000,  2000,  3000,  4000,5000],
      prefix: "$"
    });
  </script>
@@ -167,7 +175,7 @@
   $("#capital").ionRangeSlider({
     grid: true,
     from: 0,
-    values: [0,1000, 1500, 2000, 2500, 3000, 3500, 4000,4500,5000,5500,6000,6500,7000,7500,8000,8500, 9000, 9500,10000,10500,11000,11500, 12000, 12500, 13000, 13500, 14000,14500, 15000,15500,16000,16500, 17000,17500,18000,18500,19000,19500, 20000],
+    values: [0,1000, 1500, 2000, 2500, 3000],
     prefix: "$"
   });
 </script>

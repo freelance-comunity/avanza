@@ -89,7 +89,7 @@
             }
           </script>
           <br>
-          <div id="diario" style="display: none;" class="form-group col-sm-6 col-lg-12 ">
+          <div id="diario" style="display: none;">
            {!! Form::label('modalidad', 'Plazo:') !!}      
             <div class="range-slider color-3">
               <input type="text" id="modalidadr" name="modalidadr" onChange="calcularr()" />
@@ -104,25 +104,28 @@
             <input type="hidden" id="interesr" name="interesr" value="Norway">
 
             {!! Form::label('totalr', 'Cuota:') !!}  
-            {!! Form::text('totalr', null, ['class' => 'form-control input-lg', 'id' => 'totalnr', 'readonly' => 'readonly']) !!} 
+            {!! Form::text('totalr', 'null', ['class' => 'form-control input-lg', 'id' => 'totalnr', 'readonly' => 'readonly']) !!} 
 
             {!! Form::label('totalpayment', 'Total a Pagar:') !!}  
-            {!! Form::text('totalpayment', null, ['class' => 'form-control input-lg', 'id' => 'totalnr', 'readonly' => 'readonly']) !!}               
+            {!! Form::text('totalpayment', null, ['class' => 'form-control input-lg', 'id' => 'totalpayment', 'readonly' => 'readonly']) !!}               
           </div>
-          <div id="semanal" style="display: none;" class="form-group col-sm-6 col-lg-12 ">
-            <select id="modalidad" name="modalidad"  onChange="mostrar(this.value); calcular()" class="form-control input-lg">
-              <option onChange="calcular()" value="1">1 Semana</option>
-            </select> <br>
+
+
+          <div id="semanal" style="display: none;"  ">
+            <input type="hidden" name="modalidad" id="modalidad" value="1">
             <input type="hidden" id="tasa" name="tasa" value="0.15">
             {!! Form::label('capital', 'Monto solicitado:') !!}
-            <div class="range-slider color-3">
+            <div class="range-slider color-3 form-group col-sm-6 col-lg-12 ">
               <input type="text" id="capital" name="capital" onChange="calcular()" />
             </div>
             <br>
             <!--{!! Form::text('capital', null, ['class' => 'form-control input-lg', 'id' => 'capital', 'value' => '0', 'onkeyup' => 'calcular()']) !!}-->
-
+           
+            {!! Form::label('refrendo', 'Refrendo:') !!}  
+            {!! Form::text('refrendo', null, ['class' => 'form-control input-lg', 'id' => 'refrendo', 'readonly' => 'readonly']) !!}
+        
             <input type="hidden" id="interes" name="interes">
-            {!! Form::label('total', 'TOTAL:') !!}  
+            {!! Form::label('total', 'Total a pagar:') !!}  
             {!! Form::text('total', null, ['class' => 'form-control input-lg', 'id' => 'totaln', 'readonly' => 'readonly']) !!}
           </div>
         </div>
@@ -174,6 +177,7 @@
  <script>
   $("#capital").ionRangeSlider({
     grid: true,
+    
     from: 0,
     values: [0,1000, 1500, 2000, 2500, 3000],
     prefix: "$"
@@ -192,7 +196,8 @@
     utilidad_neta = capital + interes;
     total= utilidad_neta/modalidad;
 
-    document.getElementById('totaln').value=Math.ceil(total);         
+    document.getElementById('totaln').value=Math.ceil(total);
+     document.getElementById('refrendo').value=Math.ceil(interes);         
   }
   function calcularr()
   {
@@ -206,7 +211,10 @@
     utilidad_netar = capitalr + interesr;
     totalr= utilidad_netar/modalidadr;
 
-    document.getElementById('totalnr').value=Math.ceil(totalr);         
+    document.getElementById('totalnr').value=Math.ceil(totalr);  
+
+    totalpayment =  capitalr + interesr;
+    document.getElementById('totalpayment').value=Math.ceil(totalpayment);  
   }
 </script>
 

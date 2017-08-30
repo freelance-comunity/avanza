@@ -26,11 +26,8 @@ Todos los Clientes
           <th>Nombre</th>
           <th>Apellido Paterno</th>
           <th>Apellido Materno</th>
-          <th>Curp</th>
-          <th>Ine</th>
-          <th>Estado Civil</th>
           <th>Sucursal</th>
-          <th>Imagen</th>
+          <th>Teléfono</th>
           <th width="50px">Crédito</th>
           <th>Acción</th>
         </thead>
@@ -42,14 +39,14 @@ Todos los Clientes
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Elige la modalidad</h5>
+                  <h5 class="modal-title">Crediefectivo</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
                   <div class="text-center">
-                    <h4>Selecciona una modalidad de crédito</h4>
+                    <h4>Seleccione producto</h4>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -76,11 +73,8 @@ Todos los Clientes
            <td>{!! $client->firts_name !!}</td>
            <td>{!! $client->last_name !!}</td>
            <td>{!! $client->mothers_last_name !!}</td>
-           <td>{!! $client->curp !!}</td>
-           <td>{!! $client->ine !!}</td>
-           <td>{!! $client->civil_status !!}</td>
            <td>{{$branch->name}}</td>
-           <td><img src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" style="width: 50px; height: 50px;"></td>
+           <td>{{ $client->phone }}</td>
           {{-- @php
            $deuda = false;
            @endphp 

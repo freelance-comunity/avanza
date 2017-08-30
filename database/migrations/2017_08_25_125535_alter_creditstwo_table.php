@@ -26,7 +26,7 @@ class AlterCreditstwoTable extends Migration
     public function down()
     {
         Schema::table('credits', function (Blueprint $table) {
-             $table->dropForeign('posts_user_id_foreign');
+            
         });
     }
 }

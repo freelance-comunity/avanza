@@ -128,23 +128,6 @@ class ClientController extends AppBaseController
 		$data_company['postal_code_company'] = $request->input('postal_code_company');
 		$data_company['phone_company'] = $request->input('phone_company');
 		$data_company['name_company'] = $request->input('name_company');		
-		$data_company['inventory'] = $request->input('inventory');
-		$data_company['machinery_equipment'] = $request->input('machinery_equipment');
-		$data_company['vehicles'] = $request->input('vehicles');
-		$data_company['property'] = $request->input('property');
-		$data_company['box_benck'] = $request->input('box_benck');
-		$data_company['accounts'] = $request->input('accounts');
-		$data_company['suppliers'] = $request->input('suppliers');
-		$data_company['credits'] = $request->input('credits');
-		$data_company['payments'] = $request->input('payments');
-		$data_company['specify'] = $request->input('specify');
-		$data_company['weekday'] = $request->input('weekday');
-		$data_company['weekend'] = $request->input('weekend');
-		$data_company['utility'] = $request->input('utility');
-		$data_company['other_income'] = $request->input('other_income');
-		$data_company['rent'] = $request->input('rent');
-		$data_company['salary'] = $request->input('salary');
-		$data_company['others'] = $request->input('others');
 		$data_company['latitude_company'] = $request->input('latitude_company');
 		$data_company['length_company'] = $request->input('length_company');
 		$data_company['client_id'] = $client->id;
@@ -155,7 +138,6 @@ class ClientController extends AppBaseController
 		$data_aval['name_aval'] = $request->input('name_aval');
 		$data_aval['last_name_aval'] = $request->input('last_name_aval');
 		$data_aval['mothers_name_aval'] = $request->input('mothers_name_aval');
-		$data_aval['birthdate_aval'] = $request->input('birthdate_aval');
 		$data_aval['curp_aval'] = $request->input('curp_aval');
 		$data_aval['phone_aval'] = $request->input('phone_aval');
 		$data_aval['civil_status_aval'] = $request->input('civil_status_aval');
@@ -172,24 +154,6 @@ class ClientController extends AppBaseController
 		$aval = ClientAval::create($data_aval);
 
 
-
-
-		/* Get REFERENCE data  */
-		$date_reference_1['firts_name_reference'] = $request->input('firts_name_reference_1');		
-		$date_reference_1['last_name_reference'] = $request->input('last_name_reference_1');
-		$date_reference_1['mothers_last_name_reference']   = $request->input('mothers_last_name_reference_1');
-		$date_reference_1['phone_reference'] = $request->input('phone_reference_1');
-		$date_reference_1['client_id'] = $client->id;
-
-		$reference_1 = ClientReferences::create($date_reference_1);
-
-		$data_reference_2['firts_name_reference'] = $request->input('firts_name_reference_2');		
-		$data_reference_2['last_name_reference'] = $request->input('last_name_reference_2');
-		$data_reference_2['mothers_last_name_reference']   = $request->input('mothers_last_name_reference_2');
-		$data_reference_2['phone_reference'] = $request->input('phone_reference_2');
-		$data_reference_2['client_id'] = $client->id;
-
-		$reference_2 = ClientReferences::create($data_reference_2);
 		/*=============================================
 		=            Save documentation client        =
 		=============================================*/
@@ -218,7 +182,7 @@ class ClientController extends AppBaseController
 		$documentation = Clientdocuments::create($documents);
 		/*=====  End of Save documentation client  ======*/
 		
-		Toastr::success('Cliente creado exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		Toastr::success('Cliente creado exitosamente.', 'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('clients.index'));
 
@@ -295,6 +259,7 @@ class ClientController extends AppBaseController
 		}
 
 		$client->fill($request->all());
+		
 		$client->save();
 		
 		Toastr::success('Cliente editado exitosamente.', 'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);

@@ -26,7 +26,7 @@ class AlterClientsTable extends Migration
     public function down()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->dropForeign('posts_user_id_foreign');
+          
         });
     }
 }

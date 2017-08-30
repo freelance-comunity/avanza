@@ -19,7 +19,6 @@ class CreateClientAvalsTable extends Migration
 			$table->string('name_aval');
 			$table->string('last_name_aval');
 			$table->string('mothers_name_aval');
-			$table->string('birthdate_aval');
 			$table->string('curp_aval');
 			$table->string('phone_aval');
 			$table->string('civil_status_aval');

@@ -61,11 +61,7 @@
                 <p class="responsivo test">Aval</p>
             </div>
             <div class="stepwizard-step p" id="myparrafo">
-                <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
-                <p class="responsivo test">Referencias</p>
-            </div>
-            <div class="stepwizard-step p" id="myparrafo">
-                <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
                 <p  class="responsivo test">Digitalización</p>
             </div>
         </div>
@@ -73,7 +69,12 @@
     <div class="box-body">
 
        <div class="row setup-content" id="step-1">
-
+          <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('avatar', 'Imagen:') !!}
+                {!! Form::file('avatar', [
+                    'data-parsley-trigger ' => 'input focusin',
+                    ]) !!}
+                </div>
 
 
         <div class="form-group col-sm-6 col-lg-4">
@@ -114,10 +115,6 @@
                 {!! Form::select('civil_status',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('scholarship', 'Grado Escolar:') !!}
-                {!! Form::select('scholarship',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('phone', 'Teléfono:') !!}
                 <input type="number" name="phone" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
             </div>
@@ -126,21 +123,11 @@
                 {!! Form::select('no_economic_dependent',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('no_familys', 'No. Familias') !!}
-                {!! Form::select('no_familys',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
                 {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
             </div>
 
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('avatar', 'Imagen:') !!}
-                {!! Form::file('avatar', [
-                    'required' => 'required',
-                    'data-parsley-trigger ' => 'input focusin',
-                    ]) !!}
-                </div>
+          
 
 
                 @php
@@ -285,94 +272,7 @@
                 {!! Form::label('name_company', 'Nombre del Negocio:') !!}
                 {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
-            <div class="form-group col-sm-12 col-lg-12">
-                <h3 style="text-align: center;"> 
-                 <span class="label label-danger">Activos</span> 
-             </h3>                
-         </div>
-         <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('inventory', 'Inventario ($):') !!}
-            {!! Form::text('inventory', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DEL INVENTARIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('machinery_equipment', 'Maq y Equip($):') !!}
-            {!! Form::text('machinery_equipment', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DE LA MAQUINARIA Y EQUIPO', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('vehicles', 'Vehículos($):') !!}
-            {!! Form::text('vehicles', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DE VEHÍCULOS', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('property', 'Inmuebles($):') !!}
-            {!! Form::text('property', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD DEL INMUEBLE', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('box_benck', 'Caja, Bancos($):') !!}
-            {!! Form::text('box_benck', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('accounts', 'Ctas/Cobrar($):') !!}
-            {!! Form::text('accounts', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required',   'data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-        <div class="form-group col-sm-12 col-lg-12">
-            <h3 style="text-align: center;"> 
-             <span class="label label-danger">Pasivos</span> 
-         </h3>                
-     </div>
-     <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('suppliers', 'Proveedores($):') !!}
-        {!! Form::text('suppliers', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-    </div>
-    <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('credits', 'Créditos($):') !!}
-        {!! Form::text('credits', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-    </div>
-    <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('payments', 'Pago al mes($):') !!}
-        {!! Form::text('payments', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-    </div>
-    <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('specify', 'Especifica:') !!}
-        {!! Form::text('specify', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESPECIFICA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-    </div>
-    <div class="form-group col-sm-12 col-lg-12">
-        <h3 style="text-align: center;"> 
-         <span class="label label-danger">Ingresos</span> 
-     </h3>                
- </div>
- <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('weekday', 'Entre semana:') !!}
-    {!! Form::text('weekday', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-</div>
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('weekend', 'Fines de Semana:') !!}
-    {!! Form::text('weekend', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-</div>
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('utility', 'Utilidad:') !!}
-    {!! Form::text('utility', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-</div>
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('other_income', 'Otros Ingresos:') !!}
-    {!! Form::text('other_income', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-</div>
-<div class="form-group col-sm-12 col-lg-12">
-    <h3 style="text-align: center;"> 
-     <span class="label label-danger">Costos</span> 
- </h3>                
-</div>
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('rent', 'Renta:') !!}
-    {!! Form::text('rent', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-</div>
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('salary', 'Sueldos:') !!}
-    {!! Form::text('salary', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-</div>
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('others', 'Otros Luz/Agua:') !!}
-    {!! Form::text('others', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE LA CANTIDAD', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-</div>
+            
 
 
     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
@@ -387,22 +287,19 @@
             <h3>Aval </h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('name_aval', 'Nombre(s):') !!}
-                {!! Form::text('name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL AVAL', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL AVAL', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('last_name_aval', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO DEL AVAL', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('last_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO DEL AVAL',  'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('mothers_name_aval', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO DEL AVAL', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                {!! Form::text('mothers_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO DEL AVAL', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('birthdate_aval', 'Fecha de nacimiento:') !!}
-                <input type="date" name="birthdate_aval" class="form-control input-lg" required="required" data-parsley-trigger="input focusin">
-            </div>
+           
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('curp_aval', 'CURP:') !!}
                 {!! Form::text('curp_aval', null, [
@@ -411,47 +308,46 @@
                     'id' => 'curp_input',
                     'oninput' => 'validarI(this)',
                     'placeholder' => 'ESCRIBE CURP', 
-                    'required' => 'required',
                     'data-parsley-trigger ' => 'input focusin',
                     'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                     <pre id="resultados"></pre>
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('phone_aval', 'Teléfono:') !!}
-                    <input type="number" name="phone_aval" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
+                    <input type="number" name="phone_aval" class="form-control input-lg" placeholder="TELÉFONO"  data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
 
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('civil_status_aval', 'Estado Civil:') !!}
-                    {!! Form::select('civil_status_aval',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
+                    {!! Form::select('civil_status_aval',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin',]) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('scholarship_aval', 'Grado Escolar:') !!}
-                    {!! Form::select('scholarship_aval',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
+                    {!! Form::select('scholarship_aval',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin',]) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('street_aval', 'Calle:') !!}
-                    {!! Form::text('street_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                    {!! Form::text('street_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA',  'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('number_aval', 'Número de casa:') !!}
-                    {!! Form::text('number_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                    {!! Form::text('number_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('colony_aval', 'Colonia:') !!}
-                    {!! Form::text('colony_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                    {!! Form::text('colony_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA',  'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('municipality_aval', 'Municipio:') !!}
-                    {!! Form::text('municipality_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                    {!! Form::text('municipality_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('state_aval', 'Estado:') !!}
-                    {!! Form::select('state_aval',['placeholder'=>'SELECCIONE UN ESTADO','AGUASCALIENTES' => 'AGUASCALIENTES', 'BAJA CALIFORNIA' => 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR','CAMPECHE' => 'CAMPECHE','COAHUILA' => 'COAHUILA','COLIMA' => 'COLIMA','CHIAPAS' => 'CHIAPAS','CHIHUAHUA' => 'CHIHUAHUA','DISTRITO FEDERAL' => 'DISTRITO FEDERAL','DURANGO' => 'DURANGO','JALISCO' => 'JALISCO','MÉXICO' => 'MÉXICO','MICHOACÁN' => 'MICHOACÁN','MORELOS' => 'MORELOS','NAYARIT' => 'NAYARIT','NUEVO LEÓN' => 'NUEVO LEÓN','OAXACA' => 'OAXACA','PUEBLA' => 'PUEBLA','QUERÉTARO' => 'QUERÉTARO','QUINTANA ROO'=>'QUINTANA ROO','SAN LUIS POTOSÍ'=> 'SAN LUIS POTOSÍ','SINALOA'=>'SINALOA','SONORA','SONORA','TABASCO'=>'TABASCO','TAMAULIPAS'=>'TAMAULIPAS','TLAXCALA'=>'TLAXCALA','VERACRUZ'=>'VERACRUZ','YUCATÁN'=>'YUCATÁN','ZACATECAS'=>'ZACATECAS'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin']) !!}
+                    {!! Form::select('state_aval',['placeholder'=>'SELECCIONE UN ESTADO','AGUASCALIENTES' => 'AGUASCALIENTES', 'BAJA CALIFORNIA' => 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR','CAMPECHE' => 'CAMPECHE','COAHUILA' => 'COAHUILA','COLIMA' => 'COLIMA','CHIAPAS' => 'CHIAPAS','CHIHUAHUA' => 'CHIHUAHUA','DISTRITO FEDERAL' => 'DISTRITO FEDERAL','DURANGO' => 'DURANGO','JALISCO' => 'JALISCO','MÉXICO' => 'MÉXICO','MICHOACÁN' => 'MICHOACÁN','MORELOS' => 'MORELOS','NAYARIT' => 'NAYARIT','NUEVO LEÓN' => 'NUEVO LEÓN','OAXACA' => 'OAXACA','PUEBLA' => 'PUEBLA','QUERÉTARO' => 'QUERÉTARO','QUINTANA ROO'=>'QUINTANA ROO','SAN LUIS POTOSÍ'=> 'SAN LUIS POTOSÍ','SINALOA'=>'SINALOA','SONORA','SONORA','TABASCO'=>'TABASCO','TAMAULIPAS'=>'TAMAULIPAS','TLAXCALA'=>'TLAXCALA','VERACRUZ'=>'VERACRUZ','YUCATÁN'=>'YUCATÁN','ZACATECAS'=>'ZACATECAS'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin']) !!}
                 </div>     
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('postal_code_aval', 'Código Postal:') !!}
-                    <input type="number" name="postal_code_aval" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
+                    <input type="number" name="postal_code_aval" class="form-control input-lg" placeholder="CODIGO POSTAL" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
                 </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
             </div>
@@ -460,89 +356,28 @@
     </div>
     <!-- CLIENTS AVAL-->
 
-    <!-- CLIENTS LOCATION-->
-    <div class="row setup-content" id="step-5">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Referencias Personales</h3>
-                <div class="form-group col-sm-12 col-lg-12">
-                    <h3 style="text-align: center;"> 
-                     <span class="label label-danger">Referencia 1</span> 
-                 </h3>                
-             </div>
-             <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('firts_name_reference_1', 'Nombre(s):') !!}
-                {!! Form::text('firts_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('last_name_reference_1', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO PATERNO', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
 
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('mothers_last_name_reference_1', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_last_name_reference_1', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO MATERNO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('phone_reference_1', 'Teléfono:') !!}
-                <input type="number" name="phone_reference_1" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
-            </div>
-            <hr>
-
-            <div class="form-group col-sm-12 col-lg-12">
-                <h3 style="text-align: center;"> 
-                 <span class="label label-danger">Referencia 2</span> 
-             </h3>                
-         </div>
-         <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('firts_name_reference_2', 'Nombre(s):') !!}
-            {!! Form::text('firts_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('last_name_reference_2', 'Apellido Paterno:') !!}
-            {!! Form::text('last_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO PATERNO ', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('mothers_last_name_reference_2', 'Apellido Materno:') !!}
-            {!! Form::text('mothers_last_name_reference_2', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL APELLIDO MATERNO', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('phone_reference_2', 'Teléfono:') !!}
-           <input type="number" name="phone_reference_2" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
-        </div>
-
-        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-
-    </div>
-</div>
-</div>
 
 <!-- CLIENTS DOCUMENTS-->
-<div class="row setup-content" id="step-6">
+<div class="row setup-content" id="step-5">
     <div class="col-xs-12">
         <div class="col-md-12">
             <h3> Digitalización</h3>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('ine_document', 'INE:') !!}
                 {!! Form::file('ine_document', [
-                    'required' => 'required',
                     'data-parsley-trigger ' => 'input focusin',
                     ]) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('curp_document', 'CURP:') !!}
                     {!! Form::file('curp_document', [
-                        'required' => 'required',
                         'data-parsley-trigger ' => 'input focusin',
                         ]) !!}
                     </div>
                     <div class="form-group col-sm-6 col-lg-4">
                         {!! Form::label('proof_of_addres', 'Comprobante de Domicilio:') !!}
                         {!! Form::file('proof_of_addres', [
-                            'required' => 'required',
                             'data-parsley-trigger ' => 'input focusin',
                             ]) !!}
                         </div>

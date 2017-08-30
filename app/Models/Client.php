@@ -21,10 +21,8 @@ class Client extends Model
 	"curp",
 	"ine",
 	"civil_status",
-	"scholarship",
 	"phone",
 	"no_economic_dependent",
-	"no_familys",
 	"type_of_housing",
 	"avatar",
 	"branch_id",
@@ -38,12 +36,9 @@ class Client extends Model
 	"curp" => "required",
 	"ine" => "required",
 	"civil_status" => "required",
-	"scholarship" => "required",
 	"phone" => "required",
 	"no_economic_dependent" => "required",
-	"no_familys" => "required",
 	"type_of_housing" => "required",
-	"avatar" => "required",
 	
 	];
 	public function branch()

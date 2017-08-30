@@ -1,6 +1,5 @@
 @php
 $branch = $client->branch;
-$references = $client->references;
 $location = $client->location;
 $company= $client->company;
 $aval= $client->aval;
@@ -66,27 +65,13 @@ Detalles del Cliente
       </tr>
       <tr>
         <td>2.</td>
-        <td>ESCOLARIDAD:</td>
-        <td>
-          {{$client->scholarship}}
-        </td>
-      </tr>
-      <tr>
-        <td>3.</td>
         <td>DEPENDIENTES:</td>
         <td>
           {{$client->no_economic_dependent}}
         </td>
       </tr>
-      <tr>
-        <td>4.</td>
-        <td>NO. FAMILIAS:</td>
-        <td>
-         {{$client->no_familys}}
-       </td>
-     </tr>
      <tr>
-      <td>5.</td>
+      <td>3.</td>
       <td>TIPO DE VIVIENDA:</td>
       <td>
         {{$client->type_of_housing}}
@@ -233,7 +218,7 @@ Detalles del Cliente
 </div>
 </div>
 
-<div class="col-md-3">
+<!--<div class="col-md-3">
  <h4>ACTIVOS</h4>
  <div class="table-responsive">
    <table class="table table-striped">
@@ -348,7 +333,7 @@ Detalles del Cliente
     </tr>
   </table>
 </div>
-</div>
+</div>-->
 @endif
 
 @if (is_null($aval))
@@ -364,7 +349,6 @@ Detalles del Cliente
       <th style="width: 10px">NOMBRE:</th>
       <th>APELLIDO PATERNO:</th>
       <th>APELLIDO MATERNO:</th>
-      <th>FECHA DE NACIMIENTO:</th>
       <th>CURP:</th>
       <th>TELÉFONO:</th>
       <th>ESTADO CIVIL:</th>
@@ -374,7 +358,6 @@ Detalles del Cliente
       <th style="width: 10px">{{$aval->name_aval}}</th>
       <th>{{$aval->last_name_aval}}</th>
       <th>{{$aval->mothers_name_aval}}</th>
-      <th>{{$aval->birthdate_aval}}</th>
       <th>{{$aval->curp_aval}}</th>
       <th>{{$aval->phone_aval}}</th>
       <th>{{$aval->civil_status_aval}}</th>
@@ -408,12 +391,12 @@ Detalles del Cliente
 @endif
 
 
-<div class="col-md-12">
-@if (is_null($references))
+<!--<div class="col-md-12">
+
 <div class="box-body">
  <h3>Este empleado no tiene referencias registradas.</h3> 
 </div>
-@else
+
   <h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-search"></i> REFERENCIAS</h3>
   <div class="table-responsive">
    <table class="table table-striped">
@@ -424,21 +407,12 @@ Detalles del Cliente
       <th>TELÉFONO:</th>
       <th>EDITAR</th>
     </tr>
-    @foreach ($references as $references)
-    <tr>
-      <th style="width: 10px">{{$references->firts_name_reference}}</th>
-      <th>{{$references->last_name_reference}}</th>
-      <th>{{$references->mothers_last_name_reference}}</th>
-      <th>{{$references->phone_reference}}</th>
-      <th> <a href="{!! route('clientReferences.edit', [$references->id]) !!}"><i class="fa fa-edit fa-2x " data-toggle="tooltip" title="Editar"></i></a></th>
 
-    </tr>
-    @endforeach
 
   </table>
 </div>
 </div>
-@endif
+-->
 
 @if (is_null($document))
 <div class="box-body">

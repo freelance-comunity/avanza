@@ -23,12 +23,10 @@ class CreateClientsTable extends Migration
 			$table->string('curp');
 			$table->string('ine');			
 			$table->string('civil_status');
-			$table->string('scholarship');
 			$table->string('phone');		
 			$table->string('no_economic_dependent');
-			$table->string('no_familys');
 			$table->string('type_of_housing');
-			$table->string('avatar');
+			$table->string('avatar')->default('default.png');;
 			$table->integer('branch_id')->unsigned();
 			$table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
 			$table->timestamps();

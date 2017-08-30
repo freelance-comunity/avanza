@@ -15,7 +15,6 @@ class ClientAval extends Model
 	    "name_aval",
 		"last_name_aval",
 		"mothers_name_aval",
-		"birthdate_aval",
 		"curp_aval",
 		"phone_aval",
 		"civil_status_aval",
@@ -30,20 +29,7 @@ class ClientAval extends Model
 	];
 
 	public static $rules = [
-	    "name_aval" => "required",
-		"last_name_aval" => "required",
-		"mothers_name_aval" => "required",
-		"birthdate_aval" => "required",
-		"curp_aval" => "required",
-		"phone_aval" => "required",
-		"civil_status_aval" => "required",
-		"scholarship_aval" => "required",		
-		"street_aval" => "required",
-		"number_aval" => "required",
-		"colony_aval" => "required",
-		"municipality_aval" => "required",
-		"state_aval" => "required",
-		"postal_code_aval" => "required"
+	   
 	];
 	public function client()
     {

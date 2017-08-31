@@ -385,8 +385,8 @@ Route::get('pagado',function(){
 
 });
 
-Route::get('loading', function(){
-    return view('loading');
+Route::get('mexico', function(){
+    return view('mexico');
 });
 
 

@@ -14,12 +14,6 @@
             <h3>Datos generales</h3>
         </div>
 
-          <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('avatar', 'Imagen:') !!}
-                {!! Form::file('avatar', [
-                    'data-parsley-trigger ' => 'input focusin',
-                    ]) !!}
-                </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('folio', 'Folio:') !!}
             {!! Form::text('folio', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL FOLIO DEL CLIENTE','required'=>'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();','readonly'=>'readonly']) !!}

@@ -43,7 +43,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">Registro Personal</h3>
         <div class="stepwizard">
-         <div class="stepwizard-row setup-panel">
+           <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step p" id="myparrafo">
                 <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
                 <p class="responsivo test">Datos</p>
@@ -61,20 +61,20 @@
                 <p class="responsivo test">Aval</p>
             </div>
             <div class="stepwizard-step p" id="myparrafo">
-                <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
                 <p  class="responsivo test">Digitalización</p>
             </div>
         </div>
     </div>
     <div class="box-body">
 
-       <div class="row setup-content" id="step-1">
-          <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('avatar', 'Imagen:') !!}
-                {!! Form::file('avatar', [
-                    'data-parsley-trigger ' => 'input focusin',
-                    ]) !!}
-                </div>
+     <div class="row setup-content" id="step-1">
+      <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('avatar', 'Imagen:') !!}
+        {!! Form::file('avatar', [
+            'data-parsley-trigger ' => 'input focusin',
+            ]) !!}
+        </div>
 
 
         <div class="form-group col-sm-6 col-lg-4">
@@ -127,139 +127,139 @@
                 {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
             </div>
 
-          
 
 
-                @php
-                $count = App\Models\Branch::all();
-                @endphp
 
-                <div class="form-group col-sm-12 col-lg-12">
-                    {!! Form::label('branch_id', '* Sucursal:') !!}
-                    <select name="branch_id" required="required" value="{{ old('branch_id') }}" class="form-control input-lg" id="branch"  data-parsley-trigger= "input focusin">
-                        @if($count ->isEmpty())
-                        <option value="">No hay sucursales registradas en el sistema</option>
-                        @else 
-                        <option selected value="">Seleccione Sucursal</option>
-                        @foreach($count as $branches)
-                        <option value="{{ $branches->id}}">{{$branches->name}}</option>
-                        @endforeach
-                        @endif
-                    </select>
-                </div>
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                {{-- Geolocation address client --}}
-                <div class="col-md-6">
-                    <div class="gllpLatlonPicker">
-                      <label for="exampleInputEmail1">DIRECCIÓN DEL CLIENTE</label>
-                      <br/><br/>
-                      <div class="gllpMap">Google Maps</div>
-                      <br/>
-                      <input type="hidden" name="latitude" id="lat" class="gllpLatitude" value="16.753239967660058"/>
-                      <input type="hidden" name="lenght" id="lon" class="gllpLongitude" value="-93.11789682636714"/>
-                      <input type="hidden" class="gllpZoom" value="15"/>
-                      <input type="button" id="update" class="gllpUpdateButton" style="display: none;" value="Actualizar">
-                      <br/>
-                  </div>
-              </div>
-              {{-- End Geolocation address client --}}
-              <div class="col-md-6">
+            @php
+            $count = App\Models\Branch::all();
+            @endphp
+
+            <div class="form-group col-sm-12 col-lg-12">
+                {!! Form::label('branch_id', '* Sucursal:') !!}
+                <select name="branch_id" required="required" value="{{ old('branch_id') }}" class="form-control input-lg" id="branch"  data-parsley-trigger= "input focusin">
+                    @if($count ->isEmpty())
+                    <option value="">No hay sucursales registradas en el sistema</option>
+                    @else 
+                    <option selected value="">Seleccione Sucursal</option>
+                    @foreach($count as $branches)
+                    <option value="{{ $branches->id}}">{{$branches->name}}</option>
+                    @endforeach
+                    @endif
+                </select>
+            </div>
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            {{-- Geolocation address client --}}
+            <div class="col-md-6">
                 <div class="gllpLatlonPicker">
-                  <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
+                  <label for="exampleInputEmail1">DIRECCIÓN DEL CLIENTE</label>
                   <br/><br/>
                   <div class="gllpMap">Google Maps</div>
                   <br/>
-                  <input type="hidden" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
-                  <input type="hidden" id="lon_bussines" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+                  <input type="hidden" name="latitude" id="lat" class="gllpLatitude" value="16.753239967660058"/>
+                  <input type="hidden" name="lenght" id="lon" class="gllpLongitude" value="-93.11789682636714"/>
                   <input type="hidden" class="gllpZoom" value="15"/>
-                  <input type="button" id="update_bussines" class="gllpUpdateButton" style="display: none;" value="Actualizar">
+                  <input type="button" id="update" class="gllpUpdateButton" style="display: none;" value="Actualizar">
+                  <br/>
               </div>
           </div>
-          <script>
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else { 
-                alert("Este navegador no soporta Geolocalización.");
-            }
-            function showPosition(position) {
-                document.getElementById('lat').value=position.coords.latitude;
-                document.getElementById('lon').value=position.coords.longitude;
-                document.getElementById('lat_bussines').value=position.coords.latitude;
-                document.getElementById('lon_bussines').value=position.coords.longitude;
-                document.getElementById("update").click();
-                document.getElementById("update_bussines").click();
-            }
-        </script>
+          {{-- End Geolocation address client --}}
+          <div class="col-md-6">
+            <div class="gllpLatlonPicker">
+              <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
+              <br/><br/>
+              <div class="gllpMap">Google Maps</div>
+              <br/>
+              <input type="hidden" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
+              <input type="hidden" id="lon_bussines" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+              <input type="hidden" class="gllpZoom" value="15"/>
+              <input type="button" id="update_bussines" class="gllpUpdateButton" style="display: none;" value="Actualizar">
+          </div>
+      </div>
+      <script>
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            alert("Este navegador no soporta Geolocalización.");
+        }
+        function showPosition(position) {
+            document.getElementById('lat').value=position.coords.latitude;
+            document.getElementById('lon').value=position.coords.longitude;
+            document.getElementById('lat_bussines').value=position.coords.latitude;
+            document.getElementById('lon_bussines').value=position.coords.longitude;
+            document.getElementById("update").click();
+            document.getElementById("update_bussines").click();
+        }
+    </script>
 
-        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
 
-    </div>
+</div>
 
-    <!-- CLIENTS LOCATION-->
-    <div class="row setup-content" id="step-2">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Ubicación </h3>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('street', 'Calle:') !!}
-                    {!! Form::text('street', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE DE LA CALLE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('number', 'Número de Casa:') !!}
-                    {!! Form::text('number', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NÚMERO DE LA CASA','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('colony', 'Colonia:') !!}
-                    {!! Form::text('colony', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('municipality', 'Municipio:') !!}
-                    {!! Form::text('municipality', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('state', 'Estado:') !!}
-                    {!! Form::select('state',['placeholder'=>'SELECCIONE UN ESTADO','AGUASCALIENTES' => 'AGUASCALIENTES', 'BAJA CALIFORNIA' => 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR','CAMPECHE' => 'CAMPECHE','COAHUILA' => 'COAHUILA','COLIMA' => 'COLIMA','CHIAPAS' => 'CHIAPAS','CHIHUAHUA' => 'CHIHUAHUA','DISTRITO FEDERAL' => 'DISTRITO FEDERAL','DURANGO' => 'DURANGO','JALISCO' => 'JALISCO','MÉXICO' => 'MÉXICO','MICHOACÁN' => 'MICHOACÁN','MORELOS' => 'MORELOS','NAYARIT' => 'NAYARIT','NUEVO LEÓN' => 'NUEVO LEÓN','OAXACA' => 'OAXACA','PUEBLA' => 'PUEBLA','QUERÉTARO' => 'QUERÉTARO','QUINTANA ROO'=>'QUINTANA ROO','SAN LUIS POTOSÍ'=> 'SAN LUIS POTOSÍ','SINALOA'=>'SINALOA','SONORA','SONORA','TABASCO'=>'TABASCO','TAMAULIPAS'=>'TAMAULIPAS','TLAXCALA'=>'TLAXCALA','VERACRUZ'=>'VERACRUZ','YUCATÁN'=>'YUCATÁN','ZACATECAS'=>'ZACATECAS'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('postal_code', 'Código Postal:') !!}
-                    <input type="number" name="postal_code" class="form-control input-lg" placeholder="CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('references', 'Referencias:') !!}
-                    {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>   
-
-
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+<!-- CLIENTS LOCATION-->
+<div class="row setup-content" id="step-2">
+    <div class="col-xs-12">
+        <div class="col-md-12">
+            <h3> Ubicación </h3>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('street', 'Calle:') !!}
+                {!! Form::text('street', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE DE LA CALLE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('number', 'Número de Casa:') !!}
+                {!! Form::text('number', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NÚMERO DE LA CASA','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('colony', 'Colonia:') !!}
+                {!! Form::text('colony', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('municipality', 'Municipio:') !!}
+                {!! Form::text('municipality', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('state', 'Estado:') !!}
+                {!! Form::select('state',['placeholder'=>'SELECCIONE UN ESTADO','AGUASCALIENTES' => 'AGUASCALIENTES', 'BAJA CALIFORNIA' => 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR','CAMPECHE' => 'CAMPECHE','COAHUILA' => 'COAHUILA','COLIMA' => 'COLIMA','CHIAPAS' => 'CHIAPAS','CHIHUAHUA' => 'CHIHUAHUA','DISTRITO FEDERAL' => 'DISTRITO FEDERAL','DURANGO' => 'DURANGO','JALISCO' => 'JALISCO','MÉXICO' => 'MÉXICO','MICHOACÁN' => 'MICHOACÁN','MORELOS' => 'MORELOS','NAYARIT' => 'NAYARIT','NUEVO LEÓN' => 'NUEVO LEÓN','OAXACA' => 'OAXACA','PUEBLA' => 'PUEBLA','QUERÉTARO' => 'QUERÉTARO','QUINTANA ROO'=>'QUINTANA ROO','SAN LUIS POTOSÍ'=> 'SAN LUIS POTOSÍ','SINALOA'=>'SINALOA','SONORA','SONORA','TABASCO'=>'TABASCO','TAMAULIPAS'=>'TAMAULIPAS','TLAXCALA'=>'TLAXCALA','VERACRUZ'=>'VERACRUZ','YUCATÁN'=>'YUCATÁN','ZACATECAS'=>'ZACATECAS'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('postal_code', 'Código Postal:') !!}
+                <input type="number" name="postal_code" class="form-control input-lg" placeholder="CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('references', 'Referencias:') !!}
+                {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>   
+
+
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
         </div>
     </div>
-    <!-- CLIENTS COMPANY-->
-    <div class="row setup-content" id="step-3">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Datos del Negocio</h3>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('street_company', 'Calle:') !!}
-                    {!! Form::text('street_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE DE LA CALLE', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('number_company', 'Número de Casa:') !!}
-                    {!! Form::text('number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NÚMERO DE LA CASA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>  
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('colony_company', 'Colonia:') !!}
-                    {!! Form::text('colony_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('municipality_company', 'Municipio:') !!}
-                    {!! Form::text('municipality_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();','data-parsley-trigger ' => 'input focusin',]) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('state_company', 'Estado:') !!}
-                    {!! Form::select('state_company',['placeholder'=>'SELECCIONE UN ESTADO','AGUASCALIENTES' => 'AGUASCALIENTES', 'BAJA CALIFORNIA' => 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR','CAMPECHE' => 'CAMPECHE','COAHUILA' => 'COAHUILA','COLIMA' => 'COLIMA','CHIAPAS' => 'CHIAPAS','CHIHUAHUA' => 'CHIHUAHUA','DISTRITO FEDERAL' => 'DISTRITO FEDERAL','DURANGO' => 'DURANGO','JALISCO' => 'JALISCO','MÉXICO' => 'MÉXICO','MICHOACÁN' => 'MICHOACÁN','MORELOS' => 'MORELOS','NAYARIT' => 'NAYARIT','NUEVO LEÓN' => 'NUEVO LEÓN','OAXACA' => 'OAXACA','PUEBLA' => 'PUEBLA','QUERÉTARO' => 'QUERÉTARO','QUINTANA ROO'=>'QUINTANA ROO','SAN LUIS POTOSÍ'=> 'SAN LUIS POTOSÍ','SINALOA'=>'SINALOA','SONORA','SONORA','TABASCO'=>'TABASCO','TAMAULIPAS'=>'TAMAULIPAS','TLAXCALA'=>'TLAXCALA','VERACRUZ'=>'VERACRUZ','YUCATÁN'=>'YUCATÁN','ZACATECAS'=>'ZACATECAS'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin']) !!}
-                </div>
-                 <div class="form-group col-sm-6 col-lg-4">
+</div>
+<!-- CLIENTS COMPANY-->
+<div class="row setup-content" id="step-3">
+    <div class="col-xs-12">
+        <div class="col-md-12">
+            <h3> Datos del Negocio</h3>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('street_company', 'Calle:') !!}
+                {!! Form::text('street_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE DE LA CALLE', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('number_company', 'Número de Casa:') !!}
+                {!! Form::text('number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NÚMERO DE LA CASA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>  
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('colony_company', 'Colonia:') !!}
+                {!! Form::text('colony_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('municipality_company', 'Municipio:') !!}
+                {!! Form::text('municipality_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();','data-parsley-trigger ' => 'input focusin',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('state_company', 'Estado:') !!}
+                {!! Form::select('state_company',['placeholder'=>'SELECCIONE UN ESTADO','AGUASCALIENTES' => 'AGUASCALIENTES', 'BAJA CALIFORNIA' => 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR','CAMPECHE' => 'CAMPECHE','COAHUILA' => 'COAHUILA','COLIMA' => 'COLIMA','CHIAPAS' => 'CHIAPAS','CHIHUAHUA' => 'CHIHUAHUA','DISTRITO FEDERAL' => 'DISTRITO FEDERAL','DURANGO' => 'DURANGO','JALISCO' => 'JALISCO','MÉXICO' => 'MÉXICO','MICHOACÁN' => 'MICHOACÁN','MORELOS' => 'MORELOS','NAYARIT' => 'NAYARIT','NUEVO LEÓN' => 'NUEVO LEÓN','OAXACA' => 'OAXACA','PUEBLA' => 'PUEBLA','QUERÉTARO' => 'QUERÉTARO','QUINTANA ROO'=>'QUINTANA ROO','SAN LUIS POTOSÍ'=> 'SAN LUIS POTOSÍ','SINALOA'=>'SINALOA','SONORA','SONORA','TABASCO'=>'TABASCO','TAMAULIPAS'=>'TAMAULIPAS','TLAXCALA'=>'TLAXCALA','VERACRUZ'=>'VERACRUZ','YUCATÁN'=>'YUCATÁN','ZACATECAS'=>'ZACATECAS'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('postal_code_company', 'Código Postal:') !!}
                 {!! Form::text('postal_code_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','data-parsley-maxlength' => '5','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
@@ -275,86 +275,112 @@
             
 
 
-    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-</div>
-</div>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+        </div>
+    </div>
 </div>
 
 <!-- CLIENTS AVAL-->
 <div class="row setup-content" id="step-4">
     <div class="col-xs-12">
         <div class="col-md-12">
-            <h3>Aval </h3>
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('name_aval', 'Nombre(s):') !!}
-                {!! Form::text('name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL AVAL', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
+          <select id="status" onChange="mostrar(this.value);" class="form-control input-lg">
+            <option value="" class="selected">Aval</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+        </select>
+        <br>
 
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('last_name_aval', 'Apellido Paterno:') !!}
-                {!! Form::text('last_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO DEL AVAL',  'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('mothers_name_aval', 'Apellido Materno:') !!}
-                {!! Form::text('mothers_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO DEL AVAL', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-           
-            <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('curp_aval', 'CURP:') !!}
-                {!! Form::text('curp_aval', null, [
-                    'style' => 'text-transform:uppercase',
-                    'class' => 'form-control input-lg', 
-                    'id' => 'curp_input',
-                    'oninput' => 'validarI(this)',
-                    'placeholder' => 'ESCRIBE CURP', 
-                    'data-parsley-trigger ' => 'input focusin',
-                    'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                    <pre id="resultados"></pre>
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('phone_aval', 'Teléfono:') !!}
-                    <input type="number" name="phone_aval" class="form-control input-lg" placeholder="TELÉFONO"  data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
-
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('civil_status_aval', 'Estado Civil:') !!}
-                    {!! Form::select('civil_status_aval',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin',]) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('scholarship_aval', 'Grado Escolar:') !!}
-                    {!! Form::select('scholarship_aval',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin',]) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('street_aval', 'Calle:') !!}
-                    {!! Form::text('street_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA',  'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('number_aval', 'Número de casa:') !!}
-                    {!! Form::text('number_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('colony_aval', 'Colonia:') !!}
-                    {!! Form::text('colony_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA',  'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('municipality_aval', 'Municipio:') !!}
-                    {!! Form::text('municipality_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('state_aval', 'Estado:') !!}
-                    {!! Form::select('state_aval',['placeholder'=>'SELECCIONE UN ESTADO','AGUASCALIENTES' => 'AGUASCALIENTES', 'BAJA CALIFORNIA' => 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR','CAMPECHE' => 'CAMPECHE','COAHUILA' => 'COAHUILA','COLIMA' => 'COLIMA','CHIAPAS' => 'CHIAPAS','CHIHUAHUA' => 'CHIHUAHUA','DISTRITO FEDERAL' => 'DISTRITO FEDERAL','DURANGO' => 'DURANGO','JALISCO' => 'JALISCO','MÉXICO' => 'MÉXICO','MICHOACÁN' => 'MICHOACÁN','MORELOS' => 'MORELOS','NAYARIT' => 'NAYARIT','NUEVO LEÓN' => 'NUEVO LEÓN','OAXACA' => 'OAXACA','PUEBLA' => 'PUEBLA','QUERÉTARO' => 'QUERÉTARO','QUINTANA ROO'=>'QUINTANA ROO','SAN LUIS POTOSÍ'=> 'SAN LUIS POTOSÍ','SINALOA'=>'SINALOA','SONORA','SONORA','TABASCO'=>'TABASCO','TAMAULIPAS'=>'TAMAULIPAS','TLAXCALA'=>'TLAXCALA','VERACRUZ'=>'VERACRUZ','YUCATÁN'=>'YUCATÁN','ZACATECAS'=>'ZACATECAS'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin']) !!}
-                </div>     
-                <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('postal_code_aval', 'Código Postal:') !!}
-                    <input type="number" name="postal_code_aval" class="form-control input-lg" placeholder="CODIGO POSTAL" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-            </div>
-
+        <script>
+            function mostrar(id) {
+              if (id == "Si") {
+                $("#si").show();
+                $("#no").hide();
+            }
+            if (id == "No") {
+                $("#si").hide();
+                $("#no").hide();
+            }
+        }
+    </script>
+    <div id="si" style="display: none;">
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('name_aval', 'Nombre(s):') !!}
+            {!! Form::text('name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL AVAL', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
+
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('last_name_aval', 'Apellido Paterno:') !!}
+            {!! Form::text('last_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO DEL AVAL',  'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('mothers_name_aval', 'Apellido Materno:') !!}
+            {!! Form::text('mothers_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO MATERNO DEL AVAL', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+
+        <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('curp_aval', 'CURP:') !!}
+            {!! Form::text('curp_aval', null, [
+                'style' => 'text-transform:uppercase',
+                'class' => 'form-control input-lg', 
+                'id' => 'curp_input',
+                'oninput' => 'validarI(this)',
+                'placeholder' => 'ESCRIBE CURP', 
+                'data-parsley-trigger ' => 'input focusin',
+                'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                <pre id="resultados"></pre>
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('phone_aval', 'Teléfono:') !!}
+                <input type="number" name="phone_aval" class="form-control input-lg" placeholder="TELÉFONO"  data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
+
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('civil_status_aval', 'Estado Civil:') !!}
+                <select name="civil_status_aval" class="form-control input-lg">
+                    <option value="" class="selected">Selecciona</option>
+                    <option value="SOLTERO(A)">SOLTERO(A)</option>
+                    <option value="CASADO(A)">CASADO(A)</option>
+                    <option value="VIUDO(A)">VIUDO(A)</option>
+                    <option value="DIVORCIADO(A)">DIVORCIADO(A)</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('scholarship_aval', 'Grado Escolar:') !!}
+                {!! Form::select('scholarship_aval',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('street_aval', 'Calle:') !!}
+                {!! Form::text('street_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA',  'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('number_aval', 'Número de casa:') !!}
+                {!! Form::text('number_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('colony_aval', 'Colonia:') !!}
+                {!! Form::text('colony_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA',  'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('municipality_aval', 'Municipio:') !!}
+                {!! Form::text('municipality_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('state_aval', 'Estado:') !!}
+                {!! Form::select('state_aval',['placeholder'=>'SELECCIONE UN ESTADO','AGUASCALIENTES' => 'AGUASCALIENTES', 'BAJA CALIFORNIA' => 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR' => 'BAJA CALIFORNIA SUR','CAMPECHE' => 'CAMPECHE','COAHUILA' => 'COAHUILA','COLIMA' => 'COLIMA','CHIAPAS' => 'CHIAPAS','CHIHUAHUA' => 'CHIHUAHUA','DISTRITO FEDERAL' => 'DISTRITO FEDERAL','DURANGO' => 'DURANGO','JALISCO' => 'JALISCO','MÉXICO' => 'MÉXICO','MICHOACÁN' => 'MICHOACÁN','MORELOS' => 'MORELOS','NAYARIT' => 'NAYARIT','NUEVO LEÓN' => 'NUEVO LEÓN','OAXACA' => 'OAXACA','PUEBLA' => 'PUEBLA','QUERÉTARO' => 'QUERÉTARO','QUINTANA ROO'=>'QUINTANA ROO','SAN LUIS POTOSÍ'=> 'SAN LUIS POTOSÍ','SINALOA'=>'SINALOA','SONORA','SONORA','TABASCO'=>'TABASCO','TAMAULIPAS'=>'TAMAULIPAS','TLAXCALA'=>'TLAXCALA','VERACRUZ'=>'VERACRUZ','YUCATÁN'=>'YUCATÁN','ZACATECAS'=>'ZACATECAS'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin']) !!}
+            </div>     
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('postal_code_aval', 'Código Postal:') !!}
+                <input type="number" name="postal_code_aval" class="form-control input-lg" placeholder="CODIGO POSTAL" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
+            </div>
+        </div>
+        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
     </div>
-    <!-- CLIENTS AVAL-->
+
+</div>
+</div>
+<!-- CLIENTS AVAL-->
 
 
 
@@ -491,15 +517,15 @@ function validarI(input) {
 
           tecla_especial = false
           for(var i in especiales){
-           if(key == especiales[i]){
-             tecla_especial = true;
-             break;
-         } 
-     }
+             if(key == especiales[i]){
+               tecla_especial = true;
+               break;
+           } 
+       }
 
-     if(letras.indexOf(tecla)==-1 && !tecla_especial)
-      return false;
-}
+       if(letras.indexOf(tecla)==-1 && !tecla_especial)
+          return false;
+  }
 </script>
 <script type="text/javascript">
 // Solo permite ingresar numeros.

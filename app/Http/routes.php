@@ -151,6 +151,8 @@ Route::get('profile', function(){
 
 Route::post('updatepassword', 'EmployeeController@updatePassword');
 
+Route::get('vault', 'GeneralController@getPromoter');
+
 /*=====  End of Routes for Employee  ======*/
 
 Route::get('formwizard', function(){

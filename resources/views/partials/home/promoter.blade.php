@@ -40,8 +40,8 @@ $payments = Auth::user()->payments;
                     <td>{{ $payment->number }} de {{ $credit->dues }}</td>
                     <td>$ {{ number_format($payment->moratorium, 2) }}</td>
                     <td>$ {{ number_format($payment->total, 2) }}</td>
-                    <td>${{ number_format($payment->payment, 2)}}</td>
-                    <td>${{ number_format($payment->balance, 2) }}</td>
+                    <td>$ {{ number_format($payment->payment, 2)}}</td>
+                    <td>$ {{ number_format($payment->balance, 2) }}</td>
                     <td>
                         @if ($payment->status == 'Vencido')
                         <p style="color:red;">{{$payment->status}}</p>

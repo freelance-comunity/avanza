@@ -87,4 +87,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Payment');       
     }
+
+    public function vault()
+    {
+        return $this->hasOne('App\Models\Vault');
+    }
 }

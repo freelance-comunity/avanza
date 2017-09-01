@@ -153,6 +153,8 @@ Route::post('updatepassword', 'EmployeeController@updatePassword');
 
 Route::get('vault', 'GeneralController@getPromoter');
 
+Route::get('showVault/{id}', 'GeneralController@showVault');
+
 /*=====  End of Routes for Employee  ======*/
 
 Route::get('formwizard', function(){
@@ -394,3 +396,27 @@ Route::get('mexico', function(){
 
 
 
+
+
+Route::resource('vaults', 'VaultController');
+
+Route::get('vaults/{id}/delete', [
+    'as' => 'vaults.delete',
+    'uses' => 'VaultController@destroy',
+]);
+
+
+Route::resource('incomes', 'IncomeController');
+
+Route::get('incomes/{id}/delete', [
+    'as' => 'incomes.delete',
+    'uses' => 'IncomeController@destroy',
+]);
+
+
+Route::resource('expenditures', 'ExpenditureController');
+
+Route::get('expenditures/{id}/delete', [
+    'as' => 'expenditures.delete',
+    'uses' => 'ExpenditureController@destroy',
+]);

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use App\Role;
+use App\Models\Vault;
 
 class GeneralController extends Controller
 {
@@ -17,5 +18,13 @@ class GeneralController extends Controller
 		
 		return view('executives.index')
 		->with('employees', $users);
+	}
+
+	public function showVault($id)
+	{
+		$user = User::find($id);
+		$vault = $user->vault;
+
+		return view('executives.showVault');
 	}
 }

@@ -79,7 +79,7 @@ $date = new Date();
 					<tbody>
 						@foreach ($expenditures as $expenditure)
 						<tr>
-							<td>{{ $expenditure->ammout }}</td>
+							<td>${{ number_format($expenditure->ammount, 2) }}</td>
 							<td>{{ $expenditure->concept }}</td>
 							<td>{{ $expenditure->voucher }}</td>
 							<td>{{ $expenditure->created_at }}</td>

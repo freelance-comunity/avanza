@@ -399,7 +399,6 @@ Route::get('executives', function(){
 
 
 
-
 Route::resource('vaults', 'VaultController');
 
 Route::get('vaults/{id}/delete', [

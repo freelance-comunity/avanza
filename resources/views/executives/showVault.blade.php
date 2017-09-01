@@ -2,7 +2,7 @@
 
 @section('main-content')
 @php
-$date = \Carbon\Carbon::now()->toDateString();
+$date = new Date();
 @endphp
 
 <div class="box box-danger">
@@ -15,13 +15,13 @@ $date = \Carbon\Carbon::now()->toDateString();
 				<span class="info-box-icon"><i class="fa fa-dollar"></i></span>
 				<div class="info-box-content">
 					<span class="info-box-text">CAJA</span>
-					<span class="info-box-number">{{ number_format($vault->ammout,2) }}</span>
+					<span class="info-box-number">{{ number_format($vault->ammount,2) }}</span>
 
 					<div class="progress">
 						<div class="progress-bar" style="width: 100%"></div>
 					</div>
 					<span class="progress-description">
-						{{$date}}
+						{{$date->format('d F Y')}}
 					</span>
 				</div>
 			</div>
@@ -37,7 +37,7 @@ $date = \Carbon\Carbon::now()->toDateString();
 					<tr>
 						<td><i class="fa fa-map-marker"></i></td>
 						<td>SUCURSAL:</td>
-						<td>LAS NUBES TUXTLA GUTIERREZ</td>
+						<td>{{ $user->branch->name }}</td>
 					</tr>
 				</table>
 			</div>
@@ -57,7 +57,7 @@ $date = \Carbon\Carbon::now()->toDateString();
 					<tbody>
 						@foreach ($incomes as $income)
 						<tr>
-							<td>{{ $income->ammout }}</td>
+							<td>${{ number_format($income->ammount, 2) }}</td>
 							<td>{{ $income->concept }}</td>
 							<td>{{ $income->created_at }}</td>
 						</tr>

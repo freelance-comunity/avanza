@@ -1,9 +1,11 @@
 <?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\DatesTranslator;
 
 class Vault extends Model
-{
+{	
+	use DatesTranslator;
     
 	public $table = "vaults";
 

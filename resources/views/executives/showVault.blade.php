@@ -15,7 +15,7 @@ $date = \Carbon\Carbon::now()->toDateString();
 				<span class="info-box-icon"><i class="fa fa-dollar"></i></span>
 				<div class="info-box-content">
 					<span class="info-box-text">CAJA</span>
-					<span class="info-box-number">92,050</span>
+					<span class="info-box-number">{{ number_format($vault->ammout,2) }}</span>
 
 					<div class="progress">
 						<div class="progress-bar" style="width: 100%"></div>
@@ -30,12 +30,12 @@ $date = \Carbon\Carbon::now()->toDateString();
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<tr>
-						<th style="width: 10px">1</th>
-						<th>EJECUTIVO:</th>
-						<th>JUAN CARLOS MONTEJO HERNANDEZ</th>
+						<th style="width: 10px"><i class="fa fa-user"></i></th>
+						<th>EJECUTIVO DE CRÉDITO:</th>
+						<th>{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}</th>
 					</tr>
 					<tr>
-						<td>2.</td>
+						<td><i class="fa fa-map-marker"></i></td>
 						<td>SUCURSAL:</td>
 						<td>LAS NUBES TUXTLA GUTIERREZ</td>
 					</tr>
@@ -49,17 +49,19 @@ $date = \Carbon\Carbon::now()->toDateString();
 			<h4 align="center">INGRESOS</h4> 
 			<div class="table-responsive">
 				<table class="table table-hover table-striped"  id="example">
-					<thead>
+					<thead class="thead-inverse">
 						<th>MONTO</th>
 						<th>CONCEPTO</th>
 						<th>FECHA</th>
 					</thead>
 					<tbody>
+						@foreach ($incomes as $income)
 						<tr>
-							<td>$5000</td>
-							<td>PAGO DE DOÑA PELOS</td>
-							<td>{{$date}}</td>
+							<td>{{ $income->ammout }}</td>
+							<td>{{ $income->concept }}</td>
+							<td>{{ $income->created_at }}</td>
 						</tr>
+						@endforeach
 					</tbody>
 				</table>
 			</div>
@@ -68,17 +70,21 @@ $date = \Carbon\Carbon::now()->toDateString();
 			<h4 align="center">EGRESOS</h4> 
 			<div class="table-responsive">
 				<table class="table table-hover table-striped"  id="example2">
-					<thead>
+					<thead class="thead-inverse">
 						<th>MONTO</th>
 						<th>CONCEPTO</th>
-						<th>VAUHCER</th>
+						<th>COMPROBANTE</th>
+						<th>FECHA</th>
 					</thead>
 					<tbody>
+						@foreach ($expenditures as $expenditure)
 						<tr>
-							<td>$3000</td>
-							<td>RENOVACION DE CREDITO DE DON LUIS</td>
-							<td>VAUCHER.JPG</td>
+							<td>{{ $expenditure->ammout }}</td>
+							<td>{{ $expenditure->concept }}</td>
+							<td>{{ $expenditure->voucher }}</td>
+							<td>{{ $expenditure->created_at }}</td>
 						</tr>
+						@endforeach
 					</tbody>
 				</table>
 			</div>

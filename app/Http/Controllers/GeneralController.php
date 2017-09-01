@@ -24,7 +24,13 @@ class GeneralController extends Controller
 	{
 		$user = User::find($id);
 		$vault = $user->vault;
+		$incomes = $vault->incomes;
+		$expenditures = $vault->expenditures;
 
-		return view('executives.showVault');
+		return view('executives.showVault')
+		->with('user', $user)
+		->with('vault', $vault)
+		->with('incomes', $incomes)
+		->with('expenditures', $expenditures);
 	}
 }

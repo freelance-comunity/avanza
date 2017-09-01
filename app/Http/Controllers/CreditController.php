@@ -127,7 +127,7 @@ class CreditController extends AppBaseController
 				$input['postal_code_company'] = $client->company->postal_code_company;
 				$input['phone_company'] = $client->company->phone_company;
 				$input['name_company'] = $client->company->name_company;
-				if ($request->input('name_aval')) {
+				if (count($client->aval) > 0) {
 					$input['name_aval'] = $client->aval->name_aval;
 					$input['last_name_aval'] = $client->aval->last_name_aval;
 					$input['mothers_name_aval'] = $client->aval->mothers_name_aval;
@@ -142,6 +142,9 @@ class CreditController extends AppBaseController
 					$input['state_aval'] = $client->aval->state_aval;
 					$input['postal_code_aval'] = $client->aval->postal_code_aval;
 				}
+				
+					
+			
 
 				$input['firm']   = $url;
 				$input['status'] = "MINISTRADO";

@@ -393,7 +393,9 @@ Route::get('mexico', function(){
     return view('mexico');
 });
 
-
+Route::get('executives', function(){
+    return view('executives');
+});
 
 
 

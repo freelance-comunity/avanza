@@ -26,7 +26,8 @@ class CreateClientsTable extends Migration
 			$table->string('phone');		
 			$table->string('no_economic_dependent');
 			$table->string('type_of_housing');
-			$table->string('avatar')->default('default.png');;
+			$table->string('avatar')->default('default.png');
+			$table->string('maximun_amount');
 			$table->integer('branch_id')->unsigned();
 			$table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
 			$table->timestamps();

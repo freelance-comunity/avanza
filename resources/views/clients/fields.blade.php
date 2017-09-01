@@ -127,17 +127,15 @@
                     {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
                     {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
                 </div>
-            </div>
-
-
-
-
+                <div class="form-group col-sm-6 col-lg-4">
+                    {!! Form::label('maximun_amount', 'Monto Máximo') !!}
+                    <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
+                </div>
 
             @php
             $count = App\Models\Branch::all();
             @endphp
-            <div class="form-group col-sm-6 col-lg-12">
-                <div class="form-group col-sm-6 col-lg-12">
+                <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('branch_id', '* Sucursal:') !!}
                     <select name="branch_id" required="required" value="{{ old('branch_id') }}" class="form-control input-lg" id="branch"  data-parsley-trigger= "input focusin">
                         @if($count ->isEmpty())
@@ -151,12 +149,23 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group col-sm-6 col-lg-12">
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 {{-- Geolocation address client --}}
                 <div class="col-md-6">
                     <div class="gllpLatlonPicker">
-                      <label for="exampleInputEmail1">DIRECCIÓN DEL CLIENTE</label>
+                      <div class="input-group">
+                    {!! Form::text('address', null, [
+                      'style' => 'text-transform:uppercase',
+                      'class' => 'form-control input-lg gllpSearchField',
+                      'placeholder'=>'ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.',
+                      'data-parsley-trigger ' => 'input focusin',
+                      'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                      <div class="input-group-btn">
+                       <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
+                     </div>
+                   </div>
                       <br/><br/>
                       <div class="gllpMap">Google Maps</div>
                       <br/>
@@ -170,8 +179,18 @@
               {{-- End Geolocation address client --}}
               <div class="col-md-6">
                 <div class="gllpLatlonPicker">
-                  <label for="exampleInputEmail1">DIRECCIÓN DEL NEGOCIO</label>
-                  <br/><br/>
+                  <div class="input-group">
+                    {!! Form::text('address', null, [
+                      'style' => 'text-transform:uppercase',
+                      'class' => 'form-control input-lg gllpSearchField',
+                      'placeholder'=>'ESCRIBE LA DIRECCIÓN DEL NEGOCIO, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.',
+                      'data-parsley-trigger ' => 'input focusin',
+                      'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                      <div class="input-group-btn">
+                       <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
+                     </div>
+                   </div>
+                    <br/><br/>
                   <div class="gllpMap">Google Maps</div>
                   <br/>
                   <input type="hidden" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>

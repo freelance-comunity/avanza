@@ -135,23 +135,26 @@ class ClientController extends AppBaseController
 		$company = ClientCompany::create($data_company);
 		
 		/* Get client aval data */
-		$data_aval['name_aval'] = $request->input('name_aval');
-		$data_aval['last_name_aval'] = $request->input('last_name_aval');
-		$data_aval['mothers_name_aval'] = $request->input('mothers_name_aval');
-		$data_aval['curp_aval'] = $request->input('curp_aval');
-		$data_aval['phone_aval'] = $request->input('phone_aval');
-		$data_aval['civil_status_aval'] = $request->input('civil_status_aval');
-		$data_aval['scholarship_aval'] = $request->input('scholarship_aval');
-		$data_aval['street_aval'] = $request->input('street_aval');
-		$data_aval['number_aval'] = $request->input('number_aval');
-		$data_aval['colony_aval'] = $request->input('colony_aval');
-		$data_aval['municipality_aval'] = $request->input('municipality_aval');
-		$data_aval['state_aval'] = $request->input('state_aval');		
-		$data_aval['postal_code_aval'] = $request->input('postal_code_aval');
-		$data_aval['client_id'] = $client->id;	
+		if ($request->input('name_aval')) {
+			$data_aval['name_aval'] = $request->input('name_aval');
+			$data_aval['last_name_aval'] = $request->input('last_name_aval');
+			$data_aval['mothers_name_aval'] = $request->input('mothers_name_aval');
+			$data_aval['curp_aval'] = $request->input('curp_aval');
+			$data_aval['phone_aval'] = $request->input('phone_aval');
+			$data_aval['civil_status_aval'] = $request->input('civil_status_aval');
+			$data_aval['scholarship_aval'] = $request->input('scholarship_aval');
+			$data_aval['street_aval'] = $request->input('street_aval');
+			$data_aval['number_aval'] = $request->input('number_aval');
+			$data_aval['colony_aval'] = $request->input('colony_aval');
+			$data_aval['municipality_aval'] = $request->input('municipality_aval');
+			$data_aval['state_aval'] = $request->input('state_aval');		
+			$data_aval['postal_code_aval'] = $request->input('postal_code_aval');
+			$data_aval['client_id'] = $client->id;	
 
-		/* Save b aval data */	
-		$aval = ClientAval::create($data_aval);
+			/* Save b aval data */	
+			$aval = ClientAval::create($data_aval);
+		}
+		
 
 
 		/*=============================================
@@ -469,12 +472,12 @@ class ClientController extends AppBaseController
 
 			});
 
-		});
+});
 
-		Toastr::success('Archivo Excel procesado correctamente.', 'CLIENTES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+Toastr::success('Archivo Excel procesado correctamente.', 'CLIENTES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('clients.index'));
-	}
+return redirect(route('clients.index'));
+}
 
 }
 

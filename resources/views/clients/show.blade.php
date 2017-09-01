@@ -77,6 +77,13 @@ Detalles del Cliente
         {{$client->type_of_housing}}
       </td>
     </tr>
+    <tr>
+        <td>4.</td>
+        <td>MONTO MÁXIMO:</td>
+        <td>
+          {{$client->maximun_amount}}
+        </td>
+      </tr>
   </table>
 </div>
 </div>

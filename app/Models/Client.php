@@ -25,6 +25,7 @@ class Client extends Model
 	"no_economic_dependent",
 	"type_of_housing",
 	"avatar",
+	"maximun_amount",
 	"branch_id",
 	"user_id"
 	];
@@ -39,6 +40,7 @@ class Client extends Model
 	"phone" => "required",
 	"no_economic_dependent" => "required",
 	"type_of_housing" => "required",
+	"maximun_amount"=>"required"
 	
 	];
 	public function branch()

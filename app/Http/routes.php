@@ -300,27 +300,8 @@ Route::get('payments/{id}/delete', [
     ]);
 
 Route::get('carbon',function(){
-
-/*$date = \Carbon\Carbon::now()->format('l')->diffForHumans();
-echo $date;*/
 echo $date = \Carbon\Carbon::now()->diffForHumans();
 echo "<br>";
-
-$payment = App\Models\Payment::first();
-echo $payment->created_at->format('l d,F Y');
-echo "<br>";
-echo $payment->updated_at->format('l d,F Y');
-echo "<br>";
-echo $payment->day->format('l d,F Y');
-echo "<br>";
-
-$credits = App\Models\Credit::first();
-echo $credits->created_at->format('l d,F Y');
-echo "<br>";
-echo $credits->updated_at->format('l d,F Y');
-echo "<br>";
-echo  $credits->date->format('l d,F Y');
-
 });
 
 Route::resource('permissions', 'PermissionController');

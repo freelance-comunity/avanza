@@ -91,7 +91,8 @@ class CreditController extends AppBaseController
 			return redirect()->back()->withInput($request->all());
 		}
 		$number = Credit::max('id') + 1;
-		$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;	
+		if ($request->input('name_aval')) {
+			$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;	
 		$input['civil_status'] = $client->civil_status;
 		$input['phone'] = $client->phone;
 		$input['no_familys'] = $client->no_familys;
@@ -111,13 +112,13 @@ class CreditController extends AppBaseController
 		$input['postal_code_company'] = $client->company->postal_code_company;
 		$input['phone_company'] = $client->company->phone_company;
 		$input['name_company'] = $client->company->name_company;
+		
 		$input['name_aval'] = $client->aval->name_aval;
 		$input['last_name_aval'] = $client->aval->last_name_aval;
 		$input['mothers_name_aval'] = $client->aval->mothers_name_aval;
 		$input['curp_aval'] = $client->aval->curp_aval;
 		$input['phone_aval'] = $client->aval->phone_aval;
 		$input['civil_status_aval'] = $client->aval->civil_status_aval;
-		$input['scholarship_aval'] = $client->aval->scholarship_aval;
 		$input['street_aval'] = $client->aval->street_aval;
 		$input['number_aval'] = $client->aval->number_aval;
 		$input['colony_aval'] = $client->aval->colony_aval;
@@ -125,10 +126,37 @@ class CreditController extends AppBaseController
 		$input['state_aval'] = $client->aval->state_aval;
 		$input['postal_code_aval'] = $client->aval->postal_code_aval;
 
-		
 		$input['firm']   = $url;
 		$input['status'] = "MINISTRADO";
 
+		}else{
+			$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;	
+		$input['civil_status'] = $client->civil_status;
+		$input['phone'] = $client->phone;
+		$input['no_familys'] = $client->no_familys;
+		$input['type_of_housing'] = $client->type_of_housing;
+		$input['street'] = $client->location->street;
+		$input['number'] = $client->location->number;
+		$input['colony'] = $client->location->colony;
+		$input['municipality'] = $client->location->municipality;
+		$input['state'] = $client->location->state;
+		$input['postal_code'] = $client->location->postal_code;
+		$input['references'] = $client->location->references;
+		$input['street_company'] = $client->company->street_company;
+		$input['number_company'] = $client->company->number_company;
+		$input['colony_company'] = $client->company->colony_company;
+		$input['municipality_company'] = $client->company->municipality_company;
+		$input['state_company'] = $client->company->state_company;
+		$input['postal_code_company'] = $client->company->postal_code_company;
+		$input['phone_company'] = $client->company->phone_company;
+		$input['name_company'] = $client->company->name_company;
+		
+
+		$input['firm']   = $url;
+		$input['status'] = "MINISTRADO";
+
+		}
+		
 
 		$credit = Credit::create($input);
 		

@@ -76,7 +76,6 @@ class Credit extends Model
 		"interest_rate" => "required",
 		"dues" => "required",		
 		"periodicity" => "required",
-		"warranty_type" => "required",
 		"firts_name" => "required",
 		"last_name" => "required",
 		"mothers_last_name" => "required",

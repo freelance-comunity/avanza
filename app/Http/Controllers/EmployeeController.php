@@ -15,6 +15,7 @@ use Toastr;
 use Image;
 use Hash;
 use Auth;
+use App\Models\Vault;
 
 class EmployeeController extends AppBaseController
 {
@@ -92,6 +93,17 @@ class EmployeeController extends AppBaseController
 
 		/* Save new employee */		
 		$employee = User::create($input);
+
+		/**
+		 *
+		 * Add boveda
+		 *
+		 */
+		$boveda['ammount'] = 0;
+		$boveda['user_id'] = $employee->id;
+
+		$vault = Vault::create($boveda);
+		
 
 		/* Attach roles */
 		$employee->roles()->sync($request->input('roles', []));

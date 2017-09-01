@@ -31,7 +31,7 @@
                         <td>{!! $employee->mother_last_name !!}</td>
                         <td></td>
                         <td>
-                            <a data-toggle="tooltip" title="Ver detalles" href=""><i class="fa fa-eye fa-2x"></i></a>
+                            <a href="{{ url('showVault') }}/{{ $employee->id }}" data-toggle="tooltip" title="Ver detalles" href=""><i class="fa fa-eye fa-2x"></i></a>
                             <a data-toggle="tooltip" title="Agregar saldo inicial" href=""><i class="fa fa-plus fa-2x"></i></a>
                         </td>              
                     </tr>

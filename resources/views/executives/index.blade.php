@@ -25,7 +25,6 @@
                 </thead>
                 <tbody>
                     @foreach($employees as $employee)
-                    @include('executives.start_of_day')
                     <tr>
                         <td>{!! $employee->name !!}</td>
                         <td>{!! $employee->father_last_name !!}</td>
@@ -33,7 +32,6 @@
                         <td>{{ $employee->branch->name }}</td>
                         <td>
                             <a href="{{ url('showVault') }}/{{ $employee->id }}" data-toggle="tooltip" title="Ver detalles" href=""><i class="fa fa-eye fa-2x"></i></a>
-                            <a data-toggle="modal" data-target="#start_of_day_{{ $employee->id }}" data-toggle="tooltip" title="Agregar saldo inicial"><i class="fa fa-plus fa-2x"></i></a>
                         </td>              
                     </tr>
                     @endforeach

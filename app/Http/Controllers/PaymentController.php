@@ -12,6 +12,8 @@ use Flash;
 use Schema;
 use Toastr;
 use Validator;
+use App\Models\Income;
+use Auth;
 
 
 class PaymentController extends AppBaseController
@@ -338,6 +340,16 @@ class PaymentController extends AppBaseController
 			
 		}
 
+		$user = Auth::user();
+		$vault = $user->vault;
+
+		$data_income['ammount'] = $ammount;
+		$data_income['concept'] = 'Recuperación';
+		$data_income['vault_id'] = $vault->id;
+		$income = Income::create($data_income);
+
+		$vault->ammount = $vault->ammount + $income->ammount;
+		$vault->save();
 		return redirect()->back();	
 	}
 	
@@ -346,8 +358,8 @@ class PaymentController extends AppBaseController
 		$locked = LatePayments::where('debt_id',$id)->where('status','bloqueado')->get();
 		foreach ($locked as $value)
 		{
-		$value->status = "Acreditado";
-		$value->save();
+			$value->status = "Acreditado";
+			$value->save();
 		}
 		return redirect()->back();	
 	}

@@ -52,14 +52,14 @@ $date = new Date();
 					<thead class="thead-inverse">
 						<th>MONTO</th>
 						<th>CONCEPTO</th>
-						<th>FECHA</th>
+						<th style="width: 30px;">DETALLES</th>
 					</thead>
 					<tbody>
 						@foreach ($incomes as $income)
 						<tr>
 							<td>${{ number_format($income->ammount, 2) }}</td>
 							<td>{{ $income->concept }}</td>
-							<td>{{ $income->created_at }}</td>
+							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
 						</tr>
 						@endforeach
 					</tbody>
@@ -73,16 +73,14 @@ $date = new Date();
 					<thead class="thead-inverse">
 						<th>MONTO</th>
 						<th>CONCEPTO</th>
-						<th>COMPROBANTE</th>
-						<th>FECHA</th>
+						<th style="width: 30px;">DETALLES</th>
 					</thead>
 					<tbody>
 						@foreach ($expenditures as $expenditure)
 						<tr>
-							<td>{{ $expenditure->ammout }}</td>
+							<td>${{ number_format($expenditure->ammount, 2) }}</td>
 							<td>{{ $expenditure->concept }}</td>
-							<td>{{ $expenditure->voucher }}</td>
-							<td>{{ $expenditure->created_at }}</td>
+							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
 						</tr>
 						@endforeach
 					</tbody>

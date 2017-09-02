@@ -100,14 +100,14 @@ class CreditController extends AppBaseController
 				$input = $request->all();
 				$product = Product::find($request->input('type_product'));
 				if ($request->input('ammount') > $product->ammount_max) {
-					Toastr::warning('El monto máximo es de $20,000', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);		
+					Toastr::warning('El monto máximo es de: ' .$product->ammount_max, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);		
 					return redirect()->back()->withInput($request->all());
 				}elseif ($request->input('ammount') < $product->ammount_min) {
-					Toastr::warning('El monto mínimo es de $1,000', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					Toastr::warning('El monto mínimo es de: '.$product->ammount_min, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
 					return redirect()->back()->withInput($request->all());
 				}
 				elseif ($request->input('ammount') > $client->maximun_amount) {
-					Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
 					return redirect()->back()->withInput($request->all());
 				}
 				$number = Credit::max('id') + 1;

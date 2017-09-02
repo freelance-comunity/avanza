@@ -20,8 +20,8 @@ Detalles del Cliente
         <h3 class="widget-user-username">{{$client->firts_name}} {{$client->last_name}} {{$client->mothers_last_name}}</h3>
         <h5 class="widget-user-desc">SUCURSAL: {{$branch->name}}</h5>
       </div>
-      <div class="widget-user-image">
-       <img class="img-circle" src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" alt="User Avatar">
+      <div class="widget-user-image"> 
+      <a href="{{ url('/updatephoto') }}/{{$client->id}}"><img  style="border-radius: 50%; padding: 2px; width: 100px;" class="img-circle" src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" alt="User Avatar"></a>
      </div>
      <div class="box-footer">
       <div class="row">
@@ -45,6 +45,7 @@ Detalles del Cliente
           <div class="description-block">
             <h5 class="description-header">INE</h5>
             <span class="description-text">{{$client->ine}}</span>
+             
           </div>
           <!-- /.description-block -->
         </div>
@@ -225,122 +226,7 @@ Detalles del Cliente
 </div>
 </div>
 
-<!--<div class="col-md-3">
- <h4>ACTIVOS</h4>
- <div class="table-responsive">
-   <table class="table table-striped">
-    <tr>
-      <th style="width: 10px">INVENTARIO($):</th>
-      <th>{{$company->inventory}}</th>
-    </tr>
-    <tr>
-      <th style="width: 10px">MAQ Y EQUIP($):</th>
-      <th>{{$company->machinery_equipment}}</th>
-    </tr>
-    <tr>
-      <td>VEHÍCULOS($):</td>
-      <td>
-        {{$company->vehicles}}
-      </td>
-    </tr>
-    <tr>
-      <td>INMUEBLES($):</td>
-      <td>
-        {{$company->property}}
-      </td>
-    </tr>
-    <tr>
-      <td>CAJA, BANCOS($):</td>
-      <td>
-       {{$company->box_benck}}
-     </td>
-   </tr>
-   <tr>
-    <td>CTAS/COBRAR($):</td>
-    <td>
-      {{$company->accounts}}
-    </td>
-  </tr>
-</table>
-</div>
-</div>
 
-<div class="col-md-3">
- <h4>PASIVOS</h4>
- <div class="table-responsive">
-   <table class="table table-striped">
-    <tr>
-      <th style="width: 10px">PROVEEDORES($):</th>
-      <th>{{$company->suppliers}}</th>
-    </tr>
-    <tr>
-      <th style="width: 10px">CRÉDITOS($):</th>
-      <th>{{$company->credits}}</th>
-    </tr>
-    <tr>
-      <td>PAGO AL MES($):</td>
-      <td>
-        {{$company->payments}}
-      </td>
-    </tr>
-    <tr>
-      <td>ESPECIFICA($):</td>
-      <td>
-        {{$company->specify}}
-      </td>
-    </tr>
-  </table>
-</div>
-</div>
-
-<div class="col-md-3">
- <h4>INGRESOS</h4>
- <div class="table-responsive">
-   <table class="table table-striped">
-    <tr>
-      <th style="width: 10px">ENTRE SEMANA($): </th>
-      <th>{{$company->weekday}}</th>
-    </tr>
-    <tr>
-      <th style="width: 10px">FIN DE SEMANA($):</th>
-      <th>{{$company->weekend}}</th>
-    </tr>
-    <tr>
-      <td>UTILIDAD($): </td>
-      <td>
-        {{$company->utility}}
-      </td>
-    </tr>
-    <tr>
-      <td>OTROS INGRESOS($):</td>
-      <td>
-        {{$company->other_income}}
-      </td>
-    </tr>
-  </table>
-</div>
-</div>
-<div class="col-md-3">
- <h4>COSTOS</h4>
- <div class="table-responsive">
-   <table class="table table-striped">
-    <tr>
-      <th style="width: 10px">RENTA($):</th>
-      <th>{{$company->rent}}</th>
-    </tr>
-    <tr>
-      <th style="width: 10px">SUELDO($):</th>
-      <th>{{$company->salary}}</th>
-    </tr>
-    <tr>
-      <td>OTROS LUZ/AGUA($):</td>
-      <td>
-        {{$company->others}}
-      </td>
-    </tr>
-  </table>
-</div>
-</div>-->
 @endif
 
 @if (is_null($aval))
@@ -398,29 +284,6 @@ Detalles del Cliente
 @endif
 
 
-<!--<div class="col-md-12">
-
-<div class="box-body">
- <h3>Este empleado no tiene referencias registradas.</h3> 
-</div>
-
-  <h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-search"></i> REFERENCIAS</h3>
-  <div class="table-responsive">
-   <table class="table table-striped">
-    <tr>
-      <th style="width: 10px">NOMBRE:</th>
-      <th>APELLIDO PATERNO:</th>
-      <th>APELLIDO MATERNO:</th>
-      <th>TELÉFONO:</th>
-      <th>EDITAR</th>
-    </tr>
-
-
-  </table>
-</div>
-</div>
--->
-
 @if (is_null($document))
 <div class="box-body">
  <h3>Este empleado no tiene documentos registrado.</h3> 
@@ -441,21 +304,20 @@ Detalles del Cliente
         </ol>
         <div class="carousel-inner">
           <div class="item active">
-            <img src="{{ asset('/uploads/documents') }}/{!! $document->ine !!}" alt="First slide">
-
+             <a href="{{ url('/ine') }}/{{$document->id}}"> <img src="{{ asset('/uploads/documents') }}/{!! $document->ine !!}"" alt="Second slide"></a>
             <div class="carousel-caption">
               INE
             </div>
           </div>
           <div class="item">
-            <img src="{{ asset('/uploads/documents') }}/{!! $document->curp !!}"" alt="Second slide">
+          <a href="{{ url('/curps') }}/{{$document->id}}"> <img src="{{ asset('/uploads/documents') }}/{!! $document->curp !!}"" alt="Second slide"></a>
+           
             <div class="carousel-caption">
               CURP
             </div>
           </div>
           <div class="item">
-            <img src="{{ asset('/uploads/documents') }}/{!! $document->proof_of_addres !!}"" alt="Third slide">
-
+          <a href="{{ url('/updatephotos') }}/{{$document->id}}"><img src="{{ asset('/uploads/documents') }}/{!! $document->proof_of_addres !!}"" alt="Third slide"></a>
             <div class="carousel-caption">
               COMPROBANTE DE DOMICILIO
             </div>

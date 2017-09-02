@@ -302,8 +302,8 @@ Route::get('payments/{id}/delete', [
     ]);
 
 Route::get('carbon',function(){
-echo $date = \Carbon\Carbon::now()->diffForHumans();
-echo "<br>";
+    echo $date = \Carbon\Carbon::now()->diffForHumans();
+    echo "<br>";
 });
 
 Route::resource('permissions', 'PermissionController');
@@ -366,7 +366,7 @@ Route::get('pagado',function(){
           echo $value->status;
       }
 
-    }
+  }
 
 
 
@@ -387,7 +387,7 @@ Route::resource('vaults', 'VaultController');
 Route::get('vaults/{id}/delete', [
     'as' => 'vaults.delete',
     'uses' => 'VaultController@destroy',
-]);
+    ]);
 
 
 Route::resource('incomes', 'IncomeController');
@@ -395,7 +395,7 @@ Route::resource('incomes', 'IncomeController');
 Route::get('incomes/{id}/delete', [
     'as' => 'incomes.delete',
     'uses' => 'IncomeController@destroy',
-]);
+    ]);
 
 
 Route::resource('expenditures', 'ExpenditureController');
@@ -403,4 +403,29 @@ Route::resource('expenditures', 'ExpenditureController');
 Route::get('expenditures/{id}/delete', [
     'as' => 'expenditures.delete',
     'uses' => 'ExpenditureController@destroy',
-]);
+    ]);
+
+Route::get('updatephoto/{id}', function($id) {
+    $client = App\Models\Client::find($id);
+    return view('clients.upload')
+    ->with('client', $client);
+});
+Route::get('updatephotos/{id}', function($id) {
+    $document = App\Models\Clientdocuments::find($id);
+    return view('clientdocuments.uploads')
+    ->with('document', $document);
+});
+Route::get('ine/{id}', function($id) {
+    $document = App\Models\Clientdocuments::find($id);
+    return view('clientdocuments.ine')
+    ->with('document', $document);
+});
+Route::get('curps/{id}', function($id) {
+    $document = App\Models\Clientdocuments::find($id);
+    return view('clientdocuments.curps')
+    ->with('document', $document);
+});
+Route::post('updatephoto', 'Photocontroller@update');
+Route::post('ine', 'Photocontroller@ine');
+Route::post('curps', 'Photocontroller@curps');
+Route::post('updatephotos', 'Photocontroller@cfe');

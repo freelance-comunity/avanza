@@ -56,7 +56,6 @@ class ClientController extends AppBaseController
 		->with('clients', $clients)
 		->with('products',$products);
 	}
-
 	/**
 	 * Show the form for creating a new Client.
 	 *
@@ -78,6 +77,7 @@ class ClientController extends AppBaseController
 			->with('branch', $branch);
 		}
 	}
+	
 
 	/**
 	 * Store a newly created Client in storage.
@@ -478,6 +478,10 @@ Toastr::success('Archivo Excel procesado correctamente.', 'CLIENTES', ["position
 
 return redirect(route('clients.index'));
 }
+
+
+
+
 
 }
 

@@ -54,7 +54,6 @@ class Credit extends Model
 		"curp_aval",
 		"phone_aval",
 		"civil_status_aval",
-		"scholarship_aval",
 		"street_aval",
 		"number_aval",
 		"colony_aval",

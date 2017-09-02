@@ -37,6 +37,7 @@
 <div class="col-xs-12">
 <div class="col-md-12">
 <h3> Datos </h3>
+<div class="form-group col-sm-6 col-lg-12">
 <div class="form-group col-sm-6 col-lg-4">
 {!! Form::label('name', 'Nombre:') !!}
 {!! Form::text('name', null, [
@@ -72,7 +73,9 @@
 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();
 ']) !!}
 </div>
+</div>
 
+<div class="form-group col-sm-6 col-lg-12">
 <div class="form-group col-sm-6 col-lg-4">
 {!! Form::label('email', 'Correo Electrónico:') !!}
 <input type="email" class="form-control input-lg" placeholder="EJEMPLO@GMAIL.COM" name="email" value="{{ old('email') }}" required="required" data-parsley-type="email" data-parsley-trigger="input focusin"/>
@@ -90,7 +93,9 @@
 'required' => 'required',
 'data-parsley-trigger ' => 'input focusin',]) !!}
 </div>
+</div>
 
+<div class="form-group col-sm-6 col-lg-12">
 <div class="form-group col-sm-6 col-lg-4">
 {!! Form::label('place_of_birth', 'Lugar de Nacimiento:') !!}
 {!! Form::text('place_of_birth', null, [
@@ -122,6 +127,10 @@
 'data-parsley-trigger ' => 'input focusin',]) !!}
 </div>
 
+</div>
+
+
+<div class="form-group col-sm-6 col-lg-12">
 <div class="form-group col-sm-6 col-lg-4">
 {!! Form::label('country_of_birth', 'País de Nacimiento:') !!}
 {!! Form::select('country_of_birth',['MÉXICO' => 'MÉXICO'] ,null, [
@@ -148,7 +157,9 @@
     'required' => 'required',
     'data-parsley-trigger ' => 'input focusin',]) !!}
 </div>
+</div>
 
+<div class="form-group col-sm-6 col-lg-12">
 <div class="form-group col-sm-6 col-lg-4">
 {!! Form::label('phone_1', 'Teléfono 1:') !!}
 <input type="number" name="phone_1" class="form-control input-lg" placeholder="TELÉFONO 1" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
@@ -166,9 +177,13 @@
 'data-parsley-trigger ' => 'input focusin',
 ]) !!}
 </div>
+</div>
+
+
 @php
 $count = App\Models\Branch::all();
 @endphp
+<div class="form-group col-sm-12 col-lg-12">
 <div class="form-group col-sm-12 col-lg-12">
 {!! Form::label('branch_id', '* Sucursal:') !!}
 <select name="branch_id" required="" data-parsley-trigger="input focusin" value="" class="form-control input-lg" id="branch">
@@ -182,6 +197,7 @@ $count = App\Models\Branch::all();
 @endif
 </select>
 </div>
+</div>
 
 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Siguiente</button>
 </div>
@@ -191,6 +207,7 @@ $count = App\Models\Branch::all();
 <div class="col-xs-12">
 <div class="col-md-12">
 <h3> Ubicación </h3>
+<div class="form-group col-sm-12 col-lg-12">
 <div class="form-group col-sm-6 col-lg-4">
 {!! Form::label('country', 'País:') !!}
 {!! Form::select('country',['MÉXICO' => 'MÉXICO'] ,null, ['class' => 'form-control input-lg', 'required' => 'required', 
@@ -214,7 +231,8 @@ $count = App\Models\Branch::all();
     'data-parsley-trigger ' => 'input focusin',
     'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 </div>
-
+</div>
+<div class="form-group col-sm-12 col-lg-12">
 <div class="form-group col-sm-6 col-lg-4">
 {!! Form::label('colony', 'Colonia:') !!}
 {!! Form::text('colony', null, [
@@ -245,7 +263,8 @@ $count = App\Models\Branch::all();
     'data-parsley-trigger ' => 'input focusin',
     'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 </div>
-
+</div>
+<div class="form-group col-sm-12 col-lg-12">
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('outdoor_number', 'Nº E.:') !!}
     {!! Form::text('outdoor_number', null, [
@@ -276,7 +295,7 @@ $count = App\Models\Branch::all();
             {!! Form::label('postal_code', 'Código Postal:') !!}
             <input type="number" name="postal_code" class="form-control input-lg" placeholder="ESCRIBE CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
         </div>
-
+</div>
         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
     </div>
 </div>
@@ -285,8 +304,9 @@ $count = App\Models\Branch::all();
 <div class="col-xs-12">
     <div class="col-md-12">
         <h3> Identificaciones</h3>
+        <div class="form-group col-sm-12 col-lg-12">
         <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('ine', 'CLAVE DE ELECTOR INE:') !!}
+            {!! Form::label('ine', 'CLAVE DE ELECTOR INE:') !!} <a id="ine" href="#" >CONSULTA INE</a>
             {!! Form::text('ine', null, [
             'style' => 'text-transform:uppercase',
             'class' => 'form-control input-lg', 
@@ -321,7 +341,8 @@ $count = App\Models\Branch::all();
             'data-parsley-trigger ' => 'input focusin',
             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
-
+        </div>
+        <div class="form-group col-sm-12 col-lg-12">
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('passport', 'PASAPORTE:') !!}
             {!! Form::text('passport', null, [
@@ -354,7 +375,8 @@ $count = App\Models\Branch::all();
             'data-parsley-trigger ' => 'input focusin',
             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
-
+        </div>
+        <div class="form-group col-sm-12 col-lg-12">
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('professional_id', 'Cédula Profesional:') !!}
             {!! Form::text('professional_id', null, [
@@ -365,7 +387,7 @@ $count = App\Models\Branch::all();
             'data-parsley-trigger ' => 'input focusin',
             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
-
+        </div>
         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
     </div>
 </div>
@@ -376,13 +398,15 @@ $count = App\Models\Branch::all();
         <h3> Roles</h3>
         @php
         $roles = App\Role::all();
-        @endphp                 
+        @endphp  
+        <div class="form-group col-sm-12 col-lg-12">               
         <div class="btn-group btn-group" data-toggle="buttons">
             @foreach ($roles as $role) 
             <label class="btn active">
                 <input type="checkbox" required="required" data-parsley-trigger="input focusin" name='roles[]' value="{{ $role->id }}"><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i><span> {{ $role->name }}
             </label>
             @endforeach
+        </div>
         </div>
          <div class="box-body" >
                <div class="col-md-4">
@@ -396,6 +420,7 @@ $count = App\Models\Branch::all();
 </div>
 </div>
 </div>
+
 <script>
     //Función para validar una CURP
 function curpValida(curp) {
@@ -442,5 +467,6 @@ function validarInput(input) {
     resultado.innerText = "CURP: " + curp + "\nFormato: " + valido;
 }
 </script>
+
 @include('employees.validate_curp')
 

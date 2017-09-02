@@ -106,6 +106,10 @@ class CreditController extends AppBaseController
 					Toastr::warning('El monto mínimo es de $1,000', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
 					return redirect()->back()->withInput($request->all());
 				}
+				elseif ($request->input('ammount') > $client->maximun_amount) {
+					Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					return redirect()->back()->withInput($request->all());
+				}
 				$number = Credit::max('id') + 1;
 				$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;	
 				$input['civil_status'] = $client->civil_status;

@@ -43,7 +43,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">Registro Personal</h3>
         <div class="stepwizard">
-         <div class="stepwizard-row setup-panel">
+           <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step p" id="myparrafo">
                 <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
                 <p class="responsivo test">Datos</p>
@@ -68,9 +68,9 @@
     </div>
     <div class="box-body">
 
-       <div class="row setup-content" id="step-1">
-           <div class="form-group col-sm-6 col-lg-12">
-               <div class="form-group col-sm-6 col-lg-4">
+     <div class="row setup-content" id="step-1">
+         <div class="form-group col-sm-6 col-lg-12">
+             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('avatar', 'Imagen:') !!}
                 {!! Form::file('avatar', [
                     'data-parsley-trigger ' => 'input focusin',
@@ -104,12 +104,12 @@
                         <pre id="resultado"></pre>
                     </div>
                     <div class="form-group col-sm-6 col-lg-4">
-                        {!! Form::label('ine', 'INE:') !!}
+                        {!! Form::label('ine', 'CLAVE DE ELECTOR INE:') !!}<a id="ine" href="#" >CONSULTA INE</a>
                         {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA INE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                     </div>
                 </div>    
                 <div class="form-group col-sm-6 col-lg-12">
-                   <div class="form-group col-sm-6 col-lg-4">
+                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('civil_status', 'Estado Civil:') !!}
                     {!! Form::select('civil_status',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
                 </div>
@@ -132,9 +132,9 @@
                     <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
                 </div>
 
-            @php
-            $count = App\Models\Branch::all();
-            @endphp
+                @php
+                $count = App\Models\Branch::all();
+                @endphp
                 <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('branch_id', '* Sucursal:') !!}
                     <select name="branch_id" required="required" value="{{ old('branch_id') }}" class="form-control input-lg" id="branch"  data-parsley-trigger= "input focusin">
@@ -156,28 +156,28 @@
                 <div class="col-md-6">
                     <div class="gllpLatlonPicker">
                       <div class="input-group">
-                    {!! Form::text('address', null, [
-                      'style' => 'text-transform:uppercase',
-                      'class' => 'form-control input-lg gllpSearchField',
-                      'placeholder'=>'ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.',
-                      'data-parsley-trigger ' => 'input focusin',
-                      'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                      <div class="input-group-btn">
-                       <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
+                        {!! Form::text('address', null, [
+                          'style' => 'text-transform:uppercase',
+                          'class' => 'form-control input-lg gllpSearchField',
+                          'placeholder'=>'ESCRIBE LA DIRECCIÓN DEL CLIENTE, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.',
+                          'data-parsley-trigger ' => 'input focusin',
+                          'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                          <div class="input-group-btn">
+                             <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
+                         </div>
                      </div>
-                   </div>
-                      <br/><br/>
-                      <div class="gllpMap">Google Maps</div>
-                      <br/>
-                      <input type="hidden" name="latitude" id="lat" class="gllpLatitude" value="16.753239967660058"/>
-                      <input type="hidden" name="lenght" id="lon" class="gllpLongitude" value="-93.11789682636714"/>
-                      <input type="hidden" class="gllpZoom" value="15"/>
-                      <input type="button" id="update" class="gllpUpdateButton" style="display: none;" value="Actualizar">
-                      <br/>
-                  </div>
-              </div>
-              {{-- End Geolocation address client --}}
-              <div class="col-md-6">
+                     <br/><br/>
+                     <div class="gllpMap">Google Maps</div>
+                     <br/>
+                     <input type="hidden" name="latitude" id="lat" class="gllpLatitude" value="16.753239967660058"/>
+                     <input type="hidden" name="lenght" id="lon" class="gllpLongitude" value="-93.11789682636714"/>
+                     <input type="hidden" class="gllpZoom" value="15"/>
+                     <input type="button" id="update" class="gllpUpdateButton" style="display: none;" value="Actualizar">
+                     <br/>
+                 </div>
+             </div>
+             {{-- End Geolocation address client --}}
+             <div class="col-md-6">
                 <div class="gllpLatlonPicker">
                   <div class="input-group">
                     {!! Form::text('address', null, [
@@ -187,22 +187,22 @@
                       'data-parsley-trigger ' => 'input focusin',
                       'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                       <div class="input-group-btn">
-                       <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
+                         <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
                      </div>
-                   </div>
-                    <br/><br/>
-                  <div class="gllpMap">Google Maps</div>
-                  <br/>
-                  <input type="hidden" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
-                  <input type="hidden" id="lon_bussines" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
-                  <input type="hidden" class="gllpZoom" value="15"/>
-                  <input type="button" id="update_bussines" class="gllpUpdateButton" style="display: none;" value="Actualizar">
-              </div>
-          </div>
-      </div>
+                 </div>
+                 <br/><br/>
+                 <div class="gllpMap">Google Maps</div>
+                 <br/>
+                 <input type="hidden" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
+                 <input type="hidden" id="lon_bussines" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+                 <input type="hidden" class="gllpZoom" value="15"/>
+                 <input type="button" id="update_bussines" class="gllpUpdateButton" style="display: none;" value="Actualizar">
+             </div>
+         </div>
+     </div>
 
 
-      <script>
+     <script>
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
         } else { 
@@ -970,7 +970,7 @@
                 </div>
             </div>
             <div class="form-group col-sm-6 col-lg-12">
-             <div class="form-group col-sm-6 col-lg-4">
+               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('municipality_company', 'Municipio:') !!}
                 {!! Form::text('municipality_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();','data-parsley-trigger ' => 'input focusin',]) !!}
             </div>
@@ -1046,7 +1046,7 @@
             </div>
         </div>
         <div class="form-group col-sm-6 col-lg-12">
-         <div class="form-group col-sm-6 col-lg-4">
+           <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('curp_aval', 'CURP:') !!}
             {!! Form::text('curp_aval', null, [
                 'style' => 'text-transform:uppercase',
@@ -1100,7 +1100,7 @@
             </div>
         </div>
         <div class="form-group col-sm-6 col-lg-12">
-           <div class="form-group col-sm-6 col-lg-4">
+         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('colony_aval', 'Colonia:') !!}
             {!! Form::text('colony_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA',  'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
@@ -1278,6 +1278,24 @@ function validarI(input) {
         }
     </script>
     <script>
+    // usamos onload para asegurarnos que existan los elementos en nuestro DOM
+    window.onload = function() {
+        var anchor = document.getElementById("ine");         
+        
+            // le asociamos el evento a nuestro elemento para tener un codigo 
+            // html mas limpio y manejar toda la interaccion
+            // desde nuestro script
+            anchor.onclick = function() {
+                // una variable donde pongo la url a donde quiera ir, 
+                //podria estar de mas pero asi queda mas limpio la funcion window.open()
+                var url = "http://listanominal.ine.mx/";
+                window.open(url, "_blank", 'width=500,height=500'); 
+                // el return falase es para eviar que se progrague el evento y se vaya al href de tu anchor.
+                return false;
+            };
+        }
+    </script>
+    <script>
         function parrafo() {
             var x = document.getElementById("myparrafo");
             if (x.className === "p") {
@@ -1296,15 +1314,15 @@ function validarI(input) {
 
           tecla_especial = false
           for(var i in especiales){
-           if(key == especiales[i]){
-             tecla_especial = true;
-             break;
-         } 
-     }
+             if(key == especiales[i]){
+               tecla_especial = true;
+               break;
+           } 
+       }
 
-     if(letras.indexOf(tecla)==-1 && !tecla_especial)
-      return false;
-}
+       if(letras.indexOf(tecla)==-1 && !tecla_especial)
+          return false;
+  }
 </script>
 <script type="text/javascript">
 // Solo permite ingresar numeros.

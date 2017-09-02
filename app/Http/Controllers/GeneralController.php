@@ -64,4 +64,32 @@ class GeneralController extends Controller
 
 		return redirect()->back();
 	}
+
+	public function addCash(Request $request)
+	{	
+		$validator = Validator::make($request->all(), [
+			'ammount' => 'required|numeric'
+			]);
+
+		if ($validator->fails()) {
+			Toastr::error('Favor de introducir cantidad valida.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
+
+		$user = User::find($request->input('user_id'));
+		$vault = $user->vault;
+
+		$data_income['ammount'] = $request->input('ammount');
+		$data_income['concept'] = 'Asignación de efectivo';
+		$data_income['vault_id'] = $vault->id;
+		$income = Income::create($data_income);
+
+		$vault->ammount = $vault->ammount + $income->ammount;
+		$vault->save();
+
+		Toastr::success('Asignación de efectivo exitoso.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+		return redirect()->back();
+	}
 }

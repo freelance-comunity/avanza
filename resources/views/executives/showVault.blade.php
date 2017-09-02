@@ -39,6 +39,16 @@ $date = new Date();
 						<td>SUCURSAL:</td>
 						<td>{{ $user->branch->name }}</td>
 					</tr>
+					<tr>
+						<td colspan="2">
+							<a data-toggle="modal" data-target="#start_of_day" class="btn bg-primary btn-lg btn-block">ASIGNAR SALDO INICIAL</a>
+						</td>
+						<td colspan="2">
+							<a data-toggle="modal" data-target="#cash_allocation" class="btn bg-primary btn-lg btn-block">ASIGNAR EFECTIVO</a>
+						</td>
+						@include('executives.cash_allocation')
+						@include('executives.start_of_day')
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -50,7 +60,7 @@ $date = new Date();
 			<div class="table-responsive">
 				<table class="table table-hover table-striped"  id="example">
 					<thead class="thead-inverse">
-						<th>MONTO</th>
+						<th>IMPORTE</th>
 						<th>CONCEPTO</th>
 						<th style="width: 30px;">DETALLES</th>
 					</thead>
@@ -71,7 +81,7 @@ $date = new Date();
 			<div class="table-responsive">
 				<table class="table table-hover table-striped"  id="example2">
 					<thead class="thead-inverse">
-						<th>MONTO</th>
+						<th>IMPORTE</th>
 						<th>CONCEPTO</th>
 						<th style="width: 30px;">DETALLES</th>
 					</thead>

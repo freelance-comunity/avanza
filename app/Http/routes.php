@@ -157,6 +157,8 @@ Route::get('showVault/{id}', 'GeneralController@showVault');
 
 Route::post('addVault', 'GeneralController@addVault');
 
+Route::post('addCash', 'GeneralController@addCash');
+
 /*=====  End of Routes for Employee  ======*/
 
 Route::get('formwizard', function(){

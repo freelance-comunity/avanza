@@ -28,13 +28,23 @@ class GeneralController extends Controller
 		$user = User::find($id);
 		$vault = $user->vault;
 		$incomes = $vault->incomes;
+		$si = $incomes->where('concept', 'Saldo Inicial');
+		$rc = $incomes->where('concept', 'Recuperación');
+		$af = $incomes->where('concept', 'Asignación de efectivo');
+
 		$expenditures = $vault->expenditures;
+		$c = $expenditures->where('concept', 'Colocación');
+
 
 		return view('executives.showVault')
 		->with('user', $user)
 		->with('vault', $vault)
 		->with('incomes', $incomes)
-		->with('expenditures', $expenditures);
+		->with('si', $si)
+		->with('rc', $rc)
+		->with('af', $af)
+		->with('expenditures', $expenditures)
+		->with('c', $c);
 	}
 
 	public function addVault(Request $request)

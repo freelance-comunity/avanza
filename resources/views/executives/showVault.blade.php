@@ -60,18 +60,29 @@ $date = new Date();
 			<div class="table-responsive">
 				<table class="table table-hover table-striped"  id="example">
 					<thead class="thead-inverse">
-						<th>IMPORTE</th>
 						<th>CONCEPTO</th>
+						<th>IMPORTE</th>
 						<th style="width: 30px;">DETALLES</th>
 					</thead>
 					<tbody>
-						@foreach ($incomes as $income)
 						<tr>
-							<td>${{ number_format($income->ammount, 2) }}</td>
-							<td>{{ $income->concept }}</td>
+							<td>Saldo inicial</td>
+							<td>${{ number_format($si->sum('ammount')) }}</td>
+							<td style="text-align: center;">
+								<a onclick="saldo()" data-toggle="modal" data-target="#si"><i class="fa fa-eye fa-2x"></i></a>
+								@include('executives.si')
+							</td>
+						</tr>
+						<tr>
+							<td>Asignación de efectivo</td>
+							<td>${{ number_format($af->sum('ammount')) }}</td>
 							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
 						</tr>
-						@endforeach
+						<tr>
+							<td>Recuperación</td>
+							<td>${{ number_format($rc->sum('ammount')) }}</td>
+							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -86,13 +97,11 @@ $date = new Date();
 						<th style="width: 30px;">DETALLES</th>
 					</thead>
 					<tbody>
-						@foreach ($expenditures as $expenditure)
 						<tr>
-							<td>${{ number_format($expenditure->ammount, 2) }}</td>
-							<td>{{ $expenditure->concept }}</td>
+							<td>Saldo inicial</td>
+							<td>${{ number_format($c->sum('ammount')) }}</td>
 							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
 						</tr>
-						@endforeach
 					</tbody>
 				</table>
 			</div>
@@ -100,5 +109,4 @@ $date = new Date();
 		
 	</div>  	
 </div>
-
 @endsection

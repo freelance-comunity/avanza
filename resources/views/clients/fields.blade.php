@@ -43,7 +43,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">Registro Personal</h3>
         <div class="stepwizard">
-           <div class="stepwizard-row setup-panel">
+         <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step p" id="myparrafo">
                 <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
                 <p class="responsivo test">Datos</p>
@@ -68,9 +68,9 @@
     </div>
     <div class="box-body">
 
-     <div class="row setup-content" id="step-1">
-         <div class="form-group col-sm-6 col-lg-12">
-             <div class="form-group col-sm-6 col-lg-4">
+       <div class="row setup-content" id="step-1">
+           <div class="form-group col-sm-6 col-lg-12">
+               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('avatar', 'Imagen:') !!}
                 {!! Form::file('avatar', [
                     'data-parsley-trigger ' => 'input focusin',
@@ -90,8 +90,9 @@
                     {!! Form::label('mothers_last_name', 'Apellido Materno:') !!}
                     {!! Form::text('mothers_last_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO MATERNO','required'=>'required', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                 </div>
+                
                 <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('curp', 'CURP:') !!} <a id="curp" href="#" >CONSULTA CURP</a>
+                    {!! Form::label('curp', 'CURP:') !!} <a href="https://consultas.curp.gob.mx/CurpSP/" target="_blank" onClick="window.open(this.href, this.target, 'width=500,height=500'); return false;"> CONSULTA CURP</a>
                     {!! Form::text('curp', null, [
                         'style' => 'text-transform:uppercase',
                         'class' => 'form-control input-lg', 
@@ -109,7 +110,7 @@
                     </div>
                 </div>    
                 <div class="form-group col-sm-6 col-lg-12">
-                 <div class="form-group col-sm-6 col-lg-4">
+                   <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('civil_status', 'Estado Civil:') !!}
                     {!! Form::select('civil_status',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
                 </div>
@@ -163,62 +164,62 @@
                           'data-parsley-trigger ' => 'input focusin',
                           'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                           <div class="input-group-btn">
-                             <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
-                         </div>
-                     </div>
-                     <br/><br/>
-                     <div class="gllpMap">Google Maps</div>
-                     <br/>
-                     <input type="hidden" name="latitude" id="lat" class="gllpLatitude" value="16.753239967660058"/>
-                     <input type="hidden" name="lenght" id="lon" class="gllpLongitude" value="-93.11789682636714"/>
-                     <input type="hidden" class="gllpZoom" value="15"/>
-                     <input type="button" id="update" class="gllpUpdateButton" style="display: none;" value="Actualizar">
-                     <br/>
-                 </div>
-             </div>
-             {{-- End Geolocation address client --}}
-             <div class="col-md-6">
-                <div class="gllpLatlonPicker">
-                  <div class="input-group">
-                    {!! Form::text('address', null, [
-                      'style' => 'text-transform:uppercase',
-                      'class' => 'form-control input-lg gllpSearchField',
-                      'placeholder'=>'ESCRIBE LA DIRECCIÓN DEL NEGOCIO, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.',
-                      'data-parsley-trigger ' => 'input focusin',
-                      'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                      <div class="input-group-btn">
-                         <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
-                     </div>
-                 </div>
-                 <br/><br/>
-                 <div class="gllpMap">Google Maps</div>
-                 <br/>
-                 <input type="hidden" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
-                 <input type="hidden" id="lon_bussines" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
-                 <input type="hidden" class="gllpZoom" value="15"/>
-                 <input type="button" id="update_bussines" class="gllpUpdateButton" style="display: none;" value="Actualizar">
-             </div>
-         </div>
-     </div>
+                           <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
+                       </div>
+                   </div>
+                   <br/><br/>
+                   <div class="gllpMap">Google Maps</div>
+                   <br/>
+                   <input type="hidden" name="latitude" id="lat" class="gllpLatitude" value="16.753239967660058"/>
+                   <input type="hidden" name="lenght" id="lon" class="gllpLongitude" value="-93.11789682636714"/>
+                   <input type="hidden" class="gllpZoom" value="15"/>
+                   <input type="button" id="update" class="gllpUpdateButton" style="display: none;" value="Actualizar">
+                   <br/>
+               </div>
+           </div>
+           {{-- End Geolocation address client --}}
+           <div class="col-md-6">
+            <div class="gllpLatlonPicker">
+              <div class="input-group">
+                {!! Form::text('address', null, [
+                  'style' => 'text-transform:uppercase',
+                  'class' => 'form-control input-lg gllpSearchField',
+                  'placeholder'=>'ESCRIBE LA DIRECCIÓN DEL NEGOCIO, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.',
+                  'data-parsley-trigger ' => 'input focusin',
+                  'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                  <div class="input-group-btn">
+                   <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
+               </div>
+           </div>
+           <br/><br/>
+           <div class="gllpMap">Google Maps</div>
+           <br/>
+           <input type="hidden" id="lat_bussines" name="latitude_company" class="gllpLatitude" value="16.753239967660058"/>
+           <input type="hidden" id="lon_bussines" name="length_company" class="gllpLongitude" value="-93.11789682636714"/>
+           <input type="hidden" class="gllpZoom" value="15"/>
+           <input type="button" id="update_bussines" class="gllpUpdateButton" style="display: none;" value="Actualizar">
+       </div>
+   </div>
+</div>
 
 
-     <script>
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
-            alert("Este navegador no soporta Geolocalización.");
-        }
-        function showPosition(position) {
-            document.getElementById('lat').value=position.coords.latitude;
-            document.getElementById('lon').value=position.coords.longitude;
-            document.getElementById('lat_bussines').value=position.coords.latitude;
-            document.getElementById('lon_bussines').value=position.coords.longitude;
-            document.getElementById("update").click();
-            document.getElementById("update_bussines").click();
-        }
-    </script>
+<script>
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        alert("Este navegador no soporta Geolocalización.");
+    }
+    function showPosition(position) {
+        document.getElementById('lat').value=position.coords.latitude;
+        document.getElementById('lon').value=position.coords.longitude;
+        document.getElementById('lat_bussines').value=position.coords.latitude;
+        document.getElementById('lon_bussines').value=position.coords.longitude;
+        document.getElementById("update").click();
+        document.getElementById("update_bussines").click();
+    }
+</script>
 
-    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
 
 </div>
 
@@ -402,539 +403,16 @@
                         <option value="Santiago el Pinar">Santiago el Pinar</option>
                     </select>
                 </div>
-                <div class="form-group col-sm-6 col-lg-4" id="tuxtla" style="display: none;">
+                <div class="form-group col-sm-6 col-lg-4" >
                     {!! Form::label('colony', 'Colonia:') !!}
-                    <select name="colony" class="form-control input-lg" id="status" onChange="postalCode(this.value);">
-                        <option value="Tuxtla Gutiérrez Centro">Tuxtla Gutiérrez Centro</option>
-                        <option value="San Jacinto">San Jacinto</option>
-                        <option value="Guadalupe">Guadalupe</option>
-                        <option value="El Magueyito">El Magueyito</option>
-                        <option value="Santo Domingo">Santo Domingo</option>
-                        <option value="Centro SCT Chiapas">Centro SCT Chiapas</option>
-                        <option value="Delegación de La Secretaria de Salud">Delegación de La Secretaria de Salud</option>
-                        <option value="Delegación de La Secretaria de Educación Publica">Delegación de La Secretaria de Educación Publica</option>
-                        <option value="Palacio de Gobierno del Estado de Chiapas">Palacio de Gobierno del Estado de Chiapas</option>
-                        <option value="Nueva Reforma">Nueva Reforma</option>
-                        <option value="Villa San Marcos">Villa San Marcos</option>
-                        <option value="Maya">Maya</option>
-                        <option value="Las Delicias">Las Delicias</option>
-                        <option value="Magisterio 2000">Magisterio 2000</option>
-                        <option value="San Fernando">San Fernando</option>
-                        <option value="Burócrata">Burócrata</option>
-                        <option value="Estrella de Oriente">Estrella de Oriente</option>
-                        <option value="Misol-ha">Misol-ha</option>
-                        <option value="Unidad Administrativa">Unidad Administrativa</option>
-                        <option value="Albania Alta">Albania Alta</option>
-                        <option value="Albania Baja">Albania Baja</option>
-                        <option value="Lomas del Valle">Lomas del Valle</option>
-                        <option value="Nueva Estrella">Nueva Estrella</option>
-                        <option value="Morelos">Morelos</option>
-                        <option value="Agua Azul">Agua Azul</option>
-                        <option value="Los Manguitos">Los Manguitos</option>
-                        <option value="Huajitlan">Huajitlan</option>
-                        <option value="Amarantos">Amarantos</option>
-                        <option value="Nueva Delicias">Nueva Delicias</option>
-                        <option value="El Valle">El Valle</option>
-                        <option value="Renovación">Renovación</option>
-                        <option value="La Victoria">La Victoria</option>
-                        <option value="Ampliación Pomarrosa">Ampliación Pomarrosa</option>
-                        <option value="Valle Dorado">Valle Dorado</option>
-                        <option value="Las Canteras">Las Canteras</option>
-                        <option value="Canteras">Canteras</option>
-                        <option value="Pedregal San Antonio">Pedregal San Antonio</option>
-                        <option value="Jardines de las Flores">Jardines de las Flores</option>
-                        <option value="Rosario Poniente">Rosario Poniente</option>
-                        <option value="Villareal">Villareal</option>
-                        <option value="Loma Real">Loma Real</option>
-                        <option value="México">México</option>
-                        <option value="Pomarrosa">Pomarrosa</option>
-                        <option value="Santa Clara">Santa Clara</option>
-                        <option value="Luis Donaldo Colosio">Luis Donaldo Colosio</option>
-                        <option value="Grijalva">Grijalva</option>
-                        <option value="Candox">Candox</option>
-                        <option value="Linda Vista Shanka">Linda Vista Shanka</option>
-                        <option value="12 de Noviembre">12 de Noviembre</option>
-                        <option value="Yuquis">Yuquis</option>
-                        <option value="Adonahi">Adonahi</option>
-                        <option value="Colinas de Oriente">Colinas de Oriente</option>
-                        <option value="Capulines 1">Capulines 1</option>
-                        <option value="Capulines 2">Capulines 2</option>
-                        <option value="Agripino Gutiérrez">Agripino Gutiérrez</option>
-                        <option value="Las Lajas">Las Lajas</option>
-                        <option value="Estrada">Estrada</option>
-                        <option value="Natalia Venegas">Natalia Venegas</option>
-                        <option value="Los Capulines III">Los Capulines III</option>
-                        <option value="Pistimbak">Pistimbak</option>
-                        <option value="Chiapas Solidario">Chiapas Solidario</option>
-                        <option value="Las Américas">Las Américas</option>
-                        <option value="Potinaspak">Potinaspak</option>
-                        <option value="La Condesa">La Condesa</option>
-                        <option value="Jardines del Norte">Jardines del Norte</option>
-                        <option value="3 de Mayo">3 de Mayo</option>
-                        <option value="La Esperanza">La Esperanza</option>
-                        <option value="Las Granjas">Las Granjas</option>
-                        <option value="El Carmen">El Carmen</option>
-                        <option value="Santa Cruz">Santa Cruz</option>
-                        <option value="Tuxtla Chico">Tuxtla Chico</option>
-                        <option value="Buenos Aires">Buenos Aires</option>
-                        <option value="Elmar Seltzer">Elmar Seltzer</option>
-                        <option value="17 de Mayo">17 de Mayo</option>
-                        <option value="Los Ángeles">Los Ángeles</option>
-                        <option value="Cruz Con Casita">Cruz Con Casita</option>
-                        <option value="Altos del Norte">Altos del Norte</option>
-                        <option value="Patrocinio González">Patrocinio González</option>
-                        <option value="Las Flores">Las Flores</option>
-                        <option value="Las Casitas">Las Casitas</option>
-                        <option value="Democrática">Democrática</option>
-                        <option value="Buena Vista">Buena Vista</option>
-                        <option value="Kilometro 4 Oriente">Kilometro 4 Oriente</option>
-                        <option value="24 de Mayo">24 de Mayo</option>
-                        <option value="Agua Azul">Agua Azul</option>
-                        <option value="San Isidro Buenavista">San Isidro Buenavista</option>
-                        <option value="Bugambilias">Bugambilias</option>
-                        <option value="Continental">Continental</option>
-                        <option value="San Francisco Sabinito">San Francisco Sabinito</option>
-                        <option value="5 Plumas">5 Plumas</option>
-                        <option value="La Arbolada">La Arbolada</option>
-                        <option value="San Francisco Sabinal">San Francisco Sabinal</option>
-                        <option value="San Martín">San Martín</option>
-                        <option value="Laguitos Electricistas">Laguitos Electricistas</option>
-                        <option value="Villa Tziscao">Villa Tziscao</option>
-                        <option value="Ampliación Los Laguitos">Ampliación Los Laguitos</option>
-                        <option value="Magdalena">Magdalena</option>
-                        <option value="Plan de Ayala">Plan de Ayala</option>
-                        <option value="Jardines de Tuxtla">Jardines de Tuxtla</option>
-                        <option value="Juan Crispín">Juan Crispín</option>
-                        <option value="Lumha">Lumha</option>
-                        <option value="Juan Crispín">Juan Crispín</option>
-                        <option value="San Isidro">San Isidro</option>
-                        <option value="El Portal de Hierro">El Portal de Hierro</option>
-                        <option value="Privada Boulevares">Privada Boulevares</option>
-                        <option value="La Esmeralda">La Esmeralda</option>
-                        <option value="Borges Laguitos">Borges Laguitos</option>
-                        <option value="Jardín Colonial">Jardín Colonial</option>
-                        <option value="Venecia">Venecia</option>
-                        <option value="Boulevares">Boulevares</option>
-                        <option value="Los Laureles">Los Laureles</option>
-                        <option value="La Joyas">La Joyas</option>
-                        <option value="Rincón de los Lagos">Rincón de los Lagos</option>
-                        <option value="Privada Villas de Montecristo">Privada Villas de Montecristo</option>
-                        <option value="Alborada">Alborada</option>
-                        <option value="Los Portales">Los Portales</option>
-                        <option value="Los Laguitos">Los Laguitos</option>
-                        <option value="Los Tulipanes">Los Tulipanes</option>
-                        <option value="Malibú">Malibú</option>
-                        <option value="Monte Real">Monte Real</option>
-                        <option value="Villa Tziscao">Villa Tziscao</option>
-                        <option value="El Calichal">El Calichal</option>
-                        <option value="SAHOP">SAHOP</option>
-                        <option value="Fovissste 2 los Laureles">Fovissste 2 los Laureles</option>
-                        <option value="Centenario Tuxtlán">Centenario Tuxtlán</option>
-                        <option value="Bonampak">Bonampak</option>
-                        <option value="Buena Vista">Buena Vista</option>
-                        <option value="Monte Azul">Monte Azul</option>
-                        <option value="San José Yeguiste">San José Yeguiste</option>
-                        <option value="Atenas">Atenas</option>
-                        <option value="Gobernadores">Gobernadores</option>
-                        <option value="1ro de Mayo">1ro de Mayo</option>
-                        <option value="Ladera de La Loma">Ladera de La Loma</option>
-                        <option value="Paraíso Ojo de Agua">Paraíso Ojo de Agua</option>
-                        <option value="Calichal">Calichal</option>
-                        <option value="Electricistas">Electricistas</option>
-                        <option value="Buenavista">Buenavista</option>
-                        <option value="San José Chapultepec">San José Chapultepec</option>
-                        <option value="Municipal Laguitos">Municipal Laguitos</option>
-                        <option value="Nuevo Edén">Nuevo Edén</option>
-                        <option value="Los Laguitos Infonavit">Los Laguitos Infonavit</option>
-                        <option value="Secretaria de Agricultura Ganadería y Desarrollo Rural">Secretaria de Agricultura Ganadería y Desarrollo Rural</option>
-                        <option value="Residencial La Hacienda">Residencial La Hacienda</option>
-                        <option value="Privada Arboledas">Privada Arboledas</option>
-                        <option value="Las Brisas">Las Brisas</option>
-                        <option value="Moctezuma">Moctezuma</option>
-                        <option value="Residencial Campestre">Residencial Campestre</option>
-                        <option value="Residencial la Granja">Residencial la Granja</option>
-                        <option value="Barrio Covadonga">Barrio Covadonga</option>
-                        <option value="Las Arboledas">Las Arboledas</option>
-                        <option value="Vista Hermosa">Vista Hermosa</option>
-                        <option value="Rincón de Joyyo Mayu">Rincón de Joyyo Mayu</option>
-                        <option value="Rinconada del Sol">Rinconada del Sol</option>
-                        <option value="Alta Vista">Alta Vista</option>
-                        <option value="Privada Bonampak">Privada Bonampak</option>
-                        <option value="El Mirador">El Mirador</option>
-                        <option value="El Pedregal">El Pedregal</option>
-                        <option value="Los Cafetales">Los Cafetales</option>
-                        <option value="Infonavit Laborante">Infonavit Laborante</option>
-                        <option value="Los Sabinos">Los Sabinos</option>
-                        <option value="Bonampak Norte">Bonampak Norte</option>
-                        <option value="Montebello">Montebello</option>
-                        <option value="La Pimienta">La Pimienta</option>
-                        <option value="Rincón de La Florida">Rincón de La Florida</option>
-                        <option value="Quetzalcoatl">Quetzalcoatl</option>
-                        <option value="Asturias">Asturias</option>
-                        <option value="Brasilia">Brasilia</option>
-                        <option value="Rocío">Rocío</option>
-                        <option value="Bosques del Parque">Bosques del Parque</option>
-                        <option value="Rincón Potinaspak">Rincón Potinaspak</option>
-                        <option value="Nuevo Mirador">Nuevo Mirador</option>
-                        <option value="La Joya">La Joya</option>
-                        <option value="La Antenita">La Antenita</option>
-                        <option value="La Llave">La Llave</option>
-                        <option value="Niño de Atocha">Niño de Atocha</option>
-                        <option value="Paraíso Medio">Paraíso Medio</option>
-                        <option value="Colon">Colon</option>
-                        <option value="Miramar">Miramar</option>
-                        <option value="La Gloria">La Gloria</option>
-                        <option value="San Cristóbal">San Cristóbal</option>
-                        <option value="Hacienda de México">Hacienda de México</option>
-                        <option value="Tizatillo">Tizatillo</option>
-                        <option value="Juy Juy">Juy Juy</option>
-                        <option value="Miravalle">Miravalle</option>
-                        <option value="Fovissste Paraíso">Fovissste Paraíso</option>
-                        <option value="Paraíso Bajo">Paraíso Bajo</option>
-                        <option value="Penipak Norte">Penipak Norte</option>
-                        <option value="Miravalle 2a Sección">Miravalle 2a Sección</option>
-                        <option value="San Jorge">San Jorge</option>
-                        <option value="Paraíso Alto">Paraíso Alto</option>
-                        <option value="Tuxtla Nuevo">Tuxtla Nuevo</option>
-                        <option value="San Pedro Popular (San Pedro Mirador)">San Pedro Popular (San Pedro Mirador)</option>
-                        <option value="Profesor Daniel Robles Sasso">Profesor Daniel Robles Sasso</option>
-                        <option value="Ampliación Las Palmas">Ampliación Las Palmas</option>
-                        <option value="Las Palmas">Las Palmas</option>
-                        <option value="Real del Bosque">Real del Bosque</option>
-                        <option value="Santos">Santos</option>
-                        <option value="Buena Ventura">Buena Ventura</option>
-                        <option value="El Brasilito">El Brasilito</option>
-                        <option value="El Retiro">El Retiro</option>
-                        <option value="Electricistas">Electricistas</option>
-                        <option value="San Roque">San Roque</option>
-                        <option value="San Marcos">San Marcos</option>
-                        <option value="Granja Urcil">Granja Urcil</option>
-                        <option value="Parque Madero">Parque Madero</option>
-                        <option value="Periodista">Periodista</option>
-                        <option value="Hidalgo">Hidalgo</option>
-                        <option value="Infonavit Grijalva">Infonavit Grijalva</option>
-                        <option value="Aurora">Aurora</option>
-                        <option value="Residencial Campestre las Palmas">Residencial Campestre las Palmas</option>
-                        <option value="El Vergel">El Vergel</option>
-                        <option value="Las Flores">Las Flores</option>
-                        <option value="Carlos Salinas de Gortari">Carlos Salinas de Gortari</option>
-                        <option value="13 de Julio">13 de Julio</option>
-                        <option value="Bosques de Primavera">Bosques de Primavera</option>
-                        <option value="Ampliación Insurgentes">Ampliación Insurgentes</option>
-                        <option value="Buena Vista">Buena Vista</option>
-                        <option value="Cerro de Guadalupe">Cerro de Guadalupe</option>
-                        <option value="Comitán">Comitán</option>
-                        <option value="La Floresta">La Floresta</option>
-                        <option value="La Ilusión">La Ilusión</option>
-                        <option value="Las Torres">Las Torres</option>
-                        <option value="Otilio Montaño">Otilio Montaño</option>
-                        <option value="Loma Larga">Loma Larga</option>
-                        <option value="Vida Mejor">Vida Mejor</option>
-                        <option value="Los Poetas">Los Poetas</option>
-                        <option value="Insurgentes">Insurgentes</option>
-                        <option value="Dr. Gabriel Gutiérrez Zepeda">Dr. Gabriel Gutiérrez Zepeda</option>
-                        <option value="Evolución Política Mexicana">Evolución Política Mexicana</option>
-                        <option value="Patria Nueva">Patria Nueva</option>
-                        <option value="27 de Febrero">27 de Febrero</option>
-                        <option value="24 de Junio">24 de Junio</option>
-                        <option value="Belisario Domínguez">Belisario Domínguez</option>
-                        <option value="Paraíso I">Paraíso I</option>
-                        <option value="San Isidro">San Isidro</option>
-                        <option value="Paso Limón">Paso Limón</option>
-                        <option value="Jardines del Pedregal">Jardines del Pedregal</option>
-                        <option value="Paraíso II">Paraíso II</option>
-                        <option value="21 de Septiembre">21 de Septiembre</option>
-                        <option value="San Fernando">San Fernando</option>
-                        <option value="Ampliación Arroyo Blanco">Ampliación Arroyo Blanco</option>
-                        <option value="Infonavit El Rosario">Infonavit El Rosario</option>
-                        <option value="16 de Julio">16 de Julio</option>
-                        <option value="Unidad Chiapaneca">Unidad Chiapaneca</option>
-                        <option value="El Bosque">El Bosque</option>
-                        <option value="San Pedro">San Pedro</option>
-                        <option value="Arroyo Blanco">Arroyo Blanco</option>
-                        <option value="San Cayetano">San Cayetano</option>
-                        <option value="San Pedro y Cayetano">San Pedro y Cayetano</option>
-                        <option value="Las Águilas">Las Águilas</option>
-                        <option value="Paulino Aguilar Paniagua">Paulino Aguilar Paniagua</option>
-                        <option value="La Esperanza">La Esperanza</option>
-                        <option value="San Pedro Progresivo">San Pedro Progresivo</option>
-                        <option value="Terán">Terán</option>
-                        <option value="Villas de Buenaventura">Villas de Buenaventura</option>
-                        <option value="Fovissste III (El Puente)">Fovissste III (El Puente)</option>
-                        <option value="Militar 2,3 y 5">Militar 2,3 y 5</option>
-                        <option value="Alianza Campesina">Alianza Campesina</option>
-                        <option value="Flamingos">Flamingos</option>
-                        <option value="Villas de Catazaja">Villas de Catazaja</option>
-                        <option value="Tulipanes">Tulipanes</option>
-                        <option value="Villas del Rey">Villas del Rey</option>
-                        <option value="Ana Teresa">Ana Teresa</option>
-                        <option value="Las Palomas">Las Palomas</option>
-                        <option value="Acacia 2000">Acacia 2000</option>
-                        <option value="Zavaleta">Zavaleta</option>
-                        <option value="Santa Isabel">Santa Isabel</option>
-                        <option value="La Gloria">La Gloria</option>
-                        <option value="La Herradura">La Herradura</option>
-                        <option value="Bosques de la Trinidad">Bosques de la Trinidad</option>
-                        <option value="Bicentenario">Bicentenario</option>
-                        <option value="Residencial Bonanza">Residencial Bonanza</option>
-                        <option value="Real de Bosque">Real de Bosque</option>
-                        <option value="Bugambilias">Bugambilias</option>
-                        <option value="Bugambilias">Bugambilias</option>
-                        <option value="Los Tucanes">Los Tucanes</option>
-                        <option value="Villas Montes Azules">Villas Montes Azules</option>
-                        <option value="Aramoni">Aramoni</option>
-                        <option value="Villa Misol-Ha">Villa Misol-Ha</option>
-                        <option value="Joyas del Campestre">Joyas del Campestre</option>
-                        <option value="Tierra Negra">Tierra Negra</option>
-                        <option value="Militar 4">Militar 4</option>
-                        <option value="Tuxtlán Mactumatza">Tuxtlán Mactumatza</option>
-                        <option value="Villa Blanca">Villa Blanca</option>
-                        <option value="San José Terán">San José Terán</option>
-                        <option value="Los Tulipanes">Los Tulipanes</option>
-                        <option value="Campestre Arenal">Campestre Arenal</option>
-                        <option value="Campanario">Campanario</option>
-                        <option value="Los Sauces">Los Sauces</option>
-                        <option value="Club de Golf Campestre">Club de Golf Campestre</option>
-                        <option value="El Mirador II">El Mirador II</option>
-                        <option value="CCI">CCI</option>
-                        <option value="Granjas Club Campestre">Granjas Club Campestre</option>
-                        <option value="San Patricio">San Patricio</option>
-                        <option value="Cuchilla Santa Rosa">Cuchilla Santa Rosa</option>
-                        <option value="Unidad Antorchista">Unidad Antorchista</option>
-                        <option value="El Carmen">El Carmen</option>
-                        <option value="Alianza Popular Laborante">Alianza Popular Laborante</option>
-                        <option value="Villa Victoria">Villa Victoria</option>
-                        <option value="Flamboyán">Flamboyán</option>
-                        <option value="Los Tamarindos">Los Tamarindos</option>
-                        <option value="Asociación Civil Alianza Campesina">Asociación Civil Alianza Campesina</option>
-                        <option value="La Reliquia">La Reliquia</option>
-                        <option value="Puente Buena Vista">Puente Buena Vista</option>
-                        <option value="Los Presidentes">Los Presidentes</option>
-                        <option value="Loma Bonita">Loma Bonita</option>
-                        <option value="Puesta del Sol">Puesta del Sol</option>
-                        <option value="Higo Quemado">Higo Quemado</option>
-                        <option value="El Ciprés">El Ciprés</option>
-                        <option value="Colinas de Bellavista">Colinas de Bellavista</option>
-                        <option value="Buenos Aires">Buenos Aires</option>
-                        <option value="El Diamante">El Diamante</option>
-                        <option value="Solidaridad La Curul">Solidaridad La Curul</option>
-                        <option value="Belisario Domínguez">Belisario Domínguez</option>
-                        <option value="Siglo XXI">Siglo XXI</option>
-                        <option value="Ampliación Terán">Ampliación Terán</option>
-                        <option value="Matumatza">Matumatza</option>
-                        <option value="Jardines de Buena Vista">Jardines de Buena Vista</option>
-                        <option value="Solidaridad Chiapaneca">Solidaridad Chiapaneca</option>
-                        <option value="Buena Vista">Buena Vista</option>
-                        <option value="Fovissste Mactumactza">Fovissste Mactumactza</option>
-                        <option value="Bella Vista">Bella Vista</option>
-                        <option value="Ampliación El Puente">Ampliación El Puente</option>
-                        <option value="Privada Flamboyán">Privada Flamboyán</option>
-                        <option value="3 Marías y los Arroyos">3 Marías y los Arroyos</option>
-                        <option value="Penipak">Penipak</option>
-                        <option value="ISSSTE">ISSSTE</option>
-                        <option value="La Lomita">La Lomita</option>
-                        <option value="Las Terrazas">Las Terrazas</option>
-                        <option value="Burocrática">Burocrática</option>
-                        <option value="Santa Elena">Santa Elena</option>
-                        <option value="La Lomita">La Lomita</option>
-                        <option value="Xamaipak Popular">Xamaipak Popular</option>
-                        <option value="San Rafael">San Rafael</option>
-                        <option value="Los Pinos">Los Pinos</option>
-                        <option value="Lindavista">Lindavista</option>
-                        <option value="Penipak">Penipak</option>
-                        <option value="Manuel Molano">Manuel Molano</option>
-                        <option value="Borgues">Borgues</option>
-                        <option value="La Gloria">La Gloria</option>
-                        <option value="San José Libramiento">San José Libramiento</option>
-                        <option value="Lindavista">Lindavista</option>
-                        <option value="Las Lomas">Las Lomas</option>
-                        <option value="Dr.Romeo Rincón">Dr.Romeo Rincón</option>
-                        <option value="El Calvario">El Calvario</option>
-                        <option value="Santo Domingo">Santo Domingo</option>
-                        <option value="Calvarium">Calvarium</option>
-                        <option value="Lomas Verdes">Lomas Verdes</option>
-                        <option value="Las Canoitas">Las Canoitas</option>
-                        <option value="Colinas del Sur">Colinas del Sur</option>
-                        <option value="Los Milagros">Los Milagros</option>
-                        <option value="San Pascualito">San Pascualito</option>
-                        <option value="Santa Cecilia">Santa Cecilia</option>
-                        <option value="San Roque">San Roque</option>
-                        <option value="Primavera">Primavera</option>
-                        <option value="San Francisco">San Francisco</option>
-                        <option value="El Cerrito">El Cerrito</option>
-                        <option value="El Cocal">El Cocal</option>
-                        <option value="Lomas del Sur">Lomas del Sur</option>
-                        <option value="El Zoque">El Zoque</option>
-                        <option value="Vista Hermosa">Vista Hermosa</option>
-                        <option value="28 de Julio">28 de Julio</option>
-                        <option value="Bosques del Sur">Bosques del Sur</option>
-                        <option value="Ampliación Cocal">Ampliación Cocal</option>
-                        <option value="Xamaipak">Xamaipak</option>
-                        <option value="Diana Laura Riojas de Colosio">Diana Laura Riojas de Colosio</option>
-                        <option value="Belén">Belén</option>
-                        <option value="José Castillo Tielemans">José Castillo Tielemans</option>
-                        <option value="Montserrat">Montserrat</option>
-                        <option value="La Salle 1a Sección">La Salle 1a Sección</option>
-                        <option value="La Salle 3a Sección">La Salle 3a Sección</option>
-                        <option value="Las Flores">Las Flores</option>
-                        <option value="Mexicanidad Chiapaneca">Mexicanidad Chiapaneca</option>
-                        <option value="Orquídea">Orquídea</option>
-                        <option value="Santa María La Ribera">Santa María La Ribera</option>
-                        <option value="Privada Primavera">Privada Primavera</option>
-                        <option value="Villas La Salle">Villas La Salle</option>
-                        <option value="15 de Mayo">15 de Mayo</option>
-                        <option value="Villas Ensueño">Villas Ensueño</option>
-                        <option value="La Salle">La Salle</option>
-                        <option value="La Salle 2a Sección">La Salle 2a Sección</option>
-                        <option value="Zocotumbak">Zocotumbak</option>
-                        <option value="Santa Cruz">Santa Cruz</option>
-                        <option value="El Sabinito">El Sabinito</option>
-                        <option value="Moderna">Moderna</option>
-                        <option value="Emiliano Zapata">Emiliano Zapata</option>
-                        <option value="Bienestar Social">Bienestar Social</option>
-                        <option value="Los Choferes">Los Choferes</option>
-                        <option value="Magisterial">Magisterial</option>
-                        <option value="Militar">Militar</option>
-                        <option value="Delegación de La Secretaria de La Defensa Nacional">Delegación de La Secretaria de La Defensa Nacional</option>
-                        <option value="Revolución">Revolución</option>
-                        <option value="Mercedes">Mercedes</option>
-                        <option value="Agua Azul">Agua Azul</option>
-                        <option value="Benito Juárez">Benito Juárez</option>
-                        <option value="Lomas del Venado">Lomas del Venado</option>
-                        <option value="Obrera">Obrera</option>
-                        <option value="Las Lomas">Las Lomas</option>
-                        <option value="El Aguacate">El Aguacate</option>
-                        <option value="San Roque">San Roque</option>
-                        <option value="Bonampak">Bonampak</option>
-                        <option value="Maldonado">Maldonado</option>
-                        <option value="7 de Abril">7 de Abril</option>
-                        <option value="Altos del Sur">Altos del Sur</option>
-                        <option value="2 de Febrero">2 de Febrero</option>
-                        <option value="Ideal">Ideal</option>
-                        <option value="Rincón de la Montaña">Rincón de la Montaña</option>
-                        <option value="Las Nubes">Las Nubes</option>
-                        <option value="Potrero Mirador">Potrero Mirador</option>
-                        <option value="Joyas del Oriente">Joyas del Oriente</option>
-                        <option value="Popular">Popular</option>
-                        <option value="Lomas del Pedregal">Lomas del Pedregal</option>
-                        <option value="Colesquizan">Colesquizan</option>
-                        <option value="Santa Rosalía">Santa Rosalía</option>
-                        <option value="San Juan Sabinito">San Juan Sabinito</option>
-                        <option value="Coquelequixtlan">Coquelequixtlan</option>
-                        <option value="El Dorado">El Dorado</option>
-                        <option value="Santa Ana">Santa Ana</option>
-                        <option value="Coquelequixtlán">Coquelequixtlán</option>
-                        <option value="El Sabinito">El Sabinito</option>
-                        <option value="Lomas del Sauce">Lomas del Sauce</option>
-                        <option value="Francisco I Madero">Francisco I Madero</option>
-                        <option value="El Roble">El Roble</option>
-                        <option value="California">California</option>
-                        <option value="Caminera">Caminera</option>
-                        <option value="Los Olivos">Los Olivos</option>
-                        <option value="Arroyo Grande">Arroyo Grande</option>
-                        <option value="Los Trabajadores">Los Trabajadores</option>
-                        <option value="Rivera Cerro Hueco">Rivera Cerro Hueco</option>
-                        <option value="Sauce">Sauce</option>
-                        <option value="Loma Bonita">Loma Bonita</option>
-                        <option value="Paseo del Bosque">Paseo del Bosque</option>
-                        <option value="Balcones del Sur">Balcones del Sur</option>
-                        <option value="Los Pájaros">Los Pájaros</option>
-                        <option value="Las Brisas">Las Brisas</option>
-                        <option value="Aires del Oriente">Aires del Oriente</option>
-                        <option value="Lomas Verdes">Lomas Verdes</option>
-                        <option value="Lomas del Oriente">Lomas del Oriente</option>
-                        <option value="Sabines">Sabines</option>
-                        <option value="Industrial">Industrial</option>
-                        <option value="FSTSE">FSTSE</option>
-                        <option value="El Porvenir">El Porvenir</option>
-                        <option value="El Cebollal (El Ziquete)">El Cebollal (El Ziquete)</option>
-                        <option value="Emejaka">Emejaka</option>
-                        <option value="Guadalupe">Guadalupe</option>
-                        <option value="La Cueva del Jaguar">La Cueva del Jaguar</option>
-                        <option value="La Misión">La Misión</option>
-                        <option value="Tizaltillo">Tizaltillo</option>
-                        <option value="7 de Octubre">7 de Octubre</option>
-                        <option value="Lomas del Valle">Lomas del Valle</option>
-                        <option value="Condominio San Juan">Condominio San Juan</option>
-                        <option value="Azteca">Azteca</option>
-                        <option value="El Salvador">El Salvador</option>
-                        <option value="6 de Junio">6 de Junio</option>
-                        <option value="Los Ranchos">Los Ranchos</option>
-                        <option value="Zona Galáctica">Zona Galáctica</option>
-                        <option value="Francisco I. Madero">Francisco I. Madero</option>
-                        <option value="El Taray">El Taray</option>
-                        <option value="Lomas de Santa María">Lomas de Santa María</option>
-                        <option value="Colonial">Colonial</option>
-                        <option value="Copoya">Copoya</option>
-                        <option value="El Jobo">El Jobo</option>
-                        <option value="Emiliano Zapata">Emiliano Zapata</option>
-                    </select>
+                     {!! Form::text('colony', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA COLONIA','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                    
                 </div>
 
 
-                <div class="form-group col-sm-6 col-lg-4" id="tuxtlapostal" style="display: none;">
+                <div class="form-group col-sm-6 col-lg-4">
                     {!! Form::label('postal_code', 'Código Postal:') !!}
-                    <select name="postal_code" class="form-control input-lg">
-                        <option value="29000">29000</option>
-                        <option value="29001">29001</option>
-                        <option value="29007">29007</option>
-                        <option value="29008">29008</option>
-                        <option value="29009">29009</option>
-                        <option value="29010">29010</option>
-                        <option value="29014">29014</option>
-                        <option value="29016">29016</option>
-                        <option value="29017">29017</option>
-                        <option value="29018">29018</option>
-                        <option value="29019">29019</option>
-                        <option value="29020">29020</option>
-                        <option value="29023">29023</option>
-                        <option value="29024">29024</option>
-                        <option value="29025">29025</option>
-                        <option value="29026">29026</option>
-                        <option value="29027">29027</option>
-                        <option value="29028">29028</option>
-                        <option value="29029">29029</option>
-                        <option value="29030">29030</option>
-                        <option value="29034">29034</option>
-                        <option value="29037">29037</option>
-                        <option value="29038">29038</option>
-                        <option value="29039">29039</option>
-                        <option value="29040">29040</option>
-                        <option value="29043">29043</option>
-                        <option value="29044">29044</option>
-                        <option value="29045">29045</option>
-                        <option value="29047">29047</option>
-                        <option value="29049">29049</option>
-                        <option value="29050">29050</option>
-                        <option value="29054">29054</option>
-                        <option value="29055">29055</option>
-                        <option value="29056">29056</option>
-                        <option value="29057">29057</option>
-                        <option value="29058">29058</option>
-                        <option value="29059">29059</option>
-                        <option value="29060">29060</option>
-                        <option value="29064">29064</option>
-                        <option value="29065">29065</option>
-                        <option value="29066">29066</option>
-                        <option value="29067">29067</option>
-                        <option value="29070">29070</option>
-                        <option value="29073">29073</option>
-                        <option value="29075">29075</option>
-                        <option value="29076">29076</option>
-                        <option value="29077">29077</option>
-                        <option value="29078">29078</option>
-                        <option value="29079">29079</option>
-                        <option value="29080">29080</option>
-                        <option value="29086">29086</option>
-                        <option value="29087">29087</option>
-                        <option value="29089">29089</option>
-                        <option value="29090">29090</option>
-                        <option value="29094">29094</option>
-                        <option value="29096">29096</option>
-                        <option value="29098">29098</option>
-                        <option value="29100">29100</option>
-                        <option value="29112">29112</option>
-                    </select>
+                      <input type="number" name="postal_code" class="form-control input-lg" placeholder="ESCRIBE EL CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
                 </div>
             </div>
             <div class="form-group col-sm-6 col-lg-12">
@@ -970,7 +448,7 @@
                 </div>
             </div>
             <div class="form-group col-sm-6 col-lg-12">
-               <div class="form-group col-sm-6 col-lg-4">
+             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('municipality_company', 'Municipio:') !!}
                 {!! Form::text('municipality_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE MUNICIPIO', 'required' => 'required','onkeyup' => 'javascript:this.value=this.value.toUpperCase();','data-parsley-trigger ' => 'input focusin',]) !!}
             </div>
@@ -980,14 +458,14 @@
             </div>
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('postal_code_company', 'Código Postal:') !!}
-                {!! Form::text('postal_code_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE CÓDIGO POSTAL', 'required' => 'required','data-parsley-trigger ' => 'input focusin','data-parsley-type' => 'digits','data-parsley-maxlength' => '5','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                 <input type="number" name="postal_code_company" class="form-control input-lg" placeholder="ESCRIBE  CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
             </div>
         </div>
         <div class="form-group col-sm-6 col-lg-12">
 
             <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('phone_company', 'Teléfono del Negocio:') !!}
-                {!! Form::text('phone_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NÚMERO DEL TELÉFONO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'data-parsley-type' => 'digits', 'data-parsley-maxlength' => '10','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                 <input type="number" name="phone_company" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -995,10 +473,6 @@
                 {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
         </div>
-
-
-
-
 
         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
     </div>
@@ -1046,7 +520,7 @@
             </div>
         </div>
         <div class="form-group col-sm-6 col-lg-12">
-           <div class="form-group col-sm-6 col-lg-4">
+         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('curp_aval', 'CURP:') !!}
             {!! Form::text('curp_aval', null, [
                 'style' => 'text-transform:uppercase',
@@ -1100,7 +574,7 @@
             </div>
         </div>
         <div class="form-group col-sm-6 col-lg-12">
-         <div class="form-group col-sm-6 col-lg-4">
+           <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('colony_aval', 'Colonia:') !!}
             {!! Form::text('colony_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA',  'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
@@ -1277,7 +751,26 @@ function validarI(input) {
             };
         }
     </script>
-    
+    <script>
+    // usamos onload para asegurarnos que existan los elementos en nuestro DOM
+    window.onload = function() {
+        var anchor = document.getElementById("ine");         
+        
+            // le asociamos el evento a nuestro elemento para tener un codigo 
+            // html mas limpio y manejar toda la interaccion
+            // desde nuestro script
+            anchor.onclick = function() {
+                // una variable donde pongo la url a donde quiera ir, 
+                //podria estar de mas pero asi queda mas limpio la funcion window.open()
+                var url = "http://listanominal.ine.mx/";
+                window.open(url, "_blank", 'width=500,height=500'); 
+                // el return falase es para eviar que se progrague el evento y se vaya al href de tu anchor.
+                return false;
+            };
+        }
+    </script>
+
+   
     <script>
         function parrafo() {
             var x = document.getElementById("myparrafo");
@@ -1297,15 +790,15 @@ function validarI(input) {
 
           tecla_especial = false
           for(var i in especiales){
-             if(key == especiales[i]){
-               tecla_especial = true;
-               break;
-           } 
-       }
+           if(key == especiales[i]){
+             tecla_especial = true;
+             break;
+         } 
+     }
 
-       if(letras.indexOf(tecla)==-1 && !tecla_especial)
-          return false;
-  }
+     if(letras.indexOf(tecla)==-1 && !tecla_especial)
+      return false;
+}
 </script>
 <script type="text/javascript">
 // Solo permite ingresar numeros.

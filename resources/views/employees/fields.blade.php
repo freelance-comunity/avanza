@@ -306,7 +306,7 @@ $count = App\Models\Branch::all();
         <h3> Identificaciones</h3>
         <div class="form-group col-sm-12 col-lg-12">
         <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('ine', 'CLAVE DE ELECTOR INE:') !!} <a id="ine" href="#" >CONSULTA INE</a>
+            {!! Form::label('ine', 'CLAVE DE ELECTOR INE:') !!} <a href="http://listanominal.ine.mx/" target="_blank" onClick="window.open(this.href, this.target, 'width=500,height=500'); return false;"> CONSULTA INE</a>
             {!! Form::text('ine', null, [
             'style' => 'text-transform:uppercase',
             'class' => 'form-control input-lg', 
@@ -318,7 +318,7 @@ $count = App\Models\Branch::all();
         </div>
 
         <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('curp', 'CURP:') !!} <a id="curp" href="#" >CONSULTA CURP</a>
+            {!! Form::label('curp', 'CURP:') !!} <a href="https://consultas.curp.gob.mx/CurpSP/" target="_blank" onClick="window.open(this.href, this.target, 'width=500,height=500'); return false;"> CONSULTA CURP</a>
             {!! Form::text('curp', null, [
             'style' => 'text-transform:uppercase',
             'class' => 'form-control input-lg', 

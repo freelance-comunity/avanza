@@ -176,6 +176,8 @@ Route::post('addVault', 'GeneralController@addVault');
 
 Route::post('addCash', 'GeneralController@addCash');
 
+Route::post('recordExpense', 'GeneralController@recordExpense');
+
 /*=====  End of Routes for Employee  ======*/
 
 Route::get('formwizard', function(){

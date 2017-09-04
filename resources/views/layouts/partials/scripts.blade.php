@@ -8,6 +8,17 @@
 <script src="{{ asset('/js/parsley.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/es.js') }}" type="text/javascript"></script>
 
+{{-- Datatables --}}
+<script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.colVis.min.js"></script>
+
 <!--rangeslider-->
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
@@ -27,16 +38,86 @@
 
       {{-- Datatables --}}
       <script>
+        $(document).ready(function() {
+          $('#sis').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#rcs').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#afs').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#cs').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#gs').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
       	$(document).ready(function() {
       		$('#example').DataTable( {
       			"language": {
       				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
       			}
 
-          } );
+         } );
         });
       </script>
-       <script>
+      <script>
         $(document).ready(function() {
           $('#example2').DataTable( {
             "language": {

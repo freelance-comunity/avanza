@@ -9,6 +9,7 @@
       </div>
       <div class="modal-body">
        <div class="table-inverse">
+        <div class="table-responsive">
          <table class="table" id="cs">
           <thead class="thead-inverse">
             <th>Importe</th>
@@ -29,9 +30,10 @@
         </table>
       </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Cerrar</button>
-    </div>
   </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Cerrar</button>
+  </div>
+</div>
 </div>
 </div>

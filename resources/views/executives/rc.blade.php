@@ -9,22 +9,24 @@
       </div>
       <div class="modal-body">
        <div class="table-inverse">
-         <table class="table" id="rcs">
-          <thead class="thead-inverse">
-            <th>Importe</th>
-            <th>Concepto</th>
-            <th>Fecha</th>
-          </thead>
-          <tbody>
-            @foreach ($rc as $rc)
-            <tr>
-              <td>${{ number_format($rc->ammount,2) }}</td>
-              <td>{{ $rc->concept }}</td>
-              <td>{{ $rc->created_at }}</td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
+         <div class="table-responsive">
+           <table class="table" id="rcs">
+            <thead class="thead-inverse">
+              <th>Importe</th>
+              <th>Concepto</th>
+              <th>Fecha</th>
+            </thead>
+            <tbody>
+              @foreach ($rc as $rc)
+              <tr>
+                <td>${{ number_format($rc->ammount,2) }}</td>
+                <td>{{ $rc->concept }}</td>
+                <td>{{ $rc->created_at }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div class="modal-footer">

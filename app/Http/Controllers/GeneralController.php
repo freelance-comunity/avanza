@@ -133,7 +133,7 @@ class GeneralController extends Controller
 		if ($request->hasFile('voucher')) {
 			$voucher = $request->file('voucher');
 			$filename = time() . '.' . $voucher->getClientOriginalExtension();
-			Image::make($voucher)->resize(300, 300)->save(public_path('/uploads/voucher' . $filename));
+			Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
 		}
 
 		$ammount = $request->input('ammount');

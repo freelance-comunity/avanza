@@ -5,6 +5,10 @@
     transition: 0.3s;
 }
 
+img {
+    cursor: zoom-in;
+  }
+
 #myImg:hover {opacity: 0.7;}
 
 /* The Modal (background) */

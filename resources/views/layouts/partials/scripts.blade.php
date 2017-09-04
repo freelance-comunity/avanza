@@ -265,3 +265,15 @@ $('#control').keyup(function() {
   }
 }).keyup(); // Trigger the keyup event, thus running the handler on page load
 </script>
+
+{{-- IMG CLICK --}}
+<script>
+  $(function() {
+    $('img').on('click', function() {
+      $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
+      $('#enlargeImageModal').modal('show');
+      $('#g').modal('hide');
+    });
+  });
+</script>
+

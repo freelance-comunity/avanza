@@ -5,9 +5,9 @@
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'credits.store','data-parsley-validate' => '', 'id' => 'form1' ]) !!}
+    {!! Form::open(['route' => 'boxCuts.store']) !!}
 
-        @include('credits.fields')
+        @include('boxCuts.fields')
 
     {!! Form::close() !!}
 </div>

@@ -91,25 +91,27 @@ $credential = $user->credential;
             @else
             <div class="box-body">
              <div class="col-md-6">
+               ESTADO: {{$location->state}}
+               <br>
                MUNICIPIO: {{ $location->municipality }}
                <br>
                COLONIA: {{ $location->colony }}
-               <br>
-               CALLE: {{ $location->name_road }}
              </div>
              <div class="col-md-6">
-               NÚMERO DE CASA: {{ $location->outdoor_number }}
-               <br>
-               CÓDIGO POSTAL: {{ $location->postal_code }}
-             </div>
-           </div>
-           <a data-toggle="tooltip" title="Editar" href="{!! route('employeelocations.edit', [$location->id]) !!}"><i class="fa fa-pencil fa-2x"></i></a>
-           @endif
-         </div>
-       </div>
-     </center>
-   </div>
-   <div class="modal-footer">
+              CALLE: {{ $location->name_road }}
+              <br>
+              NÚMERO DE CASA: {{ $location->outdoor_number }}
+              <br>
+              CÓDIGO POSTAL: {{ $location->postal_code }}
+            </div>
+          </div>
+          <a data-toggle="tooltip" title="Editar" href="{!! route('employeelocations.edit', [$location->id]) !!}"><i class="fa fa-pencil fa-2x"></i></a>
+          @endif
+        </div>
+      </div>
+    </center>
+  </div>
+  <div class="modal-footer">
     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
   </div>
 </div>

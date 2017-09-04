@@ -5,9 +5,9 @@
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'credits.store','data-parsley-validate' => '', 'id' => 'form1' ]) !!}
+    {!! Form::model($boxCut, ['route' => ['boxCuts.update', $boxCut->id], 'method' => 'patch']) !!}
 
-        @include('credits.fields')
+        @include('boxCuts.fields')
 
     {!! Form::close() !!}
 </div>

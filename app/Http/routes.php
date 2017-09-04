@@ -46,12 +46,12 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
- $payment = App\Models\Payment::find(2242);
- $debt = $payment->debt;
- echo $debt->ammount;
- $credit = $debt->credit;
+   $payment = App\Models\Payment::find(2242);
+   $debt = $payment->debt;
+   echo $debt->ammount;
+   $credit = $debt->credit;
 
- echo $credit->ammount;
+   echo $credit->ammount;
 });
 
 Route::post('process', 'PaymentController@process');
@@ -431,3 +431,41 @@ Route::post('updatephoto', 'Photocontroller@update');
 Route::post('ine', 'Photocontroller@ine');
 Route::post('curps', 'Photocontroller@curps');
 Route::post('updatephotos', 'Photocontroller@cfe');
+
+Route::get('ajax', function(){
+    $date = \Carbon\Carbon::now();
+    $dues = 25;
+    $amount = 39;
+    for ($i=0; $i <= $dues ; $i++) { 
+        echo $dues; echo "&nbsp;";echo "&nbsp;";echo "&nbsp;";
+        echo $date->addDay(); echo "&nbsp;";echo "&nbsp;";echo "&nbsp;";
+        echo $amount; echo "&nbsp;";echo "&nbsp;";echo "&nbsp;";
+        echo "<br>";
+
+    }
+});
+
+Route::resource('boxCuts', 'BoxCutController');
+
+Route::get('boxCuts/{id}/delete', [
+    'as' => 'boxCuts.delete',
+    'uses' => 'BoxCutController@destroy',
+]);
+
+Route::get('boxcut', 'BoxCutController@getPromoter');
+Route::get('showbox/{id}', 'BoxCutController@showbox');
+Route::post('cut', 'BoxCutController@cut');
+
+Route::get('caja', function(){
+$vault = App\Models\Vault::find(2);
+echo $vault->ammount;
+$incomes = $vault->incomes;
+foreach ($incomes as  $value) {
+    echo $value->ammount;
+    echo "<br>";
+}
+});
+
+
+
+

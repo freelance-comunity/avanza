@@ -1,90 +1,58 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>javascript - Obtener el valor de un input type=text de varias maneras</title>
+    <script>
+        function capturar()
+        {
+        // obtenemos e valor por el numero de elemento
+        var porElementos=document.forms["form1"].elements[0].value;
+        // Obtenemos el valor por el id
+        var porId=document.getElementById("nombre").value;
+        var acep=document.getElementById("phone").value;
+        // Obtenemos el valor por el Nombre
+        var porNombre=document.getElementsByName("nombre")[0].value;
+        // Obtenemos el valor por el tipo de tag
+        var porTagName=document.getElementsByTagName("input")[0].value;
+        // Obtenemos el valor por el nombre de la clase
+        var porClassName=document.getElementsByClassName("formulario")[0].value;
 
-@section('main-content')
-@php
-$date = \Carbon\Carbon::now()->toDateString();
-@endphp
+        document.getElementById("resultado").innerHTML=" \
+        Por elementos: "+porElementos+" \
+        <br>Por ID: "+porId+" \
+        <br>Por ID: "+acep+" \
+        <br>Por Nombre: "+porNombre+" \
+        <br>Por TagName: "+porTagName+" \
+        <br>Por ClassName: "+porClassName;
+    }
+</script>
 
-<div class="box box-danger">
-	<div class="box-header with-border">
-		<div class="col-md-12">
-			<h3 class="box-title"><i class="fa fa-university"></i>BOVÉDA</h3>
-		</div><br><br>
-		<div class="col-md-4">   
-			<div class="info-box bg-navy">
-				<span class="info-box-icon"><i class="fa fa-dollar"></i></span>
-				<div class="info-box-content">
-					<span class="info-box-text">CAJA</span>
-					<span class="info-box-number">92,050</span>
+    <style>
+        form   {width:250px;height:180px;border:1px solid #ccc;padding:10px;}
+    </style>
+</head>
 
-					<div class="progress">
-						<div class="progress-bar" style="width: 100%"></div>
-					</div>
-					<span class="progress-description">
-						{{$date}}
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-8">   
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<tr>
-						<th style="width: 10px">1</th>
-						<th>EJECUTIVO:</th>
-						<th>JUAN CARLOS MONTEJO HERNANDEZ</th>
-					</tr>
-					<tr>
-						<td>2.</td>
-						<td>SUCURSAL:</td>
-						<td>LAS NUBES TUXTLA GUTIERREZ</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<hr>
-		<br><br>
-		<br><br><br>
-		<div class="col-md-6">  
-			<h4 align="center">INGRESOS</h4> 
-			<div class="table-responsive">
-				<table class="table table-hover table-striped"  id="example">
-					<thead>
-						<th>MONTO</th>
-						<th>CONCEPTO</th>
-						<th>FECHA</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>$5000</td>
-							<td>PAGO DE DOÑA PELOS</td>
-							<td>{{$date}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="col-md-6">  
-			<h4 align="center">EGRESOS</h4> 
-			<div class="table-responsive">
-				<table class="table table-hover table-striped"  id="example2">
-					<thead>
-						<th>MONTO</th>
-						<th>CONCEPTO</th>
-						<th>VAUHCER</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>$3000</td>
-							<td>RENOVACION DE CREDITO DE DON LUIS</td>
-							<td>VAUCHER.JPG</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		
-	</div>  	
-</div>
+<body>
+    <h1>Obtener el valor de un input type=text de varias maneras</h1>
+    <form id="form1">
+        Nombre:<br><input type="text" name="nombre"  id="nombre" class="formulario">
+        TELEFONO:<br><input type="number" name="phone"  id="phone" class="formulario">
 
-@endsection
+        <p><input type="checkbox" name="acepto" id="acepto" class="formulario_check"> Acepto el contrato</p>
+        
+        <p>Deacuerdo: Si<input type="radio" name="deacuerdo" value="si"> No<input type="radio" name="deacuerdo" value="no"></p>
+
+        <p>
+            <select name="seleccion" id="seleccion" class="formulario_select">
+                <option value="1">primera</option>
+                <option value="2">segunda</option>
+            </select>
+        </p>
+    </form>
+    <input type="button" value="obtener el nombre" onclick="capturar()">
+    <div id="resultado"></div>
+
+    <p><a href="http://www.lawebdelprogramador.com">http://www.lawebdelprogramador.com</a></p>
+</body>
+</html>

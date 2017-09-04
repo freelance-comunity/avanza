@@ -58,6 +58,23 @@ Route::post('process', 'PaymentController@process');
 
 Route::post('/import-excel', 'ClientController@importClients');
 
+Route::get('test-boveda', function(){
+    $incomes = App\Models\Income::all();
+    echo number_format($incomes->sum('ammount'));
+
+    $si = $incomes->where('concept', 'Saldo Inicial');
+    $rc = $incomes->where('concept', 'Recuperación');
+    $af = $incomes->where('concept', 'Asignación de efectivo');
+
+    echo "<br>";
+    echo number_format($si->sum('ammount'));
+    echo "<br>";
+    echo number_format($rc->sum('ammount'));
+    echo "<br>";
+    echo number_format($af->sum('ammount'));
+
+});
+
 /*=====  End of Test Routes  ======*/
 
 

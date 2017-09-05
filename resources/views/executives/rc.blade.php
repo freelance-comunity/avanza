@@ -21,7 +21,7 @@
               <tr>
                 <td>${{ number_format($rc->ammount,2) }}</td>
                 <td>{{ $rc->concept }}</td>
-                <td>{{ $rc->created_at->format('l j F Y H:i:s') }}</td>
+                <td>{{ $rc->created_at }}</td>
               </tr>
               @endforeach
             </tbody>

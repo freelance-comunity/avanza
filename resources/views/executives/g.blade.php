@@ -25,7 +25,7 @@
                 <td>
                   <img src="{{ asset('uploads/voucher/') }}{{ $g->voucher }}" style="width: 50px; height: 50px; float: left; border-radius: 10%; margin-right: 25px;">
                 </td>
-                <td>{{ $g->created_at->format('l j F Y  H:i:s') }}</td>
+                <td>{{ $g->created_at }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -39,3 +39,13 @@
   </div>
 </div>
 </div>
+{{-- IMG CLICK --}}
+<script>
+  $(function() {
+    $('img').on('click', function() {
+      $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
+      $('#enlargeImageModal').modal('show');
+      $('#g').modal('hide');
+    });
+  });
+</script>

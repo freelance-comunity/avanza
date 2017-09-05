@@ -1,9 +1,11 @@
 <?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+//use App\Traits\DatesTranslator;
 
 class Expenditure extends Model
-{
+{	
+	//use DatesTranslator;
     
 	public $table = "expenditures";
 
@@ -15,6 +17,7 @@ class Expenditure extends Model
 	    "ammount",
 		"concept",
 		"voucher",
+		"date",
 		"vault_id"
 	];
 

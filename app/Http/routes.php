@@ -46,12 +46,12 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
- $payment = App\Models\Payment::find(2242);
- $debt = $payment->debt;
- echo $debt->ammount;
- $credit = $debt->credit;
+   $payment = App\Models\Payment::find(2242);
+   $debt = $payment->debt;
+   echo $debt->ammount;
+   $credit = $debt->credit;
 
- echo $credit->ammount;
+   echo $credit->ammount;
 });
 
 Route::post('process', 'PaymentController@process');
@@ -73,6 +73,21 @@ Route::get('test-boveda', function(){
     echo "<br>";
     echo number_format($af->sum('ammount'));
 
+});
+
+Route::get('testDate', function(){
+    $current = Carbon\Carbon::today()->toDateString();
+    echo $current;
+
+
+    $user = App\User::find(3);
+    $vault = $user->vault;
+    $incomes = $vault->incomes->where('date', '2017-09-05');
+    echo "<br>";
+    dd($incomes);
+    $si = $incomes->where('concept', 'Saldo Inicial')->where('date', $current);
+    $rc = $incomes->where('concept', 'Recuperación')->where('date', $current);
+    $af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
 });
 
 /*=====  End of Test Routes  ======*/

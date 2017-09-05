@@ -14,6 +14,7 @@ use Toastr;
 use Validator;
 use App\Models\Income;
 use Auth;
+use Carbon\Carbon;
 
 
 class PaymentController extends AppBaseController
@@ -339,12 +340,13 @@ class PaymentController extends AppBaseController
 			}
 			
 		}
-
+		$current = Carbon::today();
 		$user = Auth::user();
 		$vault = $user->vault;
 
 		$data_income['ammount'] = $ammount;
 		$data_income['concept'] = 'Recuperación';
+		$data_income['date']    = $current;
 		$data_income['vault_id'] = $vault->id;
 		$income = Income::create($data_income);
 

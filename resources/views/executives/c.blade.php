@@ -23,7 +23,7 @@
               <td>${{ number_format($c->ammount,2) }}</td>
               <td>{{ $c->concept }}</td>
               <td>{{ $c->voucher }}</td>
-              <td>{{ $c->created_at }}</td>
+              <td>{{ $c->created_at->format('l j F Y  H:i:s') }}</td>
             </tr>
             @endforeach
           </tbody>

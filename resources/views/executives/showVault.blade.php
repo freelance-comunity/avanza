@@ -76,29 +76,37 @@ $date = new Date();
 					<thead class="thead-inverse">
 						<th>CONCEPTO</th>
 						<th>IMPORTE</th>
+						@role('administrador')
 						<th style="width: 30px;">DETALLES</th>
+						@endrole
 					</thead>
 					<tbody>
 						<tr>
 							<td>Saldo inicial</td>
 							<td>${{ number_format($si->sum('ammount')) }}</td>
+							@role('administrador')
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#si"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
+							@endrole
 						</tr>
 						<tr>
 							<td>Asignación de efectivo</td>
 							<td>${{ number_format($af->sum('ammount')) }}</td>
+							@role('administrador')
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#af"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
+							@endrole
 						</tr>
 						<tr>
 							<td>Recuperación</td>
 							<td>${{ number_format($rc->sum('ammount')) }}</td>
+							@role('administrador')
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#rc"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
+							@endrole
 						</tr>
 					</tbody>
 				</table>
@@ -111,32 +119,42 @@ $date = new Date();
 					<thead class="thead-inverse">
 						<th>IMPORTE</th>
 						<th>CONCEPTO</th>
+						@role('administrador')
 						<th style="width: 30px;">DETALLES</th>
+						@endrole
 					</thead>
 					<tbody>
 						<tr>
 							<td>Colocación</td>
 							<td>${{ number_format($c->sum('ammount')) }}</td>
+							@role('administrador')
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#c"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
+							@endrole
 						</tr>
 						<tr>
 							<td>Gastos</td>
 							<td>${{ number_format($g->sum('ammount')) }}</td>
+							@role('administrador')
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#g"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
+							@endrole
 						</tr>
 						<tr>
 							<td>Devolución</td>
 							<td>$0.00</td>
+							@role('administrador')
 							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
+							@endrole
 						</tr>
 						<tr>
 							<td>Inversión</td>
 							<td>$0.00</td>
+							@role('administrador')
 							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
+							@endrole
 						</tr>
 					</tbody>
 				</table>

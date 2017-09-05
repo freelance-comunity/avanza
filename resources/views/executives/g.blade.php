@@ -23,9 +23,9 @@
                 <td>${{ number_format($g->ammount,2) }}</td>
                 <td>{{ $g->concept }}</td>
                 <td>
-                  <img src="{{ asset('uploads/voucher/') }}{{ $g->voucher }}" style="width: 150px; height: 150px; float: left; border-radius: 10%; margin-right: 25px;">
+                  <img src="{{ asset('uploads/voucher/') }}{{ $g->voucher }}" style="width: 50px; height: 50px; float: left; border-radius: 10%; margin-right: 25px;">
                 </td>
-                <td>{{ $g->created_at }}</td>
+                <td>{{ $g->created_at->format('l j F Y  H:i:s') }}</td>
               </tr>
               @endforeach
             </tbody>

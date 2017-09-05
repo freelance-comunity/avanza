@@ -14,6 +14,8 @@ use Toastr;
 use Validator;
 use Auth;
 use Image;
+use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 class GeneralController extends Controller
 {
@@ -36,17 +38,19 @@ class GeneralController extends Controller
 	}
 
 	public function showVault($id)
-	{
+	{	
+		$current = Carbon::today()->toDateString();
+
 		$user = User::find($id);
 		$vault = $user->vault;
-		$incomes = $vault->incomes;
-		$si = $incomes->where('concept', 'Saldo Inicial');
-		$rc = $incomes->where('concept', 'Recuperación');
-		$af = $incomes->where('concept', 'Asignación de efectivo');
+		$incomes = $vault->incomes->where('date', $current);
+		$si = $incomes->where('concept', 'Saldo Inicial')->where('date', $current);
+		$rc = $incomes->where('concept', 'Recuperación')->where('date', $current);
+		$af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
 
-		$expenditures = $vault->expenditures;
-		$c = $expenditures->where('concept', 'Colocación');
-		$g = $expenditures->where('concept', 'Gasto');
+		$expenditures = $vault->expenditures->where('date', $current);
+		$c = $expenditures->where('concept', 'Colocación')->where('date', $current);
+		$g = $expenditures->where('concept', 'Gasto')->where('date', $current);
 
 
 		return view('executives.showVault')
@@ -63,6 +67,8 @@ class GeneralController extends Controller
 
 	public function addVault(Request $request)
 	{	
+		$current = Carbon::today();
+
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric'
 			]);
@@ -78,6 +84,7 @@ class GeneralController extends Controller
 
 		$data_income['ammount'] = $request->input('ammount');
 		$data_income['concept'] = 'Saldo Inicial';
+		$data_income['date']    = $current;
 		$data_income['vault_id'] = $vault->id;
 		$income = Income::create($data_income);
 
@@ -91,6 +98,8 @@ class GeneralController extends Controller
 
 	public function addCash(Request $request)
 	{	
+		$current = Carbon::today();
+
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric'
 			]);
@@ -106,6 +115,7 @@ class GeneralController extends Controller
 
 		$data_income['ammount'] = $request->input('ammount');
 		$data_income['concept'] = 'Asignación de efectivo';
+		$data_income['date']    = $current;
 		$data_income['vault_id'] = $vault->id;
 		$income = Income::create($data_income);
 
@@ -136,6 +146,7 @@ class GeneralController extends Controller
 			Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
 		}
 
+		$current = Carbon::today();
 		$ammount = $request->input('ammount');
 		$concept = $request->input('concept');
 		$user = Auth::user();
@@ -143,6 +154,7 @@ class GeneralController extends Controller
 		$data_expenditure['ammount'] = $ammount;
 		$data_expenditure['concept'] = 'Gasto';
 		$data_expenditure['voucher'] = $filename;
+		$data_expenditure['date']    = $current;
 		$data_expenditure['vault_id'] = $vault->id;
 
 		$expenditure = Expenditure::create($data_expenditure);

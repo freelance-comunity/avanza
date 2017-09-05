@@ -18,6 +18,7 @@ class CreateIncomesTable extends Migration
 			$table->increments('id');
 			$table->integer('ammount');
 			$table->string('concept');
+			$table->date('date');
 			$table->integer('vault_id')->unsigned();
 			$table->foreign('vault_id')->references('id')->on('vaults')->onDelete('cascade');
 			$table->timestamps();

@@ -19,6 +19,7 @@ class CreateExpendituresTable extends Migration
 			$table->integer('ammount');
 			$table->string('concept');
 			$table->string('voucher');
+			$table->date('date');
 			$table->integer('vault_id')->unsigned();
 			$table->foreign('vault_id')->references('id')->on('vaults')->onDelete('cascade');
 			$table->timestamps();

@@ -21,7 +21,7 @@
               <tr>
                 <td>${{ number_format($si->ammount,2) }}</td>
                 <td>{{ $si->concept }}</td>
-                <td>{{ $si->created_at }}</td>
+                <td>{{ $si->created_at->format('l j F Y H:i:s') }}</td>
               </tr>
               @endforeach
             </tbody>

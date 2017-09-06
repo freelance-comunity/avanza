@@ -75,6 +75,21 @@ Route::get('test-boveda', function(){
 
 });
 
+Route::get('testDate', function(){
+    $current = Carbon\Carbon::today()->toDateString();
+    echo $current;
+
+
+    $user = App\User::find(3);
+    $vault = $user->vault;
+    $incomes = $vault->incomes->where('date', '2017-09-05');
+    echo "<br>";
+    dd($incomes);
+    $si = $incomes->where('concept', 'Saldo Inicial')->where('date', $current);
+    $rc = $incomes->where('concept', 'Recuperación')->where('date', $current);
+    $af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
+});
+
 /*=====  End of Test Routes  ======*/
 
 
@@ -175,6 +190,8 @@ Route::get('showVault/{id}', 'GeneralController@showVault');
 Route::post('addVault', 'GeneralController@addVault');
 
 Route::post('addCash', 'GeneralController@addCash');
+
+Route::post('recordExpense', 'GeneralController@recordExpense');
 
 /*=====  End of Routes for Employee  ======*/
 

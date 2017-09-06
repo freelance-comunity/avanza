@@ -4,7 +4,11 @@
 @php
 $date = new Date();
 @endphp
-
+@include('executives.si')
+@include('executives.rc')
+@include('executives.af')
+@include('executives.c')
+@include('executives.g')
 <div class="box box-danger">
 	<div class="box-header with-border">
 		<div class="col-md-12">
@@ -39,6 +43,7 @@ $date = new Date();
 						<td>SUCURSAL:</td>
 						<td>{{ $user->branch->name }}</td>
 					</tr>
+					@role('administrador')
 					<tr>
 						<td colspan="2">
 							<a data-toggle="modal" data-target="#start_of_day" class="btn bg-primary btn-lg btn-block">ASIGNAR SALDO INICIAL</a>
@@ -49,6 +54,15 @@ $date = new Date();
 						@include('executives.cash_allocation')
 						@include('executives.start_of_day')
 					</tr>
+					@endrole
+					@role('ejecutivo-de-credito')
+					<tr>
+						<td colspan="4">
+							<a data-toggle="modal" data-target="#record_expense" class="btn bg-primary btn-lg btn-block">REGISTRAR GASTO</a>
+						</td>
+						@include('executives.record_expense')
+					</tr>
+					@endrole
 				</table>
 			</div>
 		</div>
@@ -62,26 +76,37 @@ $date = new Date();
 					<thead class="thead-inverse">
 						<th>CONCEPTO</th>
 						<th>IMPORTE</th>
+						@role('administrador')
 						<th style="width: 30px;">DETALLES</th>
+						@endrole
 					</thead>
 					<tbody>
 						<tr>
 							<td>Saldo inicial</td>
 							<td>${{ number_format($si->sum('ammount')) }}</td>
+							@role('administrador')
 							<td style="text-align: center;">
-								<a onclick="saldo()" data-toggle="modal" data-target="#si"><i class="fa fa-eye fa-2x"></i></a>
-								@include('executives.si')
+								<a data-toggle="modal" data-target="#si"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
+							@endrole
 						</tr>
 						<tr>
 							<td>Asignación de efectivo</td>
 							<td>${{ number_format($af->sum('ammount')) }}</td>
-							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
+							@role('administrador')
+							<td style="text-align: center;">
+								<a data-toggle="modal" data-target="#af"><i class="fa fa-eye fa-2x"></i></a>
+							</td>
+							@endrole
 						</tr>
 						<tr>
 							<td>Recuperación</td>
 							<td>${{ number_format($rc->sum('ammount')) }}</td>
-							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
+							@role('administrador')
+							<td style="text-align: center;">
+								<a data-toggle="modal" data-target="#rc"><i class="fa fa-eye fa-2x"></i></a>
+							</td>
+							@endrole
 						</tr>
 					</tbody>
 				</table>
@@ -94,13 +119,42 @@ $date = new Date();
 					<thead class="thead-inverse">
 						<th>IMPORTE</th>
 						<th>CONCEPTO</th>
+						@role('administrador')
 						<th style="width: 30px;">DETALLES</th>
+						@endrole
 					</thead>
 					<tbody>
 						<tr>
-							<td>Saldo inicial</td>
+							<td>Colocación</td>
 							<td>${{ number_format($c->sum('ammount')) }}</td>
+							@role('administrador')
+							<td style="text-align: center;">
+								<a data-toggle="modal" data-target="#c"><i class="fa fa-eye fa-2x"></i></a>
+							</td>
+							@endrole
+						</tr>
+						<tr>
+							<td>Gastos</td>
+							<td>${{ number_format($g->sum('ammount')) }}</td>
+							@role('administrador')
+							<td style="text-align: center;">
+								<a data-toggle="modal" data-target="#g"><i class="fa fa-eye fa-2x"></i></a>
+							</td>
+							@endrole
+						</tr>
+						<tr>
+							<td>Devolución</td>
+							<td>$0.00</td>
+							@role('administrador')
 							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
+							@endrole
+						</tr>
+						<tr>
+							<td>Inversión</td>
+							<td>$0.00</td>
+							@role('administrador')
+							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
+							@endrole
 						</tr>
 					</tbody>
 				</table>

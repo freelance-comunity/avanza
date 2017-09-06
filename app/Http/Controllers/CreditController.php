@@ -335,10 +335,11 @@ class CreditController extends AppBaseController
 
 					}
 				}
-
+				$current = Carbon::today();
 				$data_expenditure['ammount'] = $ammount;
 				$data_expenditure['concept'] = 'Colocación';
 				$data_expenditure['voucher'] = 'Sin comprobante';
+				$data_expenditure['date']    = $current;
 				$data_expenditure['vault_id'] = $vault->id;
 
 				$expenditure = Expenditure::create($data_expenditure);

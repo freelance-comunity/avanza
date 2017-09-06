@@ -6,7 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 
 @section('htmlheader')
-    @include('layouts.partials.htmlheader')
+@include('layouts.partials.htmlheader')
 @show
 
 <!--
@@ -30,32 +30,44 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="skin-red sidebar-mini">
-<div class="wrapper">
+    <div class="wrapper">
 
-    @include('layouts.partials.mainheader')
+        @include('layouts.partials.mainheader')
 
-    @include('layouts.partials.sidebar')
+        @include('layouts.partials.sidebar')
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
 
-        @include('layouts.partials.contentheader')
+            @include('layouts.partials.contentheader')
 
-        <!-- Main content -->
-        <section class="content">
-            <!-- Your Page Content Here -->
-            @yield('main-content')
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="" class="enlargeImageModalSource" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Your Page Content Here -->
+        @yield('main-content')
+    </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
 
-    @include('layouts.partials.controlsidebar')
+@include('layouts.partials.controlsidebar')
 
-    @include('layouts.partials.footer')
+@include('layouts.partials.footer')
 
 </div><!-- ./wrapper -->
 
 @section('scripts')
-    @include('layouts.partials.scripts')
+@include('layouts.partials.scripts')
 @show
 
 </body>

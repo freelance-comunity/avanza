@@ -19,28 +19,35 @@ class BoxCut extends Model
 		"bills_50",
 		"bills_20",
 		"coin_10",
-		"coi_5",
+		"coin_5",
 		"coin_2",
 		"coin_1",
 		"cents_50",
+		"vault_id",
 		"user_id"
 	];
 
 	public static $rules = [
-	  
+	  "bills_1000" => "required",
+	  "bills_500" => "required",
+	  "bills_200"=> "required",
+	  "bills_100" => "required",
+	  "bills_50" =>  "required",
+	  "bills_20" =>"required",
+	  "coin_10" => "required",
+	  "coin_5" => "required",
+	  "coin_2" => "required",
+	  "coin_1" => "required",
+	  "cents_50" => "required",
 	];
 	public function user()
 	{
 		return $this->belongsTo('App\Models\Vault');
 	}
-	public function incomes()
-	{
-		return $this->hasMany('App\Models\Income');
-	}
-
-	public function expenditures()
-	{
-		return $this->hasMany('App\Models\Expenditure');
-	}
+	 public function vault()
+    {
+        return $this->hasOne('App\Models\Vault');
+    }
+	
 
 }

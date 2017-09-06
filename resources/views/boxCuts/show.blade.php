@@ -39,34 +39,17 @@ $date = new Date();
 						<td>SUCURSAL:</td>
 						<td>{{ $user->branch->name }}</td>
 					</tr>
-					<tr>
-						<td colspan="2">
-							<a data-toggle="modal" data-target="#cut" class="btn bg-primary btn-lg btn-block">CORTE DE CAJA</a>
-						</td>
-						@include('boxCuts.cut')
-					</tr>
 				</table>
 			</div>
 		</div>
 		<hr>
 		<br><br>
-		<br><br><br>
-		<div class="col-md-4">   
-			<div class="info-box bg-navy">
-				<span class="info-box-icon"><i class="fa fa-dollar"></i></span>
-				<div class="info-box-content">
-					<span class="info-box-text">CAJA</span>
-					{{--<span class="info-box-number">{{ number_format($boxCut->bills_1000 * 1000 + $boxCut->bills_500 * 500 + $boxCut->bills_200 * 200 + $boxCut->bills_100 * 100 + $boxCut->bills_50 * 50 + $boxCut->bills_20 * 20 + $boxCut->coin_10 * 10 + $boxCut->coin_5 * 5 + $boxCut->coin_2 * 2 + $boxCut->coin_1 * 1 + $boxCut->cents_50 * 0.50,2) }}</span>--}}
-
-					<div class="progress">
-						<div class="progress-bar" style="width: 100%"></div>
-					</div>
-					<span class="progress-description">
-						{{$date->format('d F Y')}}
-					</span>
-				</div>
-			</div>
-		</div>
+		<br><br>
+		<div class="col-md-4"> 
+		<a data-toggle="modal" data-target="#cut" class="btn bg-primary btn-lg btn-block">CORTE DE CAJA</a>
+		</div>		
+						@include('boxCuts.cut')
+	
 
 		
 		

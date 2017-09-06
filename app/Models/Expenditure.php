@@ -28,9 +28,5 @@ class Expenditure extends Model
 	{
 		return $this->belongsTo('App\Models\Vault');
 	}
-	public function boxcut()
-	{
-		return $this->belongsTo('App\Models\BoxCut');
-	}
-
+	
 }

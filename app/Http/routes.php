@@ -474,13 +474,10 @@ Route::get('showbox/{id}', 'BoxCutController@showbox');
 Route::post('cut', 'BoxCutController@cut');
 
 Route::get('caja', function(){
-$vault = App\Models\Vault::find(2);
-echo $vault->ammount;
-$incomes = $vault->incomes;
-foreach ($incomes as  $value) {
-    echo $value->ammount;
-    echo "<br>";
-}
+ $centavo = 1 * 0.50;
+$diez = 10;
+ $resta = $centavo - $diez;
+ echo $resta;
 });
 
 

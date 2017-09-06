@@ -179,7 +179,7 @@ class BoxCutController extends AppBaseController
 	{
 		$user = User::find($id);
 		$vault = $user->vault;
-	
+
 		
 
 		return view('boxCuts.show')
@@ -189,14 +189,27 @@ class BoxCutController extends AppBaseController
 	public function cut(Request $request)
 	{	
 		$validator = Validator::make($request->all(), [
-			'bills_1000' => 'required|numeric'
+			'bills_1000' => 'required|numeric',
+			'bills_500' => 'required|numeric',
+			'bills_200' => 'required|numeric',
+			'bills_100' => 'required|numeric',
+			'bills_50' => 'required|numeric',
+			'bills_20' => 'required|numeric',
+			'coin_10' => 'required|numeric',
+			'coin_5' => 'required|numeric',
+			'coin_2' => 'required|numeric',
+			'coin_1' => 'required|numeric',
+			'cents_50' => 'required|numeric',
 			]);
 
 		if ($validator->fails()) {
-			Toastr::error('Favor de introducir cantidad valida.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			Toastr::error('Favor de introducir cantidad valida.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 			return redirect()->back();
 		}
+		
+		$user = User::find($request->input('user_id'));
+		$vault = $user->vault;
 
 		$data_boxcut['bills_1000'] = $request->input('bills_1000');
 		$data_boxcut['bills_500'] = $request->input('bills_500');
@@ -209,10 +222,39 @@ class BoxCutController extends AppBaseController
 		$data_boxcut['coin_2'] = $request->input('coin_2');
 		$data_boxcut['coin_1'] = $request->input('coin_1');
 		$data_boxcut['cents_50'] = $request->input('cents_50');
-		$data_boxcut['user_id'] = $user = Auth::User()->id;
+		$data_boxcut['vault_id'] = $vault->id;
+		$data_boxcut['user_id'] = $user->id;
 		$boxCut = BoxCut::create($data_boxcut);
+
+		$mil = $boxCut->bills_1000 * 1000;
+		$quinientos = $boxCut->bills_500 * 500;
+		$doscientos = $boxCut->bills_200 * 200;
+		$cien  = $boxCut->bills_100 * 100;
+		$cincuenta = $boxCut->bills_50 * 50;
+		$veinte = $boxCut->bills_20 * 20;
+		$diez = $boxCut->coin_10 * 10;
+		$cinco = $boxCut->coin_5 * 5;
+		$dos = $boxCut->coin_2 * 2;
+		$peso = $boxCut->coin_1 * 1;
+		$centavo = $boxCut->cents_50 * 0.50;
+
+		$rest = $mil + $quinientos + $doscientos + $cien + $cincuenta  + $veinte + $diez + $cinco + $dos + $peso + $centavo; 
+
 		
-		Toastr::success('chido.', 'corte', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		
+
+		if ($rest > $vault->ammount) {
+			Toastr::error('Estas introduciendo una cantidad mayor a tu saldo a liquidar.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		}
+		else{	
+			$vault->ammount = $vault->ammount - $rest; 
+			$vault->save();
+			if($vault->ammount == 0) {
+				Toastr::success('Corte de caja realizado exitosamente.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			}else{
+				Toastr::info('Te falta $'.$vault->ammount.' pesos para realizar el corte de caja', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			}
+		}
 
 		return redirect()->back();
 	}

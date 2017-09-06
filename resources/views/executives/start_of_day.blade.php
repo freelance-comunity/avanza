@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-      {!! Form::open(['url' => 'addVault','data-parsley-validate' => '']) !!}  
+      {!! Form::open(['url' => 'addVault','' => '']) !!}  
         <p>
           {!! Form::label('ammount', 'Monto:') !!}
           <input type="number" name="ammount" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">

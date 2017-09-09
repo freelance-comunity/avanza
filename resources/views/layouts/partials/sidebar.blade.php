@@ -24,12 +24,9 @@
       <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
       <li><a data-toggle="modal" data-target="#cotizador"><i class="fa fa-calculator"></i><span>Cotizador</span></a></li>
       <li><a href="{{ url('vault') }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
-<<<<<<< HEAD
-      <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Core de Caja</span></a></li>
 
-=======
       @role('administrador')
->>>>>>> remotes/origin/master
+      <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Core de Caja</span></a></li>
       <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li>
       @endrole
       <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
@@ -102,7 +99,7 @@
            <div class="range-slider color-3">
             <input type="text" id="modalidadr" name="modalidadr" onChange="calcularr()" />
           </div><br>
-          <input type="hidden" id="tasar" name="tasar" value="0.15">
+          <input type="hidden" id="tasar" name="tasar" value="0.25">
           {!! Form::label('capitalr', 'Monto solicitado:') !!}
           <div class="range-slider color-3">
             <input type="text" id="capitalr" name="capitalr" onChange="calcularr()" />
@@ -203,9 +200,21 @@
 
     utilidad_neta = capital + interes;
     total= utilidad_neta/modalidad;
+     var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      });
 
-    document.getElementById('totaln').value=Math.ceil(total);
-    document.getElementById('refrendo').value=Math.ceil(interes);         
+      var formatterr = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      });
+
+
+    document.getElementById('totaln').value=formatterr.format(total);
+    document.getElementById('refrendo').value=formatter.format(interes);         
   }
   function calcularr()
   {
@@ -219,10 +228,23 @@
     utilidad_netar = capitalr + interesr;
     totalr= utilidad_netar/modalidadr;
 
-    document.getElementById('totalnr').value=Math.ceil(totalr);  
+    var formatterr = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    });
+
+
+    document.getElementById('totalnr').value=formatterr.format(totalr);  
+
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    });
 
     totalpayment =  capitalr + interesr;
-    document.getElementById('totalpayment').value=Math.ceil(totalpayment);  
+    document.getElementById('totalpayment').value = formatter.format(totalpayment);  
   }
 </script>
 

@@ -50,6 +50,7 @@
 										<td>${{ number_format($payment->payment, 2)}}</td>
 										<td style="color: blue;">${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:blue;">{{$payment->status}}</p></td>
+										<td><a href="{{ url('cancel') }}/{{$payment->id}}" class="btn btn-lg bg-black btn-block" onclick="return confirm('¿Estas seguro de desbloquear este cliente?')">Anular Pago</a></td>
 									</tr>
 									@elseif($payment->status == "Vencido")
 									<tr class="danger">
@@ -60,10 +61,11 @@
 										<td>$ {{ number_format($payment->capital, 2) }}</td>
 										<td>$ {{ number_format($payment->interest, 2) }}</td>
 										<td>$ {{ number_format($payment->moratorium, 2) }}</td>
-										<td> <button type="button" class="btn btn-danger btn-lg disabled" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
+										<td> <button type="button" class="btn btn-danger btn-lg disabled btn-block" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button><a href="{{ url('cancel') }}/{{$payment->id}}" class="btn btn-lg bg-black btn-block" onclick="return confirm('¿Estas seguro de desbloquear este cliente?')">Anular Pago</a></td>
 										<td>${{ number_format($payment->payment, 2)}}</td>
 										<td style="color: red;">${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:red;">{{$payment->status}}</p></td>
+										
 									</tr>
 									@elseif($payment->status == "Pagado")
 									<tr class="success">
@@ -78,6 +80,7 @@
 										<td>${{ number_format($payment->payment, 2)}}</td>
 										<td>${{ number_format($payment->balance, 2) }}</td>
 										<td><p style="color:green;">{{$payment->status}}</p></td>
+										
 									</tr>
 									@endif
 									@endforeach

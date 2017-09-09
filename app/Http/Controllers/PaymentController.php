@@ -365,5 +365,22 @@ class PaymentController extends AppBaseController
 		}
 		return redirect()->back();	
 	}
+	public function cancel($id)
+	{	
+		$payment = Payment::find($id);
+
+		if(empty($payment))
+		{
+			Flash::error('Payment not found');
+			return redirect(route('payments.index'));
+		}
+		
+			$payment->payment = 0;
+			$payment->balance = 0;
+			$payment->status = "Pendiente";
+			$payment->save();
+	
+		return redirect()->back();	
+	}
 	
 }

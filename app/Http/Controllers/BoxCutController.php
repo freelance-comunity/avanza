@@ -252,7 +252,7 @@ class BoxCutController extends AppBaseController
 			if($vault->ammount == 0) {
 				Toastr::success('Corte de caja realizado exitosamente.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			}else{
-				Toastr::info('Te falta $'.$vault->ammount.' pesos para realizar el corte de caja', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				Toastr::info('Te falta $'.number_format($vault->ammount,2).' pesos para realizar el corte de caja', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			}
 		}
 

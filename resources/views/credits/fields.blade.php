@@ -15,10 +15,21 @@
       {!! Form::label('ammount', 'Monto Crédito:') !!}
       <input type="number" name="ammount" placeholder="ESCRIBA EL MONTO" id="ammount" class="form-control formulario input-lg" data-parsley-trigger="input focusin" required="required">
     </div>
-    @if ($product->name == 'DIARIO')
+    @if ($product->name == 'CREDIDIARIO25')
     <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('dues', 'No. Cuotas:') !!}
-      {!! Form::select('dues', ['25'=>'25','30'=>'30', '52'=>'52','60'=>'60'],null, [
+      {!! Form::select('dues', ['25'=>'25'],null, [
+        'style' => 'text-transform:uppercase',
+        'class' => 'form-control input-lg formulario', 
+        'required'=>'required',
+        'id' => 'dues',
+        'data-parsley-trigger ' => 'input focusin',
+        'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+      </div>
+      @elseif ($product->name == 'CREDIDIARIO4')
+      <div class="form-group col-sm-6 col-lg-4">
+      {!! Form::label('dues', 'No. Cuotas:') !!}
+      {!! Form::select('dues', ['4'=>'4'],null, [
         'style' => 'text-transform:uppercase',
         'class' => 'form-control input-lg formulario', 
         'required'=>'required',
@@ -96,10 +107,10 @@
             </div>
           </div> 
         </div>
-        <input type="button" class="btn bg-navy" value="Tabla de Amortizacion" onclick="capturar()">
+       <!-- <input type="button" class="btn bg-navy" value="Tabla de Amortizacion" onclick="capturar()">
         <div id="resultado demo">
           <p id="demo"></p>
-        </div>
+        </div>-->
         
       </div> 
     </div>

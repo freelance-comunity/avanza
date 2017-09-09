@@ -393,6 +393,7 @@ Route::get('graphics',function(){
 
 Route::get('unlocked/{id}' , 'PaymentController@unlocked');
 Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
+Route::get('cancel/{id}' , 'PaymentController@cancel');
 
 Route::get('pagado',function(){
 

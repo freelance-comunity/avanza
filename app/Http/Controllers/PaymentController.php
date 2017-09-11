@@ -226,10 +226,10 @@ class PaymentController extends AppBaseController
 					Toastr::success('Pagos confirmados.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				}
 			}
-			if ($debt->ammount == 0) {
+			/*if ($debt->ammount == 0) {
 				$debt->status = "Pagado";
 				$debt->save();
-			}
+			}*/
 		}
 		else{
 			if ($payment->status == "Vencido") {
@@ -332,12 +332,9 @@ class PaymentController extends AppBaseController
 			}
 
 
-			if ($debt->ammount == 0) {
-				$debt->status = "Pagado";
-				$debt->save();
+			
 
-				
-			}
+
 			
 		}
 		$current = Carbon::today();
@@ -352,7 +349,17 @@ class PaymentController extends AppBaseController
 
 		$vault->ammount = $vault->ammount + $income->ammount;
 		$vault->save();
+
+			if ($debt->ammount == 0) {
+				$debt->status = "Pagado";
+				$debt->credit->status = "Pagado";
+				$debt->credit->save();
+				$debt->save();	
+				
+			}
 		return redirect()->back();	
+
+
 	}
 	
 	public function unlocked($id)
@@ -373,10 +380,12 @@ class PaymentController extends AppBaseController
 		{
 			Flash::error('Payment not found');
 			return redirect(route('payments.index'));
-		}
-		
+		}	
+
+			$payment->moratorium = 0;
 			$payment->payment = 0;
-			$payment->balance = 0;
+			$payment->balance = $payment->ammount;;
+			$payment->total = $payment->ammount;
 			$payment->status = "Pendiente";
 			$payment->save();
 	

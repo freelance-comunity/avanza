@@ -210,4 +210,5 @@ class BranchController extends AppBaseController
 			return redirect(route('branches.index', [$branch->id])); 
 		}
 	}*/
+	
 }

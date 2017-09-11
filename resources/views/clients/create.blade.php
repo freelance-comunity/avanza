@@ -8,7 +8,7 @@ Crear Nuevo Cliente
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'clients.store', 'files' => 'true', 'data-parsley-validate' => '']) !!}
+    {!! Form::open(['route' => 'clients.store', 'files' => 'true', 'data-parsley-validate' => '', 'id'=>'formclient']) !!}
 
         @include('clients.fields')
 

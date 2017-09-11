@@ -71,7 +71,13 @@ class CreditController extends AppBaseController
 	 * @return Response
 	 */
 	public function store(CreateCreditRequest $request)
-	{	
+	{	$product = Product::find($request->input('type_product'));
+		$typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
+		if ($typecredit) {
+			Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('clients.index'));
+		}
+		
 		$ammount = $request->input('ammount');
 		$user = Auth::user();
 		$vault = $user->vault;	
@@ -163,10 +169,10 @@ class CreditController extends AppBaseController
 					$tasa = 0.25;
 				}elseif ($periodicity == 'CREDIDIARIO4' && $dues == 4) {
 					$tasa = 0.28;
-				}elseif ($periodicity == 'SEMANAL') {
+				}elseif ($periodicity == 'CREDISEMANA') {
 					$tasa = 0.15;
 				}
-				$interes = $ammount*$tasa;
+				$interes = $ammount* $tasa;
 				$capital = $ammount/$dues;
 				$total = $ammount + $interes;
 				$pago = $total/$dues;

@@ -21,6 +21,7 @@
 		<h3>Pagos Del Día</h3>
 		<canvas id="paymentsNow" width="700" height="650"></canvas>
 		<script>
+			
 			var ctx = document.getElementById("paymentsNow").getContext('2d');
 			var myChart = new Chart(ctx, {
 				type: 'bar',

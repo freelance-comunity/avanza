@@ -3,7 +3,15 @@
 @section('main-content')
 
 <div class="container">
-
+@role('administrador')
+@php
+if (Auth::user()->branch->name == 'MATRIZ' ) {
+  $employees = App\User::all();
+}else{
+$employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
+}
+@endphp
+@endrole
     @include('flash::message')
 
     <div class="row">

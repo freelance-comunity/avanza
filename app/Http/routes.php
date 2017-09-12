@@ -394,6 +394,7 @@ Route::get('graphics',function(){
 Route::get('unlocked/{id}' , 'PaymentController@unlocked');
 Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
 Route::get('cancel/{id}' , 'PaymentController@cancel');
+Route::get('mora/{id}' , 'PaymentController@mora');
 
 Route::get('pagado',function(){
 
@@ -416,7 +417,6 @@ Route::get('mexico', function(){
 Route::get('executives', function(){
     return view('executives');
 });
-
 
 
 Route::resource('vaults', 'VaultController');
@@ -490,15 +490,6 @@ Route::get('boxCuts/{id}/delete', [
 Route::get('boxcut', 'BoxCutController@getPromoter');
 Route::get('showbox/{id}', 'BoxCutController@showbox');
 Route::post('cut', 'BoxCutController@cut');
-
-Route::get('caja', function(){
- $centavo = 1 * 0.50;
-$diez = 10;
- $resta = $centavo - $diez;
- echo $resta;
-});
-
-
 
 
 

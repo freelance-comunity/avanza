@@ -391,5 +391,22 @@ class PaymentController extends AppBaseController
 	
 		return redirect()->back();	
 	}
+	public function mora($id)
+	{	
+		$payment = Payment::find($id);
+
+		if(empty($payment))
+		{
+			Flash::error('Payment not found');
+			return redirect(route('payments.index'));
+		}	
+
+			$payment->moratorium = 0;
+			$payment->balance = $payment->balance - 20;
+			$payment->total = $payment->ammount;
+			$payment->save();
+	
+		return redirect()->back();	
+	}
 	
 }

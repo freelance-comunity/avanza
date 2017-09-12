@@ -7,7 +7,7 @@
 
     {!! Form::model($branch, ['route' => ['branches.update', $branch->id], 'method' => 'patch', 'data-parsley-validate' => '']) !!}
 
-        @include('branches.fields')
+        @include('branches.fields-edit')
 
     {!! Form::close() !!}
 </div>

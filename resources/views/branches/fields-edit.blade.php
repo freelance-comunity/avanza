@@ -16,13 +16,14 @@
               'class' => 'form-control input-lg', 
               'placeholder'=>'ESCRIBE EL NOMBRE DE LA SUCURSAL',
               'required'=>'required',
+              'readonly'=>'readonly',
               'data-parsley-trigger ' => 'input focusin',
               'data-parsley-validate-if-empty'=>'true',
               'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="col-md-6">
               <label for="exampleInputEmail1">Teléfono</label>
-              <input type="number" name="phone" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-validate-if-empty="true" data-parsley-maxlength="10">
+              <input type="number" name="phone" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" value="{{$branch->phone}}" data-parsley-validate-if-empty="true" data-parsley-maxlength="10">
               </div>       
             </div>
             <!-- /.box-body -->        

@@ -13,6 +13,7 @@ use App\Models\Clientdocuments;
 use App\Models\Branch;
 use App\Models\Product;
 use App\Models\Credit;
+use App\User;
 use App\Models\LatePayments;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
@@ -46,6 +47,7 @@ class ClientController extends AppBaseController
 
 	public function index(Request $request)
 	{	
+		
 		if (Auth::user()->hasRole('administrador')) {
 			$clients = Client::all();
 		}else{
@@ -53,6 +55,7 @@ class ClientController extends AppBaseController
 		}
 		$products =	Product::all();
 		return view('clients.index')
+
 		->with('clients', $clients)
 		->with('products',$products);
 	}
@@ -97,7 +100,7 @@ class ClientController extends AppBaseController
 			Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
 			$input['avatar'] = $filename;
 		}
-		$number = Credit::max('id') + 1;
+		$number = Client::max('id') + 1;
 		
 		$input['folio'] = $request->input('state').$request->input('branch_id').'00'.$number;
 

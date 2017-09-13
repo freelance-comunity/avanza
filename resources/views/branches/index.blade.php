@@ -4,7 +4,15 @@
 @section('contentheader_title')
 Todas las sucursales
 @endsection
-
+@role('administrador')
+@php
+if (Auth::user()->branch->name == 'MATRIZ' ) {
+  $branches = App\Models\Branch::all();
+}else{
+$branches = App\Models\Branch::where('id', Auth::user()->branch_id)->get();
+}
+@endphp
+@endrole
 <div class="container">
 
     @include('flash::message')

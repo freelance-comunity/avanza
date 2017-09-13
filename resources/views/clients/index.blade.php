@@ -5,7 +5,15 @@
 Todos los Clientes
 @endsection
 <div class="container">
-
+@role('administrador')
+@php
+if (Auth::user()->branch->name == 'MATRIZ' ) {
+  $clients = App\Models\Client::all();
+}else{
+$clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get();
+}
+@endphp
+@endrole
   @include('flash::message')
 
   <div class="row">

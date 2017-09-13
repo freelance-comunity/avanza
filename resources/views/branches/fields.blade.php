@@ -9,7 +9,7 @@
           <h3 class="box-title">Datos de la Sucursal</h3>
         </div>       
         <div class="box-body">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="exampleInputEmail1">Nombre de la Sucursal</label>
             {!! Form::text('name', null, [
               'style' => 'text-transform:uppercase',
@@ -20,10 +20,15 @@
               'data-parsley-validate-if-empty'=>'true',
               'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label for="exampleInputEmail1">Teléfono</label>
               <input type="number" name="phone" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-validate-if-empty="true" data-parsley-maxlength="10">
-              </div>       
+              </div>  
+              <div class="col-md-4">
+                <label for="region_id">Región</label>
+                {!! Form::select('region_id',$regions ,null, ['class' => 'form-control input-lg']); !!}
+              </div>
+
             </div>
             <!-- /.box-body -->        
             <div class="box-body">

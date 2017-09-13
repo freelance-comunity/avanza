@@ -200,7 +200,7 @@ class BoxCutController extends AppBaseController
 			'coin_2' => 'required|numeric',
 			'coin_1' => 'required|numeric',
 			'cents_50' => 'required|numeric',
-			]);
+		]);
 
 		if ($validator->fails()) {
 			Toastr::error('Favor de introducir cantidad valida.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
@@ -251,8 +251,17 @@ class BoxCutController extends AppBaseController
 			$vault->save();
 			if($vault->ammount == 0) {
 				Toastr::success('Corte de caja realizado exitosamente.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+				$user_collector = Auth::user();
+				$vault_collector = $user_collector->vault;
+				$vault_collector->ammount = $vault_collector->ammount + $rest;
+				$vault_collector->save();
 			}else{
 				Toastr::info('Te falta $'.number_format($vault->ammount,2).' pesos para realizar el corte de caja', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				$user_collector = Auth::user();
+				$vault_collector = $user_collector->vault;
+				$vault_collector->ammount = $vault_collector->ammount + $rest;
+				$vault_collector->save();
 			}
 		}
 

@@ -78,22 +78,35 @@ class GeneralController extends Controller
 
 			return redirect()->back();
 		}
+		$user_collector = Auth::user();
+		$vault_collector = $user_collector->vault;
+		if ($vault_collector->ammount < $request->input('ammount')) {
+			Toastr::error('No cuentas con el dinero suficiente para otorgar $'.number_format($request->input('ammount')).' de saldo inicial.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		$user = User::find($request->input('user_id'));
-		$vault = $user->vault;
+			return redirect()->back();
+		}
+		else
+		{
+			$user = User::find($request->input('user_id'));
+			$vault = $user->vault;
 
-		$data_income['ammount'] = $request->input('ammount');
-		$data_income['concept'] = 'Saldo Inicial';
-		$data_income['date']    = $current;
-		$data_income['vault_id'] = $vault->id;
-		$income = Income::create($data_income);
+			$data_income['ammount'] = $request->input('ammount');
+			$data_income['concept'] = 'Saldo Inicial';
+			$data_income['date']    = $current;
+			$data_income['vault_id'] = $vault->id;
+			$income = Income::create($data_income);
 
-		$vault->ammount = $vault->ammount + $income->ammount;
-		$vault->save();
+			$vault->ammount = $vault->ammount + $income->ammount;
+			$vault->save();
 
-		Toastr::success('Saldo inicial agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect()->back();
+			$vault_collector->ammount = $vault_collector->ammount - $vault->ammount;
+			$vault_collector->save();
+
+			Toastr::success('Saldo inicial agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
 	}
 
 	public function addCash(Request $request)

@@ -493,3 +493,11 @@ Route::post('cut', 'BoxCutController@cut');
 
 
 
+
+
+Route::resource('regions', 'RegionController');
+
+Route::get('regions/{id}/delete', [
+    'as' => 'regions.delete',
+    'uses' => 'RegionController@destroy',
+]);

@@ -21,6 +21,8 @@ class CreateBranchesTable extends Migration
 			$table->string('address');
 			$table->string('latitude');
 			$table->string('length');
+			$table->integer('region_id')->unsigned();
+			$table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

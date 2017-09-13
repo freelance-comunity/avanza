@@ -16,7 +16,8 @@ class Branch extends Model
 	"phone",
 	"address",
 	"latitude",
-	"length"
+	"length",
+	"region_id"
 	];
 
 	public static $rules = [
@@ -26,6 +27,11 @@ class Branch extends Model
 	"latitude" => "required",
 	"length" => "required"
 	];
+
+	public function region()
+	{
+		return $this->belongsTo('App\Models\Region');
+	}
 
 	public function clients()
 	{

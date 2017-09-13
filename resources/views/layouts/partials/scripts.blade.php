@@ -18,6 +18,10 @@
 <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
 <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
 <script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.colVis.min.js"></script>
+<script src="{{ asset('/js/municipalitys.js')}}"></script>  
+
+<script src="{{ asset('/js/moment.js')}}"></script>
+
 
 <!--rangeslider-->
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

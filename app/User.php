@@ -92,4 +92,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Vault');
     }
+     public function boxcut()
+    {
+        return $this->hasOne('App\Models\BoxCut');
+    }
 }

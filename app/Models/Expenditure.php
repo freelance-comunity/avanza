@@ -31,5 +31,5 @@ class Expenditure extends Model
 	{
 		return $this->belongsTo('App\Models\Vault');
 	}
-
+	
 }

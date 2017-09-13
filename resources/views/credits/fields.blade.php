@@ -4,62 +4,61 @@
   </div>  
 
   <div class="box-body">
- 
 
    <input type="hidden" name="adviser" value="{{ Auth::user()->name }} {{ Auth::user()->father_last_name }} {{ Auth::user()->mother_last_name }}">
    <div class="form-group col-sm-6 col-lg-12">
      <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('date', 'Fecha:') !!}
-      <input type="date" name="date" class="form-control input-lg" required="required" data-parsley-trigger="input focusin">
+      <input type="date" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin">
     </div>
     <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('ammount', 'Monto Crédito:') !!}
-        <!--{!! Form::text('ammount',  null, [
+      <input type="number" name="ammount" placeholder="ESCRIBA EL MONTO" id="ammount" class="form-control formulario input-lg" data-parsley-trigger="input focusin" required="required">
+    </div>
+    @if ($product->name == 'CREDIDIARIO25')
+    <div class="form-group col-sm-6 col-lg-4">
+      {!! Form::label('dues', 'No. Cuotas:') !!}
+      {!! Form::select('dues', ['25'=>'25'],null, [
+        'style' => 'text-transform:uppercase',
+        'class' => 'form-control input-lg formulario', 
+        'required'=>'required',
+        'id' => 'dues',
+        'data-parsley-trigger ' => 'input focusin',
+        'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+      </div>
+      @elseif ($product->name == 'CREDIDIARIO4')
+      <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('dues', 'No. Cuotas:') !!}
+        {!! Form::select('dues', ['4'=>'4'],null, [
           'style' => 'text-transform:uppercase',
-          'class' => 'form-control input-lg', 
-          'placeholder' => 'ESCRIBA EL MONTO ', 'required' => 'required',
+          'class' => 'form-control input-lg formulario', 
+          'required'=>'required',
+          'id' => 'dues',
           'data-parsley-trigger ' => 'input focusin',
-          'data-parsley-type' => 'digits',
-          'data-parsley-maxlength' => '5',
-          'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}-->
-          <input type="number" name="ammount" placeholder="ESCRIBA EL MONTO" class="form-control input-lg" data-parsley-trigger="input focusin" required="required">
+          'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
-        @if ($product->name == 'DIARIO')
+        @else
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('dues', 'No. Cuotas:') !!}
-          {!! Form::select('dues', ['25'=>'25','30'=>'30', '52'=>'52','60'=>'60'],null, [
+          {!! Form::select('dues', ['1'=>'1'],null, [
             'style' => 'text-transform:uppercase',
             'class' => 'form-control input-lg', 
             'required'=>'required',
             'data-parsley-trigger ' => 'input focusin',
             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-          </div>
-          @else
-          <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('dues', 'No. Cuotas:') !!}
-            {!! Form::select('dues', ['1'=>'1'],null, [
-              'style' => 'text-transform:uppercase',
-              'class' => 'form-control input-lg', 
-              'required'=>'required',
-              'data-parsley-trigger ' => 'input focusin',
-              'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            @endif
-          </div>
-          <input type="hidden" name="branch" value="{{ $client->branch->name}}">
-
-
-
-          <input type="hidden" name="interest_rate" value="{{$product->interest_of_cup}}">
-
-          <input type="hidden" name="periodicity" value="{{$product->name}}">
-          <input type="hidden" name="firts_name" value="{{$client->firts_name}}">
-          <input type="hidden" name="last_name" value="{{$client->last_name}}">
-          <input type="hidden" name="mothers_last_name" value="{{$client->mothers_last_name}}">
-          <input type="hidden" name="curp" value="{{$client->curp}}">
-          <input type="hidden" name="ine" value="{{$client->ine}}">
-          <input type="hidden" name="client_id" value="{{ $client->id}}">
-           <div class="form-group col-sm-6 col-lg-12">
+          </div>p
+          @endif
+        </div>
+        <input type="hidden" name="branch" value="{{ $client->branch->name}}">
+        <input type="hidden" name="interest_rate" value="{{$product->interest_of_cup}}">
+        <input type="hidden" name="periodicity" value="{{$product->name}}">
+        <input type="hidden" name="firts_name" value="{{$client->firts_name}}">
+        <input type="hidden" name="last_name" value="{{$client->last_name}}">
+        <input type="hidden" name="mothers_last_name" value="{{$client->mothers_last_name}}">
+        <input type="hidden" name="curp" value="{{$client->curp}}">
+        <input type="hidden" name="ine" value="{{$client->ine}}">
+        <input type="hidden" name="client_id" value="{{ $client->id}}">
+        <div class="form-group col-sm-6 col-lg-12">
           <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('collection_period', 'Horario Sugerido de Cobro:') !!}
             {!! Form::select('collection_period',['MAÑANA'=>'MAÑANA','MEDIO DÍA'=>'MEDIO DIA','TARDE'=>'TARDE'],null, [
@@ -79,8 +78,12 @@
                 'readonly'
                 ]) !!}
               </div>
+              <div class="form-group col-sm-6 col-lg-4">
+                <label>  &nbsp; </label>
+                <input type="button" class="input-lg btn-block btn bg-navy" value="Generar Tabla de Amortizacion" onclick="capturar()">
               </div>
-                <div class="form-group col-sm-12 col-lg-12">
+            </div>
+            <div class="form-group col-sm-12 col-lg-12">
               <div class="form-group col-sm-12 col-lg-12">
                 <div id="signature-pad" class="m-signature-pad">
                   <div class="m-signature-pad--body">
@@ -93,18 +96,106 @@
                 </div>
 
               </div>
-              </div>
-              <input type="hidden" name="type_product" value="{{$product->id}}">
-              <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-
-              <div class="box-body" >
-               <div class="col-md-4">
-                <div class="btn-group">
-                  {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
-                </div>
-              </div> 
             </div>
-          </div>                            
+            <input type="hidden" name="type_product" value="{{$product->id}}">
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
+            <div class="box-body" >
+             <div class="col-md-4">
+              <div class="btn-group">
+               {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+             </div>
+           </div> 
+         </div>
+         <div class="form-group col-sm-12 col-lg-4 ">
+           <div class="row">
+
+           </div>
+         </div>
+       </div>
+
+       <!-- Modal -->
+       <div class="modal fade" id="tabladepagos" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Crediefectivo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="table-responsive">
+
+                <table id="resultado" class="thead-inverse table " >
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Fecha</th>
+                      <th>Monto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+            
+          </div>
         </div>
-        @include('credits.signature')
+      </div>
+
+
+      <script>
+        function capturar()
+        { 
+
+          var table=$("#resultado");
+          var date =document.getElementById("date").value;
+          var ammount= document.getElementById("ammount").value;
+          var dues =document.getElementById("dues").value;
+          table.find('tbody').html('');
+         
+
+          if(date == "" || ammount == "")
+          {
+            alert('Ingresa la fecha y el monto');
+          }
+          else{
+            var interes  = ({{$product->interest_of_cup}} / 100);
+
+            var tasa = interes * ammount;
+            var total = parseFloat(tasa) + parseFloat(ammount);
+            var newamount = total / dues;
+
+            for (var i = 1; i <= dues; i++) {
+               if(dues == 4 || dues == 1){
+              date = moment(date).add(6,'d');
+             }
+             date= moment(date).add(1,'d');
+             
+
+             if(moment(date).format("dddd") == "Sunday"){
+              date= moment(date).add(1,'d');
+            }
+            var trhtml= '<tr>';
+            trhtml += '<td>' + i +'</td>';
+            trhtml += '<td>' + moment(date).format('DD-MM-YYYY')+'</td>';
+            trhtml += '<td>' + newamount + '</td>';
+            trhtml += '</tr>';
+            table.find('tbody').append(trhtml);
+
+          }
+          $('#tabladepagos').modal('show');
+        }
+
+      }
+  
+
+    </script>
+
+
+    @include('credits.signature')
 

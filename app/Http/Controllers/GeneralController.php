@@ -71,7 +71,7 @@ class GeneralController extends Controller
 
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric'
-			]);
+		]);
 
 		if ($validator->fails()) {
 			Toastr::error('Favor de introducir cantidad valida.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
@@ -102,7 +102,7 @@ class GeneralController extends Controller
 
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric'
-			]);
+		]);
 
 		if ($validator->fails()) {
 			Toastr::error('Favor de introducir cantidad valida.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
@@ -128,42 +128,50 @@ class GeneralController extends Controller
 	}
 
 	public function recordExpense(Request $request)
-	{
-		$validator = Validator::make($request->all(), [
-			'ammount' => 'required|numeric',
-			'voucher' => 'required'
+	{	
+		$user = Auth::user();
+		$vault = $user->vault;	
+		if ($vault->ammount == 0) {
+			Toastr::error('No puedes registrar un gasto, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		}
+		else{
+			$validator = Validator::make($request->all(), [
+				'ammount' => 'required|numeric',
+				'voucher' => 'required'
 			]);
 
-		if ($validator->fails()) {
-			Toastr::error('Favor de introducir cantidad valida ó la imagen correctamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			if ($validator->fails()) {
+				Toastr::error('Favor de introducir cantidad valida ó la imagen correctamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+				return redirect()->back();
+			}
+
+			if ($request->hasFile('voucher')) {
+				$voucher = $request->file('voucher');
+				$filename = time() . '.' . $voucher->getClientOriginalExtension();
+				Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
+			}
+
+			$current = Carbon::today();
+			$ammount = $request->input('ammount');
+			$concept = $request->input('concept');
+			$user = Auth::user();
+			$vault = $user->vault;	
+			$data_expenditure['ammount'] = $ammount;
+			$data_expenditure['concept'] = 'Gasto';
+			$data_expenditure['voucher'] = $filename;
+			$data_expenditure['date']    = $current;
+			$data_expenditure['vault_id'] = $vault->id;
+
+			$expenditure = Expenditure::create($data_expenditure);
+
+			$vault->ammount = $vault->ammount - $expenditure->ammount;
+			$vault->save();
+
+			Toastr::success('Gasto agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 			return redirect()->back();
 		}
-
-		if ($request->hasFile('voucher')) {
-			$voucher = $request->file('voucher');
-			$filename = time() . '.' . $voucher->getClientOriginalExtension();
-			Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
-		}
-
-		$current = Carbon::today();
-		$ammount = $request->input('ammount');
-		$concept = $request->input('concept');
-		$user = Auth::user();
-		$vault = $user->vault;	
-		$data_expenditure['ammount'] = $ammount;
-		$data_expenditure['concept'] = 'Gasto';
-		$data_expenditure['voucher'] = $filename;
-		$data_expenditure['date']    = $current;
-		$data_expenditure['vault_id'] = $vault->id;
-
-		$expenditure = Expenditure::create($data_expenditure);
-
-		$vault->ammount = $vault->ammount - $expenditure->ammount;
-		$vault->save();
-
-		Toastr::success('Gasto agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-
-		return redirect()->back();
 	}
 }

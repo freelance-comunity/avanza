@@ -51,20 +51,23 @@ Inicio de Sesión
             <a style="color: rgb(194, 71, 54);" href="{{ url('/password/reset') }}">¿Olvidaste tu contraseña?</a><br>
 
         </div><!-- /.login-box-body -->
+        <center>
+            <a href="https://ssl.comodo.com">
+                <img src="https://ssl.comodo.com/images/trusted-site-seal.png" alt="Comodo Trusted Site Seal" width="113" height="59" style="border: 0px;"></a><br> <span style="font-weight:bold; font-size:7pt"><a href="https://ssl.comodo.com">SSL Certificate</a></span><br>
+            </center>
+        </div><!-- /.login-box -->
 
-    </div><!-- /.login-box -->
+        @include('layouts.partials.scripts_auth')
 
-    @include('layouts.partials.scripts_auth')
-
-    <script>
-        $(function () {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
+        <script>
+            $(function () {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
                 increaseArea: '20%' // optional
             });
-        });
-    </script>
-</body>
+            });
+        </script>
+    </body>
 
-@endsection
+    @endsection

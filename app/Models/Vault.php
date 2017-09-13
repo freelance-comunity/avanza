@@ -35,5 +35,9 @@ class Vault extends Model
 	{
 		return $this->hasMany('App\Models\Expenditure');
 	}
+	public function boxcut()
+	{
+		return $this->belongsTo('App\Models\BoxCut');
+	}
 
 }

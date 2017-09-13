@@ -393,6 +393,7 @@ Route::get('graphics',function(){
 
 Route::get('unlocked/{id}' , 'PaymentController@unlocked');
 Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
+Route::get('cancel/{id}' , 'PaymentController@cancel');
 
 Route::get('pagado',function(){
 
@@ -465,3 +466,39 @@ Route::post('updatephoto', 'Photocontroller@update');
 Route::post('ine', 'Photocontroller@ine');
 Route::post('curps', 'Photocontroller@curps');
 Route::post('updatephotos', 'Photocontroller@cfe');
+
+Route::get('ajax', function(){
+    $date = \Carbon\Carbon::now();
+    $dues = 25;
+    $amount = 39;
+    for ($i=0; $i <= $dues ; $i++) { 
+        echo $dues; echo "&nbsp;";echo "&nbsp;";echo "&nbsp;";
+        echo $date->addDay(); echo "&nbsp;";echo "&nbsp;";echo "&nbsp;";
+        echo $amount; echo "&nbsp;";echo "&nbsp;";echo "&nbsp;";
+        echo "<br>";
+
+    }
+});
+
+Route::resource('boxCuts', 'BoxCutController');
+
+Route::get('boxCuts/{id}/delete', [
+    'as' => 'boxCuts.delete',
+    'uses' => 'BoxCutController@destroy',
+]);
+
+Route::get('boxcut', 'BoxCutController@getPromoter');
+Route::get('showbox/{id}', 'BoxCutController@showbox');
+Route::post('cut', 'BoxCutController@cut');
+
+Route::get('caja', function(){
+ $centavo = 1 * 0.50;
+$diez = 10;
+ $resta = $centavo - $diez;
+ echo $resta;
+});
+
+
+
+
+

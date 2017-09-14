@@ -9,7 +9,7 @@
     <div class="row">
         <h1 class="pull-left">Bovéda</h1>
     </div>
-    @role('administrador')
+    @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
     <div class="row">
         @if($employees->isEmpty())
         <div class="well text-center">No hay personal registrado.</div>
@@ -40,7 +40,7 @@
         </div>
         @endif
     </div>
-    @endrole
+   @endif
     @role('ejecutivo-de-credito')
     <div class="row">
         @if(is_null($user))

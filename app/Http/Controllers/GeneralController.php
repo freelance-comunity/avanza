@@ -21,8 +21,9 @@ class GeneralController extends Controller
 {
 	public function getPromoter()
 	{	
-		if (Auth::user()->hasRole('administrador')) {
-			$role = Role::find(4);
+		if (Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal'])) {
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 			$users = $role->users;
 
 			return view('executives.index')
@@ -71,29 +72,42 @@ class GeneralController extends Controller
 
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric'
-			]);
+		]);
 
 		if ($validator->fails()) {
 			Toastr::error('Favor de introducir cantidad valida.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 			return redirect()->back();
 		}
+		$user_collector = Auth::user();
+		$vault_collector = $user_collector->vault;
+		if ($vault_collector->ammount < $request->input('ammount')) {
+			Toastr::error('No cuentas con el dinero suficiente para otorgar $'.number_format($request->input('ammount')).' de saldo inicial.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		$user = User::find($request->input('user_id'));
-		$vault = $user->vault;
+			return redirect()->back();
+		}
+		else
+		{
+			$user = User::find($request->input('user_id'));
+			$vault = $user->vault;
 
-		$data_income['ammount'] = $request->input('ammount');
-		$data_income['concept'] = 'Saldo Inicial';
-		$data_income['date']    = $current;
-		$data_income['vault_id'] = $vault->id;
-		$income = Income::create($data_income);
+			$data_income['ammount'] = $request->input('ammount');
+			$data_income['concept'] = 'Saldo Inicial';
+			$data_income['date']    = $current;
+			$data_income['vault_id'] = $vault->id;
+			$income = Income::create($data_income);
 
-		$vault->ammount = $vault->ammount + $income->ammount;
-		$vault->save();
+			$vault->ammount = $vault->ammount + $income->ammount;
+			$vault->save();
 
-		Toastr::success('Saldo inicial agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect()->back();
+			$vault_collector->ammount = $vault_collector->ammount - $vault->ammount;
+			$vault_collector->save();
+
+			Toastr::success('Saldo inicial agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
 	}
 
 	public function addCash(Request $request)
@@ -102,7 +116,7 @@ class GeneralController extends Controller
 
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric'
-			]);
+		]);
 
 		if ($validator->fails()) {
 			Toastr::error('Favor de introducir cantidad valida.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
@@ -128,42 +142,50 @@ class GeneralController extends Controller
 	}
 
 	public function recordExpense(Request $request)
-	{
-		$validator = Validator::make($request->all(), [
-			'ammount' => 'required|numeric',
-			'voucher' => 'required'
+	{	
+		$user = Auth::user();
+		$vault = $user->vault;	
+		if ($vault->ammount == 0) {
+			Toastr::error('No puedes registrar un gasto, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		}
+		else{
+			$validator = Validator::make($request->all(), [
+				'ammount' => 'required|numeric',
+				'voucher' => 'required'
 			]);
 
-		if ($validator->fails()) {
-			Toastr::error('Favor de introducir cantidad valida ó la imagen correctamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			if ($validator->fails()) {
+				Toastr::error('Favor de introducir cantidad valida ó la imagen correctamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+				return redirect()->back();
+			}
+
+			if ($request->hasFile('voucher')) {
+				$voucher = $request->file('voucher');
+				$filename = time() . '.' . $voucher->getClientOriginalExtension();
+				Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
+			}
+
+			$current = Carbon::today();
+			$ammount = $request->input('ammount');
+			$concept = $request->input('concept');
+			$user = Auth::user();
+			$vault = $user->vault;	
+			$data_expenditure['ammount'] = $ammount;
+			$data_expenditure['concept'] = 'Gasto';
+			$data_expenditure['voucher'] = $filename;
+			$data_expenditure['date']    = $current;
+			$data_expenditure['vault_id'] = $vault->id;
+
+			$expenditure = Expenditure::create($data_expenditure);
+
+			$vault->ammount = $vault->ammount - $expenditure->ammount;
+			$vault->save();
+
+			Toastr::success('Gasto agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 			return redirect()->back();
 		}
-
-		if ($request->hasFile('voucher')) {
-			$voucher = $request->file('voucher');
-			$filename = time() . '.' . $voucher->getClientOriginalExtension();
-			Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
-		}
-
-		$current = Carbon::today();
-		$ammount = $request->input('ammount');
-		$concept = $request->input('concept');
-		$user = Auth::user();
-		$vault = $user->vault;	
-		$data_expenditure['ammount'] = $ammount;
-		$data_expenditure['concept'] = 'Gasto';
-		$data_expenditure['voucher'] = $filename;
-		$data_expenditure['date']    = $current;
-		$data_expenditure['vault_id'] = $vault->id;
-
-		$expenditure = Expenditure::create($data_expenditure);
-
-		$vault->ammount = $vault->ammount - $expenditure->ammount;
-		$vault->save();
-
-		Toastr::success('Gasto agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-
-		return redirect()->back();
 	}
 }

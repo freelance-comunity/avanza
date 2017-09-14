@@ -141,6 +141,22 @@
           } );
         });
       </script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('#regions').DataTable({
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            columnDefs: [{
+              targets: [0],
+              visible: false,
+              searchable: false
+            },
+            ],
+            order: [[0, "asc"]],
+          });
+        });
+      </script>
       <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
       <script>

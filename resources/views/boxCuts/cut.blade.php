@@ -10,8 +10,8 @@
       <div class="modal-body">
         {!! Form::open(['url' => 'cut','' => '']) !!}  
         <p>
-          <div class="form-group col-sm-6 col-lg-6">
-            {!! Form::label('amount', 'Ingresar cantidad:') !!}
+          <div class="form-group col-sm-6 col-lg-12">
+            {!! Form::label('amount', 'INGRESA LA CANTIDAD:') !!}
             <input type="number" name="amount" class="form-control input-lg" required  placeholder="ESCRIBE MONTO"><br>
           </div>
           

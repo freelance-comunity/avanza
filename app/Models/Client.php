@@ -27,6 +27,7 @@ class Client extends Model
 	"avatar",
 	"maximun_amount",
 	"branch_id",
+	"region_id",
 	"user_id"
 	];
 
@@ -43,6 +44,12 @@ class Client extends Model
 	"maximun_amount"=>"required"
 	
 	];
+
+	public function region()
+    {
+        return $this->belongsTo('App\Models\Region');
+    }
+    
 	public function branch()
 	{
 		return $this->belongsTo('App\Models\Branch');

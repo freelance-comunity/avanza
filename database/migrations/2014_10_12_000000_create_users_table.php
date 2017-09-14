@@ -30,7 +30,10 @@ class CreateUsersTable extends Migration
             $table->string('avatar');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('branch_id')->unsigned()->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->integer('branch_id')->unsigned();
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->integer('region_id')->unsigned();
+            $table->foreign('region_id')->references('id')->on('branches')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

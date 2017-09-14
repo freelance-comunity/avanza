@@ -10,6 +10,7 @@ use Flash;
 use Schema;
 use Toastr;
 use Auth;
+use App\Models\Region;
 
 class BranchController extends AppBaseController
 {
@@ -54,7 +55,10 @@ class BranchController extends AppBaseController
 			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('branches.index'));
 		}
-		return view('branches.create');
+		$collection = Region::all();
+		$regions = $collection->pluck('name', 'id');
+		return view('branches.create')
+		->with('regions', $regions);
 	}
 
 	/**

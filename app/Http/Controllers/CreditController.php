@@ -82,7 +82,7 @@ class CreditController extends AppBaseController
 		$user = Auth::user();
 		$vault = $user->vault;	
 		if ($vault->ammount == 0) {
-			Toastr::error('Aún no puedes comenzar tu día, ya que no dispones de efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			Toastr::error('No puedes registrar un crédito, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('credits.index'));
 		}
 		else

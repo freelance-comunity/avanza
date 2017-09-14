@@ -48,14 +48,27 @@ class ClientController extends AppBaseController
 	public function index(Request $request)
 	{	
 		
-		if (Auth::user()->hasRole('administrador')) {
+		if (Auth::user()->hasRole('director-general')) {
 			$clients = Client::all();
-		}else{
-			$clients = Auth::user()->clients;
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+
+			$clients = $region_allocation->clients;		
+		}
+		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
+			$user_allocation = Auth::user();
+			$branch_allocation = $user_allocation->branch;
+
+			$clients = $branch_allocation->clients;
+		}
+		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
+			$user_allocation = Auth::user();
+			$clients = $user_allocation->clients;
 		}
 		$products =	Product::all();
 		return view('clients.index')
-
 		->with('clients', $clients)
 		->with('products',$products);
 	}
@@ -93,6 +106,9 @@ class ClientController extends AppBaseController
 	{
 		
 		$input = $request->all();
+		$branch = Branch::find($request->input('branch_id'));
+		$region = $branch->region;
+		$input['region_id'] = $region->id;
 		/* Save avatar client */
 		if($request->hasFile('avatar')){
 			$avatar = $request->file('avatar');

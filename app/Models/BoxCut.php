@@ -18,8 +18,7 @@ class BoxCut extends Model
 	];
 
 	public static $rules = [
-	  "amount" => "required",
-	  
+	  "amount" => "required",  
 	];
 	public function user()
 	{

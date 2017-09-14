@@ -3,7 +3,7 @@
 @section('main-content')
 
 <div class="container">
-@role('administrador')
+{{-- @role('administrador')
 @php
 if (Auth::user()->branch->name == 'MATRIZ' ) {
   $employees = App\User::all();
@@ -11,7 +11,7 @@ if (Auth::user()->branch->name == 'MATRIZ' ) {
 $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
 }
 @endphp
-@endrole
+@endrole --}}
     @include('flash::message')
 
     <div class="row">
@@ -61,8 +61,8 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                         </td>
                         <td>
                             <div class="btn-group" data-toggle="buttons">
-                            <button type="button" class="btn bg-gray btn-block btn-md" data-toggle="modal" data-target="#roles{{$employee->id}}">Ver</button>
-                                <button type="button" class="btn bg-gray btn-block btn-md" data-toggle="modal" data-target="#rolesadd{{$employee->id}}">Agregar</button>
+                            <button type="button" class="btn btn-lg bg-navy btn-block btn-md" data-toggle="modal" data-target="#roles{{$employee->id}}">Ver</button>
+                                <button type="button" class="btn btn-lg bg-teal btn-block btn-md" data-toggle="modal" data-target="#rolesadd{{$employee->id}}">Agregar</button>
                             </div>
                         </td>
                     </tr>

@@ -189,18 +189,8 @@ class BoxCutController extends AppBaseController
 	public function cut(Request $request)
 	{	
 		$validator = Validator::make($request->all(), [
-			'bills_1000' => 'required|numeric',
-			'bills_500' => 'required|numeric',
-			'bills_200' => 'required|numeric',
-			'bills_100' => 'required|numeric',
-			'bills_50' => 'required|numeric',
-			'bills_20' => 'required|numeric',
-			'coin_10' => 'required|numeric',
-			'coin_5' => 'required|numeric',
-			'coin_2' => 'required|numeric',
-			'coin_1' => 'required|numeric',
-			'cents_50' => 'required|numeric',
-			]);
+			'amount' => 'required|numeric',	
+		]);
 
 		if ($validator->fails()) {
 			Toastr::error('Favor de introducir cantidad valida.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
@@ -212,7 +202,6 @@ class BoxCutController extends AppBaseController
 		$vault = $user->vault;
 
 		$data_boxcut['amount'] = $request->input('amount');
-		
 		$data_boxcut['vault_id'] = $vault->id;
 		$data_boxcut['user_id'] = $user->id;
 		$boxCut = BoxCut::create($data_boxcut);
@@ -229,11 +218,7 @@ class BoxCutController extends AppBaseController
 		// $peso = $boxCut->coin_1 * 1;
 		// $centavo = $boxCut->cents_50 * 0.50;
 
-		$rest = $amount; 
-
-		
-		
-
+		$rest = $boxCut->amount; 
 		if ($rest > $vault->ammount) {
 			Toastr::error('Estas introduciendo una cantidad mayor a tu saldo a liquidar.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 		}
@@ -242,11 +227,19 @@ class BoxCutController extends AppBaseController
 			$vault->save();
 			if($vault->ammount == 0) {
 				Toastr::success('Corte de caja realizado exitosamente.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+				$user_collector = Auth::user();
+				$vault_collector = $user_collector->vault;
+				$vault_collector->ammount = $vault_collector->ammount + $rest;
+				$vault_collector->save();
 			}else{
 				Toastr::info('Te falta $'.number_format($vault->ammount,2).' pesos para realizar el corte de caja', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				$user_collector = Auth::user();
+				$vault_collector = $user_collector->vault;
+				$vault_collector->ammount = $vault_collector->ammount + $rest;
+				$vault_collector->save();
 			}
 		}
-
 		return redirect()->back();
 	}
 }

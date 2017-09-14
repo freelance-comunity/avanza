@@ -58,7 +58,7 @@
               'required'=>'required',
               'data-parsley-trigger ' => 'input focusin',
               'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>p
+            </div>
             @endif
           </div>
           <input type="hidden" name="branch" value="{{ $client->branch->name}}">
@@ -195,7 +195,7 @@
               var trhtml= '<tr>';
               trhtml += '<td>' + i +'</td>';
               trhtml += '<td>' + moment(date).format('DD-MM-YYYY')+'</td>';
-              trhtml += '<td>' + newamount + '</td>';
+              trhtml += '<td>' + '$' + newamount + '</td>';
               trhtml += '</tr>';
               table.find('tbody').append(trhtml);
 

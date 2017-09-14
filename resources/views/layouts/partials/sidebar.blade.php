@@ -28,7 +28,7 @@
       @endrole
       @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
       <li><a href="{{ url('vault') }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
-      <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Core de Caja</span></a></li>
+      <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Corte de Caja</span></a></li>
       <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li>
       @endif
       <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
@@ -93,39 +93,52 @@
           {!! Form::label('modalidad', 'Modalidad:') !!}        
           <select id="status" onChange="mostrar(this.value);" class="form-control input-lg">
             <option value="" class="selected">PRODUCTO</option>
-            <option value="Diario">Diario</option>
-            <option value="Semanal">Semanal</option>
+            <option value="Diario">CrediDiario 25</option>
+            <option value="Semanal">CrediSemana</option>
+            <option value="CrediDiario4">CrediDiario 4</option>
           </select>
           <script>
             function mostrar(id) {
               if (id == "Diario") {
                 $("#diario").show();
                 $("#semanal").hide();
+                $("#credidiario4").hide();
               }
               if (id == "Semanal") {
                 $("#diario").hide();
                 $("#semanal").show();
+                $("#credidiario4").hide();
+              }
+              if (id == "CrediDiario4") {
+                $("#diario").hide();
+                $("#semanal").hide();
+                $("#credidiario4").show();
               }
             }
           </script>
           <br>
           <div id="diario" style="display: none;">
-           {!! Form::label('modalidad', 'Plazo:') !!}      
+           <!--{!! Form::label('modalidad', 'Plazo:') !!}      
            <div class="range-slider color-3">
             <input type="text" id="modalidadr" name="modalidadr" onChange="calcularr()" />
+          </div>-->
+          <h4>Plazo: <strong><span id="demomodalidad"></span></strong></h4>
+          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+            <input type="range" min="1" max="25" value="2" class="slider" name="modalidadr" onChange="calcularr()" id="modalidadr">
           </div><br>
           <input type="hidden" id="tasar" name="tasar" value="0.25">
-          {!! Form::label('capitalr', 'Monto solicitado:') !!}
+          {{-- {!! Form::label('capitalr', 'Monto solicitado:') !!}
           <div class="range-slider color-3">
             <input type="text" id="capitalr" name="capitalr" onChange="calcularr()" />
+          </div> --}}
+          <h4>Monto Solicitado: <strong>$<span id="demor"></span></strong></h4>
+          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+            <input type="range" min="500" max="5000" value="2000" class="slider" name="capitalr" onChange="calcularr()" id="capitalr">
           </div>
           <br>
-          <!-- {!! Form::text('capitalr', null, ['class' => 'form-control input-lg', 'id' => 'capitalr', 'value' => '0', 'onkeyup' => 'calcularr()']) !!}-->
           <input type="hidden" id="interesr" name="interesr" value="Norway">
-
           {!! Form::label('totalr', 'Cuota:') !!}  
           {!! Form::text('totalr', 'null', ['class' => 'form-control input-lg', 'id' => 'totalnr', 'readonly' => 'readonly']) !!} 
-
           {!! Form::label('totalpayment', 'Total a Pagar:') !!}  
           {!! Form::text('totalpayment', null, ['class' => 'form-control input-lg', 'id' => 'totalpayment', 'readonly' => 'readonly']) !!}               
         </div>
@@ -134,19 +147,37 @@
         <div id="semanal" style="display: none;"  ">
           <input type="hidden" name="modalidad" id="modalidad" value="1">
           <input type="hidden" id="tasa" name="tasa" value="0.15">
-          {!! Form::label('capital', 'Monto solicitado:') !!}
-          <div class="range-slider color-3 form-group col-sm-6 col-lg-12 ">
-            <input type="text" id="capital" name="capital" onChange="calcular()" />
+          <h4>Monto Solicitado: <strong>$<span id="demo"></span></strong></h4>
+          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+            <input type="range" min="200" max="1000" value="550" class="slider" name="capital" onChange="calcular()" id="myRange">
           </div>
           <br>
-          <!--{!! Form::text('capital', null, ['class' => 'form-control input-lg', 'id' => 'capital', 'value' => '0', 'onkeyup' => 'calcular()']) !!}-->
-
           {!! Form::label('refrendo', 'Refrendo:') !!}  
           {!! Form::text('refrendo', null, ['class' => 'form-control input-lg', 'id' => 'refrendo', 'readonly' => 'readonly']) !!}
-
           <input type="hidden" id="interes" name="interes">
           {!! Form::label('total', 'Total a pagar:') !!}  
           {!! Form::text('total', null, ['class' => 'form-control input-lg', 'id' => 'totaln', 'readonly' => 'readonly']) !!}
+        </div>
+
+
+
+        <div id="credidiario4" style="display: none;"  ">
+          <h4>Semanas: <strong><span id="democredi4"></span></strong></h4>
+          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+            <input type="range" min="1" max="4" value="2" class="slider" name="modalidadfour" onChange="calcularcredi4()" id="modalidadfour">
+          </div>
+          <input type="hidden" id="tasafour" name="tasafour" value="0.28">
+          <br>   
+          <h4>Monto Solicitado: <strong>$<span id="democredi44"></span></strong></h4>
+          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+            <input type="range" min="500" max="3000" value="" class="slider" name="capitalfour" onChange="calcularcredi4()" id="capitalfour">
+          </div>
+          <br>
+          {!! Form::label('refrendofour', 'Refrendo:') !!}  
+          {!! Form::text('refrendofour', null, ['class' => 'form-control input-lg', 'id' => 'refrendofour', 'readonly' => 'readonly']) !!}
+          <input type="hidden" id="interesfour" name="interesfour">
+          {!! Form::label('totalfour', 'Total a pagar:') !!}  
+          {!! Form::text('totalfour', null, ['class' => 'form-control input-lg', 'id' => 'totalnfour', 'readonly' => 'readonly']) !!}
         </div>
       </div>
 
@@ -179,34 +210,11 @@
   border-radius: 4px;
 }
 </style>
-<script>
-  $("#modalidadr").ionRangeSlider({
-   grid: true,
-   from: 0,
-   values: [0,10,20,30,40,60],
- });
-</script>
-<script>
-  $("#capitalr").ionRangeSlider({
-   grid: true,
-   from: 0,
-   values: [0,1000,  2000,  3000,  4000,5000],
-   prefix: "$"
- });
-</script>
-<script>
-  $("#capital").ionRangeSlider({
-    grid: true,
-    
-    from: 0,
-    values: [0,1000, 1500, 2000, 2500, 3000],
-    prefix: "$"
-  });
-</script>
+
 <script>
   function calcular()
   {
-    capital = eval(document.getElementById('capital').value);
+    capital = eval(document.getElementById('myRange').value);
     tasa = eval(document.getElementById('tasa').value);
     interes = capital * tasa;
 
@@ -230,6 +238,33 @@
 
     document.getElementById('totaln').value=formatterr.format(total);
     document.getElementById('refrendo').value=formatter.format(interes);         
+  }
+  function calcularcredi4()
+  {
+    capitalfour = eval(document.getElementById('capitalfour').value);
+    tasafour = eval(document.getElementById('tasafour').value);
+    interesfour = capitalfour * tasafour;
+
+    document.getElementById('interesfour').value=interesfour;
+    modalidadfour = eval(document.getElementById('modalidadfour').value);
+
+    utilidad_netafour = capitalfour + interesfour;
+    totalfour= utilidad_netafour/modalidadfour;
+    var formatterfour = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    });
+
+    var formatterrfourfour = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    });
+
+
+    document.getElementById('totalnfour').value=formatterrfourfour.format(totalfour);
+    document.getElementById('refrendofour').value=formatterfour.format(interesfour);         
   }
   function calcularr()
   {
@@ -263,3 +298,84 @@
   }
 </script>
 
+
+<script>
+  var slider = document.getElementById("myRange");
+  var output = document.getElementById("demo");
+  output.innerHTML = slider.value;
+
+  slider.oninput = function() {
+    output.innerHTML = this.value;
+  }
+</script>
+
+<script>
+  var slider = document.getElementById("modalidadfour");
+  var output = document.getElementById("democredi4");
+  output.innerHTML = slider.value;
+
+  slider.oninput = function() {
+    output.innerHTML = this.value;
+  }
+</script>
+<script>
+function myFunctioncredi44() {
+    var x = document.getElementById("capitalfour").value;
+    document.getElementById("democredi44").innerHTML = x;
+}
+</script>
+
+
+<script>
+  var slider = document.getElementById("modalidadr");
+  var output = document.getElementById("demomodalidad");
+  output.innerHTML = slider.value;
+
+  slider.oninput = function() {
+    output.innerHTML = this.value;
+  }
+</script>
+<script>
+function mycapitalr() {
+    var x = document.getElementById("capitalr").value;
+    document.getElementById("demor").innerHTML = x;
+}
+</script>
+
+
+<style>
+#slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #ff3300;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #ff3300;
+  cursor: pointer;
+}
+</style>

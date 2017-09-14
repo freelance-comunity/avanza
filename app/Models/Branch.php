@@ -40,7 +40,7 @@ class Branch extends Model
 
 	public function users()
 	{
-		return $this->hasOne('App\User');
+		return $this->hasMany('App\User');
 	}
 
 }

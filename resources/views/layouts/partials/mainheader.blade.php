@@ -127,16 +127,15 @@
                             <img src="{{asset('/uploads/avatars')}}/{{ Auth::user()->avatar }}" class="img-circle" alt="User Image" />
                             <p>
                                 {{ Auth::user()->name }}
-                                <small><script>
-                                    var f = new Date();
-                                    document.write(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear());
-                                </script>
-
+                                <small>
+                                    {{ Auth::user()->region['name'] }}
+                                    <br>
+                                    {{ Auth::user()->branch['name'] }}
                             </small>
                         </p>
                     </li>
                     <!-- Menu Body -->
-                    <li class="user-body">
+                    {{-- <li class="user-body">
                         <div class="col-xs-4 text-center">
                             <a href="#">{{ trans('adminlte_lang::message.followers') }}</a>
                         </div>
@@ -146,7 +145,7 @@
                         <div class="col-xs-4 text-center">
                             <a href="#">{{ trans('adminlte_lang::message.friends') }}</a>
                         </div>
-                    </li>
+                    </li> --}}
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">

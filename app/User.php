@@ -31,7 +31,8 @@ class User extends Authenticatable
     "phone_1",
     "phone_2",
     "avatar",
-    "branch_id"
+    "branch_id",
+    "region_id"
     ];
 
     public static $rules = [
@@ -60,6 +61,11 @@ class User extends Authenticatable
     protected $hidden = [
     'password', 'remember_token',
     ];
+
+    public function region()
+    {
+        return $this->belongsTo('App\Models\Region');
+    }
 
     public function branch()
     {

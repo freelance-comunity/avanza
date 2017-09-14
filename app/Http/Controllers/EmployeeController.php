@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateEmployeeRequest;
 use App\User;
 use App\Models\Branch;
+use App\Models\Region;
 use App\Models\Employeelocation;
 use App\Models\Employeecredentials;
 use Illuminate\Http\Request;
@@ -34,25 +35,28 @@ class EmployeeController extends AppBaseController
 			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return view('home');
 		}
-		$query = User::query();
-		$columns = Schema::getColumnListing('$TABLE_NAME$');
-		$attributes = array();
+		if (Auth::user()->hasRole('director-general')) {
+			$employees = User::all();
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
 
-		foreach($columns as $attribute){
-			if($request[$attribute] == true)
-			{
-				$query->where($attribute, $request[$attribute]);
-				$attributes[$attribute] =  $request[$attribute];
-			}else{
-				$attributes[$attribute] =  null;
-			}
-		};
+			$employees = $region_allocation->users;		
+		}
+		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
+			$user_allocation = Auth::user();
+			$branch_allocation = $user_allocation->branch;
 
-		$employees = $query->get();
+			$employees = $branch_allocation->users;
+		}
+		else
+		{
+			$employees = User::all();
+		}
 
 		return view('employees.index')
-		->with('employees', $employees)
-		->with('attributes', $attributes);
+		->with('employees', $employees);
 	}
 
 	/**
@@ -81,6 +85,9 @@ class EmployeeController extends AppBaseController
 	public function store(CreateEmployeeRequest $request)
 	{
 		$input = $request->all();
+		$branch = Branch::find($request->input('branch_id'));
+		$region = $branch->region;
+		$input['region_id'] = $region->id;
 		$input['password'] = Hash::make('micontraseña');
 		
 		/* Save avatar employee */

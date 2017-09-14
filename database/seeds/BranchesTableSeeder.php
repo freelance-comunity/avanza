@@ -11,6 +11,18 @@ class BranchesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('branches')->delete();
+
+    	DB::table('branches')->insert([
+    		[
+    			'name' => 'SUC MATRIZ',
+    			'phone' => '000000000',
+    			'address' => 'TGZ',
+    			'latitude' => '0',
+    			'length' => '0',
+    			'region_id' => '1'
+    		]
+
+    	]);
     }
 }

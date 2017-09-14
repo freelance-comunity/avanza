@@ -93,6 +93,9 @@ class ClientController extends AppBaseController
 	{
 		
 		$input = $request->all();
+		$branch = Branch::find($request->input('branch_id'));
+		$region = $branch->region;
+		$input['region_id'] = $region->id;
 		/* Save avatar client */
 		if($request->hasFile('avatar')){
 			$avatar = $request->file('avatar');

@@ -30,7 +30,8 @@ class UsersTableSeeder extends Seeder
             'avatar' => '1502467645.jpeg',
     		'email' => 'usuario@mail.com',
     		'password' => bcrypt('secret'),
-            'branch_id' => '4'
+            'branch_id' => '1',
+            'region_id' => '1',
     		]);
     }
 }

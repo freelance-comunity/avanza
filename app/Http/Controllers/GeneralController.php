@@ -21,8 +21,9 @@ class GeneralController extends Controller
 {
 	public function getPromoter()
 	{	
-		if (Auth::user()->hasRole('administrador')) {
-			$role = Role::find(4);
+		if (Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal'])) {
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 			$users = $role->users;
 
 			return view('executives.index')

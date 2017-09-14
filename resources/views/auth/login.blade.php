@@ -48,7 +48,7 @@ Inicio de Sesión
                 </div>
             </form>
 
-            <a style="color: rgb(194, 71, 54);" href="{{ url('/password/reset') }}">¿Olvidaste tu contraseña?</a><br>
+            {{-- <a style="color: rgb(194, 71, 54);" href="{{ url('/password/reset') }}">¿Olvidaste tu contraseña?</a><br> --}}
 
         </div><!-- /.login-box-body -->
         <center>

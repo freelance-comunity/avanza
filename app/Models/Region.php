@@ -26,4 +26,14 @@ class Region extends Model
 		return $this->hasMany('App\Models\Branch');
 	}
 
+	public function clients()
+	{
+		return $this->hasMany('App\Models\Client');
+	}
+
+	public function users()
+	{
+		return $this->hasMany('App\User');
+	}
+
 }

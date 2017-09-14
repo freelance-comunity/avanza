@@ -50,8 +50,7 @@ class EmployeeController extends AppBaseController
 
 			$employees = $branch_allocation->users;
 		}
-		else
-		{
+		elseif (Auth::user()->hasRole('administrador')) {
 			$employees = User::all();
 		}
 

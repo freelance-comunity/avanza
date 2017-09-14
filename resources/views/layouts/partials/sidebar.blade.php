@@ -54,18 +54,30 @@
       <li class="treeview">
         <a href="#"><i class='fa fa-cogs'></i>  <span>Configuración</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-          <li><a href="{{ url('regions') }}">Regiones</a></li>
-         <li><a href="{{ url('branches') }}">Sucursales</a></li>
-         <li><a href="{{ url('roles') }}">Roles</a></li>
-         <li><a href="{{ url('permissions') }}">Permisos</a></li>
-         <li><a href="{{ url('employees') }}">Personal</a></li>
-         <li><a href="{{ url('products') }}">Productos</a></li>
-       </ul>
-     </li>
-     @endif
-   </ul><!-- /.sidebar-menu -->
- </section>
- <!-- /.sidebar -->
+          @if (Auth::user()->can('region'))
+            <li><a href="{{ url('regions') }}">Regiones</a></li>
+          @endif
+          @if (Auth::user()->can('sucursales'))
+            <li><a href="{{ url('branches') }}">Sucursales</a></li>
+          @endif
+          @if (Auth::user()->can('roles'))
+            <li><a href="{{ url('roles') }}">Roles</a></li>
+          @endif
+          @if (Auth::user()->can('permisos'))
+            <li><a href="{{ url('permissions') }}">Permisos</a></li>
+          @endif
+          @if (Auth::user()->can('personal'))
+            <li><a href="{{ url('employees') }}">Personal</a></li>
+          @endif
+          @if (Auth::user()->can('productos'))
+            <li><a href="{{ url('products') }}">Productos</a></li>
+          @endif
+        </ul>
+      </li>
+      @endif
+    </ul><!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
 </aside>
 
 
@@ -148,24 +160,24 @@
 </div>
 <style>
 
-  .color-3 .irs-min, .irs-max {
+.color-3 .irs-min, .irs-max {
 
-    font-size: 12px; line-height: 1.333;
-    text-shadow: none;
-    top: 0; padding: 1px 3px;
-    background: #e1e4e9;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-  }
-  .color-3 .irs-from, .irs-to, .irs-single {
-    color: #fff;
-    font-size: 15px; line-height: 1.333;
-    text-shadow: none;
-    padding: 1px 5px;
-    background: black;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-  }
+  font-size: 12px; line-height: 1.333;
+  text-shadow: none;
+  top: 0; padding: 1px 3px;
+  background: #e1e4e9;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.color-3 .irs-from, .irs-to, .irs-single {
+  color: #fff;
+  font-size: 15px; line-height: 1.333;
+  text-shadow: none;
+  padding: 1px 5px;
+  background: black;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
 </style>
 <script>
   $("#modalidadr").ionRangeSlider({
@@ -203,17 +215,17 @@
 
     utilidad_neta = capital + interes;
     total= utilidad_neta/modalidad;
-     var formatter = new Intl.NumberFormat('en-US', {
+    var formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 2,
-      });
+    });
 
-      var formatterr = new Intl.NumberFormat('en-US', {
+    var formatterr = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 2,
-      });
+    });
 
 
     document.getElementById('totaln').value=formatterr.format(total);

@@ -67,10 +67,9 @@
     </div>
   </div>
   <div class="box-body">
-
    <div class="row setup-content" id="step-1">
      <div class="form-group col-sm-6 col-lg-12">
-       <div class="form-group col-sm-6 col-lg-4">
+      <div class="form-group col-sm-6 col-lg-4">
         {!! Form::label('avatar', 'Imagen:') !!}
         {!! Form::file('avatar', [
           'data-parsley-trigger ' => 'input focusin',
@@ -78,11 +77,11 @@
         </div>
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('firts_name', 'Nombre(s):') !!}
-          {!! Form::text('firts_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          {!! Form::text('firts_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase(); myFunction()']) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('last_name', 'Apellido Paterno:') !!}
-          {!! Form::text('last_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          {!! Form::text('last_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase(); myFunction()']) !!}
         </div>
       </div>
       <div class="form-group col-sm-6 col-lg-12">
@@ -116,7 +115,7 @@
         </div>
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('phone', 'Teléfono:') !!}
-          <input type="number" name="phone" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
+          <input type="number" name="phone" class="form-control input-lg" id="telefono" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
         </div>
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('no_economic_dependent', 'No. de Dependientes Economicos') !!}
@@ -231,11 +230,11 @@
           <div class="form-group col-sm-6 col-lg-12">
             <div class="form-group col-sm-6 col-lg-4">
               {!! Form::label('street', 'Calle:') !!}
-              {!! Form::text('street', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE DE LA CALLE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+              {!! Form::text('street', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE DE LA CALLE', 'id' => 'calle' ,'required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-4">
               {!! Form::label('number', 'Número de Casa:') !!}
-              {!! Form::text('number', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NÚMERO DE LA CASA','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+              {!! Form::text('number', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NÚMERO DE LA CASA','id'=>'numero','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -277,123 +276,253 @@
              </select>
            </div>
          </div>
-         
+         <div class="form-group col-sm-6 col-lg-12">
+           <div class="form-group col-sm-6 col-lg-4">
+             <label>Municipio</label>
+             <select name="municipality" id="municipality_for_client" class="form-control input-lg">
+
+             </select>
+           </div>
+
+           <div class="form-group col-sm-6 col-lg-4" >
+            {!! Form::label('colony', 'Colonia:') !!}
+            {!! Form::text('colony', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA COLONIA','id'=>'colonia','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+
+          </div>
+
+
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('postal_code', 'Código Postal:') !!}
+            <input type="number" name="postal_code" class="form-control input-lg" id="cp" placeholder="ESCRIBE EL CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits"  data-parsley-maxlength="5">
+          </div>
+        </div>
+        <div class="form-group col-sm-6 col-lg-12">
+
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('references', 'Referencias:') !!}
+            {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div> 
+        </div>
+
+
+        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+      </div>
+    </div>
+  </div>
+  <!-- CLIENTS COMPANY-->
+  <div class="row setup-content" id="step-3">
+    <div class="col-xs-12">
+      <div class="col-md-12">
+        <h3> Datos del Negocio</h3>
+        <select id="status" onChange="direccion(this.value);" class="form-control input-lg">
+          <option value="" class="selected">¿La dirección del Negocio es la misma del Cliente?</option>
+          <option value="si">Si</option>
+          <option value="no">No</option>
+        </select>
+        <br>
+
+        <script>
+          function direccion(id) {
+            if (id == "si") {
+              $("#sii").show();
+              $("#noo").hide(1000);
+            }
+            if (id == "no") {
+              $("#sii").hide();
+              $("#noo").show(1000);
+            }
+          }
+        </script>
+        <script>
+          $(document).ready(function () {
+            $("#calle").keyup(function () {
+              var value = $(this).val();
+              $("#calledos").val(value);
+            });
+            $("#numero").keyup(function () {
+              var value = $(this).val();
+              $("#numerodos").val(value);
+            });
+            $("#colonia").keyup(function () {
+              var value = $(this).val();
+              $("#coloniados").val(value);
+            });
+            $("#cp").keyup(function () {
+              var value = $(this).val();
+              $("#cpdos").val(value);
+            });
+            $("#telefono").keyup(function () {
+              var value = $(this).val();
+              $("#telefonodos").val(value);
+            });
+          });
+        </script>
+
+        <div class="form-group col-sm-6 col-lg-12" id="sii" style="display: none;">
+          <div class="form-group col-sm-6 col-lg-12">
+            <div class="form-group col-sm-6 col-lg-4">
+              {!! Form::label('name_company', 'Nombre del Negocio:') !!}
+              {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO',  'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase(); ']) !!}
+            </div>
+
+            <div class="form-group col-sm-6 col-lg-4">
+              {!! Form::label('street_company', 'Calle:') !!}
+              {!! Form::text('street_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE DE LA CALLE','id'=>'calledos',  'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+              {!! Form::label('number_company', 'Número de Casa:') !!}
+              {!! Form::text('number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NÚMERO DE LA CASA','id'=>'numerodos', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>  
+
+          </div>
+          <div class="form-group col-sm-6 col-lg-12">
+            <div class="form-group col-sm-6 col-lg-4">
+              {!! Form::label('state_company', 'Estado:') !!}
+              <select name="state_company" id="state_for_company" onChange="estadodos(this.value);" class="form-control input-lg"> 
+               <option value="">Todo México</option>
+               <option value="AGUASCALIENTES">AGUASCALIENTES</option>
+               <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
+               <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
+               <option value="CAMPECHE">CAMPECHE</option>
+               <option value="COAHUILA DE ZARAGOZA">COAHUILA DE ZARAGOZA</option>
+               <option value="COLIMA">COLIMA</option>
+               <option value="CHIAPAS">CHIAPAS</option>
+               <option value="CHIHUAHUA">CHIHUAHUA</option>
+               <option value="DISTRITO FEDERAL">DISTRITO FEDERAL</option>
+               <option value="DURANGO">DURANGO</option>
+               <option value="GUANAJUATO">GUANAJUATO</option>
+               <option value="GUERRERO">GUERRERO</option>
+               <option value="HIDALGO">HIDALGO</option>
+               <option value="JALISCO">JALISCO</option>
+               <option value="MÉXICO">MÉXICO</option>
+               <option value="MICHOACÁN">MICHOACÁN</option>
+               <option value="MORELOS">MORELOS</option>
+               <option value="NAYARIT">NAYARIT</option>
+               <option value="NUEVO LEÓN">NUEVO LEÓN</option>
+               <option value="OAXACA">OAXACA</option>
+               <option value="PUEBLA">PUEBLA</option>
+               <option value="QUERÉTARO">QUERÉTARO</option>
+               <option value="QUINTANA ROO">QUINTANA ROO</option>
+               <option value="SAN LUIS POTOSÍ">SAN LUIS POTOSÍ</option>
+               <option value="SINALOA">SINALOA</option>
+               <option value="SONORA">SONORA</option>
+               <option value="TABASCO">TABASCO</option>
+               <option value="TAMAULIPAS">TAMAULIPAS</option>
+               <option value="TLAXCALA">TLAXCALA</option>
+               <option value="VERACRUZ">VERACRUZ</option>
+               <option value="YUCATÁN">YUCATÁN</option>
+               <option value="ZACATECAS">ZACATECAS</option>
+             </select>
+           </div>
+
+           <div class="form-group col-sm-6 col-lg-4">
+             <label>Municipio</label>
+             <select name="municipality_company"  id="municipality_for_company" class="form-control input-lg">
+
+             </select>
+           </div>
+
+
+           <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('colony_company', 'Colonia:') !!}
+            {!! Form::text('colony_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA','id'=>'coloniados', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase(); ']) !!}
+          </div>
+        </div>
+
+        <div class="form-group col-sm-6 col-lg-12">
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('postal_code_company', 'Código Postal:') !!}
+            <input type="number" name="postal_code_company" class="form-control input-lg" id="cpdos" ; placeholder="ESCRIBE  CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
+          </div>
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('phone_company', 'Teléfono del Negocio:') !!}
+            <input type="number" name="phone_company" class="form-control input-lg" id="telefonodos" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
+          </div>
+        </div>
+      </div>
+
+    {{--  <div class="form-group col-sm-6 col-lg-12" id="noo" style="display: none;">
+        <div class="form-group col-sm-6 col-lg-12">
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('name_company', 'Nombre del Negocio:') !!}
+            {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO',  'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase(); ']) !!}
+          </div>
+
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('street_company', 'Calle:') !!}
+            {!! Form::text('street_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE DE LA CALLE',  'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div>
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('number_company', 'Número de Casa:') !!}
+            {!! Form::text('number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NÚMERO DE LA CASA','required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div>  
+
+        </div>
+        <div class="form-group col-sm-6 col-lg-12">
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('state_company', 'Estado:') !!}
+            <select name="state_company" id="state_for_company" onChange="estadodos(this.value);" class="form-control input-lg"> 
+             <option value="">Todo México</option>
+             <option value="AGUASCALIENTES">AGUASCALIENTES</option>
+             <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
+             <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
+             <option value="CAMPECHE">CAMPECHE</option>
+             <option value="COAHUILA DE ZARAGOZA">COAHUILA DE ZARAGOZA</option>
+             <option value="COLIMA">COLIMA</option>
+             <option value="CHIAPAS">CHIAPAS</option>
+             <option value="CHIHUAHUA">CHIHUAHUA</option>
+             <option value="DISTRITO FEDERAL">DISTRITO FEDERAL</option>
+             <option value="DURANGO">DURANGO</option>
+             <option value="GUANAJUATO">GUANAJUATO</option>
+             <option value="GUERRERO">GUERRERO</option>
+             <option value="HIDALGO">HIDALGO</option>
+             <option value="JALISCO">JALISCO</option>
+             <option value="MÉXICO">MÉXICO</option>
+             <option value="MICHOACÁN">MICHOACÁN</option>
+             <option value="MORELOS">MORELOS</option>
+             <option value="NAYARIT">NAYARIT</option>
+             <option value="NUEVO LEÓN">NUEVO LEÓN</option>
+             <option value="OAXACA">OAXACA</option>
+             <option value="PUEBLA">PUEBLA</option>
+             <option value="QUERÉTARO">QUERÉTARO</option>
+             <option value="QUINTANA ROO">QUINTANA ROO</option>
+             <option value="SAN LUIS POTOSÍ">SAN LUIS POTOSÍ</option>
+             <option value="SINALOA">SINALOA</option>
+             <option value="SONORA">SONORA</option>
+             <option value="TABASCO">TABASCO</option>
+             <option value="TAMAULIPAS">TAMAULIPAS</option>
+             <option value="TLAXCALA">TLAXCALA</option>
+             <option value="VERACRUZ">VERACRUZ</option>
+             <option value="YUCATÁN">YUCATÁN</option>
+             <option value="ZACATECAS">ZACATECAS</option>
+           </select>
+         </div>
+
          <div class="form-group col-sm-6 col-lg-4">
            <label>Municipio</label>
-           <select name="municipality" id="municipality_for_client" class="form-control input-lg">
+           <select name="municipality_company"  id="municipality_for_company" class="form-control input-lg">
 
            </select>
          </div>
 
-         <div class="form-group col-sm-6 col-lg-4" >
-          {!! Form::label('colony', 'Colonia:') !!}
-          {!! Form::text('colony', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA COLONIA','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
 
-        </div>
-
-
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('postal_code', 'Código Postal:') !!}
-          <input type="number" name="postal_code" class="form-control input-lg" placeholder="ESCRIBE EL CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
+         <div class="form-group col-sm-6 col-lg-4">
+          {!! Form::label('colony_company', 'Colonia:') !!}
+          {!! Form::text('colony_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase(); ']) !!}
         </div>
       </div>
-      <div class="form-group col-sm-6 col-lg-12">
 
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('references', 'Referencias:') !!}
-          {!! Form::text('references', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE REFERENCIA DEL DOMICILIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div> 
-      </div>  
-
-
-      <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
-    </div>
-  </div>
-</div>
-<!-- CLIENTS COMPANY-->
-<div class="row setup-content" id="step-3">
-  <div class="col-xs-12">
-    <div class="col-md-12">
-      <h3> Datos del Negocio</h3>
       <div class="form-group col-sm-6 col-lg-12">
         <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('name_company', 'Nombre del Negocio:') !!}
-          {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          {!! Form::label('postal_code_company', 'Código Postal:') !!}
+          <input type="number" name="postal_code_company" class="form-control input-lg" ; placeholder="ESCRIBE  CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
         </div>
         <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('street_company', 'Calle:') !!}
-          {!! Form::text('street_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE DE LA CALLE', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          {!! Form::label('phone_company', 'Teléfono del Negocio:') !!}
+          <input type="number" name="phone_company" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
         </div>
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('number_company', 'Número de Casa:') !!}
-          {!! Form::text('number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NÚMERO DE LA CASA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>  
-
       </div>
-      <div class="form-group col-sm-6 col-lg-12">
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('state_company', 'Estado:') !!}
-          <select name="state_company" id="state_for_company" onChange="estadodos(this.value);" class="form-control input-lg"> 
-           <option value="">Todo México</option>
-           <option value="AGUASCALIENTES">AGUASCALIENTES</option>
-           <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
-           <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
-           <option value="CAMPECHE">CAMPECHE</option>
-           <option value="COAHUILA DE ZARAGOZA">COAHUILA DE ZARAGOZA</option>
-           <option value="COLIMA">COLIMA</option>
-           <option value="CHIAPAS">CHIAPAS</option>
-           <option value="CHIHUAHUA">CHIHUAHUA</option>
-           <option value="DISTRITO FEDERAL">DISTRITO FEDERAL</option>
-           <option value="DURANGO">DURANGO</option>
-           <option value="GUANAJUATO">GUANAJUATO</option>
-           <option value="GUERRERO">GUERRERO</option>
-           <option value="HIDALGO">HIDALGO</option>
-           <option value="JALISCO">JALISCO</option>
-           <option value="MÉXICO">MÉXICO</option>
-           <option value="MICHOACÁN">MICHOACÁN</option>
-           <option value="MORELOS">MORELOS</option>
-           <option value="NAYARIT">NAYARIT</option>
-           <option value="NUEVO LEÓN">NUEVO LEÓN</option>
-           <option value="OAXACA">OAXACA</option>
-           <option value="PUEBLA">PUEBLA</option>
-           <option value="QUERÉTARO">QUERÉTARO</option>
-           <option value="QUINTANA ROO">QUINTANA ROO</option>
-           <option value="SAN LUIS POTOSÍ">SAN LUIS POTOSÍ</option>
-           <option value="SINALOA">SINALOA</option>
-           <option value="SONORA">SONORA</option>
-           <option value="TABASCO">TABASCO</option>
-           <option value="TAMAULIPAS">TAMAULIPAS</option>
-           <option value="TLAXCALA">TLAXCALA</option>
-           <option value="VERACRUZ">VERACRUZ</option>
-           <option value="YUCATÁN">YUCATÁN</option>
-           <option value="ZACATECAS">ZACATECAS</option>
-         </select>
-       </div>
-
-       <div class="form-group col-sm-6 col-lg-4">
-         <label>Municipio</label>
-         <select name="municipality_company"  id="municipality_for_company" class="form-control input-lg">
-
-         </select>
-       </div>
-       
-
-       <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('colony_company', 'Colonia:') !!}
-        {!! Form::text('colony_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'required' => 'required','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-      </div>
-    </div>
-
-    <div class="form-group col-sm-6 col-lg-12">
-      <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('postal_code_company', 'Código Postal:') !!}
-        <input type="number" name="postal_code_company" class="form-control input-lg" placeholder="ESCRIBE  CÓDIGO POSTAL" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
-      </div>
-      <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('phone_company', 'Teléfono del Negocio:') !!}
-        <input type="number" name="phone_company" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
-      </div>
-    </div>
+    </div>--}}
 
     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
   </div>
@@ -415,11 +544,11 @@
         function mostrar(id) {
           if (id == "Si") {
             $("#si").show();
-            $("#no").hide();
+            $("#no").hide(1000);
           }
           if (id == "No") {
             $("#si").hide();
-            $("#no").hide();
+            $("#no").hide(1000);
           }
         }
       </script>
@@ -733,34 +862,25 @@ function soloNumeros(e){
   return (key >= 48 && key <= 57)
 }
 </script>
-
-
 <script>
   $('#formclient').on('change', '#state_for_client', function(){
-
     var municipality = $('#formclient').find('#municipality_for_client');
     municipality.html('');
-    
     setstate($(this).val(),municipality);
-
   });
- $('#formclient').on('change', '#state_for_company', function(){
-
+  $('#formclient').on('change', '#state_for_company', function(){
     var municipality = $('#formclient').find('#municipality_for_company');
     municipality.html('');
-    
     setstate($(this).val(),municipality);
-
   });
- $('#formclient').on('change', '#state_for_aval', function(){
-
+  $('#formclient').on('change', '#state_for_aval', function(){
     var municipality = $('#formclient').find('#municipality_for_aval');
     municipality.html('');
-    
     setstate($(this).val(),municipality);
-
   });  
-
+</script>
+<script>
+ 
 </script>
 
 @include('clients.curp')

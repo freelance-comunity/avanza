@@ -93,9 +93,7 @@ Detalles del Cliente
  <h3>Este empleado no tiene datos de ubicación registrados.</h3> 
 </div>
 @else
-
 <a href="{!! route('clientLocations.edit', [$location->id]) !!}"><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-home"></i> DOMICILIO DEL CLIENTE</h3></a>
-
 <!-- /.box-header -->
 <div class="box-body no-padding">
   <div class="row">

@@ -104,8 +104,13 @@
 						<button type="button" class="btn btn-lg bg-orange btn-block" data-toggle="modal" data-target="#myModal">Renovar Crédito</button></td>
 						@elseif($debt->status == 'Pagado' && $countlocked == 0)
 						<button type="button" class="btn btn-lg bg-blue btn-block" data-toggle="modal" data-target="#myModal{{$client->id}}">Renovar Crédito</button></td>
+						@role('administrador')
 						@elseif($countlocked >0)
 						<a href="{{ url('unlocked') }}/{{$debt->id}}" class="btn btn-lg bg-red btn-block" onclick="return confirm('¿Estas seguro de desbloquear este cliente?')">Desbloquear</a>
+						@endrole
+						@role('ejecutivo-de-credito')
+						<a href="" class="btn btn-lg bg-red btn-block" onclick="return confirm('Comunicate con el administrador para desbloquear a este cliente')">Desbloquear</a>
+						@endrole
 						@endif
 						<hr>
 					</div>					

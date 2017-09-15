@@ -64,7 +64,9 @@ class Credit extends Model
 		"firm",
 		"status",
 		"client_id",
-		"user_id"
+		"user_id",
+		"branch_id",
+		"region_id"
 	];
 
 	public static $rules = [
@@ -86,10 +88,21 @@ class Credit extends Model
 		"firm" => "required"
 	];
 
+	public function branch()
+	{
+		return $this->belongsTo('App\Models\Branch');
+	}
+
+	public function region()
+	{
+		return $this->belongsTo('App\Models\Region');
+	}
+
 	 public function client()
     {
         return $this->belongsTo('App\Models\Client');
     }
+
     public function debt()
 	{
 		return $this->hasOne('App\Models\Debt');

@@ -54,18 +54,30 @@
       <li class="treeview">
         <a href="#"><i class='fa fa-cogs'></i>  <span>Configuración</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-          <li><a href="{{ url('regions') }}">Regiones</a></li>
-         <li><a href="{{ url('branches') }}">Sucursales</a></li>
-         <li><a href="{{ url('roles') }}">Roles</a></li>
-         <li><a href="{{ url('permissions') }}">Permisos</a></li>
-         <li><a href="{{ url('employees') }}">Personal</a></li>
-         <li><a href="{{ url('products') }}">Productos</a></li>
-       </ul>
-     </li>
-     @endif
-   </ul><!-- /.sidebar-menu -->
- </section>
- <!-- /.sidebar -->
+          @if (Auth::user()->can('region'))
+            <li><a href="{{ url('regions') }}">Regiones</a></li>
+          @endif
+          @if (Auth::user()->can('sucursales'))
+            <li><a href="{{ url('branches') }}">Sucursales</a></li>
+          @endif
+          @if (Auth::user()->can('roles'))
+            <li><a href="{{ url('roles') }}">Roles</a></li>
+          @endif
+          @if (Auth::user()->can('permisos'))
+            <li><a href="{{ url('permissions') }}">Permisos</a></li>
+          @endif
+          @if (Auth::user()->can('personal'))
+            <li><a href="{{ url('employees') }}">Personal</a></li>
+          @endif
+          @if (Auth::user()->can('productos'))
+            <li><a href="{{ url('products') }}">Productos</a></li>
+          @endif
+        </ul>
+      </li>
+      @endif
+    </ul><!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
 </aside>
 
 

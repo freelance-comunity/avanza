@@ -62,6 +62,8 @@
             @endif
           </div>
           <input type="hidden" name="branch" value="{{ $client->branch->name}}">
+          <input type="hidden" name="branch_id" value="{{ $client->branch->id }}">
+          <input type="hidden" name="region_id" value="{{ $client->branch->region->id }}">
           <input type="hidden" name="interest_rate" value="{{$product->interest_of_cup}}">
           <input type="hidden" name="periodicity" value="{{$product->name}}">
           <input type="hidden" name="firts_name" value="{{$client->firts_name}}">

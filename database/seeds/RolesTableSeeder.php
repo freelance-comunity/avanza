@@ -20,6 +20,16 @@ class RolesTableSeeder extends Seeder
             'description' => 'PERSONA QUE ADMINISTRA Y EJECUTA LA OPERACIÓN DIARIA DE LA EMPRESA, CON TODAS LAS FACULTADES.'
             ],
             [
+            'name' => 'coordinador-regional',
+            'display_name' => 'Coordinador Regional',
+            'description' => 'PERSONA QUE ADMINISTRA Y EJECUTA LA OPERACIÓN DIARIA EN SU REGIÓN.'
+            ],
+            [
+            'name' => 'coordinador-sucursal',
+            'display_name' => 'Coordinador Sucursal',
+            'description' => 'PERSONA QUE ADMINISTRA Y EJECUTA LA OPERACIÓN DIARIA EN SUCURSAL.'
+            ],
+            [
             'name' => 'auditor',
             'display_name' => 'auditor',
             'description' => 'PERSONA QUE SUPERVISA LAS OPERACIONES DE LA EMPRESA, FACULTAD PARA VER INFORMACION Y REALIZAR ADECUACIONES EN BASE A RESULTADOS DE SU TRABAJO.'

@@ -51,6 +51,9 @@ class ClientController extends AppBaseController
 		if (Auth::user()->hasRole('director-general')) {
 			$clients = Client::all();
 		}
+		elseif (Auth::user()->hasRole('administrador')) {
+			$clients = Client::all();
+		}
 		elseif (Auth::user()->hasRole('coordinador-regional')) {
 			$user_allocation = Auth::user();
 			$region_allocation = $user_allocation->region;

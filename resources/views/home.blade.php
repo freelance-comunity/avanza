@@ -44,7 +44,7 @@ Home
 								<div class="panel-body">
 									{{ trans('adminlte_lang::message.logged') }}
 									<br>
-									Te invitamos a actualizar tu contraseña en el siguiente <a href="{{ url('profile') }}">LINK...</a>
+									Le invitamos a actualizar tu contraseña en el siguiente <a href="{{ url('profile') }}">LINK...</a>
 								</div>
 							</div>
 						</div>

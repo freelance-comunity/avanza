@@ -67,6 +67,10 @@ class CreateCreditsTable extends Migration
 			$table->string('status');
 			$table->integer('client_id')->unsigned();
 			$table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+			$table->integer('branch_id')->unsigned();
+			$table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+			$table->integer('region_id')->unsigned();
+			$table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

@@ -1,16 +1,7 @@
 @extends('layouts.app')
 
 @section('main-content')
-@role('administrador')
-@php
-if (Auth::user()->branch->name == 'MATRIZ' ) {
-	$credits = App\Models\Credit::all();
-}else{
-	$client = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get();
-	$credits = App\Models\Credit::where('user_id', $client)->get();
-}
-@endphp
-@endrole
+{{-- Credits all --}}
 <div class="container">
 	<div class="row">
 		<h1 class="pull-left">Créditos</h1>

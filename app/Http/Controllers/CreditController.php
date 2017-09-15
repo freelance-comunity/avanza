@@ -39,12 +39,32 @@ class CreditController extends AppBaseController
 
 	public function index(Request $request)
 	{	
-		if (Auth::user()->hasRole('administrador')) {
+		// New
+		if (Auth::user()->hasRole('director-general')) {
 			$credits = Credit::all();
+		}
+		elseif (Auth::user()->hasRole('administrador')) {
+			$credits = Credit::all();
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+
+			$credits = $region_allocation->credits;		
+		}
+		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
+			$user_allocation = Auth::user();
+			$branch_allocation = $user_allocation->branch;
+
+			$credits = $branch_allocation->credits;
+		}
+		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
+			$user_allocation = Auth::user();
+			$credits = $user_allocation->credits;
 		}
 		else
 		{
-			$credits = Auth::user()->credits;
+			$credits = Credit::all();
 		}
 
 		return view('credits.index')

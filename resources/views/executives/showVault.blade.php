@@ -43,7 +43,7 @@ $date = new Date();
 						<td>SUCURSAL:</td>
 						<td>{{ $user->branch->name }}</td>
 					</tr>
-					@role('administrador')
+					 @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 					<tr>
 						<td colspan="2">
 							<a data-toggle="modal" data-target="#start_of_day" class="btn bg-primary btn-lg btn-block">ASIGNAR SALDO INICIAL</a>
@@ -54,7 +54,7 @@ $date = new Date();
 						@include('executives.cash_allocation')
 						@include('executives.start_of_day')
 					</tr>
-					@endrole
+					@endif
 					@role('ejecutivo-de-credito')
 					<tr>
 						<td colspan="4">

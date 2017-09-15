@@ -38,6 +38,11 @@ class Branch extends Model
 		return $this->hasMany('App\Models\Client');
 	}
 
+	public function credits()
+	{
+		return $this->hasMany('App\Models\Credit');
+	}
+
 	public function users()
 	{
 		return $this->hasMany('App\User');

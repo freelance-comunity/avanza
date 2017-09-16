@@ -16,7 +16,13 @@ use App\Models\Vault;
 use Auth;
 
 class BoxCutController extends AppBaseController
-{
+{	
+
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+	
 	public function getPromoter()
 	{	
 		$role = Role::find(4);

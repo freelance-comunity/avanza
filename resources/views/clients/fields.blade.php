@@ -148,7 +148,7 @@
             @endif
           </select>
         </div>
-      </div>
+      </div> 
 
       <div class="form-group col-sm-6 col-lg-12">
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -375,7 +375,7 @@
           $(document).ready(function () {
             $("#calle").keyup(function () {
               street = $(this).val();  
-           });
+            });
             $("#numero").keyup(function () {
               number = $(this).val();  
             });
@@ -895,7 +895,7 @@ function soloNumeros(e){
     municipality.html('');
     setstate($(this).val(),municipality);
     state = $(this).val(); 
-  
+
   });
   $('#formclient').on('change', '#municipality_for_client', function(){
     //var state = $('#formclient').find('select[name="state_company"]').val();

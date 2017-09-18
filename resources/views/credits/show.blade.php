@@ -28,7 +28,7 @@
 					<div class="col-md-4">
 						<p><strong>FRECUENCIA:</strong> {{$credit->periodicity}}</p>
 						<p><strong>MONTO:</strong>$ {{ number_format($credit->ammount, 2) }}</p>
-						<p><strong>TASA:</strong> {{$credit->interest_rate*100}}%</p>
+						<p><strong>TASA:</strong> {{$credit->interest_rate}}%</p>
 						<p><strong>CUOTAS:</strong> {{$credit->dues}}</p>
 						<p><strong>FECHA DE CONTRATO:</strong> {{strtoupper($credit->date->format('l, d F Y'))}}</p>
 					</div>
@@ -119,9 +119,9 @@
 						@role('administrador')
 							@include('credits.payment_table_admin')
 						@endrole
-						@role('ejecutivo-de-credito')
+						@if (Auth::user()->can('ver-pagos'))
 							@include('credits.payment_table_promoter')
-						@endrole
+						  @endif
 						</div>
 					</div>
 				</div>

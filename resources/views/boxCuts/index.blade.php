@@ -24,9 +24,7 @@
                     <th width="100px">Acción</th>
                 </thead>
                 <tbody>
-
                     @foreach($employees as $employee)
-
                     <tr>
                         <td>{!! $employee->name !!}</td>
                         <td>{!! $employee->father_last_name !!}</td>

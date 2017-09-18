@@ -25,11 +25,24 @@ class BoxCutController extends AppBaseController
 	
 	public function getPromoter()
 	{	
-		$role = Role::find(4);
-		$users = $role->users;
-		
-		return view('boxCuts.index')
-		->with('employees', $users);
+
+		if (Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal'])) {
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+			$users = $role->users;
+
+
+
+			return view('boxCuts.index')
+			->with('employees', $users);
+		}
+		elseif(Auth::user()->hasRole('ejecutivo-de-credito')) {
+			
+			$user = Auth::user();
+
+			return view('executives.index')
+			->with('user', $user);
+		}	
 	}
 
 

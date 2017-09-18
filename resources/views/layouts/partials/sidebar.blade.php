@@ -55,22 +55,22 @@
         <a href="#"><i class='fa fa-cogs'></i>  <span>Configuración</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
           @if (Auth::user()->can('region'))
-            <li><a href="{{ url('regions') }}">Regiones</a></li>
+          <li><a href="{{ url('regions') }}">Regiones</a></li>
           @endif
           @if (Auth::user()->can('sucursales'))
-            <li><a href="{{ url('branches') }}">Sucursales</a></li>
+          <li><a href="{{ url('branches') }}">Sucursales</a></li>
           @endif
           @if (Auth::user()->can('roles'))
-            <li><a href="{{ url('roles') }}">Roles</a></li>
+          <li><a href="{{ url('roles') }}">Roles</a></li>
           @endif
           @if (Auth::user()->can('permisos'))
-            <li><a href="{{ url('permissions') }}">Permisos</a></li>
+          <li><a href="{{ url('permissions') }}">Permisos</a></li>
           @endif
           @if (Auth::user()->can('personal'))
-            <li><a href="{{ url('employees') }}">Personal</a></li>
+          <li><a href="{{ url('employees') }}">Personal</a></li>
           @endif
           @if (Auth::user()->can('productos'))
-            <li><a href="{{ url('products') }}">Productos</a></li>
+          <li><a href="{{ url('products') }}">Productos</a></li>
           @endif
         </ul>
       </li>
@@ -123,7 +123,7 @@
             <input type="text" id="modalidadr" name="modalidadr" onChange="calcularr()" />
           </div>-->
           <h4>Plazo: <strong><span id="demomodalidad"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+          <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
             <input type="range" min="1" max="25" value="2" class="slider" name="modalidadr" onChange="calcularr()" id="modalidadr">
           </div><br>
           <input type="hidden" id="tasar" name="tasar" value="0.25">
@@ -132,7 +132,7 @@
             <input type="text" id="capitalr" name="capitalr" onChange="calcularr()" />
           </div> --}}
           <h4>Monto Solicitado: <strong>$<span id="demor"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+          <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
             <input type="range" min="500" max="5000" value="2000" class="slider" name="capitalr" onChange="calcularr()" id="capitalr">
           </div>
           <br>
@@ -148,7 +148,7 @@
           <input type="hidden" name="modalidad" id="modalidad" value="1">
           <input type="hidden" id="tasa" name="tasa" value="0.15">
           <h4>Monto Solicitado: <strong>$<span id="demo"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+          <div class=" col-sm-6 col-lg-12 " class="slidecontainer">
             <input type="range" min="200" max="1000" value="550" class="slider" name="capital" onChange="calcular()" id="myRange">
           </div>
           <br>
@@ -163,7 +163,7 @@
 
         <div id="credidiario4" style="display: none;"  ">
           <h4>Semanas: <strong><span id="democredi4"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+          <div class=" col-sm-6 col-lg-12 " class="slidecontainer">
             <input type="range" min="1" max="4" value="2" class="slider" name="modalidadfour" onChange="calcularcredi4()" id="modalidadfour">
           </div>
           <input type="hidden" id="tasafour" name="tasafour" value="0.28">
@@ -310,41 +310,50 @@
 </script>
 
 <script>
-  var slider = document.getElementById("modalidadfour");
-  var output = document.getElementById("democredi4");
-  output.innerHTML = slider.value;
+  var slider3 = document.getElementById("modalidadfour");
+  var output3 = document.getElementById("democredi4");
+  output3.innerHTML = slider3.value;
 
-  slider.oninput = function() {
-    output.innerHTML = this.value;
+  slider3.oninput = function() {
+    output3.innerHTML = this.value;
   }
 </script>
 <script>
-function myFunctioncredi44() {
-    var x = document.getElementById("capitalfour").value;
-    document.getElementById("democredi44").innerHTML = x;
-}
-</script>
+  var slider4 = document.getElementById("capitalfour");
+  var output4 = document.getElementById("democredi44");
+  output4.innerHTML = slider4.value;
 
-
-<script>
-  var slider = document.getElementById("modalidadr");
-  var output = document.getElementById("demomodalidad");
-  output.innerHTML = slider.value;
-
-  slider.oninput = function() {
-    output.innerHTML = this.value;
+  slider4.oninput = function() {
+    output4.innerHTML = this.value;
   }
+  
+</script>
+
+
+<script>
+  var slider1 = document.getElementById("modalidadr");
+  var output1 = document.getElementById("demomodalidad");
+  output1.innerHTML = slider1.value;
+
+  slider1.oninput = function() {
+    output1.innerHTML = this.value;
+  }
+
 </script>
 <script>
-function mycapitalr() {
-    var x = document.getElementById("capitalr").value;
-    document.getElementById("demor").innerHTML = x;
+ var slider2 = document.getElementById("capitalr");
+ var output2 = document.getElementById("demor");
+ output2.innerHTML = slider2.value;
+
+ slider2.oninput = function() {
+  output2.innerHTML = this.value;
 }
+
 </script>
 
 
 <style>
-#slidecontainer {
+.slidecontainer {
   width: 100%;
 }
 

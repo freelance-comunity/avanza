@@ -122,9 +122,16 @@ class GeneralController extends Controller
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric'
 		]);
-
+		$user_collector = Auth::user();
+		$vault_collector = $user_collector->vault;
 		if ($validator->fails()) {
 			Toastr::error('Favor de introducir cantidad valida.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
+
+		elseif ($vault_collector->ammount < $request->input('ammount')) {
+			Toastr::error('No cuentas con el dinero suficiente para otorgar $'.number_format($request->input('ammount')).' de saldo inicial.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 			return redirect()->back();
 		}

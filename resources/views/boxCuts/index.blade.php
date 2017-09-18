@@ -9,7 +9,7 @@
     <div class="row">
         <h1 class="pull-left">CORTE DE CAJA</h1>
     </div>
-
+ @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
     <div class="row">
         @if($employees->isEmpty())
         <div class="well text-center">No hay personal registrado.</div>
@@ -24,7 +24,9 @@
                     <th width="100px">Acción</th>
                 </thead>
                 <tbody>
+
                     @foreach($employees as $employee)
+
                     <tr>
                         <td>{!! $employee->name !!}</td>
                         <td>{!! $employee->father_last_name !!}</td>
@@ -40,5 +42,6 @@
         </div>
         @endif
     </div>
+    @endif
 </div>
 @endsection

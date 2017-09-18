@@ -18,7 +18,12 @@ use Carbon\Carbon;
 use Jenssegers\Date\Date;
 
 class GeneralController extends Controller
-{
+{	
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+	
 	public function getPromoter()
 	{	
 		if (Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal'])) {

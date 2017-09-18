@@ -27,7 +27,7 @@ use App\Traits\DatesTranslator;
 use \Excel;
 
 class ClientController extends AppBaseController
-{
+{	
 	use  DatesTranslator;
 	public function getSubmitedAtAttribute($created_at)
 	{

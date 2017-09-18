@@ -10,7 +10,12 @@ use App\Models\Client;
 use App\Models\Clientdocuments;
 
 class PhotoController extends Controller
-{
+{	
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+	
 	public function update(Request $request)
 	{ 
 		$id = $request->input('client_id');

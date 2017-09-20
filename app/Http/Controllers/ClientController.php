@@ -131,7 +131,7 @@ class ClientController extends AppBaseController
 		$data_location['street'] = $request->input('street');
 		$data_location['number']   = $request->input('number');
 		$data_location['colony']  = $request->input('colony');
-		$data_location['municipality'] = $request->input('municipality');
+		$data_location['municipality'] =strtoupper($request->input('municipality'));
 		$data_location['state']  = $request->input('state');
 		$data_location['postal_code'] = $request->input('postal_code');
 		$data_location['references'] = $request->input('references');
@@ -145,7 +145,7 @@ class ClientController extends AppBaseController
 		$data_company['street_company'] = $request->input('street_company');
 		$data_company['number_company'] = $request->input('number_company');
 		$data_company['colony_company']  = $request->input('colony_company');
-		$data_company['municipality_company'] = $request->input('municipality_company');
+		$data_company['municipality_company'] = strtoupper($request->input('municipality_company'));
 		$data_company['state_company']   = $request->input('state_company');
 		$data_company['postal_code_company'] = $request->input('postal_code_company');
 		$data_company['phone_company'] = $request->input('phone_company');
@@ -168,7 +168,7 @@ class ClientController extends AppBaseController
 			$data_aval['street_aval'] = $request->input('street_aval');
 			$data_aval['number_aval'] = $request->input('number_aval');
 			$data_aval['colony_aval'] = $request->input('colony_aval');
-			$data_aval['municipality_aval'] = $request->input('municipality_aval');
+			$data_aval['municipality_aval'] = strtoupper($request->input('municipality_aval'));
 			$data_aval['state_aval'] = $request->input('state_aval');		
 			$data_aval['postal_code_aval'] = $request->input('postal_code_aval');
 			$data_aval['client_id'] = $client->id;	

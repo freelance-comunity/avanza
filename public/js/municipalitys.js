@@ -198,7 +198,7 @@ function municipalityforchiapas(){
    +'<option value="Totolapa">Totolapa</option>'
    +'<option value="La Trinitaria">La Trinitaria</option>'
    +'<option value="Tumbala">Tumbala</option>'
-   +'<option value="TUXTLA GUTIÉRREZ">TUXTLA GUTIÉRREZ</option>'
+   +'<option value="Tuxtla Gutiérrez">Tuxtla Gutiérrez</option>'
    +'<option value="Tuxtla Chico">Tuxtla Chico</option>'
    +'<option value="Tuzantan">Tuzantan</option>'
    +'<option value="Tzimol">Tzimol</option>'

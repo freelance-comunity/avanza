@@ -126,6 +126,7 @@
 						</div>
 					</div>
 				</div>
+				{{-- <a href="{{ url('/avatar') }}/{!! Auth::user()->avatar !!}"><img  style="border-radius: 50%; padding: 2px; width: 100px;" class="img-circle" src="{{ asset('/uploads/avatars') }}/{!! Auth::user()->avatar !!}" alt="User Avatar"></a> --}}
 			</div>
 		</div>
 	</div>

@@ -465,6 +465,8 @@ Route::post('updatephoto', 'Photocontroller@update');
 Route::post('ine', 'Photocontroller@ine');
 Route::post('curps', 'Photocontroller@curps');
 Route::post('updatephotos', 'Photocontroller@cfe');
+Route::post('avatar','Photocontroller@avatar');
+
 
 Route::get('ajax', function(){
     $date = \Carbon\Carbon::now();

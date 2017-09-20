@@ -9,6 +9,7 @@ use Image;
 use App\Models\Client;
 use App\Models\Clientdocuments;
 
+
 class PhotoController extends Controller
 {	
 	public function __construct()
@@ -16,10 +17,23 @@ class PhotoController extends Controller
 		$this->middleware('auth');
 	}
 	
+	// public function avatar(Request $request)
+	// {
+	// 	$id = $request->input('user_id');
+	// 	$user = Auth::user()->id();
+	// 	if($request->hasFile('avatar')){
+	// 		$avatar = $request->file('avatar');
+	// 		$filename = time() . '.' . $avatar->getClientOriginalExtension();
+	// 		Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+	// 		$input['avatar'] = $filename;
+	// 	}
+	// }
+
 	public function update(Request $request)
 	{ 
 		$id = $request->input('client_id');
 		$client = Client::find($id);
+
 		if ($request->hasFile('avatar')) {
 			$avatar = $request->file('avatar');
 			$filename = time() . '.' . $avatar->getClientOriginalExtension();
@@ -27,9 +41,11 @@ class PhotoController extends Controller
 			$client->avatar = $filename;
 			$client->save();
 		}
-		return view('clients.show')
+		return view('clients.upload')
 		->with('client', $client);
 	}
+
+
 
 	public function ine(Request $request)
 	{ 

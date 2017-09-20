@@ -18,9 +18,9 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
 
 <div class="row">
   <h1 class="pull-left">Clientes</h1>
-  {{--  @if (Auth::user()->can('crear-cliente')) --}}
+@if (Auth::user()->can('crear-cliente'))
   <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('clients.create') !!}">Agregar Nuevo Cliente</a>
-  {{-- @endif --}}
+  @endif 
   <!--<button type="button" class="btn bg-navy pull-right" style="margin-top: 25px" data-toggle="modal" data-target="#inputExcel"><i class="fa fa-file-excel-o"></i> Importar Excel</button>-->
 </div>
 @include('clients.input-excel')

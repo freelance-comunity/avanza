@@ -396,16 +396,23 @@ Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
 Route::get('cancel/{id}' , 'PaymentController@cancel');
 Route::get('mora/{id}' , 'PaymentController@mora');
 
-Route::get('pagado',function(){
+Route::get('clientemodal',function(){
+$expenditure = App\Models\Expenditure::all();
+foreach ($expenditure as  $value) {
+    echo $value->concept;
+    echo "<br>";
+}
 
-    $payments = App\Models\Payment::where('debt_id',62)->where('status','Pagado')->get();
-    foreach ($payments as  $value) {
-      if ($payments->last() == $value) {
-          echo $value->status;
-      }
+$user = App\User::find(3);
+$vault = $user->vault;
+echo $vault->ammount;
+echo "<br>";
 
-  }
-
+$credits = $user->credits;
+foreach ($credits as $credits) {
+    echo $credits->firts_name;
+    echo "<br>";
+}
 
 
 });

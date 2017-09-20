@@ -86,7 +86,7 @@
         @role('administrador')
           <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('maximun_amount', 'Monto Máximo') !!}
-          <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
+          <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" value="{{$client->maximun_amount}}" data-parsley-maxlength="10">
         </div>
         @endrole
         <input type="hidden" name="avatar" value="{{$client->avatar}}">

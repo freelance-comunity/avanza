@@ -430,7 +430,7 @@ class CreditController extends AppBaseController
 				$data_expenditure['voucher'] = 'Sin comprobante';
 				$data_expenditure['date']    = $current;
 				$data_expenditure['vault_id'] = $vault->id;
-
+				
 				$expenditure = Expenditure::create($data_expenditure);
 
 				$vault->ammount = $vault->ammount - $expenditure->ammount;

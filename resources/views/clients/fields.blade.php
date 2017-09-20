@@ -132,7 +132,7 @@
           <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
         </div>
 
-        @php
+        {{-- @php
         $count = App\Models\Branch::all();
         @endphp
         <div class="form-group col-sm-6 col-lg-4">
@@ -147,8 +147,9 @@
             @endforeach
             @endif
           </select>
-        </div> 
+        </div>  --}}
       </div> 
+       <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
      {{--  <input type="hidden" name="branch_id" value="{{ Auth::user()->branch->id }}"> --}}
       <div class="form-group col-sm-6 col-lg-12">
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">

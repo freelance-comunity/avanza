@@ -10,6 +10,7 @@ use App\Role;
 use App\Models\Vault;
 use App\Models\Income;
 use App\Models\Expenditure;
+use App\Models\Credit;
 use Toastr;
 use Validator;
 use Auth;
@@ -48,6 +49,7 @@ class GeneralController extends Controller
 		$current = Carbon::today()->toDateString();
 
 		$user = User::find($id);
+		$credits = $user->credit;
 		$vault = $user->vault;
 		$incomes = $vault->incomes->where('date', $current);
 		$si = $incomes->where('concept', 'Saldo Inicial')->where('date', $current);
@@ -57,8 +59,7 @@ class GeneralController extends Controller
 		$expenditures = $vault->expenditures->where('date', $current);
 		$c = $expenditures->where('concept', 'Colocación')->where('date', $current);
 		$g = $expenditures->where('concept', 'Gasto')->where('date', $current);
-
-
+		
 		return view('executives.showVault')
 		->with('user', $user)
 		->with('vault', $vault)
@@ -68,7 +69,8 @@ class GeneralController extends Controller
 		->with('af', $af)
 		->with('expenditures', $expenditures)
 		->with('c', $c)
-		->with('g', $g);
+		->with('g', $g)
+		->with('credits',$credits);
 	}
 
 	public function addVault(Request $request)

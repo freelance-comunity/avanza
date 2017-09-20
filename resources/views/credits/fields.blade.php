@@ -197,7 +197,7 @@
               var trhtml= '<tr>';
               trhtml += '<td>' + i +'</td>';
               trhtml += '<td>' + moment(date).format('DD-MM-YYYY')+'</td>';
-              trhtml += '<td>' + '$' + newamount + '</td>';
+              trhtml += '<td>' + '$' + Math.ceil(newamount) + '</td>';
               trhtml += '</tr>';
               table.find('tbody').append(trhtml);
 

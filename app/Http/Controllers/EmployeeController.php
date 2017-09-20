@@ -31,6 +31,7 @@ class EmployeeController extends AppBaseController
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('is_admin');
 	}
 	
 	public function index(Request $request)
@@ -57,6 +58,7 @@ class EmployeeController extends AppBaseController
 		elseif (Auth::user()->hasRole('administrador')) {
 			$employees = User::all();
 		}
+		
 
 		return view('employees.index')
 		->with('employees', $employees);

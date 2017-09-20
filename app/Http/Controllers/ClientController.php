@@ -209,7 +209,10 @@ class ClientController extends AppBaseController
 		
 		Toastr::success('Cliente creado exitosamente.', 'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('clients.index'));
+		return redirect(route('clients.index'))
+		->with('client',$client);
+
+
 
 	}
 

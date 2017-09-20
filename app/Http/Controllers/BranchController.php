@@ -26,6 +26,7 @@ class BranchController extends AppBaseController
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('is_admin');
 	}
 	
 	public function index(Request $request)
@@ -58,14 +59,14 @@ class BranchController extends AppBaseController
 	 */
 	public function create()
 	{	if (Auth::User()->branch_id == 0) {
-			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			return redirect(route('branches.index'));
-		}
-		$collection = Region::all();
-		$regions = $collection->pluck('name', 'id');
-		return view('branches.create')
-		->with('regions', $regions);
+		Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		return redirect(route('branches.index'));
 	}
+	$collection = Region::all();
+	$regions = $collection->pluck('name', 'id');
+	return view('branches.create')
+	->with('regions', $regions);
+}
 
 	/**
 	 * Store a newly created Branch in storage.

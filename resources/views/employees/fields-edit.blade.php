@@ -44,7 +44,8 @@
 
 					<div class="form-group col-sm-6 col-lg-4">
 						{!! Form::label('birthdate', 'Fecha de Nacimiento:') !!}
-						<input type="date" name="birthdate" value="{{ $employee->birthdate }}" class="form-control input-lg" required="required" data-parsley-trigger="input focusin">
+						 <input type="date" name="birthdate" value="{{ $employee->birthdate}}"  class="form-control input-lg" required="required" data-parsley-trigger="input focusin">
+
 					</div>
 
 					<div class="form-group col-sm-6 col-lg-4">

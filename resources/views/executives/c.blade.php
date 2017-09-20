@@ -16,6 +16,7 @@
             <th>Concepto</th>
             <th>Comprobante</th>
             <th>Fecha</th>
+            <th>Cliente</th>
           </thead>
           <tbody>
             @foreach ($c as $c)
@@ -24,6 +25,7 @@
               <td>{{ $c->concept }}</td>
               <td>{{ $c->voucher }}</td>
               <td>{{ $c->created_at }}</td>
+              <td>{{ $credits}}</td>
             </tr>
             @endforeach
           </tbody>

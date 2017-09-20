@@ -54,9 +54,9 @@
       <li class="treeview">
         <a href="#"><i class='fa fa-cogs'></i>  <span>Configuración</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-          @if (Auth::user()->can('region'))
+          {{-- @if (Auth::user()->can('region')) --}}
           <li><a href="{{ url('regions') }}">Regiones</a></li>
-          @endif
+         {{--  @endif --}}
           @if (Auth::user()->can('sucursales'))
           <li><a href="{{ url('branches') }}">Sucursales</a></li>
           @endif
@@ -96,6 +96,7 @@
             <option value="Diario">CrediDiario 25</option>
             <option value="Semanal">CrediSemana</option>
             <option value="CrediDiario4">CrediDiario 4</option>
+            <option value="anterior">Diario</option>
           </select>
           <script>
             function mostrar(id) {
@@ -103,34 +104,35 @@
                 $("#diario").show();
                 $("#semanal").hide();
                 $("#credidiario4").hide();
+                $("#credidiario4").hide();
               }
               if (id == "Semanal") {
                 $("#diario").hide();
                 $("#semanal").show();
+                $("#credidiario4").hide();
                 $("#credidiario4").hide();
               }
               if (id == "CrediDiario4") {
                 $("#diario").hide();
                 $("#semanal").hide();
                 $("#credidiario4").show();
+                $("#credidiario4").hide();
+              }
+              if (id == "anterior") {
+                $("#diario").hide();
+                $("#semanal").hide();
+                $("#credidiario4").hide();
+                $("#anterior").show();
               }
             }
           </script>
           <br>
           <div id="diario" style="display: none;">
-           <!--{!! Form::label('modalidad', 'Plazo:') !!}      
-           <div class="range-slider color-3">
-            <input type="text" id="modalidadr" name="modalidadr" onChange="calcularr()" />
-          </div>-->
           <h4>Plazo: <strong><span id="demomodalidad"></span></strong></h4>
           <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
             <input type="range" min="1" max="25" value="2" class="slider" name="modalidadr" onChange="calcularr()" id="modalidadr">
           </div><br>
           <input type="hidden" id="tasar" name="tasar" value="0.25">
-          {{-- {!! Form::label('capitalr', 'Monto solicitado:') !!}
-          <div class="range-slider color-3">
-            <input type="text" id="capitalr" name="capitalr" onChange="calcularr()" />
-          </div> --}}
           <h4>Monto Solicitado: <strong>$<span id="demor"></span></strong></h4>
           <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
             <input type="range" min="500" max="5000" value="2000" class="slider" name="capitalr" onChange="calcularr()" id="capitalr">
@@ -143,6 +145,23 @@
           {!! Form::text('totalpayment', null, ['class' => 'form-control input-lg', 'id' => 'totalpayment', 'readonly' => 'readonly']) !!}               
         </div>
 
+        <div id="anterior" style="display: none;"> 
+          <h4>Plazo: <strong><span id="demomodalidaddiario"></span></strong></h4>
+          <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
+            <input type="range" min="1" max="60" value="30" class="slider" name="modalidaddiario" onChange="calculardiario()" id="modalidaddiario">
+          </div><br>
+          <input type="hidden" id="tasadiario" name="tasadiario" value="0.15">
+          <h4>Monto Solicitado: <strong>$<span id="demordiario"></span></strong></h4>
+          <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
+            <input type="range" min="500" max="5000" value="2000" class="slider" name="capitaldiario" onChange="calculardiario()" id="capitaldiario">
+          </div>
+          <br>
+          <input type="hidden" id="interesdiario" name="interesdiario" value="Norway">
+          {!! Form::label('totaldiario', 'Cuota:') !!}  
+          {!! Form::text('totaldiario', 'null', ['class' => 'form-control input-lg', 'id' => 'totalndiario', 'readonly' => 'readonly']) !!} 
+          {!! Form::label('totalpaymentdiario', 'Total a Pagar:') !!}  
+          {!! Form::text('totalpaymentdiario', null, ['class' => 'form-control input-lg', 'id' => 'totalpaymentdiario', 'readonly' => 'readonly']) !!}   
+        </div>
 
         <div id="semanal" style="display: none;"  ">
           <input type="hidden" name="modalidad" id="modalidad" value="1">
@@ -236,8 +255,8 @@
     });
 
 
-    document.getElementById('totaln').value=formatterr.format(total);
-    document.getElementById('refrendo').value=formatter.format(interes);         
+    document.getElementById('totaln').value=formatterr.format(Math.ceil(total));
+    document.getElementById('refrendo').value=formatter.format(Math.ceil(interes));         
   }
   function calcularcredi4()
   {
@@ -263,8 +282,8 @@
     });
 
 
-    document.getElementById('totalnfour').value=formatterrfourfour.format(totalfour);
-    document.getElementById('refrendofour').value=formatterfour.format(interesfour);         
+    document.getElementById('totalnfour').value=formatterrfourfour.format(Math.ceil(totalfour));
+    document.getElementById('refrendofour').value=formatterfour.format(Math.ceil(interesfour));         
   }
   function calcularr()
   {
@@ -285,7 +304,7 @@
     });
 
 
-    document.getElementById('totalnr').value=formatterr.format(totalr);  
+    document.getElementById('totalnr').value=formatterr.format(Math.ceil(totalr));  
 
     var formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -294,7 +313,38 @@
     });
 
     totalpayment =  capitalr + interesr;
-    document.getElementById('totalpayment').value = formatter.format(totalpayment);  
+    document.getElementById('totalpayment').value = formatter.format(Math.ceil(totalpayment));  
+  }
+
+  function calculardiario()
+  {
+    capitaldiario = eval(document.getElementById('capitaldiario').value);
+    tasadiario= eval(document.getElementById('tasadiario').value);
+    interesdiario = capitaldiario * tasadiario;
+
+    document.getElementById('interesdiario').value=interes;
+    modalidaddiario = eval(document.getElementById('modalidaddiario').value);
+
+    utilidad_netadiario = capitaldiario + interesdiario;
+    totaldiario= utilidad_netadiario/modalidaddiario;
+
+    var formatterr = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    });
+
+
+    document.getElementById('totalndiario').value=formatterr.format(Math.ceil(totaldiario));  
+
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    });
+
+    totalpaymentdiario =  capitaldiario + interesdiario;
+    document.getElementById('totalpaymentdiario').value = formatter.format(Math.ceil(totalpaymentdiario));  
   }
 </script>
 
@@ -341,12 +391,32 @@
 
 </script>
 <script>
+  var sliderdiario = document.getElementById("modalidaddiario");
+  var outputdiario = document.getElementById("demomodalidaddiario");
+  outputdiario.innerHTML = sliderdiario.value;
+
+  sliderdiario.oninput = function() {
+    outputdiario.innerHTML = this.value;
+  }
+
+</script>
+<script>
  var slider2 = document.getElementById("capitalr");
  var output2 = document.getElementById("demor");
  output2.innerHTML = slider2.value;
 
  slider2.oninput = function() {
   output2.innerHTML = this.value;
+}
+
+</script>
+<script>
+ var slider2diario = document.getElementById("capitaldiario");
+ var output2diario = document.getElementById("demordiario");
+ output2diario.innerHTML = slider2diario.value;
+
+ slider2diario.oninput = function() {
+  output2diario.innerHTML = this.value;
 }
 
 </script>

@@ -46,12 +46,12 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
-   $payment = App\Models\Payment::find(2242);
-   $debt = $payment->debt;
-   echo $debt->ammount;
-   $credit = $debt->credit;
+ $payment = App\Models\Payment::find(2242);
+ $debt = $payment->debt;
+ echo $debt->ammount;
+ $credit = $debt->credit;
 
-   echo $credit->ammount;
+ echo $credit->ammount;
 });
 
 Route::post('process', 'PaymentController@process');
@@ -91,14 +91,27 @@ Route::get('testDate', function(){
 });
 
 Route::get('ciclos', function(){
-    $j = 4;
+    $payment = 150;
+    $extra   = $payment - 50;
+    $budget  = intdiv($extra, 50);
+    $r       = fmod($extra, 50);
 
-    while ($j > 0) {
-        echo $j;
+    $id_online = 1;
+    $id_next   = $id_online + 1;
 
-        $j--;
-
+    echo "Nos alcanza para pagar ".$budget." pagos completos";
+    echo "<br>";
+    if ($r > 0) {
+        echo "Y uno por la cantidad de ".$r;
+        echo "<br>";
     }
+
+    while ($budget > 0) {
+     echo "PAGO #".$id_next;
+     echo "<br>";
+     $id_next = $id_next + 1;
+     $budget = $budget - 1;
+ }
 });
 
 /*=====  End of Test Routes  ======*/
@@ -106,14 +119,14 @@ Route::get('ciclos', function(){
 
 Route::get('/', function () {
     if($user = Auth::user())
-    {
-        return view('home');
-    }
-    if(Auth::guest())
-    {
-        return redirect('login');
-    }   
-});
+        {
+            return view('home');
+        }
+        if(Auth::guest())
+            {
+                return redirect('login');
+            }   
+        });
 
 Route::auth();
 
@@ -126,7 +139,7 @@ Route::resource('roles', 'RoleController');
 Route::get('roles/{id}/delete', [
     'as' => 'roles.delete',
     'uses' => 'RoleController@destroy',
-    ]);
+]);
 
 Route::get('permission-to-role/{id}', 'PermissionController@permissions');
 
@@ -150,7 +163,7 @@ Route::resource('branches', 'BranchController');
 Route::get('branches/{id}/delete', [
     'as' => 'branches.delete',
     'uses' => 'BranchController@destroy',
-    ]);
+]);
 
 Route::get('charts','BranchController@charts');
 
@@ -162,7 +175,7 @@ Route::resource('employees', 'EmployeeController');
 Route::get('employees/{id}/delete', [
     'as' => 'employees.delete',
     'uses' => 'EmployeeController@destroy',
-    ]);
+]);
 
 Route::get('/deleterole/{employee}/{role}', function($employee, $role){
   $employee_quit = App\User::find($employee);
@@ -217,19 +230,19 @@ Route::resource('clients', 'ClientController');
 Route::get('clients/{id}/delete', [
     'as' => 'clients.delete',
     'uses' => 'ClientController@destroy',
-    ]);
+]);
 
 Route::get('client/{id}/',[
     'as' => 'branch.client',
     'uses' => 'BranchController@client',
-    ]);
+]);
 
 Route::resource('employeelocations', 'EmployeelocationController');
 
 Route::get('employeelocations/{id}/delete', [
     'as' => 'employeelocations.delete',
     'uses' => 'EmployeelocationController@destroy',
-    ]);
+]);
 
 
 Route::resource('employeecredentials', 'EmployeecredentialsController');
@@ -237,14 +250,14 @@ Route::resource('employeecredentials', 'EmployeecredentialsController');
 Route::get('employeecredentials/{id}/delete', [
     'as' => 'employeecredentials.delete',
     'uses' => 'EmployeecredentialsController@destroy',
-    ]);
+]);
 
 Route::resource('clientLocations', 'ClientLocationController');
 
 Route::get('clientLocations/{id}/delete', [
     'as' => 'clientLocations.delete',
     'uses' => 'ClientLocationController@destroy',
-    ]);
+]);
 
 
 Route::resource('clientCredentials', 'ClientCredentialController');
@@ -252,7 +265,7 @@ Route::resource('clientCredentials', 'ClientCredentialController');
 Route::get('clientCredentials/{id}/delete', [
     'as' => 'clientCredentials.delete',
     'uses' => 'ClientCredentialController@destroy',
-    ]);
+]);
 
 
 Route::resource('clientAvals', 'ClientAvalController');
@@ -260,7 +273,7 @@ Route::resource('clientAvals', 'ClientAvalController');
 Route::get('clientAvals/{id}/delete', [
     'as' => 'clientAvals.delete',
     'uses' => 'ClientAvalController@destroy',
-    ]);
+]);
 
 
 Route::resource('spouses', 'SpouseController');
@@ -268,7 +281,7 @@ Route::resource('spouses', 'SpouseController');
 Route::get('spouses/{id}/delete', [
     'as' => 'spouses.delete',
     'uses' => 'SpouseController@destroy',
-    ]);
+]);
 
 
 Route::resource('clientCompanies', 'ClientCompanyController');
@@ -276,7 +289,7 @@ Route::resource('clientCompanies', 'ClientCompanyController');
 Route::get('clientCompanies/{id}/delete', [
     'as' => 'clientCompanies.delete',
     'uses' => 'ClientCompanyController@destroy',
-    ]);
+]);
 
 
 Route::resource('clientReferences', 'ClientReferencesController');
@@ -284,7 +297,7 @@ Route::resource('clientReferences', 'ClientReferencesController');
 Route::get('clientReferences/{id}/delete', [
     'as' => 'clientReferences.delete',
     'uses' => 'ClientReferencesController@destroy',
-    ]);
+]);
 
 
 Route::resource('clientdocuments', 'ClientdocumentsController');
@@ -292,7 +305,7 @@ Route::resource('clientdocuments', 'ClientdocumentsController');
 Route::get('clientdocuments/{id}/delete', [
     'as' => 'clientdocuments.delete',
     'uses' => 'ClientdocumentsController@destroy',
-    ]);
+]);
 
 
 Route::resource('products', 'ProductController');
@@ -300,7 +313,7 @@ Route::resource('products', 'ProductController');
 Route::get('products/{id}/delete', [
     'as' => 'products.delete',
     'uses' => 'ProductController@destroy',
-    ]);
+]);
 
 
 Route::resource('credits', 'CreditController');
@@ -308,13 +321,13 @@ Route::resource('credits', 'CreditController');
 Route::get('credits/{id}/delete', [
     'as' => 'credits.delete',
     'uses' => 'CreditController@destroy',
-    ]);
+]);
 
 
 Route::get('creditsClient/{id}/{product}',[
     'as' => 'client.creditsClient',
     'uses' => 'ClientController@creditsClient',
-    ]);
+]);
 
 
 Route::get('renovate/{id}/{product}', function($id){
@@ -338,7 +351,7 @@ Route::resource('debts', 'DebtController');
 Route::get('debts/{id}/delete', [
     'as' => 'debts.delete',
     'uses' => 'DebtController@destroy',
-    ]);
+]);
 
 
 Route::resource('payments', 'PaymentController');
@@ -346,7 +359,7 @@ Route::resource('payments', 'PaymentController');
 Route::get('payments/{id}/delete', [
     'as' => 'payments.delete',
     'uses' => 'PaymentController@destroy',
-    ]);
+]);
 
 Route::get('carbon',function(){
     echo $date = \Carbon\Carbon::now()->diffForHumans();
@@ -358,7 +371,7 @@ Route::resource('permissions', 'PermissionController');
 Route::get('permissions/{id}/delete', [
     'as' => 'permissions.delete',
     'uses' => 'PermissionController@destroy',
-    ]);
+]);
 
 
 Route::resource('latePayments', 'LatePaymentsController');
@@ -366,7 +379,7 @@ Route::resource('latePayments', 'LatePaymentsController');
 Route::get('latePayments/{id}/delete', [
     'as' => 'latePayments.delete',
     'uses' => 'LatePaymentsController@destroy',
-    ]);
+]);
 
 
 Route::get('cl', function(){
@@ -423,7 +436,7 @@ Route::resource('vaults', 'VaultController');
 Route::get('vaults/{id}/delete', [
     'as' => 'vaults.delete',
     'uses' => 'VaultController@destroy',
-    ]);
+]);
 
 
 Route::resource('incomes', 'IncomeController');
@@ -431,7 +444,7 @@ Route::resource('incomes', 'IncomeController');
 Route::get('incomes/{id}/delete', [
     'as' => 'incomes.delete',
     'uses' => 'IncomeController@destroy',
-    ]);
+]);
 
 
 Route::resource('expenditures', 'ExpenditureController');
@@ -439,7 +452,7 @@ Route::resource('expenditures', 'ExpenditureController');
 Route::get('expenditures/{id}/delete', [
     'as' => 'expenditures.delete',
     'uses' => 'ExpenditureController@destroy',
-    ]);
+]);
 
 Route::get('updatephoto/{id}', function($id) {
     $client = App\Models\Client::find($id);

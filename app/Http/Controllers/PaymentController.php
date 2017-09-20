@@ -193,6 +193,7 @@ class PaymentController extends AppBaseController
 		$ammount = number_format($request->input('payment'),2);
 		$payment = Payment::find($request->input('payment_id'));
 		$ammount_payment = number_format($payment->balance,2);
+		$ammount_payment_total = number_format($payment->ammount,2);
 		$debt = $payment->debt;
 		//End
 
@@ -226,50 +227,55 @@ class PaymentController extends AppBaseController
 			// get exact quota
 			$extra    = $ammount - $ammount_payment;
 			$complete = $ammount - $extra;
-			// get id payment online and next request
-			$id_online = $payment->id;
-			$id_next   = $id_online + 1;
 			// Process payment
 			$payment->status  = 'Pagado';
 			$payment->payment = $payment->payment + $ammount_payment;
 			$payment->balance = $payment->balance - $ammount_payment;
 			$payment->save();
 			// Process debt
-			$debt->ammount = $debt->ammount - $complete;
+			$debt->ammount = $debt->ammount - $ammount_payment;
 			$debt->save();
+			// Process news payments
+			$budget  = intdiv($extra, $ammount_payment_total);
+			$r       = fmod($extra, $ammount_payment_total);
+			// 
+			// get id payment online and next request
+			$id_online = $payment->id;
+			$id_next   = $id_online + 1;
 
-			while ($extra > 0) {
-				$next_ammount = number_format($extra);
+			while ($budget > 0) {
+				//$next_ammount = number_format($extra);
 				$next_payment = Payment::find($id_next);
 				$next_ammount_payment = number_format($next_payment->balance,2);
-				$next_debt = $next_payment->debt;
+				//$next_debt = $next_payment->debt;
 
 				// Process next payment
-				$next_payment->payment = $next_payment->payment + $next_ammount;
-				$next_payment->balance = $next_payment->balance - $next_ammount;
-				if ($next_payment->balance === 0) {
-					$next_payment->status = 'Pagado';
-				}
-				else
-				{
-					$next_payment->status = 'Parcial';
-				}
+				$next_payment->payment = $next_payment->payment + $next_payment->ammount;
+				$next_payment->balance = $next_payment->balance - $next_payment->ammount;
+				$next_payment->status  = 'Pagado';
 				$next_payment->save();
-				// Process next debt
-				$next_debt->ammount = $next_debt->ammount - $next_ammount;
-				$next_debt->save();
-				echo $next_payment->id;
-				echo "<br>";
-				echo $next_ammount;
-				echo "<br>";
-				$extra = $extra - $next_payment->payment;
-				$id_next = $next_payment->id + 1;
-				echo $id_next;
-				echo "<br>";
-				echo $extra;
+		
+				// Process debt
+				$debt->ammount = $debt->ammount - $next_payment->ammount;
+				$debt->save();
+
+				$id_next = $id_next + 1;
+				$budget = $budget - 1;
+			}
+			if ($r > 0) {
+				$payment_extra = Payment::find($id_next);
+				// 
+				$payment_extra->payment = $payment_extra->payment + $r;
+				$payment_extra->balance = $payment_extra->balance - $r;
+				$payment_extra->status  = 'Parcial';
+				$payment_extra->save();
+				// Process debt
+				$debt->ammount = $debt->ammount - $payment_extra->payment;
+				$debt->save();
+
 			}
 
-			Toastr::info('Pago realizado y sobran '.number_format($extra,2).' pesos.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			Toastr::info('Pagos realizados y 1 extra de '.number_format($r,2).' pesos.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();
 		}
 

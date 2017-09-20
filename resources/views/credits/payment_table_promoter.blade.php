@@ -6,7 +6,7 @@
 			<th>Monto</th>
 			<th>Mora</th>
 			<th>Pagado</th>
-			<th>Balance</th>				
+			<th>Adeudo</th>				
 			<th>Estatus</th>
 		</thead>
 		<tbody>
@@ -21,7 +21,7 @@
 					<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
 					</button>
 					@else
-					<button type="button" class="btn bg-yellow btn-lg disabled" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
+					<button type="button" class="btn bg-yellow btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
 					</button>
 					@endif
 					
@@ -33,7 +33,7 @@
 				<td><p style="color:gray;">{{$payment->status}}</p></td>
 			</tr>
 			@elseif($payment->status == "Parcial")
-			<tr class="info">
+			<tr class="warning">
 				<td>{{ $payment->number }}</td>
 				<td>{{$payment->date->format('d F Y')}}</td>
 				<td> <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>

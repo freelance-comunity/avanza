@@ -90,6 +90,17 @@ Route::get('testDate', function(){
     $af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
 });
 
+Route::get('ciclos', function(){
+    $j = 4;
+
+    while ($j > 0) {
+        echo $j;
+
+        $j--;
+
+    }
+});
+
 /*=====  End of Test Routes  ======*/
 
 
@@ -396,26 +407,7 @@ Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
 Route::get('cancel/{id}' , 'PaymentController@cancel');
 Route::get('mora/{id}' , 'PaymentController@mora');
 
-Route::get('clientemodal',function(){
-$expenditure = App\Models\Expenditure::all();
-foreach ($expenditure as  $value) {
-    echo $value->concept;
-    echo "<br>";
-}
 
-$user = App\User::find(3);
-$vault = $user->vault;
-echo $vault->ammount;
-echo "<br>";
-
-$credits = $user->credits;
-foreach ($credits as $credits) {
-    echo $credits->firts_name;
-    echo "<br>";
-}
-
-
-});
 
 Route::get('mexico', function(){
     return view('mexico');

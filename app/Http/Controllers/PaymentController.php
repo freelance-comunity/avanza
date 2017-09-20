@@ -177,193 +177,101 @@ class PaymentController extends AppBaseController
 
 	public function process(Request $request)
 	{	
+		// Valitador
 		$validator = Validator::make($request->all(), [
 			'payment' => 'required|numeric',
 			'payment_id' => 'required',
-			]);
+		]);
 
 		if ($validator->fails()) {
 			Toastr::error('Por favor introduce una cantidad correcta.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();
 		}
+		//End 
 
-		$ammount = $request->input('payment');
+		//Get data payment, debt and ammount input
+		$ammount = number_format($request->input('payment'),2);
 		$payment = Payment::find($request->input('payment_id'));
+		$ammount_payment = number_format($payment->balance,2);
 		$debt = $payment->debt;
-		if ($ammount > $payment->balance AND $payment->status == "Pendiente") {
-			$budget = intdiv($ammount, $payment->balance);
-			$r = fmod($ammount, $payment->balance);
-			$count = $payment->id + $budget;
+		//End
 
-			if ($ammount > $debt->ammount) {
-				Toastr::error('Estas introduciendo una cantidad mayor a tu saldo a liquidar.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			}else{
-				if ($budget >= 1 AND $r >= 1) {
-					for ($i=$payment->id; $i < $count; $i++) { 
-						$payment_process = Payment::find($i);
-						$payment_process->payment = $payment->balance;
-						$payment_process->balance = 0;
-						$payment_process->status = "Pagado";
-						$payment_process->save();
-						$debt->ammount = $debt->ammount - $payment->balance;
-						$debt->save();
-					}
-					$payment_extra = Payment::find($count);
-					$payment_extra->payment = $r;
-					$payment_extra->balance = $payment_extra->balance - $r;
-					$payment_extra->status = "Parcial";
-					$payment_extra->save();
-					$debt->ammount = $debt->ammount - $r;
-					
-					$debt->save();
-					Toastr::success('Pagos test.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-				}
-				else{
-					for ($i=$payment->id; $i < $count; $i++) { 
-						$payment_process = Payment::find($i);
-						$payment_process->payment = $payment->balance;
-						$payment_process->balance = 0;
-						$payment_process->status = "Pagado";
-						$payment_process->save();
-						$debt->ammount = $debt->ammount - $payment->balance;
-						
-						$debt->save();
-					}
-					Toastr::success('Pagos confirmados.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-				}
-			}
-			/*if ($debt->ammount == 0) {
-				$debt->status = "Pagado";
-				$debt->save();
-			}*/
-		}
-		else{
-			if ($payment->status == "Vencido") {
-				$ammount = $request->input('payment');
-				$rest = $payment->balance;
-				$paid_out = $payment->payment;
-				$new_balance = $rest - $ammount;
-
-				if ($ammount > $payment->balance) {
-					Toastr::warning('Se requiere introducir cantidad exacta o menos para procesar su pago.', 'PAGO VENCIDO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-				}
-				else{
-					if ($new_balance == 0) {
-						$payment->balance = $new_balance;
-						$payment->status = "Pagado";
-						$payment->payment = $paid_out + $ammount;
-						$debt->ammount = $debt->ammount - $rest;
-						$debt->save();
-						Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-					}elseif($new_balance < $rest){
-						$payment->status = "Vencido";
-						$payment->balance = $new_balance;
-						$payment->payment = $paid_out + $ammount;
-
-						$debt->ammount = $debt->ammount - $ammount;
-
-						$debt->save();
-
-						Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-					}elseif ($new_balance > $rest) {
-						echo "No sabemos que hacer";
-					}
-				}
-			}elseif ($payment->status == "Parcial") {
-				$ammount = $request->input('payment');
-				$rest = $payment->balance;
-				$paid_out = $payment->payment;
-				$new_balance = $rest - $ammount;
-
-				if ($ammount > $payment->balance) {
-					Toastr::warning('Se requiere introducir cantidad exacta o menos para procesar su pago.', 'PAGO VENCIDO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-				}
-				else{
-					if ($new_balance == 0) {
-						$payment->balance = $new_balance;
-						$payment->status = "Pagado";
-						$payment->payment = $paid_out + $ammount;
-						$debt->ammount = $debt->ammount - $rest;
-						$debt->save();
-						Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-					}elseif($new_balance < $rest){
-						$payment->status = "Parcial";
-						$payment->balance = $new_balance;
-						$payment->payment = $paid_out + $ammount;
-
-						$debt->ammount = $debt->ammount - $ammount;
-						$debt->save();
-						Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-					}elseif ($new_balance > $rest) {
-						echo "No sabemos que hacer";
-					}
-				}
-			}
-			else{
-				$payment->balance = $payment->total - $ammount;
-				if ($payment->balance == 0) {
-					$payment->status = "Pagado";
-					$payment->payment = $ammount;
-					$debt->ammount = $debt->ammount - $payment->payment;
-					$debt->save();
-					Toastr::success('Pago confirmado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-				}elseif ($payment->balance >= 1) {
-					$payment->status = "Vencido";
-					$payment->payment = $ammount;
-					$payment->moratorium = 20;
-					$payment->total = $payment->ammount + $payment->moratorium;
-					$payment->balance = $payment->balance + 20;
-					$debt->ammount = $debt->ammount + 20;
-					$debt->ammount = $debt->ammount - $payment->payment;
-					$debt->save();
-
-					Toastr::info('Pago realizado parcialmente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-					
-
-				}
-			}
+		if ($ammount === $ammount_payment) {
+			// Process payment
+			$payment->status  = 'Pagado';
+			$payment->payment = $payment->payment + $ammount;
+			$payment->balance = 0;
 			$payment->save();
-
-			if ($payment->status ==  "Vencido") {
-				$latePayments = new LatePayments;
-				$latePayments->late_number = $payment->number;
-				$latePayments->late_ammount = $payment->total;
-				$latePayments->late_payment = $request->input('payment');
-				$latePayments->status = "Bloqueado";
-				$latePayments->payment_id = $payment->id;
-				$latePayments->debt_id = $payment->debt->id;
-				$latePayments->save();
-
-
-			}
-
-
-			
-
-
-			
+			// Process debt
+			$debt->ammount = $debt->ammount - $ammount;
+			$debt->save();
+			// show message 
+			Toastr::success('Pago procesado exitosamente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();	
 		}
-		$current = Carbon::today();
-		$user = Auth::user();
-		$vault = $user->vault;
+		elseif ($ammount < $ammount_payment) {
+			// Process payment
+			$payment->status  = 'Parcial';
+			$payment->payment = $payment->payment + $ammount;
+			$payment->balance = $ammount_payment - $ammount;
+			$payment->save();
+			// Process debt
+			$debt->ammount = $debt->ammount - $ammount;
+			$debt->save();
+			// show message 
+			Toastr::warning('Pago incompleto realizado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();	
+		}
+		elseif ($ammount > $ammount_payment) {
+			// get exact quota
+			$extra    = $ammount - $ammount_payment;
+			$complete = $ammount - $extra;
+			// get id payment online and next request
+			$id_online = $payment->id;
+			$id_next   = $id_online + 1;
+			// Process payment
+			$payment->status  = 'Pagado';
+			$payment->payment = $payment->payment + $ammount_payment;
+			$payment->balance = $payment->balance - $ammount_payment;
+			$payment->save();
+			// Process debt
+			$debt->ammount = $debt->ammount - $complete;
+			$debt->save();
 
-		$data_income['ammount'] = $ammount;
-		$data_income['concept'] = 'Recuperación';
-		$data_income['date']    = $current;
-		$data_income['vault_id'] = $vault->id;
-		$income = Income::create($data_income);
+			while ($extra > 0) {
+				$next_ammount = number_format($extra);
+				$next_payment = Payment::find($id_next);
+				$next_ammount_payment = number_format($next_payment->balance,2);
+				$next_debt = $next_payment->debt;
 
-		$vault->ammount = $vault->ammount + $income->ammount;
-		$vault->save();
-
-			if ($debt->ammount == 0) {
-				$debt->status = "Pagado";
-				$debt->credit->status = "Pagado";
-				$debt->credit->save();
-				$debt->save();	
-				
+				// Process next payment
+				$next_payment->payment = $next_payment->payment + $next_ammount;
+				$next_payment->balance = $next_payment->balance - $next_ammount;
+				if ($next_payment->balance === 0) {
+					$next_payment->status = 'Pagado';
+				}
+				else
+				{
+					$next_payment->status = 'Parcial';
+				}
+				$next_payment->save();
+				// Process next debt
+				$next_debt->ammount = $next_debt->ammount - $next_ammount;
+				$next_debt->save();
+				echo $next_payment->id;
+				echo "<br>";
+				echo $next_ammount;
+				echo "<br>";
+				$extra = $extra - $next_payment->payment;
+				$id_next = $next_payment->id + 1;
+				echo $id_next;
+				echo "<br>";
+				echo $extra;
 			}
-		return redirect()->back();	
+
+			Toastr::info('Pago realizado y sobran '.number_format($extra,2).' pesos.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		}
 
 
 	}
@@ -388,13 +296,13 @@ class PaymentController extends AppBaseController
 			return redirect(route('payments.index'));
 		}	
 
-			$payment->moratorium = 0;
-			$payment->payment = 0;
-			$payment->balance = $payment->ammount;;
-			$payment->total = $payment->ammount;
-			$payment->status = "Pendiente";
-			$payment->save();
-	
+		$payment->moratorium = 0;
+		$payment->payment = 0;
+		$payment->balance = $payment->ammount;;
+		$payment->total = $payment->ammount;
+		$payment->status = "Pendiente";
+		$payment->save();
+
 		return redirect()->back();	
 	}
 	public function mora($id)
@@ -407,11 +315,11 @@ class PaymentController extends AppBaseController
 			return redirect(route('payments.index'));
 		}	
 
-			$payment->moratorium = 0;
-			$payment->balance = $payment->balance - 20;
-			$payment->total = $payment->ammount;
-			$payment->save();
-	
+		$payment->moratorium = 0;
+		$payment->balance = $payment->balance - 20;
+		$payment->total = $payment->ammount;
+		$payment->save();
+
 		return redirect()->back();	
 	}
 	

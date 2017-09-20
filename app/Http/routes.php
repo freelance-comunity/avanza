@@ -90,6 +90,17 @@ Route::get('testDate', function(){
     $af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
 });
 
+Route::get('ciclos', function(){
+    $j = 4;
+
+    while ($j > 0) {
+        echo $j;
+
+        $j--;
+
+    }
+});
+
 /*=====  End of Test Routes  ======*/
 
 

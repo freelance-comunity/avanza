@@ -190,10 +190,10 @@ class PaymentController extends AppBaseController
 		//End 
 
 		//Get data payment, debt and ammount input
-		$ammount = number_format($request->input('payment'),2);
+		$ammount = number_format($request->input('payment'));
 		$payment = Payment::find($request->input('payment_id'));
-		$ammount_payment = number_format($payment->balance,2);
-		$ammount_payment_total = number_format($payment->ammount,2);
+		$ammount_payment = number_format($payment->balance);
+		$ammount_payment_total = number_format($payment->ammount);
 		$debt = $payment->debt;
 		//End
 
@@ -246,7 +246,7 @@ class PaymentController extends AppBaseController
 			while ($budget > 0) {
 				//$next_ammount = number_format($extra);
 				$next_payment = Payment::find($id_next);
-				$next_ammount_payment = number_format($next_payment->balance,2);
+				$next_ammount_payment = number_format($next_payment->balance);
 				//$next_debt = $next_payment->debt;
 
 				// Process next payment

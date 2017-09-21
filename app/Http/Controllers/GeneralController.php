@@ -49,7 +49,6 @@ class GeneralController extends Controller
 		$current = Carbon::today()->toDateString();
 
 		$user = User::find($id);
-		$credits = $user->credit;
 		$vault = $user->vault;
 		$incomes = $vault->incomes->where('date', $current);
 		$si = $incomes->where('concept', 'Saldo Inicial')->where('date', $current);
@@ -57,8 +56,10 @@ class GeneralController extends Controller
 		$af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
 
 		$expenditures = $vault->expenditures->where('date', $current);
+		
 		$c = $expenditures->where('concept', 'Colocación')->where('date', $current);
 		$g = $expenditures->where('concept', 'Gasto')->where('date', $current);
+		
 		
 		return view('executives.showVault')
 		->with('user', $user)
@@ -69,8 +70,7 @@ class GeneralController extends Controller
 		->with('af', $af)
 		->with('expenditures', $expenditures)
 		->with('c', $c)
-		->with('g', $g)
-		->with('credits',$credits);
+		->with('g', $g);
 	}
 
 	public function addVault(Request $request)

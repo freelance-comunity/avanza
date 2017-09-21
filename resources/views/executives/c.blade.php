@@ -17,6 +17,7 @@
             <th>Comprobante</th>
             <th>Fecha</th>
             <th>Cliente</th>
+            <th></th>
           </thead>
           <tbody>
             @foreach ($c as $c)
@@ -25,7 +26,8 @@
               <td>{{ $c->concept }}</td>
               <td>{{ $c->voucher }}</td>
               <td>{{ $c->created_at }}</td>
-              <td>{{ $credits}}</td>
+              <td> {{ $c->credit->folio }}</td>
+              <td><a href="{!! route('credits.show', [$c->credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a> </td>
             </tr>
             @endforeach
           </tbody>

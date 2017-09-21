@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AdminMiddleware
+class CreditsMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,10 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-         if (\Auth::user()->hasRole(['administrador'])) {
+        if (\Auth::user()->hasRole(['ejecutivo-de-credito'])) {
             return $next($request);
         }else{
             return abort(403);
         }
-        
     }
 }

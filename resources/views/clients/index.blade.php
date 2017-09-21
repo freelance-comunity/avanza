@@ -38,7 +38,9 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
         <th>Apellido Materno</th>
         <th>Sucursal</th>
         <th>Teléfono</th>
+        @if (Auth::user()->can('crear-credito'))
         <th width="50px">Crédito</th>
+        @endif
         <th>Acción</th>
       </thead>
       <tbody>
@@ -103,7 +105,9 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
            <a href="" class="btn bg-red btn-block uppercase">Bloqueado</a>
            <button type="button" class="btn bg-red btn-block uppercase">Bloqueado</button></td>
            @else--}}
+           @if (Auth::user()->can('crear-credito'))
            <td> <button type="button" class="btn btn-primary btn-block uppercase" data-toggle="modal" data-target="#myModal{{$client->id}}">Nuevo</button></td>
+           @endif
  
        
           <td>

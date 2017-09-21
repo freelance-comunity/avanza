@@ -21,81 +21,81 @@ Detalles del Cliente
         <h5 class="widget-user-desc">SUCURSAL: {{$branch->name}}</h5>
       </div>
       <div class="widget-user-image"> 
-      <a href="{{ url('/updatephoto') }}/{{$client->id}}"><img  style="border-radius: 50%; padding: 2px; width: 100px;" class="img-circle" src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" alt="User Avatar"></a>
-     </div>
-     <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-4 border-right">
-          <div class="description-block">
-            <h5 class="description-header">TELÉFONO</h5>
-            <span class="description-text">{{$client->phone}}</span>
-          </div>
-          <!-- /.description-block -->
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 border-right">
-          <div class="description-block">
-            <h5 class="description-header">CURP</h5>
-            <span class="description-text">{{ $client->curp}}</span>
-          </div>
-          <!-- /.description-block -->
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4">
-          <div class="description-block">
-            <h5 class="description-header">INE</h5>
-            <span class="description-text">{{$client->ine}}</span>
-             
-          </div>
-          <!-- /.description-block -->
-        </div>
-        <!-- /.col -->
+        <a href="{{ url('/updatephoto') }}/{{$client->id}}"><img  style="border-radius: 50%; padding: 2px; width: 100px;" class="img-circle" src="{{ asset('/uploads/avatars') }}/{!! $client->avatar !!}" alt="User Avatar"></a>
       </div>
-      <!-- /.row -->
+      <div class="box-footer">
+        <div class="row">
+          <div class="col-sm-4 border-right">
+            <div class="description-block">
+              <h5 class="description-header">TELÉFONO</h5>
+              <span class="description-text">{{$client->phone}}</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-4 border-right">
+            <div class="description-block">
+              <h5 class="description-header">CURP</h5>
+              <span class="description-text">{{ $client->curp}}</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-4">
+            <div class="description-block">
+              <h5 class="description-header">INE</h5>
+              <span class="description-text">{{$client->ine}}</span>
+
+            </div>
+            <!-- /.description-block -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
     </div>
   </div>
-</div>
-<div class="col-md-6">
-  <a href="{!! route('clients.edit', [$client->id]) !!}"><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-user"></i> DATOS PERSONALES</h3></a>
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <tr>
-        <th style="width: 10px">1</th>
-        <th>ESTADO CIVIL:</th>
-        <th>{{$client->civil_status}}</th>
-      </tr>
-      <tr>
-        <td>2.</td>
-        <td>DEPENDIENTES:</td>
-        <td>
-          {{$client->no_economic_dependent}}
-        </td>
-      </tr>
-     <tr>
-      <td>3.</td>
-      <td>TIPO DE VIVIENDA:</td>
-      <td>
-        {{$client->type_of_housing}}
-      </td>
-    </tr>
-    <tr>
-        <td>4.</td>
-        <td>MONTO MÁXIMO:</td>
-        <td>
-          {{$client->maximun_amount}}
-        </td>
-      </tr>
-  </table>
-</div>
-</div>
-@if (is_null($location))
-<div class="box-body">
- <h3>Este empleado no tiene datos de ubicación registrados.</h3> 
-</div>
-@else
-<a href="{!! route('clientLocations.edit', [$location->id]) !!}"><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-home"></i> DOMICILIO DEL CLIENTE</h3></a>
-<!-- /.box-header -->
-<div class="box-body no-padding">
+  <div class="col-md-6">
+    <a href="{!! route('clients.edit', [$client->id]) !!}"><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-user"></i> DATOS PERSONALES</h3></a>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <tr>
+          <th style="width: 10px">1</th>
+          <th>ESTADO CIVIL:</th>
+          <th>{{$client->civil_status}}</th>
+        </tr>
+        <tr>
+          <td>2.</td>
+          <td>DEPENDIENTES:</td>
+          <td>
+            {{$client->no_economic_dependent}}
+          </td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td>TIPO DE VIVIENDA:</td>
+          <td>
+            {{$client->type_of_housing}}
+          </td>
+        </tr>
+        <tr>
+          <td>4.</td>
+          <td>MONTO MÁXIMO:</td>
+          <td>
+            {{$client->maximun_amount}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  @if (is_null($location))
+  <div class="box-body">
+   <h3>Este empleado no tiene datos de ubicación registrados.</h3> 
+ </div>
+ @else
+ <a href="{!! route('clientLocations.edit', [$location->id]) !!}"><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-home"></i> DOMICILIO DEL CLIENTE</h3></a>
+ <!-- /.box-header -->
+ <div class="box-body no-padding">
   <div class="row">
     <div class="col-md-8 col-sm-8">
       <div class="pad">
@@ -302,36 +302,35 @@ Detalles del Cliente
         </ol>
         <div class="carousel-inner">
           <div class="item active">
-             <a href="{{ url('/ine') }}/{{$document->id}}"> <img src="{{ asset('/uploads/documents') }}/{!! $document->ine !!}"" alt="Second slide"></a>
-            <div class="carousel-caption">
-              INE
-            </div>
-          </div>
-          <div class="item">
-          <a href="{{ url('/curps') }}/{{$document->id}}"> <img src="{{ asset('/uploads/documents') }}/{!! $document->curp !!}"" alt="Second slide"></a>
-           
-            <div class="carousel-caption">
-              CURP
-            </div>
-          </div>
-          <div class="item">
-          <a href="{{ url('/updatephotos') }}/{{$document->id}}"><img src="{{ asset('/uploads/documents') }}/{!! $document->proof_of_addres !!}"" alt="Third slide"></a>
-            <div class="carousel-caption">
-              COMPROBANTE DE DOMICILIO
-            </div>
+            <img src="{{ asset('/uploads/documents') }}/{!! $document->ine !!}"" alt="Second slide">
+           <div class="carousel-caption">
+           <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/ine') }}/{{$document->id}}"><strong>EDITAR INE</strong></a></h1>
           </div>
         </div>
-        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-          <span class="fa fa-angle-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-          <span class="fa fa-angle-right"></span>
-        </a>
+        <div class="item">
+          <img src="{{ asset('/uploads/documents') }}/{!! $document->curp !!}"" alt="Second slide">
+          <div class="carousel-caption">
+            <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/curpss') }}/{{$document->id}}"><strong>EDITAR CURP</strong></a></h1>
+          </div>
+        </div>
+        <div class="item">
+          <img src="{{ asset('/uploads/documents') }}/{!! $document->proof_of_addres !!}"" alt="Third slide">
+          <div class="carousel-caption">
+             <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/updatephotos') }}/{{$document->id}}"><strong>EDITAR COMPROBANTE DE DOMICILIO</strong></a></h1>
+          </div>
+        </div>
       </div>
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="fa fa-angle-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="fa fa-angle-right"></span>
+      </a>
     </div>
-    <!-- /.box-body -->
   </div>
-  <!-- /.box -->
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
 </div>
 
 <!-- /.col -->

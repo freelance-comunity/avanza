@@ -190,95 +190,135 @@ class PaymentController extends AppBaseController
 		//End 
 
 		//Get data payment, debt and ammount input
-		$ammount = number_format($request->input('payment'));
+		$ammount = $request->input('payment'); /*$request->input('payment');*/
 		$payment = Payment::find($request->input('payment_id'));
-		$ammount_payment = number_format($payment->balance);
-		$ammount_payment_total = number_format($payment->ammount);
+		$ammount_payment = $payment->balance;
+		$ammount_payment_total = $payment->ammount;
 		$debt = $payment->debt;
 		//End
 
-		if ($ammount === $ammount_payment) {
-			// Process payment
-			$payment->status  = 'Pagado';
-			$payment->payment = $payment->payment + $ammount;
-			$payment->balance = 0;
-			$payment->save();
-			// Process debt
-			$debt->ammount = $debt->ammount - $ammount;
-			$debt->save();
-			// show message 
-			Toastr::success('Pago procesado exitosamente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		// Check debt 
+		if ($request->input('payment') > $debt->ammount) {
+			Toastr::error('Estas introduciendo una cantitad mayor a tu adeudo, la cuota solicitada es de $'.$debt->ammount.' pesos', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();	
 		}
-		elseif ($ammount < $ammount_payment) {
+		// else
+		else
+		{
+			if ($ammount === $ammount_payment) {
 			// Process payment
-			$payment->status  = 'Parcial';
-			$payment->payment = $payment->payment + $ammount;
-			$payment->balance = $ammount_payment - $ammount;
-			$payment->save();
-			// Process debt
-			$debt->ammount = $debt->ammount - $ammount;
-			$debt->save();
-			// show message 
-			Toastr::warning('Pago incompleto realizado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			return redirect()->back();	
-		}
-		elseif ($ammount > $ammount_payment) {
-			// get exact quota
-			$extra    = $ammount - $ammount_payment;
-			$complete = $ammount - $extra;
-			// Process payment
-			$payment->status  = 'Pagado';
-			$payment->payment = $payment->payment + $ammount_payment;
-			$payment->balance = $payment->balance - $ammount_payment;
-			$payment->save();
-			// Process debt
-			$debt->ammount = $debt->ammount - $ammount_payment;
-			$debt->save();
-			// Process news payments
-			$budget  = intdiv($extra, $ammount_payment_total);
-			$r       = fmod($extra, $ammount_payment_total);
-			// 
-			// get id payment online and next request
-			$id_online = $payment->id;
-			$id_next   = $id_online + 1;
-
-			while ($budget > 0) {
-				//$next_ammount = number_format($extra);
-				$next_payment = Payment::find($id_next);
-				$next_ammount_payment = number_format($next_payment->balance);
-				//$next_debt = $next_payment->debt;
-
-				// Process next payment
-				$next_payment->payment = $next_payment->payment + $next_payment->ammount;
-				$next_payment->balance = $next_payment->balance - $next_payment->ammount;
-				$next_payment->status  = 'Pagado';
-				$next_payment->save();
-		
+				$payment->status  = 'Pagado';
+				$payment->payment = $payment->payment + $ammount;
+				$payment->balance = 0;
+				$payment->save();
 				// Process debt
-				$debt->ammount = $debt->ammount - $next_payment->ammount;
+				$debt->ammount = $debt->ammount - $ammount;
 				$debt->save();
+				// show message 
+				Toastr::success('Pago procesado exitosamente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-				$id_next = $id_next + 1;
-				$budget = $budget - 1;
+				if ($debt->ammount == 0) {
+					$debt->status = "Pagado";
+					$debt->credit->status = "Pagado";
+					$debt->credit->save();
+					$debt->save();	
+
+				}
+
+				return redirect()->back();	
 			}
-			if ($r > 0) {
-				$payment_extra = Payment::find($id_next);
+
+			elseif ($ammount < $ammount_payment) {
+				// Process payment
+				$payment->status  = 'Parcial';
+				$payment->payment = $payment->payment + $ammount;
+				$payment->balance = $ammount_payment - $ammount;
+				$payment->save();
+				// Process debt
+				$debt->ammount = $debt->ammount - $ammount;
+				$debt->save();
+				// show message 
+				Toastr::warning('Pago incompleto realizado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+				if ($debt->ammount == 0) {
+					$debt->status = "Pagado";
+					$debt->credit->status = "Pagado";
+					$debt->credit->save();
+					$debt->save();	
+
+				}
+
+				return redirect()->back();	
+			}
+
+			elseif ($ammount > $ammount_payment) {
+
+				// get exact quota
+				$extra    = $ammount - $ammount_payment;
+				$complete = $ammount - $extra;
+				// Process payment
+				$payment->status  = 'Pagado';
+				$payment->payment = $payment->payment + $ammount_payment;
+				$payment->balance = $payment->balance - $ammount_payment;
+				$payment->save();
+				// Process debt
+				$debt->ammount = $debt->ammount - $ammount_payment;
+				$debt->save();
+				// Process news payments
+				$budget  = intdiv($extra, $ammount_payment_total);
+				$r       = fmod($extra, $ammount_payment_total);
 				// 
-				$payment_extra->payment = $payment_extra->payment + $r;
-				$payment_extra->balance = $payment_extra->balance - $r;
-				$payment_extra->status  = 'Parcial';
-				$payment_extra->save();
-				// Process debt
-				$debt->ammount = $debt->ammount - $payment_extra->payment;
-				$debt->save();
+				// get id payment online and next request
+				$id_online = $payment->id;
+				$id_next   = $id_online + 1;
 
+				while ($budget > 0) {
+					//$next_ammount = number_format($extra);
+					$next_payment = Payment::find($id_next);
+					$next_ammount_payment = $next_payment->balance;
+					//$next_debt = $next_payment->debt;
+
+					// Process next payment
+					$next_payment->payment = $next_payment->payment + $next_payment->ammount;
+					$next_payment->balance = $next_payment->balance - $next_payment->ammount;
+					$next_payment->status  = 'Pagado';
+					$next_payment->save();
+
+					// Process debt
+					$debt->ammount = $debt->ammount - $next_payment->ammount;
+					$debt->save();
+
+					$id_next = $id_next + 1;
+					$budget = $budget - 1;
+				}
+				if ($r > 0) {
+					$payment_extra = Payment::find($id_next);
+					// 
+					$payment_extra->payment = $payment_extra->payment + $r;
+					$payment_extra->balance = $payment_extra->balance - $r;
+					$payment_extra->status  = 'Parcial';
+					$payment_extra->save();
+					// Process debt
+					$debt->ammount = $debt->ammount - $payment_extra->payment;
+					$debt->save();
+
+				}
+
+				Toastr::info('Pagos realizados y 1 extra de '.number_format($r,2).' pesos.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+				if ($debt->ammount == 0) {
+					$debt->status = "Pagado";
+					$debt->credit->status = "Pagado";
+					$debt->credit->save();
+					$debt->save();	
+
+				}
+
+				return redirect()->back();
 			}
 
-			Toastr::info('Pagos realizados y 1 extra de '.number_format($r,2).' pesos.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			return redirect()->back();
+		//end else
 		}
-
 
 	}
 	

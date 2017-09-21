@@ -91,10 +91,10 @@ Route::get('testDate', function(){
 });
 
 Route::get('ciclos', function(){
-    $payment = 150;
-    $extra   = $payment - 50;
-    $budget  = intdiv($extra, 50);
-    $r       = fmod($extra, 50);
+    $payment = 1050;
+    $extra   = 180;
+    $budget  = intdiv($extra, 320);
+    $r       = fmod($extra, 320);
 
     $id_online = 1;
     $id_next   = $id_online + 1;

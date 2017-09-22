@@ -13,6 +13,7 @@ use Schema;
 use Toastr;
 use Validator;
 use App\Models\Income;
+use App\Models\IncomePayment;
 use Auth;
 use Carbon\Carbon;
 
@@ -216,7 +217,20 @@ class PaymentController extends AppBaseController
 				$debt->save();
 				// show message 
 				Toastr::success('Pago procesado exitosamente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				$current = Carbon::today();
+				$user = Auth::user();
+				$vault = $user->vault;
 
+				$data_incomePayment['ammount'] = $ammount;
+				$data_incomePayment['concept'] = 'Recuperación';
+				$data_incomePayment['date']    = $current;
+				$data_incomePayment['payment_id'] = $payment->id;
+				$data_incomePayment['debt_id'] = $debt->id;
+				$data_incomePayment['vault_id'] = $vault->id;
+				$incomePayment = IncomePayment::create($data_incomePayment);
+
+				$vault->ammount = $vault->ammount + $incomePayment->ammount;
+				$vault->save();
 				if ($debt->ammount == 0) {
 					$debt->status = "Pagado";
 					$debt->credit->status = "Pagado";
@@ -239,9 +253,28 @@ class PaymentController extends AppBaseController
 				$debt->save();
 				// show message 
 				Toastr::warning('Pago incompleto realizado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				$current = Carbon::today();
+				$user = Auth::user();
+				$vault = $user->vault;
 
+				$data_incomePayment['ammount'] = $ammount;
+				$data_incomePayment['concept'] = 'Recuperación';
+				$data_incomePayment['date']    = $current;
+				$data_incomePayment['payment_id'] = $payment->id;
+				$data_incomePayment['debt_id'] = $debt->id;
+				$data_incomePayment['vault_id'] = $vault->id;
+				$incomePayment = IncomePayment::create($data_incomePayment);
+
+				$vault->ammount = $vault->ammount + $incomePayment->ammount;
+				$vault->save();
 				if ($debt->ammount == 0) {
 					$debt->status = "Pagado";
+					$debt->credit->status = "Pagado";
+					$debt->credit->save();
+					$debt->save();	
+
+				}else if ($debt->credit->periodicity == 'CREDISEMANA') {
+					$debt->status = "Renovación";
 					$debt->credit->status = "Pagado";
 					$debt->credit->save();
 					$debt->save();	
@@ -250,6 +283,42 @@ class PaymentController extends AppBaseController
 
 				return redirect()->back();	
 			}
+
+			// elseif ($debt->credit->periodicity == 'CREDISEMANA' && $ammount < $ammount_payment) {
+			// 	// Process payment
+			// 	$payment->status  = 'Parcial';
+			// 	$payment->payment = $payment->payment + $ammount;
+			// 	$payment->balance = $ammount_payment - $ammount;
+			// 	$payment->save();
+			// 	// Process debt
+			// 	$debt->ammount = $debt->ammount - $ammount;
+			// 	$debt->save();
+			// 	// show message 
+			// 	Toastr::warning('Pago incompleto realizado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			// 	$current = Carbon::today();
+			// 	$user = Auth::user();
+			// 	$vault = $user->vault;
+
+			// 	$data_incomePayment['ammount'] = $ammount;
+			// 	$data_incomePayment['concept'] = 'Recuperación';
+			// 	$data_incomePayment['date']    = $current;
+			// 	$data_incomePayment['payment_id'] = $payment->id;
+			// 	$data_incomePayment['debt_id'] = $debt->id;
+			// 	$data_incomePayment['vault_id'] = $vault->id;
+			// 	$incomePayment = IncomePayment::create($data_incomePayment);
+
+			// 	$vault->ammount = $vault->ammount + $incomePayment->ammount;
+			// 	$vault->save();
+			// 	if ($debt->ammount == 250) {
+			// 		$debt->status = "Pagado";
+			// 		$debt->credit->status = "Pagado";
+			// 		$debt->credit->save();
+			// 		$debt->save();	
+
+			// 	}
+
+			// 	return redirect()->back();	
+			// }
 
 			elseif ($ammount > $ammount_payment) {
 
@@ -305,7 +374,20 @@ class PaymentController extends AppBaseController
 				}
 
 				Toastr::info('Pagos realizados y 1 extra de '.number_format($r,2).' pesos.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				$current = Carbon::today();
+				$user = Auth::user();
+				$vault = $user->vault;
 
+				$data_incomePayment['ammount'] = $ammount;
+				$data_incomePayment['concept'] = 'Recuperación';
+				$data_incomePayment['date']    = $current;
+				$data_incomePayment['payment_id'] = $payment->id;
+				$data_incomePayment['debt_id'] = $debt->id;
+				$data_incomePayment['vault_id'] = $vault->id;
+				$incomePayment = IncomePayment::create($data_incomePayment);
+
+				$vault->ammount = $vault->ammount + $incomePayment->ammount;
+				$vault->save();
 				if ($debt->ammount == 0) {
 					$debt->status = "Pagado";
 					$debt->credit->status = "Pagado";
@@ -319,6 +401,7 @@ class PaymentController extends AppBaseController
 
 		//end else
 		}
+		
 
 	}
 	

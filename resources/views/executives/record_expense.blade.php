@@ -19,6 +19,10 @@
           <input type="text" name="concept" class="form-control input-lg" placeholder="ESCRIBE CONCEPTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
         </p>-->
         <p>
+          {!! Form::label('description', 'Descripción:') !!}
+          <input type="text" name="description" class="form-control input-lg">
+        </p>
+        <p>
           {!! Form::label('voucher', 'Coprobante:') !!}
           <input type="file" name="voucher" class="form-control input-lg">
         </p>

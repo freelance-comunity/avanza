@@ -7,7 +7,7 @@
 
     {!! Form::model($clientAval, ['route' => ['clientAvals.update', $clientAval->id], 'method' => 'patch','data-parsley-validate' => '']) !!}
 
-        @include('clientAvals.fields')
+        @include('clientAvals.fields-edit')
 
     {!! Form::close() !!}
 </div>

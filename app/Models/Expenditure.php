@@ -18,6 +18,7 @@ class Expenditure extends Model
 		"concept",
 		"voucher",
 		"date",
+		"description",
 		"credit_id",
 		"vault_id"
 	];
@@ -25,16 +26,13 @@ class Expenditure extends Model
 	public static $rules = [
 	    "ammount" => "required",
 		"concept" => "required",
-		"voucher" => "required"
+		"voucher" => "required",
+		"description" => "required"
 	];
 
 	public function vault()
 	{
 		return $this->belongsTo('App\Models\Vault');
-	}
-	public function credit()
-	{
-		return $this->belongsTo('App\Models\Credit');
 	}
 	
 }

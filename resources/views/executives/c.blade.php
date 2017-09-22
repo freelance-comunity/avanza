@@ -14,20 +14,18 @@
           <thead class="thead-inverse">
             <th>Importe</th>
             <th>Concepto</th>
-            <th>Comprobante</th>
             <th>Fecha</th>
             <th>Cliente</th>
-            <th></th>
+            <th>Acción</th>
           </thead>
           <tbody>
             @foreach ($c as $c)
             <tr>
               <td>${{ number_format($c->ammount,2) }}</td>
               <td>{{ $c->concept }}</td>
-              <td>{{ $c->voucher }}</td>
               <td>{{ $c->created_at }}</td>
-              <td> {{ $c->credit->folio }}</td>
-              <td><a href="{!! route('credits.show', [$c->credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a> </td>
+              <td>{{ $c->credit->folio }}</td>
+              <td><a href="{!! route('credits.show', [$c->credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a></td>
             </tr>
             @endforeach
           </tbody>

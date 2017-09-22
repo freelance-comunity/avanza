@@ -229,7 +229,8 @@ Detalles del Cliente
 
 @if (is_null($aval))
 <div class="box-body">
- <h3>Este empleado no tiene aval registrado.</h3> 
+  <a  style="margin-right: 25px" href="{!! route('client.avalClient', [$client->id])!!}"><h3>Este empleado no tiene aval registrado.</h3></a>
+  
 </div>
 @else
 <div class="col-md-12">

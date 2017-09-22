@@ -117,8 +117,8 @@ class Credit extends Model
 			'App\Models\LatePayments', 'App\Models\Debt', 
 			'credit_id','debt_id','id');
 	}
-	public function expenditures()
+	public function expendituresCredit()
 	{
-		return $this->hasOne('App\Models\Expenditure');
+		return $this->hasOne('App\Models\ExpenditureCredit');
 	}
 }

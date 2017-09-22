@@ -18,7 +18,11 @@ class CreateExpenditureCreditsTable extends Migration
 			$table->increments('id');
 			$table->string('ammount');
 			$table->string('concept');
-			$table->string('date');
+			$table->date('date');
+			$table->integer('credit_id')->unsigned();
+			$table->foreign('credit_id')->references('id')->on('credits')->onDelete('cascade');
+			$table->integer('vault_id')->unsigned();
+			$table->foreign('vault_id')->references('id')->on('vaults')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

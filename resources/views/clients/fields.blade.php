@@ -315,25 +315,6 @@
     <div class="col-xs-12">
       <div class="col-md-12">
         <h3>¿La dirección del cliente es la misma del negocio?</h3>
-        {{-- <select id="status" onChange="direccion(this.value);" class="form-control input-lg">
-          <option value="" class="selected">¿La dirección del Negocio es la misma del Cliente?</option>
-          <option value="si">Si</option>
-          <option  value="no">No</option>
-        </select>
-        <br>
-        <script>
-          function direccion(id) {
-            if (id == "si") {
-              $("#sii").show();
-              $("#noo").hide(1000);
-            }
-            if (id == "no") {
-              $("#sii").hide(1000);
-              $("#noo").show();
-            }
-          }
-        </script> --}}
-
         <div class="form-group col-sm-6 col-lg-12">
           <button id="buttonok" class="btn  btn-lg btn-primary">SI</button>
           <button id="buttonoff" class="btn btn-lg btn-success">No</button>
@@ -474,82 +455,7 @@
           </div>
         </div>
       </div>
-      {{-- <div class="form-group col-sm-6 col-lg-12" id="noo" style="display: none;">
-        <div class="form-group col-sm-6 col-lg-12">
-          <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('name_company', 'Nombre del Negocio:') !!}
-            {!! Form::text('name_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE NOMBRE DEL NEGOCIO', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase(); ']) !!}
-          </div>
-          <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('street_company', 'Calle:') !!}
-            {!! Form::text('', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NOMBRE DE LA CALLE','id' => 'calle', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-          </div>
-          <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('number_company', 'Número de Casa:') !!}
-            {!! Form::text('number_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE EL NÚMERO DE LA CASA','data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-          </div>  
-        </div>
-        <div class="form-group col-sm-6 col-lg-12">
-          <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('state_company', 'Estado:') !!}
-            <select name="state_company" id="state_for_companydos" onChange="estadodos(this.value);" class="form-control input-lg"> 
-             <option value="" class="selected">TODO MÉXICO</option>
-             <option value="AGUASCALIENTES">AGUASCALIENTES</option>
-             <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
-             <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
-             <option value="CAMPECHE">CAMPECHE</option>
-             <option value="COAHUILA DE ZARAGOZA">COAHUILA DE ZARAGOZA</option>
-             <option value="COLIMA">COLIMA</option>
-             <option value="CHIAPAS">CHIAPAS</option>
-             <option value="CHIHUAHUA">CHIHUAHUA</option>
-             <option value="DISTRITO FEDERAL">DISTRITO FEDERAL</option>
-             <option value="DURANGO">DURANGO</option>
-             <option value="GUANAJUATO">GUANAJUATO</option>
-             <option value="GUERRERO">GUERRERO</option>
-             <option value="HIDALGO">HIDALGO</option>
-             <option value="JALISCO">JALISCO</option>
-             <option value="MÉXICO">MÉXICO</option>
-             <option value="MICHOACÁN">MICHOACÁN</option>
-             <option value="MORELOS">MORELOS</option>
-             <option value="NAYARIT">NAYARIT</option>
-             <option value="NUEVO LEÓN">NUEVO LEÓN</option>
-             <option value="OAXACA">OAXACA</option>
-             <option value="PUEBLA">PUEBLA</option>
-             <option value="QUERÉTARO">QUERÉTARO</option>
-             <option value="QUINTANA ROO">QUINTANA ROO</option>
-             <option value="SAN LUIS POTOSÍ">SAN LUIS POTOSÍ</option>
-             <option value="SINALOA">SINALOA</option>
-             <option value="SONORA">SONORA</option>
-             <option value="TABASCO">TABASCO</option>
-             <option value="TAMAULIPAS">TAMAULIPAS</option>
-             <option value="TLAXCALA">TLAXCALA</option>
-             <option value="VERACRUZ">VERACRUZ</option>
-             <option value="YUCATÁN">YUCATÁN</option>
-             <option value="ZACATECAS">ZACATECAS</option>
-           </select>
-         </div>
-         <div class="form-group col-sm-6 col-lg-4">
-           <label>Municipio</label>
-           <select name="municipality_company"  id="municipality_for_companydoss" class="form-control input-lg">
-
-           </select>
-         </div>
-         <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('colony_company', 'Colonia:') !!}
-          {!! Form::text('colony_company', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE COLONIA', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase(); ']) !!}
-        </div>
-      </div>
-      <div class="form-group col-sm-6 col-lg-12">
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('postal_code_company', 'Código Postal:') !!}
-          <input type="number" name="postal_code_company" class="form-control input-lg" ; placeholder="ESCRIBE  CÓDIGO POSTAL"  data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('phone_company', 'Teléfono del Negocio:') !!}
-          <input type="number" name="phone_company" class="form-control input-lg" placeholder="TELÉFONO"  data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
-        </div>
-      </div>
-    </div>  --}}
+      
     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
   </div>
 </div>

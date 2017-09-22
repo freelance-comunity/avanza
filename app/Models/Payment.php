@@ -53,5 +53,9 @@ class Payment extends Model
 	{
 		return $this->belongsTo('App\User');
 	}
+	public function incomePayment()
+	{
+		return $this->hasOne('App\Models\IncomePayment');
+	}
 
 }

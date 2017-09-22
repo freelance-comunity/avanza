@@ -270,6 +270,11 @@ Route::get('clientCredentials/{id}/delete', [
 
 Route::resource('clientAvals', 'ClientAvalController');
 
+  Route::get('avalClient/{id}/',[
+          'as' => 'client.avalClient',
+          'uses' => 'ClientController@avalClient',
+          ]);
+
 Route::get('clientAvals/{id}/delete', [
     'as' => 'clientAvals.delete',
     'uses' => 'ClientAvalController@destroy',
@@ -394,6 +399,7 @@ Route::get('mora/{id}' , 'PaymentController@mora');
 
 
 
+
 Route::get('mexico', function(){
     return view('mexico');
 });
@@ -489,11 +495,15 @@ Route::get('regions/{id}/delete', [
 ]);
 
 Route::get('id',function(){
-$expenditures = App\Models\Expenditure::find(1);
-echo $expenditures->id;
+$vault = App\Models\Vault::find(2);
+echo $vault->ammount;
+echo "<br>";
 
-$credit = $expenditures->credit;
-echo $credit->id;
+$incomePayment = $vault->incomePayment;
+foreach ($incomePayment as $incomePayment) {
+   echo $incomePayment->id;
+}
+
 });
 
 
@@ -502,4 +512,12 @@ Route::resource('expenditureCredits', 'ExpenditureCreditController');
 Route::get('expenditureCredits/{id}/delete', [
     'as' => 'expenditureCredits.delete',
     'uses' => 'ExpenditureCreditController@destroy',
+]);
+
+
+Route::resource('incomePayments', 'IncomePaymentController');
+
+Route::get('incomePayments/{id}/delete', [
+    'as' => 'incomePayments.delete',
+    'uses' => 'IncomePaymentController@destroy',
 ]);

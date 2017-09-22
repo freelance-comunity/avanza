@@ -30,6 +30,10 @@ class Debt extends Model
 	{
 		return $this->hasMany('App\Models\Payment');
 	}
+	public function incomePayment()
+	{
+		return $this->hasOne('App\Models\IncomePayment');
+	}
 
 	
 }

@@ -19,7 +19,7 @@ use Toastr;
 use Carbon\Carbon;
 use Auth;
 use App\Models\Expenditure;
-
+use App\Models\ExpenditureCredit;
 
 
 class CreditController extends AppBaseController
@@ -191,10 +191,18 @@ class CreditController extends AppBaseController
 				$tasa = 0.28;
 			}elseif ($periodicity == 'CREDISEMANA') {
 				$tasa = 0.15;
-			}elseif ($periodicity == 'DIARIO') {
+			}elseif ($periodicity == 'DIARIO' && $dues == 25) {
+				$tasa = 0.15;
+			}elseif ($periodicity == 'DIARIO' && $dues == 52) {
 				$tasa = 0.15;
 			}
-			$interes = $ammount* $tasa;
+			elseif ($periodicity == 'DIARIO' && $dues == 30) {
+				$tasa = 0.17;
+			}
+			elseif ($periodicity == 'DIARIO' && $dues == 60) {
+				$tasa = 0.17;
+			}
+			$interes = $ammount * $tasa;
 			$capital = $ammount/$dues;
 			$total = $ammount + $interes;
 			$pago = $total/$dues;
@@ -425,15 +433,15 @@ class CreditController extends AppBaseController
 				}
 			}
 			$current = Carbon::today();
-			$data_expenditure['ammount'] = $ammount;
-			$data_expenditure['concept'] = 'Colocación';
-			$data_expenditure['voucher'] = 'Sin comprobante';
-			$data_expenditure['date']    = $current;
-			$data_expenditure['vault_id'] = $vault->id;
+			$data_expendituresCredits['ammount'] = $ammount;
+			$data_expendituresCredits['concept'] = 'Colocación';
+			$data_expendituresCredits['date']    = $current;
+			$data_expendituresCredits['credit_id']= $credit->id;
+			$data_expendituresCredits['vault_id'] = $vault->id;
 			
-			$expenditure = Expenditure::create($data_expenditure);
+			$expendituresCredit = ExpenditureCredit::create($data_expendituresCredits);
 
-			$vault->ammount = $vault->ammount - $expenditure->ammount;
+			$vault->ammount = $vault->ammount - $expendituresCredit->ammount;
 			$vault->save();
 
 			Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);

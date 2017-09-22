@@ -14,6 +14,7 @@
             <thead class="thead-inverse">
               <th>Importe</th>
               <th>Concepto</th>
+              <th>Descripción</th>
               <th>Comprobante</th>
               <th>Fecha</th>
             </thead>
@@ -22,6 +23,7 @@
               <tr>
                 <td>${{ number_format($g->ammount,2) }}</td>
                 <td>{{ $g->concept }}</td>
+                <td>{{ $g->description}}</td>
                 <td>
                   <img src="{{ asset('uploads/voucher/') }}{{ $g->voucher }}" style="width: 50px; height: 50px; float: left; border-radius: 10%; margin-right: 25px;">
                 </td>

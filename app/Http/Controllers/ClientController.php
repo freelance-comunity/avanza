@@ -505,9 +505,51 @@ Toastr::success('Archivo Excel procesado correctamente.', 'CLIENTES', ["position
 return redirect(route('clients.index'));
 }
 
+public function aval($id)
+{	
+	$client = Client::find($id);
 
+	if(empty($payment))
+	{
+		Flash::error('client not found');
+		return redirect(route('client.index'));
+	}	
 
+	$data_aval['name_aval'] = $request->input('name_aval');
+	$data_aval['last_name_aval'] = $request->input('last_name_aval');
+	$data_aval['mothers_name_aval'] = $request->input('mothers_name_aval');
+	$data_aval['curp_aval'] = $request->input('curp_aval');
+	$data_aval['phone_aval'] = $request->input('phone_aval');
+	$data_aval['civil_status_aval'] = $request->input('civil_status_aval');
+	$data_aval['scholarship_aval'] = $request->input('scholarship_aval');
+	$data_aval['street_aval'] = $request->input('street_aval');
+	$data_aval['number_aval'] = $request->input('number_aval');
+	$data_aval['colony_aval'] = $request->input('colony_aval');
+	$data_aval['municipality_aval'] = strtoupper($request->input('municipality_aval'));
+	$data_aval['state_aval'] = $request->input('state_aval');		
+	$data_aval['postal_code_aval'] = $request->input('postal_code_aval');
+	$data_aval['client_id'] = $client->id;	
 
+	/* Save b aval data */	
+	$aval = ClientAval::create($data_aval);
+	return redirect()->back();	
+}
+
+public function avalClient($id)
+	{
+		$client = Client::find($id);
+		$clientAval = $client->clientAval;
+		if (empty($clientAval)) {
+			return view ('clientAvals.create')
+			->with('client', $client);
+		}
+		else
+		{
+			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('client.show', [$client->id])); 
+		}
+		
+	}
 
 
 }

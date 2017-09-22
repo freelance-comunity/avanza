@@ -110,6 +110,18 @@ class PermissionsTableSeeder extends Seeder
         	'description' => 'Permiso para crear, ver, editar y eliminar productos',
         	'code' => 'CONFIGURACIÓN'
         	],
+            [
+            'name' => 'region',
+            'display_name' => 'Permiso sobre regiones',
+            'description' => 'Permiso para ver-crear-editar-eliminar regiones',
+            'code' => 'CONFIGURACIÓN'
+            ],
+            [
+            'name' => 'region',
+            'display_name' => 'Permiso sobre regiones',
+            'description' => 'Permiso para ver-crear-editar-eliminar regiones',
+            'code' => 'CONFIGURACIÓN'
+            ],
         	]);
 
     }

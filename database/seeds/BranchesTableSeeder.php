@@ -84,7 +84,7 @@ class BranchesTableSeeder extends Seeder
                 'address' => 'SAN FERNANDO',
                 'latitude' => '0',
                 'length' => '0',
-                'region_id' => '4'
+                'region_id' => '2'
             ],
             [
                 'name' => 'SUC TAPALAPA',

@@ -203,7 +203,7 @@ class CreditController extends AppBaseController
 				if ($periodicity == 'DIARIO' && $dues == 30) {
 					$debt = new Debt;
 					$debt->ammount = $credit->ammount + $interes;
-					$debt->status = "Pendiente";
+					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
 
@@ -233,7 +233,7 @@ class CreditController extends AppBaseController
 				if ($periodicity == 'DIARIO' && $dues == 25) {
 					$debt = new Debt;
 					$debt->ammount = $credit->ammount +  $interes;
-					$debt->status = "Pendiente";
+					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
 
@@ -266,7 +266,7 @@ class CreditController extends AppBaseController
 				if ($periodicity == 'DIARIO' && $dues == 52) {
 					$debt = new Debt;
 					$debt->ammount = $credit->ammount + $interes; 
-					$debt->status = "Pendiente";
+					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
 
@@ -300,7 +300,7 @@ class CreditController extends AppBaseController
 				if ($periodicity == 'DIARIO' && $dues == 60) {
 					$debt = new Debt;
 					$debt->ammount = $credit->ammount + $interes;
-					$debt->status = "Pendiente";
+					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
 
@@ -331,7 +331,7 @@ class CreditController extends AppBaseController
 				if ($periodicity == 'CREDIDIARIO25' && $dues == 25) {
 					$debt = new Debt;
 					$debt->ammount = $credit->ammount +  $interes;
-					$debt->status = "Pendiente";
+					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
 
@@ -364,7 +364,7 @@ class CreditController extends AppBaseController
 				if ($periodicity == 'CREDIDIARIO4') {
 					$debt = new Debt;
 					$debt->ammount = $credit->ammount + $interes;
-					$debt->status = "Pendiente";
+					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
 
@@ -396,7 +396,7 @@ class CreditController extends AppBaseController
 				if ($periodicity == 'CREDISEMANA') {
 					$debt = new Debt;
 					$debt->ammount = $credit->ammount + $interes;
-					$debt->status = "Pendiente";
+					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
 

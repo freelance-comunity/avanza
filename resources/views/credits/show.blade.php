@@ -12,7 +12,7 @@
 				<!-- /.box-header -->
 				@php
 				$debt = $credit->debt;
-				$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Atrasado')->get();
+				$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 				$late_interest = $late_payments->sum('interest');
 				$late_capital = $late_payments->sum('capital');
 				$late_moratorium = $late_payments->sum('moratorium');

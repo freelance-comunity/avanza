@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
                   <label>  &nbsp; </label>
-                  <input type="button" class="input-lg btn-block btn bg-navy" value="Generar Tabla de Amortizacion" onclick="capturar()">
+                  <input type="button" class="btn-lg btn-block btn bg-navy" value="SIMULAR TABLA DE PAGOS" onclick="capturar()">
                 </div>
               </div>
               <div class="form-group col-sm-12 col-lg-12">
@@ -104,8 +104,8 @@
                       <canvas style="border: 1px solid black; height: 200px;"></canvas>
                     </div>
                     <div class="m-signature-pad--footer">
-                      <button type="button" class="button clear" data-action="clear">Limpiar</button>
-                      <button type="button" class="button save" data-action="save">Usar</button>
+                      <button type="button" class="btn btn-lg btn-info clear" data-action="clear">Limpiar</button>
+                      <button type="button" class="btn btn-lg btn-success save" data-action="save">Usar</button>
                     </div>
                   </div>
 
@@ -117,7 +117,7 @@
               <div class="box-body" >
                <div class="col-md-4">
                 <div class="btn-group">
-                 {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+                 {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-block btn-primary', 'id' => 'save']) !!}
                </div>
              </div> 
            </div>
@@ -133,7 +133,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Crediefectivo</h5>
+                <h3 class="modal-title">SIMULACIÓN DE TABLA DE PAGOS</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>

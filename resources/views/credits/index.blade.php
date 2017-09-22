@@ -29,7 +29,7 @@
 					@foreach($credits as $key=>$credit)
 					@php
 					$debt = $credit->debt;
-					$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Atrasado')->get();
+					$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 					$late_interest = $late_payments->sum('interest');
 					$late_capital = $late_payments->sum('capital');
 					$late_moratorium = $late_payments->sum('moratorium');
@@ -47,7 +47,7 @@
 						@if ($late_total==0)
 						<td class="success">${!! number_format($late_total, 2) !!}</td>
 						@elseif($late_total > 0)
-						<td class="danger" style="color: red;">${!! number_format($late_total, 2) !!}</td>
+						<td class="danger" style="color: #f44336;">${!! number_format($late_total, 2) !!}</td>
 						@endif
 						<td>
 							<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa fa-file-pdf-o fa-2x"></i></a>

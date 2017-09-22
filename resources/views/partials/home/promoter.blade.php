@@ -22,10 +22,10 @@ $payments = Auth::user()->payments;
         <table class="table" id="pagoss">
             <thead class="thead-inverse">
                 <th style="width: 15px;">No. Cuota</th>
-                <th>Mora</th>
-                <th>Total</th>
-                <th>Pagado</th>
-                <th>Balance</th>                
+                <th>Total</th>      
+                <th>Cliente</th>   
+                <th>Crédito</th>   
+                <th>Horario de cobro</th>   
                 <th>Estatus</th>
                 <th width="50px;">Acción</th>
             </thead>
@@ -35,13 +35,74 @@ $payments = Auth::user()->payments;
                 $debt = $payment->debt;
                 $credit = $debt->credit;
                 @endphp
-                @if ($payment->date == $date_now AND $payment->status != 'Pagado')
-                <tr class="active">
+                @if ($payment->status === 'Vencido')
+                <tr class="danger">
                     <td>{{ $payment->number }} de {{ $credit->dues }}</td>
-                    <td>$ {{ number_format($payment->moratorium, 2) }}</td>
-                    <td>$ {{ number_format($payment->total, 2) }}</td>
-                    <td>$ {{ number_format($payment->payment, 2)}}</td>
                     <td>$ {{ number_format($payment->balance, 2) }}</td>
+                    <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
+                    </td>
+                    <td>{{ $credit->folio }}</td>
+                    <td>{{ $credit->collection_period }}</td>
+                    <td>
+                        @if ($payment->status == 'Vencido')
+                        <p style="color:red;">{{$payment->status}}</p>
+                        @else
+                        <p style="color:gray;">{{$payment->status}}</p>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-success btn-lg btn-block">PAGAR</a>
+                    </td>
+                </tr>
+                @endif
+                @if ($payment->status === 'Parcial')
+                <tr class="info">
+                    <td>{{ $payment->number }} de {{ $credit->dues }}</td>
+                    <td>$ {{ number_format($payment->balance, 2) }}</td>
+                    <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
+                    </td>
+                    <td>{{ $credit->folio }}</td>
+                    <td>{{ $credit->collection_period }}</td>
+                    <td>
+                        @if ($payment->status == 'Vencido')
+                        <p style="color:red;">{{$payment->status}}</p>
+                        @else
+                        <p style="color:gray;">{{$payment->status}}</p>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-success btn-lg btn-block">PAGAR</a>
+                    </td>
+                </tr>
+                @endif
+                @if ($payment->date == $date_now AND $payment->status === 'Pendiente')
+                <tr class="success">
+                    <td>{{ $payment->number }} de {{ $credit->dues }}</td>
+                    <td>$ {{ number_format($payment->balance, 2) }}</td>
+                    <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
+                    </td>
+                    <td>{{ $credit->folio }}</td>
+                    <td>{{ $credit->collection_period }}</td>
+                    <td>
+                        @if ($payment->status == 'Vencido')
+                        <p style="color:red;">{{$payment->status}}</p>
+                        @else
+                        <p style="color:gray;">{{$payment->status}}</p>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-success btn-lg btn-block">PAGAR</a>
+                    </td>
+                </tr>
+                @endif
+                @if ($payment->date == $date_now AND $payment->status === 'Vencido')
+                <tr class="danger">
+                    <td>{{ $payment->number }} de {{ $credit->dues }}</td>
+                    <td>$ {{ number_format($payment->balance, 2) }}</td>
+                    <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
+                    </td>
+                    <td>{{ $credit->folio }}</td>
+                    <td>{{ $credit->collection_period }}</td>
                     <td>
                         @if ($payment->status == 'Vencido')
                         <p style="color:red;">{{$payment->status}}</p>

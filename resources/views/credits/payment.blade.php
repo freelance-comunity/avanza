@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">REALIZAR PAGO # {{ $payment->number }} cuota: {{ $payment->balance }}</h5>
+        <h3 class="modal-title" id="exampleModalLabel">PAGO #<strong>{{ $payment->number }}</strong> CUOTA: <strong>${{ number_format($payment->balance,2) }}</strong></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

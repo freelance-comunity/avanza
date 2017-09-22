@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('father_last_name');
             $table->string('mother_last_name');  
-            $table->date('birthdate');
+            $table->string('birthdate');
             $table->string('birth_entity');
             $table->string('place_of_birth');
             $table->string('gender');

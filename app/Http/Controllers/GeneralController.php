@@ -10,6 +10,7 @@ use App\Role;
 use App\Models\Vault;
 use App\Models\Income;
 use App\Models\Expenditure;
+use App\Models\ExpenditureCredit;
 use App\Models\Credit;
 use Toastr;
 use Validator;
@@ -47,30 +48,32 @@ class GeneralController extends Controller
 	public function showVault($id)
 	{	
 		$current = Carbon::today()->toDateString();
-
 		$user = User::find($id);
-		$credits = $user->credit;
 		$vault = $user->vault;
 		$incomes = $vault->incomes->where('date', $current);
 		$si = $incomes->where('concept', 'Saldo Inicial')->where('date', $current);
-		$rc = $incomes->where('concept', 'Recuperación')->where('date', $current);
 		$af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
 
+		$incomePayment = $vault->incomePayment->where('date', $current);
+		$rc = $incomePayment->where('concept', 'Recuperación')->where('date', $current);
+
 		$expenditures = $vault->expenditures->where('date', $current);
-		$c = $expenditures->where('concept', 'Colocación')->where('date', $current);
 		$g = $expenditures->where('concept', 'Gasto')->where('date', $current);
-		
+	
+		$expendituresCredit = $vault->expendituresCredit->where('date', $current);
+		$c = $expendituresCredit->where('concept', 'Colocación')->where('date', $current);
 		return view('executives.showVault')
 		->with('user', $user)
 		->with('vault', $vault)
 		->with('incomes', $incomes)
+		->with('incomePayment', $incomePayment)
 		->with('si', $si)
 		->with('rc', $rc)
 		->with('af', $af)
 		->with('expenditures', $expenditures)
+		->with('expendituresCredit', $expendituresCredit)
 		->with('c', $c)
-		->with('g', $g)
-		->with('credits',$credits);
+		->with('g', $g);
 	}
 
 	public function addVault(Request $request)
@@ -190,6 +193,7 @@ class GeneralController extends Controller
 			$data_expenditure['concept'] = 'Gasto';
 			$data_expenditure['voucher'] = $filename;
 			$data_expenditure['date']    = $current;
+			$data_expenditure['description']= $request->input('description');;
 			$data_expenditure['vault_id'] = $vault->id;
 
 			$expenditure = Expenditure::create($data_expenditure);

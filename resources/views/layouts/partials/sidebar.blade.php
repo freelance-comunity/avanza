@@ -54,9 +54,9 @@
       <li class="treeview">
         <a href="#"><i class='fa fa-cogs'></i>  <span>Configuración</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-          {{-- @if (Auth::user()->can('region')) --}}
+          @if (Auth::user()->can('region'))
           <li><a href="{{ url('regions') }}">Regiones</a></li>
-         {{--  @endif --}}
+          @endif
           @if (Auth::user()->can('sucursales'))
           <li><a href="{{ url('branches') }}">Sucursales</a></li>
           @endif

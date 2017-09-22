@@ -270,6 +270,11 @@ Route::get('clientCredentials/{id}/delete', [
 
 Route::resource('clientAvals', 'ClientAvalController');
 
+  Route::get('avalClient/{id}/',[
+          'as' => 'client.avalClient',
+          'uses' => 'ClientController@avalClient',
+          ]);
+
 Route::get('clientAvals/{id}/delete', [
     'as' => 'clientAvals.delete',
     'uses' => 'ClientAvalController@destroy',
@@ -382,34 +387,6 @@ Route::get('latePayments/{id}/delete', [
 ]);
 
 
-Route::get('cl', function(){
-    $latePayments = App\Models\LatePayments::find(54);
-    echo $latePayments->id;
-    echo "<br>";
-    $payment = $latePayments->payment;
-    echo $latePayments->payment->id;
-    echo "<br>";
-    $debt = $payment->debt;
-    echo $debt->id;
-    echo "<br>";
-    $credit = $debt->credit;
-    echo $credit->id;
-    echo "<br>";
-    $client = $credit->client;
-    echo $client->id;
-    echo "<br>";
-
-    $cliente = $payment->debt->credit->client;
-    echo $cliente->id;
-
-    echo "<br>";
-    $latePayments = $payment->latePayments;
-
-    foreach ($latePayments as $key => $value) {
-        echo $value->id;
-        echo "<br>";
-    }
-});
 Route::get('graphics',function(){
 
     return view('graphics');
@@ -419,6 +396,7 @@ Route::get('unlocked/{id}' , 'PaymentController@unlocked');
 Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
 Route::get('cancel/{id}' , 'PaymentController@cancel');
 Route::get('mora/{id}' , 'PaymentController@mora');
+
 
 
 
@@ -478,6 +456,8 @@ Route::post('updatephoto', 'Photocontroller@update');
 Route::post('ine', 'Photocontroller@ine');
 Route::post('curps', 'Photocontroller@curps');
 Route::post('updatephotos', 'Photocontroller@cfe');
+Route::post('avatar','Photocontroller@avatar');
+
 
 Route::get('ajax', function(){
     $date = \Carbon\Carbon::now();
@@ -512,4 +492,32 @@ Route::resource('regions', 'RegionController');
 Route::get('regions/{id}/delete', [
     'as' => 'regions.delete',
     'uses' => 'RegionController@destroy',
+]);
+
+Route::get('id',function(){
+$vault = App\Models\Vault::find(2);
+echo $vault->ammount;
+echo "<br>";
+
+$incomePayment = $vault->incomePayment;
+foreach ($incomePayment as $incomePayment) {
+   echo $incomePayment->id;
+}
+
+});
+
+
+Route::resource('expenditureCredits', 'ExpenditureCreditController');
+
+Route::get('expenditureCredits/{id}/delete', [
+    'as' => 'expenditureCredits.delete',
+    'uses' => 'ExpenditureCreditController@destroy',
+]);
+
+
+Route::resource('incomePayments', 'IncomePaymentController');
+
+Route::get('incomePayments/{id}/delete', [
+    'as' => 'incomePayments.delete',
+    'uses' => 'IncomePaymentController@destroy',
 ]);

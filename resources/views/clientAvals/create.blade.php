@@ -1,11 +1,11 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('content')
+@section('main-content')
 <div class="container">
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'clientAvals.store']) !!}
+    {!! Form::open(['route' => 'clientAvals.store','id'=>'formaval']) !!}
 
         @include('clientAvals.fields')
 

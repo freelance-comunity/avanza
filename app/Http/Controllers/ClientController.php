@@ -43,6 +43,7 @@ class ClientController extends AppBaseController
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('client',['only'=>['create','creditsClient']]);		
 	}
 
 	public function index(Request $request)
@@ -131,7 +132,7 @@ class ClientController extends AppBaseController
 		$data_location['street'] = $request->input('street');
 		$data_location['number']   = $request->input('number');
 		$data_location['colony']  = $request->input('colony');
-		$data_location['municipality'] = $request->input('municipality');
+		$data_location['municipality'] =strtoupper($request->input('municipality'));
 		$data_location['state']  = $request->input('state');
 		$data_location['postal_code'] = $request->input('postal_code');
 		$data_location['references'] = $request->input('references');
@@ -145,7 +146,7 @@ class ClientController extends AppBaseController
 		$data_company['street_company'] = $request->input('street_company');
 		$data_company['number_company'] = $request->input('number_company');
 		$data_company['colony_company']  = $request->input('colony_company');
-		$data_company['municipality_company'] = $request->input('municipality_company');
+		$data_company['municipality_company'] = strtoupper($request->input('municipality_company'));
 		$data_company['state_company']   = $request->input('state_company');
 		$data_company['postal_code_company'] = $request->input('postal_code_company');
 		$data_company['phone_company'] = $request->input('phone_company');
@@ -168,7 +169,7 @@ class ClientController extends AppBaseController
 			$data_aval['street_aval'] = $request->input('street_aval');
 			$data_aval['number_aval'] = $request->input('number_aval');
 			$data_aval['colony_aval'] = $request->input('colony_aval');
-			$data_aval['municipality_aval'] = $request->input('municipality_aval');
+			$data_aval['municipality_aval'] = strtoupper($request->input('municipality_aval'));
 			$data_aval['state_aval'] = $request->input('state_aval');		
 			$data_aval['postal_code_aval'] = $request->input('postal_code_aval');
 			$data_aval['client_id'] = $client->id;	
@@ -504,9 +505,51 @@ Toastr::success('Archivo Excel procesado correctamente.', 'CLIENTES', ["position
 return redirect(route('clients.index'));
 }
 
+public function aval($id)
+{	
+	$client = Client::find($id);
 
+	if(empty($payment))
+	{
+		Flash::error('client not found');
+		return redirect(route('client.index'));
+	}	
 
+	$data_aval['name_aval'] = $request->input('name_aval');
+	$data_aval['last_name_aval'] = $request->input('last_name_aval');
+	$data_aval['mothers_name_aval'] = $request->input('mothers_name_aval');
+	$data_aval['curp_aval'] = $request->input('curp_aval');
+	$data_aval['phone_aval'] = $request->input('phone_aval');
+	$data_aval['civil_status_aval'] = $request->input('civil_status_aval');
+	$data_aval['scholarship_aval'] = $request->input('scholarship_aval');
+	$data_aval['street_aval'] = $request->input('street_aval');
+	$data_aval['number_aval'] = $request->input('number_aval');
+	$data_aval['colony_aval'] = $request->input('colony_aval');
+	$data_aval['municipality_aval'] = strtoupper($request->input('municipality_aval'));
+	$data_aval['state_aval'] = $request->input('state_aval');		
+	$data_aval['postal_code_aval'] = $request->input('postal_code_aval');
+	$data_aval['client_id'] = $client->id;	
 
+	/* Save b aval data */	
+	$aval = ClientAval::create($data_aval);
+	return redirect()->back();	
+}
+
+public function avalClient($id)
+	{
+		$client = Client::find($id);
+		$clientAval = $client->clientAval;
+		if (empty($clientAval)) {
+			return view ('clientAvals.create')
+			->with('client', $client);
+		}
+		else
+		{
+			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('client.show', [$client->id])); 
+		}
+		
+	}
 
 
 }

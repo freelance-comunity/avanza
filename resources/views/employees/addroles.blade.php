@@ -1,6 +1,6 @@
  <!-- Modal Add -->
  <div id="rolesadd{{$employee->id}}" class="modal fade modal-default" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
 
     <!-- Modal content-->
     <div class="modal-content">

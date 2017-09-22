@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\CreateClientAvalRequest;
 use App\Models\ClientAval;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -68,12 +69,16 @@ class ClientAvalController extends AppBaseController
 	public function store(CreateClientAvalRequest $request)
 	{
 		$input = $request->all();
+		$client = $request->input('client_id');
+		$clients = Client::find($client);
+
 
 		$clientAval = ClientAval::create($input);
 
-		Flash::message('ClientAval saved successfully.');
+		Toastr::success('Aval creado correctamente.', 'AVAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('clientAvals.index'));
+
+		return redirect(route('clients.index'));
 	}
 
 	/**

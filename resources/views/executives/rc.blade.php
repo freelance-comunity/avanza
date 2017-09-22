@@ -15,6 +15,8 @@
               <th>Importe</th>
               <th>Concepto</th>
               <th>Fecha</th>
+              <th>Cliente</th>
+              <th>Acción</th>
             </thead>
             <tbody>
               @foreach ($rc as $rc)
@@ -22,6 +24,8 @@
                 <td>${{ number_format($rc->ammount,2) }}</td>
                 <td>{{ $rc->concept }}</td>
                 <td>{{ $rc->created_at }}</td>
+                <td>{{$rc->debt->credit->folio}}</td>
+                <td><a href="{!! route('credits.show', [$rc->debt->credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a></td>
               </tr>
               @endforeach
             </tbody>

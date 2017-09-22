@@ -209,7 +209,7 @@ class CreditController extends AppBaseController
 			$pago = $total/$dues;
 			$intpago = $pago-$capital;
 			$date = new Carbon($credit->date);
-			f ($periodicity == 'DIARIO' && $dues == 30) {
+			if ($periodicity == 'DIARIO' && $dues == 30) {
 					$debt = new Debt;
 					$debt->ammount = $credit->ammount + $interes;
 					$debt->status = "VIGENTE";

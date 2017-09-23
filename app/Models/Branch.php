@@ -15,6 +15,7 @@ class Branch extends Model
 	"name",
 	"phone",
 	"address",
+	"nomenclature",
 	"latitude",
 	"length",
 	"region_id"
@@ -24,6 +25,7 @@ class Branch extends Model
 	"name" => "required",
 	"phone" => "required",
 	"address" => "required",
+	"nomenclature"=>'required',
 	"latitude" => "required",
 	"length" => "required"
 	];

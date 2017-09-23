@@ -23,10 +23,22 @@
             <div class="col-md-4">
               <label for="exampleInputEmail1">Teléfono</label>
               <input type="number" name="phone" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-validate-if-empty="true" data-parsley-maxlength="10">
-              </div>  
-              <div class="col-md-4">
-                <label for="region_id">Región</label>
-                {!! Form::select('region_id',$regions ,null, ['class' => 'form-control input-lg']); !!}
+            </div>  
+            <div class="col-md-4">
+              <label for="region_id">Región</label>
+              {!! Form::select('region_id',$regions ,null, ['class' => 'form-control input-lg']); !!}
+            </div>
+            <br>
+            <div class="col-md-12">
+              <label for="exampleInputEmail1">Nomenclatura</label>
+              {!! Form::text('nomenclature', null, [
+                'style' => 'text-transform:uppercase',
+                'class' => 'form-control input-lg', 
+                'placeholder'=>'ESCRIBE LA NOMENCLATURA DE LA SUCURSAL',
+                'required'=>'required',
+                'data-parsley-trigger ' => 'input focusin',
+                'data-parsley-validate-if-empty'=>'true',
+                'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
               </div>
 
             </div>
@@ -71,4 +83,4 @@
 
         <!-- /.row -->
       </section>
- 
+

@@ -138,7 +138,7 @@ class CreditController extends AppBaseController
 				return redirect()->back()->withInput($request->all());
 			}
 			$number = Credit::max('id') + 1;
-			$input['folio'] = $request->input('state').$request->input('branch').'00'.$number;	
+			$input['folio'] = $client->branch->nomenclature.'00'.$number;	
 			$input['civil_status'] = $client->civil_status;
 			$input['phone'] = $client->phone;
 			$input['no_familys'] = $client->no_familys;

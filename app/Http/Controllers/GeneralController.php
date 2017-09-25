@@ -36,6 +36,7 @@ class GeneralController extends Controller
 			return view('executives.index')
 			->with('employees', $users);
 		}
+		
 		elseif(Auth::user()->hasRole('ejecutivo-de-credito')) {
 
 			$user = Auth::user();
@@ -153,6 +154,10 @@ class GeneralController extends Controller
 
 		$vault->ammount = $vault->ammount + $income->ammount;
 		$vault->save();
+
+		$vault_collector->ammount = $vault_collector->ammount - $vault->ammount;
+		$vault_collector->save();
+
 
 		Toastr::success('Asignación de efectivo exitoso.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 

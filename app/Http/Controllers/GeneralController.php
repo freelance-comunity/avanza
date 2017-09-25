@@ -29,9 +29,14 @@ class GeneralController extends Controller
 	public function getPromoter()
 	{	
 		if (Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal'])) {
+
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+
 			$collection = Role::all();
 			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
-			$users = $role->users;
+			$filtered = $role->users;
+			$users = $filtered->where('region_id', $region_allocation->id);
 
 			return view('executives.index')
 			->with('employees', $users);

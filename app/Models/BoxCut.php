@@ -18,7 +18,7 @@ class BoxCut extends Model
 	];
 
 	public static $rules = [
-	  "amount" => "required",  
+	  "amount" => "required|regex:/[\d]{2}.[\d]{2}/",  
 	];
 	public function user()
 	{

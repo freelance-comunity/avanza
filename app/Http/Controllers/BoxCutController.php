@@ -213,7 +213,7 @@ class BoxCutController extends AppBaseController
 	public function cut(Request $request)
 	{	
 		$validator = Validator::make($request->all(), [
-			'amount' => 'required|numeric',	
+			'amount' => 'required|numeric|between:0,99.99',	
 		]);
 
 		if ($validator->fails()) {

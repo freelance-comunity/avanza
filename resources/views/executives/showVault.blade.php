@@ -80,46 +80,46 @@ $date = new Date();
 					<thead class="thead-inverse">
 						<th>CONCEPTO</th>
 						<th>IMPORTE</th>
-						@role('administrador')
-						<th style="width: 30px;">DETALLES</th>
-						@endrole
+						@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+							<th style="width: 30px;">DETALLES</th>
+						@endif
 					</thead>
 					<tbody>
 						<tr>
 							<td>Saldo inicial</td>
 							<td>${{ number_format($si->sum('ammount')) }}</td>
-							@role('administrador')
+							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#si"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
-							@endrole
+							@endif
 						</tr>
 						<tr>
 							<td>Asignación de efectivo</td>
 							<td>${{ number_format($af->sum('ammount')) }}</td>
-							@role('administrador')
+							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#af"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
-							@endrole
+							@endif
 						</tr>
 						<tr>
 							<td>Recuperación</td>
 							<td>${{ number_format($rc->sum('ammount')) }}</td>
-							@role('administrador')
+							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#rc"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
-							@endrole
+							@endif
 						</tr>
 						 <tr>
 							<td>Recuperación Access</td>
 							<td>${{ number_format($ra->sum('ammount')) }}</td>
-							@role('administrador')
+							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#ra"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
-							@endrole
+							@endif
 						</tr> 
 					</tbody>
 				</table>

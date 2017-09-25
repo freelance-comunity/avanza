@@ -41,3 +41,13 @@
   </div>
 </div>
 </div>
+{{-- IMG CLICK --}}
+<script>
+  $(function() {
+    $('img').on('click', function() {
+      $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
+      $('#enlargeImageModal').modal('show');
+      $('#ra').modal('hide');
+    });
+  });
+</script>

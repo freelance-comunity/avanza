@@ -18,7 +18,7 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
 
 <div class="row">
   <h1 class="pull-left">Clientes</h1>
-@if (Auth::user()->can('crear-cliente'))
+  @if (Auth::user()->can('crear-cliente'))
   <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('clients.create') !!}">Agregar Nuevo Cliente</a>
   @endif 
   <!--<button type="button" class="btn bg-navy pull-right" style="margin-top: 25px" data-toggle="modal" data-target="#inputExcel"><i class="fa fa-file-excel-o"></i> Importar Excel</button>-->
@@ -38,9 +38,9 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
         <th>Apellido Materno</th>
         <th>Sucursal</th>
         <th>Teléfono</th>
-       {{--  @if (Auth::user()->can('crear-credito')) --}}
+        @if (Auth::user()->can('crear-credito')) 
         <th width="50px">Crédito</th>
-        {{-- @endif --}}
+        @endif 
         <th>Acción</th>
       </thead>
       <tbody>
@@ -66,9 +66,11 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
                 <a href="{{ url('products') }}" class="btn btn-block btn-danger">No hay productos registrados</a>
                 @else
                 @foreach ($products as $product)
+                
                 <div class="form-group col-sm-6 col-lg-6">
                  <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}" ><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
                </div>
+               
                @endforeach
                @endif
              </div>
@@ -105,11 +107,11 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
            <a href="" class="btn bg-red btn-block uppercase">Bloqueado</a>
            <button type="button" class="btn bg-red btn-block uppercase">Bloqueado</button></td>
            @else--}}
-          {{--  @if (Auth::user()->can('crear-credito')) --}}
+           @if (Auth::user()->can('crear-credito'))
            <td> <button type="button" class="btn btn-primary btn-block uppercase" data-toggle="modal" data-target="#myModal{{$client->id}}">Nuevo</button></td>
-   {{--         @endif --}}
-    
-          <td>
+           @endif 
+           
+           <td>
             <a href="{!! route('clients.show', [$client->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a> 
             @if (Auth::user()->can('eliminar-cliente'))
             <a href="{!! route('clients.delete', [$client->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar este cliente?')"><i class="fa fa-trash fa-2x" data-toggle="tooltip" title="Eliminar"></i></a>   
@@ -121,13 +123,13 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
     </table>
   </div>
   @endif
-   @if(!empty(Session::get('client')) )
-           <script>
-            $(function() {
-             $('#myModal{{$client->id}}').modal('show')
-           });
-         </script>
-         @endif 
+  @if(!empty(Session::get('client')) )
+  <script>
+    $(function() {
+     $('#myModal{{$client->id}}').modal('show')
+   });
+ </script>
+ @endif 
 </div>
 </div>
 @endsection

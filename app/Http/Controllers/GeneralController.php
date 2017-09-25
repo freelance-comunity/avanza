@@ -37,12 +37,13 @@ class GeneralController extends Controller
 			->with('employees', $users);
 		}
 		elseif(Auth::user()->hasRole('ejecutivo-de-credito')) {
-			
+
 			$user = Auth::user();
 
 			return view('executives.index')
 			->with('user', $user);
-		}	
+		}
+		
 	}
 
 	public function showVault($id)
@@ -59,7 +60,7 @@ class GeneralController extends Controller
 
 		$expenditures = $vault->expenditures->where('date', $current);
 		$g = $expenditures->where('concept', 'Gasto')->where('date', $current);
-	
+
 		$expendituresCredit = $vault->expendituresCredit->where('date', $current);
 		$c = $expendituresCredit->where('concept', 'Colocación')->where('date', $current);
 		return view('executives.showVault')

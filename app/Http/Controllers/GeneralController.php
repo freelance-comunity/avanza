@@ -12,6 +12,7 @@ use App\Models\Income;
 use App\Models\Expenditure;
 use App\Models\ExpenditureCredit;
 use App\Models\Credit;
+use App\Models\PurseAccess;
 use Toastr;
 use Validator;
 use Auth;
@@ -28,10 +29,30 @@ class GeneralController extends Controller
 	
 	public function getPromoter()
 	{	
-		if (Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal'])) {
+
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$users = User::all();
+			return view('executives.index')
+			->with('employees', $users);
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+
+			$filtered = User::all();
+			$users = $filtered->where('region_id', $region_allocation->id);
+
+			return view('executives.index')
+			->with('employees', $users);
+		}
+		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
+			$user_allocation = Auth::user();
+			$branch_allocation = $user_allocation->branch;
+
 			$collection = Role::all();
 			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
-			$users = $role->users;
+			$filtered = User::all();
+			$users = $filtered->where('branch_id', $branch_allocation->id);
 
 			return view('executives.index')
 			->with('employees', $users);
@@ -64,6 +85,10 @@ class GeneralController extends Controller
 
 		$expendituresCredit = $vault->expendituresCredit->where('date', $current);
 		$c = $expendituresCredit->where('concept', 'Colocación')->where('date', $current);
+
+		$purseAccess = $vault->purseAccess->where('date', $current);
+		$ra = $purseAccess->where('concept', 'Recuperación Access')->where('date', $current);
+
 		return view('executives.showVault')
 		->with('user', $user)
 		->with('vault', $vault)
@@ -75,7 +100,9 @@ class GeneralController extends Controller
 		->with('expenditures', $expenditures)
 		->with('expendituresCredit', $expendituresCredit)
 		->with('c', $c)
-		->with('g', $g);
+		->with('g', $g)
+		->with('purseAccess',$purseAccess)
+		->with('ra',$ra);
 	}
 
 	public function addVault(Request $request)
@@ -155,7 +182,7 @@ class GeneralController extends Controller
 		$vault->ammount = $vault->ammount + $income->ammount;
 		$vault->save();
 
-		$vault_collector->ammount = $vault_collector->ammount - $vault->ammount;
+		$vault_collector->ammount = $vault_collector->ammount - $request->input('ammount');
 		$vault_collector->save();
 
 
@@ -212,4 +239,40 @@ class GeneralController extends Controller
 			return redirect()->back();
 		}
 	}
+	public function purseAccess(Request $request)
+	{	
+		
+		$validator = Validator::make($request->all(), [
+			'ammount' => 'required|numeric',	
+		]);
+
+		if ($validator->fails()) {
+			Toastr::error('Favor de introducir cantidad valida.', 'CARTERA ACCESS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
+		if ($request->hasFile('voucher')) {
+			$voucher = $request->file('voucher');
+			$filename = time() . '.' . $voucher->getClientOriginalExtension();
+			Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
+		}
+		$current = Carbon::today();
+		$user = User::find($request->input('user_id'));
+		$vault = $user->vault;
+
+		$data_purseAccess['ammount'] = $request->input('ammount');
+		$data_purseAccess['concept']= 'Recuperación Access';
+		$data_purseAccess['voucher'] = $filename;
+		$data_purseAccess['date']    = $current;
+		$data_purseAccess['vault_id'] = $vault->id;
+		$data_purseAccess['user_id'] = $user->id;
+		$purseAccess = PurseAccess::create($data_purseAccess);
+
+		$vault->ammount = $vault->ammount + $purseAccess->ammount;
+			$vault->save();
+		Toastr::success('Monto agregado exitosamente.', 'CARTERA ACCESS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+	}
+
 }

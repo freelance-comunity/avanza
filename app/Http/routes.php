@@ -217,6 +217,8 @@ Route::post('addCash', 'GeneralController@addCash');
 
 Route::post('recordExpense', 'GeneralController@recordExpense');
 
+Route::post('purseAccess', 'GeneralController@purseAccess');
+
 /*=====  End of Routes for Employee  ======*/
 
 Route::get('formwizard', function(){
@@ -520,4 +522,12 @@ Route::resource('incomePayments', 'IncomePaymentController');
 Route::get('incomePayments/{id}/delete', [
     'as' => 'incomePayments.delete',
     'uses' => 'IncomePaymentController@destroy',
+]);
+
+
+Route::resource('purseAccesses', 'PurseAccessController');
+
+Route::get('purseAccesses/{id}/delete', [
+    'as' => 'purseAccesses.delete',
+    'uses' => 'PurseAccessController@destroy',
 ]);

@@ -230,18 +230,6 @@ class BoxCutController extends AppBaseController
 		$data_boxcut['user_id'] = $user->id;
 		$boxCut = BoxCut::create($data_boxcut);
 
-		// $mil = $boxCut->bills_1000 * 1000;
-		// $quinientos = $boxCut->bills_500 * 500;
-		// $doscientos = $boxCut->bills_200 * 200;
-		// $cien  = $boxCut->bills_100 * 100;
-		// $cincuenta = $boxCut->bills_50 * 50;
-		// $veinte = $boxCut->bills_20 * 20;
-		// $diez = $boxCut->coin_10 * 10;
-		// $cinco = $boxCut->coin_5 * 5;
-		// $dos = $boxCut->coin_2 * 2;
-		// $peso = $boxCut->coin_1 * 1;
-		// $centavo = $boxCut->cents_50 * 0.50;
-
 		$rest = $boxCut->amount; 
 		if ($rest > $vault->ammount) {
 			Toastr::error('Estas introduciendo una cantidad mayor a tu saldo a liquidar.', 'CORTE DE CAJA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);

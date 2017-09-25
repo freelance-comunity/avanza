@@ -9,6 +9,7 @@ $date = new Date();
 @include('executives.af')
 @include('executives.c')
 @include('executives.g')
+@include('executives.ra')
 <div class="box box-danger">
 	<div class="box-header with-border">
 		<div class="col-md-12">
@@ -59,9 +60,12 @@ $date = new Date();
 					<tr>
 						<td colspan="4">
 							<a data-toggle="modal" data-target="#record_expense" class="btn bg-primary btn-lg btn-block">REGISTRAR GASTO</a>
+							<a data-toggle="modal" data-target="#purse_access" class="btn bg-primary btn-lg btn-block">REGISTRAR COBROS ACCESS</a>
 						</td>
 						@include('executives.record_expense')
+						@include('executives.purse_access')
 					</tr>
+					
 					@endrole
 				</table>
 			</div>
@@ -108,6 +112,15 @@ $date = new Date();
 							</td>
 							@endrole
 						</tr>
+						 <tr>
+							<td>Recuperación Access</td>
+							<td>${{ number_format($ra->sum('ammount')) }}</td>
+							@role('administrador')
+							<td style="text-align: center;">
+								<a data-toggle="modal" data-target="#ra"><i class="fa fa-eye fa-2x"></i></a>
+							</td>
+							@endrole
+						</tr> 
 					</tbody>
 				</table>
 			</div>

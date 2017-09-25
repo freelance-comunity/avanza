@@ -47,4 +47,8 @@ class Vault extends Model
 	{
 		return $this->hasMany('App\Models\IncomePayment');
 	}
+	public function purseAccess()
+	{
+		return $this->hasMany('App\Models\PurseAccess');
+	}
 }

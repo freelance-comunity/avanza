@@ -102,4 +102,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\BoxCut');
     }
+    public function purseAccess()
+    {
+        return $this->hasOne('App\Models\ParseAccess');
+    }
 }

@@ -28,15 +28,42 @@ class GeneralController extends Controller
 	
 	public function getPromoter()
 	{	
-		if (Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal'])) {
+		/*if (Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal'])) {
 
 			$user_allocation = Auth::user();
 			$region_allocation = $user_allocation->region;
 
 			$collection = Role::all();
 			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
-			$filtered = $role->users;
+			$filtered = User::all();
 			$users = $filtered->where('region_id', $region_allocation->id);
+
+			return view('executives.index')
+			->with('employees', $users);
+		}*/
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$users = User::all();
+			return view('executives.index')
+			->with('employees', $users);
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+
+			$filtered = User::all();
+			$users = $filtered->where('region_id', $region_allocation->id);
+
+			return view('executives.index')
+			->with('employees', $users);
+		}
+		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
+			$user_allocation = Auth::user();
+			$branch_allocation = $user_allocation->branch;
+
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+			$filtered = User::all();
+			$users = $filtered->where('branch_id', $branch_allocation->id);
 
 			return view('executives.index')
 			->with('employees', $users);

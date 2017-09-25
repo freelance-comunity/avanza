@@ -25,6 +25,9 @@
                 </thead>
                 <tbody>
                     @foreach($employees as $employee)
+                    @php
+                        $roles = $employee->role;
+                    @endphp
                     <tr>
                         <td>{!! $employee->name !!}</td>
                         <td>{!! $employee->father_last_name !!}</td>

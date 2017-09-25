@@ -64,7 +64,7 @@ class GeneralController extends Controller
 
 		$expenditures = $vault->expenditures->where('date', $current);
 		$g = $expenditures->where('concept', 'Gasto')->where('date', $current);
-	
+		
 		$expendituresCredit = $vault->expendituresCredit->where('date', $current);
 		$c = $expendituresCredit->where('concept', 'Colocación')->where('date', $current);
 		return view('executives.showVault')
@@ -157,6 +157,10 @@ class GeneralController extends Controller
 
 		$vault->ammount = $vault->ammount + $income->ammount;
 		$vault->save();
+
+		$vault_collector->ammount = $vault_collector->ammount - $vault->ammount;
+		$vault_collector->save();
+
 
 		Toastr::success('Asignación de efectivo exitoso.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 

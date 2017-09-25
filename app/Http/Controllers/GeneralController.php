@@ -158,7 +158,7 @@ class GeneralController extends Controller
 		$vault->ammount = $vault->ammount + $income->ammount;
 		$vault->save();
 
-		$vault_collector->ammount = $vault_collector->ammount - $vault->ammount;
+		$vault_collector->ammount = $vault_collector->ammount - $request->input('ammount');
 		$vault_collector->save();
 
 

@@ -150,7 +150,6 @@
         </div>  --}}
       </div> 
        <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
-     {{--  <input type="hidden" name="branch_id" value="{{ Auth::user()->branch->id }}"> --}}
       <div class="form-group col-sm-6 col-lg-12">
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         {{-- Geolocation address client --}}

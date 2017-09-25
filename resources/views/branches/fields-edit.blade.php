@@ -21,11 +21,23 @@
               'data-parsley-validate-if-empty'=>'true',
               'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
             </div>
+
             <div class="col-md-6">
               <label for="exampleInputEmail1">Teléfono</label>
               <input type="number" name="phone" class="form-control input-lg" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" value="{{$branch->phone}}" data-parsley-validate-if-empty="true" data-parsley-maxlength="10">
               </div>       
             </div>
+            <div class="col-md-12">
+              <label for="exampleInputEmail1">Nomenclatura</label>
+              {!! Form::text('nomenclature', null, [
+                'style' => 'text-transform:uppercase',
+                'class' => 'form-control input-lg', 
+                'placeholder'=>'ESCRIBE LA NOMENCLATURA DE LA SUCURSAL',
+                'required'=>'required',
+                'data-parsley-trigger ' => 'input focusin',
+                'data-parsley-validate-if-empty'=>'true',
+                'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+              </div>
             <!-- /.box-body -->        
             <div class="box-body">
               <div class="col-md-12">

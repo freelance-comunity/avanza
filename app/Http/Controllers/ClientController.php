@@ -122,8 +122,8 @@ class ClientController extends AppBaseController
 		}
 		$number = Client::max('id') + 1;
 		
-		$input['folio'] = $request->input('state').$request->input('branch_id').'00'.$number;
-
+		$input['folio'] ='CLTE'.$branch->nomenclature.'00'.$number;
+		
 		$client = Client::create($input);
 
 
@@ -536,20 +536,20 @@ public function aval($id)
 }
 
 public function avalClient($id)
-	{
-		$client = Client::find($id);
-		$clientAval = $client->clientAval;
-		if (empty($clientAval)) {
-			return view ('clientAvals.create')
-			->with('client', $client);
-		}
-		else
-		{
-			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-			return redirect(route('client.show', [$client->id])); 
-		}
-		
+{
+	$client = Client::find($id);
+	$clientAval = $client->clientAval;
+	if (empty($clientAval)) {
+		return view ('clientAvals.create')
+		->with('client', $client);
 	}
+	else
+	{
+		Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+		return redirect(route('client.show', [$client->id])); 
+	}
+
+}
 
 
 }

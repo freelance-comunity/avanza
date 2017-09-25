@@ -21,7 +21,7 @@ class BoxCutController extends AppBaseController
 	public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('is_admin');
+		// $this->middleware('is_admin');
 	}
 	
 	public function getPromoter()

@@ -35,7 +35,7 @@ Home
 							</div>
 						</div>
 					</div>
-					@if (Hash::check('micontraseña', Auth::user()->password))
+					{{-- @if (Hash::check('micontraseña', Auth::user()->password))
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
 							<div class="panel panel-default">
@@ -49,7 +49,7 @@ Home
 							</div>
 						</div>
 					</div>
-					@endif
+					@endif --}}
 					@role('ejecutivo-de-credito')
 					@include('partials.home.promoter')
 					@endrole

@@ -16,7 +16,7 @@
           <div class="icon">
             <i class="fa fa-bank"></i>
           </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+           <a href="{{ url('/report-vault') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -31,7 +31,7 @@
           <div class="icon">
             <i class="fa fa-users"></i>
           </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+           <a href="{{ url('/report-clients') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -46,7 +46,7 @@
           <div class="icon">
             <i class="fa fa-paperclip"></i>
           </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+           <a href="{{ url('/report-credits') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -61,7 +61,7 @@
           <div class="icon">
             <i class="fa fa-money"></i>
           </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+           <a href="{{ url('/report-credits') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
         </div>
       </div>
       <!-- ./col -->

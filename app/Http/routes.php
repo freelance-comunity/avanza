@@ -351,6 +351,12 @@ Route::get('solicitud/{id}', function($id){
     return $pdf->download('solicitud.pdf');
 });
 
+Route::get('account_pdf/{id}', function($id){
+    $credit = App\Models\Credit::find($id);
+    $pdf = PDF::loadView('credits.account_pdf', compact('credit'));
+    return $pdf->download('Estado-De-Cuenta.pdf');
+});
+
 Route::get('account/{id}', function($id){
    $credit = App\Models\Credit::find($id);
    return view('credits.account')
@@ -536,3 +542,25 @@ Route::get('purseAccesses/{id}/delete', [
     'as' => 'purseAccesses.delete',
     'uses' => 'PurseAccessController@destroy',
 ]);
+
+/*========================================
+=            Download reports            =
+========================================*/
+Route::get('report-vault', function(){
+    $pdf = PDF::loadView('reports.vault')->setPaper('a4', 'landscape');
+    return $pdf->download('reporte-bovéda.pdf');
+});
+
+Route::get('report-clients', function(){
+    $pdf = PDF::loadView('reports.clients')->setPaper('a4', 'landscape');
+    return $pdf->download('reporte-clientes.pdf');
+});
+
+Route::get('report-credits', function(){
+    $pdf = PDF::loadView('reports.credits')->setPaper('a4', 'landscape');
+    return $pdf->download('reporte-créditos.pdf');
+});
+
+
+/*=====  End of Download reports  ======*/
+

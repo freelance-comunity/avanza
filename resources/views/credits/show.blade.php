@@ -171,12 +171,15 @@ Detalles
 					</div>					
 					<div class="col-md-12">
 						<div class="table-responsive">
-						@role('administrador')
+							@role('administrador')
 							@include('credits.payment_table_admin')
-						@endrole
-						@if (Auth::user()->can('ver-pagos'))
+							@endrole
+							@if (Auth::user()->can('ver-pagos'))
+							@include('credits.payment_show')
+							@endif
+							@if (Auth::user()->can('aplicar-pagos'))
 							@include('credits.payment_table_promoter')
-						  @endif
+							@endif
 						</div>
 						<br><br><br><br>
 					</div>

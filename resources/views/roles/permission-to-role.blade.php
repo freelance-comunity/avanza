@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('main-content')
+@section('message_level')
+Roles
+@endsection
+@section('message_level_here')
+Permisos
+@endsection
 <div class="container">
 	<div class="row">
 		<h1 class="pull-left">Asignar Permisos al rol {{ $role->display_name }}</h1>

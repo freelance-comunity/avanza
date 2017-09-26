@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('main-content')
-
+@section('message_level')
+Regiones
+@endsection
+@section('message_level_here')
+Lista de regiones
+@endsection
 <div class="container">
 
     {{-- @include('flash::message') --}}

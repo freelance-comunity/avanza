@@ -4,6 +4,12 @@
 Home
 @endsection
 @section('main-content')
+@section('message_level')
+Inicio
+@endsection
+@section('message_level_here')
+Panel de control
+@endsection
 <div class="row">
 	<div class="col-md-12">
 		<div class="box box-default">

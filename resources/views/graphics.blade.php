@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('main-content')
-
+@section('message_level')
+Graficas de monitoreo
+@endsection
+@section('message_level_here')
+Lista de graficas
+@endsection
 <div class="container">
 	@php
 	$date = \Carbon\Carbon::now()->toDateString();

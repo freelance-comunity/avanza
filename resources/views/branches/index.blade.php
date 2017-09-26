@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('main-content')
+@section('message_level')
+Sucursales
+@endsection
+@section('message_level_here')
+Lista de sucursales
+@endsection
 @section('contentheader_title')
 Todas las sucursales
 @endsection

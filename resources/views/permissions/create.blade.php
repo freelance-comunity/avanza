@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('main-content')
+@section('message_level')
+Permisos
+@endsection
+@section('message_level_here')
+Crear
+@endsection
 <div class="container">
 
     @include('common.errors')

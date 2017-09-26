@@ -1,5 +1,11 @@
 @extends('layouts.app')
 @section('main-content')
+@section('message_level')
+Créditos
+@endsection
+@section('message_level_here')
+Detalles
+@endsection
 <div class="container">
 	<div class="row">
 		<!-- ./col -->

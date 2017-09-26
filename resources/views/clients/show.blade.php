@@ -8,6 +8,12 @@ $document= $client->document;
 @extends('layouts.app')
 
 @section('main-content')
+@section('message_level')
+Clientes
+@endsection
+@section('message_level_here')
+Detalles
+@endsection
 @section('contentheader_title')
 Detalles del Cliente 
 @endsection

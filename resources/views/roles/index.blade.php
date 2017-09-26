@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('main-content')
-
+@section('message_level')
+Roles
+@endsection
+@section('message_level_here')
+Lista de roles
+@endsection
 <div class="container">
 
     @include('flash::message')

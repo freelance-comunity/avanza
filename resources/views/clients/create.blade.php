@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('main-content')
+@section('message_level')
+Clientes
+@endsection
+@section('message_level_here')
+Crear
+@endsection
 @section('contentheader_title')
 Crear Nuevo Cliente 
 @endsection

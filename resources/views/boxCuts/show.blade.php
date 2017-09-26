@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('main-content')
+@section('message_level')
+Corte de caja
+@endsection
+@section('message_level_here')
+Detalles
+@endsection
 @php
 $date = new Date();
 @endphp

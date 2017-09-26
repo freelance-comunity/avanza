@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('main-content')
+@section('message_level')
+Bovéda
+@endsection
+@section('message_level_here')
+Detalles
+@endsection
 @php
 $date = new Date();
 @endphp

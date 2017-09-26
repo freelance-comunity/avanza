@@ -6,7 +6,7 @@
         <!--<img src="{{ asset('img/logo.jpg') }}" style="width: 250px; height: 100px;" class="img-responsive" alt="">-->
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> {{ trans('adminlte_lang::message.level') }}</a></li>
-        <li class="active">{{ trans('adminlte_lang::message.here') }}</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> @yield('message_level', 'Nivel')</a></li>
+        <li class="active">@yield('message_level_here', 'Aquí')</li>
     </ol>
 </section>

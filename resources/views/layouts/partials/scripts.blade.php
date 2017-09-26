@@ -117,6 +117,8 @@
       	$(document).ready(function() {
       		$('#example').DataTable( {
       			"language": {
+              "pageLength": 25,
+              responsive: true,
       				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
       			}
 

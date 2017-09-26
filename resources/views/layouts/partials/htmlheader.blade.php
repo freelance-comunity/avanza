@@ -38,7 +38,8 @@
         <script src="{{ asset('js/gmaps/jquery-gmaps-latlon-picker.js')}}"></script>
 
         <!-- Toastr -->
-        <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+       {{--  <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> --}}
+       <link rel="stylesheet" href="{{ asset('css/toasts/toastr.min.css') }}">
         {{--  Datatables --}}
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">

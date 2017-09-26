@@ -35,6 +35,7 @@ class CreditController extends AppBaseController
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('credits',['only'=>['create','creditsClient']]);
 	}
 
 	public function index(Request $request)

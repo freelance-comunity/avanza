@@ -44,7 +44,7 @@ $date = new Date();
 						<td>SUCURSAL:</td>
 						<td>{{ $user->branch->name }}</td>
 					</tr>
-					 @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
+					@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 					<tr>
 						<td colspan="2">
 							<a data-toggle="modal" data-target="#start_of_day" class="btn bg-primary btn-lg btn-block">ASIGNAR SALDO INICIAL</a>
@@ -81,7 +81,7 @@ $date = new Date();
 						<th>CONCEPTO</th>
 						<th>IMPORTE</th>
 						@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<th style="width: 30px;">DETALLES</th>
+						<th style="width: 30px;">DETALLES</th>
 						@endif
 					</thead>
 					<tbody>
@@ -112,7 +112,7 @@ $date = new Date();
 							</td>
 							@endif
 						</tr>
-						 <tr>
+						<tr>
 							<td>Recuperación Access</td>
 							<td>${{ number_format($ra->sum('ammount')) }}</td>
 							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
@@ -132,42 +132,42 @@ $date = new Date();
 					<thead class="thead-inverse">
 						<th>IMPORTE</th>
 						<th>CONCEPTO</th>
-						@role('administrador')
+						@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 						<th style="width: 30px;">DETALLES</th>
-						@endrole
+						@endif
 					</thead>
 					<tbody>
 						<tr>
 							<td>Colocación</td>
 							<td>${{ number_format($c->sum('ammount')) }}</td>
-							@role('administrador')
+							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#c"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
-							@endrole
+							@endif
 						</tr>
 						<tr>
 							<td>Gastos</td>
 							<td>${{ number_format($g->sum('ammount')) }}</td>
-							@role('administrador')
+							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 							<td style="text-align: center;">
 								<a data-toggle="modal" data-target="#g"><i class="fa fa-eye fa-2x"></i></a>
 							</td>
-							@endrole
+							@endif
 						</tr>
 						<tr>
 							<td>Devolución</td>
 							<td>$0.00</td>
-							@role('administrador')
+							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
-							@endrole
+							@endif
 						</tr>
 						<tr>
 							<td>Inversión</td>
 							<td>$0.00</td>
-							@role('administrador')
+							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
-							@endrole
+							@endif
 						</tr>
 					</tbody>
 				</table>

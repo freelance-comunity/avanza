@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-         if (\Auth::user()->hasRole(['administrador'])) {
+         if (\Auth::user()->hasRole(['administrador', 'director-general'])) {
             return $next($request);
         }else{
             return abort(403);

@@ -38,7 +38,7 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
         <th>Apellido Materno</th>
         <th>Sucursal</th>
         <th>Teléfono</th>
-        @if (Auth::user()->can('crear-credito')) 
+        @if (Auth::user()->can('crear-credito'))
         <th width="50px">Crédito</th>
         @endif 
         <th>Acción</th>
@@ -66,11 +66,9 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
                 <a href="{{ url('products') }}" class="btn btn-block btn-danger">No hay productos registrados</a>
                 @else
                 @foreach ($products as $product)
-                
                 <div class="form-group col-sm-6 col-lg-6">
                  <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}" ><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
                </div>
-               
                @endforeach
                @endif
              </div>
@@ -107,10 +105,10 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
            <a href="" class="btn bg-red btn-block uppercase">Bloqueado</a>
            <button type="button" class="btn bg-red btn-block uppercase">Bloqueado</button></td>
            @else--}}
-           @if (Auth::user()->can('crear-credito'))
+           @if (Auth::user()->can('crear-credito')) 
            <td> <button type="button" class="btn btn-primary btn-block uppercase" data-toggle="modal" data-target="#myModal{{$client->id}}">Nuevo</button></td>
            @endif 
-           
+
            <td>
             <a href="{!! route('clients.show', [$client->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a> 
             @if (Auth::user()->can('eliminar-cliente'))

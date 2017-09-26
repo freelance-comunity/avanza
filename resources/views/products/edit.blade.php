@@ -7,7 +7,7 @@
 
     {!! Form::model($product, ['route' => ['products.update', $product->id], 'method' => 'patch']) !!}
 
-        @include('products.fields')
+        @include('products.fields-edit')
 
     {!! Form::close() !!}
 </div>

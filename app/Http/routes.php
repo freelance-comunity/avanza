@@ -46,12 +46,12 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
- $payment = App\Models\Payment::find(2242);
- $debt = $payment->debt;
- echo $debt->ammount;
- $credit = $debt->credit;
+   $payment = App\Models\Payment::find(2242);
+   $debt = $payment->debt;
+   echo $debt->ammount;
+   $credit = $debt->credit;
 
- echo $credit->ammount;
+   echo $credit->ammount;
 });
 
 Route::post('process', 'PaymentController@process');
@@ -107,11 +107,11 @@ Route::get('ciclos', function(){
     }
 
     while ($budget > 0) {
-     echo "PAGO #".$id_next;
-     echo "<br>";
-     $id_next = $id_next + 1;
-     $budget = $budget - 1;
- }
+       echo "PAGO #".$id_next;
+       echo "<br>";
+       $id_next = $id_next + 1;
+       $budget = $budget - 1;
+   }
 });
 
 /*=====  End of Test Routes  ======*/
@@ -272,10 +272,10 @@ Route::get('clientCredentials/{id}/delete', [
 
 Route::resource('clientAvals', 'ClientAvalController');
 
-  Route::get('avalClient/{id}/',[
-          'as' => 'client.avalClient',
-          'uses' => 'ClientController@avalClient',
-          ]);
+Route::get('avalClient/{id}/',[
+  'as' => 'client.avalClient',
+  'uses' => 'ClientController@avalClient',
+]);
 
 Route::get('clientAvals/{id}/delete', [
     'as' => 'clientAvals.delete',
@@ -351,7 +351,12 @@ Route::get('solicitud/{id}', function($id){
     return $pdf->download('solicitud.pdf');
 });
 
+Route::get('account/{id}', function($id){
+   $credit = App\Models\Credit::find($id);
+   return view('credits.account')
+   ->with('credit',$credit);
 
+});
 
 Route::resource('debts', 'DebtController');
 
@@ -497,14 +502,14 @@ Route::get('regions/{id}/delete', [
 ]);
 
 Route::get('id',function(){
-$vault = App\Models\Vault::find(2);
-echo $vault->ammount;
-echo "<br>";
+    $vault = App\Models\Vault::find(2);
+    echo $vault->ammount;
+    echo "<br>";
 
-$incomePayment = $vault->incomePayment;
-foreach ($incomePayment as $incomePayment) {
-   echo $incomePayment->id;
-}
+    $incomePayment = $vault->incomePayment;
+    foreach ($incomePayment as $incomePayment) {
+     echo $incomePayment->id;
+ }
 
 });
 

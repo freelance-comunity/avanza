@@ -431,7 +431,13 @@ class PaymentController extends AppBaseController
 		$payment->total = $payment->ammount;
 		$payment->status = "Pendiente";
 		$payment->save();
+		$user = Auth::user();
+		$vault = $user->vault;
 
+		$vault->ammount = $vault->ammount - 50;
+		$vault->save();
+
+		
 		return redirect()->back();	
 	}
 	public function mora($id)

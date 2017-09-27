@@ -149,7 +149,7 @@
           </select>
         </div>  --}}
       </div> 
-       <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
+      <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
       <div class="form-group col-sm-6 col-lg-12">
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         {{-- Geolocation address client --}}
@@ -455,9 +455,9 @@
         </div>
       </div>
       
-    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+      <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Siguiente</button>
+    </div>
   </div>
-</div>
 </div>
 
 <!-- CLIENTS AVAL-->
@@ -619,10 +619,7 @@
 
 </div>
 </div>
-<!-- CLIENTS AVAL-->
-
-
-
+<!-- CLIENTS AVAL-->  
 <!-- CLIENTS DOCUMENTS-->
 <div class="row setup-content" id="step-5">
   <div class="col-xs-12">

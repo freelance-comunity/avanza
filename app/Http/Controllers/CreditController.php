@@ -476,6 +476,7 @@ class CreditController extends AppBaseController
 		return view('credits.show')->with('credit', $credit);
 	}
 
+	
 	/**
 	 * Show the form for editing the specified Credit.
 	 *

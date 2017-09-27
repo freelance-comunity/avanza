@@ -12,12 +12,13 @@ Crear Nuevo Cliente
 @endsection
 <div class="container">
 
-    @include('common.errors')
+	@include('common.errors')
 
-    {!! Form::open(['route' => 'clients.store', 'files' => 'true', 'data-parsley-validate' => '', 'id'=>'formclient']) !!}
+	{!! Form::open(['route' => 'clients.store', 'files' => 'true', 'data-parsley-validate' => '', 'id'=>'formclient','onsubmit'=>'return checkSubmit();']) !!}
 
-        @include('clients.fields')
+	@include('clients.fields')
 
-    {!! Form::close() !!}
+
+	{!! Form::close() !!}
 </div>
 @endsection

@@ -351,7 +351,18 @@ Route::get('solicitud/{id}', function($id){
     return $pdf->download('solicitud.pdf');
 });
 
+Route::get('account_pdf/{id}', function($id){
+    $credit = App\Models\Credit::find($id);
+    $pdf = PDF::loadView('credits.account_pdf', compact('credit'));
+    return $pdf->download('Estado-De-Cuenta.pdf');
+});
 
+Route::get('account/{id}', function($id){
+   $credit = App\Models\Credit::find($id);
+   return view('credits.account')
+   ->with('credit',$credit);
+
+});
 
 Route::resource('debts', 'DebtController');
 

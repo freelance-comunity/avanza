@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
 
-      {!! Form::open(['url' => 'process','data-parsley-validate' => '']) !!}  
+      {!! Form::open(['url' => 'process','data-parsley-validate' => '','onsubmit'=>'return enviado()']) !!}  
         <p>
           {!! Form::label('payment', 'Monto:') !!}
             <input type="number" name="payment" id=" payment example" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
@@ -58,5 +58,20 @@
 
    });
  });
+</script>
+<script>
+  var cuenta=0;
+  function enviado() { 
+    if (cuenta == 0)
+    {
+      cuenta++;
+      return true;
+    }
+    else 
+    {
+      alert("El formulario ya está siendo enviado, por favor aguarde un instante.");
+      return false;
+    }
+  }
 </script>
 

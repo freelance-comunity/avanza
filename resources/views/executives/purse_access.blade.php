@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        {!! Form::open(['url' => 'purseAccess','data-parsley-validate' => '',  'files' => 'true']) !!}  
+        {!! Form::open(['url' => 'purseAccess','data-parsley-validate' => '',  'files' => 'true','onsubmit'=>'return enviado()']) !!}  
         <p>
           {!! Form::label('ammount', 'Monto:') !!}
           <input type="number" name="ammount" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
@@ -33,3 +33,20 @@
     </div>
   </div>
 </div>
+<script>
+
+  var cuenta=0;
+  function enviado() { 
+    if (cuenta == 0)
+    {
+      cuenta++;
+      return true;
+    }
+    else 
+    {
+      alert("El formulario ya está siendo enviado, por favor aguarde un instante.");
+      return false;
+    }
+  }
+
+</script>

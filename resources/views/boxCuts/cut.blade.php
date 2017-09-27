@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        {!! Form::open(['url' => 'cut','' => '']) !!}  
+        {!! Form::open(['url' => 'cut','' => '','onsubmit'=>'return enviado()']) !!}  
         <p>
           <div class="form-group col-sm-6 col-lg-12">
             {!! Form::label('amount', 'INGRESA LA CANTIDAD:') !!}
@@ -40,4 +40,21 @@
    });
  });
 </script>
+
+<script>
+  var cuenta=0;
+  function enviado() { 
+    if (cuenta == 0)
+    {
+      cuenta++;
+      return true;
+    }
+    else 
+    {
+      alert("El formulario ya está siendo enviado, por favor aguarde un instante.");
+      return false;
+    }
+  }
+</script>
+
  

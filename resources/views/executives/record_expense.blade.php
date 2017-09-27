@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        {!! Form::open(['url' => 'recordExpense','data-parsley-validate' => '',  'files' => 'true']) !!}  
+        {!! Form::open(['url' => 'recordExpense','data-parsley-validate' => '',  'files' => 'true','onsubmit'=>'return enviado()']) !!}  
         <p>
           {!! Form::label('ammount', 'Monto:') !!}
           <input type="number" name="ammount" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
@@ -22,7 +22,7 @@
           {!! Form::label('description', 'Descripción:') !!}
           <input type="text" name="description" class="form-control input-lg">
         </p>
-          <input type="hidden"  name="user_id" value="{{ $user->id }}">
+        <input type="hidden"  name="user_id" value="{{ $user->id }}">
         <p>
           {!! Form::label('voucher', 'Coprobante:') !!}
           <input type="file" name="voucher" class="form-control input-lg">
@@ -38,3 +38,21 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  var cuenta=0;
+  function enviado() { 
+    if (cuenta == 0)
+    {
+      cuenta++;
+      return true;
+    }
+    else 
+    {
+      alert("El formulario ya está siendo enviado, por favor aguarde un instante.");
+      return false;
+    }
+  }
+
+</script>

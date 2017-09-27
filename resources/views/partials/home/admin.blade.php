@@ -72,7 +72,7 @@ $expenditures = App\Models\Expenditure::all();
       <div class="inner">
         <h3>${{ number_format($expenditures->sum('ammount'),2) }}</h3>
 
-        <p>Total Gastos</p>
+        <p>Total Gastoss</p>
       </div>
       <div class="icon">
         <i class="fa fa-shopping-cart"></i>

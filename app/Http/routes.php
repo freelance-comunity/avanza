@@ -566,5 +566,10 @@ Route::get('report-expenditures', function(){
     return $pdf->download('reporte-gastos.pdf');
 });
 
+Route::get('report-payments', function(){
+    $pdf = PDF::loadView('reports.payments')->setPaper('a4', 'landscape');
+    return $pdf->download('reporte-cobranza.pdf');
+});
+
 /*=====  End of Download reports  ======*/
 

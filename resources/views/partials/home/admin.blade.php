@@ -118,7 +118,7 @@ $payments = $collection_payments->where('date', $now);
         <ul class="users-list clearfix">
           @foreach ($activities as $activity)
           <li>
-            <img src="{{asset('/uploads/avatars')}}/{{ $activity->user->avatar }}" alt="User Image">
+            <img src="{{asset('/uploads/avatars')}}/{{ $activity->user->avatar }}" alt="User Image" class="online">
             <a class="users-list-name" href="#">{{ $activity->user->name }}</a>
             <span class="users-list-date">{{ Carbon\Carbon::now() }}</span>
           </li>

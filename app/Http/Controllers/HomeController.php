@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Activity;
 
 /**
  * Class HomeController
@@ -32,7 +33,9 @@ class HomeController extends Controller
      * @return Response
      */
     public function index()
-    {
-        return view('home');
+    {   
+        $activities = Activity::users()->get();
+        return view('home')
+        ->with('activities', $activities);
     }
 }

@@ -67,6 +67,7 @@ class GeneralController extends Controller
 		}
 		
 	}
+	
 
 	public function showVault($id)
 	{	

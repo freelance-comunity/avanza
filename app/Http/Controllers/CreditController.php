@@ -114,13 +114,22 @@ class CreditController extends AppBaseController
 		}
 		else
 		{
+			/* Save avatar client */
+		if($request->hasFile('firm_ine')){
+			$firm_ine = $request->file('firm_ine');
+			$filename = time() . '.' . $firm_ine->getClientOriginalExtension();
+			Image::make($firm_ine)->resize(300, 300)->save( public_path('/uploads/signatures/' . $filename ) );
+			$input['firm_ine'] = $filename;
+		}
 			/* Get signature */
+			if ($request->input('firm')) {
 			$data_uri = $request->input('firm');
 			$encoded_image = explode(",", $data_uri)[1];
 			$decoded_image = base64_decode($encoded_image);
 			$url = 'signature'. '-id-'. $request->input('client_id') . rand(111,9999).'.png';
 
 			file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
+		}
 			/* End get signature */
 
 			$client = Client::find($request->input('client_id'));
@@ -177,8 +186,9 @@ class CreditController extends AppBaseController
 			
 			
 			
-
+			if($request->input('firm')){
 			$input['firm']   = $url;
+		}
 			$input['status'] = "MINISTRADO";
 
 

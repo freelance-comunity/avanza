@@ -507,16 +507,16 @@ Route::get('regions/{id}/delete', [
     'uses' => 'RegionController@destroy',
 ]);
 
-Route::get('id',function(){
-    $vault = App\Models\Vault::find(2);
-    echo $vault->ammount;
-    echo "<br>";
+Route::get('usuarios',function(){
+    $user = App\User::all();
+    
 
-    $incomePayment = $vault->incomePayment;
-    foreach ($incomePayment as $incomePayment) {
-     echo $incomePayment->id;
- }
+   foreach ($user as $key => $user) {
 
+      echo $user->name;
+      echo "<br>";
+   
+}
 });
 
 

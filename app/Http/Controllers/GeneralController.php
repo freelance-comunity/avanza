@@ -31,7 +31,8 @@ class GeneralController extends Controller
 	{	
 
 		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
-			$users = User::all();
+			 $users = User::where('id', '!=', Auth::id())->get();
+			// $users = User::all();
 			return view('executives.index')
 			->with('employees', $users);
 		}
@@ -39,7 +40,7 @@ class GeneralController extends Controller
 			$user_allocation = Auth::user();
 			$region_allocation = $user_allocation->region;
 
-			$filtered = User::all();
+			$filtered = User::where('id', '!=', Auth::id())->get();
 			$users = $filtered->where('region_id', $region_allocation->id);
 
 			return view('executives.index')

@@ -52,7 +52,7 @@ class GeneralController extends Controller
 
 			$collection = Role::all();
 			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
-			$filtered = User::all();
+			$filtered = User::where('id', '!=', Auth::id())->get();
 			$users = $filtered->where('branch_id', $branch_allocation->id);
 
 			return view('executives.index')

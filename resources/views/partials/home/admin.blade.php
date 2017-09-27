@@ -3,6 +3,10 @@ $vault   = App\Models\Vault::all();
 $clients = App\Models\Client::all();
 $credits = App\Models\Credit::all();
 $expenditures = App\Models\Expenditure::all();
+
+$now = Carbon\Carbon::now()->toDateString();
+$collection_payments = App\Models\IncomePayment::all();
+$payments = $collection_payments->where('date', $now);
 @endphp
 <!-- Small boxes (Stat box) -->
 <div class="row">
@@ -81,7 +85,20 @@ $expenditures = App\Models\Expenditure::all();
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-xs-6"></div>
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-orange">
+      <div class="inner">
+        <h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+
+        <p>Total Recuperado del día</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-line-chart"></i>
+      </div>
+      <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+    </div>
+  </div>
   <div class="col-lg-6 col-xs-6">
     <!-- USERS LIST -->
     <div class="box box-success">

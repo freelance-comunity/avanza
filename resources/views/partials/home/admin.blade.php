@@ -72,7 +72,7 @@ $expenditures = App\Models\Expenditure::all();
       <div class="inner">
         <h3>${{ number_format($expenditures->sum('ammount'),2) }}</h3>
 
-        <p>Total Gastoss</p>
+        <p>Total Gastos</p>
       </div>
       <div class="icon">
         <i class="fa fa-shopping-cart"></i>
@@ -81,5 +81,42 @@ $expenditures = App\Models\Expenditure::all();
     </div>
   </div>
   <!-- ./col -->
+  <div class="col-lg-3 col-xs-6"></div>
+  <div class="col-lg-6 col-xs-6">
+    <!-- USERS LIST -->
+    <div class="box box-success">
+      <div class="box-header with-border">
+        <h3 class="box-title">Usuarios en Linea</h3>
+
+        <div class="box-tools pull-right">
+          <span class="label label-success">{{ $activities->count() }} en linea</span>
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body no-padding">
+        <ul class="users-list clearfix">
+          @foreach ($activities as $activity)
+          <li>
+            <img src="{{asset('/uploads/avatars')}}/{{ $activity->user->avatar }}" alt="User Image">
+            <a class="users-list-name" href="#">{{ $activity->user->name }}</a>
+            <span class="users-list-date">{{ Carbon\Carbon::now() }}</span>
+          </li>
+          @endforeach
+        </ul>
+        <!-- /.users-list -->
+      </div>
+      <!-- /.box-body -->
+      {{-- <div class="box-footer text-center">
+        <a href="javascript:void(0)" class="uppercase">View All Users</a>
+      </div> --}}
+      <!-- /.box-footer -->
+    </div>
+    <!--/.box -->
+  </div>
+  <!-- /.col -->
 </div>
 <!-- /.row -->

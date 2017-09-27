@@ -188,6 +188,15 @@ return [
          *
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        /**
+         *
+         * Users online
+         *
+         */
+
+        Kim\Activity\ActivityServiceProvider::class,
+        
         
         
         
@@ -271,6 +280,15 @@ return [
      *
      */
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+    /**
+     *
+     * Users online
+     *
+     */
+
+    'Activity' => Kim\Activity\ActivityFacade::class,
+    
 
     
     

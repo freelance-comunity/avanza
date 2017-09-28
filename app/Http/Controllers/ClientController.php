@@ -70,7 +70,9 @@ class ClientController extends AppBaseController
 		}
 		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
 			$user_allocation = Auth::user();
-			$clients = $user_allocation->clients;
+			$branch_allocation = $user_allocation->branch;
+
+			$clients = $branch_allocation->clients;
 		}
 		$products =	Product::all();
 		return view('clients.index')

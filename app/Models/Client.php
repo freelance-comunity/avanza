@@ -35,7 +35,7 @@ class Client extends Model
 	"firts_name" => "required",
 	"last_name" => "required",
 	"mothers_last_name" => "required",
-	"curp" => "required",
+	//"curp" => "required|exists:clients,curp",
 	"ine" => "required",
 	"civil_status" => "required",
 	"phone" => "required",

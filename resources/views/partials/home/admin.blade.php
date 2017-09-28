@@ -99,7 +99,10 @@ $payments = $collection_payments->where('date', $now);
       <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
     </div>
   </div>
-  <div class="col-lg-6 col-xs-6">
+</div>
+<!-- /.row -->
+<div class="row">
+  <div class="col-md-6">
     <!-- USERS LIST -->
     <div class="box box-success">
       <div class="box-header with-border">
@@ -120,7 +123,7 @@ $payments = $collection_payments->where('date', $now);
           <li>
             <img src="{{asset('/uploads/avatars')}}/{{ $activity->user->avatar }}" alt="User Image" class="online">
             <a class="users-list-name" href="#">{{ $activity->user->name }}</a>
-            <span class="users-list-date">{{ Carbon\Carbon::now() }}</span>
+            {{-- <span class="users-list-date">{{ Carbon\Carbon::now() }}</span> --}}
           </li>
           @endforeach
         </ul>
@@ -136,4 +139,3 @@ $payments = $collection_payments->where('date', $now);
   </div>
   <!-- /.col -->
 </div>
-<!-- /.row -->

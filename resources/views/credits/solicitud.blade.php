@@ -345,10 +345,13 @@
 			<p  style="width: 200%">Autorizo expresamente a CrediEfectivo, para que por conducto de sus servidores públicos facultados lleve a cabo sus investigaciones sobre mi comportamiento crediticio con las Sociedades de Información Crediticia. </p>
 			<p style="width: 200%">Asimismo, declaro que conozco la naturaleza y alcance de la información que se solicitará, del uso que la Financiera hará de tal información y de que ésta podrá realizar consultas periódicas de mi historial crediticio, consintiendo que esta autorización se encuentre vigente por los siguientes tres años contados a partir de su expedición y en todo caso durante el tiempo que se mantenga 	la relación jurídica entre ambas.</p>
 			<p style="width: 200%">Estoy de acuerdo y acepto que este documento quede bajo propiedad de la Financiera y/o de la Sociedad de Información Crediticia consultada para efectos de control y cumplimiento del artículo 28 de la Ley para Regular las Sociedades de Información Crediticia.</p>					
-
-			<h6 style="text-align: center; width:200%"><img  class="displayed" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" style="height: 45px; max-width: 50%;"><br>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}
+			@if ($credit->firm == 1)
+				<h6 style="text-align: center; width:200%"><img  class="displayed" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" style="height: 45px; max-width: 50%;"><br>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}
 			</h6>
-
+			@else
+			<h6 style="text-align: center; width:200%"><img  class="displayed" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm_ine }}" style="height: 45px; max-width: 50%;"><br>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}
+			</h6>
+			@endif
 		</div>
 		<div class="part2">
 			<table style="width:50%; float:right;">

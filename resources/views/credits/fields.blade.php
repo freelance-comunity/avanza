@@ -108,88 +108,27 @@
                 }
               }
             </script>
-            <div id="si" style="display: none;">
+            {{--  <div id="si" style="display: none;"> --}}
               <div  class="form-group col-sm-6 col-lg-12">
-                <div class="form-group col-sm-6 col-lg-4">
-                  {!! Form::label('firm', 'Firma:') !!}
-                  {!! Form::text('firm',null, [
-                    'class' => 'form-control input-lg', 
-                    'id'    => 'signature',
-                    'readonly'
-                    ]) !!}
-                  </div>
+               <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('firm', 'Firma:') !!}
+                {!! Form::text('firm',null, [
+                  'class' => 'form-control input-lg', 
+                  'id'    => 'signature',
+                  'readonly'
+                  ]) !!}
                 </div>
+              {{--  </div> --}}
 
-                <div  class="form-group col-sm-12 col-lg-12">
-                  <div class="form-group col-sm-12 col-lg-12">
-                    <div id="signature-pad" class="m-signature-pad">
-                      <div class="m-signature-pad--body">
-                        <canvas style="border: 1px solid black; height: 200px;"></canvas>
-                      </div>
-                      <div class="m-signature-pad--footer">
-                        <button type="button" class="btn btn-lg btn-info clear" data-action="clear">Limpiar</button>
-                        <button type="button" class="btn btn-lg btn-success save" data-action="save">Usar</button>
-                      </div>
+              <div  class="form-group col-sm-12 col-lg-12">
+                <div class="form-group col-sm-12 col-lg-12">
+                  <div id="signature-pad" class="m-signature-pad">
+                    <div class="m-signature-pad--body">
+                      <canvas style="border: 1px solid black; height: 200px;"></canvas>
                     </div>
-
-                  </div>
-                </div>
-              </div>
-
-              <div id="no" style="display: none;">
-                <div  class="form-group col-sm-6 col-lg-12">
-                  <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('firm_ine', 'Foto de la firma:') !!}
-                    {!! Form::file('firm_ine', [
-                      ]) !!}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-                  <input type="hidden" name="type_product" value="{{$product->id}}">
-                  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-
-                  <div class="box-body" >
-                   <div class="col-md-4">
-                    <div class="btn-group">
-                     {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-block btn-primary', 'id' => 'save']) !!}
-                   </div>
-                 </div> 
-               </div>
-               <div class="form-group col-sm-12 col-lg-4 ">
-                 <div class="row">
-
-                 </div>
-               </div>
-             </div>
-
-             <!-- Modal -->
-             <div class="modal fade" id="tabladepagos" tabindex="-1" role="dialog"  aria-hidden="true">
-              <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title">SIMULACIÓN DE TABLA DE PAGOS</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="table-responsive">
-
-                      <table id="resultado" class="thead-inverse table " >
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Fecha</th>
-                            <th>Monto</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                      </table>
-
+                    <div class="m-signature-pad--footer">
+                      <button type="button" class="btn btn-lg btn-info clear" data-action="clear">Limpiar</button>
+                      <button type="button" class="btn btn-lg btn-success save" data-action="save">Usar</button>
                     </div>
                   </div>
 
@@ -197,55 +136,116 @@
               </div>
             </div>
 
+            {{--   <div id="no" style="display: none;"> --}}
+              <div  class="form-group col-sm-6 col-lg-12">
+                <div class="form-group col-sm-6 col-lg-4">
+                  {!! Form::label('firm_ine', 'Foto de la firma:') !!}
+                  {!! Form::file('firm_ine',  ['data-parsley-trigger ' => 'input focusin',
+                  ]) !!}
+                </div>
+              </div>
+            </div>
+          {{--        </div> --}}
 
-            <script>
-              function capturar()
-              { 
+          <input type="hidden" name="type_product" value="{{$product->id}}">
+          <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
-                var table=$("#resultado");
-                var date =document.getElementById("date").value;
-                var ammount= document.getElementById("ammount").value;
-                var dues =document.getElementById("dues").value;
-                table.find('tbody').html('');
+          <div class="box-body" >
+           <div class="col-md-4">
+            <div class="btn-group">
+             {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-block btn-primary', 'id' => 'save']) !!}
+           </div>
+         </div> 
+       </div>
+       <div class="form-group col-sm-12 col-lg-4 ">
+         <div class="row">
+
+         </div>
+       </div>
+     </div>
+
+     <!-- Modal -->
+     <div class="modal fade" id="tabladepagos" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">SIMULACIÓN DE TABLA DE PAGOS</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+
+              <table id="resultado" class="thead-inverse table " >
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Fecha</th>
+                    <th>Monto</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
 
-                if(date == "" || ammount == "")
-                {
-                  alert('Ingresa la fecha y el monto');
-                }
-                else{
-                  var interes  = ({{$product->interest_of_cup}} / 100);
+    <script>
+      function capturar()
+      { 
 
-                  var tasa = interes * ammount;
-                  var total = parseFloat(tasa) + parseFloat(ammount);
-                  var newamount = total / dues;
-
-                  for (var i = 1; i <= dues; i++) {
-                   if(dues == 4 || dues == 1){
-                    date = moment(date).add(6,'d');
-                  }
-                  date= moment(date).add(1,'d');
+        var table=$("#resultado");
+        var date =document.getElementById("date").value;
+        var ammount= document.getElementById("ammount").value;
+        var dues =document.getElementById("dues").value;
+        table.find('tbody').html('');
 
 
-                  if(moment(date).format("dddd") == "Sunday"){
-                    date= moment(date).add(1,'d');
-                  }
-                  var trhtml= '<tr>';
-                  trhtml += '<td>' + i +'</td>';
-                  trhtml += '<td>' + moment(date).format('DD-MM-YYYY')+'</td>';
-                  trhtml += '<td>' + '$' + Math.ceil(newamount) + '</td>';
-                  trhtml += '</tr>';
-                  table.find('tbody').append(trhtml);
+        if(date == "" || ammount == "")
+        {
+          alert('Ingresa la fecha y el monto');
+        }
+        else{
+          var interes  = ({{$product->interest_of_cup}} / 100);
 
-                }
-                $('#tabladepagos').modal('show');
-              }
+          var tasa = interes * ammount;
+          var total = parseFloat(tasa) + parseFloat(ammount);
+          var newamount = total / dues;
 
-            }
-
-
-          </script>
+          for (var i = 1; i <= dues; i++) {
+           if(dues == 4 || dues == 1){
+            date = moment(date).add(6,'d');
+          }
+          date= moment(date).add(1,'d');
 
 
-          @include('credits.signature')
+          if(moment(date).format("dddd") == "Sunday"){
+            date= moment(date).add(1,'d');
+          }
+          var trhtml= '<tr>';
+          trhtml += '<td>' + i +'</td>';
+          trhtml += '<td>' + moment(date).format('DD-MM-YYYY')+'</td>';
+          trhtml += '<td>' + '$' + Math.ceil(newamount) + '</td>';
+          trhtml += '</tr>';
+          table.find('tbody').append(trhtml);
+
+        }
+        $('#tabladepagos').modal('show');
+      }
+
+    }
+
+
+  </script>
+
+
+  @include('credits.signature')
 

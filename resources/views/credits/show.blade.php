@@ -183,7 +183,9 @@ Detalles
 						</div>
 						<br><br><br><br>
 					</div>
-
+					<div class="widget-user-image"> 
+						<img  style="border-radius: 50%; padding: 2px; width: 100px;" class="img-circle" src="{{ asset('/uploads/avatars') }}/{!! $credit->firm_ine !!}" alt="User Avatar">
+					</div>
 				</div>
 				<!-- /.box-body -->
 			</div>

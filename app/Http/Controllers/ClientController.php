@@ -25,6 +25,7 @@ use Image;
 use Auth;
 use App\Traits\DatesTranslator;
 use \Excel;
+use Validator;
 
 class ClientController extends AppBaseController
 {	
@@ -69,7 +70,9 @@ class ClientController extends AppBaseController
 		}
 		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
 			$user_allocation = Auth::user();
-			$clients = $user_allocation->clients;
+			$branch_allocation = $user_allocation->branch;
+
+			$clients = $branch_allocation->clients;
 		}
 		$products =	Product::all();
 		return view('clients.index')
@@ -106,8 +109,20 @@ class ClientController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function store(CreateClientRequest $request)
-	{
+	public function store(Request $request)
+	{	
+		$curp_validate = $request->input('curp');
+		// Valitador
+		$validator = Validator::make($request->all(), [
+			'curp' => 'required|unique:clients,curp'
+			//COJB820320MCSRRL00
+		]);
+
+		if ($validator->fails()) {
+			Toastr::error('La CURP: '.$curp_validate.' ya se encuentra registrada en la base de datos.', 'CLIENTES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		}
+		//End 
 		
 		$input = $request->all();
 		$branch = Branch::find($request->input('branch_id'));

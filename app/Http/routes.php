@@ -573,3 +573,19 @@ Route::get('report-payments', function(){
 
 /*=====  End of Download reports  ======*/
 
+/*=====================================
+=            Lock payments            =
+=====================================*/
+Route::get('lock-payments', 'GeneralController@lockPayments');
+
+/*=====  End of Lock payments  ======*/
+
+
+
+
+Route::resource('closes', 'CloseController');
+
+Route::get('closes/{id}/delete', [
+    'as' => 'closes.delete',
+    'uses' => 'CloseController@destroy',
+]);

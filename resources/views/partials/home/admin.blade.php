@@ -8,7 +8,7 @@ $now = Carbon\Carbon::now()->toDateString();
 $collection_payments = App\Models\IncomePayment::all();
 $payments = $collection_payments->where('date', $now);
 
-$closes = App\Models\Close::orderBy('created_at', 'desc')->get();
+$closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
 @endphp
 <!-- Small boxes (Stat box) -->
 <div class="row">
@@ -210,6 +210,10 @@ $closes = App\Models\Close::orderBy('created_at', 'desc')->get();
         @endif
         <!-- /.closes-list -->
       </div>
+      <div class="box-footer text-center">
+        <a href="{{ url('closes') }}" class="uppercase">Ver más</a>
+      </div>
+      <!-- /.box-footer -->
     </div>
     <!--/.box -->
   </div>

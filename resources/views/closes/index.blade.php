@@ -1,41 +1,47 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('content')
+@section('main-content')
+@section('message_level')
+Cierre de Operación
+@endsection
+@section('message_level_here')
+Lista de cierres
+@endsection
+<div class="container">
 
-    <div class="container">
+    @include('flash::message')
 
-        @include('flash::message')
-
-        <div class="row">
-            <h1 class="pull-left">Closes</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('closes.create') !!}">Add New</a>
-        </div>
-
-        <div class="row">
-            @if($closes->isEmpty())
-                <div class="well text-center">No Closes found.</div>
-            @else
-                <table class="table">
-                    <thead>
-                    <th>Name User</th>
-			<th>Role User</th>
-                    <th width="50px">Action</th>
-                    </thead>
-                    <tbody>
-                     
-                    @foreach($closes as $close)
-                        <tr>
-                            <td>{!! $close->name_user !!}</td>
-					<td>{!! $close->role_user !!}</td>
-                            <td>
-                                <a href="{!! route('closes.edit', [$close->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a href="{!! route('closes.delete', [$close->id]) !!}" onclick="return confirm('Are you sure wants to delete this Close?')"><i class="glyphicon glyphicon-remove"></i></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            @endif
-        </div>
+    <div class="row">
+        {{-- <h1 class="pull-left">Closes</h1>
+        <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('closes.create') !!}">Add New</a> --}}
     </div>
+
+    <div class="row">
+        @if($closes->isEmpty())
+        <div class="well text-center">No hay registros.</div>
+        @else
+        <div class="table-responsive">
+            <table class="table" id="example">
+                <thead class="thead-inverse">
+                    <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Fecha/Hora</th>
+                </thead>
+                <tbody>
+
+                    @foreach($closes as $close)
+                    <tr>
+                        <td>{!! $close->name_user !!}</td>
+                        <td>{!! $close->user['father_last_name'] !!}</td>
+                        <td>{!! $close->user['mother_last_name'] !!}</td>
+                        <td>{!! $close->created_at !!}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @endif
+    </div>
+</div>
 @endsection

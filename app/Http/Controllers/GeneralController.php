@@ -31,8 +31,8 @@ class GeneralController extends Controller
 	{	
 
 		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
-			 // $users = User::where('id', '!=', Auth::id())->get();
-			 $users = User::all();
+			$users = User::where('id', '!=', Auth::id())->get();
+			// $users = User::all();
 			return view('executives.index')
 			->with('employees', $users);
 		}
@@ -40,8 +40,8 @@ class GeneralController extends Controller
 			$user_allocation = Auth::user();
 			$region_allocation = $user_allocation->region;
 
-			// $filtered = User::where('id', '!=', Auth::id())->get();
-			$filtered = User::all();
+			$filtered = User::where('id', '!=', Auth::id())->get();
+			//$filtered = User::all();
 			$users = $filtered->where('region_id', $region_allocation->id);
 
 			return view('executives.index')
@@ -52,7 +52,8 @@ class GeneralController extends Controller
 			$branch_allocation = $user_allocation->branch;
 			$collection = Role::all();
 			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
-			$filtered = User::all();
+			//$filtered = User::all();
+			$filtered = User::where('id', '!=', Auth::id())->get();
 			$users = $filtered->where('branch_id', $branch_allocation->id);
 			return view('executives.index')
 			->with('employees', $users);
@@ -270,10 +271,10 @@ class GeneralController extends Controller
 		$purseAccess = PurseAccess::create($data_purseAccess);
 
 		$vault->ammount = $vault->ammount + $purseAccess->ammount;
-			$vault->save();
+		$vault->save();
 		Toastr::success('Monto agregado exitosamente.', 'CARTERA ACCESS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-			return redirect()->back();
+		return redirect()->back();
 	}
 
 }

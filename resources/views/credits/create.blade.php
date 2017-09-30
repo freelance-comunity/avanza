@@ -5,7 +5,7 @@
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'credits.store','data-parsley-validate' => '', 'id' => 'form1','onsubmit'=>'return enviado()']) !!}
+    {!! Form::open(['route' => 'credits.store','files'=>'true', 'data-parsley-validate' => '', 'id' => 'form1','onsubmit'=>'return enviado()']) !!}
 
         @include('credits.fields')
         <script>
@@ -22,7 +22,7 @@
         			alert("El formulario ya está siendo enviado, por favor aguarde un instante.");
         			return false;
         		}
-        	}
+        	}   
 
         </script>
 

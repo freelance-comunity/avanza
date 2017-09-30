@@ -1,4 +1,4 @@
- <div class="box box-danger">
+<div class="box box-danger">
   <div class="box-header with-border">
     <h3 class="box-title">Solicitud de Crédito</h3>
   </div>  
@@ -83,44 +83,21 @@
                 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
               </div>
               <div class="form-group col-sm-6 col-lg-4">
-                <label>  &nbsp; </label>
-                <input type="button" class="btn-lg btn-block btn bg-navy" value="SIMULAR TABLA DE PAGOS" onclick="capturar()">
-              </div>
-              <div class="form-group col-sm-6 col-lg-4">
-               <label>  Firma del Cliente </label>
-               <select id="status" onChange="mostrar(this.value);" class="form-control input-lg">
-                <option value="" class="selected">Selecciona modo de firma</option>
-                <option value="Si">Firmar</option>
-                <option value="No">Imagen</option>
-              </select>
-              <br>
-
-            </div>
-            <script>
-              function mostrar(id) {
-                if (id == "Si") {
-                  $("#si").show();
-                  $("#no").hide(1500);
-                }
-                if (id == "No") {
-                  $("#si").hide(1500);
-                  $("#no").show();
-                }
-              }
-            </script>
-            {{--  <div id="si" style="display: none;"> --}}
-              <div  class="form-group col-sm-6 col-lg-12">
-               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('firm', 'Firma:') !!}
                 {!! Form::text('firm',null, [
                   'class' => 'form-control input-lg', 
                   'id'    => 'signature',
+                  'required'=>'required',
+                  'data-parsley-trigger ' => 'input focusin',
                   'readonly'
                   ]) !!}
                 </div>
-              {{--  </div> --}}
-
-              <div  class="form-group col-sm-12 col-lg-12">
+                <div class="form-group col-sm-6 col-lg-4">
+                  <label>  &nbsp; </label>
+                  <input type="button" class="btn-lg btn-block btn bg-navy" value="SIMULAR TABLA DE PAGOS" onclick="capturar()">
+                </div>
+              </div>
+              <div class="form-group col-sm-12 col-lg-12">
                 <div class="form-group col-sm-12 col-lg-12">
                   <div id="signature-pad" class="m-signature-pad">
                     <div class="m-signature-pad--body">
@@ -134,118 +111,102 @@
 
                 </div>
               </div>
-            </div>
-
-            {{--   <div id="no" style="display: none;"> --}}
-              <div  class="form-group col-sm-6 col-lg-12">
-                <div class="form-group col-sm-6 col-lg-4">
-                  {!! Form::label('firm_ine', 'Foto de la firma:') !!}
-                  {!! Form::file('firm_ine',  ['data-parsley-trigger ' => 'input focusin',
+              {{-- <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('firm_ine', 'Imagen:') !!}
+                {!! Form::file('firm_ine', [
+                  'data-parsley-trigger ' => 'input focusin',
                   ]) !!}
+                </div> --}}
+                <input type="hidden" name="type_product" value="{{$product->id}}">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
+                <div class="box-body" >
+                 <div class="col-md-4">
+                  <div class="btn-group">
+                   {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-block btn-primary', 'id' => 'save']) !!}
+                 </div>
+               </div> 
+             </div>
+             <div class="form-group col-sm-12 col-lg-4 ">
+               <div class="row">
+
+               </div>
+             </div>
+           </div>
+
+           <!-- Modal -->
+           <div class="modal fade" id="tabladepagos" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title">SIMULACIÓN DE TABLA DE PAGOS</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
+                <div class="modal-body">
+                  <div class="table-responsive">
+
+                    <table id="resultado" class="thead-inverse table " >
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Fecha</th>
+                          <th>Monto</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
               </div>
             </div>
-          {{--        </div> --}}
-
-          <input type="hidden" name="type_product" value="{{$product->id}}">
-          <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-
-          <div class="box-body" >
-           <div class="col-md-4">
-            <div class="btn-group">
-             {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-block btn-primary', 'id' => 'save']) !!}
-           </div>
-         </div> 
-       </div>
-       <div class="form-group col-sm-12 col-lg-4 ">
-         <div class="row">
-
-         </div>
-       </div>
-     </div>
-
-     <!-- Modal -->
-     <div class="modal fade" id="tabladepagos" tabindex="-1" role="dialog"  aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">SIMULACIÓN DE TABLA DE PAGOS</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="table-responsive">
-
-              <table id="resultado" class="thead-inverse table " >
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Fecha</th>
-                    <th>Monto</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
-
-            </div>
           </div>
 
-        </div>
-      </div>
-    </div>
 
+          <script>
+            function capturar()
+            { 
+              var table=$("#resultado");
+              var date =document.getElementById("date").value;
+              var ammount= document.getElementById("ammount").value;
+              var dues =document.getElementById("dues").value;
+              table.find('tbody').html('');
 
-    <script>
-      function capturar()
-      { 
+              if(date == "" || ammount == "")
+              {
+                alert('Ingresa la fecha y el monto');
+              }
+              else{
+                var interes  = ({{$product->interest_of_cup}} / 100);
+                var tasa = interes * ammount;
+                var total = parseFloat(tasa) + parseFloat(ammount);
+                var newamount = total / dues;
+                for (var i = 1; i <= dues; i++) {
+                 if(dues == 4 || dues == 1){
+                  date = moment(date).add(6,'d');
+                }
+                date= moment(date).add(1,'d');
 
-        var table=$("#resultado");
-        var date =document.getElementById("date").value;
-        var ammount= document.getElementById("ammount").value;
-        var dues =document.getElementById("dues").value;
-        table.find('tbody').html('');
-
-
-        if(date == "" || ammount == "")
-        {
-          alert('Ingresa la fecha y el monto');
-        }
-        else{
-          var interes  = ({{$product->interest_of_cup}} / 100);
-
-          var tasa = interes * ammount;
-          var total = parseFloat(tasa) + parseFloat(ammount);
-          var newamount = total / dues;
-
-          for (var i = 1; i <= dues; i++) {
-           if(dues == 4 || dues == 1){
-            date = moment(date).add(6,'d');
+                if(moment(date).format("dddd") == "Sunday"){
+                  date= moment(date).add(1,'d');
+                }
+                var trhtml= '<tr>';
+                trhtml += '<td>' + i +'</td>';
+                trhtml += '<td>' + moment(date).format('DD-MM-YYYY')+'</td>';
+                trhtml += '<td>' + '$' + Math.ceil(newamount) + '</td>';
+                trhtml += '</tr>';
+                table.find('tbody').append(trhtml);
+              }
+              $('#tabladepagos').modal('show');
+            }
           }
-          date= moment(date).add(1,'d');
+
+        </script>
 
 
-          if(moment(date).format("dddd") == "Sunday"){
-            date= moment(date).add(1,'d');
-          }
-          var trhtml= '<tr>';
-          trhtml += '<td>' + i +'</td>';
-          trhtml += '<td>' + moment(date).format('DD-MM-YYYY')+'</td>';
-          trhtml += '<td>' + '$' + Math.ceil(newamount) + '</td>';
-          trhtml += '</tr>';
-          table.find('tbody').append(trhtml);
-
-        }
-        $('#tabladepagos').modal('show');
-      }
-
-    }
-
-
-  </script>
-
-
-  @include('credits.signature')
-
+        @include('credits.signature')

@@ -23,6 +23,7 @@ Estado de Cuenta
      $now = \Carbon\Carbon::today()->toDateString();
      @endphp
    </header><br>
+ 
    <div class="row">
     <div class="col-xs-12">
       <h2 class="page-header">

@@ -106,4 +106,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\ParseAccess');
     }
+
+    public function closes()
+    {
+        return $this->hasMany('App\Models\Close');       
+    }
 }

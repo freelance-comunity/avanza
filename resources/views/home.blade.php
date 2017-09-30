@@ -11,6 +11,9 @@ Inicio
 Panel de control
 @endsection
 <div class="row">
+	@php
+	$activities = Activity::users()->get();
+	@endphp
 	<div class="col-md-12">
 		<div class="box box-default">
 			<div class="box-header with-border">
@@ -24,7 +27,7 @@ Panel de control
 			<div class="box-body">
 				<div class="container spark-screen">
 					@if (Auth::user()->hasRole(['administrador', 'director-general']))
-						@include('partials.home.admin')
+					@include('partials.home.admin')
 					@endif
 					<div class="row"> 
 						@php

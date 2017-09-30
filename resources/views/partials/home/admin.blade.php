@@ -7,6 +7,8 @@ $expenditures = App\Models\Expenditure::all();
 $now = Carbon\Carbon::now()->toDateString();
 $collection_payments = App\Models\IncomePayment::all();
 $payments = $collection_payments->where('date', $now);
+
+$closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
 @endphp
 <!-- Small boxes (Stat box) -->
 <div class="row">
@@ -99,7 +101,40 @@ $payments = $collection_payments->where('date', $now);
       <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
     </div>
   </div>
-  <div class="col-lg-6 col-xs-6">
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-navy">
+      <div class="inner">
+        <h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+
+        <p>Saldo Cartera Vigente</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-retweet"></i>
+      </div>
+      <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-maroon">
+      <div class="inner">
+        <h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+
+        <p>Saldo Cartera Vencida</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-exclamation"></i>
+      </div>
+      <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+    </div>
+  </div>
+</div>
+<!-- /.row -->
+<div class="row">
+  <div class="col-md-6">
     <!-- USERS LIST -->
     <div class="box box-success">
       <div class="box-header with-border">
@@ -120,7 +155,7 @@ $payments = $collection_payments->where('date', $now);
           <li>
             <img src="{{asset('/uploads/avatars')}}/{{ $activity->user->avatar }}" alt="User Image" class="online">
             <a class="users-list-name" href="#">{{ $activity->user->name }}</a>
-            <span class="users-list-date">{{ Carbon\Carbon::now() }}</span>
+            {{-- <span class="users-list-date">{{ Carbon\Carbon::now() }}</span> --}}
           </li>
           @endforeach
         </ul>
@@ -135,5 +170,75 @@ $payments = $collection_payments->where('date', $now);
     <!--/.box -->
   </div>
   <!-- /.col -->
+  <div class="col-md-3">
+    <!-- USERS LIST -->
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Cierres de operación</h3>
+
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body no-padding">
+        @if($closes->isEmpty())
+        <div class="well text-center">No hay registros.</div>
+        @else
+        <table class="table">
+          <thead>
+            <th>Usuario</th>
+            <th>Fecha/hora</th>
+            {{--  <th width="50px">Acción</th> --}}
+          </thead>
+          <tbody>
+            @foreach($closes as $close)
+            <tr>
+              <td>{!! $close->name_user !!}</td>
+              <td>{!! $close->created_at !!}</td>
+              {{-- <td>
+                <a href="{!! route('closes.edit', [$close->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                <a href="{!! route('closes.delete', [$close->id]) !!}" onclick="return confirm('Are you sure wants to delete this Close?')"><i class="glyphicon glyphicon-remove"></i></a>
+              </td> --}}
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+        @endif
+        <!-- /.closes-list -->
+      </div>
+      <div class="box-footer text-center">
+        <a href="{{ url('closes') }}" class="uppercase">Ver más</a>
+      </div>
+      <!-- /.box-footer -->
+    </div>
+    <!--/.box -->
+  </div>
+  <!-- /.col -->
+  <div class="col-md-3">
+   <div class="box box-default">
+    <div class="box-header with-border">
+      <h3 class="box-title">Cerrar operación</h3>
+
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body no-padding">
+      <a href="{{ url('lock-payments') }}" class="btn btn-default btn-block" onclick="return confirm('¿Seguro que quieres cerrar operación?')">
+        <i class="fa fa-3x fa-clock-o"></i>
+        <h3>Cerrar operación</h3>
+      </a>
+    </div>
+  </div>
+  <!--/.box -->
 </div>
-<!-- /.row -->
+<!-- /.col -->
+</div>

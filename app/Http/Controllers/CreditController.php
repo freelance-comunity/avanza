@@ -208,13 +208,13 @@ class CreditController extends AppBaseController
 				}elseif ($periodicity == 'DIARIO' && $dues == 25) {
 					$tasa = 0.15;
 				}elseif ($periodicity == 'DIARIO' && $dues == 52) {
-					$tasa = 0.15;
+					$tasa = 0.30;
 				}
 				elseif ($periodicity == 'DIARIO' && $dues == 30) {
 					$tasa = 0.15;
 				}
 				elseif ($periodicity == 'DIARIO' && $dues == 60) {
-					$tasa = 0.15;
+					$tasa = 0.30;
 				}
 				$interes = $ammount * $tasa;
 				$capital = $ammount/$dues;

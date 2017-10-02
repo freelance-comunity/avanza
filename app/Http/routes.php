@@ -595,20 +595,20 @@ Route::get('unlock', function(){
 
         $date_now = \Carbon\Carbon::now()->toDateString();
         //$hour_now = Carbon::now()->toTimeString();
-        $payments = App\Models\Payment::where('date', $date_now)->where('status', 'Vencido')->get();
+        $payments = App\Models\Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
 
         foreach ($payments as $key => $value) {
             //echo "Estamos listos para bloquear";
             $payment = App\Models\Payment::find($value->id);
-            $payment->status = 'Pendiente';
-            $payment->moratorium = 0;
-            $payment->total = $payment->ammount - 20;
-            $payment->balance = $payment->balance - 20;
+            // $payment->status = 'Pendiente';
+            // $payment->moratorium = 0;
+            $payment->total = $payment->total + 20;
+            // $payment->balance = $payment->balance - 20;
             $payment->save();
 
-            $debt = $payment->debt;
-            $debt->ammount = $debt->ammount - 20;
-            $debt->save();         
+            // $debt = $payment->debt;
+            // $debt->ammount = $debt->ammount - 20;
+            // $debt->save();         
         }
 
         Toastr::info('Se han anulado los pagos con mora del día de hoy.', 'INFO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);

@@ -36,7 +36,6 @@
     text-overflow: inherit;
     overflow: visible;
   }
-
 }
 </style>
 <div class="box box-danger">

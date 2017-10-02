@@ -183,7 +183,6 @@ Detalles
 						</div>
 						<br><br><br><br>
 					</div>
-
 				</div>
 				<!-- /.box-body -->
 			</div>

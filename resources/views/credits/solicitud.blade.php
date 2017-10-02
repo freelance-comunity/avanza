@@ -90,7 +90,7 @@
 	<br>
 	<br>
 	<div class="part1">
-		<label>A. DATOS DEL CRÉDITO</label>
+		<label> DATOS DEL CRÉDITO</label>
 		<table style="width:203%">
 			<tr>
 				<th align="center">EJECUTIVO DE CRÉDITO</th>
@@ -118,7 +118,7 @@
 				<td align="center">{{$credit->warranty_type}}</td>
 			</tr>
 		</table>
-		<label class="visible">B.DATOS GENERALES DEL SOLICITANTE</label>
+		<label class="visible"> DATOS GENERALES DEL SOLICITANTE</label>
 		<table style="width:203%">
 			<tr>
 				<th align="center">NOMBRE(S)</th>
@@ -185,7 +185,7 @@
 				<td align="center">{{$credit->references}}</td>
 			</tr>
 		</table>
-		<label>C. DATOS DEL NEGOCIO</label>
+		<label>DATOS DEL NEGOCIO</label>
 		<table style="width:203%">
 			<tr>
 				<th align="center">CALLE</th>
@@ -215,76 +215,8 @@
 				<td align="center">{{$credit->name_company}}</td>
 			</tr>
 		</table>
-		<table style="width: 203%">
-			<tr>
-				<th align="center" colspan="2">
-					ACTIVOS
-				</th>
-				<th align="center" colspan="2">
-					PASIVOS
-				</th>
-				<th align="center" colspan="2">
-					INGRESOS
-				</th>
-				<th align="center" colspan="1">
-					COSTOS
-				</th>
-			</tr>
-			<tr>
-				<td align="center">INVENTARIO($)</td>
-				<td align="center">{{$credit->inventory}}</td>		
-				<td align="center">PROVEEDORES($)</td>
-				<td align="center">{{$credit->suppliers}}</td>				
-				<td align="center">ENTRE SEMANA</td>
-				<td align="center">FIN DE SEMANA</td>
-				<th align="center">RENTA</th>
-			</tr>
-			<tr>
-				<td align="center">MAQ Y EQUIP($)</td>
-				<td align="center">{{$credit->maq_equi}}</td>	
-				<td align="center">CRÉDITOS($)</td>
-				<td align="center">{{$credit->credits}}</td>	
-				<td align="center">{{$credit->weekday}}</td>			
-				<td align="center">{{$credit->weekend}}</td>
-				<td align="center">{{$credit->rent}}</td>	
-			</tr>
-			<tr>
-				<td align="center">VEHÍCULOS($)</td>
-				<td align="center">{{$credit->vehicles}}</td>
-				<td align="center">PAGOS AL MES($)</td>
-				<td align="center">{{$credit->payments}}</td>
-				<td align="center">UTILIDAD($)</td>
-				<td align="center">{{$credit->utility}}</td>
-				<th align="center">SUELDOS</th>
-			</tr>
-			<tr>
-				<td align="center">IMMUEBLE($)</td>
-				<td align="center">{{$credit->property}}</td>
-				<td align="center">ESPECIFICA:</td>
-				<td align="center" rowspan="3">{{$credit->specify}}</td>
-				<td align="center">OTROS INGRESOS($)</td>
-				<td align="center">{{$credit->other_income}}</td>
-				<td align="center">{{$credit->utility}}</td>
-				<tr>
-					<td align="center">CAJA, BANCOS($)</td>
-					<td align="center">{{$credit->box_benck}}</td>
-					<td align="center"></td>
-					<td align="center"></td>
-					<td align="center"></td>
-
-					<th align="center">OTROS</th>
-				</tr>
-				<tr>
-					<td align="center">CTAS/COBRAR($)</td>
-					<td align="center">{{$credit->accounts}}</td>
-					<td align="center"></td>
-					<td align="center"></td>
-					<td align="center"></td>
-
-					<td align="center">{{$credit->others}}</td>
-				</tr>
-			</table>
-			<label>D. DATOS DEL CONYUGUE Y/O AVAL</label>
+	@if ($credit->client->aval)
+		<label> DATOS DEL CONYUGUE Y/O AVAL</label>
 			<table style="width:203%">
 				<tr>
 					<th align="center">NOMBRE(S)</th>
@@ -329,26 +261,21 @@
 					<td align="center">{{$credit->postal_code_aval}}</td>
 				</tr>
 			</table>
-			<table style="width:203%">
-				<tr>
-					<th align="center">REFERENCIA 1</th>
-					<td align="center">{{$credit->firts_name_reference}} {{$credit->last_name_reference}} {{$credit->mothers_last_name_reference}} | {{$credit->phone_reference}}</td>
-
-				</tr>
-				<tr>
-					<th align="center">REFERENCIA 2</th>
-					<td align="center">{{$credit->firts_name_reference2}} {{$credit->last_name_reference2}} {{$credit->mothers_last_name_reference2}} | {{$credit->phone_reference2}}</td>
-				</tr>
-			</table>
+		
+	@endif
 			
-			<label>E. AUTORIZACION PARA CONSULTA DE SIC</label>
+			
+			<label> AUTORIZACION PARA CONSULTA DE SIC</label>
 			<p  style="width: 200%">Autorizo expresamente a CrediEfectivo, para que por conducto de sus servidores públicos facultados lleve a cabo sus investigaciones sobre mi comportamiento crediticio con las Sociedades de Información Crediticia. </p>
 			<p style="width: 200%">Asimismo, declaro que conozco la naturaleza y alcance de la información que se solicitará, del uso que la Financiera hará de tal información y de que ésta podrá realizar consultas periódicas de mi historial crediticio, consintiendo que esta autorización se encuentre vigente por los siguientes tres años contados a partir de su expedición y en todo caso durante el tiempo que se mantenga 	la relación jurídica entre ambas.</p>
 			<p style="width: 200%">Estoy de acuerdo y acepto que este documento quede bajo propiedad de la Financiera y/o de la Sociedad de Información Crediticia consultada para efectos de control y cumplimiento del artículo 28 de la Ley para Regular las Sociedades de Información Crediticia.</p>					
-
-			<h6 style="text-align: center; width:200%"><img  class="displayed" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" style="height: 45px; max-width: 50%;"><br>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}
+			@if ($credit->firm)
+				<h6 style="text-align: center; width:200%"><img  class="displayed" src="{{ asset('uploads/signatures/') }}/{{ $credit->firm }}" style="height: 45px; max-width: 50%;"><br>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}
 			</h6>
-
+			@elseif($credit->firm_ine)
+			<h6 style="text-align: center; width:200%"><img  class="displayed" src="{{ asset('uploads/firms/') }}/{{ $credit->firm_ine }}" style="height: 45px; max-width: 50%;"><br>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}
+			</h6>
+			@endif
 		</div>
 		<div class="part2">
 			<table style="width:50%; float:right;">

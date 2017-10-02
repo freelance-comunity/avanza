@@ -1,4 +1,4 @@
- <div class="box box-danger">
+<div class="box box-danger">
   <div class="box-header with-border">
     <h3 class="box-title">Solicitud de Crédito</h3>
   </div>  
@@ -111,105 +111,102 @@
 
                 </div>
               </div>
-              <input type="hidden" name="type_product" value="{{$product->id}}">
-              <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+              {{-- <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('firm_ine', 'Imagen:') !!}
+                {!! Form::file('firm_ine', [
+                  'data-parsley-trigger ' => 'input focusin',
+                  ]) !!}
+                </div> --}}
+                <input type="hidden" name="type_product" value="{{$product->id}}">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
-              <div class="box-body" >
-               <div class="col-md-4">
-                <div class="btn-group">
-                 {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-block btn-primary', 'id' => 'save']) !!}
+                <div class="box-body" >
+                 <div class="col-md-4">
+                  <div class="btn-group">
+                   {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-block btn-primary', 'id' => 'save']) !!}
+                 </div>
+               </div> 
+             </div>
+             <div class="form-group col-sm-12 col-lg-4 ">
+               <div class="row">
+
                </div>
-             </div> 
-           </div>
-           <div class="form-group col-sm-12 col-lg-4 ">
-             <div class="row">
-
              </div>
            </div>
-         </div>
 
-         <!-- Modal -->
-         <div class="modal fade" id="tabladepagos" tabindex="-1" role="dialog"  aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h3 class="modal-title">SIMULACIÓN DE TABLA DE PAGOS</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="table-responsive">
-
-                  <table id="resultado" class="thead-inverse table " >
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Fecha</th>
-                        <th>Monto</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                  </table>
-
+           <!-- Modal -->
+           <div class="modal fade" id="tabladepagos" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title">SIMULACIÓN DE TABLA DE PAGOS</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
+                <div class="modal-body">
+                  <div class="table-responsive">
+
+                    <table id="resultado" class="thead-inverse table " >
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Fecha</th>
+                          <th>Monto</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
               </div>
-              
             </div>
           </div>
-        </div>
 
 
-        <script>
-          function capturar()
-          { 
+          <script>
+            function capturar()
+            { 
+              var table=$("#resultado");
+              var date =document.getElementById("date").value;
+              var ammount= document.getElementById("ammount").value;
+              var dues =document.getElementById("dues").value;
+              table.find('tbody').html('');
 
-            var table=$("#resultado");
-            var date =document.getElementById("date").value;
-            var ammount= document.getElementById("ammount").value;
-            var dues =document.getElementById("dues").value;
-            table.find('tbody').html('');
-            
-
-            if(date == "" || ammount == "")
-            {
-              alert('Ingresa la fecha y el monto');
-            }
-            else{
-              var interes  = ({{$product->interest_of_cup}} / 100);
-
-              var tasa = interes * ammount;
-              var total = parseFloat(tasa) + parseFloat(ammount);
-              var newamount = total / dues;
-
-              for (var i = 1; i <= dues; i++) {
-               if(dues == 4 || dues == 1){
-                date = moment(date).add(6,'d');
+              if(date == "" || ammount == "")
+              {
+                alert('Ingresa la fecha y el monto');
               }
-              date= moment(date).add(1,'d');
-              
-
-              if(moment(date).format("dddd") == "Sunday"){
+              else{
+                var interes  = ({{$product->interest_of_cup}} / 100);
+                var tasa = interes * ammount;
+                var total = parseFloat(tasa) + parseFloat(ammount);
+                var newamount = total / dues;
+                for (var i = 1; i <= dues; i++) {
+                 if(dues == 4 || dues == 1){
+                  date = moment(date).add(6,'d');
+                }
                 date= moment(date).add(1,'d');
-              }
-              var trhtml= '<tr>';
-              trhtml += '<td>' + i +'</td>';
-              trhtml += '<td>' + moment(date).format('DD-MM-YYYY')+'</td>';
-              trhtml += '<td>' + '$' + Math.ceil(newamount) + '</td>';
-              trhtml += '</tr>';
-              table.find('tbody').append(trhtml);
 
+                if(moment(date).format("dddd") == "Sunday"){
+                  date= moment(date).add(1,'d');
+                }
+                var trhtml= '<tr>';
+                trhtml += '<td>' + i +'</td>';
+                trhtml += '<td>' + moment(date).format('DD-MM-YYYY')+'</td>';
+                trhtml += '<td>' + '$' + Math.ceil(newamount) + '</td>';
+                trhtml += '</tr>';
+                table.find('tbody').append(trhtml);
+              }
+              $('#tabladepagos').modal('show');
             }
-            $('#tabladepagos').modal('show');
           }
 
-        }
-        
-
-      </script>
+        </script>
 
 
-      @include('credits.signature')
-
+        @include('credits.signature')

@@ -62,6 +62,7 @@ class Credit extends Model
 		"postal_code_aval",
 		"collection_period",
 		"firm",
+		"firm_ine",
 		"status",
 		"client_id",
 		"user_id",
@@ -82,10 +83,8 @@ class Credit extends Model
 		"mothers_last_name" => "required",
 		"curp" => "required",
 		"ine" => "required",
-		
-	
 		"collection_period" => "required",
-		"firm" => "required"
+		
 	];
 
 	public function branch()

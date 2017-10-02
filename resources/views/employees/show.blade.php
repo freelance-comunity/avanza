@@ -3,6 +3,7 @@ $user = App\User::find($employee->id);
 $branch = $user->branch;
 $location = $user->location;
 $credential = $user->credential;
+$region = $user->region;
 @endphp
 <div class="modal fade" id="detail{{ $employee->id }}">
   <div class="modal-dialog">
@@ -28,6 +29,7 @@ $credential = $user->credential;
                    @else
                    SUCURSAL: {{ $branch->name }}
                    @endif
+                   REGION: {{$region->name}}
                    <br>
                    TELÉFONO 1: {{ $employee->phone_1 }}
                    <br>

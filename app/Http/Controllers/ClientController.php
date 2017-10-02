@@ -352,21 +352,24 @@ class ClientController extends AppBaseController
 		$credits = $client->credits;
 		//$LatePayments = LatePayments::where('debt_id', $debt->id)->where('status', 'Bloqueado')->count();
 		
-		$status = 0;
-		$diario =0;
-		$semanal = 0;
-		foreach ($credits as $value) {
-			if ($value->status == 'MINISTRADO') {
-				$status ++;
-			}
-			if ($status == 3) {
-				break;
-			}
-		}
-		if ($status == 3) {
-			Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-			return redirect(route('clients.index'));
-		}
+		// $status = 0;
+		// $diario =0;
+		// $semanal = 0;
+		// foreach ($credits as $value) {
+		// 	if ($value->status == 'MINISTRADO') {
+		// 		$status ++;
+		// 	}
+		// 	if ($status == 3) {
+		// 		break;
+		// 	}
+		// }
+		// if ($status == 3) {
+		// 	Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+		// 	return redirect(route('clients.index'));
+		// }
+
+
+
 		/*elseif ($LatePayments >=1){
 			Toastr::error('Este cliente esta Bloqueado','BLOQUADO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
@@ -379,13 +382,13 @@ class ClientController extends AppBaseController
 			Toastr::error('Este cliente ya cuenta con 1 créditos semanal','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 			return redirect(route('clients.index'));
 		}*/
-		else{
+		// else{
 			return view ('credits.create')
 			->with('credits',$credits)
 			->with('product', $product)
 			->with('client', $client)
 			->with('credit',$credit);
-		}
+		//}
 	}
 
 	public function unlockedclient($id)

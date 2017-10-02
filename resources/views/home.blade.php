@@ -29,13 +29,14 @@ Panel de control
 					@if (Auth::user()->hasRole(['administrador', 'director-general']))
 					@include('partials.home.admin')
 					@endif
+					@if (Auth::user()->hasRole(['coordinador-regional']))
+					@include('partials.home.coordinador-regional')
+					@endif
 					<div class="row"> 
 						@php
 						$user = Auth::user();
 						$vault = $user->vault;
 						@endphp  
-
-
 						<div class="col-md-4">
 							<div class="info-box bg-teal">
 								<span class="info-box-icon"><i class="fa fa-dollar"></i></span>

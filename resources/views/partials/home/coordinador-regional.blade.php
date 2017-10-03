@@ -15,6 +15,7 @@ $filtered_date_now_credits = App\Models\Credit::where('region_id',$region_alloca
 @endphp
 <!-- Small boxes (Stat box) -->
 <div class="row">
+	{{-- Include modals --}}
 	@include('partials.modals-coordinador.total-clients')
 	@include('partials.modals-coordinador.total-clients-now')
 	@include('partials.modals-coordinador.total-credits')

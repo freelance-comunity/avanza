@@ -95,11 +95,11 @@ class CreditController extends AppBaseController
 	public function store(CreateCreditRequest $request)
 	{	
 		$product = Product::find($request->input('type_product'));
-		// $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
-		// if ($typecredit) {
-		// 	Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-		// 	return redirect(route('clients.index'));
-		// }
+		$typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
+		if ($typecredit) {
+			Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('clients.index'));
+		}
 		
 
 		$ammount = $request->input('ammount');
@@ -147,6 +147,10 @@ class CreditController extends AppBaseController
 
 				elseif ($request->input('ammount') > $client->maximun_amount) {
 					Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					return redirect()->back()->withInput($request->all());
+				}
+				elseif ($request->input('ammount') >= 3000 && $client->credits = 0) {
+					Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
 					return redirect()->back()->withInput($request->all());
 				}
 

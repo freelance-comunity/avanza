@@ -19,12 +19,12 @@
             <th>Acción</th>
           </thead>
           <tbody>
-            @foreach ($credits as $credit)
+            @foreach ($c as $c)
             <tr>
-              <td>${{ number_format($credit->ammount,2) }}</td>
-              <td>{{ $credit->created_at }}</td>
-              <td>{{ $credit->folio }}</td>
-              <td><a href="{!! route('credits.show', [$credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a></td>
+              <td>${{ number_format($c->ammount,2) }}</td>
+              <td>{{ $c->created_at }}</td>
+              <td>{{ $c->credit->folio }}</td>
+              <td><a href="{!! route('credits.show', [$c->credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a></td>
             </tr>
             @endforeach
           </tbody>

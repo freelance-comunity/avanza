@@ -95,11 +95,11 @@ class CreditController extends AppBaseController
 	public function store(CreateCreditRequest $request)
 	{	
 		$product = Product::find($request->input('type_product'));
-		$typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
-		if ($typecredit) {
-			Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-			return redirect(route('clients.index'));
-		}
+		// $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
+		// if ($typecredit) {
+		// 	Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+		// 	return redirect(route('clients.index'));
+		// }
 		
 
 		$ammount = $request->input('ammount');

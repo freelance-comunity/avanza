@@ -4,6 +4,16 @@
 @section('contentheader_title')
 Detalles de la {{$branch->name}}
 @endsection
+@php
+$employees =App\User::where('branch_id',$branch->id)->count();
+$clients = App\Models\Client::where('branch_id',$branch->id)->count();
+$credit = App\Models\Credit::where('branch_id',$branch->id)->where('status','MINISTRADO')->count();
+$credits = App\Models\Credit::where('branch_id',$branch->id)->count();
+$diario = App\Models\Credit::where('periodicity','DIARIO')->where('branch_id',$branch->id)->count();
+$credidiario25 = App\Models\Credit::where('periodicity','CREDIDIARIO25')->where('branch_id',$branch->id)->count();
+$credidiario4 = App\Models\Credit::where('periodicity','CREDIDIARIO4')->where('branch_id',$branch->id)->count();
+$credisemana = App\Models\Credit::where('periodicity','CREDISEMANA')->where('branch_id',$branch->id)->count();
+@endphp
 <div class="container">
   <div class="box box-danger">
       <div class="box-header with-border">
@@ -18,10 +28,10 @@ Detalles de la {{$branch->name}}
               </div>
               <div class="box-footer no-padding">
                   <ul class="nav nav-stacked">
-                    <li><a href="#">Empleados <span class="pull-right badge bg-blue">31</span></a></li>
-                    <li><a href="#">Clientes <span class="pull-right badge bg-aqua">5</span></a></li>
-                    <li><a href="#">Creditos Activos <span class="pull-right badge bg-green">12</span></a></li>
-                    <li><a href="#">Total de Créditos <span class="pull-right badge bg-red">842</span></a></li>
+                    <li><a href="#">Empleados <span class="pull-right badge bg-blue">{{$employees}}</span></a></li>
+                    <li><a href="#">Clientes <span class="pull-right badge bg-aqua">{{$clients}}</span></a></li>
+                    <li><a href="#">Creditos Activos <span class="pull-right badge bg-green">{{$credit}}</span></a></li>
+                    <li><a href="#">Total de Créditos <span class="pull-right badge bg-red">{{$credits}}</span></a></li>
                 </ul>
             </div>
         </div>
@@ -63,10 +73,10 @@ Detalles de la {{$branch->name}}
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ["{{$branch->name}}"],
+                    labels: ["{{$diario}}"],
                     datasets: [{
                         label: '# of Votes',
-                        data: ["{{$branch->count()}}"],
+                        data: ["{{$diario}}"],
                         backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -101,26 +111,26 @@ Detalles de la {{$branch->name}}
     
     <!-- /.col (LEFT) -->
     <div class="col-md-6">
-    <p>Grafica Pastel</p>
-    <canvas id="pie-chart" width="800" height="700"></canvas>
+        <p>Top Productos</p>
+        <canvas id="pie-chart" width="800" height="700"></canvas>
         <script>
-        new Chart(document.getElementById("pie-chart"), {
-    type: 'doughnut',
-    data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-      datasets: [{
-        label: "Population (millions)",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [2478,5267,734,784,433]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Predicted world population (millions) in 2050'
-      }
-    }
-});
+            new Chart(document.getElementById("pie-chart"), {
+                type: 'doughnut',
+                data: {
+                  labels: ["DIARIO", "CREDIDIARIO25", "CREDIDIARIO4", "CREDISEMANA"],
+                  datasets: [{
+                    label: "Population (millions)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: [{{$diario}},{{$credidiario25}},{{$credidiario4}},{{$credisemana}}]
+                }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: ''
+            }
+        }
+    });
 </script>
 </div>
 <!-- /.col (RIGHT) -->

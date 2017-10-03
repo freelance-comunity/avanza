@@ -87,7 +87,7 @@
                 {!! Form::text('firm',null, [
                   'class' => 'form-control input-lg', 
                   'id'    => 'signature',
-                  'required'=>'required',
+                  
                   'data-parsley-trigger ' => 'input focusin',
                   'readonly'
                   ]) !!}
@@ -117,6 +117,7 @@
                   'data-parsley-trigger ' => 'input focusin',
                   ]) !!}
                 </div> --}}
+         
                 <input type="hidden" name="type_product" value="{{$product->id}}">
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 

@@ -95,11 +95,12 @@ class CreditController extends AppBaseController
 	public function store(CreateCreditRequest $request)
 	{	
 		$product = Product::find($request->input('type_product'));
-		// $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
-		// if ($typecredit) {
-		// 	Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-		// 	return redirect(route('clients.index'));
-		// }
+		$typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
+		if ($typecredit) {
+			Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('clients.index'));
+		}
+		
 
 		$ammount = $request->input('ammount');
 		$user = Auth::user();
@@ -224,7 +225,7 @@ class CreditController extends AppBaseController
 				$date = new Carbon($credit->date);
 				if ($periodicity == 'DIARIO' && $dues == 30) {
 					$debt = new Debt;
-					$debt->ammount = $credit->ammount + $interes;
+					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
@@ -254,7 +255,7 @@ class CreditController extends AppBaseController
 				}
 				if ($periodicity == 'DIARIO' && $dues == 25) {
 					$debt = new Debt;
-					$debt->ammount = $credit->ammount +  $interes;
+					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
@@ -287,7 +288,7 @@ class CreditController extends AppBaseController
 				}
 				if ($periodicity == 'DIARIO' && $dues == 52) {
 					$debt = new Debt;
-					$debt->ammount = $credit->ammount + $interes; 
+					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
@@ -321,7 +322,7 @@ class CreditController extends AppBaseController
 				}
 				if ($periodicity == 'DIARIO' && $dues == 60) {
 					$debt = new Debt;
-					$debt->ammount = $credit->ammount + $interes;
+					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
@@ -352,7 +353,7 @@ class CreditController extends AppBaseController
 				}
 				if ($periodicity == 'CREDIDIARIO25' && $dues == 25) {
 					$debt = new Debt;
-					$debt->ammount = $credit->ammount +  $interes;
+					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
@@ -385,7 +386,7 @@ class CreditController extends AppBaseController
 				}
 				if ($periodicity == 'CREDIDIARIO4') {
 					$debt = new Debt;
-					$debt->ammount = $credit->ammount + $interes;
+					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
@@ -417,7 +418,7 @@ class CreditController extends AppBaseController
 
 				if ($periodicity == 'CREDISEMANA') {
 					$debt = new Debt;
-					$debt->ammount = $credit->ammount + $interes;
+					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();

@@ -11,13 +11,26 @@ $payments = $collection_payments->where('date', $now);
 $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
 @endphp
 <!-- Small boxes (Stat box) -->
+{{-- <style>
+
+@media only screen and (max-width: 500px) {  
+    p {
+      font-size: 5px;
+
+    }
+    h3 {
+    font-size: 50%;
+    background-color: red;
+    }
+    
+} 
+</style> --}}
 <div class="row">
   <div class="col-lg-3 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-aqua">
       <div class="inner">
         <h3>${{ number_format($vault->sum('ammount'),2) }}</h3>
-
         <p>Total Bovéda</p>
       </div>
       <div class="icon">

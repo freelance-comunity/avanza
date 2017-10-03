@@ -1,23 +1,24 @@
-{{-- @php
-$vault   = App\Models\Vault::all();
-//$clients = App\Models\Client::all();
-$credits = App\Models\Credit::all();
-$expenditures = App\Models\Expenditure::all();
-
-$now = Carbon\Carbon::now()->toDateString();
-$collection_payments = App\Models\IncomePayment::all();
-$payments = $collection_payments->where('date', $now);
-
-$closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
-
+@php
 $user_allocation = Auth::user();
 $region_allocation = $user_allocation->region;
 $clients = $region_allocation->clients;
-$date_now = \Carbon\Carbon::now();
-$filtered_date_now = $clients->where('created_at', '<', $date_now);
+
+$filtered_date_now = App\Models\Client::where('region_id',$region_allocation->id)->where(function ($query) {
+    $query->whereRaw('DATE(created_at) = CURRENT_DATE')
+          ->orWhereRaw('DATE(updated_at) = CURRENT_DATE');
+})->get(); 
+$credits = $region_allocation->credits;
+$filtered_date_now_credits = App\Models\Credit::where('region_id',$region_allocation->id)->where(function ($query) {
+    $query->whereRaw('DATE(created_at) = CURRENT_DATE')
+          ->orWhereRaw('DATE(updated_at) = CURRENT_DATE');
+})->get(); 
 @endphp
 <!-- Small boxes (Stat box) -->
 <div class="row">
+	@include('partials.modals-coordinador.total-clients')
+	@include('partials.modals-coordinador.total-clients-now')
+	@include('partials.modals-coordinador.total-credits')
+	@include('partials.modals-coordinador.total-credits-now')
 	<div class="col-lg-3 col-xs-6">
 		<!-- small box -->
 		<div class="small-box bg-green">
@@ -29,7 +30,7 @@ $filtered_date_now = $clients->where('created_at', '<', $date_now);
 			<div class="icon">
 				<i class="fa fa-users"></i>
 			</div>
-			<a href="{{ url('/report-clients') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+			<a data-toggle="modal" data-target="#tc" class="small-box-footer">Ver <i class="fa fa-eye"></i></a>
 		</div>
 	</div>
 	<!-- ./col -->
@@ -37,14 +38,14 @@ $filtered_date_now = $clients->where('created_at', '<', $date_now);
 		<!-- small box -->
 		<div class="small-box bg-aqua">
 			<div class="inner">
-				<h3>${{ number_format($vault->sum('ammount'),2) }}</h3>
+				<h3>{{ $filtered_date_now->count() }}</h3>
 
-				<p>Total Bovéda</p>
+				<p>Total Clientes Creados Hoy</p>
 			</div>
 			<div class="icon">
-				<i class="fa fa-bank"></i>
+				<i class="fa fa-calendar"></i>
 			</div>
-			<a href="{{ url('/report-vault') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+			<a data-toggle="modal" data-target="#tcn" class="small-box-footer">Ver <i class="fa fa-eye"></i></a>
 		</div>
 	</div>
 	<!-- ./col -->
@@ -59,13 +60,28 @@ $filtered_date_now = $clients->where('created_at', '<', $date_now);
 			<div class="icon">
 				<i class="fa fa-paperclip"></i>
 			</div>
-			<a href="{{ url('/report-credits') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+			<a data-toggle="modal" data-target="#c" class="small-box-footer">Ver <i class="fa fa-eye"></i></a>
 		</div>
 	</div>
 	<!-- ./col -->
 	<div class="col-lg-3 col-xs-6">
 		<!-- small box -->
 		<div class="small-box bg-red">
+			<div class="inner">
+				<h3>{{ $filtered_date_now_credits->count() }}</h3></a>
+
+				<p>Total Créditos Creados Hoy</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-clock-o"></i>
+			</div>
+			<a data-toggle="modal" data-target="#cn" class="small-box-footer">Ver <i class="fa fa-eye"></i></a>
+		</div>
+	</div>
+	<!-- ./col -->
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-purple">
 			<div class="inner">
 				<h3>${{ number_format($credits->sum('ammount'),2) }}</h3>
 
@@ -74,22 +90,7 @@ $filtered_date_now = $clients->where('created_at', '<', $date_now);
 			<div class="icon">
 				<i class="fa fa-money"></i>
 			</div>
-			<a href="{{ url('/report-credits') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
-		</div>
-	</div>
-	<!-- ./col -->
-	<div class="col-lg-3 col-xs-6">
-		<!-- small box -->
-		<div class="small-box bg-purple">
-			<div class="inner">
-				<h3>${{ number_format($expenditures->sum('ammount'),2) }}</h3>
-
-				<p>Total Gastos</p>
-			</div>
-			<div class="icon">
-				<i class="fa fa-shopping-cart"></i>
-			</div>
-			<a href="{{ url('/report-expenditures') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
 		</div>
 	</div>
 	<!-- ./col -->
@@ -97,17 +98,17 @@ $filtered_date_now = $clients->where('created_at', '<', $date_now);
 		<!-- small box -->
 		<div class="small-box bg-orange">
 			<div class="inner">
-				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+				<h3>${{ number_format($filtered_date_now_credits->sum('ammount'),2) }}</h3>
 
-				<p>Total Recuperado del día</p>
+				<p>Total Ministrado del día</p>
 			</div>
 			<div class="icon">
 				<i class="fa fa-line-chart"></i>
 			</div>
-			<a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
 		</div>
 	</div>
-	<!-- ./col -->
+{{-- 	<!-- ./col -->
 	<div class="col-lg-3 col-xs-6">
 		<!-- small box -->
 		<div class="small-box bg-navy">
@@ -122,7 +123,7 @@ $filtered_date_now = $clients->where('created_at', '<', $date_now);
 			<a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
 		</div>
 	</div>
-	<!-- ./col -->
+	./col
 	<div class="col-lg-3 col-xs-6">
 		<!-- small box -->
 		<div class="small-box bg-maroon">
@@ -136,8 +137,7 @@ $filtered_date_now = $clients->where('created_at', '<', $date_now);
 			</div>
 			<a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
 		</div>
-	</div>
+	</div> --}}
 </div>
 <!-- /.row -->
 
- --}}

@@ -1,8 +1,8 @@
-<div class="modal fade" id="c" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">DETALLES DE COLOCACIÓN</h5>
+        <h5 class="modal-title" id="exampleModalLabel">DETALLES DE COLOCACIÓN CREADA HOY</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -16,15 +16,14 @@
             <th>Concepto</th>
             <th>Fecha</th>
             <th>Cliente</th>
-            <th>Acción</th>
           </thead>
           <tbody>
-            @foreach ($credits as $credit)
+            @foreach ($filtered_date_now_credits as $creditn)
             <tr>
-              <td>${{ number_format($credit->ammount,2) }}</td>
-              <td>{{ $credit->created_at }}</td>
-              <td>{{ $credit->folio }}</td>
-              <td><a href="{!! route('credits.show', [$credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a></td>
+              <td>${{ number_format($creditn->ammount,2) }}</td>
+              <td>{{ $creditn->created_at }}</td>
+              <td>{{ $creditn->folio }}</td>
+              <td><a href="{!! route('credits.show', [$creditn->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a></td>
             </tr>
             @endforeach
           </tbody>

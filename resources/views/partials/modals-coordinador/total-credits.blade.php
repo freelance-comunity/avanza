@@ -16,7 +16,6 @@
             <th>Concepto</th>
             <th>Fecha</th>
             <th>Cliente</th>
-            <th>Acción</th>
           </thead>
           <tbody>
             @foreach ($credits as $credit)

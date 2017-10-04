@@ -15,6 +15,7 @@
             <th>Importe</th>
             <th>Concepto</th>
             <th>Fecha</th>
+            <th>Folio</th>
             <th>Cliente</th>
             <th>Acción</th>
           </thead>
@@ -25,6 +26,7 @@
               <td>{{$c->concept}}</td>
               <td>{{ $c->created_at }}</td>
               <td>{{ $c->credit->folio }}</td>
+              <td>{{ $c->credit->firts_name }}</td>
               <td><a href="{!! route('credits.show', [$c->credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a></td>
             </tr>
             @endforeach

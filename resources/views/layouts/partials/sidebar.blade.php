@@ -30,7 +30,7 @@
       <li><a href="{{ url('vault') }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
       <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Corte de Caja</span></a></li>
       <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li>
-      <li><a href="#"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li>
+      <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li>
       @endif
       <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
       <li><a href="{{ url('credits') }}"><i class="fa fa-money"></i> <span>Créditos</span></a></li>

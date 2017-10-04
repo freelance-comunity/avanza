@@ -115,7 +115,7 @@ $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
     </div>
   </div>
   <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
+  {{-- <div class="col-lg-3 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-navy">
       <div class="inner">
@@ -128,9 +128,9 @@ $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
       </div>
       <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
     </div>
-  </div>
+  </div> --}}
   <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
+{{--   <div class="col-lg-3 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-maroon">
       <div class="inner">
@@ -143,7 +143,7 @@ $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
       </div>
       <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
     </div>
-  </div>
+  </div> --}}
 </div>
 <!-- /.row -->
 <div class="row">

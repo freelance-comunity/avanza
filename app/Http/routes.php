@@ -614,3 +614,7 @@ Route::get('unlock', function(){
         Toastr::info('Se han anulado los pagos con mora del día de hoy.', 'INFO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
         return redirect()->back();
 });
+
+Route::get('movements', function(){
+    return view('partials.movements');
+});

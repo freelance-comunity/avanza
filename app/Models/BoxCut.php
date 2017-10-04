@@ -22,7 +22,7 @@ class BoxCut extends Model
 	];
 	public function user()
 	{
-		return $this->belongsTo('App\Models\Vault');
+		return $this->belongsTo('App\User');
 	}
 	 public function vault()
     {

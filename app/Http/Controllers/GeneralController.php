@@ -42,7 +42,6 @@ class GeneralController extends Controller
 		elseif (Auth::user()->hasRole('coordinador-regional')) {
 			$user_allocation = Auth::user();
 			$region_allocation = $user_allocation->region;
-		
 
 			$filtered = User::where('id', '!=', Auth::id())->get();
 			//$filtered = User::all();

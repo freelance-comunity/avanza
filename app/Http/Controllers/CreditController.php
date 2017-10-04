@@ -134,355 +134,364 @@ class CreditController extends AppBaseController
 				// 	Image::make($firm_ine)->resize(300, 300)->save( public_path('/uploads/firms/' . $filename ) );
 				// 	$input['firm_ine'] = $filename;
 				// }
-				// $new = Client::find($request->input('client_id'))->credits()->count();
-				$client = Client::find($request->input('client_id'));
-
-				$input = $request->all();
-				$product = Product::find($request->input('type_product'));
-				if ($request->input('ammount') > $product->ammount_max) {
-					Toastr::warning('El monto máximo es de: ' .$product->ammount_max, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);		
-					return redirect()->back()->withInput($request->all());
-				}elseif ($request->input('ammount') < $product->ammount_min) {
-					Toastr::warning('El monto mínimo es de: '.$product->ammount_min, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-					return redirect()->back()->withInput($request->all());
+				$new = Client::find($request->input('client_id'))->credits()->count();
+				
+				if (count($new)>1) {
+					$renovation = Credit::find('ammount')->first();
 				}
+				
+					$client = Client::find($request->input('client_id'));
+
+					$input = $request->all();
+					$product = Product::find($request->input('type_product'));
+					if ($request->input('ammount') > $product->ammount_max) {
+						Toastr::warning('El monto máximo es de: ' .$product->ammount_max, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);		
+						return redirect()->back()->withInput($request->all());
+					}elseif ($request->input('ammount') < $product->ammount_min) {
+						Toastr::warning('El monto mínimo es de: '.$product->ammount_min, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+						return redirect()->back()->withInput($request->all());
+					}
 				//Restricciión de Monto Máximo del Cliente
-				// elseif ($request->input('ammount') > $client->maximun_amount) {
-				// 	Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-				// 	return redirect()->back()->withInput($request->all());
-				// }
-				//Restriccion de Cliente Nuevo
-				// elseif ($new == 0 && $request->input('ammount') > 3000 && $credits->periodicity == "CREDIDIARIO25") {
-				// 	Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-				// 	return redirect()->back()->withInput($request->all());
-				// }
-				// elseif ($new == 0 && $request->input('ammount') > 3000 && $credits->periodicity == "DIARIO") {
-				// 	Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-				// 	return redirect()->back()->withInput($request->all());
-				// }
-				// elseif ($new == 0 && $request->input('ammount') > 1000 && $credits->periodicity == "CREDISEMANA") {
-				// 	Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-				// 	return redirect()->back()->withInput($request->all());
-				// }
-				// elseif ($new == 0 && $request->input('ammount') > 1000 && $credits->periodicity == "CREDIDIARIO4") {
-				// 	Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-				// 	return redirect()->back()->withInput($request->all());
-				// }
-
-				$number = Credit::max('id') + 1;
-				$input['folio'] = $client->branch->nomenclature.'00'.$number;	
-				$input['civil_status'] = $client->civil_status;
-				$input['phone'] = $client->phone;
-				$input['no_familys'] = $client->no_familys;
-				$input['type_of_housing'] = $client->type_of_housing;
-				$input['street'] = $client->location->street;
-				$input['number'] = $client->location->number;
-				$input['colony'] = $client->location->colony;
-				$input['municipality'] = $client->location->municipality;
-				$input['state'] = $client->location->state;
-				$input['postal_code'] = $client->location->postal_code;
-				$input['references'] = $client->location->references;
-				$input['street_company'] = $client->company->street_company;
-				$input['number_company'] = $client->company->number_company;
-				$input['colony_company'] = $client->company->colony_company;
-				$input['municipality_company'] = $client->company->municipality_company;
-				$input['state_company'] = $client->company->state_company;
-				$input['postal_code_company'] = $client->company->postal_code_company;
-				$input['phone_company'] = $client->company->phone_company;
-				$input['name_company'] = $client->company->name_company;
-				if (count($client->aval) > 0) {
-					$input['name_aval'] = $client->aval->name_aval;
-					$input['last_name_aval'] = $client->aval->last_name_aval;
-					$input['mothers_name_aval'] = $client->aval->mothers_name_aval;
-					$input['curp_aval'] = $client->aval->curp_aval;
-					$input['phone_aval'] = $client->aval->phone_aval;
-					$input['civil_status_aval'] = $client->aval->civil_status_aval;
-					$input['scholarship_aval'] = $client->aval->scholarship_aval;
-					$input['street_aval'] = $client->aval->street_aval;
-					$input['number_aval'] = $client->aval->number_aval;
-					$input['colony_aval'] = $client->aval->colony_aval;
-					$input['municipality_aval'] = $client->aval->municipality_aval;
-					$input['state_aval'] = $client->aval->state_aval;
-					$input['postal_code_aval'] = $client->aval->postal_code_aval;
-				}
-
-
-				if( $request->input('firm')){
-					$input['firm']   = $url;
-				}
-
-				$input['status'] = "MINISTRADO";
-
-
-				$credit = Credit::create($input);
-
-				$ammount= $credit->ammount;
-				$dues = $credit->dues;
-				$periodicity = $credit->periodicity;
-				if ($periodicity == 'CREDIDIARIO25' && $dues == 25) {
-					$tasa = 0.25;
-				}elseif ($periodicity == 'CREDIDIARIO4' && $dues == 4) {
-					$tasa = 0.28;
-				}elseif ($periodicity == 'CREDISEMANA') {
-					$tasa = 0.15;
-				}elseif ($periodicity == 'DIARIO' && $dues == 25) {
-					$tasa = 0.15;
-				}elseif ($periodicity == 'DIARIO' && $dues == 52) {
-					$tasa = 0.30;
-				}
-				elseif ($periodicity == 'DIARIO' && $dues == 30) {
-					$tasa = 0.15;
-				}
-				elseif ($periodicity == 'DIARIO' && $dues == 60) {
-					$tasa = 0.30;
-				}
-				$interes = $ammount * $tasa;
-				$capital = $ammount/$dues;
-				$total = $ammount + $interes;
-				$pago = $total/$dues;
-				$intpago = $pago-$capital;
-				$date = new Carbon($credit->date);
-				if ($periodicity == 'DIARIO' && $dues == 30) {
-					$debt = new Debt;
-					$debt->ammount = ceil($total);
-					$debt->status = "VIGENTE";
-					$debt->credit_id = $credit->id;
-					$debt->save();
-
-					for ($i=1; $i <= $credit->dues; $i++) { 
-						$var = $date->addDay();
-
-						$fechaPago[$i] = $date->toDateString();
-						$payment = new Payment;
-						$payment->number = $i;
-						$payment->day = $fechaPago[$i];
-						$payment->date =$fechaPago[$i];
-						$payment->ammount = ceil($pago);
-						$payment->capital = ceil($capital);
-						$payment->interest= $intpago;
-						$payment->moratorium = '0';
-						$payment->total = ceil($pago) + 0; 
-						$payment->payment = 0;
-						$payment->balance = ceil($pago) + 0;
-						$payment->status = "Pendiente";
-						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
-						$payment->save();
-
+					elseif ($request->input('ammount') > $client->maximun_amount) {
+						Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+						return redirect()->back()->withInput($request->all());
 					}
-				}
-				if ($periodicity == 'DIARIO' && $dues == 25) {
-					$debt = new Debt;
-					$debt->ammount = ceil($total);
-					$debt->status = "VIGENTE";
-					$debt->credit_id = $credit->id;
-					$debt->save();
+					//Restriccion de Cliente Nuevo
+					elseif ($new == 0 && $request->input('ammount') > 3000 && $credits->periodicity == "CREDIDIARIO25") {
+						Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+						return redirect()->back()->withInput($request->all());
+					}
+					elseif ($new == 0 && $request->input('ammount') > 3000 && $credits->periodicity == "DIARIO") {
+						Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+						return redirect()->back()->withInput($request->all());
+					}
+					elseif ($new == 0 && $request->input('ammount') > 1000 && $credits->periodicity == "CREDISEMANA") {
+						Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+						return redirect()->back()->withInput($request->all());
+					}
+					elseif ($new == 0 && $request->input('ammount') > 1000 && $credits->periodicity == "CREDIDIARIO4") {
+						Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+						return redirect()->back()->withInput($request->all());
+					}
+					elseif ($request->input('ammount') > $renovation ) {
+						Toastr::error('Solo puedes aumentar: $500.00 para renovar', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+						return redirect()->back()->withInput($request->all());
+					}
 
-					for ($i=1; $i <= $credit->dues; $i++) { 
-						$var = $date->addDay();
-						if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
-							$date->addDay(); 
+					$number = Credit::max('id') + 1;
+					$input['folio'] = $client->branch->nomenclature.'00'.$number;	
+					$input['civil_status'] = $client->civil_status;
+					$input['phone'] = $client->phone;
+					$input['no_familys'] = $client->no_familys;
+					$input['type_of_housing'] = $client->type_of_housing;
+					$input['street'] = $client->location->street;
+					$input['number'] = $client->location->number;
+					$input['colony'] = $client->location->colony;
+					$input['municipality'] = $client->location->municipality;
+					$input['state'] = $client->location->state;
+					$input['postal_code'] = $client->location->postal_code;
+					$input['references'] = $client->location->references;
+					$input['street_company'] = $client->company->street_company;
+					$input['number_company'] = $client->company->number_company;
+					$input['colony_company'] = $client->company->colony_company;
+					$input['municipality_company'] = $client->company->municipality_company;
+					$input['state_company'] = $client->company->state_company;
+					$input['postal_code_company'] = $client->company->postal_code_company;
+					$input['phone_company'] = $client->company->phone_company;
+					$input['name_company'] = $client->company->name_company;
+					if (count($client->aval) > 0) {
+						$input['name_aval'] = $client->aval->name_aval;
+						$input['last_name_aval'] = $client->aval->last_name_aval;
+						$input['mothers_name_aval'] = $client->aval->mothers_name_aval;
+						$input['curp_aval'] = $client->aval->curp_aval;
+						$input['phone_aval'] = $client->aval->phone_aval;
+						$input['civil_status_aval'] = $client->aval->civil_status_aval;
+						$input['scholarship_aval'] = $client->aval->scholarship_aval;
+						$input['street_aval'] = $client->aval->street_aval;
+						$input['number_aval'] = $client->aval->number_aval;
+						$input['colony_aval'] = $client->aval->colony_aval;
+						$input['municipality_aval'] = $client->aval->municipality_aval;
+						$input['state_aval'] = $client->aval->state_aval;
+						$input['postal_code_aval'] = $client->aval->postal_code_aval;
+					}
+
+
+					if( $request->input('firm')){
+						$input['firm']   = $url;
+					}
+
+					$input['status'] = "MINISTRADO";
+
+
+					$credit = Credit::create($input);
+
+					$ammount= $credit->ammount;
+					$dues = $credit->dues;
+					$periodicity = $credit->periodicity;
+					if ($periodicity == 'CREDIDIARIO25' && $dues == 25) {
+						$tasa = 0.25;
+					}elseif ($periodicity == 'CREDIDIARIO4' && $dues == 4) {
+						$tasa = 0.28;
+					}elseif ($periodicity == 'CREDISEMANA') {
+						$tasa = 0.15;
+					}elseif ($periodicity == 'DIARIO' && $dues == 25) {
+						$tasa = 0.15;
+					}elseif ($periodicity == 'DIARIO' && $dues == 52) {
+						$tasa = 0.30;
+					}
+					elseif ($periodicity == 'DIARIO' && $dues == 30) {
+						$tasa = 0.15;
+					}
+					elseif ($periodicity == 'DIARIO' && $dues == 60) {
+						$tasa = 0.30;
+					}
+					$interes = $ammount * $tasa;
+					$capital = $ammount/$dues;
+					$total = $ammount + $interes;
+					$pago = $total/$dues;
+					$intpago = $pago-$capital;
+					$date = new Carbon($credit->date);
+					if ($periodicity == 'DIARIO' && $dues == 30) {
+						$debt = new Debt;
+						$debt->ammount = ceil($total);
+						$debt->status = "VIGENTE";
+						$debt->credit_id = $credit->id;
+						$debt->save();
+
+						for ($i=1; $i <= $credit->dues; $i++) { 
+							$var = $date->addDay();
+
+							$fechaPago[$i] = $date->toDateString();
+							$payment = new Payment;
+							$payment->number = $i;
+							$payment->day = $fechaPago[$i];
+							$payment->date =$fechaPago[$i];
+							$payment->ammount = ceil($pago);
+							$payment->capital = ceil($capital);
+							$payment->interest= $intpago;
+							$payment->moratorium = '0';
+							$payment->total = ceil($pago) + 0; 
+							$payment->payment = 0;
+							$payment->balance = ceil($pago) + 0;
+							$payment->status = "Pendiente";
+							$payment->debt_id = $debt->id;
+							$payment->user_id = Auth::User()->id;
+							$payment->branch_id = Auth::User()->branch_id;
+							$payment->save();
+
 						}
-
-						$fechaPago[$i] = $date->toDateString();
-						$payment = new Payment;
-						$payment->number = $i;
-						$payment->day = $fechaPago[$i];
-						$payment->date =$fechaPago[$i];
-						$payment->ammount = ceil($pago);
-						$payment->capital = ceil($capital);
-						$payment->interest= $intpago;
-						$payment->moratorium = '0';
-						$payment->total = ceil($pago) + 0; 
-						$payment->payment = 0;
-						$payment->balance = ceil($pago) + 0;
-						$payment->status = "Pendiente";
-						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
-						$payment->save();
-
 					}
-				}
-				if ($periodicity == 'DIARIO' && $dues == 52) {
-					$debt = new Debt;
-					$debt->ammount = ceil($total);
-					$debt->status = "VIGENTE";
-					$debt->credit_id = $credit->id;
-					$debt->save();
+					if ($periodicity == 'DIARIO' && $dues == 25) {
+						$debt = new Debt;
+						$debt->ammount = ceil($total);
+						$debt->status = "VIGENTE";
+						$debt->credit_id = $credit->id;
+						$debt->save();
 
+						for ($i=1; $i <= $credit->dues; $i++) { 
+							$var = $date->addDay();
+							if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
+								$date->addDay(); 
+							}
 
-					for ($i=1; $i <= $credit->dues; $i++) { 
-						$var = $date->addDay();
-						if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
-							$date->addDay(); 
+							$fechaPago[$i] = $date->toDateString();
+							$payment = new Payment;
+							$payment->number = $i;
+							$payment->day = $fechaPago[$i];
+							$payment->date =$fechaPago[$i];
+							$payment->ammount = ceil($pago);
+							$payment->capital = ceil($capital);
+							$payment->interest= $intpago;
+							$payment->moratorium = '0';
+							$payment->total = ceil($pago) + 0; 
+							$payment->payment = 0;
+							$payment->balance = ceil($pago) + 0;
+							$payment->status = "Pendiente";
+							$payment->debt_id = $debt->id;
+							$payment->user_id = Auth::User()->id;
+							$payment->branch_id = Auth::User()->branch_id;
+							$payment->save();
+
 						}
-
-						$fechaPago[$i] = $date->toDateString();
-						$payment = new Payment;
-						$payment->number = $i;
-						$payment->day = $fechaPago[$i];
-						$payment->date =$fechaPago[$i];
-						$payment->ammount = ceil($pago);
-						$payment->capital = ceil($capital);
-						$payment->interest= $intpago;
-						$payment->moratorium = '0';
-						$payment->total = ceil($pago) + 0;
-						$payment->payment = 0;
-						$payment->balance = ceil($pago) + 0; 
-						$payment->status = "Pendiente";
-						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
-						$payment->save();
-
 					}
-				}
-				if ($periodicity == 'DIARIO' && $dues == 60) {
-					$debt = new Debt;
-					$debt->ammount = ceil($total);
-					$debt->status = "VIGENTE";
-					$debt->credit_id = $credit->id;
-					$debt->save();
+					if ($periodicity == 'DIARIO' && $dues == 52) {
+						$debt = new Debt;
+						$debt->ammount = ceil($total);
+						$debt->status = "VIGENTE";
+						$debt->credit_id = $credit->id;
+						$debt->save();
 
 
-					for ($i=1; $i <= $credit->dues; $i++) { 
-						$var = $date->addDay();
+						for ($i=1; $i <= $credit->dues; $i++) { 
+							$var = $date->addDay();
+							if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
+								$date->addDay(); 
+							}
 
-						$fechaPago[$i] = $date->toDateString();
-						$payment = new Payment;
-						$payment->number = $i;
-						$payment->day = $fechaPago[$i];
-						$payment->date =$fechaPago[$i];
-						$payment->ammount = ceil($pago);
-						$payment->capital = ceil($capital);
-						$payment->interest= $intpago;
-						$payment->moratorium = '0';
-						$payment->total = ceil($pago) + 0;
-						$payment->payment = 0;
-						$payment->balance = ceil($pago) + 0; 
-						$payment->status = "Pendiente";
-						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
-						$payment->save();
+							$fechaPago[$i] = $date->toDateString();
+							$payment = new Payment;
+							$payment->number = $i;
+							$payment->day = $fechaPago[$i];
+							$payment->date =$fechaPago[$i];
+							$payment->ammount = ceil($pago);
+							$payment->capital = ceil($capital);
+							$payment->interest= $intpago;
+							$payment->moratorium = '0';
+							$payment->total = ceil($pago) + 0;
+							$payment->payment = 0;
+							$payment->balance = ceil($pago) + 0; 
+							$payment->status = "Pendiente";
+							$payment->debt_id = $debt->id;
+							$payment->user_id = Auth::User()->id;
+							$payment->branch_id = Auth::User()->branch_id;
+							$payment->save();
 
-					}
-				}
-				if ($periodicity == 'CREDIDIARIO25' && $dues == 25) {
-					$debt = new Debt;
-					$debt->ammount = ceil($total);
-					$debt->status = "VIGENTE";
-					$debt->credit_id = $credit->id;
-					$debt->save();
-
-					for ($i=1; $i <= $credit->dues; $i++) { 
-						$var = $date->addDay();
-						if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
-							$date->addDay(); 
 						}
-
-						$fechaPago[$i] = $date->toDateString();
-						$payment = new Payment;
-						$payment->number = $i;
-						$payment->day = $fechaPago[$i];
-						$payment->date =$fechaPago[$i];
-						$payment->ammount = ceil($pago);
-						$payment->capital = ceil($capital);
-						$payment->interest= $intpago;
-						$payment->moratorium = '0';
-						$payment->total = ceil($pago) + 0; 
-						$payment->payment = 0;
-						$payment->balance = ceil($pago) + 0;
-						$payment->status = "Pendiente";
-						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
-						$payment->save();
-
 					}
-				}
-				if ($periodicity == 'CREDIDIARIO4') {
-					$debt = new Debt;
-					$debt->ammount = ceil($total);
-					$debt->status = "VIGENTE";
-					$debt->credit_id = $credit->id;
-					$debt->save();
+					if ($periodicity == 'DIARIO' && $dues == 60) {
+						$debt = new Debt;
+						$debt->ammount = ceil($total);
+						$debt->status = "VIGENTE";
+						$debt->credit_id = $credit->id;
+						$debt->save();
 
 
-					for ($i=1; $i <= $credit->dues; $i++) { 
-						$var = $date->addWeek();
+						for ($i=1; $i <= $credit->dues; $i++) { 
+							$var = $date->addDay();
 
-						$fechaPago[$i] = $date->toDateString();
-						$payment = new Payment;
-						$payment->number = $i;
-						$payment->day = $date;
-						$payment->date =$fechaPago[$i];
-						$payment->ammount = ceil($pago);
-						$payment->capital = ceil($capital);
-						$payment->interest= $intpago;
-						$payment->moratorium = '0';
-						$payment->total = ceil($pago) + 0; 
-						$payment->payment = 0;
-						$payment->balance = ceil($pago) + 0;
-						$payment->status = "Pendiente";
-						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
-						$payment->save();
+							$fechaPago[$i] = $date->toDateString();
+							$payment = new Payment;
+							$payment->number = $i;
+							$payment->day = $fechaPago[$i];
+							$payment->date =$fechaPago[$i];
+							$payment->ammount = ceil($pago);
+							$payment->capital = ceil($capital);
+							$payment->interest= $intpago;
+							$payment->moratorium = '0';
+							$payment->total = ceil($pago) + 0;
+							$payment->payment = 0;
+							$payment->balance = ceil($pago) + 0; 
+							$payment->status = "Pendiente";
+							$payment->debt_id = $debt->id;
+							$payment->user_id = Auth::User()->id;
+							$payment->branch_id = Auth::User()->branch_id;
+							$payment->save();
 
+						}
 					}
-				}
+					if ($periodicity == 'CREDIDIARIO25' && $dues == 25) {
+						$debt = new Debt;
+						$debt->ammount = ceil($total);
+						$debt->status = "VIGENTE";
+						$debt->credit_id = $credit->id;
+						$debt->save();
 
-				if ($periodicity == 'CREDISEMANA') {
-					$debt = new Debt;
-					$debt->ammount = ceil($total);
-					$debt->status = "VIGENTE";
-					$debt->credit_id = $credit->id;
-					$debt->save();
+						for ($i=1; $i <= $credit->dues; $i++) { 
+							$var = $date->addDay();
+							if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
+								$date->addDay(); 
+							}
 
+							$fechaPago[$i] = $date->toDateString();
+							$payment = new Payment;
+							$payment->number = $i;
+							$payment->day = $fechaPago[$i];
+							$payment->date =$fechaPago[$i];
+							$payment->ammount = ceil($pago);
+							$payment->capital = ceil($capital);
+							$payment->interest= $intpago;
+							$payment->moratorium = '0';
+							$payment->total = ceil($pago) + 0; 
+							$payment->payment = 0;
+							$payment->balance = ceil($pago) + 0;
+							$payment->status = "Pendiente";
+							$payment->debt_id = $debt->id;
+							$payment->user_id = Auth::User()->id;
+							$payment->branch_id = Auth::User()->branch_id;
+							$payment->save();
 
-					for ($i=1; $i <= $credit->dues; $i++) { 
-						$var = $date->addWeek();
-
-						$fechaPago[$i] = $date->toDateString();
-						$payment = new Payment;
-						$payment->number = $i;
-						$payment->day = $date;
-						$payment->date =$fechaPago[$i];
-						$payment->ammount = ceil($pago);
-						$payment->capital = ceil($capital);
-						$payment->interest= $intpago;
-						$payment->moratorium = '0';
-						$payment->total = ceil($pago) + 0; 
-						$payment->payment = 0;
-						$payment->balance = ceil($pago) + 0;
-						$payment->status = "Pendiente";
-						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
-						$payment->save();
-
+						}
 					}
+					if ($periodicity == 'CREDIDIARIO4') {
+						$debt = new Debt;
+						$debt->ammount = ceil($total);
+						$debt->status = "VIGENTE";
+						$debt->credit_id = $credit->id;
+						$debt->save();
+
+
+						for ($i=1; $i <= $credit->dues; $i++) { 
+							$var = $date->addWeek();
+
+							$fechaPago[$i] = $date->toDateString();
+							$payment = new Payment;
+							$payment->number = $i;
+							$payment->day = $date;
+							$payment->date =$fechaPago[$i];
+							$payment->ammount = ceil($pago);
+							$payment->capital = ceil($capital);
+							$payment->interest= $intpago;
+							$payment->moratorium = '0';
+							$payment->total = ceil($pago) + 0; 
+							$payment->payment = 0;
+							$payment->balance = ceil($pago) + 0;
+							$payment->status = "Pendiente";
+							$payment->debt_id = $debt->id;
+							$payment->user_id = Auth::User()->id;
+							$payment->branch_id = Auth::User()->branch_id;
+							$payment->save();
+
+						}
+					}
+
+					if ($periodicity == 'CREDISEMANA') {
+						$debt = new Debt;
+						$debt->ammount = ceil($total);
+						$debt->status = "VIGENTE";
+						$debt->credit_id = $credit->id;
+						$debt->save();
+
+
+						for ($i=1; $i <= $credit->dues; $i++) { 
+							$var = $date->addWeek();
+
+							$fechaPago[$i] = $date->toDateString();
+							$payment = new Payment;
+							$payment->number = $i;
+							$payment->day = $date;
+							$payment->date =$fechaPago[$i];
+							$payment->ammount = ceil($pago);
+							$payment->capital = ceil($capital);
+							$payment->interest= $intpago;
+							$payment->moratorium = '0';
+							$payment->total = ceil($pago) + 0; 
+							$payment->payment = 0;
+							$payment->balance = ceil($pago) + 0;
+							$payment->status = "Pendiente";
+							$payment->debt_id = $debt->id;
+							$payment->user_id = Auth::User()->id;
+							$payment->branch_id = Auth::User()->branch_id;
+							$payment->save();
+
+						}
+					}
+					$current = Carbon::today();
+					$data_expendituresCredits['ammount'] = $ammount;
+					$data_expendituresCredits['concept'] = 'Colocación';
+					$data_expendituresCredits['date']    = $current;
+					$data_expendituresCredits['credit_id']= $credit->id;
+					$data_expendituresCredits['vault_id'] = $vault->id;
+
+					$expendituresCredit = ExpenditureCredit::create($data_expendituresCredits);
+
+					$vault->ammount = $vault->ammount - $expendituresCredit->ammount;
+					$vault->save();
+
+					Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+					return redirect(route('credits.index'));
 				}
-				$current = Carbon::today();
-				$data_expendituresCredits['ammount'] = $ammount;
-				$data_expendituresCredits['concept'] = 'Colocación';
-				$data_expendituresCredits['date']    = $current;
-				$data_expendituresCredits['credit_id']= $credit->id;
-				$data_expendituresCredits['vault_id'] = $vault->id;
-
-				$expendituresCredit = ExpenditureCredit::create($data_expendituresCredits);
-
-				$vault->ammount = $vault->ammount - $expendituresCredit->ammount;
-				$vault->save();
-
-				Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-				return redirect(route('credits.index'));
 			}
 		}
-	}
 
 	/**
 	 * Display the specified Credit.

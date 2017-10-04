@@ -77,18 +77,18 @@
             {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
             {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
         </div>
-        @role('ejecutivo-de-credito')
+        @if (Auth::user()->hasRole(['administrador', 'director-general'])) 
+         <div class="form-group col-sm-6 col-lg-4">
+          {!! Form::label('maximun_amount', 'Monto Máximo') !!}
+          <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" value="{{$client->maximun_amount}}" data-parsley-maxlength="10">
+        </div>
+        @endif
+       @if(Auth::user()->hasRole(['ejecutivo-de-credito','coordinador-regional', 'coordinador-sucursal']))
          <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('maximun_amount', 'Monto Máximo') !!}
           <input type="number" name="maximun_amount" class="form-control input-lg" readonly="readonly" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" value="{{$client->maximun_amount}}" data-parsley-type="digits" data-parsley-maxlength="10">
         </div>
-        @endrole
-        @role('administrador')
-          <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('maximun_amount', 'Monto Máximo') !!}
-          <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" value="{{$client->maximun_amount}}" data-parsley-maxlength="10">
-        </div>
-        @endrole
+        @endif
         <input type="hidden" name="avatar" value="{{$client->avatar}}">
 
 

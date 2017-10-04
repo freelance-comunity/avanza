@@ -30,8 +30,8 @@
       fixed layout. -->
 
       <!-- Toastr --> 
-     {{--  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script> --}}
-     <script src="{{ asset('/js/toastr/toastr.min.js')}}"></script>  
+      {{--  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script> --}}
+      <script src="{{ asset('/js/toastr/toastr.min.js')}}"></script>  
 
       {!! Toastr::message() !!}
 
@@ -99,9 +99,10 @@
           } );
         });
       </script>
+      {{-- Datatables multiples tabs --}}
       <script>
         $(document).ready(function() {
-          $('#gs').DataTable( {
+          $('#vault').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -114,15 +115,127 @@
         });
       </script>
       <script>
+        $(document).ready(function() {
+          $('#start').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#assignment').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#recovery').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#acces').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#credit').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#expense').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#cut').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      {{-- End --}}
+      <script>
+        $(document).ready(function() {
+          $('#gs').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+            'print'
+            ],
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            }
+          } );
+        });
+      </script>
+      <script>
       	$(document).ready(function() {
       		$('#example').DataTable( {
       			"language": {
               "pageLength": 25,
               responsive: true,
-      				"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-      			}
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            }
 
-         } );
+          } );
         });
       </script>
       <script>

@@ -52,7 +52,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -66,7 +66,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -80,7 +80,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -94,7 +94,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -109,7 +109,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -123,7 +123,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -137,7 +137,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -151,7 +151,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -165,7 +165,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -179,7 +179,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -193,7 +193,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -207,7 +207,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'csv','excel', 'pdf', 'print',
             ]
 
           } );
@@ -219,7 +219,7 @@
           $('#gs').DataTable( {
             dom: 'Bfrtip',
             buttons: [
-            'print'
+            'excel', 'pdf', 'print',
             ],
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -234,7 +234,11 @@
               "pageLength": 25,
               responsive: true,
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-            }
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
 
           } );
         });
@@ -244,7 +248,11 @@
           $('#example2').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-            }
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
 
           } );
         });
@@ -254,8 +262,11 @@
           $('#pagoss').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-            }
-            searching: false
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
           } );
         });
       </script>
@@ -265,13 +276,10 @@
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
-            columnDefs: [{
-              targets: [0],
-              visible: false,
-              searchable: false
-            },
-            ],
-            order: [[0, "asc"]],
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ]
           });
         });
       </script>

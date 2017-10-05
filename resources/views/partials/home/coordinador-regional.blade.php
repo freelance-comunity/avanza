@@ -4,14 +4,18 @@ $region_allocation = $user_allocation->region;
 $clients = $region_allocation->clients;
 
 $filtered_date_now = App\Models\Client::where('region_id',$region_allocation->id)->where(function ($query) {
-    $query->whereRaw('DATE(created_at) = CURRENT_DATE')
-          ->orWhereRaw('DATE(updated_at) = CURRENT_DATE');
+	$query->whereRaw('DATE(created_at) = CURRENT_DATE')
+	->orWhereRaw('DATE(updated_at) = CURRENT_DATE');
 })->get(); 
 $credits = $region_allocation->credits;
 $filtered_date_now_credits = App\Models\Credit::where('region_id',$region_allocation->id)->where(function ($query) {
-    $query->whereRaw('DATE(created_at) = CURRENT_DATE')
-          ->orWhereRaw('DATE(updated_at) = CURRENT_DATE');
+	$query->whereRaw('DATE(created_at) = CURRENT_DATE')
+	->orWhereRaw('DATE(updated_at) = CURRENT_DATE');
 })->get(); 
+
+$vault = $user_allocation->vault;
+$expenditures_collection = App\Models\Expenditure::all();
+$expenses = $expenditures_collection->where('vault_id', $vault->id);
 @endphp
 <!-- Small boxes (Stat box) -->
 <div class="row">
@@ -108,6 +112,51 @@ $filtered_date_now_credits = App\Models\Credit::where('region_id',$region_alloca
 			</div>
 			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
 		</div>
+	</div>
+	<div class="col-lg-6 col-xs-6">
+		<!-- USERS LIST -->
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title">Mis Gastos</h3>
+
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+					</button>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body no-padding">
+				@if($expenses->isEmpty())
+				<div class="well text-center">No hay registros.</div>
+				@else
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<th>Monto</th>
+							<th>Concepto</th>
+							<th>Descripción</th>
+						</thead>
+						<tbody>
+							@foreach ($expenses as $expense)
+							<tr>
+								<td>${{ number_format($expense->ammount,2) }}</td>
+								<td>{{ $expense->concept }}</td>
+								<td>{{ $expense->description }}</td>
+							</tr>
+							@endforeach
+							<tr class="bg-navy">
+								<td colspan="3">${{ number_format($expenses->sum('ammount'),2) }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				@endif
+				<!-- /.closes-list -->
+			</div>
+		</div>
+		<!--/.box -->
 	</div>
 {{-- 	<!-- ./col -->
 	<div class="col-lg-3 col-xs-6">

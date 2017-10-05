@@ -134,11 +134,8 @@ class CreditController extends AppBaseController
 				// 	Image::make($firm_ine)->resize(300, 300)->save( public_path('/uploads/firms/' . $filename ) );
 				// 	$input['firm_ine'] = $filename;
 				// }
-				$new = Client::find($request->input('client_id'))->credits()->count();
+				// $new = Client::find($request->input('client_id'))->credits()->count();
 				
-				if (count($new)>1) {
-					$renovation = Credit::find('ammount')->first();
-				}
 				
 					$client = Client::find($request->input('client_id'));
 
@@ -152,31 +149,31 @@ class CreditController extends AppBaseController
 						return redirect()->back()->withInput($request->all());
 					}
 				//Restricciión de Monto Máximo del Cliente
-					elseif ($request->input('ammount') > $client->maximun_amount) {
-						Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-						return redirect()->back()->withInput($request->all());
-					}
+					// elseif ($request->input('ammount') > $client->maximun_amount) {
+					// 	Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					// 	return redirect()->back()->withInput($request->all());
+					// }
 					//Restriccion de Cliente Nuevo
-					elseif ($new == 0 && $request->input('ammount') > 3000 && $credits->periodicity == "CREDIDIARIO25") {
-						Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-						return redirect()->back()->withInput($request->all());
-					}
-					elseif ($new == 0 && $request->input('ammount') > 3000 && $credits->periodicity == "DIARIO") {
-						Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-						return redirect()->back()->withInput($request->all());
-					}
-					elseif ($new == 0 && $request->input('ammount') > 1000 && $credits->periodicity == "CREDISEMANA") {
-						Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-						return redirect()->back()->withInput($request->all());
-					}
-					elseif ($new == 0 && $request->input('ammount') > 1000 && $credits->periodicity == "CREDIDIARIO4") {
-						Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-						return redirect()->back()->withInput($request->all());
-					}
-					elseif ($request->input('ammount') > $renovation ) {
-						Toastr::error('Solo puedes aumentar: $500.00 para renovar', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
-						return redirect()->back()->withInput($request->all());
-					}
+					// elseif ($new == 0 && $request->input('ammount') > 3000 && $credits->periodicity == "CREDIDIARIO25") {
+					// 	Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					// 	return redirect()->back()->withInput($request->all());
+					// }
+					// elseif ($new == 0 && $request->input('ammount') > 3000 && $credits->periodicity == "DIARIO") {
+					// 	Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					// 	return redirect()->back()->withInput($request->all());
+					// }
+					// elseif ($new == 0 && $request->input('ammount') > 1000 && $credits->periodicity == "CREDISEMANA") {
+					// 	Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					// 	return redirect()->back()->withInput($request->all());
+					// }
+					// elseif ($new == 0 && $request->input('ammount') > 1000 && $credits->periodicity == "CREDIDIARIO4") {
+					// 	Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					// 	return redirect()->back()->withInput($request->all());
+					// }
+					// elseif ($request->input('ammount') > $renovation ) {
+					// 	Toastr::error('Solo puedes aumentar: $500.00 para renovar', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
+					// 	return redirect()->back()->withInput($request->all());
+					// }
 
 					$number = Credit::max('id') + 1;
 					$input['folio'] = $client->branch->nomenclature.'00'.$number;	

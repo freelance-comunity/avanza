@@ -625,3 +625,11 @@ Route::get('rosters/{id}/delete', [
     'as' => 'rosters.delete',
     'uses' => 'RosterController@destroy',
 ]);
+
+
+Route::resource('investments', 'InvestmentController');
+
+Route::get('investments/{id}/delete', [
+    'as' => 'investments.delete',
+    'uses' => 'InvestmentController@destroy',
+]);

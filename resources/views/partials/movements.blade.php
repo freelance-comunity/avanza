@@ -44,7 +44,7 @@ Detalles
 						@if($vaults->isEmpty())
 						<div class="well text-center">Ho hay registros.</div>
 						@else
-						<table class="table" id="vault">
+						<table class="table" id="vaul">
 							<thead class="thead-inverse">
 								<th>Sucursal</th>
 								<th>Usuario</th>
@@ -179,7 +179,7 @@ Detalles
 						@if($credits->isEmpty())
 						<div class="well text-center">Ho hay registros.</div>
 						@else
-						<table class="table" id="credit">
+						<table class="table" id="creditos">
 							<thead class="thead-inverse">
 								<th>Sucursal</th>
 								<th>Usuario</th>
@@ -206,7 +206,7 @@ Detalles
 						@if($expenses->isEmpty())
 						<div class="well text-center">Ho hay registros.</div>
 						@else
-						<table class="table" id="expense">
+						<table class="table" id="expensees">
 							<thead class="thead-inverse">
 								<th>Sucursal</th>
 								<th>Usuario</th>
@@ -233,7 +233,7 @@ Detalles
 						@if($cuts->isEmpty())
 						<div class="well text-center">Ho hay registros.</div>
 						@else
-						<table class="table" id="cut">
+						<table class="table" id="corte">
 							<thead class="thead-inverse">
 								<th>Sucursal</th>
 								<th>Usuario</th>

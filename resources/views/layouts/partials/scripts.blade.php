@@ -18,8 +18,9 @@
 <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
 <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
 <script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.colVis.min.js"></script>
-<script src="{{ asset('/js/municipalitys.js')}}"></script>  
 
+
+<script src="{{ asset('/js/municipalitys.js')}}"></script>  
 <script src="{{ asset('/js/moment.js')}}"></script>
 
 
@@ -102,7 +103,7 @@
       {{-- Datatables multiples tabs --}}
       <script>
         $(document).ready(function() {
-          $('#vault').DataTable( {
+          $('#vaul').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -113,7 +114,7 @@
 
           } );
         });
-      </script>
+      </script> 
       <script>
         $(document).ready(function() {
           $('#start').DataTable( {
@@ -172,7 +173,7 @@
       </script>
       <script>
         $(document).ready(function() {
-          $('#credit').DataTable( {
+          $('#creditos').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -186,7 +187,7 @@
       </script>
       <script>
         $(document).ready(function() {
-          $('#expense').DataTable( {
+          $('#expensees').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -200,7 +201,7 @@
       </script>
       <script>
         $(document).ready(function() {
-          $('#cut').DataTable( {
+          $('#corte').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -274,7 +275,7 @@
           });
         });
       </script>
-      <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+      {{-- <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> --}}
 
       <script>
        var changeDateFormat = $('#date').each(function(i,e) {

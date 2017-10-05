@@ -29,6 +29,13 @@
       @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
       <li><a href="{{ url('vault') }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
       <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Corte de Caja</span></a></li>
+      <li class="treeview">
+        <a href="#"><i class='fa fa-cubes'></i><span> Sueldos y Gastos</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
+          <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>
+        </ul>
+      </li>
       <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li>
       <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li>
       @endif
@@ -129,106 +136,106 @@
           </script>
           <br>
           <div id="diario" style="display: none;">
-          <h4>Plazo: <strong><span id="demomodalidad"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
-            <input type="range" min="1" max="25" value="2" class="slider" name="modalidadr" onChange="calcularr()" id="modalidadr">
-          </div><br>
-          <input type="hidden" id="tasar" name="tasar" value="0.25">
-          <h4>Monto Solicitado: <strong>$<span id="demor"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
-            <input type="range" min="500" max="5000" value="2000" class="slider" name="capitalr" onChange="calcularr()" id="capitalr">
+            <h4>Plazo: <strong><span id="demomodalidad"></span></strong></h4>
+            <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
+              <input type="range" min="1" max="25" value="2" class="slider" name="modalidadr" onChange="calcularr()" id="modalidadr">
+            </div><br>
+            <input type="hidden" id="tasar" name="tasar" value="0.25">
+            <h4>Monto Solicitado: <strong>$<span id="demor"></span></strong></h4>
+            <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
+              <input type="range" min="500" max="5000" value="2000" class="slider" name="capitalr" onChange="calcularr()" id="capitalr">
+            </div>
+            <br>
+            <input type="hidden" id="interesr" name="interesr" value="Norway">
+            {!! Form::label('totalr', 'Cuota:') !!}  
+            {!! Form::text('totalr', 'null', ['class' => 'form-control input-lg', 'id' => 'totalnr', 'readonly' => 'readonly']) !!} 
+            {!! Form::label('totalpayment', 'Total a Pagar:') !!}  
+            {!! Form::text('totalpayment', null, ['class' => 'form-control input-lg', 'id' => 'totalpayment', 'readonly' => 'readonly']) !!}               
           </div>
-          <br>
-          <input type="hidden" id="interesr" name="interesr" value="Norway">
-          {!! Form::label('totalr', 'Cuota:') !!}  
-          {!! Form::text('totalr', 'null', ['class' => 'form-control input-lg', 'id' => 'totalnr', 'readonly' => 'readonly']) !!} 
-          {!! Form::label('totalpayment', 'Total a Pagar:') !!}  
-          {!! Form::text('totalpayment', null, ['class' => 'form-control input-lg', 'id' => 'totalpayment', 'readonly' => 'readonly']) !!}               
+
+          <div id="anterior" style="display: none;"> 
+            <h4>Plazo: <strong><span id="demomodalidaddiario"></span></strong></h4>
+            <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
+              <input type="range" min="1" max="60" value="30" class="slider" name="modalidaddiario" onChange="calculardiario()" id="modalidaddiario">
+            </div><br>
+            <input type="hidden" id="tasadiario" name="tasadiario" value="0.15">
+            <h4>Monto Solicitado: <strong>$<span id="demordiario"></span></strong></h4>
+            <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
+              <input type="range" min="500" max="5000" value="2000" class="slider" name="capitaldiario" onChange="calculardiario()" id="capitaldiario">
+            </div>
+            <br>
+            <input type="hidden" id="interesdiario" name="interesdiario" value="Norway">
+            {!! Form::label('totaldiario', 'Cuota:') !!}  
+            {!! Form::text('totaldiario', 'null', ['class' => 'form-control input-lg', 'id' => 'totalndiario', 'readonly' => 'readonly']) !!} 
+            {!! Form::label('totalpaymentdiario', 'Total a Pagar:') !!}  
+            {!! Form::text('totalpaymentdiario', null, ['class' => 'form-control input-lg', 'id' => 'totalpaymentdiario', 'readonly' => 'readonly']) !!}   
+          </div>
+
+          <div id="semanal" style="display: none;"  ">
+            <input type="hidden" name="modalidad" id="modalidad" value="1">
+            <input type="hidden" id="tasa" name="tasa" value="0.15">
+            <h4>Monto Solicitado: <strong>$<span id="demo"></span></strong></h4>
+            <div class=" col-sm-6 col-lg-12 " class="slidecontainer">
+              <input type="range" min="200" max="1000" value="550" class="slider" name="capital" onChange="calcular()" id="myRange">
+            </div>
+            <br>
+            {!! Form::label('refrendo', 'Refrendo:') !!}  
+            {!! Form::text('refrendo', null, ['class' => 'form-control input-lg', 'id' => 'refrendo', 'readonly' => 'readonly']) !!}
+            <input type="hidden" id="interes" name="interes">
+            {!! Form::label('total', 'Total a pagar:') !!}  
+            {!! Form::text('total', null, ['class' => 'form-control input-lg', 'id' => 'totaln', 'readonly' => 'readonly']) !!}
+          </div>
+
+
+
+          <div id="credidiario4" style="display: none;"  ">
+            <h4>Semanas: <strong><span id="democredi4"></span></strong></h4>
+            <div class=" col-sm-6 col-lg-12 " class="slidecontainer">
+              <input type="range" min="1" max="4" value="2" class="slider" name="modalidadfour" onChange="calcularcredi4()" id="modalidadfour">
+            </div>
+            <input type="hidden" id="tasafour" name="tasafour" value="0.28">
+            <br>   
+            <h4>Monto Solicitado: <strong>$<span id="democredi44"></span></strong></h4>
+            <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
+              <input type="range" min="500" max="3000" value="" class="slider" name="capitalfour" onChange="calcularcredi4()" id="capitalfour">
+            </div>
+            <br>
+            {!! Form::label('refrendofour', 'Refrendo:') !!}  
+            {!! Form::text('refrendofour', null, ['class' => 'form-control input-lg', 'id' => 'refrendofour', 'readonly' => 'readonly']) !!}
+            <input type="hidden" id="interesfour" name="interesfour">
+            {!! Form::label('totalfour', 'Total a pagar:') !!}  
+            {!! Form::text('totalfour', null, ['class' => 'form-control input-lg', 'id' => 'totalnfour', 'readonly' => 'readonly']) !!}
+          </div>
         </div>
 
-        <div id="anterior" style="display: none;"> 
-          <h4>Plazo: <strong><span id="demomodalidaddiario"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
-            <input type="range" min="1" max="60" value="30" class="slider" name="modalidaddiario" onChange="calculardiario()" id="modalidaddiario">
-          </div><br>
-          <input type="hidden" id="tasadiario" name="tasadiario" value="0.15">
-          <h4>Monto Solicitado: <strong>$<span id="demordiario"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 "  class="slidecontainer">
-            <input type="range" min="500" max="5000" value="2000" class="slider" name="capitaldiario" onChange="calculardiario()" id="capitaldiario">
-          </div>
-          <br>
-          <input type="hidden" id="interesdiario" name="interesdiario" value="Norway">
-          {!! Form::label('totaldiario', 'Cuota:') !!}  
-          {!! Form::text('totaldiario', 'null', ['class' => 'form-control input-lg', 'id' => 'totalndiario', 'readonly' => 'readonly']) !!} 
-          {!! Form::label('totalpaymentdiario', 'Total a Pagar:') !!}  
-          {!! Form::text('totalpaymentdiario', null, ['class' => 'form-control input-lg', 'id' => 'totalpaymentdiario', 'readonly' => 'readonly']) !!}   
-        </div>
-
-        <div id="semanal" style="display: none;"  ">
-          <input type="hidden" name="modalidad" id="modalidad" value="1">
-          <input type="hidden" id="tasa" name="tasa" value="0.15">
-          <h4>Monto Solicitado: <strong>$<span id="demo"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 " class="slidecontainer">
-            <input type="range" min="200" max="1000" value="550" class="slider" name="capital" onChange="calcular()" id="myRange">
-          </div>
-          <br>
-          {!! Form::label('refrendo', 'Refrendo:') !!}  
-          {!! Form::text('refrendo', null, ['class' => 'form-control input-lg', 'id' => 'refrendo', 'readonly' => 'readonly']) !!}
-          <input type="hidden" id="interes" name="interes">
-          {!! Form::label('total', 'Total a pagar:') !!}  
-          {!! Form::text('total', null, ['class' => 'form-control input-lg', 'id' => 'totaln', 'readonly' => 'readonly']) !!}
-        </div>
-
-
-
-        <div id="credidiario4" style="display: none;"  ">
-          <h4>Semanas: <strong><span id="democredi4"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 " class="slidecontainer">
-            <input type="range" min="1" max="4" value="2" class="slider" name="modalidadfour" onChange="calcularcredi4()" id="modalidadfour">
-          </div>
-          <input type="hidden" id="tasafour" name="tasafour" value="0.28">
-          <br>   
-          <h4>Monto Solicitado: <strong>$<span id="democredi44"></span></strong></h4>
-          <div class=" col-sm-6 col-lg-12 " id="slidecontainer">
-            <input type="range" min="500" max="3000" value="" class="slider" name="capitalfour" onChange="calcularcredi4()" id="capitalfour">
-          </div>
-          <br>
-          {!! Form::label('refrendofour', 'Refrendo:') !!}  
-          {!! Form::text('refrendofour', null, ['class' => 'form-control input-lg', 'id' => 'refrendofour', 'readonly' => 'readonly']) !!}
-          <input type="hidden" id="interesfour" name="interesfour">
-          {!! Form::label('totalfour', 'Total a pagar:') !!}  
-          {!! Form::text('totalfour', null, ['class' => 'form-control input-lg', 'id' => 'totalnfour', 'readonly' => 'readonly']) !!}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-      </div>
+      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-content -->
+    <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal-dialog -->
-</div>
-<style>
+  <style>
 
-.color-3 .irs-min, .irs-max {
+  .color-3 .irs-min, .irs-max {
 
-  font-size: 12px; line-height: 1.333;
-  text-shadow: none;
-  top: 0; padding: 1px 3px;
-  background: #e1e4e9;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-}
-.color-3 .irs-from, .irs-to, .irs-single {
-  color: #fff;
-  font-size: 15px; line-height: 1.333;
-  text-shadow: none;
-  padding: 1px 5px;
-  background: black;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-}
+    font-size: 12px; line-height: 1.333;
+    text-shadow: none;
+    top: 0; padding: 1px 3px;
+    background: #e1e4e9;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+  }
+  .color-3 .irs-from, .irs-to, .irs-single {
+    color: #fff;
+    font-size: 15px; line-height: 1.333;
+    text-shadow: none;
+    padding: 1px 5px;
+    background: black;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+  }
 </style>
 
 <script>

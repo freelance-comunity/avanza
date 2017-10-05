@@ -614,3 +614,14 @@ Route::get('unlock', function(){
 Route::get('movements', function(){
     return view('partials.movements');
 });
+
+Route::get('expenses-admin', function(){
+    return view('partials.expenses');
+});
+
+Route::resource('rosters', 'RosterController');
+
+Route::get('rosters/{id}/delete', [
+    'as' => 'rosters.delete',
+    'uses' => 'RosterController@destroy',
+]);

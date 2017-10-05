@@ -508,15 +508,11 @@ Route::get('regions/{id}/delete', [
 ]);
 
 Route::get('usuarios',function(){
-    $user = App\User::all();
-    
-
-   foreach ($user as $key => $user) {
-
-      echo $user->name;
-      echo "<br>";
-   
-}
+   $now = \Carbon\Carbon::now()->toDateString();
+   $quincena= \Carbon\Carbon::now()->addDays(15);
+   echo "De: ".$now;
+   echo "<br>";
+   echo "hasta: ".$quincena;
 });
 
 

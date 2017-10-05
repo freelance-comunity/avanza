@@ -25,12 +25,10 @@ class Vault extends Model
 	{
 		return $this->belongsTo('App\User');
 	}
-
 	public function incomes()
 	{
 		return $this->hasMany('App\Models\Income');
 	}
-
 	public function expenditures()
 	{
 		return $this->hasMany('App\Models\Expenditure');

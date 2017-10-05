@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">DETALLES DE RECUPERACIÓN</h5>
+        <h5 class="modal-title" id="exampleModalLabel">DETALLES DE RECUPERACIÓN ACCESS</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -10,7 +10,7 @@
       <div class="modal-body">
        <div class="table-inverse">
          <div class="table-responsive">
-           <table class="table" id="rcs">
+           <table class="table" id="rec_access">
             <thead class="thead-inverse">
               <th>Importe</th>
               <th>Concepto</th>

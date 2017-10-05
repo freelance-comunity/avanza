@@ -75,7 +75,7 @@ class GeneralController extends Controller
 
 	public function showVault($id)
 	{	
-		$current = Carbon::today()->subDay()->toDateString();
+		$current = Carbon::today()->toDateString();
 		$user = User::find($id);
 		$vault = $user->vault;
 		$incomes = $vault->incomes->where('date', $current);

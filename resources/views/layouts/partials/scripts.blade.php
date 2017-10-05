@@ -74,6 +74,20 @@
       </script>
       <script>
         $(document).ready(function() {
+          $('#rec_access').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'csv','excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
           $('#afs').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -259,7 +273,7 @@
       </script>
       <script>
         $(document).ready(function() {
-          $('#pagoss').DataTable( {
+          $('#pagos_promotor').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },

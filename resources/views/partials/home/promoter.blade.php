@@ -19,7 +19,7 @@ $payments = Auth::user()->payments;
     <div class="well text-center">No se encontraron pagos para este día.</div>
     @else
     <div class="table-responsive">
-        <table class="table" id="pagoss">
+        <table class="table" id="pagos_promotor">
             <thead class="thead-inverse">
                 <th style="width: 15px;">No. Cuota</th>
                 <th>Total</th>      

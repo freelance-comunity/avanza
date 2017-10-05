@@ -104,7 +104,7 @@ class User extends Authenticatable
     }
     public function purseAccess()
     {
-        return $this->hasOne('App\Models\ParseAccess');
+        return $this->hasOne('App\Models\PurseAccess');
     }
 
     public function closes()

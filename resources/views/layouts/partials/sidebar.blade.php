@@ -30,7 +30,7 @@
       <li><a href="{{ url('vault') }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
       <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Corte de Caja</span></a></li>
       <li class="treeview">
-        <a href="#"><i class='fa fa-cubes'></i><span> Sueldos y Gastos</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <a href="#"><i class='fa fa-cubes'></i><span> Administración</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>

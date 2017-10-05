@@ -26,15 +26,15 @@ Detalles
 				</div>
 				<div class="form-group col-sm-6 col-lg-4">
 					{!! Form::label('description', 'Descripción:') !!}
-					<input type="text" name="description" class="form-control input-lg">
+					<input type="text" name="description" placeholder="ESCRIBE DESCRIPCIÓN" required="required" data-parsley-trigger="input focusin" class="form-control input-lg">
 				</div>
 				<input type="hidden"  name="user_id" value="{{ Auth::user()->id }}">
 				<div class="form-group col-sm-6 col-lg-4">
 					{!! Form::label('voucher', 'Coprobante:') !!}
-					<input type="file" name="voucher" class="form-control input-lg">
+					<input type="file" name="voucher" required="required" data-parsley-trigger="input focusin" class="form-control input-lg">
 				</div>
 				<div class="form-group col-sm-12 col-lg-12">
-					{!! Form::submit('ASIGNAR', ['class' => 'btn btn-lg btn-block bg-navy']) !!}
+					{!! Form::submit('ASIGNAR', ['class' => 'btn btn-lg btn-block bg-primary']) !!}
 				</div>
 				{!! Form::close() !!}
 			</div>

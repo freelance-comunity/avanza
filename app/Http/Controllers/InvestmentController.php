@@ -8,6 +8,10 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Toastr;
+use Validator;
+use App\User;
+use App\Models\Vault;
 
 class InvestmentController extends AppBaseController
 {
@@ -22,24 +26,24 @@ class InvestmentController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Investment::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $investments = $query->get();
+		$investments = $query->get();
 
-        return view('investments.index')
-            ->with('investments', $investments)
-            ->with('attributes', $attributes);
+		return view('investments.index')
+		->with('investments', $investments)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -61,15 +65,38 @@ class InvestmentController extends AppBaseController
 	 */
 	public function store(CreateInvestmentRequest $request)
 	{
-        $input = $request->all();
 
-		$investment = Investment::create($input);
+		$validator = Validator::make($request->all(), [
+			'ammount' => 'required|numeric',	
+		]);
 
-		Flash::message('Investment saved successfully.');
+		if ($validator->fails()) {
+			Toastr::error('Favor de introducir cantidad valida.', 'CARTERA ACCESS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('investments.index'));
+			return redirect()->back();
+		}
+		$user = User::find($request->input('user_id'));
+		$vault = $user->vault;
+		if ( $request->input('ammount') < 0) {
+			Toastr::error('No puedes depositar esa cantidad', 'INVERSIÓN', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
+		$data_investment['ammount'] = $request->input('ammount');
+		$data_investment['vault_id'] = $vault->id;
+		$data_investment['user_id'] = $user->id;
+		$investment = Investment::create($data_investment);
+
+		$vault->ammount = $vault->ammount + $investment->ammount;
+		$vault->save();
+		Toastr::success('Inversión  exitosamente.', 'INVERSIÓN', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+		return redirect()->back();
 	}
 
+
+
+	
 	/**
 	 * Display the specified Investment.
 	 *
@@ -159,5 +186,14 @@ class InvestmentController extends AppBaseController
 		Flash::message('Investment deleted successfully.');
 
 		return redirect(route('investments.index'));
+	}
+	public function showInvestments($id)
+	{
+		$user = User::find($id);
+		$investments = $user->investments;
+
+		return view('investments.show')
+		->with('investments', $investments)
+		->with('user',$user);
 	}
 }

@@ -1,6 +1,6 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('content')
+@section('main-content')
 <div class="container">
 
     @include('common.errors')

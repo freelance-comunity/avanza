@@ -32,6 +32,10 @@
       <li class="treeview">
         <a href="#"><i class='fa fa-cubes'></i><span> Administración</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
+          @if(Auth::user()->hasRole(['administrador', 'director-general']))
+          <li><a href="{{ url('showInvestments') }}/{{ Auth::user()->id }}">Inversiones</a></li>
+          <li><a href="{{ url('showRetreats') }}/{{ Auth::user()->id }}">Retiros</a></li>
+          @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>
         </ul>

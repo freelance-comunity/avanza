@@ -5,9 +5,9 @@
 
     @include('common.errors')
 
-    {!! Form::model($investment, ['route' => ['investments.update', $investment->id], 'method' => 'patch']) !!}
+    {!! Form::model($retreat, ['route' => ['retreats.update', $retreat->id], 'method' => 'patch']) !!}
 
-        @include('investments.fields')
+        @include('retreats.fields')
 
     {!! Form::close() !!}
 </div>

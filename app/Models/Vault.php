@@ -49,4 +49,12 @@ class Vault extends Model
 	{
 		return $this->hasMany('App\Models\PurseAccess');
 	}
+	public function investments()
+	{
+		return $this->hasMany('App\Models\Investments');
+	}
+	public function retreats()
+	{
+		return $this->hasMany('App\Models\Retreat');
+	}
 }

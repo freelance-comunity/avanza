@@ -2,10 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Investment extends Model
+class Retreat extends Model
 {
     
-	public $table = "investments";
+	public $table = "retreats";
 
 	public $primaryKey = "id";
     
@@ -20,7 +20,6 @@ class Investment extends Model
 	public static $rules = [
 	    "ammount" => "required"
 	];
-
 	public function user()
     {
         return $this->belongsTo('App\User');
@@ -29,4 +28,5 @@ class Investment extends Model
 	{
 		return $this->belongsTo('App\Models\Vault');
 	}
+
 }

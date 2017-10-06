@@ -633,3 +633,12 @@ Route::get('investments/{id}/delete', [
     'as' => 'investments.delete',
     'uses' => 'InvestmentController@destroy',
 ]);
+Route::get('/showInvestments/{id}', 'InvestmentController@showInvestments');
+Route::get('/showRetreats/{id}', 'RetreatController@show');
+
+Route::resource('retreats', 'RetreatController');
+
+Route::get('retreats/{id}/delete', [
+    'as' => 'retreats.delete',
+    'uses' => 'RetreatController@destroy',
+]);

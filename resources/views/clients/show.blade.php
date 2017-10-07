@@ -91,6 +91,16 @@ Detalles del Cliente
             {{$client->maximun_amount}}
           </td>
         </tr>
+        @if ($client->warranty)
+        <tr>
+          <td>5.</td>
+          <td>GARANTÍA:</td>
+          <td>
+            {{$client->warranty}}
+          </td>
+        </tr>
+        @endif
+        
       </table>
     </div>
   </div>
@@ -310,11 +320,11 @@ Detalles del Cliente
         <div class="carousel-inner">
           <div class="item active">
             <img src="{{ asset('/uploads/documents') }}/{!! $document->ine !!}"" alt="Second slide">
-           <div class="carousel-caption">
-           <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/ine') }}/{{$document->id}}"><strong>EDITAR INE</strong></a></h1>
-          </div>
-        </div>
-        <div class="item">
+            <div class="carousel-caption">
+             <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/ine') }}/{{$document->id}}"><strong>EDITAR INE</strong></a></h1>
+           </div>
+         </div>
+         <div class="item">
           <img src="{{ asset('/uploads/documents') }}/{!! $document->curp !!}"" alt="Second slide">
           <div class="carousel-caption">
             <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/curpss') }}/{{$document->id}}"><strong>EDITAR CURP</strong></a></h1>
@@ -323,19 +333,19 @@ Detalles del Cliente
         <div class="item">
           <img src="{{ asset('/uploads/documents') }}/{!! $document->proof_of_addres !!}"" alt="Third slide">
           <div class="carousel-caption">
-             <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/updatephotos') }}/{{$document->id}}"><strong>EDITAR COMPROBANTE DE DOMICILIO</strong></a></h1>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="fa fa-angle-left"></span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="fa fa-angle-right"></span>
-      </a>
-    </div>
+           <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/updatephotos') }}/{{$document->id}}"><strong>EDITAR COMPROBANTE DE DOMICILIO</strong></a></h1>
+         </div>
+       </div>
+     </div>
+     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+      <span class="fa fa-angle-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+      <span class="fa fa-angle-right"></span>
+    </a>
   </div>
-  <!-- /.box-body -->
+</div>
+<!-- /.box-body -->
 </div>
 <!-- /.box -->
 </div>

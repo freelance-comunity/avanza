@@ -26,6 +26,7 @@ class Client extends Model
 	"type_of_housing",
 	"avatar",
 	"maximun_amount",
+	"warranty",
 	"branch_id",
 	"region_id",
 	"user_id"

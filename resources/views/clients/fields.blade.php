@@ -148,6 +148,17 @@
           </select>
         </div>  --}}
       </div> 
+      @if (Auth::user()->branch_id == 4)
+      <div class="form-group col-sm-6 col-lg-12">
+        <div class="form-group col-sm-6 col-lg-12">
+          {!! Form::label('warranty', 'Garantía') !!}
+          {!! Form::textarea('warranty', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+      </div>
+      @endif
+      
+
+
       <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
       <div class="form-group col-sm-6 col-lg-12">
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">

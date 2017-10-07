@@ -57,4 +57,8 @@ class Vault extends Model
 	{
 		return $this->hasMany('App\Models\Retreat');
 	}
+	public function rosters()
+	{
+		return $this->belongsTo('App\Models\Roster');
+	}
 }

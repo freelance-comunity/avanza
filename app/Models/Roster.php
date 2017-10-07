@@ -46,4 +46,9 @@ class Roster extends Model
 		"employee_firm" => "required"
 	];
 
+	 public function vault()
+    {
+        return $this->hasOne('App\Models\Vault');
+    }
+
 }

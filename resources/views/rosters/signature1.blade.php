@@ -13,12 +13,12 @@
         }
 
         window.onresize = resizeCanvas;
-        resizeCanvas();
+        resizeCanvas(canvas);
 
         signaturePad = new SignaturePad(canvas);
 
         clearButton.addEventListener("click", function (event) {
-          signaturePad.clear();
+          signaturePad.clear(clearButton);
         });
 
         saveButton.addEventListener("click", function (event) {

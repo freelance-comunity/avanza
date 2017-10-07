@@ -100,50 +100,52 @@ $users = $filtered->where('region_id', $region_allocation->id);
 
     <div class="form-group col-sm-6 col-lg-4">
         {!! Form::label('coordinating_firm', 'Firma Coordinador:') !!}
-        {!! Form::text('coordinating_firm', null, ['class' => 'form-control input-lg']) !!}
+        {!! Form::text('coordinating_firm', null, ['class' => 'form-control input-lg','id' => 'signature', 'readonly']) !!}
     </div>
+
 
     {{-- Firma coordinador --}}
-     <div class="form-group col-sm-6 col-lg-4">
-                <div class="form-group col-sm-12 col-lg-12">
-                  <div id="signature-pad" class="m-signature-pad">
-                    <div class="m-signature-pad--body">
-                      <canvas style="border: 1px solid black; height: 200px;"></canvas>
-                    </div>
-                    <div class="m-signature-pad--footer">
-                      <button type="button" class="btn btn-lg btn-info clear" data-action="clear">Limpiar</button>
-                      <button type="button" class="btn btn-lg btn-success save" data-action="save">Usar</button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-    {{-- End --}}
-
-    {{-- Firma empleado --}}
-     <div class="form-group col-sm-6 col-lg-4">
-                <div class="form-group col-sm-12 col-lg-12">
-                  <div id="signature-pad2" class="m-signature-pad">
-                    <div class="m-signature-pad--body">
-                      <canvas style="border: 1px solid black; height: 200px;"></canvas>
-                    </div>
-                    <div class="m-signature-pad--footer">
-                      <button type="button" class="btn btn-lg btn-info clear" data-action="clear2">Limpiar</button>
-                      <button type="button" class="btn btn-lg btn-success save" data-action="save2">Usar</button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-    {{-- End --}}
-
     <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('employee_firm', 'Firma Empleado:') !!}
-        {!! Form::text('employee_firm', null, ['class' => 'form-control input-lg']) !!}
-    </div>
+        <div class="form-group col-sm-12 col-lg-12">
+          <div id="signature-pad" class="m-signature-pad">
+            <div class="m-signature-pad--body">
+              <canvas style="border: 1px solid black; height: 200px;"></canvas>
+          </div>
+          <div class="m-signature-pad--footer">
+              <button type="button" class="btn btn-lg btn-info clear"  data-action="clear">Limpiar</button>
+              <button type="button" class="btn btn-lg btn-success save" data-action="save">Usar</button>
+          </div>
+      </div>
+
+  </div>
+</div>
+{{-- End --}}
+
+{{-- Firma empleado --}}
+<div class="form-group col-sm-6 col-lg-4">
+    <div class="form-group col-sm-12 col-lg-12">
+      <div id="signature-pad2" class="m-signature-pad">
+        <div class="m-signature-pad--body">
+          <canvas style="border: 1px solid black; height: 200px;"></canvas>
+      </div>
+      <div class="m-signature-pad--footer">
+          <button type="button" class="btn btn-lg btn-info clear" data-action="clear2">Limpiar</button>
+          <button type="button" class="btn btn-lg btn-success save" data-action="save2">Usar</button>
+      </div>
+  </div>
+
+</div>
+</div>
+
+{{-- End --}}
 
 
-<!--- Submit Field --->
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('employee_firm', 'Firma Empleado:') !!}
+    {!! Form::text('employee_firm', null, ['class' => 'form-control input-lg','id' => 'signature2','readonly']) !!}
+</div>
+
+
 <div class="form-group col-sm-12">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
 </div>

@@ -87,7 +87,6 @@
                 {!! Form::text('firm',null, [
                   'class' => 'form-control input-lg', 
                   'id'    => 'signature',
-                  
                   'data-parsley-trigger ' => 'input focusin',
                   'readonly'
                   ]) !!}

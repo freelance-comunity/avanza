@@ -9,6 +9,9 @@ use Response;
 use Flash;
 use Schema;
 use App\User;
+use Toastr;
+use App\Models\Vault;
+use Auth;
 
 class RosterController extends AppBaseController
 {
@@ -23,24 +26,24 @@ class RosterController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Roster::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $rosters = $query->get();
+		$rosters = $query->get();
 
-        return view('rosters.index')
-            ->with('rosters', $rosters)
-            ->with('attributes', $attributes);
+		return view('rosters.index')
+		->with('rosters', $rosters)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -62,18 +65,43 @@ class RosterController extends AppBaseController
 	 */
 	public function store(CreateRosterRequest $request)
 	{	
-		 
+
 		$input = $request->all();
 		$id_user = $request->input('name_employee');
 		$employee = User::find($id_user);
+		if($request->input('coordinating_firm')){
+			$data_uri = $request->input('coordinating_firm');
+			$encoded_image = explode(",", $data_uri)[1];
+			$decoded_image = base64_decode($encoded_image);
+			$url_coordinating = 'signature_coordinating'. '-id-'. $request->input('user_id') . rand(111,9999).'.png';
+
+			file_put_contents('../public/uploads/rosters/' . $url_coordinating, $decoded_image);
+		}
+		if($request->input('employee_firm')){
+			$data_uri = $request->input('employee_firm');
+			$encoded_image = explode(",", $data_uri)[1];
+			$decoded_image = base64_decode($encoded_image);
+			$url_employee = 'signature_employee'. '-id-'. $request->input('user_id') . rand(111,9999).'.png';
+
+			file_put_contents('../public/uploads/rosters/' . $url_employee, $decoded_image);
+		}
+		
 
 		$input['user_id'] = $id_user;
 		$input['name_employee'] = $employee->name." ".$employee->father_last_name." ".$employee->mother_last_name;
 		$input['number_employee'] = $employee->id;
 		$input['position'] = $employee->roles;
+		$input['coordinating_firm']   = $url_coordinating;
+		$input['employee_firm']   = $url_employee;
+		
 		$roster = Roster::create($input);
 
-		Flash::message('Roster saved successfully.');
+
+		$user_collector = Auth::user();
+		$vault = $user_collector->vault;
+		$vault->ammount = $vault->ammount - $roster->grandchild_pay;
+		$vault->save();
+		Toastr::success('Sueldo Pagado', 'SUELDOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('rosters.index'));
 		// dd($input);

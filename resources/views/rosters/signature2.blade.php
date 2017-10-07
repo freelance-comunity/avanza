@@ -1,9 +1,9 @@
 <script>
-   var wrapper = document.getElementById("signature-pad2"),
-        clearButton = wrapper.querySelector("[data-action=clear2]"),
-        saveButton = wrapper.querySelector("[data-action=save2]"),
-        canvas = wrapper.querySelector("canvas"),
-        signaturePad;
+   var wrapper2 = document.getElementById("signature-pad2"),
+        clearButton2 = wrapper2.querySelector("[data-action=clear2]"),
+        saveButton2 = wrapper2.querySelector("[data-action=save2]"),
+        canvas2 = wrapper2.querySelector("canvas"),
+        signaturePad2;
 
         function resizeCanvas() {
           var ratio =  Math.max(window.devicePixelRatio || 1, 1);
@@ -13,19 +13,19 @@
         }
 
         window.onresize = resizeCanvas;
-        resizeCanvas();
+        resizeCanvas(canvas2);
 
-        signaturePad = new SignaturePad(canvas);
+        signaturePad2 = new SignaturePad(canvas2);
 
-        clearButton.addEventListener("click", function (event) {
-          signaturePad.clear();
+        clearButton2.addEventListener("click", function (event) {
+          signaturePad2.clear(clearButton2);
         });
 
-        saveButton.addEventListener("click", function (event) {
-          if (signaturePad.isEmpty()) {
+        saveButton2.addEventListener("click", function (event) {
+          if (signaturePad2.isEmpty()) {
             alert("Por favor dibuja tu firma.");
           } else {
-            document.getElementById('signature2').value=signaturePad.toDataURL('image/png');
+            document.getElementById('signature2').value=signaturePad2.toDataURL('image/png');
           }
         });
 </script>

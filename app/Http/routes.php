@@ -642,3 +642,11 @@ Route::get('retreats/{id}/delete', [
     'as' => 'retreats.delete',
     'uses' => 'RetreatController@destroy',
 ]);
+
+Route::get('/transfer', function(){
+    $users = App\User::all()->pluck('name','id');
+    return view('partials.transfer')
+    ->with('users', $users);
+});
+
+Route::post('transferProcess', 'GeneralController@transferProcess');

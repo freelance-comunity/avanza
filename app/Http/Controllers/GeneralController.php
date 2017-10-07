@@ -12,6 +12,7 @@ use App\Models\Income;
 use App\Models\Expenditure;
 use App\Models\ExpenditureCredit;
 use App\Models\Credit;
+use App\Models\Client;
 use App\Models\PurseAccess;
 use Toastr;
 use Validator;
@@ -318,6 +319,37 @@ class GeneralController extends Controller
 		$close = Close::create($close_data);
 
 		Toastr::info('La operación se ha cerrado exitosamente.', 'INFO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		return redirect()->back();
+	}
+
+	public function transferProcess(Request $request)
+	{
+		$transmitter = User::find($request->input('transmitter'));
+
+		$receiver = User::find($request->input('receiver'));
+
+		$clients  = $transmitter->clients;
+
+		$credits  = $transmitter->credits;
+
+		$payments = $transmitter->payments;
+	
+		foreach ($clients as $client) {
+			$client->user_id = $receiver->id;
+			$client->save();
+		}
+
+		foreach ($credits as $credit) {
+			$credit->user_id = $receiver->id;
+			$credit->save();
+		}
+
+		foreach ($payments as $payment) {
+			$payment->user_id = $receiver->id;
+			$payment->save();
+		}
+
+		Toastr::success('Se ha realizado la transferencia de cartera exitosamente.', 'TRANSFERENCIA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 		return redirect()->back();
 	}
 }

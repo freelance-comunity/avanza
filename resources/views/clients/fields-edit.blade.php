@@ -1,12 +1,12 @@
-<style>
-    #resultadoedit {
-        background-color: red;
-        color: white;
-        font-weight: bold;
-    }
-    #resultadoedit.ok {
-        background-color: green;
-    }
+ <style>
+ #resultadoedit {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+#resultadoedit.ok {
+    background-color: green;
+}
 </style>
 <div class="box box-danger">
     <div class="box-header with-border">
@@ -38,76 +38,85 @@
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('curp', 'Curp:') !!}
             {!! Form::text('curp', null, [
-                        'style' => 'text-transform:uppercase',
-                        'class' => 'form-control input-lg', 
-                        'id' => 'curp_input',
-                        'oninput' => 'validarE(this)',
-                        'placeholder' => 'ESCRIBE CURP', 
-                        'required' => 'required',
-                        'data-parsley-trigger ' => 'input focusin',
-                        'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-                     <pre id="resultadoedit"></pre>
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('ine', 'Ine:') !!}
-            {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA INE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('civil_status', 'Estado Civil:') !!}
-            {!! Form::select('civil_status',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('scholarship', 'Grado Escolar:') !!}
-            {!! Form::select('scholarship',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('phone', 'Teléfono:') !!}
-            {!! Form::text('phone', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();','data-parsley-trigger ' => 'input focusin',
-                        'data-parsley-type' => 'digits', 'data-parsley-maxlength' => '10',]) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('no_economic_dependent', 'No. de Dependientes Economicos') !!}
-            {!! Form::select('no_economic_dependent',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'],  null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('no_familys', 'No. Familias') !!}
-            {!! Form::select('no_familys',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
-            {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
-        </div>
-        @if (Auth::user()->hasRole(['administrador', 'director-general'])) 
-         <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('maximun_amount', 'Monto Máximo') !!}
-          <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" value="{{$client->maximun_amount}}" data-parsley-maxlength="10">
-        </div>
-        @endif
-       @if(Auth::user()->hasRole(['ejecutivo-de-credito','coordinador-regional', 'coordinador-sucursal']))
-         <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('maximun_amount', 'Monto Máximo') !!}
-          <input type="number" name="maximun_amount" class="form-control input-lg" readonly="readonly" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" value="{{$client->maximun_amount}}" data-parsley-type="digits" data-parsley-maxlength="10">
-        </div>
-        @endif
-        <input type="hidden" name="avatar" value="{{$client->avatar}}">
-
-
-        @php
-        $count = App\Models\Branch::all();
-        @endphp
-
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('branch_id', '* Sucursal:') !!}
-            <select name="branch_id" required="required" data-parsley-trigger="input focusin" value="{{ old('branch_id') }}" class="form-control input-lg" ">
-                @foreach($count as $branches)
-                <option value="{{$branches->id}}" {{ ($branches->id == $client->branch_id) ? 'selected=selected' : '' }}>
-                    {{$branches->name}} 
-                    @endforeach
-                </select>
+                'style' => 'text-transform:uppercase',
+                'class' => 'form-control input-lg', 
+                'id' => 'curp_input',
+                'oninput' => 'validarE(this)',
+                'placeholder' => 'ESCRIBE CURP', 
+                'required' => 'required',
+                'data-parsley-trigger ' => 'input focusin',
+                'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                <pre id="resultadoedit"></pre>
             </div>
-            <button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
-        </div>    
-    </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('ine', 'Ine:') !!}
+                {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA INE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('civil_status', 'Estado Civil:') !!}
+                {!! Form::select('civil_status',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('scholarship', 'Grado Escolar:') !!}
+                {!! Form::select('scholarship',['NINGUNA' => 'NINGUNA', 'SABE LEER' => 'SABE LEER', 'PRIMARIA' => 'PRIMARIA', 'SECUNDARIA' => 'SECUNDARIA', 'BACHILLERATO' => 'BACHILLERATO', 'LICENCIATURA' => 'LICENCIATURA', 'POSGRADO' => 'POSGRADO'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin']) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('phone', 'Teléfono:') !!}
+                {!! Form::text('phone', null, ['class' => 'form-control input-lg', 'placeholder' => 'TELÉFONO', 'required' => 'required', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();','data-parsley-trigger ' => 'input focusin',
+                'data-parsley-type' => 'digits', 'data-parsley-maxlength' => '10',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('no_economic_dependent', 'No. de Dependientes Economicos') !!}
+                {!! Form::select('no_economic_dependent',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'],  null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('no_familys', 'No. Familias') !!}
+                {!! Form::select('no_familys',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
+            </div>
+            <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
+                {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
+            </div>
+            @if (Auth::user()->hasRole(['administrador', 'director-general'])) 
+            <div class="form-group col-sm-6 col-lg-4">
+              {!! Form::label('maximun_amount', 'Monto Máximo') !!}
+              <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" value="{{$client->maximun_amount}}" data-parsley-maxlength="10">
+          </div>
+          @endif
+          @if(Auth::user()->hasRole(['ejecutivo-de-credito','coordinador-regional', 'coordinador-sucursal']))
+          <div class="form-group col-sm-6 col-lg-4">
+              {!! Form::label('maximun_amount', 'Monto Máximo') !!}
+              <input type="number" name="maximun_amount" class="form-control input-lg" readonly="readonly" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" value="{{$client->maximun_amount}}" data-parsley-type="digits" data-parsley-maxlength="10">
+          </div>
+          @endif
+
+      <input type="hidden" name="avatar" value="{{$client->avatar}}">
+
+
+      @php
+      $count = App\Models\Branch::all();
+      @endphp
+
+      <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('branch_id', '* Sucursal:') !!}
+        <select name="branch_id" required="required" data-parsley-trigger="input focusin" value="{{ old('branch_id') }}" class="form-control input-lg" ">
+            @foreach($count as $branches)
+            <option value="{{$branches->id}}" {{ ($branches->id == $client->branch_id) ? 'selected=selected' : '' }}>
+                {{$branches->name}} 
+                @endforeach
+            </select>
+        </div>
+         @if ($client->branch_id == 4)
+          <div class="form-group col-sm-6 col-lg-12">
+            <div class="form-group col-sm-6 col-lg-12">
+              {!! Form::label('warranty', 'Garantía') !!}
+              {!! Form::textarea('warranty', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div>
+      </div>
+      @endif
+        <button class="btn btn-success btn-lg pull-right" type="submit">Guardar</button>
+    </div>    
+</div>
 
 
 <script>

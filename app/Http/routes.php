@@ -46,12 +46,12 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
-   $payment = App\Models\Payment::find(2242);
-   $debt = $payment->debt;
-   echo $debt->ammount;
-   $credit = $debt->credit;
+ $payment = App\Models\Payment::find(2242);
+ $debt = $payment->debt;
+ echo $debt->ammount;
+ $credit = $debt->credit;
 
-   echo $credit->ammount;
+ echo $credit->ammount;
 });
 
 Route::post('process', 'PaymentController@process');
@@ -107,11 +107,11 @@ Route::get('ciclos', function(){
     }
 
     while ($budget > 0) {
-       echo "PAGO #".$id_next;
-       echo "<br>";
-       $id_next = $id_next + 1;
-       $budget = $budget - 1;
-   }
+     echo "PAGO #".$id_next;
+     echo "<br>";
+     $id_next = $id_next + 1;
+     $budget = $budget - 1;
+ }
 });
 
 /*=====  End of Test Routes  ======*/
@@ -358,9 +358,9 @@ Route::get('account_pdf/{id}', function($id){
 });
 
 Route::get('account/{id}', function($id){
-   $credit = App\Models\Credit::find($id);
-   return view('credits.account')
-   ->with('credit',$credit);
+ $credit = App\Models\Credit::find($id);
+ return view('credits.account')
+ ->with('credit',$credit);
 
 });
 
@@ -508,11 +508,11 @@ Route::get('regions/{id}/delete', [
 ]);
 
 Route::get('usuarios',function(){
-   $now = \Carbon\Carbon::now()->toDateString();
-   $quincena= \Carbon\Carbon::now()->addDays(15);
-   echo "De: ".$now;
-   echo "<br>";
-   echo "hasta: ".$quincena;
+ $now = \Carbon\Carbon::now()->toDateString();
+ $quincena= \Carbon\Carbon::now()->addDays(15);
+ echo "De: ".$now;
+ echo "<br>";
+ echo "hasta: ".$quincena;
 });
 
 
@@ -589,26 +589,26 @@ Route::get('closes/{id}/delete', [
 Route::get('unlock', function(){
     //return "Hello, world!";
 
-        $date_now = \Carbon\Carbon::now()->toDateString();
+    $date_now = \Carbon\Carbon::now()->toDateString();
         //$hour_now = Carbon::now()->toTimeString();
-        $payments = App\Models\Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
+    $payments = App\Models\Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
 
-        foreach ($payments as $key => $value) {
+    foreach ($payments as $key => $value) {
             //echo "Estamos listos para bloquear";
-            $payment = App\Models\Payment::find($value->id);
+        $payment = App\Models\Payment::find($value->id);
             // $payment->status = 'Pendiente';
             // $payment->moratorium = 0;
-            $payment->total = $payment->total + 20;
+        $payment->total = $payment->total + 20;
             // $payment->balance = $payment->balance - 20;
-            $payment->save();
+        $payment->save();
 
             // $debt = $payment->debt;
             // $debt->ammount = $debt->ammount - 20;
             // $debt->save();         
-        }
+    }
 
-        Toastr::info('Se han anulado los pagos con mora del día de hoy.', 'INFO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-        return redirect()->back();
+    Toastr::info('Se han anulado los pagos con mora del día de hoy.', 'INFO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+    return redirect()->back();
 });
 
 Route::get('movements', function(){
@@ -642,3 +642,15 @@ Route::get('retreats/{id}/delete', [
     'as' => 'retreats.delete',
     'uses' => 'RetreatController@destroy',
 ]);
+
+Route::get('/transfer', function(){
+    //$users = App\User::all();
+    $collection = App\Role::all();
+    $role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+    $users = $role->users;
+    return view('partials.transfer')
+    ->with('users', $users);
+});
+
+Route::post('transferProcess', 'GeneralController@transferProcess');

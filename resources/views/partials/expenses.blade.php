@@ -21,7 +21,7 @@ Detalles
 				{!! Form::open(['url' => 'recordExpense','data-parsley-validate' => '',  'files' => 'true']) !!}  
 				<div class="form-group col-sm-6 col-lg-4">
 					{!! Form::label('ammount', 'Monto:') !!}
-					<input type="number" name="ammount" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
+					<input type="text" name="ammount" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
 					<input type="hidden"  name="user_id" value="{{ Auth::user()->id }}">
 				</div>
 				<div class="form-group col-sm-6 col-lg-4">

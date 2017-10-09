@@ -327,7 +327,7 @@ Detalles del Cliente
          <div class="item">
           <img src="{{ asset('/uploads/documents') }}/{!! $document->curp !!}"" alt="Second slide">
           <div class="carousel-caption">
-            <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/curpss') }}/{{$document->id}}"><strong>EDITAR CURP</strong></a></h1>
+            <h1 style="background-color: rgba(255,0,0,0.5);"><a href="{{ url('/curps') }}/{{$document->id}}"><strong>EDITAR CURP</strong></a></h1>
           </div>
         </div>
         <div class="item">

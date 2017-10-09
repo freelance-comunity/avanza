@@ -94,11 +94,17 @@ class RosterController extends AppBaseController
 		$input['coordinating_firm']   = $url_coordinating;
 		$input['employee_firm']   = $url_employee;
 		
-		$roster = Roster::create($input);
-
 
 		$user_collector = Auth::user();
 		$vault = $user_collector->vault;
+		if ($vault->ammount < $request->input('grandchild_pay')) {
+			Toastr::error('No cuentas con el dinero suficiente para pagar $'.number_format($request->input('grandchild_pay')).'.', 'SUELDOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
+		$roster = Roster::create($input);
+
+
 		$vault->ammount = $vault->ammount - $roster->grandchild_pay;
 		$vault->save();
 		Toastr::success('Sueldo Pagado', 'SUELDOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);

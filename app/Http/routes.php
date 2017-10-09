@@ -625,7 +625,11 @@ Route::get('rosters/{id}/delete', [
     'as' => 'rosters.delete',
     'uses' => 'RosterController@destroy',
 ]);
-
+Route::get('roster/{id}', function($id){
+    $roster = App\Models\Roster::find($id);
+    $pdf = PDF::loadView('rosters.roster', compact('roster'));
+    return $pdf->download('Nomina.pdf');
+});
 
 Route::resource('investments', 'InvestmentController');
 

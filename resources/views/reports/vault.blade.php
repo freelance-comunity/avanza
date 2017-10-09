@@ -33,14 +33,14 @@
     margin-bottom: 30px;
   }
 
-  #logo {
-    text-align: center;
-    margin-bottom: 10px;
-  }
+    #logo {
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-  #logo img {
-    width: 250px;
-  }
+    #logo img {
+      width: 250px;
+    }
 
   h1 {
     border-top: 1px solid  #5D6975;

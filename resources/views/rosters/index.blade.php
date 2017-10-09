@@ -34,6 +34,7 @@
                             <th>Percepciones</th>
                             <th>Deducciones</th>
                             <th>Neto a Pagar</th>
+                            <th>Descargar</th>
                         </thead>
                         <tbody>
 
@@ -49,7 +50,7 @@
                                 <td>${!! number_format($roster->perceptions,2) !!}</td>
                                 <td>${!! number_format($roster->deductions,2) !!}</td>
                                 <td>${!! number_format($roster->grandchild_pay,2) !!}</td>
-
+                                <td><a href="{{ url('roster') }}/{{ $roster->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Nomina"></i></a></td>
                             </tr>
                             @endforeach
                         </tbody>

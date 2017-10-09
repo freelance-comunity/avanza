@@ -124,9 +124,12 @@ class GeneralController extends Controller
 
 			return redirect()->back();
 		}
-		$user_collector = Auth::user();
+
+		$user_collector  = Auth::user();
 		$vault_collector = $user_collector->vault;
-		if ($vault_collector->ammount < $request->input('ammount')) {
+		$ammount_add     = $request->input('ammount');
+
+		if ($vault_collector->ammount < $ammount_add) {
 			Toastr::error('No cuentas con el dinero suficiente para otorgar $'.number_format($request->input('ammount')).' de saldo inicial.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 			return redirect()->back();
@@ -146,7 +149,7 @@ class GeneralController extends Controller
 			$vault->save();
 
 
-			$vault_collector->ammount = $vault_collector->ammount - $vault->ammount;
+			$vault_collector->ammount = $vault_collector->ammount - $ammount_add;
 			$vault_collector->save();
 
 			Toastr::success('Saldo inicial agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
@@ -162,15 +165,18 @@ class GeneralController extends Controller
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric'
 		]);
+
 		$user_collector = Auth::user();
 		$vault_collector = $user_collector->vault;
+		$ammount_add     = $request->input('ammount');
+
 		if ($validator->fails()) {
 			Toastr::error('Favor de introducir cantidad valida.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 			return redirect()->back();
 		}
 
-		elseif ($vault_collector->ammount < $request->input('ammount')) {
+		elseif ($vault_collector->ammount < $ammount_add) {
 			Toastr::error('No cuentas con el dinero suficiente para otorgar $'.number_format($request->input('ammount')).' de saldo inicial.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 			return redirect()->back();
@@ -188,7 +194,7 @@ class GeneralController extends Controller
 		$vault->ammount = $vault->ammount + $income->ammount;
 		$vault->save();
 
-		$vault_collector->ammount = $vault_collector->ammount - $request->input('ammount');
+		$vault_collector->ammount = $vault_collector->ammount - $ammount_add;
 		$vault_collector->save();
 
 
@@ -329,7 +335,10 @@ class GeneralController extends Controller
 		$receiver = User::find($request->input('receiver'));
 
 		$clients  = $transmitter->clients;
-
+		
+		// echo $transmitter->name;
+		// echo "<br>";
+		// echo $receiver->name;
 		$credits  = $transmitter->credits;
 
 		$payments = $transmitter->payments;

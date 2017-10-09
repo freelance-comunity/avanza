@@ -25,7 +25,7 @@ Detalles
 					<select name="transmitter" id="" class="form-control input-lg" required="">
 						<option value="" hidden>Selecciona promotor que transfiere</option>
 						@foreach ($users as $user)
-						<option>
+						<option value="{{ $user->id }}">
 							{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}
 						</option>
 						@endforeach
@@ -37,7 +37,7 @@ Detalles
 					<select name="receiver" id="" class="form-control input-lg" required="">
 						<option value="" hidden>Selecciona promotor a transferir</option>
 						@foreach ($users as $user)
-						<option>
+						<option value="{{ $user->id }}">
 							{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}
 						</option>
 						@endforeach

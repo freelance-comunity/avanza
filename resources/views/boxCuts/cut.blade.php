@@ -12,7 +12,7 @@
         <p>
           <div class="form-group col-sm-6 col-lg-12">
             {!! Form::label('amount', 'INGRESA LA CANTIDAD:') !!}
-            <input type="number" name="amount" class="form-control input-lg" required  placeholder="ESCRIBE MONTO"><br>
+            <input type="text" name="amount" class="form-control input-lg" required  placeholder="ESCRIBE MONTO"><br>
           </div>
           
           <input type="hidden"  name="user_id" value="{{ $user->id }}">

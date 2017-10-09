@@ -335,7 +335,10 @@ class GeneralController extends Controller
 		$receiver = User::find($request->input('receiver'));
 
 		$clients  = $transmitter->clients;
-
+		
+		// echo $transmitter->name;
+		// echo "<br>";
+		// echo $receiver->name;
 		$credits  = $transmitter->credits;
 
 		$payments = $transmitter->payments;

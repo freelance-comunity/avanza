@@ -658,3 +658,4 @@ Route::get('/transfer', function(){
 });
 
 Route::post('transferProcess', 'GeneralController@transferProcess');
+

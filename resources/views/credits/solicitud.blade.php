@@ -261,7 +261,6 @@
 					<td align="center">{{$credit->postal_code_aval}}</td>
 				</tr>
 			</table>
-		
 	@endif
 			
 			

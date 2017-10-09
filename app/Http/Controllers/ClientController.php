@@ -114,12 +114,16 @@ class ClientController extends AppBaseController
 		$curp_validate = $request->input('curp');
 		// Valitador
 		$validator = Validator::make($request->all(), [
-			'curp' => 'required|unique:clients,curp'
+			'curp' => 'required|unique:clients,curp',
+			'avatar' => 'required|image|mimes:jpeg,png,jpg',
+			'proof_of_addres' => 'required|image|mimes:jpeg,png,jpg',
+			'ine_document' => 'required|image|mimes:jpeg,png,jpg',
+			'curp_document' => 'required|image|mimes:jpeg,png,jpg',
 			//COJB820320MCSRRL00
 		]);
 
 		if ($validator->fails()) {
-			Toastr::error('La CURP: '.$curp_validate.' ya se encuentra registrada en la base de datos.', 'CLIENTES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			Toastr::error('La CURP: '.$curp_validate.' ya se encuentra registrada en la base de datos ó las imagenes no son validas.', 'CLIENTES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();
 		}
 		//End 

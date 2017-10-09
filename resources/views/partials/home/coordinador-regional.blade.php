@@ -24,7 +24,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 	@include('partials.modals-coordinador.total-clients-now')
 	@include('partials.modals-coordinador.total-credits')
 	@include('partials.modals-coordinador.total-credits-now')
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-green">
 			<div class="inner">
@@ -39,7 +39,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 		</div>
 	</div>
 	<!-- ./col -->
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-aqua">
 			<div class="inner">
@@ -54,7 +54,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 		</div>
 	</div>
 	<!-- ./col -->
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-yellow">
 			<div class="inner">
@@ -69,7 +69,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 		</div>
 	</div>
 	<!-- ./col -->
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-red">
 			<div class="inner">
@@ -84,7 +84,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 		</div>
 	</div>
 	<!-- ./col -->
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-purple">
 			<div class="inner">
@@ -99,7 +99,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 		</div>
 	</div>
 	<!-- ./col -->
-	<div class="col-lg-3 col-xs-6">
+	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-orange">
 			<div class="inner">
@@ -113,7 +113,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
 		</div>
 	</div>
-	<div class="col-lg-6 col-xs-6">
+	<div class="col-lg-3 col-md-4">
 		<!-- USERS LIST -->
 		<div class="box box-info">
 			<div class="box-header with-border">

@@ -214,7 +214,7 @@ class GeneralController extends Controller
 		else{
 			$validator = Validator::make($request->all(), [
 				'ammount' => 'required|numeric',
-				'voucher' => 'required'
+				'voucher' => 'required|image|mimes:jpeg,png,jpg',
 			]);
 
 			if ($validator->fails()) {
@@ -255,11 +255,12 @@ class GeneralController extends Controller
 	{	
 		
 		$validator = Validator::make($request->all(), [
-			'ammount' => 'required|numeric',	
+			'ammount' => 'required|numeric',
+			'voucher' => 'required|image|mimes:jpeg,png,jpg',
 		]);
 
 		if ($validator->fails()) {
-			Toastr::error('Favor de introducir cantidad valida.', 'CARTERA ACCESS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			Toastr::error('Favor de introducir cantidad valida ó la imagen correctamente.', 'CARTERA ACCESS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 			return redirect()->back();
 		}

@@ -17,18 +17,6 @@ class PhotoController extends Controller
 		$this->middleware('auth');
 	}
 	
-	// public function avatar(Request $request)
-	// {
-	// 	$id = $request->input('user_id');
-	// 	$user = Auth::user()->id();
-	// 	if($request->hasFile('avatar')){
-	// 		$avatar = $request->file('avatar');
-	// 		$filename = time() . '.' . $avatar->getClientOriginalExtension();
-	// 		Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
-	// 		$input['avatar'] = $filename;
-	// 	}
-	// }
-
 	public function update(Request $request)
 	{ 
 		$id = $request->input('client_id');

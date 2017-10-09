@@ -465,11 +465,11 @@ Route::get('curps/{id}', function($id) {
     return view('clientdocuments.curps')
     ->with('document', $document);
 });
-Route::post('updatephoto', 'Photocontroller@update');
-Route::post('ine', 'Photocontroller@ine');
-Route::post('curps', 'Photocontroller@curps');
-Route::post('updatephotos', 'Photocontroller@cfe');
-Route::post('avatar','Photocontroller@avatar');
+Route::post('updatephoto', 'PhotoController@update');
+Route::post('ine', 'PhotoController@ine');
+Route::post('curps', 'PhotoController@curps');
+Route::post('updatephotos', 'PhotoController@cfe');
+Route::post('avatar','PhotoController@avatar');
 
 
 Route::get('ajax', function(){

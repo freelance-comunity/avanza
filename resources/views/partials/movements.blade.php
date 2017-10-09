@@ -138,6 +138,8 @@ Detalles
 									<th>Usuario</th>
 									<th>Monto</th>
 									<th>Concepto</th>
+									<th>Cliente</th>
+									<th>Folio crédito</th>
 									<th>Fecha/Hora asignación</th>
 								</thead>
 								<tbody>
@@ -147,6 +149,8 @@ Detalles
 										<td>{{ $recovery->vault->user['name'] }} {{ $recovery->vault->user['father_last_name'] }} {{ $recovery->vault->user['mother_last_name'] }}</td>
 										<td>${{ number_format($recovery->ammount) }}</td>
 										<td>{{ $recovery->concept }}</td>
+										<td>{{ $recovery->debt->credit['firts_name'] }} {{ $recovery->debt->credit['last_name'] }} {{ $recovery->debt->credit['mothers_last_name'] }}</td>
+										<td>{{ $recovery->debt->credit['folio'] }}</td>
 										<td>{{ $recovery->created_at }}</td>
 									</tr>
 									@endforeach
@@ -196,6 +200,8 @@ Detalles
 									<th>Usuario</th>
 									<th>Monto</th>
 									<th>Concepto</th>
+									<th>Cliente</th>
+									<th>Folio crédito</th>
 									<th>Fecha/Hora asignación</th>
 								</thead>
 								<tbody>
@@ -205,6 +211,8 @@ Detalles
 										<td>{{ $credit->vault->user['name'] }} {{ $credit->vault->user['father_last_name'] }} {{ $credit->vault->user['mother_last_name'] }}</td>
 										<td>${{ number_format($credit->ammount) }}</td>
 										<td>{{ $credit->concept }}</td>
+										<td>{{ $credit->credit['firts_name'] }} {{ $credit->credit['last_name'] }} {{ $credit->credit['mothers_last_name'] }}</td>
+										<td>{{ $credit->credit['folio'] }}</td>
 										<td>{{ $credit->created_at }}</td>
 									</tr>
 									@endforeach

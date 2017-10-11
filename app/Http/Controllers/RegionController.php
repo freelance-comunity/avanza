@@ -170,4 +170,37 @@ class RegionController extends AppBaseController
 
 		return redirect(route('regions.index'));
 	}
+	public function transferRegion(Request $request)
+	{
+		$transmitter = User::find($request->input('transmitter'));
+
+		$receiver = User::find($request->input('receiver'));
+
+		$clients  = $transmitter->clients;
+		
+		// echo $transmitter->name;
+		// echo "<br>";
+		// echo $receiver->name;
+		$credits  = $transmitter->credits;
+
+		$payments = $transmitter->payments;
+	
+		foreach ($clients as $client) {
+			$client->user_id = $receiver->id;
+			$client->save();
+		}
+
+		foreach ($credits as $credit) {
+			$credit->user_id = $receiver->id;
+			$credit->save();
+		}
+
+		foreach ($payments as $payment) {
+			$payment->user_id = $receiver->id;
+			$payment->save();
+		}
+
+		Toastr::success('Se ha realizado la transferencia de cartera exitosamente.', 'TRANSFERENCIA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		return redirect()->back();
+	}
 }

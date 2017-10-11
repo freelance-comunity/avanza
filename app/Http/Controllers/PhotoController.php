@@ -39,6 +39,7 @@ class PhotoController extends Controller
 	{ 
 		$id = $request->input('document_id');
 		$document = Clientdocuments::find($id);
+		$client = $document->client;
 		if ($request->hasFile('ine')) {
 			$ine = $request->file('ine');
 			$filename = time() . '.' . $ine->getClientOriginalExtension();
@@ -46,8 +47,8 @@ class PhotoController extends Controller
 			$document->ine = $filename;
 			$document->save();
 		}
-		return view('clientdocuments.ine')
-		->with('document', $document);
+		return view('clients.show')
+		->with('client', $client);
 	}
 
 	public function curps(Request $request)
@@ -61,9 +62,8 @@ class PhotoController extends Controller
 			$document->curp = $filename;
 			$document->save();
 		}
-		return view('clientdocuments.curps')
-		->with('document', $document);
-	}
+		return view('clients.show')
+		->with('client', $client);	}
 
 	public function cfe(Request $request)
 	{ 
@@ -76,7 +76,7 @@ class PhotoController extends Controller
 			$document->proof_of_addres = $filename;
 			$document->save();
 		}
-		return view('clientdocuments.uploads')
-		->with('document', $document);
+		return view('clients.show')
+		->with('client', $client);
 	}
 }

@@ -116,9 +116,6 @@ class ClientController extends AppBaseController
 		$validator = Validator::make($request->all(), [
 			'curp' => 'required|unique:clients,curp',
 			'avatar' => 'required|image|mimes:jpeg,png,jpg',
-			'proof_of_addres' => 'required|image|mimes:jpeg,png,jpg',
-			'ine_document' => 'required|image|mimes:jpeg,png,jpg',
-			'curp_document' => 'required|image|mimes:jpeg,png,jpg',
 			//COJB820320MCSRRL00
 		]);
 

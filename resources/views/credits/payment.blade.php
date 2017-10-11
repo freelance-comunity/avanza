@@ -9,42 +9,43 @@
       </div>
       <div class="modal-body">
 
-      {!! Form::open(['url' => 'process','data-parsley-validate' => '','onsubmit'=>'return enviado()']) !!}  
+        {!! Form::open(['url' => 'process','data-parsley-validate' => '','onsubmit'=>'return enviado()']) !!}  
         <p>
           {!! Form::label('payment', 'Monto:') !!}
-            <input type="number" name="payment" id=" payment example" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
-            <input type="hidden"  name="payment_id" value="{{ $payment->id }}">
-          </p>
-          <p>
-            {!! Form::submit('PAGAR', ['class' => 'btn btn-lg btn-block btn-success', 'id'=>'cl']) !!}
-          </p>
-          {!! Form::close() !!}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-
+          <input type="number" name="payment" id=" payment example" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
+          <input type="hidden"  name="payment_id" value="{{ $payment->id }}">
+        </p>
+        <p>
+          {!! Form::submit('PAGAR', ['class' => 'btn btn-lg btn-block btn-success', 'id'=>'cl']) !!}
+        </p>
+        {!! Form::close() !!}
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+
     </div>
   </div>
-  <script>
-    function numeros(e){
-      key = e.keyCode || e.which;
-      tecla = String.fromCharCode(key).toLowerCase();
-      letras = " 0123456789";
-      especiales = [8,37,39,46];
+</div>
 
-      tecla_especial = false
-      for(var i in especiales){
-       if(key == especiales[i]){
-         tecla_especial = true;
-         break;
-       } 
-     }
+<script>
+  function numeros(e){
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " 0123456789";
+    especiales = [8,37,39,46];
 
-     if(letras.indexOf(tecla)==-1 && !tecla_especial)
-      return false;
-  }
+    tecla_especial = false
+    for(var i in especiales){
+     if(key == especiales[i]){
+       tecla_especial = true;
+       break;
+     } 
+   }
+
+   if(letras.indexOf(tecla)==-1 && !tecla_especial)
+    return false;
+}
 </script>
 <script>
   $(document).ready(function(){

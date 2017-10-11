@@ -21,7 +21,7 @@ Lista de regiones
         <div class="well text-center">Ho hay regiones registradas.</div>
         @else
         <table class="table" id="regions">
-            <thead class="thead-inverse">
+            <thead class="bg-primary">
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Area abarcada</th>

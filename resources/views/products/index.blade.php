@@ -22,7 +22,7 @@ Lista de productos
         @else
         <div class="table-responsive">
             <table class="table"  id="example">
-                <thead class="thead-inverse">
+                <thead class="bg-primary">
                     <th>Codigo </th>
                     <th>Nombre</th>
                     <th>Interés</th>

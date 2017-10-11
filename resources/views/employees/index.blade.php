@@ -30,7 +30,7 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
         @else
         <div class="table-responsive">
             <table class="table" id="example">
-                <thead class="thead-inverse">
+                <thead class="bg-primary">
                     <th>Nombre</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>

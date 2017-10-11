@@ -19,7 +19,7 @@ Lista de créditos
 		@else
 		<div class="table-responsive">
 			<table class="table table-hover table-striped"  id="example">
-				<thead class="thead-inverse">
+				<thead class="bg-primary">
 					<th>No.</th>
 					<th>Folio</th>
 					<th>Cliente</th>

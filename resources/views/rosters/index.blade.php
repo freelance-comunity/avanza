@@ -23,7 +23,7 @@
                 @else
                 <div class="table-responsive">
                     <table class="table" id="example">
-                        <thead class="thead-inverse">
+                        <thead class="bg-primary">
                             <th>Fecha</th>
                             <th>Nombre Coordonador</th>
                             <th>Coordinación</th>

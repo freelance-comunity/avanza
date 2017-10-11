@@ -20,14 +20,14 @@ $payments = Auth::user()->payments;
     @else
     <div class="table-responsive">
         <table class="table" id="pagos_promotor">
-            <thead class="thead-inverse">
+            <thead class="bg-default">
                 <th style="width: 15px;">No. Cuota</th>
                 <th>Total</th>      
                 <th>Cliente</th>   
                 <th>Crédito</th>   
-                <th>Horario de cobro</th>   
-                <th>Estatus</th>
-                <th width="50px;">Acción</th>
+               {{--  <th>Horario de cobro</th>   
+                <th>Estatus</th> --}}
+                <th {{-- width="50px;" --}}>Acción</th>
             </thead>
             <tbody>
                 @foreach($payments as $payment)
@@ -36,62 +36,62 @@ $payments = Auth::user()->payments;
                 $credit = $debt->credit;
                 @endphp
                 @if ($payment->status === 'Vencido')
-                <tr class="danger">
+                <tr {{-- class="bg-danger" --}}>
                     <td>{{ $payment->number }} de {{ $credit->dues }}</td>
                     <td>$ {{ number_format($payment->balance, 2) }}</td>
                     <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
                     </td>
                     <td>{{ $credit->folio }}</td>
-                    <td>{{ $credit->collection_period }}</td>
+                    {{-- <td>{{ $credit->collection_period }}</td>
                     <td>
                         @if ($payment->status == 'Vencido')
                         <p style="color:red;">{{$payment->status}}</p>
                         @else
                         <p style="color:gray;">{{$payment->status}}</p>
                         @endif
-                    </td>
+                    </td> --}}
                     <td>
-                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-success btn-lg btn-block">PAGAR</a>
+                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-primary btn-lg btn-block">PAGAR</a>
                     </td>
                 </tr>
                 @endif
                 @if ($payment->status === 'Parcial')
-                <tr class="info">
+                <tr {{-- class="bg-info" --}}>
                     <td>{{ $payment->number }} de {{ $credit->dues }}</td>
                     <td>$ {{ number_format($payment->balance, 2) }}</td>
                     <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
                     </td>
                     <td>{{ $credit->folio }}</td>
-                    <td>{{ $credit->collection_period }}</td>
+                    {{-- <td>{{ $credit->collection_period }}</td>
                     <td>
                         @if ($payment->status == 'Vencido')
                         <p style="color:red;">{{$payment->status}}</p>
                         @else
                         <p style="color:gray;">{{$payment->status}}</p>
                         @endif
-                    </td>
+                    </td> --}}
                     <td>
-                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-success btn-lg btn-block">PAGAR</a>
+                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-primary btn-lg btn-block">PAGAR</a>
                     </td>
                 </tr>
                 @endif
-                @if ($payment->date == $date_now AND $payment->status === 'Pendiente')
-                <tr class="success">
+                @if ($payment->date <= $date_now AND $payment->status === 'Pendiente')
+                <tr {{-- class="bg-success" --}}>
                     <td>{{ $payment->number }} de {{ $credit->dues }}</td>
                     <td>$ {{ number_format($payment->balance, 2) }}</td>
                     <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
                     </td>
                     <td>{{ $credit->folio }}</td>
-                    <td>{{ $credit->collection_period }}</td>
+                    {{-- <td>{{ $credit->collection_period }}</td>
                     <td>
                         @if ($payment->status == 'Vencido')
                         <p style="color:red;">{{$payment->status}}</p>
                         @else
                         <p style="color:gray;">{{$payment->status}}</p>
                         @endif
-                    </td>
+                    </td> --}}
                     <td>
-                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-success btn-lg btn-block">PAGAR</a>
+                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-primary btn-lg btn-block">PAGAR</a>
                     </td>
                 </tr>
                 @endif
@@ -102,16 +102,16 @@ $payments = Auth::user()->payments;
                     <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
                     </td>
                     <td>{{ $credit->folio }}</td>
-                    <td>{{ $credit->collection_period }}</td>
+                    {{-- <td>{{ $credit->collection_period }}</td>
                     <td>
                         @if ($payment->status == 'Vencido')
                         <p style="color:red;">{{$payment->status}}</p>
                         @else
                         <p style="color:gray;">{{$payment->status}}</p>
                         @endif
-                    </td>
+                    </td> --}}
                     <td>
-                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-success btn-lg btn-block">PAGAR</a>
+                        <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-primary btn-lg btn-block">PAGAR</a>
                     </td>
                 </tr>
                 @endif
@@ -122,3 +122,36 @@ $payments = Auth::user()->payments;
     @endif
 </div>
 
+{{-- <div class="row">
+    <div class="table-responsive">
+        <table class="table" id="pagos_promotor">
+            <thead>
+                <th>
+                    VISITAS
+                </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                     <div class="col-lg-12 col-xs-12">
+                        <!-- small box -->
+                        <div class="small-box bg-teal">
+                          <div class="inner">
+                            <h3>MXN 450.00</h3>
+                            <p>JOSÉ PEREZ</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">PAGAR <i class="fa fa-file-pdf-o"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+
+ --}}

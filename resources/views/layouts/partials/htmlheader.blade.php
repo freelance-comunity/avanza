@@ -2,10 +2,13 @@
   <meta charset="UTF-8">
   <title>CREDIEFECTIVO</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="icon" href="{{ asset('/img/icon.png') }}" type="image/x-icon" />
 
   <!-- Bootstrap 3.3.4 -->
-  <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+  {{-- <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" type="text/css" /> --}}
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome Icons -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <!-- Ionicons -->
@@ -13,7 +16,7 @@
   <!-- Theme style -->
   <link href="{{ asset('/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
   {{-- CSS Modal --}}
-  <link rel="stylesheet" href="{{ asset('/css/modal.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('/css/modal.css') }}"> --}}
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.

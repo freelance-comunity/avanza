@@ -1,5 +1,5 @@
 	<table class="table" id="pagoss">
-		<thead class="thead-inverse">
+		<thead class="bg-primary">
 			<th style="width: 15px;">No. Cuota</th>
 			<th>Fecha</th>
 			<th>Total</th>
@@ -30,7 +30,7 @@
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
 				<td>${{ number_format($payment->balance, 2) }}</td>
-				<td><p style="color:gray;">{{$payment->status}}</p></td>
+				<td><p>{{$payment->status}}</p></td>
 			</tr>
 			@elseif($debt->credit->periodicity == "CREDISEMANA" && $payment->status == "Parcial")
 			<tr class="warning">
@@ -40,8 +40,8 @@
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
-				<td style="color: blue;">${{ number_format($payment->balance, 2) }}</td>
-				<td><p style="color:blue;">{{$payment->status}}</p></td>
+				<td>${{ number_format($payment->balance, 2) }}</td>
+				<td><p>{{$payment->status}}</p></td>
 			</tr>
 			@elseif($payment->status == "Parcial")
 			<tr class="warning">
@@ -51,8 +51,8 @@
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
-				<td style="color: blue;">${{ number_format($payment->balance, 2) }}</td>
-				<td><p style="color:blue;">{{$payment->status}}</p></td>
+				<td>${{ number_format($payment->balance, 2) }}</td>
+				<td><p>{{$payment->status}}</p></td>
 			</tr>
 			@elseif($payment->status == "Vencido")
 			<tr class="danger">
@@ -62,8 +62,8 @@
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
-				<td style="color: red;">${{ number_format($payment->balance, 2) }}</td>
-				<td><p style="color:red;">{{$payment->status}}</p></td>
+				<td>${{ number_format($payment->balance, 2) }}</td>
+				<td><p>{{$payment->status}}</p></td>
 			</tr>
 			@elseif($payment->status == "Pagado")
 			<tr class="success">
@@ -74,7 +74,7 @@
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
 				<td>${{ number_format($payment->balance, 2) }}</td>
-				<td><p style="color:green;">{{$payment->status}}</p></td>
+				<td><p>{{$payment->status}}</p></td>
 			</tr>
 			@endif
 			@endforeach

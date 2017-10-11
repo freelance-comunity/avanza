@@ -1,12 +1,22 @@
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- Bootstrap 3.3.2 JS -->
-<script src="{{ asset('/js/bootstrap.min.js') }}" type="text/javascript"></script>
+{{-- <script src="{{ asset('/js/bootstrap.min.js') }}" type="text/javascript"></script> --}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('/js/app.min.js') }}" type="text/javascript"></script>
 {{-- Parsley JS --}}
 <script src="{{ asset('/js/parsley.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/es.js') }}" type="text/javascript"></script>
+
+{{-- Setup Token mismatch --}}
+<script type="text/javascript">
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+</script>
 
 {{-- Datatables --}}
 <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" type="text/javascript"></script>

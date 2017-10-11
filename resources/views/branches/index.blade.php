@@ -35,7 +35,7 @@ $branches = App\Models\Branch::where('id', Auth::user()->branch_id)->get();
         @else
         <div class="table-responsive">
             <table class="table"  id="example">
-            <thead class="thead-inverse">
+            <thead class="bg-primary">
                     <th>Nombre</th>
                     <th>Teléfono</th>
                     <th>Dirección</th>

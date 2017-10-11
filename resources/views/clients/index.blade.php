@@ -37,7 +37,7 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
 
   <div class="table-responsive">
     <table class="table"  id="example">
-      <thead class="thead-inverse">
+      <thead class="bg-primary">
         <th>Folio</th>
         <th>Nombre</th>
         <th>Apellido Paterno</th>

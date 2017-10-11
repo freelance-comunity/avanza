@@ -21,7 +21,7 @@ Lista de roles
         @else
         <div class="table-responsive">
             <table class="table"  id="example">
-                <thead class="thead-inverse">
+                <thead class="bg-primary">
                     <th>Nombre Rol</th>
                     <th>Descripción Rol</th>
                     <th width="150px">Acción</th>

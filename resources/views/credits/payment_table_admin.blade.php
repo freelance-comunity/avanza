@@ -1,5 +1,5 @@
 	<table class="table" id="pagoss">
-		<thead class="thead-inverse">
+		<thead class="bg-primary">
 			<th style="width: 15px;">No. Cuota</th>
 			<th>Día</th>
 			<th>Fecha</th>

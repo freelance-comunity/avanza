@@ -40,7 +40,9 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                     <th>Teléfono 2</th>
                     <th>Foto</th>
                     <th width="50px">Acción</th>
+                     @if (Auth::user()->can('agregar-roles'))
                     <th width="50px">Roles</th>
+                    @endif
                 </thead>
                 <tbody>
 
@@ -64,12 +66,14 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                             <a data-toggle="tooltip" title="Ver"><i class="fa fa-eye fa-2x" data-toggle="modal" data-target="#detail{{ $employee->id }}"></i></a>
                             <a data-toggle="tooltip" title="Eliminar" href="{!! route('employees.delete', [$employee->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar este empleado?')"><i class="fa fa-trash fa-2x"></i></a>
                         </td>
+                         @if (Auth::user()->can('agregar-roles'))
                         <td>
                             <div class="btn-group" data-toggle="buttons">
                             <button type="button" class="btn btn-lg bg-navy btn-block btn-md" data-toggle="modal" data-target="#roles{{$employee->id}}">Ver</button>
                                 <button type="button" class="btn btn-lg bg-teal btn-block btn-md" data-toggle="modal" data-target="#rolesadd{{$employee->id}}">Agregar</button>
                             </div>
                         </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

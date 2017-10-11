@@ -18,7 +18,7 @@ Actualizar foto
             <input type="hidden" value="{{$document->id}}" name="document_id">
             <br>
             <input type="submit" value="Actualizar" class="uppercase btn btn-primary">
-            <a href="{!! route('clients.show', [$document->id]) !!}" class="btn bg-navy">Ver perfil</a>
+           {{--  <a href="{!! route('clients.show', [$document->id]) !!}" class="btn bg-navy">Ver perfil</a> --}}
           </form>
         </div>
       </div>

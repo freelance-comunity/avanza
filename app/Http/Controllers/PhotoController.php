@@ -17,18 +17,6 @@ class PhotoController extends Controller
 		$this->middleware('auth');
 	}
 	
-	// public function avatar(Request $request)
-	// {
-	// 	$id = $request->input('user_id');
-	// 	$user = Auth::user()->id();
-	// 	if($request->hasFile('avatar')){
-	// 		$avatar = $request->file('avatar');
-	// 		$filename = time() . '.' . $avatar->getClientOriginalExtension();
-	// 		Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
-	// 		$input['avatar'] = $filename;
-	// 	}
-	// }
-
 	public function update(Request $request)
 	{ 
 		$id = $request->input('client_id');
@@ -51,6 +39,7 @@ class PhotoController extends Controller
 	{ 
 		$id = $request->input('document_id');
 		$document = Clientdocuments::find($id);
+		$client = $document->client;
 		if ($request->hasFile('ine')) {
 			$ine = $request->file('ine');
 			$filename = time() . '.' . $ine->getClientOriginalExtension();
@@ -58,8 +47,8 @@ class PhotoController extends Controller
 			$document->ine = $filename;
 			$document->save();
 		}
-		return view('clientdocuments.ine')
-		->with('document', $document);
+		return view('clients.show')
+		->with('client', $client);
 	}
 
 	public function curps(Request $request)
@@ -73,9 +62,8 @@ class PhotoController extends Controller
 			$document->curp = $filename;
 			$document->save();
 		}
-		return view('clientdocuments.curps')
-		->with('document', $document);
-	}
+		return view('clients.show')
+		->with('client', $client);	}
 
 	public function cfe(Request $request)
 	{ 
@@ -88,7 +76,7 @@ class PhotoController extends Controller
 			$document->proof_of_addres = $filename;
 			$document->save();
 		}
-		return view('clientdocuments.uploads')
-		->with('document', $document);
+		return view('clients.show')
+		->with('client', $client);
 	}
 }

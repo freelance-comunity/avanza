@@ -130,9 +130,9 @@ Detalles
 						<button type="button" class="btn btn-lg bg-orange btn-block" data-toggle="modal" data-target="#myModal">Renovar Crédito</button></td>
 						@elseif ($credit->periodicity == 'CREDIDIARIO4' && $pay >= 2 && $debt->status == 'Pendiente')
 						<button type="button" class="btn btn-lg bg-orange btn-block" data-toggle="modal" data-target="#myModal">Renovar Crédito</button></td>
-						@elseif ($credit->periodicity == 'DIARIO' && $credit->dues == '25' && $pay >= 20 && $debt->status == 'Pendiente'  && $countlocked == 0)
+						@elseif ($credit->periodicity == 'DIARIO' && $credit->dues == '25' && $pay >= 20 && $debt->status == 'Pendiente'  && $countlocked == 3)
 						<button type="button" class="btn btn-lg bg-orange btn-block" data-toggle="modal" data-target="#myModal">Renovar Crédito</button></td>
-						@elseif ($credit->periodicity == 'DIARIO' && $credit->dues == '30' && $pay >= 20 && $debt->status == 'Pendiente'  && $countlocked == 0)
+						@elseif ($credit->periodicity == 'DIARIO' && $credit->dues == '30' && $pay >= 20 && $debt->status == 'Pendiente'  && $countlocked == 3)
 						<button type="button" class="btn btn-lg bg-orange btn-block" data-toggle="modal" data-target="#myModal">Renovar Crédito</button></td>
 						@elseif ($credit->periodicity == 'DIARIO' && $credit->dues == '52'  && $pay >= 40 && $debt->status == 'Pendiente'  && $countlocked == 0)
 						<button type="button" class="btn btn-lg bg-orange btn-block" data-toggle="modal" data-target="#myModal">Renovar Crédito</button></td>

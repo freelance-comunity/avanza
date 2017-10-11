@@ -18,13 +18,13 @@
 				<td>{{$payment->date->format('d F Y')}}</td>
 				<td> 
 					@if ($payment->date == $date_now)
-					<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
+					<button type="button" class="btn btn-success btn-lg"  data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
 					</button>
 					@else
 					<button type="button" class="btn bg-yellow btn-lg" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
 					</button>
 					@endif
-					
+	
 				</td>
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
@@ -80,3 +80,6 @@
 			@endforeach
 		</tbody>
 	</table>
+	<script>
+		
+	</script>

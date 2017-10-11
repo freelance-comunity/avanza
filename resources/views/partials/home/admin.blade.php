@@ -26,95 +26,96 @@ $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
 } 
 </style> --}}
 <div class="row">
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-aqua">
-      <div class="inner">
-        <h3>${{ number_format($vault->sum('ammount'),2) }}</h3>
-        <p>Total Bovéda</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-bank"></i>
-      </div>
-      <a href="{{ url('/report-vault') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+<div class="col-lg-3 col-md-4">
+  <!-- small box -->
+  <div class="small-box bg-aqua">
+    <div class="inner">
+      <h3>${{ number_format($vault->sum('ammount'),2) }}</h3>
+      <p>Total Bovéda</p>
     </div>
+    <div class="icon">
+      <i class="fa fa-bank"></i>
+    </div>
+    <a href="{{ url('/report-vault') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
   </div>
-  <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-green">
-      <div class="inner">
-        <h3>{{ $clients->count() }}</h3>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-md-4">
+  <!-- small box -->
+  <div class="small-box bg-green">
+    <div class="inner">
+      <h3>{{ $clients->count() }}</h3>
 
-        <p>Total Clientes</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-users"></i>
-      </div>
-      <a href="{{ url('/report-clients') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+      <p>Total Clientes</p>
     </div>
+    <div class="icon">
+      <i class="fa fa-users"></i>
+    </div>
+    <a href="{{ url('/report-clients') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
   </div>
-  <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-yellow">
-      <div class="inner">
-        <h3>{{ $credits->count() }}</h3>
+</div>
 
-        <p>Total Créditos</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-paperclip"></i>
-      </div>
-      <a href="{{ url('/report-credits') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
-    </div>
-  </div>
-  <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-red">
-      <div class="inner">
-        <h3>${{ number_format($credits->sum('ammount'),2) }}</h3>
+<!-- ./col -->
+<div class="col-lg-3 col-md-4">
+  <!-- small box -->
+  <div class="small-box bg-yellow">
+    <div class="inner">
+      <h3>{{ $credits->count() }}</h3>
 
-        <p>Total Ministrado</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-money"></i>
-      </div>
-      <a href="{{ url('/report-credits') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+      <p>Total Créditos</p>
     </div>
+    <div class="icon">
+      <i class="fa fa-paperclip"></i>
+    </div>
+    <a href="{{ url('/report-credits') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
   </div>
-  <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-purple">
-      <div class="inner">
-        <h3>${{ number_format($expenditures->sum('ammount'),2) }}</h3>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-md-4">
+  <!-- small box -->
+  <div class="small-box bg-red">
+    <div class="inner">
+      <h3>${{ number_format($credits->sum('ammount'),2) }}</h3>
 
-        <p>Total Gastos</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-shopping-cart"></i>
-      </div>
-      <a href="{{ url('/report-expenditures') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+      <p>Total Ministrado</p>
     </div>
+    <div class="icon">
+      <i class="fa fa-money"></i>
+    </div>
+    <a href="{{ url('/report-credits') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
   </div>
-  <!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-orange">
-      <div class="inner">
-        <h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-md-4">
+  <!-- small box -->
+  <div class="small-box bg-purple">
+    <div class="inner">
+      <h3>${{ number_format($expenditures->sum('ammount'),2) }}</h3>
 
-        <p>Total Recuperado del día</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-line-chart"></i>
-      </div>
-      <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+      <p>Total Gastos</p>
     </div>
+    <div class="icon">
+      <i class="fa fa-shopping-cart"></i>
+    </div>
+    <a href="{{ url('/report-expenditures') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
   </div>
-  <!-- ./col -->
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-md-4">
+  <!-- small box -->
+  <div class="small-box bg-orange">
+    <div class="inner">
+      <h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+
+      <p>Total Recuperado del día</p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-line-chart"></i>
+    </div>
+    <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+  </div>
+</div>
+<!-- ./col -->
   {{-- <div class="col-lg-3 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-navy">
@@ -146,6 +147,7 @@ $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
   </div> --}}
 </div>
 <!-- /.row -->
+
 <div class="row">
   <div class="col-md-6">
     <!-- USERS LIST -->

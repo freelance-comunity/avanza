@@ -286,11 +286,16 @@
           $('#pagos_promotor').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-            },
-            dom: 'Bfrtip',
-            buttons: [
-            'excel', 'pdf', 'print',
-            ]
+            }
+          } );
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#pagos_promotor2').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            }
           } );
         });
       </script>

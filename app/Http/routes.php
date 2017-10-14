@@ -46,12 +46,12 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
-   $payment = App\Models\Payment::find(2242);
-   $debt = $payment->debt;
-   echo $debt->ammount;
-   $credit = $debt->credit;
+ $payment = App\Models\Payment::find(2242);
+ $debt = $payment->debt;
+ echo $debt->ammount;
+ $credit = $debt->credit;
 
-   echo $credit->ammount;
+ echo $credit->ammount;
 });
 
 Route::post('process', 'PaymentController@process');
@@ -107,13 +107,12 @@ Route::get('ciclos', function(){
     }
 
     while ($budget > 0) {
-       echo "PAGO #".$id_next;
-       echo "<br>";
-       $id_next = $id_next + 1;
-       $budget = $budget - 1;
-   }
+     echo "PAGO #".$id_next;
+     echo "<br>";
+     $id_next = $id_next + 1;
+     $budget = $budget - 1;
+ }
 });
-
 /*=====  End of Test Routes  ======*/
 
 
@@ -361,9 +360,9 @@ Route::get('account_pdf/{id}', function($id){
 });
 
 Route::get('account/{id}', function($id){
-   $credit = App\Models\Credit::find($id);
-   return view('credits.account')
-   ->with('credit',$credit);
+ $credit = App\Models\Credit::find($id);
+ return view('credits.account')
+ ->with('credit',$credit);
 
 });
 
@@ -511,11 +510,11 @@ Route::get('regions/{id}/delete', [
 ]);
 
 Route::get('usuarios',function(){
-   $now = \Carbon\Carbon::now()->toDateString();
-   $quincena= \Carbon\Carbon::now()->addDays(15);
-   echo "De: ".$now;
-   echo "<br>";
-   echo "hasta: ".$quincena;
+ $now = \Carbon\Carbon::now()->toDateString();
+ $quincena= \Carbon\Carbon::now()->addDays(15);
+ echo "De: ".$now;
+ echo "<br>";
+ echo "hasta: ".$quincena;
 });
 
 
@@ -664,30 +663,30 @@ Route::get('transferClients', function(){
     $branch = App\Models\Branch::find(4);
     $clients = $branch->clients;
     foreach ($clients as $key => $value) {
-       $value->region_id = 4;
-       $value->save();
-   }
-   $branch = App\Models\Branch::find(9);
-   $clients = $branch->clients;
-    foreach ($clients as $key => $value) {
-       $value->region_id = 4;
-       $value->save();
-   }
+     $value->region_id = 4;
+     $value->save();
+ }
+ $branch = App\Models\Branch::find(9);
+ $clients = $branch->clients;
+ foreach ($clients as $key => $value) {
+     $value->region_id = 4;
+     $value->save();
+ }
 });
 
 Route::get('transferCredits', function(){
     $branch = App\Models\Branch::find(4);
     $credits = $branch->credits;
     foreach ($credits as $key => $value) {
-       $value->region_id = 4;
-       $value->save();
-   }
-   $branch = App\Models\Branch::find(9);
-   $credits = $branch->credits;
-    foreach ($credits as $key => $value) {
-       $value->region_id = 4;
-       $value->save();
-   }
+     $value->region_id = 4;
+     $value->save();
+ }
+ $branch = App\Models\Branch::find(9);
+ $credits = $branch->credits;
+ foreach ($credits as $key => $value) {
+     $value->region_id = 4;
+     $value->save();
+ }
 });
 Route::post('transferProcess', 'GeneralController@transferProcess');
 

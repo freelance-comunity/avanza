@@ -1,6 +1,22 @@
+@php
+$date_now = Carbon\Carbon::today();
+$payments = Auth::user()->payments;
+$count_credits = 0;
+foreach ($payments as $element) {
+    if ($element->date == $date_now AND $element->status === 'Pendiente') {
+        $count_credits = $count_credits + 1;
+    }
+    if ($element->status === 'Vencido') {
+        $count_credits = $count_credits + 1;
+    }
+    if ($element->status === 'Parcial') {
+        $count_credits = $count_credits + 1;
+    }
+}
+@endphp
 <div class="row">
     <div class="col-md-4">
-        <div class="alert alert-success alert-dismissible">
+        <div class="alert bg-success alert-dismissible">
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-map-marker"></i>
@@ -9,11 +25,28 @@
             RUTA DE COBRO
         </div>
     </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <th>Ruta del día</th>
+                <th>Cobrados</th>
+                <th>Tu avance</th>
+            </thead>
+            <tbody>
+                <tr class="bg-primary">
+                    <td>{{ $count_credits }} créditos</td>
+                   <td>60 créditos</td>
+                   <td>58%</td>
+               </tr>
+               <tr class="bg-warning">
+                   <td>89 clientes</td>
+                   <td>59 clientes</td>
+                   <td>66%</td>
+               </tr>
+           </tbody>
+       </table>
+   </div>
 </div>
-@php
-$date_now = Carbon\Carbon::today();
-$payments = Auth::user()->payments;
-@endphp
 <div class="row">
     @if($payments->isEmpty())
     <div class="well text-center">No se encontraron pagos para este día.</div>
@@ -75,7 +108,7 @@ $payments = Auth::user()->payments;
                     </td>
                 </tr>
                 @endif
-                @if ($payment->date <= $date_now AND $payment->status === 'Pendiente')
+                @if ($payment->date == $date_now AND $payment->status === 'Pendiente')
                 <tr {{-- class="bg-success" --}}>
                     <td>{{ $payment->number }} de {{ $credit->dues }}</td>
                     <td>$ {{ number_format($payment->balance, 2) }}</td>

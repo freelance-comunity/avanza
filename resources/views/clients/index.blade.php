@@ -36,63 +36,67 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
   @else
 
   <div class="table-responsive">
+    @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
     <table class="table"  id="example">
-      <thead class="bg-primary">
-        <th>Folio</th>
-        <th>Nombre</th>
-        <th>Apellido Paterno</th>
-        <th>Apellido Materno</th>
-        <th>Sucursal</th>
-        <th>Teléfono</th>
-        @if (Auth::user()->can('crear-credito'))
-        <th width="50px">Crédito</th>
-        @endif 
-        <th>Acción</th>
-      </thead>
-      <tbody>
+      @else
+      <table class="table"  id="pagos_promotor">
+        @endif  
+        <thead class="bg-primary">
+          <th>Folio</th>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>Sucursal</th>
+          <th>Teléfono</th>
+          @if (Auth::user()->can('crear-credito'))
+          <th width="50px">Crédito</th>
+          @endif 
+          <th>Acción</th>
+        </thead>
+        <tbody>
 
-        @foreach($clients as $client)
-        <!-- Modal -->
-        <div class="modal fade" id="myModal{{$client->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Crediefectivo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="text-center">
-                  <h4>Seleccione producto</h4>
+          @foreach($clients as $client)
+          <!-- Modal -->
+          <div class="modal fade" id="myModal{{$client->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Crediefectivo</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-              </div>
-              <div class="modal-footer">
-                @if ($products->isEmpty())
-                <a href="{{ url('products') }}" class="btn btn-block btn-danger">No hay productos registrados</a>
-                @else
-                @foreach ($products as $product)
-                <div class="form-group col-sm-6 col-lg-6">
-                 <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}" ><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
+                <div class="modal-body">
+                  <div class="text-center">
+                    <h4>Seleccione producto</h4>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  @if ($products->isEmpty())
+                  <a href="{{ url('products') }}" class="btn btn-block btn-danger">No hay productos registrados</a>
+                  @else
+                  @foreach ($products as $product)
+                  <div class="form-group col-sm-6 col-lg-6">
+                   <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}" ><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
+                 </div>
+                 @endforeach
+                 @endif
                </div>
-               @endforeach
-               @endif
              </div>
            </div>
          </div>
-       </div>
-       @php
-       $branch = $client->branch;
-       $credits = $client->credits;
-       @endphp
-       <tr>
+         @php
+         $branch = $client->branch;
+         $credits = $client->credits;
+         @endphp
+         <tr>
 
-         <td>{!! $client->folio!!}</td>
-         <td>{!! $client->firts_name !!}</td>
-         <td>{!! $client->last_name !!}</td>
-         <td>{!! $client->mothers_last_name !!}</td>
-         <td>{{$branch->name}}</td>
-         <td>{{ $client->phone }}</td>
+           <td>{!! $client->folio!!}</td>
+           <td>{!! $client->firts_name !!}</td>
+           <td>{!! $client->last_name !!}</td>
+           <td>{!! $client->mothers_last_name !!}</td>
+           <td>{{$branch->name}}</td>
+           <td>{{ $client->phone }}</td>
           {{-- @php
            $deuda = false;
            @endphp 

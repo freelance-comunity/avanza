@@ -28,7 +28,7 @@
                     @foreach($investments as $investment)
                     <tr>
                         <td>{!! $investment->id!!}</td>
-                        <td>${!! number_format($investment->ammount) !!}</td>
+                        <td>${!! number_format($investment->ammount, 2, '.', ',') !!}</td>
                         <td>{!! $investment->created_at !!}</td>
                             {{-- <td>
                                 <a href="{!! route('investments.edit', [$investment->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>

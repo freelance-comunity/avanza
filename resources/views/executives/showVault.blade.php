@@ -82,107 +82,115 @@ $date = new Date();
 		<div class="col-md-6">  
 			<h4 align="center">INGRESOS</h4> 
 			<div class="table-responsive">
-				<table class="table table-hover table-striped"  id="example">
-					<thead class="thead-inverse">
-						<th>CONCEPTO</th>
-						<th>IMPORTE</th>
-						@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-						<th style="width: 30px;">DETALLES</th>
-						@endif
-					</thead>
-					<tbody>
-						<tr>
-							<td>Saldo inicial</td>
-							<td>${{ number_format($si->sum('ammount')) }}</td>
+				@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
+				<table class="table"  id="example">
+					@else
+					<table class="table"  id="pagos_promotor">
+						@endif  
+						<thead class="thead-inverse">
+							<th>CONCEPTO</th>
+							<th>IMPORTE</th>
 							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<td style="text-align: center;">
-								<a data-toggle="modal" data-target="#si"><i class="fa fa-eye fa-2x"></i></a>
-							</td>
+							<th style="width: 30px;">DETALLES</th>
 							@endif
-						</tr>
-						<tr>
-							<td>Asignación de efectivo</td>
-							<td>${{ number_format($af->sum('ammount')) }}</td>
-							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<td style="text-align: center;">
-								<a data-toggle="modal" data-target="#af"><i class="fa fa-eye fa-2x"></i></a>
-							</td>
-							@endif
-						</tr>
-						<tr>
-							<td>Recuperación</td>
-							<td>${{ number_format($rc->sum('ammount')) }}</td>
-							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<td style="text-align: center;">
-								<a data-toggle="modal" data-target="#rc"><i class="fa fa-eye fa-2x"></i></a>
-							</td>
-							@endif
-						</tr>
-						<tr>
-							<td>Recuperación Access</td>
-							<td>${{ number_format($ra->sum('ammount')) }}</td>
-							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<td style="text-align: center;">
-								<a data-toggle="modal" data-target="#ra"><i class="fa fa-eye fa-2x"></i></a>
-							</td>
-							@endif
-						</tr> 
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Saldo inicial</td>
+								<td>${{ number_format($si->sum('ammount')) }}</td>
+								@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+								<td style="text-align: center;">
+									<a data-toggle="modal" data-target="#si"><i class="fa fa-eye fa-2x"></i></a>
+								</td>
+								@endif
+							</tr>
+							<tr>
+								<td>Asignación de efectivo</td>
+								<td>${{ number_format($af->sum('ammount')) }}</td>
+								@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+								<td style="text-align: center;">
+									<a data-toggle="modal" data-target="#af"><i class="fa fa-eye fa-2x"></i></a>
+								</td>
+								@endif
+							</tr>
+							<tr>
+								<td>Recuperación</td>
+								<td>${{ number_format($rc->sum('ammount')) }}</td>
+								@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+								<td style="text-align: center;">
+									<a data-toggle="modal" data-target="#rc"><i class="fa fa-eye fa-2x"></i></a>
+								</td>
+								@endif
+							</tr>
+							<tr>
+								<td>Recuperación Access</td>
+								<td>${{ number_format($ra->sum('ammount')) }}</td>
+								@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+								<td style="text-align: center;">
+									<a data-toggle="modal" data-target="#ra"><i class="fa fa-eye fa-2x"></i></a>
+								</td>
+								@endif
+							</tr> 
+						</tbody>
+					</table>
+				</div>
 			</div>
+			<div class="col-md-6">  
+				<h4 align="center">EGRESOS</h4> 
+				<div class="table-responsive">
+					@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
+					<table class="table"  id="example2">
+						@else
+						<table class="table"  id="pagos_promotor2">
+							@endif  
+							<thead class="thead-inverse">
+								<th>IMPORTE</th>
+								<th>CONCEPTO</th>
+								@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+								<th style="width: 30px;">DETALLES</th>
+								@endif
+							</thead>
+							<tbody>
+								<tr>
+									<td>Colocación</td>
+									<td>${{ number_format($c->sum('ammount')) }}</td>
+									@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+									<td style="text-align: center;">
+										<a data-toggle="modal" data-target="#c"><i class="fa fa-eye fa-2x"></i></a>
+									</td>
+									@endif
+								</tr>
+								<tr>
+									<td>Gastos</td>
+									<td>${{ number_format($g->sum('ammount')) }}</td>
+									@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+									<td style="text-align: center;">
+										<a data-toggle="modal" data-target="#g"><i class="fa fa-eye fa-2x"></i></a>
+									</td>
+									@endif
+								</tr>
+								<tr>
+									<td>Devolución</td>
+									<td>$0.00</td>
+									@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+									<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
+									@endif
+								</tr>
+								<tr>
+									<td>Inversión</td>
+									<td>$0.00</td>
+									@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+									<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
+									@endif
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>  	
 		</div>
-		<div class="col-md-6">  
-			<h4 align="center">EGRESOS</h4> 
-			<div class="table-responsive">
-				<table class="table table-hover table-striped"  id="example2">
-					<thead class="thead-inverse">
-						<th>IMPORTE</th>
-						<th>CONCEPTO</th>
-						@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-						<th style="width: 30px;">DETALLES</th>
-						@endif
-					</thead>
-					<tbody>
-						<tr>
-							<td>Colocación</td>
-							<td>${{ number_format($c->sum('ammount')) }}</td>
-							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<td style="text-align: center;">
-								<a data-toggle="modal" data-target="#c"><i class="fa fa-eye fa-2x"></i></a>
-							</td>
-							@endif
-						</tr>
-						<tr>
-							<td>Gastos</td>
-							<td>${{ number_format($g->sum('ammount')) }}</td>
-							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<td style="text-align: center;">
-								<a data-toggle="modal" data-target="#g"><i class="fa fa-eye fa-2x"></i></a>
-							</td>
-							@endif
-						</tr>
-						<tr>
-							<td>Devolución</td>
-							<td>$0.00</td>
-							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
-							@endif
-						</tr>
-						<tr>
-							<td>Inversión</td>
-							<td>$0.00</td>
-							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
-							@endif
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		
-	</div>  	
-</div>
 
 
-@endsection
+		@endsection
 

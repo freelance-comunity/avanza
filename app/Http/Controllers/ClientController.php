@@ -115,7 +115,7 @@ class ClientController extends AppBaseController
 		// Valitador
 		$validator = Validator::make($request->all(), [
 			'curp' => 'required|unique:clients,curp',
-			'avatar' => 'required|image|mimes:jpeg,png,jpg',
+			// 'avatar' => 'required|image|mimes:jpeg,png,jpg',
 			//COJB820320MCSRRL00
 		]);
 
@@ -384,13 +384,14 @@ class ClientController extends AppBaseController
 			return redirect(route('clients.index'));
 		}*/
 		// else{
-			return view ('credits.create')
-			->with('credits',$credits)
-			->with('product', $product)
-			->with('client', $client)
-			->with('credit',$credit);
+		return view ('credits.create')
+		->with('credits',$credits)
+		->with('product', $product)
+		->with('client', $client)
+		->with('credit',$credit);
 		//}
 	}
+	
 
 	public function unlockedclient($id)
 	{

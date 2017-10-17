@@ -27,12 +27,12 @@ Lista de créditos
 						<th>No.</th>
 						<th>Folio</th>
 						<th>Cliente</th>
-						<th>Teléfono</th>
 						<th>Fecha de Contrato</th>
 						<th>Sucursal</th>
 						<th>$ Monto</th>
 						<th>No. Cuotas</th>	
-						<th>Vencido</th>			
+						<th>Vencido</th>
+						<th>Estatus</th>			
 						<th width="50px">Acción</th>
 					</thead>
 					<tbody>
@@ -49,7 +49,6 @@ Lista de créditos
 							<td>#{{ ++$key }}</td>
 							<td>{!! $credit->folio !!}</td>
 							<td>{!! $credit->firts_name !!} {!! $credit->last_name !!} {!! $credit->mothers_last_name !!}</td>
-							<td>{!! $credit->phone !!}</td>
 							<td>{!! strtoupper($credit->date->format('d F Y')) !!}</td>
 							<td>{!! $credit->branch !!}</td>
 							<td>${!! number_format($credit->ammount, 2) !!}</td>
@@ -59,6 +58,7 @@ Lista de créditos
 							@elseif($late_total > 0)
 							<td class="danger">${!! number_format($late_total, 2) !!}</td>
 							@endif
+							<td>{{ $credit->debt['status'] }}</td>
 							<td>
 								<a href="{{ url('account') }}/{{ $credit->id }}"><i class="fa fa-align-left fa-2x" data-toggle="tooltip" title="Ver Estado de Cuenta"></i></a>
 								<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Solicitud"></i></a>

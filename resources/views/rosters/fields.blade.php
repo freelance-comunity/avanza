@@ -2,7 +2,7 @@
 $user_allocation = Auth::user();
 $region_allocation = $user_allocation->region;
 
-$filtered = App\User::where('id', '!=', Auth::id())->get();
+$filtered = App\User::all();
             //$filtered = User::all();
 $users = $filtered->where('region_id', $region_allocation->id);
 @endphp

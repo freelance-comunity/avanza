@@ -60,57 +60,46 @@ Lista de graficas
 		<canvas id="type_credit" width="700" height="650"></canvas>
 		<script>
 			new Chart(document.getElementById("type_credit"), {
-    type: 'polarArea',
-    data: {
-      labels: ["25 CUOTAS", "30 CUOTAS","52 CUOTAS", "60 CUOTAS" ,"SEMANAL"],
-      datasets: [
-        {
-          label: "Population (millions)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [{{$diario_one}},{{$diario_two}},{{$diario_three}},{{$diario_four}},{{$semanal}}]
-        }
-      ]
-    },
-    options: {
-     
-    }
-});
+				type: 'polarArea',
+				data: {
+					labels: ["25 CUOTAS", "30 CUOTAS","52 CUOTAS", "60 CUOTAS" ,"SEMANAL"],
+					datasets: [
+					{
+						label: "Population (millions)",
+						backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+						data: [{{$diario_one}},{{$diario_two}},{{$diario_three}},{{$diario_four}},{{$semanal}}]
+					}
+					]
+				},
+				options: {
+					
+				}
+			});
 		</script>
 	</div>
-
 	<div class="col-md-6">
-		<h3>Pagos Del Día</h3>
-		<canvas id="line-chart" width="700" height="650"></canvas>
+		<h3>Tipos de Créditos</h3>
+		<canvas id="type_credit" width="700" height="650"></canvas>
 		<script>
-			new Chart(document.getElementById("line-chart"), {
-  type: 'line',
-  data: {
-    labels: [1,2,3,4,5,6,7,8,9,10],
-    datasets: [{ 
-        data: [{{$payments}}],
-        label: "Proyectado",
-        borderColor: "#3e95cd",
-        fill: false
-      }, { 
-        data: [{{$recovered}}],
-        label: "Recuperado",
-        borderColor: "#3cba9f",
-        fill: false
-      }, { 
-        data: [{{$late}}],
-        label: "Vencido",
-        borderColor: "#c45850",
-        fill: false
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'World population per region (in millions)'
-    }
-  }
-});
+			var ctx = document.getElementById("myChart");
+			var myChart = new Chart(ctx, {
+				type: 'radar',
+				data: {
+					labels: ["M", "T", "W", "T", "F", "S", "S"],
+					datasets: [{
+						label: 'apples',
+						backgroundColor: "rgba(153,255,51,0.4)",
+						borderColor: "rgba(153,255,51,1)",
+						data: [12, 19, 3, 17, 28, 24, 7]
+					}, {
+						label: 'oranges',
+						backgroundColor: "rgba(255,153,0,0.4)",
+						borderColor: "rgba(255,153,0,1)",
+						data: [30, 29, 5, 5, 20, 3, 10]
+					}]
+				}
+			});
 		</script>
 	</div>
+	
 	@endsection

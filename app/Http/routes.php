@@ -320,7 +320,10 @@ Route::get('creditsClient/{id}/{product}',[
     'uses' => 'ClientController@creditsClient',
 ]);
 
-
+Route::get('creditsClientSemanal/{id}/{product}',[
+    'as' => 'client.creditsClientSemanal',
+    'uses' => 'ClientController@creditsClientSemanal',
+]);
 Route::get('renovate/{id}/{product}', function($id){
     $client = App\Models\Client::find($id);
     return view('credits.renovate')

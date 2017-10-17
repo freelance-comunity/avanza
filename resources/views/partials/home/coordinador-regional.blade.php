@@ -113,7 +113,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
 		</div>
 	</div>
-	<div class="col-lg-3 col-md-4">
+	<div class="col-lg-12 col-md-6">
 		<!-- USERS LIST -->
 		<div class="box box-info">
 			<div class="box-header with-border">
@@ -132,7 +132,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 				<div class="well text-center">No hay registros.</div>
 				@else
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table" id="example">
 						<thead>
 							<th>Monto</th>
 							<th>Concepto</th>

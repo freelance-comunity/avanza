@@ -25,7 +25,7 @@ foreach ($payments as $element) {
             RUTA DE COBRO
         </div>
     </div>
-    <div class="table-responsive">
+   {{--  <div class="table-responsive">
         <table class="table">
             <thead>
                 <th>Ruta del día</th>
@@ -45,7 +45,7 @@ foreach ($payments as $element) {
                </tr>
            </tbody>
        </table>
-   </div>
+   </div> --}}
 </div>
 <div class="row">
     @if($payments->isEmpty())

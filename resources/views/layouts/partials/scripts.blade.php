@@ -285,6 +285,7 @@
         $(document).ready(function() {
           $('#pagos_promotor').DataTable( {
             "language": {
+              // "order": [[ 0, 'asc' ], [ 3, 'asc' ]],
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             }
           } );

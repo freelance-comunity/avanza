@@ -91,27 +91,12 @@ Route::get('testDate', function(){
 });
 
 Route::get('ciclos', function(){
-    $payment = 1050;
-    $extra   = 180;
-    $budget  = intdiv($extra, 320);
-    $r       = fmod($extra, 320);
-
-    $id_online = 1;
-    $id_next   = $id_online + 1;
-
-    echo "Nos alcanza para pagar ".$budget." pagos completos";
-    echo "<br>";
-    if ($r > 0) {
-        echo "Y uno por la cantidad de ".$r;
-        echo "<br>";
-    }
-
-    while ($budget > 0) {
-     echo "PAGO #".$id_next;
-     echo "<br>";
-     $id_next = $id_next + 1;
-     $budget = $budget - 1;
- }
+    $date_now = Carbon\Carbon::today()->toDateString();
+    $payments = Auth::user()->payments->sortBy('payment');
+    $ammount_total = $payments->where('date', $date_now);
+    $pagos_pendientes = DB::table('payments')->where([['user_id', '=', Auth::user()->id], ['date', '<=', $date_now],['status', '=', 'Pendiente']])->get();
+    $pagos_parciales = DB::table('payments')->where([['user_id', '=', Auth::user()->id], ['date', '<=', $date_now],['status', '=', 'Parcial']])->get();
+    $pagos_vencidos = DB::table('payments')->where([['user_id', '=', Auth::user()->id], ['date', '<=', $date_now],['status', '=', 'Vencido']])->get();
 });
 /*=====  End of Test Routes  ======*/
 

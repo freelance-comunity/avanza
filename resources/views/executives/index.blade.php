@@ -31,8 +31,19 @@ Lista de personal
                 <tbody>
                     @foreach($employees as $employee)
                     @php
-                        $roles = $employee->role;
+                    $roles = $employee->role;
                     @endphp
+                    @if ($employee->hasRole(['administrador', 'director-general']))
+                    <tr style="display: none;">
+                        <td>{!! $employee->name !!}</td>
+                        <td>{!! $employee->father_last_name !!}</td>
+                        <td>{!! $employee->mother_last_name !!}</td>
+                        <td>{{ $employee->branch->name }}</td>
+                        <td>
+                            <a href="{{ url('showVault') }}/{{ $employee->id }}" data-toggle="tooltip" title="Ver detalles" href=""><i class="fa fa-eye fa-2x"></i></a>
+                        </td>              
+                    </tr>
+                    @else
                     <tr>
                         <td>{!! $employee->name !!}</td>
                         <td>{!! $employee->father_last_name !!}</td>
@@ -42,13 +53,14 @@ Lista de personal
                             <a href="{{ url('showVault') }}/{{ $employee->id }}" data-toggle="tooltip" title="Ver detalles" href=""><i class="fa fa-eye fa-2x"></i></a>
                         </td>              
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
         </div>
         @endif
     </div>
-   @endif
+    @endif
     @role('ejecutivo-de-credito')
     <div class="row">
         @if(is_null($user))

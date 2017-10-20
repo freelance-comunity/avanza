@@ -29,7 +29,6 @@
 <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
 <script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.colVis.min.js"></script>
 
-
 <script src="{{ asset('/js/municipalitys.js')}}"></script>  
 <script src="{{ asset('/js/moment.js')}}"></script>
 
@@ -136,6 +135,19 @@
             'csv','excel', 'pdf', 'print',
             ]
 
+          } );
+        });
+      </script> 
+      <script>
+        $(document).ready(function() {
+          $('#gastosCoordinador').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'csv','excel', 'pdf', 'print',
+            ]
           } );
         });
       </script> 

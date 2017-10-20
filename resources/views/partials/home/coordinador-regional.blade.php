@@ -4,13 +4,11 @@ $region_allocation = $user_allocation->region;
 $clients = $region_allocation->clients;
 
 $filtered_date_now = App\Models\Client::where('region_id',$region_allocation->id)->where(function ($query) {
-	$query->whereRaw('DATE(created_at) = CURRENT_DATE')
-	->orWhereRaw('DATE(updated_at) = CURRENT_DATE');
+	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
 })->get(); 
 $credits = $region_allocation->credits;
 $filtered_date_now_credits = App\Models\Credit::where('region_id',$region_allocation->id)->where(function ($query) {
-	$query->whereRaw('DATE(created_at) = CURRENT_DATE')
-	->orWhereRaw('DATE(updated_at) = CURRENT_DATE');
+	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
 })->get(); 
 
 $vault = $user_allocation->vault;
@@ -132,8 +130,8 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 				<div class="well text-center">No hay registros.</div>
 				@else
 				<div class="table-responsive">
-					<table class="table" id="gastos">
-						<thead>
+					<table class="table" id="gastosCoordinador">
+						<thead class="bg-yellow">
 							<th>Monto</th>
 							<th>Concepto</th>
 							<th>Descripción</th>
@@ -146,9 +144,10 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 								<td>{{ $expense->description }}</td>
 							</tr>
 							@endforeach
-							<tr class="bg-navy">
-								<td colspan="3">${{ number_format($expenses->sum('ammount'),2) }}</td>
-							</tr>
+							{{-- <tr class="bg-navy">
+								<td colspan="2">${{ number_format($expenses->sum('ammount'),2) }}</td>
+								<td></td>
+							</tr> --}}
 						</tbody>
 					</table>
 				</div>

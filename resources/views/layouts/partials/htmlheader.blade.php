@@ -77,8 +77,8 @@
         <script src="{{asset('/rangeSlider/js/ion.rangeSlider.js')}}" type="text/javascript"></script>
         <!--pace-->
 
-        <script src="{{ asset('/pace/pace.js') }}"></script>
-        <link href="{{ asset('/pace/themes/pace-theme-barber-shop.css') }}"  rel="stylesheet" />
+        {{-- <script src="{{ asset('/pace/pace.js') }}"></script>
+        <link href="{{ asset('/pace/themes/pace-theme-barber-shop.css') }}"  rel="stylesheet" /> --}}
         
 
         <style>

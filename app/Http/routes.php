@@ -392,6 +392,11 @@ Route::get('graphics',function(){
     return view('graphics');
 });
 
+Route::get('graphics2',function(){
+
+    return view('reports.graphics');
+});
+
 Route::get('unlocked/{id}' , 'PaymentController@unlocked');
 Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
 Route::get('cancel/{id}' , 'PaymentController@cancel');
@@ -598,9 +603,10 @@ Route::get('unlock', function(){
     return redirect()->back();
 });
 
-Route::get('movements', function(){
-    return view('partials.movements');
-});
+// Route::get('movements', function(){
+//     return view('partials.movements');
+// });
+Route::get('movements', 'GeneralController@movements');
 
 Route::get('expenses-admin', function(){
     return view('partials.expenses');

@@ -56,6 +56,7 @@ class Kernel extends HttpKernel
         'client' => \App\Http\Middleware\ClientMiddleware::class,
         'clientCreate' => \App\Http\Middleware\ClienCreatetMiddleware::class,
         'credits' => \App\Http\Middleware\CreditsMiddleware::class,
+        'login_mid' => \App\Http\Middleware\LoginMiddleware::class,
         
     ];
 }

@@ -98,6 +98,14 @@ Route::get('ciclos', function(){
     $pagos_parciales = DB::table('payments')->where([['user_id', '=', Auth::user()->id], ['date', '<=', $date_now],['status', '=', 'Parcial']])->get();
     $pagos_vencidos = DB::table('payments')->where([['user_id', '=', Auth::user()->id], ['date', '<=', $date_now],['status', '=', 'Vencido']])->get();
 });
+
+Route::get('LoginMid', function(){
+    $td = Carbon\Carbon::now();
+    if ($td->hour <= 20) {
+        echo "Ya esta sobre el horario te uso del sistema, intenta mañana.";
+    }
+
+});
 /*=====  End of Test Routes  ======*/
 
 

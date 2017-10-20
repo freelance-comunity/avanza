@@ -25,6 +25,7 @@ class RegionController extends AppBaseController
 	{
 		$this->middleware('auth');
 		$this->middleware('is_admin');
+		$this->middleware('login_mid');
 	}
 	
 	public function index(Request $request)

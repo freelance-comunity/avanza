@@ -32,6 +32,7 @@ class PaymentController extends AppBaseController
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('login_mid');
 	}
 	
 	public function index(Request $request)

@@ -13,7 +13,7 @@ $filtered_date_now_credits = App\Models\Credit::where('region_id',$region_alloca
 
 $vault = $user_allocation->vault;
 $expenditures_collection = App\Models\Expenditure::all();
-$expenses = $expenditures_collection->where('vault_id', $vault->id);
+$expenses = $expenditures_collection->where('vault_id', $vault->id)->sortBy('created_at');
 @endphp
 <!-- Small boxes (Stat box) -->
 <div class="row">
@@ -135,6 +135,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 							<th>Monto</th>
 							<th>Concepto</th>
 							<th>Descripción</th>
+							<th>Fecha/Hora</th>
 						</thead>
 						<tbody>
 							@foreach ($expenses as $expense)
@@ -142,6 +143,7 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id);
 								<td>${{ number_format($expense->ammount,2) }}</td>
 								<td>{{ $expense->concept }}</td>
 								<td>{{ $expense->description }}</td>
+								<td>{{ $expense->created_at }}</td>
 							</tr>
 							@endforeach
 							{{-- <tr class="bg-navy">

@@ -687,6 +687,65 @@ Route::get('transferCredits', function(){
      $value->save();
  }
 });
+
 Route::post('transferProcess', 'GeneralController@transferProcess');
+
+Route::get('moratorio',function(){
+ $credit = App\Models\credit::all();
+
+ $date_now = \Carbon\Carbon::now()->toDateString();
+ $hour_now = \Carbon\Carbon::now()->toTimeString();
+
+ foreach ($credit as $key => $credit) {
+
+     $debt = $credit->debt;
+     $payments = $debt->payments;
+     if ($credit->periodicity == "CREDISEMANA") {
+       $payments = App\Models\Payment::where('status', 'Pendiente')->get();
+       foreach ($payments as $key => $value) {
+           if ($value->date <= $date_now) {
+            $payment = App\Models\Payment::find($value->id);
+            $payment->status = 'Vencido';
+            $payment->moratorium = 20;
+            $payment->total = $payment->ammount + $payment->moratorium;
+            $payment->balance = $payment->balance + 20;
+            $payment->save();
+
+            $debt = $payment->debt;
+            $debt->ammount = $debt->ammount + 20;
+            $debt->save();
+        }
+    }
+}
+else{
+   $payments = App\Models\Payment::where('status', 'Pendiente')->where('status','Parcial')->get();
+   foreach ($payments as $key => $value) {
+       if ($value->date <= $date_now) {
+        $payment = App\Models\Payment::find($value->id);
+        $payment->status = 'Vencido';
+        $payment->moratorium = 20;
+        $payment->total = $payment->ammount + $payment->moratorium;
+        $payment->balance = $payment->balance + 20;
+        $payment->save();
+
+        $debt = $payment->debt;
+        $debt->ammount = $debt->ammount + 20;
+        $debt->save();
+    }
+}
+
+}
+if ($payment->status == 'Vencido') {
+    $latePayments = new App\Models\LatePayments;
+    $latePayments->late_number = $payment->number;
+    $latePayments->late_ammount = $payment->total;
+    $latePayments->late_payment = $payment->payment;
+    $latePayments->payment_id = $payment->id;
+    $latePayments->debt_id    = $debt->id;
+    $latePayments->save();
+}
+}
+echo "moratorio aplicado";
+});
 
 

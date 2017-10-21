@@ -659,7 +659,7 @@
                 ]) !!}
               </div>
               <hr>
-              <h4>Digitalización del Aval</h4>
+              {{-- <h4>Digitalización del Aval</h4>
               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('photo_ine', 'INE del Aval:') !!}
                 {!! Form::file('photo_ine', [
@@ -679,7 +679,7 @@
                       'data-parsley-trigger ' => 'input focusin',
                       
                       ]) !!}
-                    </div>
+                    </div> --}}
                     <div class="col-md-4">
                       <div class="btn-group">
                         {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}

@@ -46,12 +46,12 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
- $payment = App\Models\Payment::find(2242);
- $debt = $payment->debt;
- echo $debt->ammount;
- $credit = $debt->credit;
+   $payment = App\Models\Payment::find(2242);
+   $debt = $payment->debt;
+   echo $debt->ammount;
+   $credit = $debt->credit;
 
- echo $credit->ammount;
+   echo $credit->ammount;
 });
 
 Route::post('process', 'PaymentController@process');
@@ -107,11 +107,11 @@ Route::get('ciclos', function(){
     }
 
     while ($budget > 0) {
-     echo "PAGO #".$id_next;
-     echo "<br>";
-     $id_next = $id_next + 1;
-     $budget = $budget - 1;
- }
+       echo "PAGO #".$id_next;
+       echo "<br>";
+       $id_next = $id_next + 1;
+       $budget = $budget - 1;
+   }
 });
 /*=====  End of Test Routes  ======*/
 
@@ -340,10 +340,13 @@ Route::get('creditsClientSemanal/{id}/{product}',[
     'uses' => 'ClientController@creditsClientSemanal',
 ]);
 Route::get('renovate/{id}/{product}', function($id){
+    $product = App\Models\Product::find(3);
     $client = App\Models\Client::find($id);
     return view('credits.renovate')
-    ->with('client',$client);
+    ->with('client',$client)
+    ->with('product',$product);
 });
+
 
 Route::post('renovation', 'CreditController@renovation');
 
@@ -353,6 +356,8 @@ Route::get('solicitud/{id}', function($id){
     return $pdf->download('solicitud.pdf');
 });
 
+
+
 Route::get('account_pdf/{id}', function($id){
     $credit = App\Models\Credit::find($id);
     $pdf = PDF::loadView('credits.account_pdf', compact('credit'));
@@ -360,9 +365,9 @@ Route::get('account_pdf/{id}', function($id){
 });
 
 Route::get('account/{id}', function($id){
- $credit = App\Models\Credit::find($id);
- return view('credits.account')
- ->with('credit',$credit);
+   $credit = App\Models\Credit::find($id);
+   return view('credits.account')
+   ->with('credit',$credit);
 
 });
 
@@ -411,8 +416,6 @@ Route::get('unlocked/{id}' , 'PaymentController@unlocked');
 Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
 Route::get('cancel/{id}' , 'PaymentController@cancel');
 Route::get('mora/{id}' , 'PaymentController@mora');
-
-
 
 
 Route::get('mexico', function(){
@@ -510,11 +513,11 @@ Route::get('regions/{id}/delete', [
 ]);
 
 Route::get('usuarios',function(){
- $now = \Carbon\Carbon::now()->toDateString();
- $quincena= \Carbon\Carbon::now()->addDays(15);
- echo "De: ".$now;
- echo "<br>";
- echo "hasta: ".$quincena;
+   $now = \Carbon\Carbon::now()->toDateString();
+   $quincena= \Carbon\Carbon::now()->addDays(15);
+   echo "De: ".$now;
+   echo "<br>";
+   echo "hasta: ".$quincena;
 });
 
 
@@ -663,31 +666,129 @@ Route::get('transferClients', function(){
     $branch = App\Models\Branch::find(4);
     $clients = $branch->clients;
     foreach ($clients as $key => $value) {
-     $value->region_id = 4;
-     $value->save();
- }
- $branch = App\Models\Branch::find(9);
- $clients = $branch->clients;
- foreach ($clients as $key => $value) {
-     $value->region_id = 4;
-     $value->save();
- }
+       $value->region_id = 4;
+       $value->save();
+   }
+   $branch = App\Models\Branch::find(9);
+   $clients = $branch->clients;
+   foreach ($clients as $key => $value) {
+       $value->region_id = 4;
+       $value->save();
+   }
 });
 
 Route::get('transferCredits', function(){
     $branch = App\Models\Branch::find(4);
     $credits = $branch->credits;
     foreach ($credits as $key => $value) {
-     $value->region_id = 4;
-     $value->save();
- }
- $branch = App\Models\Branch::find(9);
- $credits = $branch->credits;
- foreach ($credits as $key => $value) {
-     $value->region_id = 4;
-     $value->save();
- }
+       $value->region_id = 4;
+       $value->save();
+   }
+   $branch = App\Models\Branch::find(9);
+   $credits = $branch->credits;
+   foreach ($credits as $key => $value) {
+       $value->region_id = 4;
+       $value->save();
+   }
 });
+
+Route::get('moratorio',function(){
+  $credit = App\Models\Credit::all();
+
+  $date_now = \Carbon\Carbon::now()->toDateString();
+  $hour_now = \Carbon\Carbon::now()->toTimeString();
+
+  foreach ($credit as $key => $credit) {
+
+      $debt = $credit->debt;
+      $payments = $debt->payments;
+      if ($credit->periodicity == "CREDISEMANA") {
+        $payments = App\Models\Payment::where('status', 'Pendiente')->get();
+        foreach ($payments as $key => $value) {
+            if ($value->date <= $date_now) {
+               $payment = App\Models\Payment::find($value->id);
+               $payment->status = 'Vencido';
+               $payment->moratorium = 20;
+               $payment->total = $payment->ammount + $payment->moratorium;
+               $payment->balance = $payment->balance + 20;
+               $payment->save();
+
+               $debt = $payment->debt;
+               $debt->ammount = $debt->ammount + 20;
+               $debt->save();
+           }
+       }
+   }
+   elseif($credit->periodicity == "CREDIDIARIO25"){
+    $payments = App\Models\Payment::where('status', 'Pendiente')->where('status','Parcial')->get();
+    foreach ($payments as $key => $value) {
+        if ($value->date <= $date_now) {
+           $payment = App\Models\Payment::find($value->id);
+           $payment->status = 'Vencido';
+           $payment->moratorium = 20;
+           $payment->total = $payment->ammount + $payment->moratorium;
+           $payment->balance = $payment->balance + 20;
+           $payment->save();
+
+           $debt = $payment->debt;
+           $debt->ammount = $debt->ammount + 20;
+           $debt->save();
+       }
+   }
+}
+elseif($credit->periodicity == "CREDIDIARIO4"){
+    $payments = App\Models\Payment::where('status', 'Pendiente')->where('status','Parcial')->get();
+    foreach ($payments as $key => $value) {
+        if ($value->date <= $date_now) {
+           $payment = App\Models\Payment::find($value->id);
+           $payment->status = 'Vencido';
+           $payment->moratorium = 20;
+           $payment->total = $payment->ammount + $payment->moratorium;
+           $payment->balance = $payment->balance + 20;
+           $payment->save();
+
+           $debt = $payment->debt;
+           $debt->ammount = $debt->ammount + 20;
+           $debt->save();
+       }
+   }
+}
+elseif($credit->periodicity == "DIARIO"){
+    $payments = App\Models\Payment::where('status', 'Pendiente')->where('status','Parcial')->get();
+    foreach ($payments as $key => $value) {
+        if ($value->date <= $date_now) {
+           $payment = App\Models\Payment::find($value->id);
+           $payment->status = 'Vencido';
+           $payment->moratorium = 20;
+           $payment->total = $payment->ammount + $payment->moratorium;
+           $payment->balance = $payment->balance + 20;
+           $payment->save();
+
+           $debt = $payment->debt;
+           $debt->ammount = $debt->ammount + 20;
+           $debt->save();
+       }
+   }
+}
+if ($payment->status == 'Vencido') {
+   $latePayments = new App\Models\LatePayments;
+   $latePayments->late_number = $payment->number;
+   $latePayments->late_ammount = $payment->total;
+   $latePayments->late_payment = $payment->payment;
+   $latePayments->payment_id = $payment->id;
+   $latePayments->debt_id    = $debt->id;
+   $latePayments->save();
+}
+
+
+}
+
+echo "moratorio aplicado";
+
+
+});
+
 Route::post('transferProcess', 'GeneralController@transferProcess');
+
 
 

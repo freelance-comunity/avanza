@@ -36,7 +36,7 @@
 			<tr class="warning">
 				<td>{{ $payment->number }}</td>
 				<td>{{$payment->date->format('d F Y')}}</td>
-				<td> <button type="button" class="btn btn-primary btn-lg" onclick="myFunction()" data-toggle="modal" data-target="#credisemana{{$client->id}}">$ {{ number_format($payment->total, 2) }}</button></td>
+				<td> <button type="button" class="btn btn-primary btn-lg disabled" {{--onclick="myFunction()"  data-toggle="modal" data-target="#credisemana{{$client->id}}" --}}>$ {{ number_format($payment->total, 2) }}</button></td>
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>

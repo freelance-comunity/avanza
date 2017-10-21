@@ -76,17 +76,21 @@ Detalles
 									</div>
 									<div class="modal-footer">
 
-										@foreach ($product as $product)
+										@foreach ($product as $key =>  $product)
+										@if($key < 4)
 										<div class="form-group col-sm-6 col-lg-6">
 											<a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}" ><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
 										</div>
+										@endif
 										@endforeach
 
 									</div>
 								</div>
 							</div>
 						</div>
-
+						@php
+						$product = App\Models\Product::find(3);
+						@endphp
 						<div class="modal fade" id="credisemana{{$client->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
@@ -96,11 +100,14 @@ Detalles
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
+									
 									<div class="modal-footer">
 										<div class="form-group col-sm-6 col-lg-12">
-											<a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
+											<a href="{{ url('renovate') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
 										</div>
 									</div>
+
+									
 								</div>
 							</div>
 						</div>
@@ -155,7 +162,7 @@ Detalles
 						@elseif($credit->periodicity == 'CREDISEMANA' && $debt->status == 'RENOVACIÓN' && $payParcial == 1)
 						<button type="button" class="btn btn-lg bg-blue btn-block" data-toggle="modal" data-target="#credisemana{{$client->id}}">Renovar Crédito</button></td>
 						@elseif($credit->periodicity == 'CREDISEMANA' && $debt->status == 'Pagado' && $pay == 1 && $countlocked <= 0)
-						<button type="button" class="btn btn-lg bg-blue btn-block" data-toggle="modal" data-target="#credisemana{{$client->id}}">Renovar Crédito</button></td>
+						<button type="button" class="btn btn-lg bg-blue btn-block" data-toggle="modal" data-target="#myModal{{$client->id}}">Renovar Crédito</button></td>
 
 						@role('administrador')
 						@elseif($credit->periodicity == 'CREDISEMANA' && $debt->status == 'Pagado' && $countlocked > 0)

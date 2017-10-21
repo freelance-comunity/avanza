@@ -32,8 +32,6 @@ class ClientLocation extends Model
 		"state" => "required",
 		"postal_code" => "required",
 		"references" => "required",
-		"latitude" => "required",
-		"lenght" => "required"
 	];
 	public function client()
     {

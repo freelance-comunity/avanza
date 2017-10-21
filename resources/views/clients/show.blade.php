@@ -104,6 +104,7 @@ Detalles del Cliente
       </table>
     </div>
   </div>
+<label>&nbsp;</label> 
   @if (is_null($location))
   <div class="box-body">
    <h3>Este empleado no tiene datos de ubicación registrados.</h3> 
@@ -113,13 +114,17 @@ Detalles del Cliente
  <!-- /.box-header -->
  <div class="box-body no-padding">
   <div class="row">
-    <div class="col-md-8 col-sm-8">
+    @if ($location->latitude)
+      <div class="col-md-8 col-sm-8">
       <div class="pad">
         <!-- Map will be created here -->
         <div id="map" style="height: 325px;"></div>
       </div>
       @include('clientLocations.script-map')
     </div>
+    
+    @endif
+   
     <!-- /.col -->
     <div class="col-md-4 col-sm-4">
      <div class="table-responsive">
@@ -349,6 +354,8 @@ Detalles del Cliente
 </div>
 <!-- /.box -->
 </div>
+
+
 
 <!-- /.col -->
 <div class="col-md-6">

@@ -15,7 +15,7 @@ class ClientMiddleware
      */
     public function handle($request, Closure $next)
     {
-         if (\Auth::user()->hasRole(['ejecutivo-de-credito'])) {
+         if (\Auth::user()->hasRole(['ejecutivo-de-credito','coordinador-regional'])) {
             return $next($request);
         }else{
             return abort(403);

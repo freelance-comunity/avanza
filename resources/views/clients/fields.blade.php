@@ -1,12 +1,12 @@
-<style>
-#resultado {
-  background-color: red;
-  color: white;
-  font-weight: bold;
-}
-#resultado.ok {
-  background-color: green;
-}
+  <style>
+  #resultado {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+  }
+  #resultado.ok {
+    background-color: green;
+  }
 </style>
 <style>
 #resultados {
@@ -68,50 +68,45 @@
   <div class="box-body">
    <div class="row setup-content" id="step-1">
      <div class="form-group col-sm-6 col-lg-12">
-      <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('avatar', 'Imagen:') !!}
-        {!! Form::file('avatar', [
-          'data-parsley-trigger ' => 'input focusin',
-          ]) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('firts_name', 'Nombre(s):') !!}
-          {!! Form::text('firts_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase(); myFunction()']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('last_name', 'Apellido Paterno:') !!}
-          {!! Form::text('last_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase(); myFunction()']) !!}
-        </div>
-      </div>
-      <div class="form-group col-sm-6 col-lg-12">
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('mothers_last_name', 'Apellido Materno:') !!}
-          {!! Form::text('mothers_last_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO MATERNO','required'=>'required', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-        </div>
 
+      <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('firts_name', 'Nombre(s):') !!}
+        {!! Form::text('firts_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL NOMBRE CLIENTE','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase(); myFunction()']) !!}
+      </div>
+      <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('last_name', 'Apellido Paterno:') !!}
+        {!! Form::text('last_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO PATERNO','required'=>'required', 'data-parsley-trigger' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase(); myFunction()']) !!}
+      </div>
+      <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('mothers_last_name', 'Apellido Materno:') !!}
+        {!! Form::text('mothers_last_name', null, [ 'style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE EL APELLIDO MATERNO','required'=>'required', 'data-parsley-trigger ' => 'input focusin','onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+      </div>
+    </div>
+    <div class="form-group col-sm-6 col-lg-12">
+      <div class="form-group col-sm-6 col-lg-4">
+        {!! Form::label('curp', 'CURP:') !!} <a href="https://consultas.curp.gob.mx/CurpSP/" target="_blank" onClick="window.open(this.href, this.target, 'width=500,height=500'); return false;"> CONSULTA CURP</a>
+        {!! Form::text('curp', null, [
+          'style' => 'text-transform:uppercase',
+          'class' => 'form-control input-lg', 
+          'id' => 'curp_input',
+          'oninput' => 'validarInput(this)',
+          'placeholder' => 'ESCRIBE CURP', 
+          'required' => 'required',
+          'data-parsley-trigger ' => 'input focusin',
+          'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          <pre id="resultado"></pre>
+        </div>
         <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('curp', 'CURP:') !!} <a href="https://consultas.curp.gob.mx/CurpSP/" target="_blank" onClick="window.open(this.href, this.target, 'width=500,height=500'); return false;"> CONSULTA CURP</a>
-          {!! Form::text('curp', null, [
-            'style' => 'text-transform:uppercase',
-            'class' => 'form-control input-lg', 
-            'id' => 'curp_input',
-            'oninput' => 'validarInput(this)',
-            'placeholder' => 'ESCRIBE CURP', 
-            'required' => 'required',
-            'data-parsley-trigger ' => 'input focusin',
-            'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            <pre id="resultado"></pre>
-          </div>
-          <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('ine', 'CLAVE DE ELECTOR INE:') !!}<a id="ine" href="#" >CONSULTA INE</a>
-            {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA INE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-          </div>
-        </div>    
-        <div class="form-group col-sm-6 col-lg-12">
-         <div class="form-group col-sm-6 col-lg-4">
+          {!! Form::label('ine', 'CLAVE DE ELECTOR INE:') !!}<a id="ine" href="#" >CONSULTA INE</a>
+          {!! Form::text('ine', null, ['class' => 'form-control input-lg', 'placeholder'=>'ESCRIBE LA INE','required'=>'required','data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('civil_status', 'Estado Civil:') !!}
           {!! Form::select('civil_status',['SOLTERO(A)' => 'SOLTERO(A)', 'CASADO(A)' => 'CASADO(A)','VIUDO(A)'=>'VIUDO(A)','DIVORCIADO(A)'=>'DIVORCIADO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
         </div>
+      </div>    
+      <div class="form-group col-sm-6 col-lg-12">
+
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('phone', 'Teléfono:') !!}
           <input type="number" name="phone" class="form-control input-lg" id="telefono" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
@@ -120,12 +115,13 @@
           {!! Form::label('no_economic_dependent', 'No. de Dependientes Economicos') !!}
           {!! Form::select('no_economic_dependent',['0'=>'0','1' => '1', ' 2' => ' 2', '3' => '3', '4' => '4', '5' => '5'], null, ['class' => 'form-control input-lg', 'required' => 'required', 'data-parsley-trigger ' => 'input focusin',]) !!}
         </div>
-      </div>
-      <div class="form-group col-sm-6 col-lg-12">
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('type_of_housing', 'Tipo de Vivienda') !!}
           {!! Form::select('type_of_housing',['PROPIA'=>'PROPIA','FAMILIAR' => 'FAMILIAR', ' RENTA' => ' RENTA', 'HIPOTECA' => 'HIPOTECA'], null, ['class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'required' => 'required']) !!}
         </div>
+      </div>
+      <div class="form-group col-sm-6 col-lg-12">
+
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('maximun_amount', 'Monto Máximo') !!}
           <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
@@ -163,7 +159,7 @@
       <div class="form-group col-sm-6 col-lg-12">
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         {{-- Geolocation address client --}}
-        <div class="col-md-6">
+      {{--   <div class="col-md-6">
           <div class="gllpLatlonPicker">
             <div class="input-group">
               {!! Form::text('address', null, [
@@ -185,11 +181,12 @@
              <input type="button" id="update" class="gllpUpdateButton" style="display: none;" value="Actualizar">
              <br/>
            </div>
-         </div>
+         </div> --}}
          {{-- End Geolocation address client --}}
-         <div class="col-md-6">
+         <div class="col-md-12">
           <div class="gllpLatlonPicker">
             <div class="input-group">
+              <label>Ubica El Negocio</label>
               {!! Form::text('address', null, [
                 'style' => 'text-transform:uppercase',
                 'class' => 'form-control input-lg gllpSearchField',
@@ -236,7 +233,7 @@
     <div class="row setup-content" id="step-2">
       <div class="col-xs-12">
         <div class="col-md-12">
-          <h3> Ubicación </h3>
+          <h3> Domicilio  del Acreditado </h3>
           <div class="form-group col-sm-6 col-lg-12">
             <div class="form-group col-sm-6 col-lg-4">
               {!! Form::label('street', 'Calle:') !!}
@@ -501,7 +498,7 @@
           </div>
 
           <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('last_name_aval', 'Apellido Paterno:') !!}
+            {!! Form::label('last_name_aval', 'Apellido Paternos:') !!}
             {!! Form::text('last_name_aval', null, ['class' => 'form-control input-lg', 'placeholder' => 'ESCRIBE APELLIDO PATERNO DEL AVAL',  'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
           </div>
 
@@ -636,38 +633,66 @@
     <div class="col-md-12">
       <h3> Digitalización</h3>
       <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('ine_document', 'INE:') !!}
-        {!! Form::file('ine_document', [
+        {!! Form::label('avatar', 'Foto del Acreditado:') !!}
+        {!! Form::file('avatar', [
           'data-parsley-trigger ' => 'input focusin',
-          'required'=>'required'
           ]) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('curp_document', 'CURP:') !!}
-          {!! Form::file('curp_document', [
+          {!! Form::label('ine_document', 'INE:') !!}
+          {!! Form::file('ine_document', [
             'data-parsley-trigger ' => 'input focusin',
+            'required'=>'required'
             ]) !!}
           </div>
           <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('proof_of_addres', 'Comprobante de Domicilio:') !!}
-            {!! Form::file('proof_of_addres', [
+            {!! Form::label('curp_document', 'CURP:') !!}
+            {!! Form::file('curp_document', [
               'data-parsley-trigger ' => 'input focusin',
-              'required'=>'required'
               ]) !!}
             </div>
-            <div class="col-md-4">
-              <div class="btn-group">
-                {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+            <div class="form-group col-sm-6 col-lg-4">
+              {!! Form::label('proof_of_addres', 'Comprobante de Domicilio:') !!}
+              {!! Form::file('proof_of_addres', [
+                'data-parsley-trigger ' => 'input focusin',
+                'required'=>'required'
+                ]) !!}
               </div>
-            </div>
+              <hr>
+              <h4>Digitalización del Aval</h4>
+              <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('photo_ine', 'INE del Aval:') !!}
+                {!! Form::file('photo_ine', [
+                  'data-parsley-trigger ' => 'input focusin',
+                  'required'=>'required'
+                  ]) !!}
+                </div>
+                <div class="form-group col-sm-6 col-lg-4">
+                  {!! Form::label('photo_curp', 'CURP del Aval:') !!}
+                  {!! Form::file('photo_curp', [
+                    'data-parsley-trigger ' => 'input focusin',
+                    ]) !!}
+                  </div>
+                  <div class="form-group col-sm-6 col-lg-4">
+                    {!! Form::label('photo_cd', 'Comprobante de Domicilio del Aval:') !!}
+                    {!! Form::file('photo_cd', [
+                      'data-parsley-trigger ' => 'input focusin',
+                      'required'=>'required'
+                      ]) !!}
+                    </div>
+                    <div class="col-md-4">
+                      <div class="btn-group">
+                        {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>    
           </div>
-        </div>
-      </div>
 
-    </div>    
-  </div>
-
-  <script>
+          <script>
     //Función para validar una CURP
     function curpValida(curp) {
       var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,

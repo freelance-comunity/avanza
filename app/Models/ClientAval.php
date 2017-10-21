@@ -25,6 +25,9 @@ class ClientAval extends Model
 		"municipality_aval",
 		"state_aval",
 		"postal_code_aval",
+		"photo_ine",
+		"photo_curp",
+		"photo_cd",
 		"client_id"
 	];
 

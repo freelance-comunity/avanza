@@ -214,7 +214,7 @@ Route::post('purseAccess', 'GeneralController@purseAccess');
 /*=====  End of Routes for Employee  ======*/
 
 Route::get('formwizard', function(){
-	return view('wizard');
+    return view('wizard');
 });
 Route::get('teclado', function(){
     return view('teclado');
@@ -333,10 +333,13 @@ Route::get('creditsClientSemanal/{id}/{product}',[
     'uses' => 'ClientController@creditsClientSemanal',
 ]);
 Route::get('renovate/{id}/{product}', function($id){
+    $product = App\Models\Product::find(3);
     $client = App\Models\Client::find($id);
     return view('credits.renovate')
-    ->with('client',$client);
+    ->with('client',$client)
+    ->with('product',$product);
 });
+
 
 Route::post('renovation', 'CreditController@renovation');
 

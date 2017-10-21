@@ -153,8 +153,10 @@ class ClientController extends AppBaseController
 		$data_location['state']  = $request->input('state');
 		$data_location['postal_code'] = $request->input('postal_code');
 		$data_location['references'] = $request->input('references');
-		$data_location['latitude'] = $request->input('latitude');
-		$data_location['lenght'] = $request->input('lenght');
+		if ($request->input('latitude')) {
+			$data_location['latitude'] = $request->input('latitude');
+			$data_location['lenght'] = $request->input('lenght');
+		}
 		$data_location['client_id'] = $client->id;
 
 		$location = ClientLocation::create($data_location);
@@ -189,6 +191,25 @@ class ClientController extends AppBaseController
 			$data_aval['municipality_aval'] = strtoupper($request->input('municipality_aval'));
 			$data_aval['state_aval'] = $request->input('state_aval');		
 			$data_aval['postal_code_aval'] = $request->input('postal_code_aval');
+
+			if($request->hasFile('photo_ine')){
+				$photo_ine = $request->file('photo_ine');
+				$filename = time() . '.'.$client->id.'_ine_aval.' . $photo_ine->getClientOriginalExtension();
+				Image::make($photo_ine)->resize(300, 300)->save( public_path('/uploads/documents/' . $filename ) );
+				$input['photo_ine'] = $filename;
+			}
+			if($request->hasFile('photo_curp')){
+				$photo_curp = $request->file('photo_curp');
+				$filename = time() . '.'.$client->id.'_curp_aval.' . $photo_curp->getClientOriginalExtension();
+				Image::make($photo_curp)->resize(300, 300)->save( public_path('/uploads/documents/' . $filename ) );
+				$input['photo_curp'] = $filename;
+			}
+			if($request->hasFile('photo_cd')){
+				$photo_cd = $request->file('photo_cd');
+				$filename = time() . '.'.$client->id.'_comprobante_aval.' . $photo_cd->getClientOriginalExtension();
+				Image::make($photo_cd)->resize(300, 300)->save( public_path('/uploads/documents/' . $filename ) );
+				$input['photo_cd'] = $filename;
+			}
 			$data_aval['client_id'] = $client->id;	
 
 			/* Save b aval data */	

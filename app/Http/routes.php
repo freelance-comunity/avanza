@@ -694,7 +694,7 @@ Route::get('transferCredits', function(){
 Route::post('transferProcess', 'GeneralController@transferProcess');
 
 Route::get('moratorio',function(){
- $credit = App\Models\credit::all();
+ $credit = App\Models\Credit::all();
 
  $date_now = \Carbon\Carbon::now()->toDateString();
  $hour_now = \Carbon\Carbon::now()->toTimeString();

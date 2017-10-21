@@ -38,7 +38,10 @@ Lista de créditos
 						<th>Capital Vencido</th>
 						<th>Intereses vencidos</th>
 						<th>Mora</th>
-						<th>Total</th>
+						{{-- <th>Total</th> --}}
+						<th>Total Vigente</th>
+						<th>Total Capital Vigente</th>
+						<th>Total Interes Vigente</th>
 						<th>Estatus</th>			
 					</thead>
 					<tbody>
@@ -48,10 +51,16 @@ Lista de créditos
 						$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 						$current_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pagado')->get();
 						$partial_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Parcial')->get();
+						$pending_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pendiente')->get();$late_interest = $late_payments->sum('interest');
+
 						$late_interest = $late_payments->sum('interest');
 						$late_capital = $late_payments->sum('capital');
 						$late_moratorium = $late_payments->sum('moratorium');
 						$late_total = $late_interest + $late_capital + $late_moratorium;
+
+						$pending_interest = $pending_payments->sum('interest');
+						$pending_capital = $pending_payments->sum('capital');
+						$pending_total = $pending_interest + $pending_capital;
 						@endphp
 						<tr>
 							<td><a href="{!! route('credits.show', [$credit->id]) !!}">{!! $credit->folio !!}</a></td>
@@ -63,7 +72,7 @@ Lista de créditos
 							<td>{!! $current_payments->count() !!}</td>
 							<td>{!! $partial_payments->count() !!}</td>
 							<td>{!! $late_payments->count() !!}</td>
-							<th class="info">${{ number_format($debt->ammount,2) }}</th>
+							<th class="info">${{ number_format($current_payments->sum('total'),2) }}</th>
 							@if ($late_total==0)
 							<td class="success">${!! number_format($late_total, 2) !!}</td>
 							@elseif($late_total > 0)
@@ -72,7 +81,10 @@ Lista de créditos
 							<td class="bg-primary">${{ number_format($late_capital,2) }}</td>
 							<td class="bg-primary">${{ number_format($late_interest,2) }}</td>
 							<td class="bg-primary">${{ number_format($late_moratorium,2) }}</td>
-							<td class="warning">${{ number_format($credit->debt['ammount'] + $late_total,2) }}</td>
+							{{-- <td class="warning">${{ number_format($credit->debt['ammount'] + $late_total,2) }}</td> --}}
+							<td class="warning">${!! number_format($pending_total,2) !!}</td>
+							<td class="bg-primary">${!! number_format($pending_capital,2) !!}</td>
+							<td class="bg-primary">${!! number_format($pending_interest,2) !!}</td>
 							<td>{{ $credit->debt['status'] }}</td>
 						</tr>
 						@endforeach

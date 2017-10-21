@@ -664,7 +664,7 @@
                 {!! Form::label('photo_ine', 'INE del Aval:') !!}
                 {!! Form::file('photo_ine', [
                   'data-parsley-trigger ' => 'input focusin',
-                  'required'=>'required'
+                 
                   ]) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
@@ -677,7 +677,7 @@
                     {!! Form::label('photo_cd', 'Comprobante de Domicilio del Aval:') !!}
                     {!! Form::file('photo_cd', [
                       'data-parsley-trigger ' => 'input focusin',
-                      'required'=>'required'
+                      
                       ]) !!}
                     </div>
                     <div class="col-md-4">

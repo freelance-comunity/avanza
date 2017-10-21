@@ -1,34 +1,203 @@
-@extends('layouts.app')
-
-@section('htmlheader_title')
-    {{ trans('adminlte_lang::message.serviceunavailable') }}
-@endsection
-
-@section('contentheader_title')
-    {{ trans('adminlte_lang::message.503error') }}
-@endsection
-
-@section('$contentheader_description')
-@endsection
-
-@section('main-content')
-
-    <div class="error-page">
-        <h2 class="headline text-red">503</h2>
-        <div class="error-content">
-            <h3><i class="fa fa-warning text-red"></i> Oops! {{ trans('adminlte_lang::message.somethingwrong') }}</h3>
-            <p>
-                }}
-                {{ trans('adminlte_lang::message.mainwhile') }} <a href='{{ url('/home') }}'>{{ trans('adminlte_lang::message.returndashboard') }}</a> {{ trans('adminlte_lang::message.usingsearch') }}
-            </p>
-            <form class='search-form'>
-                <div class='input-group'>
-                    <input type="text" name="search" class='form-control' placeholder="{{ trans('adminlte_lang::message.search') }}"/>
-                    <div class="input-group-btn">
-                        <button type="submit" name="submit" class="btn btn-danger btn-flat"><i class="fa fa-search"></i></button>
-                    </div>
-                </div><!-- /.input-group -->
-            </form>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>CREDIEFECTIVO | BLOQUEO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+    /* reset */
+    html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+    article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+    ol,ul{list-style:none;margin:0px;padding:0px;}
+    blockquote,q{quotes:none;}
+    blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+    table{border-collapse:collapse;border-spacing:0;}
+    /* start editing from here */
+    a{text-decoration:none;}
+    .txt-rt{text-align:right;}/* text align right */
+    .txt-lt{text-align:left;}/* text align left */
+    .txt-center{text-align:center;}/* text align center */
+    .float-rt{float:right;}/* float right */
+    .float-lt{float:left;}/* float left */
+    .clear{clear:both;}/* clear float */
+    .pos-relative{position:relative;}/* Position Relative */
+    .pos-absolute{position:absolute;}/* Position Absolute */
+    .vertical-base{ vertical-align:baseline;}/* vertical align baseline */
+    .vertical-top{  vertical-align:top;}/* vertical align top */
+    .underline{ padding-bottom:5px; border-bottom: 1px solid #eee; margin:0 0 20px 0;}/* Add 5px bottom padding and a underline */
+    nav.vertical ul li{ display:block;}/* vertical menu */
+    nav.horizontal ul li{   display: inline-block;}/* horizontal menu */
+    img{max-width:100%;}
+    /*end reset*/
+    body{
+        font-family:"Century Gothic" Geneva Helvetica, sans-serif;
+        background: url('../images/bg.png');
+        background: url('{{ asset('img/bg.png') }}');
+    }
+    .wrap{
+        margin:0 auto; 
+        width: 96%;
+    }
+    h1{
+        margin-top: 20px;
+        color: #603813;
+        font-size: 3em;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    .banner{
+        text-align:center;
+        margin-top: 30px;
+    }
+    .banner img{
+        margin-top: 0px;
+    }
+    .page{
+        text-align:center;
+        font-family: "Century Gothic";
+    }
+    .page h2{
+        font-size:3em;
+        color: rgb(99, 44, 37);
+        font-weight:bold;
+    }
+    .footer{
+        font-family: "Century Gothic";
+        position: absolute;
+        right: 30px;
+        bottom:20px;
+    }
+    .footer p{
+        font-size:1em;
+        color: #603813;
+    }
+    .footer a{
+       color: #f9614d;
+   }
+   .footer a:hover{
+    text-decoration:underline;
+}
+/*media queries*/
+@media all and (max-width:1366px) and (min-width:1280px){
+    .wrap{
+        width: 90%;
+    }
+    .banner{
+        margin-top: 30px;
+    }
+}
+@media all and (max-width:1280px) and (min-width:1024px){
+    .wrap{
+        width: 90%;
+    }
+}   
+@media all and (max-width:1024px) and (min-width:800px){
+    .wrap{
+        width: 90%;
+    }
+    h1{
+        font-size: 2em;
+    }
+    .banner{
+        margin-top: 0px;
+    }
+    .page h2{
+        font-size: 2em;
+    }
+}
+@media all and (max-width:800px) and (min-width:640px){
+    .wrap{
+        width: 90%;
+    }
+    h1{
+        font-size: 2em;
+    }
+    .banner{
+        margin-top: 10px;
+    }
+    .banner img{
+        width: 34%;
+    }
+    .page h2{
+        font-size:2em;
+    }
+}
+@media all and (max-width:640px) and (min-width:480px){
+    .wrap{
+        width: 90%;
+    }
+    h1{
+        font-size: 1.6em;
+    }
+    .banner{
+        margin-top: 0px;
+    }
+    .banner img{
+        width: 32%;
+    }
+    .page h2{
+        font-size:1.6em;
+    }
+}
+@media all and (max-width:480px) and (min-width:320px){
+    .wrap{
+        width: 90%;
+    }
+    h1{
+        font-size: 1.4em;
+    }
+    .banner{
+        margin-top: 0px;
+    }
+    .banner img{
+        width: 32%;
+    }
+    .page h2{
+        font-size:1.4em;
+    }
+    .footer p{
+        font-size: 0.9em;
+    }
+}
+@media all and (max-width:320px){
+    .wrap{
+        width: 90%;
+    }
+    h1{
+        font-size: 1.4em;
+    }
+    .banner{
+        margin-top: 10px;
+    }
+    .banner img{
+        width:80%;
+    }
+    .page h2{
+        font-size:1.4em;
+    }
+    .footer{
+        bottom: 10px;
+    }
+    .footer p{
+        font-size: 0.9em;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>CREDIEFECTIVO</h1>
+        <div class="banner">
+            <img src="images/banner.png" alt="" />
+            <img src="{{ asset('img/banner.png') }}" alt="" />
         </div>
-    </div><!-- /.error-page -->
-@endsection
+        <div class="page">
+            <h2>Lo sentimos el horario de uso del sistema ha expirado, intenta mañana!</h2>
+        </div>
+        <div class="footer">
+            <p>Desarrollo <a href="#">IT</a></p>
+        </div>
+    </div>
+</body>
+</html>
+

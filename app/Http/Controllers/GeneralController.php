@@ -23,12 +23,15 @@ use Jenssegers\Date\Date;
 use App\Models\Payment;
 use App\Models\LatePayments;
 use App\Models\Close;
+use App\Models\IncomePayment;
+use App\Models\BoxCut;
 
 class GeneralController extends Controller
 {	
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('login_mid');
 	}
 	
 	public function getPromoter()
@@ -43,7 +46,6 @@ class GeneralController extends Controller
 		elseif (Auth::user()->hasRole('coordinador-regional')) {
 			$user_allocation = Auth::user();
 			$region_allocation = $user_allocation->region;
-
 			$filtered = User::where('id', '!=', Auth::id())->get();
 			//$filtered = User::all();
 			$users = $filtered->where('region_id', $region_allocation->id);
@@ -343,7 +345,7 @@ class GeneralController extends Controller
 		$credits  = $transmitter->credits;
 
 		$payments = $transmitter->payments;
-	
+
 		foreach ($clients as $client) {
 			$client->user_id = $receiver->id;
 			$client->save();
@@ -361,5 +363,33 @@ class GeneralController extends Controller
 
 		Toastr::success('Se ha realizado la transferencia de cartera exitosamente.', 'TRANSFERENCIA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 		return redirect()->back();
+	}
+
+	public function movements()
+	{
+		$user_allocation = Auth::user();
+		$region_allocation = $user_allocation->region;
+
+		$vaults = Vault::all()->sortByDesc('updated_at');;
+		$starts_collection = Income::all();
+		$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at'); 
+		$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at'); 
+		$recoverys = IncomePayment::all()->sortByDesc('created_at'); 
+		$accesses  = PurseAccess::all()->sortByDesc('created_at'); 
+		$credits   = ExpenditureCredit::all()->sortByDesc('created_at'); 
+		$expenses  = Expenditure::all()->sortByDesc('created_at');
+		$cuts      = BoxCut::all()->sortByDesc('created_at');
+
+		return view('partials.movements')
+		->with('region_allocation', $region_allocation)
+		->with('vaults', $vaults)
+		->with('starts_collection', $starts_collection)
+		->with('starts', $starts)
+		->with('assignments', $assignments)
+		->with('recoverys', $recoverys)
+		->with('credits', $credits)
+		->with('accesses', $accesses)
+		->with('expenses', $expenses)
+		->with('cuts', $cuts);
 	}
 }

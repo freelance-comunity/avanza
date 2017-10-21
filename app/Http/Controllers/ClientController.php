@@ -44,6 +44,7 @@ class ClientController extends AppBaseController
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('login_mid');
 		$this->middleware('client',['only'=>['create','creditsClient']]);		
 	}
 

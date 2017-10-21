@@ -12,11 +12,13 @@
         {!! Form::open(['url' => 'process','data-parsley-validate' => '','onsubmit'=>'return enviado()']) !!}  
         <p>
           {!! Form::label('payment', 'Monto:') !!}
-          <input type="number" name="payment" id=" payment example" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
+          <input type="text" name="payment" id=" payment example" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
           <input type="hidden"  name="payment_id" value="{{ $payment->id }}">
         </p>
         <p>
-          {!! Form::submit('PAGAR', ['class' => 'btn btn-lg btn-block btn-success', 'id'=>'cl']) !!}
+          {{-- {!! Form::submit('PAGAR', ['class' => 'btn btn-lg btn-block btn-success', 'id'=>'cl']) !!} --}}
+          
+          <input type="submit" value="PAGAR" class="btn btn-lg btn-block btn-success" id="cl" onclick="return confirm('¿Estás seguro de procesar este pago?')">
         </p>
         {!! Form::close() !!}
       </div>

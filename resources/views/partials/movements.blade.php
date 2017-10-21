@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('htmlheader_title')
 Home
 @endsection
@@ -11,21 +10,10 @@ Movimientos
 Detalles
 @endsection
 <div class="row">
-	@php
-	$vaults = App\Models\Vault::all()->sortByDesc('updated_at');;
-	$starts_collection = App\Models\Income::all();
-	$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at'); 
-	$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at'); 
-	$recoverys = App\Models\IncomePayment::all()->sortByDesc('created_at'); 
-	$accesses  = App\Models\PurseAccess::all()->sortByDesc('created_at'); 
-	$credits   = App\Models\ExpenditureCredit::all()->sortByDesc('created_at'); 
-	$expenses  = App\Models\Expenditure::all()->sortByDesc('created_at');
-	$cuts      = App\Models\BoxCut::all()->sortByDesc('created_at');
-	@endphp
 	<div class="col-md-12">
 		<div class="box box-danger">
 			<div class="box-header with-border">
-				<h3 class="box-title">Movimientos</h3>
+				<h3 class="box-title">Movimientos {{-- {{ $region_allocation->id }} --}}</h3>
 			</div>  
 			<div class="box-body">
 				<ul class="nav nav-tabs">
@@ -54,6 +42,25 @@ Detalles
 								</thead>
 								<tbody>
 									@foreach($vaults as $vault)
+									@if ($vault->user->region->id != $region_allocation->id)
+									<tr style="display: none;">
+										<td>{{ $vault->user->branch['name'] }}</td>
+										<td>{{ $vault->user['name'] }} {{ $vault->user['father_last_name'] }} {{ $vault->user['mother_last_name'] }}</td>
+										<td>
+											${{ number_format($vault->ammount,2) }}
+										</td>
+										<td>{{ $vault->updated_at->toDateTimeString() }}</td>
+									</tr>
+									@elseif ($vault->user->hasRole(['administrador', 'director-general']))
+									<tr style="display: none;">
+										<td>{{ $vault->user->branch['name'] }}</td>
+										<td>{{ $vault->user['name'] }} {{ $vault->user['father_last_name'] }} {{ $vault->user['mother_last_name'] }}</td>
+										<td>
+											${{ number_format($vault->ammount,2) }}
+										</td>
+										<td>{{ $vault->updated_at->toDateTimeString() }}</td>
+									</tr>
+									@else
 									<tr>
 										<td>{{ $vault->user->branch['name'] }}</td>
 										<td>{{ $vault->user['name'] }} {{ $vault->user['father_last_name'] }} {{ $vault->user['mother_last_name'] }}</td>
@@ -62,6 +69,7 @@ Detalles
 										</td>
 										<td>{{ $vault->updated_at->toDateTimeString() }}</td>
 									</tr>
+									@endif
 									@endforeach
 								</tbody>
 							</table>
@@ -84,6 +92,10 @@ Detalles
 								</thead>
 								<tbody>
 									@foreach($starts as $start)
+									{{-- @php
+									$startRegion = $start->vault->user->region['id'];
+									@endphp
+									@if($startRegion === $region_allocation->id)
 									<tr>
 										<td>{{ $start->vault->user->branch['name'] }}</td>
 										<td>{{ $start->vault->user['name'] }} {{ $start->vault->user['father_last_name'] }} {{ $start->vault->user['mother_last_name'] }}</td>
@@ -91,6 +103,15 @@ Detalles
 										<td>{{ $start->concept }}</td>
 										<td>{{ $start->created_at }}</td>
 									</tr>
+									@else --}}
+									<tr>
+										<td>{{ $start->vault->user->branch['name'] }}</td>
+										<td>{{ $start->vault->user['name'] }} {{ $start->vault->user['father_last_name'] }} {{ $start->vault->user['mother_last_name'] }}</td>
+										<td>${{ number_format($start->ammount) }}</td>
+										<td>{{ $start->concept }}</td>
+										<td>{{ $start->vault->user->region['id'] }}</td>
+									</tr>
+									{{-- @endif --}}
 									@endforeach
 								</tbody>
 							</table>
@@ -113,6 +134,15 @@ Detalles
 								</thead>
 								<tbody>
 									@foreach($assignments as $assignment)
+									{{-- @if ($assignment->vault->user->region_id != $region_allocation->id)
+									<tr style="display: none;">
+										<td>{{ $assignment->vault->user->branch['name'] }}</td>
+										<td>{{ $assignment->vault->user['name'] }} {{ $assignment->vault->user['father_last_name'] }} {{ $assignment->vault->user['mother_last_name'] }}</td>
+										<td>${{ number_format($assignment->ammount) }}</td>
+										<td>{{ $assignment->concept }}</td>
+										<td>{{ $assignment->created_at }}</td>
+									</tr>
+									@else --}}
 									<tr>
 										<td>{{ $assignment->vault->user->branch['name'] }}</td>
 										<td>{{ $assignment->vault->user['name'] }} {{ $assignment->vault->user['father_last_name'] }} {{ $assignment->vault->user['mother_last_name'] }}</td>
@@ -120,6 +150,7 @@ Detalles
 										<td>{{ $assignment->concept }}</td>
 										<td>{{ $assignment->created_at }}</td>
 									</tr>
+									{{-- @endif --}}
 									@endforeach
 								</tbody>
 							</table>	
@@ -206,6 +237,17 @@ Detalles
 								</thead>
 								<tbody>
 									@foreach($credits as $credit)
+									{{-- @if ($credit->credit['folio'] != $region_allocation->id)
+									<tr style="display: none;">
+										<td>{{ $credit->vault->user->branch['name'] }}</td>
+										<td>{{ $credit->vault->user['name'] }} {{ $credit->vault->user['father_last_name'] }} {{ $credit->vault->user['mother_last_name'] }}</td>
+										<td>${{ number_format($credit->ammount) }}</td>
+										<td>{{ $credit->concept }}</td>
+										<td>{{ $credit->credit['firts_name'] }} {{ $credit->credit['last_name'] }} {{ $credit->credit['mothers_last_name'] }}</td>
+										<td>{{ $credit->credit['folio'] }}</td>
+										<td>{{ $credit->created_at }}</td>
+									</tr>
+									@else --}}
 									<tr>
 										<td>{{ $credit->vault->user->branch['name'] }}</td>
 										<td>{{ $credit->vault->user['name'] }} {{ $credit->vault->user['father_last_name'] }} {{ $credit->vault->user['mother_last_name'] }}</td>
@@ -215,6 +257,7 @@ Detalles
 										<td>{{ $credit->credit['folio'] }}</td>
 										<td>{{ $credit->created_at }}</td>
 									</tr>
+									{{-- @endif --}}
 									@endforeach
 								</tbody>
 							</table>

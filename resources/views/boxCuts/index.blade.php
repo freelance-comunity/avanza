@@ -14,7 +14,7 @@ Lista de personal
     <div class="row">
         <h1 class="pull-left">CORTE DE CAJA</h1>
     </div>
- @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
+    @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
     <div class="row">
         @if($employees->isEmpty())
         <div class="well text-center">No hay personal registrado.</div>
@@ -30,6 +30,7 @@ Lista de personal
                 </thead>
                 <tbody>
                     @foreach($employees as $employee)
+                    @if (Auth::user()->hasRole(['administrador', 'director-general']))
                     <tr>
                         <td>{!! $employee->name !!}</td>
                         <td>{!! $employee->father_last_name !!}</td>
@@ -39,6 +40,29 @@ Lista de personal
                             <a href="{{ url('showbox') }}/{{ $employee->id }}" data-toggle="tooltip" title="Ver detalles" href=""><i class="fa fa-eye fa-2x"></i></a>
                         </td>              
                     </tr>
+                    @else
+                    @if ($employee->hasRole(['administrador', 'director-general']))
+                    <tr style="display: none;">
+                        <td>{!! $employee->name !!}</td>
+                        <td>{!! $employee->father_last_name !!}</td>
+                        <td>{!! $employee->mother_last_name !!}</td>
+                        <td>{{ $employee->branch->name }}</td>
+                        <td>
+                            <a href="{{ url('showbox') }}/{{ $employee->id }}" data-toggle="tooltip" title="Ver detalles" href=""><i class="fa fa-eye fa-2x"></i></a>
+                        </td>              
+                    </tr>
+                    @else
+                    <tr>
+                        <td>{!! $employee->name !!}</td>
+                        <td>{!! $employee->father_last_name !!}</td>
+                        <td>{!! $employee->mother_last_name !!}</td>
+                        <td>{{ $employee->branch->name }}</td>
+                        <td>
+                            <a href="{{ url('showbox') }}/{{ $employee->id }}" data-toggle="tooltip" title="Ver detalles" href=""><i class="fa fa-eye fa-2x"></i></a>
+                        </td>              
+                    </tr>
+                    @endif
+                    @endif
                     @endforeach
                 </tbody>
             </table>

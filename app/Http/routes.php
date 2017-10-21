@@ -748,4 +748,6 @@ if ($payment->status == 'Vencido') {
 echo "moratorio aplicado";
 });
 
+Route::get('walletExpired', 'GeneralController@walletExpired');
+
 

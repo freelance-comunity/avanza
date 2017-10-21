@@ -392,4 +392,11 @@ class GeneralController extends Controller
 		->with('expenses', $expenses)
 		->with('cuts', $cuts);
 	}
+
+	public function walletExpired()
+	{
+		$credits = Credit::all();
+		return view('credits.wallet_expired')
+		->with('credits', $credits);
+	}
 }

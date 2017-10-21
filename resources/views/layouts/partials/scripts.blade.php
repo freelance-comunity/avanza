@@ -19,7 +19,7 @@
 </script>
 
 {{-- Datatables --}}
-<script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
 <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
@@ -53,6 +53,28 @@
       </script>
 
       {{-- Datatables --}}
+      <script>
+        $(document).ready(function() {
+          $('#carteraVencida').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            fnFooterCallback: function(row, data, start, end, display) {
+              var api = this.api();
+              var footer = $(this).append('<tfoot><tr></tr></tfoot>');
+              this.api().columns().every(function () {
+                var column = this;
+                $(footer).append('<tfoot><th><input type="text" style="width:100%;"></th></tfoot>');
+              });
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'csv','excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
       <script>
         $(document).ready(function() {
           $('#sis').DataTable( {

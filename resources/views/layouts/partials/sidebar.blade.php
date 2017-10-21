@@ -42,7 +42,16 @@
         </ul>
       </li>
       <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li>
+      @if(Auth::user()->hasRole(['administrador', 'director-general']))
       <li><a href="{{ url('graphics2') }}"><i class='fa fa-line-chart'></i> <span>Graficas 2</span></a></li>
+      <li class="treeview">
+        <a href="#"><i class='fa fa-pie-chart'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">   
+         <li><a href="{{ url('walletExpired') }}">Cartera vencida</a></li>
+         <li><a href=""></a></li>
+        </ul>
+      </li>
+      @endif
       <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li>
       @endif
       <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>

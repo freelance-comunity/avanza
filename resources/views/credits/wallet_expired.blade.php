@@ -25,6 +25,7 @@ Lista de créditos
 					@endif  
 					<thead class="bg-primary">
 						<th>Folio</th>
+						<th>Región</th>
 						<th>Tipo de Crédito</th>
 						<th>Promotor</th>
 						<th>Cliente</th>
@@ -65,6 +66,7 @@ Lista de créditos
 						@endphp
 						<tr>
 							<td><a href="{!! route('credits.show', [$credit->id]) !!}">{!! $credit->folio !!}</a></td>
+							<td>{!! $credit->region['name'] !!}</td>
 							<td>{!! $credit->periodicity !!}</td>
 							<td>{!! $credit->user['name'] !!} {!! $credit->user['father_last_name'] !!} {!! $credit->user['mother_last_name'] !!}</td>
 							<td>{!! $credit->firts_name !!} {!! $credit->last_name !!} {!! $credit->mothers_last_name !!}</td>

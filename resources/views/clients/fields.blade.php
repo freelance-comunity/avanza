@@ -159,7 +159,7 @@
       <div class="form-group col-sm-6 col-lg-12">
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         {{-- Geolocation address client --}}
-      {{--   <div class="col-md-6">
+     {{--    <div class="col-md-6">
           <div class="gllpLatlonPicker">
             <div class="input-group">
               {!! Form::text('address', null, [
@@ -216,11 +216,11 @@
           alert("Este navegador no soporta Geolocalización.");
         }
         function showPosition(position) {
-          document.getElementById('lat').value=position.coords.latitude;
-          document.getElementById('lon').value=position.coords.longitude;
+          // document.getElementById('lat').value=position.coords.latitude;
+          // document.getElementById('lon').value=position.coords.longitude;
           document.getElementById('lat_bussines').value=position.coords.latitude;
           document.getElementById('lon_bussines').value=position.coords.longitude;
-          document.getElementById("update").click();
+          // document.getElementById("update").click();
           document.getElementById("update_bussines").click();
         }
       </script>
@@ -659,12 +659,12 @@
                 ]) !!}
               </div>
               <hr>
-              <h4>Digitalización del Aval</h4>
+              {{-- <h4>Digitalización del Aval</h4>
               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('photo_ine', 'INE del Aval:') !!}
                 {!! Form::file('photo_ine', [
                   'data-parsley-trigger ' => 'input focusin',
-                  'required'=>'required'
+                 
                   ]) !!}
                 </div>
                 <div class="form-group col-sm-6 col-lg-4">
@@ -677,9 +677,9 @@
                     {!! Form::label('photo_cd', 'Comprobante de Domicilio del Aval:') !!}
                     {!! Form::file('photo_cd', [
                       'data-parsley-trigger ' => 'input focusin',
-                      'required'=>'required'
+                      
                       ]) !!}
-                    </div>
+                    </div> --}}
                     <div class="col-md-4">
                       <div class="btn-group">
                         {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-primary', 'id' => 'save']) !!}

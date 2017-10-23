@@ -26,10 +26,10 @@
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>
 					@if ($payment->date == $date_now)
-					<button type="button" class="btn btn-success btn-lg disabled" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
+					<button type="button" class="btn btn-success btn-lg disabled" >$ {{ number_format($payment->total, 2) }}
 					</button>
 					@else
-					<button type="button" class="btn bg-yellow btn-lg disabled" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
+					<button type="button" class="btn bg-yellow btn-lg disabled" >$ {{ number_format($payment->total, 2) }}
 					</button>
 					@endif
 				</td>
@@ -46,7 +46,7 @@
 				<td>$ {{ number_format($payment->capital, 2) }}</td>
 				<td>$ {{ number_format($payment->interest, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
-				<td> <button type="button" class="btn btn-primary btn-lg disabled" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button>
+				<td> <button type="button" class="btn btn-primary btn-lg disabled">$ {{ number_format($payment->total, 2) }}</button>
 					<a href="{{ url('cancel') }}/{{$payment->id}}" class="btn btn-lg bg-black" onclick="return confirm('¿Estas seguro de cancelar el pago?')"><i class="fa fa-angle-double-left"></i></a></td>
 					<td>${{ number_format($payment->payment, 2)}}</td>
 					<td style="color: blue;">${{ number_format($payment->balance, 2) }}</td>
@@ -62,7 +62,7 @@
 					<td>$ {{ number_format($payment->capital, 2) }}</td>
 					<td>$ {{ number_format($payment->interest, 2) }}</td>
 					<td>$ {{ number_format($payment->moratorium, 2) }}</td>
-					<td> <button type="button" class="btn btn-primary  btn-lg disabled " data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button><a href="{{ url('mora') }}/{{$payment->id}}"  class=" btn btn-lg bg-red " onclick="return confirm('¿Estas seguro de perdonar el moratorio?')"><i class="fa fa-angle-left"></i></a><a href="{{ url('cancel') }}/{{$payment->id}}" class="btn btn-lg bg-black " onclick="return confirm('¿Estas seguro de cancelar el pago?')"><i class="fa fa-angle-double-left"></i></a></td>
+					<td> <button type="button" class="btn btn-primary  btn-lg disabled ">$ {{ number_format($payment->total, 2) }}</button><a href="{{ url('mora') }}/{{$payment->id}}"  class=" btn btn-lg bg-red " onclick="return confirm('¿Estas seguro de perdonar el moratorio?')"><i class="fa fa-angle-left"></i></a><a href="{{ url('cancel') }}/{{$payment->id}}" class="btn btn-lg bg-black " onclick="return confirm('¿Estas seguro de cancelar el pago?')"><i class="fa fa-angle-double-left"></i></a></td>
 					<td>${{ number_format($payment->payment, 2)}}</td>
 					<td>${{ number_format($payment->balance, 2) }}</td>
 					<td><p>{{$payment->status}}</p></td>
@@ -77,7 +77,7 @@
 					<td>$ {{ number_format($payment->capital, 2) }}</td>
 					<td>$ {{ number_format($payment->interest, 2) }}</td>
 					<td>$ {{ number_format($payment->moratorium, 2) }}</td>
-					<td> <button type="button" class="btn bg-default btn-lg disabled" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button><a href="{{ url('cancel') }}/{{$payment->id}}"  class="btn btn-lg bg-black" onclick="return confirm('¿Estas seguro de cancelar el pago?')"><i class="fa fa-angle-double-left"></i></a></td>
+					<td> <button type="button" class="btn bg-default btn-lg disabled" >$ {{ number_format($payment->total, 2) }}</button><a href="{{ url('cancel') }}/{{$payment->id}}"  class="btn btn-lg bg-black" onclick="return confirm('¿Estas seguro de cancelar el pago?')"><i class="fa fa-angle-double-left"></i></a></td>
 					<td>${{ number_format($payment->payment, 2)}}</td>
 					<td>${{ number_format($payment->balance, 2) }}</td>
 					<td><p style="color:green;">{{$payment->status}}</p></td>

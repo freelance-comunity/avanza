@@ -159,7 +159,7 @@
       <div class="form-group col-sm-6 col-lg-12">
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         {{-- Geolocation address client --}}
-      {{--   <div class="col-md-6">
+     {{--    <div class="col-md-6">
           <div class="gllpLatlonPicker">
             <div class="input-group">
               {!! Form::text('address', null, [
@@ -216,11 +216,11 @@
           alert("Este navegador no soporta Geolocalización.");
         }
         function showPosition(position) {
-          document.getElementById('lat').value=position.coords.latitude;
-          document.getElementById('lon').value=position.coords.longitude;
+          // document.getElementById('lat').value=position.coords.latitude;
+          // document.getElementById('lon').value=position.coords.longitude;
           document.getElementById('lat_bussines').value=position.coords.latitude;
           document.getElementById('lon_bussines').value=position.coords.longitude;
-          document.getElementById("update").click();
+          // document.getElementById("update").click();
           document.getElementById("update_bussines").click();
         }
       </script>

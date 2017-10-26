@@ -193,6 +193,7 @@
                 'placeholder'=>'ESCRIBE LA DIRECCIÓN DEL NEGOCIO, EJ: AV. CENTRAL OTE. 214 SAN MARCOS, TUXTLA GUTIÉRREZ, CHIS.',
                 'data-parsley-trigger ' => 'input focusin',
                 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                 <label>&nbsp;&nbsp;</label>
                 <div class="input-group-btn">
                  <input type="button" class="gllpSearchButton btn btn-primary input-lg" value="Buscar">
                </div>

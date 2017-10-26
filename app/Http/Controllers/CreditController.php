@@ -251,7 +251,7 @@ class CreditController extends AppBaseController
 				elseif ($periodicity == 'DIARIO' && $dues == 60) {
 					$tasa = 0.30;
 				}
-				elseif($periodicity == 'REESTRUCTURACIÓN'){
+				elseif($periodicity == 'MIGRADOS'){
 					$tasa = $request->input('interest_rate') / 100;
 				}
 				$interes = $ammount * $tasa;
@@ -260,7 +260,7 @@ class CreditController extends AppBaseController
 				$pago = $total/$dues;
 				$intpago = $pago-$capital;
 				$date = new Carbon($credit->date);
-				if ($periodicity == 'REESTRUCTURACIÓN' ) {
+				if ($periodicity == 'MIGRADOS' ) {
 					$debt = new Debt;
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";

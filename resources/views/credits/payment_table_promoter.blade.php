@@ -58,7 +58,7 @@
 			<tr class="danger">
 				<td>{{ $payment->number }}</td>
 				<td>{{$payment->date->format('d F Y')}}</td>
-				<td> <button type="button" class="btn btn-danger btn-lg" onclick="myFunction()" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
+				<td> <button  type="button" class="btn btn-danger btn-lg" id="vencido" onclick="myFunction()" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
@@ -85,6 +85,8 @@
 			alert("¿ESTAS SEGURO DE REALIZAR ESTE PAGO?");
 		}
 	</script>
-	<script>
-		
-	</script>
+{{-- 
+	<script>	
+		var a = $('#date_now')
+		alert(a);
+	</script> --}}

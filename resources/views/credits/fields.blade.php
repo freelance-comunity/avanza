@@ -57,7 +57,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
             'data-parsley-trigger ' => 'input focusin',
             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
           </div>
-          @elseif ($product->name == 'REESTRUCTURACIÓN')
+          @elseif ($product->name == 'MIGRADOS')
           <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('dues', 'No. Cuotas:') !!}
             {!! Form::text('dues',null, [
@@ -81,7 +81,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
             <input type="hidden" name="branch" value="{{ $client->branch->name}}">
             <input type="hidden" name="branch_id" value="{{ $client->branch->id }}">
             <input type="hidden" name="region_id" value="{{ $client->branch->region->id }}">
-            @if ($product->name == 'REESTRUCTURACIÓN')
+            @if ($product->name == 'MIGRADOS')
             <div class="form-group col-sm-6 col-lg-12">
               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('interest_rate', 'Tasa:') !!}

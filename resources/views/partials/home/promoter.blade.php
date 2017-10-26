@@ -13,6 +13,7 @@ foreach ($payments as $element) {
         $count_credits = $count_credits + 1;
     }
 }
+
 @endphp
 <div class="row">
     <div class="col-md-4">
@@ -23,6 +24,16 @@ foreach ($payments as $element) {
                 {{ Date::now()->format('l j F Y') }}
             </h4>
             RUTA DE COBRO
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="alert bg-success alert-dismissible">
+            <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
+            <h4>
+                <i class="icon fa fa-money"></i>
+                Monto a Recuperar
+            </h4>
+            
         </div>
     </div>
    {{--  <div class="table-responsive">

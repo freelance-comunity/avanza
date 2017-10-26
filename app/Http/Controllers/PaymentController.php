@@ -194,6 +194,9 @@ class PaymentController extends AppBaseController
 		//Get data payment, debt and ammount input
 		$ammount = $request->input('payment'); /*$request->input('payment');*/
 		$payment = Payment::find($request->input('payment_id'));
+		if ($request->input('payment')) {
+			# code...
+		}
 		$ammount_payment = $payment->balance;
 		$ammount_payment_total = $payment->ammount;
 		$debt = $payment->debt;

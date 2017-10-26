@@ -58,6 +58,10 @@ Detalles
 						<p style="color:red;"><strong>CAPITAL:</strong>$ {{ number_format($late_capital, 2) }}</p>
 						<p style="color:red;"><strong>MORA:</strong>$ {{ number_format($late_moratorium, 2)	 }}</p>
 						<p style="color:red;"><strong>TOTAL:</strong>$ {{ number_format($late_total, 2) }}</p>
+						<p>
+							<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#processPayments">PAGAR</button>
+							@include('credits.processPayments')
+						</p>
 						{{-- <button type="button" class="btn btn-lg bg-olive btn-block" data-toggle="modal" data-target="#payment">Saldar Prestamo</button> --}}
 						<!-- Modal -->
 						<div class="modal fade" id="myModal{{$client->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -75,7 +79,6 @@ Detalles
 										</div>
 									</div>
 									<div class="modal-footer">
-
 										@foreach ($product as $key =>  $product)
 										@if($key < 4)
 										<div class="form-group col-sm-6 col-lg-6">
@@ -83,7 +86,6 @@ Detalles
 										</div>
 										@endif
 										@endforeach
-
 									</div>
 								</div>
 							</div>

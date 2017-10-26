@@ -46,12 +46,21 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
+
    $payment = App\Models\Payment::find(2242);
    $debt = $payment->debt;
    echo $debt->ammount;
    $credit = $debt->credit;
 
    echo $credit->ammount;
+
+    $budget  = intdiv(230, 170);
+    $r       = fmod(230, 170);
+
+    echo $budget;
+    echo "<br>";
+    echo $r;
+
 });
 
 Route::post('process', 'PaymentController@process');
@@ -752,6 +761,8 @@ echo "moratorio aplicado";
 });
 
 Route::get('walletExpired', 'GeneralController@walletExpired');
+
+Route::post('processPayments', 'PaymentController@processPayments');
 
 
 Route::get('adviser', function(){

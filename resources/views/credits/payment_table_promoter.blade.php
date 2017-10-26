@@ -23,8 +23,7 @@
 					@else
 					<button type="button" class="btn bg-yellow btn-lg" onclick="myFunction()" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
 					</button>
-					@endif
-					
+					@endif				
 				</td>
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
@@ -84,9 +83,13 @@
 		function myFunction() {
 			alert("¿ESTAS SEGURO DE REALIZAR ESTE PAGO?");
 		}
+<<<<<<< HEAD
 	</script>
 {{-- 
 	<script>	
 		var a = $('#date_now')
 		alert(a);
 	</script> --}}
+=======
+	</script>
+>>>>>>> remotes/origin/master

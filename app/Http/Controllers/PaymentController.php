@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\CreatePaymentRequest;
 use App\Models\Payment;
+use App\Models\Credit;
 use App\Models\Client;
 use App\Models\LatePayments;
 use Illuminate\Http\Request;
@@ -192,10 +193,10 @@ class PaymentController extends AppBaseController
 		//End 
 
 		//Get data payment, debt and ammount input
-		$ammount = $request->input('payment'); /*$request->input('payment');*/
+		$ammount = $request->input('payment'); 
 		$payment = Payment::find($request->input('payment_id'));
 		$ammount_payment = $payment->balance;
-		$ammount_payment_total = $payment->ammount;
+		$ammount_payment_total = $payment->total;
 		$debt = $payment->debt;
 		//End
 
@@ -208,7 +209,7 @@ class PaymentController extends AppBaseController
 		else
 		{
 			if ($ammount === $ammount_payment) {
-			// Process payment
+				// Process payment
 				$payment->status  = 'Pagado';
 				$payment->payment = $payment->payment + $ammount;
 				$payment->balance = 0;
@@ -285,42 +286,6 @@ class PaymentController extends AppBaseController
 				return redirect()->back();	
 			}
 
-			// elseif ($debt->credit->periodicity == 'CREDISEMANA' && $ammount < $ammount_payment) {
-			// 	// Process payment
-			// 	$payment->status  = 'Parcial';
-			// 	$payment->payment = $payment->payment + $ammount;
-			// 	$payment->balance = $ammount_payment - $ammount;
-			// 	$payment->save();
-			// 	// Process debt
-			// 	$debt->ammount = $debt->ammount - $ammount;
-			// 	$debt->save();
-			// 	// show message 
-			// 	Toastr::warning('Pago incompleto realizado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			// 	$current = Carbon::today();
-			// 	$user = Auth::user();
-			// 	$vault = $user->vault;
-
-			// 	$data_incomePayment['ammount'] = $ammount;
-			// 	$data_incomePayment['concept'] = 'Recuperación';
-			// 	$data_incomePayment['date']    = $current;
-			// 	$data_incomePayment['payment_id'] = $payment->id;
-			// 	$data_incomePayment['debt_id'] = $debt->id;
-			// 	$data_incomePayment['vault_id'] = $vault->id;
-			// 	$incomePayment = IncomePayment::create($data_incomePayment);
-
-			// 	$vault->ammount = $vault->ammount + $incomePayment->ammount;
-			// 	$vault->save();
-			// 	if ($debt->ammount == 250) {
-			// 		$debt->status = "Pagado";
-			// 		$debt->credit->status = "Pagado";
-			// 		$debt->credit->save();
-			// 		$debt->save();	
-
-			// 	}
-
-			// 	return redirect()->back();	
-			// }
-
 			elseif ($ammount > $ammount_payment) {
 
 				// get exact quota
@@ -332,7 +297,7 @@ class PaymentController extends AppBaseController
 				$payment->balance = $payment->balance - $ammount_payment;
 				$payment->save();
 				// Process debt
-				$debt->ammount = $debt->ammount - $ammount_payment;
+				$debt->ammount = $debt->ammount - $payment->payment;
 				$debt->save();
 				// Process news payments
 				$budget  = intdiv($extra, $ammount_payment_total);
@@ -441,6 +406,7 @@ class PaymentController extends AppBaseController
 		
 		return redirect()->back();	
 	}
+
 	public function mora($id)
 	{	
 		$payment = Payment::find($id);
@@ -457,6 +423,184 @@ class PaymentController extends AppBaseController
 		$payment->save();
 
 		return redirect()->back();	
+	}
+
+	public function processPayments(Request $request)
+	{
+		// Valitador
+		$validator = Validator::make($request->all(), [
+			'payment' => 'required|numeric',
+			'credit' => 'required',
+		]);
+		if ($validator->fails()) {
+			Toastr::error('Por favor introduce una cantidad correcta.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		}
+		//End 
+		$amountAvailable = $request->input('payment');
+		$discount = $request->input('payment');
+		$credit = Credit::find($request->input('credit'));
+		$debt   = $credit->debt;
+		$payments = $debt->payments;
+
+		$current = Carbon::today();
+		$user = Auth::user();
+		$vault = $user->vault;
+
+		if ($amountAvailable > $debt->ammount) {
+			Toastr::error('Estas introduciendo una cantitad mayor a tu adeudo, la cuota solicitada es de $'.number_format($debt->ammount,2).' pesos', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();    
+		}
+
+		foreach ($payments as $payment) {
+			// Pendiente
+			if ($payment->status == 'Pendiente') {
+				if ($amountAvailable >= $payment->balance) {
+					$payment->status  = 'Pagado';
+					$payment->payment = $payment->total;
+					$payment->balance = $payment->balance - $payment->total;
+					$payment->save();
+
+					$data_incomePayment['ammount'] = $payment->payment;
+					$data_incomePayment['concept'] = 'Recuperación';
+					$data_incomePayment['date']    = $current;
+					$data_incomePayment['payment_id'] = $payment->id;
+					$data_incomePayment['debt_id'] = $debt->id;
+					$data_incomePayment['vault_id'] = $vault->id;
+					$incomePayment = IncomePayment::create($data_incomePayment);
+
+					$vault->ammount = $vault->ammount + $incomePayment->ammount;
+					$vault->save();
+
+					$amountAvailable = $amountAvailable - $payment->payment;
+				}
+				elseif ($amountAvailable < $payment->balance) {
+					$payment->status  = 'Parcial';
+					$payment->payment = $amountAvailable;
+					$payment->balance = $payment->balance - $payment->payment;
+					$payment->save();
+
+					$data_incomePayment['ammount'] = $payment->payment;
+					$data_incomePayment['concept'] = 'Recuperación';
+					$data_incomePayment['date']    = $current;
+					$data_incomePayment['payment_id'] = $payment->id;
+					$data_incomePayment['debt_id'] = $debt->id;
+					$data_incomePayment['vault_id'] = $vault->id;
+					$incomePayment = IncomePayment::create($data_incomePayment);
+
+					$vault->ammount = $vault->ammount + $incomePayment->ammount;
+					$vault->save();
+
+					$amountAvailable = $amountAvailable - $payment->payment;
+				}		
+			}
+			// Fin pendiente
+			// Parcial
+			elseif ($payment->status == 'Parcial') {
+				if ($amountAvailable >= $payment->balance) {
+					$rest = $payment->balance;
+					$payment->status  = 'Pagado';
+					$payment->payment = $payment->total;
+					$payment->balance = 0;
+					$payment->save();
+
+					$data_incomePayment['ammount'] = $rest;
+					$data_incomePayment['concept'] = 'Recuperación';
+					$data_incomePayment['date']    = $current;
+					$data_incomePayment['payment_id'] = $payment->id;
+					$data_incomePayment['debt_id'] = $debt->id;
+					$data_incomePayment['vault_id'] = $vault->id;
+					$incomePayment = IncomePayment::create($data_incomePayment);
+
+					$vault->ammount = $vault->ammount + $incomePayment->ammount;
+					$vault->save();
+
+					$amountAvailable = $amountAvailable - $rest;
+				}
+				elseif ($amountAvailable < $payment->balance) {
+					$payment->status  = 'Parcial';
+					$payment->payment = $payment->payment + $amountAvailable;
+					$payment->balance = $payment->balance - $amountAvailable;
+					$payment->save();
+
+					$data_incomePayment['ammount'] = $discount;
+					$data_incomePayment['concept'] = 'Recuperación';
+					$data_incomePayment['date']    = $current;
+					$data_incomePayment['payment_id'] = $payment->id;
+					$data_incomePayment['debt_id'] = $debt->id;
+					$data_incomePayment['vault_id'] = $vault->id;
+					$incomePayment = IncomePayment::create($data_incomePayment);
+
+					$vault->ammount = $vault->ammount + $incomePayment->ammount;
+					$vault->save();
+
+					$amountAvailable = $amountAvailable - $discount;
+				}	
+			}
+			// Fin parcial
+			// Vencido
+			elseif ($payment->status == 'Vencido') {
+				if ($amountAvailable >= $payment->balance) {
+					$rest = $payment->balance;
+					$payment->status  = 'Pagado';
+					$payment->payment = $payment->total;
+					$payment->balance = 0;
+					$payment->save();
+
+					$data_incomePayment['ammount'] = $rest;
+					$data_incomePayment['concept'] = 'Recuperación';
+					$data_incomePayment['date']    = $current;
+					$data_incomePayment['payment_id'] = $payment->id;
+					$data_incomePayment['debt_id'] = $debt->id;
+					$data_incomePayment['vault_id'] = $vault->id;
+					$incomePayment = IncomePayment::create($data_incomePayment);
+
+					$vault->ammount = $vault->ammount + $incomePayment->ammount;
+					$vault->save();
+
+					$amountAvailable = $amountAvailable - $rest;
+				}
+				elseif ($amountAvailable < $payment->balance) {
+					$payment->status  = 'Vencido';
+					$payment->payment = $payment->payment + $amountAvailable;
+					$payment->balance = $payment->balance - $amountAvailable;
+					$payment->save();
+
+					$data_incomePayment['ammount'] = $discount;
+					$data_incomePayment['concept'] = 'Recuperación';
+					$data_incomePayment['date']    = $current;
+					$data_incomePayment['payment_id'] = $payment->id;
+					$data_incomePayment['debt_id'] = $debt->id;
+					$data_incomePayment['vault_id'] = $vault->id;
+					$incomePayment = IncomePayment::create($data_incomePayment);
+
+					$vault->ammount = $vault->ammount + $incomePayment->ammount;
+					$vault->save();
+
+					$amountAvailable = $amountAvailable - $discount;
+				}	
+			}
+			// Fin vencido
+			if ($amountAvailable <= 0) {
+				$debt->ammount = $debt->ammount - $discount;
+				$debt->save();
+
+				if ($debt->ammount == 0) {
+					$debt->status = "Pagado";
+					$debt->credit->status = "Pagado";
+					$debt->credit->save();
+					$debt->save();    
+
+				}
+
+				break;
+			}
+		}
+
+		// echo "Ahora contamos con: ".$amountAvailable;
+		Toastr::success('Pago aplicado correctamente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		return redirect()->back();
+
 	}
 	
 }

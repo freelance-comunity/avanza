@@ -5,6 +5,7 @@ $date_now = Carbon\Carbon::today();
 $payments = Auth::user()->payments;
 $now = Carbon\Carbon::today()->toDateString();
 $payments_now = $payments->where('day',$now);
+
 $total_payments = DB::table('payments')->where([
     ['user_id', '=', $user->id],
     ['date', '=', $now],

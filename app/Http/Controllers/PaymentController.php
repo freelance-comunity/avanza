@@ -526,7 +526,7 @@ class PaymentController extends AppBaseController
 					$payment->balance = $payment->balance - $amountAvailable;
 					$payment->save();
 
-					$data_incomePayment['ammount'] = $discount;
+					$data_incomePayment['ammount'] = $amountAvailable;
 					$data_incomePayment['concept'] = 'Recuperación';
 					$data_incomePayment['date']    = $current;
 					$data_incomePayment['payment_id'] = $payment->id;
@@ -569,7 +569,7 @@ class PaymentController extends AppBaseController
 					$payment->balance = $payment->balance - $amountAvailable;
 					$payment->save();
 
-					$data_incomePayment['ammount'] = $discount;
+					$data_incomePayment['ammount'] = $amountAvailable;
 					$data_incomePayment['concept'] = 'Recuperación';
 					$data_incomePayment['date']    = $current;
 					$data_incomePayment['payment_id'] = $payment->id;

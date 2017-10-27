@@ -115,6 +115,17 @@ Route::get('LoginMid', function(){
     }
 
 });
+
+Route::get('join', function(){
+    $user_allocation = Auth::user();
+    $region_allocation = $user_allocation->region;
+
+    $users = DB::table('regions')
+            ->join('rosters', 'users.id', '=', 'rosters.user_id')
+            ->join('regions', 'users.id', '=', 'orders.user_id')
+            ->select('users.*', 'contacts.phone', 'orders.price')
+            ->get();
+});
 /*=====  End of Test Routes  ======*/
 
 

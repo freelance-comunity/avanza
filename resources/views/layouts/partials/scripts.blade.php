@@ -271,6 +271,20 @@
           } );
         });
       </script>
+       <script>
+        $(document).ready(function() {
+          $('#sueldos').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'csv','excel', 'pdf', 'print',
+            ]
+
+          } );
+        });
+      </script>
       {{-- End --}}
       <script>
         $(document).ready(function() {

@@ -10,6 +10,20 @@ $total_payments = DB::table('payments')->where([
     ['date', '=', $now],
 ])->sum('total');
 
+$total_payments_losers = DB::table('payments')->where([
+    ['user_id', '=', $user->id],
+    ['date', '<=', $now],
+    ['status', '=', 'Vencido'],
+])->sum('total');
+
+$total_payments_partials = DB::table('payments')->where([
+    ['user_id', '=', $user->id],
+    ['date', '<=', $now],
+    ['status', '=', 'Parcial'],
+])->sum('total');
+
+$total_payments_extra = $total_payments_losers + $total_payments_partials;
+
 $total_incomes = DB::table('income_payments')->where([
     ['vault_id', '=', $vault->id],
     ['date', '=', $now],
@@ -32,9 +46,19 @@ else
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-money"></i>
-                Monto a Recuperar 
+                Monto a Recuperar Vigente
             </h4>
             ${{ number_format($total_payments,2) }} 
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="alert bg-red alert-dismissible">
+            <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
+            <h4>
+                <i class="icon fa fa-money"></i>
+                Monto Vencido 
+            </h4>
+            ${{ number_format($total_payments_losers + $total_payments_partials,2) }} 
         </div>
     </div>
     <div class="col-md-4">

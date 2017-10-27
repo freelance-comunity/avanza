@@ -54,12 +54,12 @@ Route::get('division', function(){
 
    echo $credit->ammount;
 
-    $budget  = intdiv(230, 170);
-    $r       = fmod(230, 170);
+   $budget  = intdiv(230, 170);
+   $r       = fmod(230, 170);
 
-    echo $budget;
-    echo "<br>";
-    echo $r;
+   echo $budget;
+   echo "<br>";
+   echo $r;
 
 });
 
@@ -792,6 +792,34 @@ Route::get('adviser', function(){
 
 });
 
-Route::get('creditos',function(){
-    return view('credits.credito');
+Route::get('proyeccion',function(){
+   $date_now = Carbon\Carbon::today();
+   $payments = Auth::user()->payments;
+   $date = \Carbon\Carbon::now()->toDateString();
+   $payment = App\Models\Payment::where('date', $date)->sum('ammount');
+
+   echo $payment;
+
 }); 
+
+Route::get('najera',function(){
+  
+    $credits = App\Models\Credit::all();
+
+    foreach ($credits as $key => $value) {
+        if ($value->adviser == "CARLOS EDUARDO TRUJILLO CORDERO") {
+            $value->adviser = "IVAN MOISES HERNANDEZ NAJERA";
+            $value->save();
+
+        }
+
+    }
+    foreach ($credits as $key => $value) {
+        if ($value->adviser == "SELVIN ANTONIO HERNANDEZ JIMENEZ") {
+         $value->adviser = "IVAN MOISES HERNANDEZ NAJERA";
+         $value->save();
+     }
+
+ }
+ echo "chido se cambio el nombre del promotor";
+});

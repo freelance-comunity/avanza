@@ -7,7 +7,7 @@ $expenditures = App\Models\Expenditure::all();
 $now = Carbon\Carbon::now()->toDateString();
 $collection_payments = App\Models\IncomePayment::all();
 $payments = $collection_payments->where('date', $now);
-$payment = App\Models\payment::where('date',$now)->sum('ammount');
+$payment = App\Models\Payment::where('date',$now)->sum('ammount');
 $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
 
 

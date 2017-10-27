@@ -14,6 +14,13 @@ $filtered_date_now_credits = App\Models\Credit::where('region_id',$region_alloca
 $vault = $user_allocation->vault;
 $expenditures_collection = App\Models\Expenditure::all();
 $expenses = $expenditures_collection->where('vault_id', $vault->id)->sortBy('created_at');
+
+$now = Carbon\Carbon::today()->toDateString();
+$user = Auth::user();
+$region = $user->region;
+$branches = $region->branches;
+$total_promoter = 0;
+
 @endphp
 <!-- Small boxes (Stat box) -->
 <div class="row">
@@ -111,6 +118,66 @@ $expenses = $expenditures_collection->where('vault_id', $vault->id)->sortBy('cre
 			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
 		</div>
 	</div>
+	<hr>
+	{{-- <div class="col-lg-12 col-md-4">
+		<!-- USERS LIST -->
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title">Sucursales</h3>
+
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+					</button>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body no-padding">
+				@if($branches->isEmpty())
+				<div class="well text-center">No hay registros.</div>
+				@else
+				<div class="table-responsive">
+					<table class="table" id="example">
+						<thead class="bg-green">
+							<th>Nombre</th>
+							<th>Monto A Recuperar</th>
+							<th>Recuperado</th>
+						</thead>
+						<tbody>
+							@foreach ($branches as $branch)		
+							@php
+							$total_payments = DB::table('payments')->where([
+								['branch_id', '=', $branch->id],
+								['date', '=', $now],
+							])->sum('total');
+							$users = $branch->users;
+
+							foreach ($users as $key => $user) {
+								$vault = $user->vault;
+								$total_incomes = DB::table('income_payments')->where([
+									['vault_id', '=', $vault->id],
+									['date', '=', $now],
+								])->sum('ammount');
+								$total_promoter = $total_promoter + $total_incomes;
+							}
+							@endphp
+							<tr>
+								<td>{{$branch->name}}</td>
+								<td>${{number_format($total_payments,2)}}</td>
+								<td>${{number_format($total_promoter,2)}}</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+				@endif
+				<!-- /.closes-list -->
+			</div>
+		</div>
+		<!--/.box -->
+	</div> --}}
+	<hr>
 	<div class="col-lg-12 col-md-6">
 		<!-- USERS LIST -->
 		<div class="box box-info">

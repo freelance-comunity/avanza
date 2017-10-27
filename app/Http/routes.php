@@ -54,19 +54,15 @@ Route::get('division', function(){
     $total_promoter = 0;
 
     foreach ($branches as $key => $value) {
-
         $users = $value->users;
-
         foreach ($users as $key => $user) {
             $vault = $user->vault;
             $total_incomes = DB::table('income_payments')->where([
                 ['vault_id', '=', $vault->id],
                 ['date', '=', $now],
             ])->sum('ammount');
-
             $total_promoter = $total_promoter + $total_incomes;
         }
-
         echo $value->name;
         echo "<br>";
         $total_payments = DB::table('payments')->where([

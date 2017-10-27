@@ -55,6 +55,7 @@ class PhotoController extends Controller
 	{ 
 		$id = $request->input('document_id');
 		$document = Clientdocuments::find($id);
+		$client = $document->client;
 		if ($request->hasFile('curp')) {
 			$curp = $request->file('curp');
 			$filename = time() . '.' . $curp->getClientOriginalExtension();
@@ -69,6 +70,7 @@ class PhotoController extends Controller
 	{ 
 		$id = $request->input('document_id');
 		$document = Clientdocuments::find($id);
+		$client = $document->client;
 		if ($request->hasFile('proof_of_addres')) {
 			$proof_of_addres = $request->file('proof_of_addres');
 			$filename = time() . '.' . $proof_of_addres->getClientOriginalExtension();

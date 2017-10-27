@@ -7,8 +7,10 @@ $expenditures = App\Models\Expenditure::all();
 $now = Carbon\Carbon::now()->toDateString();
 $collection_payments = App\Models\IncomePayment::all();
 $payments = $collection_payments->where('date', $now);
-
+$payment = App\Models\payment::where('date',$now)->sum('ammount');
 $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
+
+
 @endphp
 <!-- Small boxes (Stat box) -->
 {{-- <style>
@@ -100,6 +102,22 @@ $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
     <a href="{{ url('/report-expenditures') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
   </div>
 </div>
+<!-- ./col -->
+<div class="col-lg-3 col-md-4">
+  <!-- small box -->
+  <div class="small-box bg-blue">
+    <div class="inner">
+      <h3>${{ number_format($payment,2) }}</h3>
+
+      <p>Proyección de Recuperación</p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-dollar"></i>
+    </div>
+    <a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar <i class="fa fa-file-pdf-o"></i></a>
+  </div>
+</div>
+<!-- ./col -->
 <!-- ./col -->
 <div class="col-lg-3 col-md-4">
   <!-- small box -->

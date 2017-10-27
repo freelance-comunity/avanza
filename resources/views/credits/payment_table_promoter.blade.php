@@ -18,10 +18,10 @@
 				<td>{{$payment->date->format('d F Y')}}</td>
 				<td> 
 					@if ($payment->date == $date_now)
-					<button type="button" class="btn btn-success btn-lg" onclick="myFunction()"  data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
+					<button type="button" class="btn btn-success btn-lg" {{-- onclick="myFunction()"  data-toggle="modal" data-target="#payment_{{ $payment->id }}" --}}>$ {{ number_format($payment->total, 2) }}
 					</button>
 					@else
-					<button type="button" class="btn bg-yellow btn-lg" onclick="myFunction()" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}
+					<button type="button" class="btn bg-yellow btn-lg" {{-- onclick="myFunction()" data-toggle="modal" data-target="#payment_{{ $payment->id }}" --}}>$ {{ number_format($payment->total, 2) }}
 					</button>
 					@endif				
 				</td>
@@ -35,7 +35,7 @@
 			<tr class="warning">
 				<td>{{ $payment->number }}</td>
 				<td>{{$payment->date->format('d F Y')}}</td>
-				<td> <button type="button" class="btn btn-primary btn-lg" onclick="myFunction()"  data-toggle="modal" data-target="#credisemana{{$client->id}}" >$ {{ number_format($payment->total, 2) }}</button></td>
+				<td> <button type="button" class="btn btn-primary btn-lg" {{-- onclick="myFunction()"  data-toggle="modal" data-target="#credisemana{{$client->id}}" --}} >$ {{ number_format($payment->total, 2) }}</button></td>
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
@@ -46,7 +46,7 @@
 			<tr class="warning">
 				<td>{{ $payment->number }}</td>
 				<td>{{$payment->date->format('d F Y')}}</td>
-				<td> <button type="button" class="btn btn-primary btn-lg" onclick="myFunction()" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
+				<td> <button type="button" class="btn btn-primary btn-lg" {{-- onclick="myFunction()" data-toggle="modal" data-target="#payment_{{ $payment->id }}" --}}>$ {{ number_format($payment->total, 2) }}</button></td>
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
@@ -57,7 +57,7 @@
 			<tr class="danger">
 				<td>{{ $payment->number }}</td>
 				<td>{{$payment->date->format('d F Y')}}</td>
-				<td> <button  type="button" class="btn btn-danger btn-lg" id="vencido" onclick="myFunction()" data-toggle="modal" data-target="#payment_{{ $payment->id }}">$ {{ number_format($payment->total, 2) }}</button></td>
+				<td> <button  type="button" class="btn btn-danger btn-lg" id="vencido" {{-- onclick="myFunction()" data-toggle="modal" data-target="#payment_{{ $payment->id }}" --}}>$ {{ number_format($payment->total, 2) }}</button></td>
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
@@ -83,13 +83,5 @@
 		function myFunction() {
 			alert("¿ESTAS SEGURO DE REALIZAR ESTE PAGO?");
 		}
-<<<<<<< HEAD
-	</script>
-{{-- 
-	<script>	
-		var a = $('#date_now')
-		alert(a);
-	</script> --}}
-=======
-	</script>
->>>>>>> remotes/origin/master
+</script>
+

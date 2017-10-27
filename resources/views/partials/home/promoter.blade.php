@@ -13,7 +13,15 @@ foreach ($payments as $element) {
         $count_credits = $count_credits + 1;
     }
 }
+// $now = Carbon\Carbon::now()->toDateString();
+// $user = Auth::user()->id;
+// $todos_pagos = $user->payments;
+// $pagos_dia = $todos_pagos->where('date', $now)->count();
 
+// $pagos_dia = DB::table('payments')->where([
+//     ['date','=',$now],
+//     ['user_id','=',$user],
+// ])->count();
 @endphp
 <div class="row">
     <div class="col-md-4">
@@ -31,9 +39,9 @@ foreach ($payments as $element) {
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-money"></i>
-                Monto a Recuperar
+                Monto a Recuperar 
             </h4>
-            
+   
         </div>
     </div>
    {{--  <div class="table-responsive">

@@ -46,18 +46,40 @@ Route::get('geolocation', function(){
 });
 
 Route::get('division', function(){
-$now = Carbon\Carbon::today()->toDateString();
- $pagos = DB::table('payments')->where([
-    ['user_id', '=', Auth::user()->id],
-    ['date', '<=', $now],
-    ['status', '!=', 'Pagado']
-])->sum('total');
-echo $pagos;
- // foreach ($pagos as $key => $value) {
- //     echo $value->total;
- //     echo "<br>";
- // }
+    $now = Carbon\Carbon::today()->toDateString();
+    $user = Auth::user();
+    $region = $user->region;
+    $branches = $region->branches;
 
+    $total_promoter = 0;
+
+    foreach ($branches as $key => $value) {
+
+        $users = $value->users;
+
+        foreach ($users as $key => $user) {
+            $vault = $user->vault;
+            $total_incomes = DB::table('income_payments')->where([
+                ['vault_id', '=', $vault->id],
+                ['date', '=', $now],
+            ])->sum('ammount');
+
+            $total_promoter = $total_promoter + $total_incomes;
+        }
+
+        echo $value->name;
+        echo "<br>";
+        $total_payments = DB::table('payments')->where([
+            ['branch_id', '=', $value->id],
+            ['date', '=', $now],
+        ])->sum('total');
+        echo "Proyectado: ".$total_payments;
+        echo "<br>";
+        echo "Recuperado: ".$total_promoter;
+        echo "<br>";
+        echo "===================================";
+        echo "<br>";
+    }
 });
 
 Route::post('process', 'PaymentController@process');

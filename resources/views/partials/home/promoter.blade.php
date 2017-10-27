@@ -1,71 +1,67 @@
 @php
+$user = Auth::user();
+$vault = $user->vault;
 $date_now = Carbon\Carbon::today();
 $payments = Auth::user()->payments;
-$count_credits = 0;
-foreach ($payments as $element) {
-    if ($element->date == $date_now AND $element->status === 'Pendiente') {
-        $count_credits = $count_credits + 1;
-    }
-    if ($element->status === 'Vencido') {
-        $count_credits = $count_credits + 1;
-    }
-    if ($element->status === 'Parcial') {
-        $count_credits = $count_credits + 1;
-    }
-}
-$now = Carbon\Carbon::now()->toDateString();
-// $user = Auth::user()->id;
-// $todos_pagos = $user->payments;
-// $pagos_dia = $todos_pagos->where('date', $now)->count();
+$now = Carbon\Carbon::today()->toDateString();
+$payments_now = $payments->where('day',$now);
+$total_payments = DB::table('payments')->where([
+    ['user_id', '=', $user->id],
+    ['date', '=', $now],
+])->sum('total');
 
-$pagos_dia = DB::table('payments')->where([
-    ['date','=',$now],
-    ['user_id','=',$user],
-])->count();
+$total_incomes = DB::table('income_payments')->where([
+    ['vault_id', '=', $vault->id],
+    ['date', '=', $now],
+])->sum('ammount');
+
+$porcent = $total_incomes / $total_payments;
+$porcent_friendly = number_format($porcent * 100,2);
 @endphp
 <div class="row">
     <div class="col-md-4">
-        <div class="alert bg-success alert-dismissible">
-            <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
-            <h4>
-                <i class="icon fa fa-map-marker"></i>
-                {{ Date::now()->format('l j F Y') }}
-            </h4>
-            RUTA DE COBRO
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="alert bg-success alert-dismissible">
+        <div class="alert bg-yellow alert-dismissible">
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-money"></i>
                 Monto a Recuperar 
             </h4>
-   
+            ${{ number_format($total_payments,2) }} 
         </div>
     </div>
-   {{--  <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <th>Ruta del día</th>
-                <th>Cobrados</th>
-                <th>Tu avance</th>
-            </thead>
-            <tbody>
-                <tr class="bg-primary">
-                    <td>{{ $count_credits }} créditos</td>
-                   <td>60 créditos</td>
-                   <td>58%</td>
-               </tr>
-               <tr class="bg-warning">
-                   <td>89 clientes</td>
-                   <td>59 clientes</td>
-                   <td>66%</td>
-               </tr>
-           </tbody>
-       </table>
-   </div> --}}
+    <div class="col-md-4">
+        <div class="alert bg-green alert-dismissible">
+            <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
+            <h4>
+                <i class="icon fa fa-money"></i>
+                Monto Recuperado 
+            </h4>
+            ${{ number_format($total_incomes,2) }} 
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4>Porcentaje Recuperado</h4>
+       <div class="progress-lg">
+          @if ($porcent_friendly < 30)
+          <div class="progress-bar bg-red progress-bar-striped active" role="progressbar"
+          aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+          {{ $porcent_friendly }} %
+      </div>
+      @elseif ($porcent_friendly >30 AND $porcent_friendly < 70)
+          <div class="progress-bar bg-yellow progress-bar-striped active" role="progressbar"
+          aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+          {{ $porcent_friendly }} %
+      </div>
+      @elseif ($porcent_friendly > 70)
+          <div class="progress-bar bg-green progress-bar-striped active" role="progressbar"
+          aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+          {{ $porcent_friendly }} %
+      </div>
+      @endif
+  </div>
 </div>
+</div>
+<hr>
 <div class="row">
     @if($payments->isEmpty())
     <div class="well text-center">No se encontraron pagos para este día.</div>
@@ -173,37 +169,3 @@ $pagos_dia = DB::table('payments')->where([
     </div>
     @endif
 </div>
-
-{{-- <div class="row">
-    <div class="table-responsive">
-        <table class="table" id="pagos_promotor">
-            <thead>
-                <th>
-                    VISITAS
-                </th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                     <div class="col-lg-12 col-xs-12">
-                        <!-- small box -->
-                        <div class="small-box bg-teal">
-                          <div class="inner">
-                            <h3>MXN 450.00</h3>
-                            <p>JOSÉ PEREZ</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">PAGAR <i class="fa fa-file-pdf-o"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-            </td>
-        </tr>
-    </tbody>
-</table>
-</div>
-</div>
-
- --}}

@@ -13,15 +13,15 @@ foreach ($payments as $element) {
         $count_credits = $count_credits + 1;
     }
 }
-// $now = Carbon\Carbon::now()->toDateString();
+$now = Carbon\Carbon::now()->toDateString();
 // $user = Auth::user()->id;
 // $todos_pagos = $user->payments;
 // $pagos_dia = $todos_pagos->where('date', $now)->count();
 
-// $pagos_dia = DB::table('payments')->where([
-//     ['date','=',$now],
-//     ['user_id','=',$user],
-// ])->count();
+$pagos_dia = DB::table('payments')->where([
+    ['date','=',$now],
+    ['user_id','=',$user],
+])->count();
 @endphp
 <div class="row">
     <div class="col-md-4">

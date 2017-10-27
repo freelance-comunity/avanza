@@ -24,6 +24,7 @@ Detalles
 					<li><a data-toggle="tab" href="#menu5">Recuperación Acces</a></li>
 					<li><a data-toggle="tab" href="#menu6">Colocación</a></li>
 					<li><a data-toggle="tab" href="#menu7">Gastos</a></li>
+					<li><a data-toggle="tab" href="#menu9">Sueldos</a></li>
 					<li><a data-toggle="tab" href="#menu8">Cortes de caja</a></li>
 				</ul>
 				<div class="tab-content">
@@ -34,7 +35,7 @@ Detalles
 						@else
 						<div class="table-responsive">
 							<table class="table" id="vaul">
-								<thead class="thead-inverse">
+								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
@@ -83,7 +84,7 @@ Detalles
 						@else
 						<div class="table-responsive">
 							<table class="table" id="start">
-								<thead class="thead-inverse">
+								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
@@ -125,7 +126,7 @@ Detalles
 						@else
 						<div class="table-responsive">
 							<table class="table" id="assignment">
-								<thead class="thead-inverse">
+								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
@@ -164,7 +165,7 @@ Detalles
 						@else
 						<div class="table-responsive">
 							<table class="table" id="recovery">
-								<thead class="thead-inverse">
+								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
@@ -197,7 +198,7 @@ Detalles
 						@else
 						<div class="table-responsive">
 							<table class="table" id="acces">
-								<thead class="thead-inverse">
+								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
@@ -226,7 +227,7 @@ Detalles
 						@else
 						<div class="table-responsive">
 							<table class="table" id="creditos">
-								<thead class="thead-inverse">
+								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
@@ -271,7 +272,7 @@ Detalles
 						@else
 						<div class="table-responsive">
 							<table class="table" id="expensees">
-								<thead class="thead-inverse">
+								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
@@ -300,7 +301,7 @@ Detalles
 						@else
 						<div class="table-responsive">
 							<table class="table" id="corte">
-								<thead class="thead-inverse">
+								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
@@ -313,6 +314,47 @@ Detalles
 										<td>{{ $cut->user['name'] }} {{ $cut->user['father_last_name'] }} {{ $cut->user['mother_last_name'] }}</td>
 										<td>${{ number_format($cut->amount) }}</td>
 										<td>{{ $cut->created_at }}</td>
+									</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+						@endif
+					</div>
+					<div id="menu9" class="tab-pane fade">
+						<h3>Cortes de caja</h3>
+						@if($cuts->isEmpty())
+						<div class="well text-center">Ho hay registros.</div>
+						@else
+						<div class="table-responsive">
+							<table class="table" id="sueldos">
+								<thead class="bg-success">
+									<th>Fecha</th>
+									<th>Nombre Coordonador</th>
+									<th>Coordinación</th>
+									<th>Sucursal</th>
+									<th>Nombre Empleado</th>
+									<th>Esquema de Pago</th>
+									<th>Periodo de Pago</th>
+									<th>Percepciones</th>
+									<th>Deducciones</th>
+									<th>Neto a Pagar</th>
+									<th>Descargar</th>
+								</thead>
+								<tbody>
+									@foreach($rosters as $roster)
+									<tr>
+										<td>{!! $roster->date !!}</td>
+										<td>{!! $roster->coordinating_name !!}</td>
+										<td>{!! $roster->coordination !!}</td>
+										<td>{!! $roster->branch_office !!}</td>
+										<td>{!! $roster->name_employee !!}</td>
+										<td>{!! $roster->payment_scheme !!}</td>
+										<td>{!! $roster->payment_period !!}</td>
+										<td>${!! number_format($roster->perceptions,2) !!}</td>
+										<td>${!! number_format($roster->deductions,2) !!}</td>
+										<td>${!! number_format($roster->grandchild_pay,2) !!}</td>
+										<td><a href="{{ url('roster') }}/{{ $roster->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Nomina"></i></a></td>
 									</tr>
 									@endforeach
 								</tbody>

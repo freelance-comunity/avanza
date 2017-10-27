@@ -25,6 +25,7 @@ use App\Models\LatePayments;
 use App\Models\Close;
 use App\Models\IncomePayment;
 use App\Models\BoxCut;
+use App\Models\Roster;
 
 class GeneralController extends Controller
 {	
@@ -369,6 +370,7 @@ class GeneralController extends Controller
 	{
 		$user_allocation = Auth::user();
 		$region_allocation = $user_allocation->region;
+		$vault_allocation = $user_allocation->vault;
 
 		$vaults = Vault::all()->sortByDesc('updated_at');;
 		$starts_collection = Income::all();
@@ -379,6 +381,8 @@ class GeneralController extends Controller
 		$credits   = ExpenditureCredit::all()->sortByDesc('created_at'); 
 		$expenses  = Expenditure::all()->sortByDesc('created_at');
 		$cuts      = BoxCut::all()->sortByDesc('created_at');
+		$rosters   = Roster::all()->sortByDesc('created_at');
+		// $rosters   = $vault_allocation->rosters;
 
 		return view('partials.movements')
 		->with('region_allocation', $region_allocation)
@@ -390,7 +394,8 @@ class GeneralController extends Controller
 		->with('credits', $credits)
 		->with('accesses', $accesses)
 		->with('expenses', $expenses)
-		->with('cuts', $cuts);
+		->with('cuts', $cuts)
+		->with('rosters', $rosters);
 	}
 
 	public function walletExpired()

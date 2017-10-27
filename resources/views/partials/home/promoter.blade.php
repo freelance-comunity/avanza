@@ -15,8 +15,16 @@ $total_incomes = DB::table('income_payments')->where([
     ['date', '=', $now],
 ])->sum('ammount');
 
-$porcent = $total_incomes / $total_payments;
-$porcent_friendly = number_format($porcent * 100,2);
+if($total_incomes > 0 && $total_payments >0) 
+{ 
+    $porcent = $total_incomes / $total_payments;
+    $porcent_friendly = number_format($porcent * 100,2);
+} 
+else 
+{ 
+    //Método para controlar el error 
+    $porcent_friendly = number_format(0,2);
+}  
 @endphp
 <div class="row">
     <div class="col-md-4">
@@ -41,24 +49,24 @@ $porcent_friendly = number_format($porcent * 100,2);
     </div>
     <div class="col-md-4">
         <h4>Porcentaje Recuperado</h4>
-       <div class="progress-lg">
+        <div class="progress-lg">
           @if ($porcent_friendly < 30)
           <div class="progress-bar bg-red progress-bar-striped active" role="progressbar"
           aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
           {{ $porcent_friendly }} %
       </div>
       @elseif ($porcent_friendly >30 AND $porcent_friendly < 70)
-          <div class="progress-bar bg-yellow progress-bar-striped active" role="progressbar"
-          aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-          {{ $porcent_friendly }} %
-      </div>
-      @elseif ($porcent_friendly > 70)
-          <div class="progress-bar bg-green progress-bar-striped active" role="progressbar"
-          aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-          {{ $porcent_friendly }} %
-      </div>
-      @endif
+      <div class="progress-bar bg-yellow progress-bar-striped active" role="progressbar"
+      aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+      {{ $porcent_friendly }} %
   </div>
+  @elseif ($porcent_friendly > 70)
+  <div class="progress-bar bg-green progress-bar-striped active" role="progressbar"
+  aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+  {{ $porcent_friendly }} %
+</div>
+@endif
+</div>
 </div>
 </div>
 <hr>

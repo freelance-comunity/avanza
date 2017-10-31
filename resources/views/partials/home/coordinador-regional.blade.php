@@ -119,7 +119,7 @@ $total_promoter = 0;
 		</div>
 	</div>
 	<hr>
-	{{-- <div class="col-lg-12 col-md-4">
+	<div class="col-lg-12 col-md-4">
 		<!-- USERS LIST -->
 		<div class="box box-info">
 			<div class="box-header with-border">
@@ -176,7 +176,7 @@ $total_promoter = 0;
 			</div>
 		</div>
 		<!--/.box -->
-	</div> --}}
+	</div>
 	<hr>
 	<div class="col-lg-12 col-md-6">
 		<!-- USERS LIST -->

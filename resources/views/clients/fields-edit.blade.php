@@ -106,7 +106,7 @@
                 @endforeach
             </select>
         </div>
-         @if ($client->branch_id == 4)
+         @if ($client->region_id == 4)
           <div class="form-group col-sm-6 col-lg-12">
             <div class="form-group col-sm-6 col-lg-12">
               {!! Form::label('warranty', 'Garantía') !!}

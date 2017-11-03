@@ -363,6 +363,11 @@ Route::get('creditsClient/{id}/{product}',[
     'uses' => 'ClientController@creditsClient',
 ]);
 
+Route::get('creditsMigrate/{id}/{product}',[
+    'as' => 'client.creditsMigrate',
+    'uses' => 'ClientController@creditsMigrate',
+]);
+
 Route::get('creditsClientSemanal/{id}/{product}',[
     'as' => 'client.creditsClientSemanal',
     'uses' => 'ClientController@creditsClientSemanal',
@@ -838,3 +843,5 @@ Route::get('najera',function(){
    }
    echo "chido se cambio el nombre del promotor";
 });
+
+Route::get('reportPayment', 'GeneralController@reportPayment');

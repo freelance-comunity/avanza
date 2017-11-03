@@ -17,11 +17,11 @@ Detalles
 			</div>  
 			<div class="box-body">
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#menu1">Saldo en caja</a></li>
-					<li><a data-toggle="tab" href="#menu2">Saldo inicial</a></li>
-					<li><a data-toggle="tab" href="#menu3">Asignación de efectivo</a></li>
-					<li><a data-toggle="tab" href="#menu4">Recuperación</a></li>
-					<li><a data-toggle="tab" href="#menu5">Recuperación Acces</a></li>
+					<li class="active"><a data-toggle="tab" href="#menu1"><i class="fa fa-archive"></i>Saldo en caja</a></li>
+					<li><a data-toggle="tab" href="#menu2"><i class="fa fa-reply"></i> Saldo inicial</a></li>
+					<li><a data-toggle="tab" href="#menu3"><i class="fa fa-money"></i> Asignación de efectivo</a></li>
+					<li><a data-toggle="tab" href="#menu4"><i class="fa fa-money"></i> Recuperación</a></li>
+					<li><a data-toggle="tab" href="#menu5"><i class="fa fa-money"></i> Recuperación Acces</a></li>
 					<li><a data-toggle="tab" href="#menu6">Colocación</a></li>
 					<li><a data-toggle="tab" href="#menu7">Gastos</a></li>
 					<li><a data-toggle="tab" href="#menu9">Sueldos</a></li>
@@ -42,35 +42,15 @@ Detalles
 									<th>Fecha/Hora ultima actualización</th>
 								</thead>
 								<tbody>
-									@foreach($vaults as $vault)
-									@if ($vault->user->region->id != $region_allocation->id)
-									<tr style="display: none;">
-										<td>{{ $vault->user->branch['name'] }}</td>
-										<td>{{ $vault->user['name'] }} {{ $vault->user['father_last_name'] }} {{ $vault->user['mother_last_name'] }}</td>
-										<td>
-											${{ number_format($vault->ammount,2) }}
-										</td>
-										<td>{{ $vault->updated_at->toDateTimeString() }}</td>
-									</tr>
-									@elseif ($vault->user->hasRole(['administrador', 'director-general']))
-									<tr style="display: none;">
-										<td>{{ $vault->user->branch['name'] }}</td>
-										<td>{{ $vault->user['name'] }} {{ $vault->user['father_last_name'] }} {{ $vault->user['mother_last_name'] }}</td>
-										<td>
-											${{ number_format($vault->ammount,2) }}
-										</td>
-										<td>{{ $vault->updated_at->toDateTimeString() }}</td>
-									</tr>
-									@else
+									@foreach($empleados as $emple)								
 									<tr>
-										<td>{{ $vault->user->branch['name'] }}</td>
-										<td>{{ $vault->user['name'] }} {{ $vault->user['father_last_name'] }} {{ $vault->user['mother_last_name'] }}</td>
+										<td>{{ $emple->branch['name'] }}</td>
+										<td>{{ $emple['name'] }} {{ $emple['father_last_name'] }} {{ $emple['mother_last_name'] }}</td>
 										<td>
-											${{ number_format($vault->ammount,2) }}
+											${{ number_format($emple->vault->ammount,2) }}
 										</td>
-										<td>{{ $vault->updated_at->toDateTimeString() }}</td>
+										<td>{{ $emple->vault->updated_at->toDateTimeString() }}</td>
 									</tr>
-									@endif
 									@endforeach
 								</tbody>
 							</table>
@@ -93,18 +73,6 @@ Detalles
 								</thead>
 								<tbody>
 									@foreach($starts as $start)
-									{{-- @php
-									$startRegion = $start->vault->user->region['id'];
-									@endphp
-									@if($startRegion === $region_allocation->id)
-									<tr>
-										<td>{{ $start->vault->user->branch['name'] }}</td>
-										<td>{{ $start->vault->user['name'] }} {{ $start->vault->user['father_last_name'] }} {{ $start->vault->user['mother_last_name'] }}</td>
-										<td>${{ number_format($start->ammount) }}</td>
-										<td>{{ $start->concept }}</td>
-										<td>{{ $start->created_at }}</td>
-									</tr>
-									@else --}}
 									<tr>
 										<td>{{ $start->vault->user->branch['name'] }}</td>
 										<td>{{ $start->vault->user['name'] }} {{ $start->vault->user['father_last_name'] }} {{ $start->vault->user['mother_last_name'] }}</td>
@@ -112,7 +80,6 @@ Detalles
 										<td>{{ $start->concept }}</td>
 										<td>{{ $start->vault->user->region['id'] }}</td>
 									</tr>
-									{{-- @endif --}}
 									@endforeach
 								</tbody>
 							</table>

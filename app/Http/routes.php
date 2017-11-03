@@ -778,7 +778,7 @@ else{
 }
 
 }
-if ($payment->status == 'Vencido') {
+if ($value->status == 'Vencido') {
     $latePayments = new App\Models\LatePayments;
     $latePayments->late_number = $payment->number;
     $latePayments->late_ammount = $payment->total;
@@ -844,4 +844,52 @@ Route::get('najera',function(){
    echo "chido se cambio el nombre del promotor";
 });
 
+
 Route::get('reportPayment', 'GeneralController@reportPayment');
+
+Route::get('moratorium',function(){
+    $credit = App\Models\Credit::all();
+    $date_now = \Carbon\Carbon::now()->toDateString();
+    $hour_now = \Carbon\Carbon::now()->toTimeString();
+    foreach ($credit as $key => $credit) {
+       $debt = $credit->debt;
+       $payments = $debt->payments;
+    
+       foreach ($payments as $key => $payment) {
+        if ($payment->date <= $date_now && $payment->status == 'Pendiente' && $hour_now >= '11:00:00') {
+            $payment = App\Models\Payment::find($payment->id);
+            $payment->status = 'Vencido';
+            $payment->moratorium = 20;
+            $payment->total = $payment->ammount + $payment->moratorium;
+            $payment->balance = $payment->balance + 20;
+            $payment->save();
+
+            $debt = $payment->debt;
+            $debt->ammount = $debt->ammount + 20;
+            $debt->save();
+        }
+         if ($payment->date <= $date_now && $payment->status == 'Parcial' && $hour_now >= '11:00:00') {
+            $payment = App\Models\Payment::find($payment->id);
+            $payment->status = 'Vencido';
+            $payment->moratorium = 20;
+            $payment->total = $payment->ammount + $payment->moratorium;
+            $payment->balance = $payment->balance + 20;
+            $payment->save();
+
+            $debt = $payment->debt;
+            $debt->ammount = $debt->ammount + 20;
+            $debt->save();
+        }
+        if ($payment->status == 'Vencido') {
+            $latePayments = new App\Models\LatePayments;
+            $latePayments->late_number = $payment->number;
+            $latePayments->late_ammount = $payment->total;
+            $latePayments->late_payment = $payment->payment;
+            $latePayments->payment_id = $payment->id;
+            $latePayments->debt_id    = $debt->id;
+            $latePayments->save();
+        }
+    }
+}
+echo "MORATORIO APLICADO CORRECTAMENTE";
+});

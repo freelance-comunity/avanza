@@ -304,6 +304,11 @@ Route::get('avalClient/{id}/',[
   'uses' => 'ClientController@avalClient',
 ]);
 
+Route::get('referencesClient/{id}/',[
+  'as' => 'client.referencesClient',
+  'uses' => 'ClientController@referencesClient',
+]);
+
 Route::get('clientAvals/{id}/delete', [
     'as' => 'clientAvals.delete',
     'uses' => 'ClientAvalController@destroy',
@@ -886,3 +891,20 @@ Route::get('moratorium',function(){
 }
 echo "MORATORIO APLICADO CORRECTAMENTE";
 });
+
+Route::resource('clientReferences', 'ClientReferencesController');
+
+Route::get('clientReferences/{id}/delete', [
+    'as' => 'clientReferences.delete',
+    'uses' => 'ClientReferencesController@destroy',
+]);
+
+Route::get('referencias',function(){
+    $client = App\Models\Client::find(462);
+  
+    foreach ($client->references as $key => $value) {
+        echo $value->name_reference;
+        echo "<br>";
+    }
+});
+

@@ -4,6 +4,7 @@ $location = $client->location;
 $company= $client->company;
 $aval= $client->aval;
 $document= $client->document;
+$references = $client->references;
 @endphp
 @extends('layouts.app')
 
@@ -244,9 +245,48 @@ Detalles del Cliente
   </div>
 </div>
 </div>
-
-
 @endif
+
+
+<!--REFERENCIAS-->
+@if ($references->isEmpty())
+<div class="box-body">
+  <a  style="margin-right: 25px" href="{!! route('client.referencesClient', [$client->id])!!}"><h3>Este empleado no tiene referencias.</h3></a>
+</div>
+@else
+<div class="col-md-12">
+  <a><h3 style="color:#18bc9c; text-decoration: underline;"><i class="fa fa-users"></i> REFERENCIAS</h3></a>
+  @if ($references->count() <2)
+    <a class="btn btn-success" href="{!! route('client.referencesClient', [$client->id])!!}"><span>agregar otra referencia</span></a>
+  @endif
+
+  <div class="table-responsive">
+   <table class="table table-striped">
+    <tr>
+      <th style="width: 10px">NOMBRE</th>
+      <th>APELLIDO PATERNO</th>
+      <th>APELLIDO MATERNO</th>
+      <th>TELÉFONO</th>
+      <th>PARENTEZCO</th>
+      <th>Editar</th>
+    </tr>
+    @foreach ($references as $reference)
+   <tr>
+      <th style="width: 10px">{{$reference->name_reference}}</th>
+      <th>{{$reference->last_name_reference}}</th>
+      <th>{{$reference->mothers_name_reference}}</th>
+      <th>{{$reference->phone_reference}}</th>
+      <th>{{$reference->relationship}}</th>
+      <th><a href="{!! route('clientReferences.edit', [$reference->id]) !!}"><i class="glyphicon  glyphicon-edit "></i></a></th>
+    </tr>
+    @endforeach  
+  </table>
+</div>
+</div>
+    @endif
+<!--ENDREFERENCIAS-->
+
+
 
 @if (is_null($aval))
 <div class="box-body">
@@ -302,6 +342,8 @@ Detalles del Cliente
 </div>
 </div>
 @endif
+
+
 
 
 @if (is_null($document))

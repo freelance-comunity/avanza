@@ -20,7 +20,7 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
 }
 @endphp
 @endrole --}}
-@include('flash::message')
+
 
 <div class="row">
   <h1 class="pull-left">Clientes</h1>

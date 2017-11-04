@@ -12,22 +12,24 @@ class ClientReferences extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "firts_name_reference",
+	    "name_reference",
 		"last_name_reference",
-		"mothers_last_name_reference",
+		"mothers_name_reference",
 		"phone_reference",
+		"relationship",
 		"client_id"
 	];
 
 	public static $rules = [
-	    "firts_name_reference" => "required",
+	    "name_reference" => "required",
 		"last_name_reference" => "required",
-		"mothers_last_name_reference" => "required",
-		"phone_reference" => "required"
+		"mothers_name_reference" => "required",
+		"phone_reference" => "required",
+		"relationship" => "required"
 	];
 	public function client()
-    {
-        return $this->belongsTo('App\Models\Client');
-    }
+	{
+		return $this->belongsTo('App\Models\Client');
+	}
 
 }

@@ -1,6 +1,6 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('content')
+@section('main-content')
 
     <div class="container">
 
@@ -17,20 +17,22 @@
             @else
                 <table class="table">
                     <thead>
-                    <th>Firts Name Reference</th>
+                    <th>Name Reference</th>
 			<th>Last Name Reference</th>
-			<th>Mothers Last Name</th>
+			<th>Mothers Name Reference</th>
 			<th>Phone Reference</th>
+			<th>Relationship</th>
                     <th width="50px">Action</th>
                     </thead>
                     <tbody>
                      
                     @foreach($clientReferences as $clientReferences)
                         <tr>
-                            <td>{!! $clientReferences->firts_name_reference !!}</td>
+                            <td>{!! $clientReferences->name_reference !!}</td>
 					<td>{!! $clientReferences->last_name_reference !!}</td>
-					<td>{!! $clientReferences->mothers_last_name !!}</td>
+					<td>{!! $clientReferences->mothers_name_reference !!}</td>
 					<td>{!! $clientReferences->phone_reference !!}</td>
+					<td>{!! $clientReferences->relationship !!}</td>
                             <td>
                                 <a href="{!! route('clientReferences.edit', [$clientReferences->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                                 <a href="{!! route('clientReferences.delete', [$clientReferences->id]) !!}" onclick="return confirm('Are you sure wants to delete this ClientReferences?')"><i class="glyphicon glyphicon-remove"></i></a>

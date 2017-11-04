@@ -5,9 +5,9 @@
 
     @include('common.errors')
 
-    {!! Form::model($clientReferences, ['route' => ['clientReferences.update', $clientReferences->id], 'method' => 'patch','data-parsley-validate' => '']) !!}
+    {!! Form::model($clientReferences, ['route' => ['clientReferences.update', $clientReferences->id], 'method' => 'patch']) !!}
 
-        @include('clientReferences.fields')
+        @include('clientReferences.fields-edit')
 
     {!! Form::close() !!}
 </div>

@@ -3,7 +3,7 @@ $user_allocation = Auth::user();
 $region_allocation = $user_allocation->region;
 $collection = App\Role::all();
 $role = $collection->where('name', 'ejecutivo-de-credito')->first();
-$filtered = App\User::all();
+$filtered = App\User::where('id', '!=', Auth::id())->get();
 $users = $filtered->where('region_id', $region_allocation->id);
 @endphp
 
@@ -94,65 +94,74 @@ $users = $filtered->where('region_id', $region_allocation->id);
                 <div class="form-group col-sm-6 col-lg-8">
                   {!! Form::label('adviser', 'Nombre del Ejecutivo:') !!}
                   <select name="adviser"  id="" class="form-control input-lg">
+                    <option selected="">ELIGE PROMOTOR</option>
                     @foreach ($users as $user)
-                    <option   value="{{ $user->id }}">
+                    <option   value="{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}">
                       {{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}
                     </option>
                     @endforeach
                   </select>
                 </div>
-              </div>
-             {{--  <input type="hidden" name="user_id" value="{{$user->id}}"> --}}
-              @else
-              <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-              <input type="hidden" name="adviser" value="{{ Auth::user()->name }} {{ Auth::user()->father_last_name }} {{ Auth::user()->mother_last_name }}">
-              <input type="hidden" name="interest_rate" value="{{$product->interest_of_cup}}">
-              @endif
-              <input type="hidden" name="periodicity" value="{{$product->name}}">
-              <input type="hidden" name="firts_name" value="{{$client->firts_name}}">
-              <input type="hidden" name="last_name" value="{{$client->last_name}}">
-              <input type="hidden" name="mothers_last_name" value="{{$client->mothers_last_name}}">
-              <input type="hidden" name="curp" value="{{$client->curp}}">
-              <input type="hidden" name="ine" value="{{$client->ine}}">
-              <input type="hidden" name="client_id" value="{{ $client->id}}">
-              <div class="form-group col-sm-6 col-lg-12">
+              </div> 
+              
+              <input type="text" name="user_id" value="">
+              <script>
+                $(document).ready(function(){
+                  $("select[name=adviser]").change(function(){
+                    $('input[name=user_id]').val($(this).val());
+                  });
+                });
+              </script>
+             @else
+             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+             <input type="hidden" name="adviser" value="{{ Auth::user()->name }} {{ Auth::user()->father_last_name }} {{ Auth::user()->mother_last_name }}">
+             <input type="hidden" name="interest_rate" value="{{$product->interest_of_cup}}">
+             @endif
+             <input type="hidden" name="periodicity" value="{{$product->name}}">
+             <input type="hidden" name="firts_name" value="{{$client->firts_name}}">
+             <input type="hidden" name="last_name" value="{{$client->last_name}}">
+             <input type="hidden" name="mothers_last_name" value="{{$client->mothers_last_name}}">
+             <input type="hidden" name="curp" value="{{$client->curp}}">
+             <input type="hidden" name="ine" value="{{$client->ine}}">
+             <input type="hidden" name="client_id" value="{{ $client->id}}">
+             <div class="form-group col-sm-6 col-lg-12">
+              <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('collection_period', 'Horario Sugerido de Cobro:') !!}
+                {!! Form::select('collection_period',['MAÑANA'=>'MAÑANA','MEDIO DÍA'=>'MEDIO DIA','TARDE'=>'TARDE'],null, [
+                  'style' => 'text-transform:uppercase',
+                  'class' => 'form-control input-lg', 
+                  'required'=>'required',
+                  'data-parsley-trigger ' => 'input focusin',
+                  'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                </div>
                 <div class="form-group col-sm-6 col-lg-4">
-                  {!! Form::label('collection_period', 'Horario Sugerido de Cobro:') !!}
-                  {!! Form::select('collection_period',['MAÑANA'=>'MAÑANA','MEDIO DÍA'=>'MEDIO DIA','TARDE'=>'TARDE'],null, [
-                    'style' => 'text-transform:uppercase',
+                  {!! Form::label('firm', 'Firma:') !!}
+                  {!! Form::text('firm',null, [
                     'class' => 'form-control input-lg', 
-                    'required'=>'required',
+                    'id'    => 'signature',
                     'data-parsley-trigger ' => 'input focusin',
-                    'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+                    'readonly'
+                    ]) !!}
                   </div>
                   <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('firm', 'Firma:') !!}
-                    {!! Form::text('firm',null, [
-                      'class' => 'form-control input-lg', 
-                      'id'    => 'signature',
-                      'data-parsley-trigger ' => 'input focusin',
-                      'readonly'
-                      ]) !!}
-                    </div>
-                    <div class="form-group col-sm-6 col-lg-4">
-                      <label>  &nbsp; </label>
-                      <input type="button" class="btn-lg btn-block btn bg-navy" value="SIMULAR TABLA DE PAGOS" onclick="capturar()">
-                    </div>
+                    <label>  &nbsp; </label>
+                    <input type="button" class="btn-lg btn-block btn bg-navy" value="SIMULAR TABLA DE PAGOS" onclick="capturar()">
                   </div>
+                </div>
+                <div class="form-group col-sm-12 col-lg-12">
                   <div class="form-group col-sm-12 col-lg-12">
-                    <div class="form-group col-sm-12 col-lg-12">
-                      <div id="signature-pad" class="m-signature-pad">
-                        <div class="m-signature-pad--body">
-                          <canvas style="border: 1px solid black; height: 200px;"></canvas>
-                        </div>
-                        <div class="m-signature-pad--footer">
-                          <button type="button" class="btn btn-lg btn-info clear" data-action="clear">Limpiar</button>
-                          <button type="button" class="btn btn-lg btn-success save" data-action="save">Usar</button>
-                        </div>
+                    <div id="signature-pad" class="m-signature-pad">
+                      <div class="m-signature-pad--body">
+                        <canvas style="border: 1px solid black; height: 200px;"></canvas>
                       </div>
-
+                      <div class="m-signature-pad--footer">
+                        <button type="button" class="btn btn-lg btn-info clear" data-action="clear">Limpiar</button>
+                        <button type="button" class="btn btn-lg btn-success save" data-action="save">Usar</button>
+                      </div>
                     </div>
+
                   </div>
+                </div>
               {{-- <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('firm_ine', 'Imagen:') !!}
                 {!! Form::file('firm_ine', [

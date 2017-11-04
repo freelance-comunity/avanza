@@ -96,7 +96,7 @@ class CreditController extends AppBaseController
 	 */
 	public function store(CreateCreditRequest $request)
 	{	
-		// $product = Product::find($request->input('type_product'));
+		$product = Product::find($request->input('type_product'));
 		// $LatePayments = LatePayments::where('debt_id', $debt->id)->where('status', 'Bloqueado')->count();
 		//Restriccion de Números de creditos con un producto
 		// $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
@@ -109,8 +109,15 @@ class CreditController extends AppBaseController
 		$ammount = $request->input('ammount');
 		// $id_user = $request->input('adviser');
 		// $user = User::find($id_user);
-		$user = Auth::user();
-		$vault = $user->vault;	
+		if ($product->name == 'MIGRADOS') {
+			$id_user = $request->input('user_id');
+			$user = User::find($id_user);
+			$vault = $user->vault;
+		}else{
+			$user = Auth::user();
+			$vault = $user->vault;	
+		}
+		
 		if ($vault->ammount == 0) {
 			Toastr::error('No puedes registrar un crédito, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect(route('credits.index'));
@@ -734,6 +741,6 @@ class CreditController extends AppBaseController
 			}
 		}
 		Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-				return redirect(route('credits.index'));	
+		return redirect(route('credits.index'));	
 	}
 }

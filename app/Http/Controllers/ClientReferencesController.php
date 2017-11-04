@@ -9,6 +9,7 @@ use Response;
 use Flash;
 use Schema;
 use Toastr;
+use App\Models\Client;
 
 class ClientReferencesController extends AppBaseController
 {
@@ -20,11 +21,6 @@ class ClientReferencesController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
 	public function index(Request $request)
 	{
 		$query = ClientReferences::query();
@@ -68,12 +64,14 @@ class ClientReferencesController extends AppBaseController
 	public function store(CreateClientReferencesRequest $request)
 	{
 		$input = $request->all();
+		$client = $request->input('client_id');
+		$clients = Client::find($client);
 
-		$clientReferences = ClientReferences::create($input);
+		$references = ClientReferences::create($input);
 
-		Flash::message('ClientReferences saved successfully.');
+		Toastr::success('Referencias Guardadas Correctamente.', 'REFERENCIAS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-		return redirect(route('clientReferences.index'));
+		return redirect(route('clients.index'));
 	}
 
 	/**
@@ -137,7 +135,7 @@ class ClientReferencesController extends AppBaseController
 		$clientReferences->fill($request->all());
 		$clientReferences->save();
 
-		Toastr::success('Referencia editada exitosamente.', 'REFERENCIA CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+		Toastr::success('Referencias Editadas Correctamente.', 'REFERENCIAS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('clients.index'));
 	}

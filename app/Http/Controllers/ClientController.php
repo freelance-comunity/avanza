@@ -176,6 +176,26 @@ class ClientController extends AppBaseController
 
 		$company = ClientCompany::create($data_company);
 		
+		/* Get REFERENCE  data  */
+		$date_references['name_reference'] = $request->input('name_reference');
+		$date_references['last_name_reference'] = $request->input('last_name_reference');
+		$date_references['mothers_name_reference']  = $request->input('mothers_name_reference');
+		$date_references['phone_reference'] = strtoupper($request->input('phone_reference'));
+		$date_references['relationship'] = strtoupper($request->input('relationship'));
+		
+		$date_references['client_id'] = $client->id;
+
+		$references = ClientReferences::create($date_references);
+		$date_references2['name_reference'] = $request->input('name_reference2');
+		$date_references2['last_name_reference'] = $request->input('last_name_reference2');
+		$date_references2['mothers_name_reference']  = $request->input('mothers_name_reference2');
+		$date_references2['phone_reference'] = strtoupper($request->input('phone_reference2'));
+		$date_references2['relationship'] = strtoupper($request->input('relationship2'));
+		
+		$date_references2['client_id'] = $client->id;
+
+		$references2 = ClientReferences::create($date_references2);
+
 		/* Get client aval data */
 		if ($request->input('name_aval')) {
 			$data_aval['name_aval'] = $request->input('name_aval');
@@ -587,7 +607,23 @@ public function avalClient($id)
 	}
 	else
 	{
-		Toastr::error('Este cliente ya cuenta con 3 créditos','CRÉDITOS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+		Toastr::error('Este cliente ya cuenta con Aval','AVAL',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+		return redirect(route('client.show', [$client->id])); 
+	}
+
+}
+
+public function referencesClient($id)
+{
+	$client = Client::find($id);
+	$clientReferences = $client->clientReferences;
+	if (empty($clientReferences)) {
+		return view ('clientReferences.create')
+		->with('client', $client);
+	}
+	else
+	{
+		Toastr::error('Este cliente ya cuenta con Referencias','REFERENCIAS',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 		return redirect(route('client.show', [$client->id])); 
 	}
 

@@ -1,11 +1,11 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('content')
+@section('main-content')
 <div class="container">
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'clientReferences.store']) !!}
+    {!! Form::open(['route' => 'clientReferences.store','data-parsley-validate' => '', 'onsubmit'=>'return checkSubmit();']) !!}
 
         @include('clientReferences.fields')
 

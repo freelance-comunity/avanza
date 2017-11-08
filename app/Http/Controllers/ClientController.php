@@ -433,6 +433,24 @@ class ClientController extends AppBaseController
 		->with('credit',$credit);
 		//}
 	}
+
+	public function creditsMigrate($id, $product)
+	{	
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('clients.index'));
+		}
+		$product = Product::find($product);
+		$client = Client::find($id);
+		$credit = Credit::find($id);
+		$credits = $client->credits;
+	
+		return view ('credits.migrate')
+		->with('credits',$credits)
+		->with('product', $product)
+		->with('client', $client)
+		->with('credit',$credit);
+	}
 	
 
 	public function unlockedclient($id)

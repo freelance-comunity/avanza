@@ -76,7 +76,7 @@ class Credit extends Model
 		"branch" => "required",
 		"ammount" => "required",
 		"interest_rate" => "required",
-		"dues" => "required",		
+		"dues"=>"required",	
 		"periodicity" => "required",
 		"firts_name" => "required",
 		"last_name" => "required",

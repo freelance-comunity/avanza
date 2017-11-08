@@ -78,8 +78,8 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
                   @role('coordinador-regional')
                   @foreach ($products as $key => $product)
                   @if($key > 3)
-                  <div class="form-group col-sm-6 col-lg-6">
-                   <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
+                  <div class="form-group col-sm-12 col-lg-12">
+                   <a href="{{ url('creditsMigrate') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-primary">{{mb_strtoupper($product->name)}}</button></a>
                  </div>
                  @endif
                  @endforeach

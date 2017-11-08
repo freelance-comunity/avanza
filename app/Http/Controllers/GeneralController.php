@@ -370,7 +370,11 @@ class GeneralController extends Controller
 	{
 		$user_allocation = Auth::user();
 		$region_allocation = $user_allocation->region;
-		$vault_allocation = $user_allocation->vault;
+		$branch_allocation = $user_allocation->branch;
+		$collection = Role::all();
+		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+		$empleados = $region_allocation->users;
 
 		$vaults = Vault::all()->sortByDesc('updated_at');;
 		$starts_collection = Income::all();
@@ -395,13 +399,33 @@ class GeneralController extends Controller
 		->with('accesses', $accesses)
 		->with('expenses', $expenses)
 		->with('cuts', $cuts)
-		->with('rosters', $rosters);
+		->with('rosters', $rosters)
+		->with('empleados', $empleados);
 	}
 
 	public function walletExpired()
 	{
 		$credits = Credit::all();
 		return view('credits.wallet_expired')
+		->with('credits', $credits);
+	}
+
+	public function reportPayment()
+	{
+		$recoverys = IncomePayment::all()->sortByDesc('created_at'); 
+		return view('partials.reportPayment')
+		->with('recoverys', $recoverys);
+	}
+	public function totalVault()
+	{
+		$vault = Vault::all(); 
+		return view('reports.totalVault')
+		->with('vault', $vault);
+	}
+	public function currentCredits()
+	{
+		$credits = Credit::all(); 
+		return view('reports.currentCredits')
 		->with('credits', $credits);
 	}
 }

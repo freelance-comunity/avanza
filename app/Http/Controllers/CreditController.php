@@ -109,7 +109,7 @@ class CreditController extends AppBaseController
 		$ammount = $request->input('ammount');
 		// $id_user = $request->input('adviser');
 		// $user = User::find($id_user);
-		if ($product->name == 'MIGRADOS') {
+		if ($request->input('periodicity') == 'SEMANAL') {
 			$id_user = $request->input('user_id');
 			$user = User::find($id_user);
 			$vault = $user->vault;
@@ -117,10 +117,9 @@ class CreditController extends AppBaseController
 			$user = Auth::user();
 			$vault = $user->vault;	
 		}
-		
 		if ($vault->ammount == 0) {
 			Toastr::error('No puedes registrar un crédito, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			return redirect(route('credits.index'));
+			return redirect()->back();	
 		}
 		else
 		{
@@ -148,7 +147,7 @@ class CreditController extends AppBaseController
 				// // }
 				// $new = Client::find($request->input('client_id'))->credits()->count();
 				$client = Client::find($request->input('client_id'));
-
+					
 				$input = $request->all();
 				// $product = Product::find($request->input('type_product'));
 				// if ($request->input('ammount') > $product->ammount_max) {
@@ -258,7 +257,16 @@ class CreditController extends AppBaseController
 				elseif ($periodicity == 'DIARIO' && $dues == 60) {
 					$tasa = 0.30;
 				}
-				elseif($periodicity == 'MIGRADOS'){
+				elseif($periodicity == 'TRADICIONAL'){
+					$tasa = $request->input('interest_rate') / 100;
+				}
+				elseif($periodicity == 'SEMANAL'){
+					$tasa = $request->input('interest_rate')/ 100;
+				}
+				elseif($periodicity == 'DIARIO25'){
+					$tasa = $request->input('interest_rate') / 100;
+				}
+				elseif($periodicity == 'DIARIO4'){
 					$tasa = $request->input('interest_rate') / 100;
 				}
 				$interes = $ammount * $tasa;
@@ -267,7 +275,7 @@ class CreditController extends AppBaseController
 				$pago = $total/$dues;
 				$intpago = $pago-$capital;
 				$date = new Carbon($credit->date);
-				if ($periodicity == 'MIGRADOS' ) {
+				if ($periodicity == 'TRADICIONAL' ) {
 					$debt = new Debt;
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
@@ -297,6 +305,105 @@ class CreditController extends AppBaseController
 
 					}
 				}
+				if ($periodicity == 'DIARIO25' ) {
+					$debt = new Debt;
+					$debt->ammount = ceil($total);
+					$debt->status = "VIGENTE";
+					$debt->credit_id = $credit->id;
+					$debt->save();
+
+					for ($i=1; $i <= $credit->dues; $i++) { 
+						$var = $date->addDay();
+						if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
+							$date->addDay(); 
+						}
+
+						$fechaPago[$i] = $date->toDateString();
+						$payment = new Payment;
+						$payment->number = $i;
+						$payment->day = $fechaPago[$i];
+						$payment->date =$fechaPago[$i];
+						$payment->ammount = ceil($pago);
+						$payment->capital = ceil($capital);
+						$payment->interest= $intpago;
+						$payment->moratorium = '0';
+						$payment->total = ceil($pago) + 0; 
+						$payment->payment = 0;
+						$payment->balance = ceil($pago) + 0;
+						$payment->status = "Pendiente";
+						$payment->debt_id = $debt->id;
+						$payment->user_id = Auth::User()->id;
+						$payment->branch_id = Auth::User()->branch_id;
+						$payment->save();
+
+					}
+				}
+				if ($periodicity == 'DIARIO4') {
+					$debt = new Debt;
+					$debt->ammount = ceil($total);
+					$debt->status = "VIGENTE";
+					$debt->credit_id = $credit->id;
+					$debt->save();
+
+
+					for ($i=1; $i <= $credit->dues; $i++) { 
+						$var = $date->addWeek();
+
+						$fechaPago[$i] = $date->toDateString();
+						$payment = new Payment;
+						$payment->number = $i;
+						$payment->day = $date;
+						$payment->date =$fechaPago[$i];
+						$payment->ammount = ceil($pago);
+						$payment->capital = ceil($capital);
+						$payment->interest= $intpago;
+						$payment->moratorium = '0';
+						$payment->total = ceil($pago) + 0; 
+						$payment->payment = 0;
+						$payment->balance = ceil($pago) + 0;
+						$payment->status = "Pendiente";
+						$payment->debt_id = $debt->id;
+						$payment->user_id = Auth::User()->id;
+						$payment->branch_id = Auth::User()->branch_id;
+						$payment->save();
+
+					}
+				}
+
+				if ($periodicity == 'SEMANAL') {
+					$debt = new Debt;
+					$debt->ammount = ceil($total);
+					$debt->status = "VIGENTE";
+					$debt->credit_id = $credit->id;
+					$debt->save();
+
+
+					for ($i=1; $i <= $credit->dues; $i++) { 
+						$var = $date->addWeek();
+
+						$fechaPago[$i] = $date->toDateString();
+						$payment = new Payment;
+						$payment->number = $i;
+						$payment->day = $date;
+						$payment->date =$fechaPago[$i];
+						$payment->ammount = ceil($pago);
+						$payment->capital = ceil($capital);
+						$payment->interest= $intpago;
+						$payment->moratorium = '0';
+						$payment->total = ceil($pago) + 0; 
+						$payment->payment = 0;
+						$payment->balance = ceil($pago) + 0;
+						$payment->status = "Pendiente";
+						$payment->debt_id = $debt->id;
+						$payment->user_id = Auth::User()->id;
+						$payment->branch_id = Auth::User()->branch_id;
+						$payment->save();
+
+					}
+				}
+
+
+
 				if ($periodicity == 'DIARIO' && $dues == 30) {
 					$debt = new Debt;
 					$debt->ammount = ceil($total);

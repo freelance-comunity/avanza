@@ -23,6 +23,10 @@ $users = $filtered->where('region_id', $region_allocation->id);
       {!! Form::label('ammount', 'Monto Crédito:') !!}
       <input type="number" name="ammount" placeholder="ESCRIBA EL MONTO" id="ammount" class="form-control formulario input-lg" data-parsley-trigger="input focusin" required="required">
     </div>
+    
+    
+
+
     @if ($product->name == 'CREDIDIARIO25')
     <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('dues', 'No. Cuotas:') !!}

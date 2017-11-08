@@ -368,6 +368,11 @@ Route::get('creditsClient/{id}/{product}',[
     'uses' => 'ClientController@creditsClient',
 ]);
 
+Route::get('creditsMigrate/{id}/{product}',[
+    'as' => 'client.creditsMigrate',
+    'uses' => 'ClientController@creditsMigrate',
+]);
+
 Route::get('creditsClientSemanal/{id}/{product}',[
     'as' => 'client.creditsClientSemanal',
     'uses' => 'ClientController@creditsClientSemanal',
@@ -794,6 +799,8 @@ echo "moratorio aplicado";
 Route::get('walletExpired', 'GeneralController@walletExpired');
 
 Route::post('processPayments', 'PaymentController@processPayments');
+Route::get('totalVault', 'GeneralController@totalVault');
+Route::get('currentCredits', 'GeneralController@currentCredits');
 
 
 Route::get('adviser', function(){
@@ -845,6 +852,8 @@ Route::get('najera',function(){
 });
 
 
+Route::get('reportPayment', 'GeneralController@reportPayment');
+
 Route::get('moratorium',function(){
     $credit = App\Models\Credit::all();
     $date_now = \Carbon\Carbon::now()->toDateString();
@@ -852,7 +861,7 @@ Route::get('moratorium',function(){
     foreach ($credit as $key => $credit) {
        $debt = $credit->debt;
        $payments = $debt->payments;
-    
+
        foreach ($payments as $key => $payment) {
         if ($payment->date <= $date_now && $payment->status == 'Pendiente' && $hour_now >= '11:00:00') {
             $payment = App\Models\Payment::find($payment->id);
@@ -866,7 +875,7 @@ Route::get('moratorium',function(){
             $debt->ammount = $debt->ammount + 20;
             $debt->save();
         }
-         if ($payment->date <= $date_now && $payment->status == 'Parcial' && $hour_now >= '11:00:00') {
+        if ($payment->date <= $date_now && $payment->status == 'Parcial' && $hour_now >= '11:00:00') {
             $payment = App\Models\Payment::find($payment->id);
             $payment->status = 'Vencido';
             $payment->moratorium = 20;
@@ -899,12 +908,19 @@ Route::get('clientReferences/{id}/delete', [
     'uses' => 'ClientReferencesController@destroy',
 ]);
 
-Route::get('referencias',function(){
-    $client = App\Models\Client::find(462);
-  
-    foreach ($client->references as $key => $value) {
-        echo $value->name_reference;
-        echo "<br>";
-    }
+Route::get('muertos',function(){
+ $payments = App\Models\Payment::all();
+ foreach ($payments as $key => $payment) {
+    if ($payment->day == '2017-11-02 00:00:00' AND $payment->status == "Pendiente" OR $payment->status == "Parcial") {
+     echo "dia de muertos";
+     echo "<br>";
+     echo "Pago #".$payment->number;
+     echo "<br>";
+     echo "Deuda: ".$payment->debt_id;
+     echo "<br>";
+     echo "===========";
+     echo "<br>";
+ }
+}
 });
 

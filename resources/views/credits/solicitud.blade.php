@@ -71,8 +71,6 @@
 			float: ;
 			padding: 15px;
 		}
-		<<<<<<< HEAD
-
 	</style>
 </head>
 <body>

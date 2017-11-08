@@ -48,15 +48,17 @@
         <a href="#"><i class='fa fa-pie-chart'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">   
          <li><a href="{{ url('walletExpired') }}">Cartera vencida</a></li>
-         <li><a href=""></a></li>
-        </ul>
-      </li>
-      @endif
-      <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li>
-      @endif
-      <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
-      <li><a href="{{ url('credits') }}"><i class="fa fa-money"></i> <span>Créditos</span></a></li>
-      @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
+         <li><a href="{{ url('reportPayment') }}">Reporte pagos</a></li>
+         <li><a href="{{ url('totalVault') }}">Total bovéda</a></li>
+         <li><a href="{{ url('currentCredits') }}">Créditos Vigentes</a></li>
+       </ul>
+     </li>
+     @endif
+     <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li>
+     @endif
+     <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
+     <li><a href="{{ url('credits') }}"><i class="fa fa-money"></i> <span>Créditos</span></a></li>
+     @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
       {{-- <li class="treeview">
         <a href="#"><i class='fa fa-book'></i>  <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">

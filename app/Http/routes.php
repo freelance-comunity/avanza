@@ -924,3 +924,12 @@ Route::get('muertos',function(){
 }
 });
 
+Route::get('totalSueldos',function(){
+    
+    $date = \Carbon\Carbon::now();
+    $rosters = App\Models\Roster::whereMonth('created_at', '>=', 11)->whereMonth('created_at', '<=', 12)->get();
+    foreach ($rosters as $key => $value) {
+       echo $value->id;
+       echo "<br>";
+    }
+});

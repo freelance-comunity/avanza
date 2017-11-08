@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('main-content')
 @section('message_level')
-Estado de Resultados
+Total Bóveda
 @endsection
 @section('message_level_here')
 Detalles

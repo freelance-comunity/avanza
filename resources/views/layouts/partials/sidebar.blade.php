@@ -48,7 +48,7 @@
         <a href="#"><i class='fa fa-pie-chart'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">   
          <li><a href="{{ url('walletExpired') }}">Cartera</a></li>
-         <li><a href="{{ url('reportPayment') }}">Reporte pagos</a></li>
+        {{--  <li><a href="{{ url('reportPayment') }}">Reporte pagos</a></li> --}}
          <li><a href="{{ url('totalVault') }}">Total bovéda</a></li>
          <li><a href="{{ url('currentCredits') }}">Créditos Vigentes</a></li>
        </ul>

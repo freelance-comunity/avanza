@@ -104,26 +104,51 @@ class CreditController extends AppBaseController
 		// 	Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 		// 	return redirect(route('clients.index'));
 		// }
-		
 
 		$ammount = $request->input('ammount');
 		// $id_user = $request->input('adviser');
 		// $user = User::find($id_user);
-		if ($request->input('periodicity') == 'SEMANAL') {
+		if ($request->input('periodicity') == 'TRADICIONAL') {
 			$id_user = $request->input('user_id');
 			$user = User::find($id_user);
 			$vault = $user->vault;
-		}else{
+		}	
+		else{
 			$user = Auth::user();
 			$vault = $user->vault;	
 		}
-		if ($vault->ammount == 0) {
+
+		if ($vault->ammount == 0 AND $product->name == "CREDIDIARIO25" ) {
+			Toastr::error('No puedes registrar un crédito, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();	
+		}
+		elseif ($vault->ammount == 0 AND $product->name == "CREDISEMANA" ) {
+			Toastr::error('No puedes registrar un crédito, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();	
+		}
+		elseif ($vault->ammount == 0 AND $product->name == "CREDIDIARIO4" ) {
+			Toastr::error('No puedes registrar un crédito, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();	
+		}
+		elseif ($vault->ammount == 0 AND $product->name == "DIARIO" ) {
 			Toastr::error('No puedes registrar un crédito, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();	
 		}
 		else
 		{
-			if ($vault->ammount < $ammount) {
+			if ($vault->ammount < $ammount AND $product->name == "CREDIDIARIO25" ) {
+				Toastr::error('Ya no tienes saldo suficiente en tu caja.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				return redirect(route('credits.index'));
+			}
+			elseif ($vault->ammount < $ammount AND $product->name == "CREDIDIARIO4" ) {
+				Toastr::error('Ya no tienes saldo suficiente en tu caja.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				return redirect(route('credits.index'));
+			}
+			elseif ($vault->ammount < $ammount AND $product->name == "CREDIDIARIO4" ) {
+				Toastr::error('Ya no tienes saldo suficiente en tu caja.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+				return redirect(route('credits.index'));
+			}
+			elseif ($vault->ammount < $ammount AND $product->name == "DIARIO" ) {
 				Toastr::error('Ya no tienes saldo suficiente en tu caja.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				return redirect(route('credits.index'));
 			}
@@ -147,7 +172,7 @@ class CreditController extends AppBaseController
 				// // }
 				// $new = Client::find($request->input('client_id'))->credits()->count();
 				$client = Client::find($request->input('client_id'));
-					
+
 				$input = $request->all();
 				// $product = Product::find($request->input('type_product'));
 				// if ($request->input('ammount') > $product->ammount_max) {
@@ -332,8 +357,8 @@ class CreditController extends AppBaseController
 						$payment->balance = ceil($pago) + 0;
 						$payment->status = "Pendiente";
 						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
+						$payment->user_id = $credit->user_id;
+						$payment->branch_id = $user->branch_id;
 						$payment->save();
 
 					}
@@ -363,8 +388,8 @@ class CreditController extends AppBaseController
 						$payment->balance = ceil($pago) + 0;
 						$payment->status = "Pendiente";
 						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
+						$payment->user_id = $credit->user_id;
+						$payment->branch_id = $user->branch_id;
 						$payment->save();
 
 					}
@@ -395,8 +420,8 @@ class CreditController extends AppBaseController
 						$payment->balance = ceil($pago) + 0;
 						$payment->status = "Pendiente";
 						$payment->debt_id = $debt->id;
-						$payment->user_id = Auth::User()->id;
-						$payment->branch_id = Auth::User()->branch_id;
+						$payment->user_id = $credit->user_id;
+						$payment->branch_id = $user->branch_id;
 						$payment->save();
 
 					}
@@ -637,8 +662,26 @@ class CreditController extends AppBaseController
 
 				$expendituresCredit = ExpenditureCredit::create($data_expendituresCredits);
 
-				$vault->ammount = $vault->ammount - $expendituresCredit->ammount;
-				$vault->save();
+				if ($periodicity == 'TRADICIONAL') {
+					$vault->ammount = $vault->ammount;
+					$vault->save();
+				}
+				elseif ($periodicity == 'SEMANAL') {
+					$vault->ammount = $vault->ammount;
+					$vault->save();
+				}
+				if ($periodicity == 'DIARIO4') {
+					$vault->ammount = $vault->ammount;
+					$vault->save();
+				}
+				if ($periodicity == 'DIARIO25') {
+					$vault->ammount = $vault->ammount;
+					$vault->save();
+				}
+				else{
+					$vault->ammount = $vault->ammount - $expendituresCredit->ammount;
+					$vault->save();
+				}
 
 				Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				return redirect(route('credits.index'));

@@ -93,8 +93,8 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 			<div class="icon">
 				<i class="fa fa-money"></i>
 			</div>
-			<a href="{{ url('/report-credits-month') }}" class="small-box-footer">Descargar
-				<i class="fa fa-file-pdf-o"></i>
+			<a href="{{ url('/report-credits-month') }}" class="small-box-footer">Ver
+				<i class="fa fa-eye"></i>
 			</a>
 		</div>
 	</div>
@@ -196,8 +196,8 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 			<div class="icon">
 				<i class="fa fa-line-chart"></i>
 			</div>
-			<a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar
-				<i class="fa fa-file-pdf-o"></i>
+			<a  class="small-box-footer">Ver
+				<i class="fa fa-eye"></i>
 			</a>
 		</div>
 	</div>

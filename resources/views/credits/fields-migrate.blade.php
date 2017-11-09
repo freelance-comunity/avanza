@@ -35,45 +35,45 @@ $users = $filtered->where('region_id', $region_allocation->id);
       </select>
     </div>
   </div>
-</div>
-<script>
-  function mostrar(id) {
-    if (id == "CREDIDIARIO25") {
-      $("#CREDIDIARIO25").show();
-      $("#CREDIDIARIO4").hide(1500);
-      $("#CREDISEMANA").hide(1500);
-      $("#DIARIO").hide(1500);
-    }
-    if (id == "CREDIDIARIO4") {
-      $("#CREDIDIARIO25").hide(1500);
-      $("#CREDIDIARIO4").show();
-      $("#CREDISEMANA").hide(1500);
-      $("#DIARIO").hide(1500);
-    }
-    if (id == "CREDISEMANA") {
-      $("#CREDIDIARIO25").hide(1500);
-      $("#CREDIDIARIO4").hide(1500);
-      $("#CREDISEMANA").show();
-      $("#DIARIO").hide(1500);
-    }
-    if (id == "DIARIO") {
-      $("#CREDIDIARIO25").hide(1500);
-      $("#CREDIDIARIO4").hide(1500);
-      $("#CREDISEMANA").hide(1500);
-      $("#DIARIO").show();
-    }
-  }
-</script>
 
-<div class="form-group col-sm-6 col-lg-12">
+  <script>
+    function mostrar(id) {
+      if (id == "CREDIDIARIO25") {
+        $("#CREDIDIARIO25").show();
+        $("#CREDIDIARIO4").hide(1500);
+        $("#CREDISEMANA").hide(1500);
+        $("#DIARIO").hide(1500);
+      }
+      if (id == "CREDIDIARIO4") {
+        $("#CREDIDIARIO25").hide(1500);
+        $("#CREDIDIARIO4").show();
+        $("#CREDISEMANA").hide(1500);
+        $("#DIARIO").hide(1500);
+      }
+      if (id == "CREDISEMANA") {
+        $("#CREDIDIARIO25").hide(1500);
+        $("#CREDIDIARIO4").hide(1500);
+        $("#CREDISEMANA").show();
+        $("#DIARIO").hide(1500);
+      }
+      if (id == "DIARIO") {
+        $("#CREDIDIARIO25").hide(1500);
+        $("#CREDIDIARIO4").hide(1500);
+        $("#CREDISEMANA").hide(1500);
+        $("#DIARIO").show();
+      }
+    }
+  </script>
 
   <div class="form-group col-sm-6 col-lg-12">
-    {!! Form::label('dues', 'No. Cuotas:') !!}
-    {!! Form::text('dues',null, [
-      'class' => 'form-control input-lg', 
-      'data-parsley-trigger ' => 'input focusin',
-      ]) !!}
-    </div>
+
+    <div class="form-group col-sm-6 col-lg-12">
+      {!! Form::label('dues', 'No. Cuotas:') !!}
+      {!! Form::text('dues',null, [
+        'class' => 'form-control input-lg', 
+        'data-parsley-trigger ' => 'input focusin',
+        ]) !!}
+      </div>
 
 
 
@@ -139,7 +139,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
                 @endforeach
               </select>
             </div>
-           
+
             <input type="hidden" name="user_id" value="">
             <script>
               $(document).ready(function(){
@@ -149,39 +149,34 @@ $users = $filtered->where('region_id', $region_allocation->id);
               });
             </script>
           </div>
-
-
-           
-
-
-  <input type="hidden" name="firts_name" value="{{$client->firts_name}}">
-  <input type="hidden" name="last_name" value="{{$client->last_name}}">
-  <input type="hidden" name="mothers_last_name" value="{{$client->mothers_last_name}}">
-  <input type="hidden" name="curp" value="{{$client->curp}}">
-  <input type="hidden" name="ine" value="{{$client->ine}}">
-  <input type="hidden" name="client_id" value="{{ $client->id}}">
-  <input type="hidden" name="branch" value="{{ $client->branch->name}}">
-  <input type="hidden" name="branch_id" value="{{ $client->branch->id }}">
-  <input type="hidden" name="region_id" value="{{ $client->branch->region->id }}">
-  <div class="form-group col-sm-6 col-lg-12">
-    <div class="form-group col-sm-6 col-lg-4">
-      {!! Form::label('collection_period', 'Horario Sugerido de Cobro:') !!}
-      {!! Form::select('collection_period',['MAÑANA'=>'MAÑANA','MEDIO DÍA'=>'MEDIO DIA','TARDE'=>'TARDE'],null, [
-        'style' => 'text-transform:uppercase',
-        'class' => 'form-control input-lg', 
-        'required'=>'required',
-        'data-parsley-trigger ' => 'input focusin',
-        'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-      </div>
-      <div class="form-group col-sm-6 col-lg-4">
-        {!! Form::label('firm', 'Firma:') !!}
-        {!! Form::text('firm',null, [
-          'class' => 'form-control input-lg', 
-          'id'    => 'signature',
-          'data-parsley-trigger ' => 'input focusin',
-          'readonly'
-          ]) !!}
-        </div>
+          <input type="hidden" name="firts_name" value="{{$client->firts_name}}">
+          <input type="hidden" name="last_name" value="{{$client->last_name}}">
+          <input type="hidden" name="mothers_last_name" value="{{$client->mothers_last_name}}">
+          <input type="hidden" name="curp" value="{{$client->curp}}">
+          <input type="hidden" name="ine" value="{{$client->ine}}">
+          <input type="hidden" name="client_id" value="{{ $client->id}}">
+          <input type="hidden" name="branch" value="{{ $client->branch->name}}">
+          <input type="hidden" name="branch_id" value="{{ $client->branch->id }}">
+          <input type="hidden" name="region_id" value="{{ $client->branch->region->id }}">
+          <div class="form-group col-sm-6 col-lg-12">
+            <div class="form-group col-sm-6 col-lg-4">
+              {!! Form::label('collection_period', 'Horario Sugerido de Cobro:') !!}
+              {!! Form::select('collection_period',['MAÑANA'=>'MAÑANA','MEDIO DÍA'=>'MEDIO DIA','TARDE'=>'TARDE'],null, [
+                'style' => 'text-transform:uppercase',
+                'class' => 'form-control input-lg', 
+                'required'=>'required',
+                'data-parsley-trigger ' => 'input focusin',
+                'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+              </div>
+              <div class="form-group col-sm-6 col-lg-4">
+                {!! Form::label('firm', 'Firma:') !!}
+                {!! Form::text('firm',null, [
+                  'class' => 'form-control input-lg', 
+                  'id'    => 'signature',
+                  'data-parsley-trigger ' => 'input focusin',
+                  'readonly'
+                  ]) !!}
+                </div>
               {{-- <div class="form-group col-sm-6 col-lg-4">
                 <label>  &nbsp; </label>
                 <input type="button" class="btn-lg btn-block btn bg-navy" value="SIMULAR TABLA DE PAGOS" onclick="capturar()">

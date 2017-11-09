@@ -29,12 +29,23 @@ Detalles
 				$rest = $credit->dues - $pay;
 				$date_now = Carbon\Carbon::today();
 				$countlocked = App\Models\LatePayments::where('debt_id',$debt->id)->where('status','Bloqueado')->count();
-				
+				$user = $credit->user;
 				@endphp
 				<div class="box-body">
 					<div class="col-md-4">
-						<p><strong>PROMOTOR: {{$credit->adviser}}</strong></p>
+						<p><strong>PROMOTOR: {{$credit->user->name}} {{$credit->user->father_last_name}} {{$credit->user->mother_last_name}}</strong></p>
+						@if ($credit->periodicity == 'TRADICIONAL')
+							<p><strong>FRECUENCIA:</strong> DIARIO</p>
+						@elseif($credit->periodicity == 'DIARIO25')
+						<p><strong>FRECUENCIA:</strong> CREDIDIARIO25</p>
+						@elseif($credit->periodicity == 'DIARIO4')
+						<p><strong>FRECUENCIA:</strong> CREDIDIARIO4</p>
+						@elseif($credit->periodicity == 'SEMANAL')
+						<p><strong>FRECUENCIA:</strong> CREDISEMANA</p>
+						@else
 						<p><strong>FRECUENCIA:</strong> {{$credit->periodicity}}</p>
+						@endif
+						
 						<p><strong>MONTO:</strong>$ {{ number_format($credit->ammount, 2) }}</p>
 						<p><strong>TASA:</strong> {{$credit->interest_rate}}%</p>
 						<p><strong>CUOTAS:</strong> {{$credit->dues}}</p>

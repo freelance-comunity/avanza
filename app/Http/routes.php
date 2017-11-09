@@ -2,7 +2,7 @@
 /*===================================
 =            Test Routes            =
 ===================================*/
-Route::get('pdf/{id}', function($id){
+Route::get('pdf/{id}', function ($id) {
     $client = App\Models\Client::find($id);
     $document = $client->document;
     $pdf = PDF::loadView('clients.documents', compact('document'));
@@ -10,25 +10,25 @@ Route::get('pdf/{id}', function($id){
 });
 
 
-Route::get('signature', function(){
+Route::get('signature', function () {
     return view('signature');
 });
 
-Route::post('save-signature', function(Illuminate\Http\Request  $request){
+Route::post('save-signature', function (Illuminate\Http\Request  $request) {
     $data_uri = $request->input('signature');
     $encoded_image = explode(",", $data_uri)[1];
     $decoded_image = base64_decode($encoded_image);
-    $url = 'signature'. rand(111,9999).'.png';
+    $url = 'signature'. rand(111, 9999).'.png';
 
     file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
     echo $url;
 });
 
-Route::get('validation', function(){
+Route::get('validation', function () {
     return view('validation');
 });
 
-Route::get('test-relationship', function(){
+Route::get('test-relationship', function () {
     $client = App\Models\Client::find(1);
 
     $references = $client->references;
@@ -38,14 +38,13 @@ Route::get('test-relationship', function(){
         echo $value->firts_name_reference;
         echo "<br>";
     }
-
 });
 
-Route::get('geolocation', function(){
+Route::get('geolocation', function () {
     return view('geolocation');
 });
 
-Route::get('division', function(){
+Route::get('division', function () {
     $now = Carbon\Carbon::today()->toDateString();
     $user = Auth::user();
     $region = $user->region;
@@ -82,7 +81,7 @@ Route::post('process', 'PaymentController@process');
 
 Route::post('/import-excel', 'ClientController@importClients');
 
-Route::get('test-boveda', function(){
+Route::get('test-boveda', function () {
     $incomes = App\Models\Income::all();
     echo number_format($incomes->sum('ammount'));
 
@@ -96,10 +95,9 @@ Route::get('test-boveda', function(){
     echo number_format($rc->sum('ammount'));
     echo "<br>";
     echo number_format($af->sum('ammount'));
-
 });
 
-Route::get('testDate', function(){
+Route::get('testDate', function () {
     $current = Carbon\Carbon::today()->toDateString();
     echo $current;
 
@@ -114,7 +112,7 @@ Route::get('testDate', function(){
     $af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
 });
 
-Route::get('ciclos', function(){
+Route::get('ciclos', function () {
     $date_now = Carbon\Carbon::today()->toDateString();
     $payments = Auth::user()->payments->sortBy('payment');
     $ammount_total = $payments->where('date', $date_now);
@@ -123,15 +121,14 @@ Route::get('ciclos', function(){
     $pagos_vencidos = DB::table('payments')->where([['user_id', '=', Auth::user()->id], ['date', '<=', $date_now],['status', '=', 'Vencido']])->get();
 });
 
-Route::get('LoginMid', function(){
+Route::get('LoginMid', function () {
     $td = Carbon\Carbon::now();
     if ($td->hour <= 20) {
         echo "Ya esta sobre el horario te uso del sistema, intenta mañana.";
     }
-
 });
 
-Route::get('join', function(){
+Route::get('join', function () {
     $user_allocation = Auth::user();
     $region_allocation = $user_allocation->region;
 
@@ -145,15 +142,13 @@ Route::get('join', function(){
 
 
 Route::get('/', function () {
-    if($user = Auth::user())
-        {
+    if ($user = Auth::user()) {
             return view('home');
-        }
-        if(Auth::guest())
-            {
-                return redirect('login');
-            }   
-        });
+    }
+    if (Auth::guest()) {
+        return redirect('login');
+    }
+});
 
 Route::auth();
 
@@ -174,14 +169,14 @@ Route::Post ('/asignamment', 'PermissionController@addPermission');
 
 Route::Post ('/permissionEdit', 'PermissionController@permissionEdit');
 
-Route::get('/deletepermission/{role}/{permission}', function($role, $permission){
-  $users = App\User::all();
-  $role_quit = App\Role::find($role);
-  $permission = App\Permission::find($permission);
-  $role_quit->permissions()->detach($permission);
-  Toastr::info('Permiso eliminado exitosamente.', 'ROLES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+Route::get('/deletepermission/{role}/{permission}', function ($role, $permission) {
+    $users = App\User::all();
+    $role_quit = App\Role::find($role);
+    $permission = App\Permission::find($permission);
+    $role_quit->permissions()->detach($permission);
+    Toastr::info('Permiso eliminado exitosamente.', 'ROLES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
-  return redirect(route('roles.index'));
+    return redirect(route('roles.index'));
 });
 /*=====  End of Routes for Roles  ======*/
 
@@ -192,7 +187,7 @@ Route::get('branches/{id}/delete', [
     'uses' => 'BranchController@destroy',
 ]);
 
-Route::get('charts','BranchController@charts');
+Route::get('charts', 'BranchController@charts');
 
 /*========================================
 =            Routes for Employee            =
@@ -204,31 +199,31 @@ Route::get('employees/{id}/delete', [
     'uses' => 'EmployeeController@destroy',
 ]);
 
-Route::get('/deleterole/{employee}/{role}', function($employee, $role){
-  $employee_quit = App\User::find($employee);
-  $role = App\Role::find($role);
-  $employee_quit->roles()->detach($role);
-  Toastr::success('Privilegios removidos exitosamente.', 'ROLES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-  return redirect(route('employees.index'));
+Route::get('/deleterole/{employee}/{role}', function ($employee, $role) {
+    $employee_quit = App\User::find($employee);
+    $role = App\Role::find($role);
+    $employee_quit->roles()->detach($role);
+    Toastr::success('Privilegios removidos exitosamente.', 'ROLES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+    return redirect(route('employees.index'));
 });
 
-Route::post('/updateroles', function(Illuminate\Http\Request  $request) {
-  $user = App\User::find($request->input('user_id'));
-  $users = App\User::all();
-  $roles = $request->input($user->id);
-  foreach ($roles as $role) {
-    $name_role = App\Role::find($role);
-    $user->attachRole($name_role);
-}
-Toastr::success('Privilegios agregados exitosamente.', 'ROLES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-return redirect(route('employees.index'));
+Route::post('/updateroles', function (Illuminate\Http\Request  $request) {
+    $user = App\User::find($request->input('user_id'));
+    $users = App\User::all();
+    $roles = $request->input($user->id);
+    foreach ($roles as $role) {
+        $name_role = App\Role::find($role);
+        $user->attachRole($name_role);
+    }
+    Toastr::success('Privilegios agregados exitosamente.', 'ROLES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+    return redirect(route('employees.index'));
 });
 
-Route::get('update', function(){
+Route::get('update', function () {
     return view('employees.updatepassword');
 });
 
-Route::get('profile', function(){
+Route::get('profile', function () {
     return view('employees.profile');
 });
 
@@ -248,10 +243,10 @@ Route::post('purseAccess', 'GeneralController@purseAccess');
 
 /*=====  End of Routes for Employee  ======*/
 
-Route::get('formwizard', function(){
+Route::get('formwizard', function () {
     return view('wizard');
 });
-Route::get('teclado', function(){
+Route::get('teclado', function () {
     return view('teclado');
 });
 Route::resource('clients', 'ClientController');
@@ -261,7 +256,7 @@ Route::get('clients/{id}/delete', [
     'uses' => 'ClientController@destroy',
 ]);
 
-Route::get('client/{id}/',[
+Route::get('client/{id}/', [
     'as' => 'branch.client',
     'uses' => 'BranchController@client',
 ]);
@@ -299,12 +294,12 @@ Route::get('clientCredentials/{id}/delete', [
 
 Route::resource('clientAvals', 'ClientAvalController');
 
-Route::get('avalClient/{id}/',[
+Route::get('avalClient/{id}/', [
   'as' => 'client.avalClient',
   'uses' => 'ClientController@avalClient',
 ]);
 
-Route::get('referencesClient/{id}/',[
+Route::get('referencesClient/{id}/', [
   'as' => 'client.referencesClient',
   'uses' => 'ClientController@referencesClient',
 ]);
@@ -363,48 +358,47 @@ Route::get('credits/{id}/delete', [
 ]);
 
 
-Route::get('creditsClient/{id}/{product}',[
+Route::get('creditsClient/{id}/{product}', [
     'as' => 'client.creditsClient',
     'uses' => 'ClientController@creditsClient',
 ]);
 
-Route::get('creditsMigrate/{id}/{product}',[
+Route::get('creditsMigrate/{id}/{product}', [
     'as' => 'client.creditsMigrate',
     'uses' => 'ClientController@creditsMigrate',
 ]);
 
-Route::get('creditsClientSemanal/{id}/{product}',[
+Route::get('creditsClientSemanal/{id}/{product}', [
     'as' => 'client.creditsClientSemanal',
     'uses' => 'ClientController@creditsClientSemanal',
 ]);
-Route::get('renovate/{id}/{product}', function($id){
+Route::get('renovate/{id}/{product}', function ($id) {
     $product = App\Models\Product::find(3);
     $client = App\Models\Client::find($id);
     return view('credits.renovate')
-    ->with('client',$client)
-    ->with('product',$product);
+    ->with('client', $client)
+    ->with('product', $product);
 });
 
 
 Route::post('renovation', 'CreditController@renovation');
 
-Route::get('solicitud/{id}', function($id){
+Route::get('solicitud/{id}', function ($id) {
     $credit = App\Models\Credit::find($id);
     $pdf = PDF::loadView('credits.solicitud', compact('credit'));
     return $pdf->download('solicitud.pdf');
 });
 
-Route::get('account_pdf/{id}', function($id){
+Route::get('account_pdf/{id}', function ($id) {
     $credit = App\Models\Credit::find($id);
     $pdf = PDF::loadView('credits.account_pdf', compact('credit'));
     return $pdf->download('Estado-De-Cuenta.pdf');
 });
 
-Route::get('account/{id}', function($id){
- $credit = App\Models\Credit::find($id);
- return view('credits.account')
- ->with('credit',$credit);
-
+Route::get('account/{id}', function ($id) {
+    $credit = App\Models\Credit::find($id);
+    return view('credits.account')
+    ->with('credit', $credit);
 });
 
 Route::resource('debts', 'DebtController');
@@ -422,7 +416,7 @@ Route::get('payments/{id}/delete', [
     'uses' => 'PaymentController@destroy',
 ]);
 
-Route::get('carbon',function(){
+Route::get('carbon', function () {
     echo $date = \Carbon\Carbon::now()->diffForHumans();
     echo "<br>";
 });
@@ -443,29 +437,29 @@ Route::get('latePayments/{id}/delete', [
 ]);
 
 
-Route::get('graphics',function(){
+Route::get('graphics', function () {
 
     return view('graphics');
 });
 
-Route::get('graphics2',function(){
+Route::get('graphics2', function () {
 
     return view('reports.graphics');
 });
 
-Route::get('unlocked/{id}' , 'PaymentController@unlocked');
-Route::get('unlockedclient/{id}' , 'ClientController@unlockedclient');
-Route::get('cancel/{id}' , 'PaymentController@cancel');
-Route::get('mora/{id}' , 'PaymentController@mora');
+Route::get('unlocked/{id}', 'PaymentController@unlocked');
+Route::get('unlockedclient/{id}', 'ClientController@unlockedclient');
+Route::get('cancel/{id}', 'PaymentController@cancel');
+Route::get('mora/{id}', 'PaymentController@mora');
 
 
 
 
-Route::get('mexico', function(){
+Route::get('mexico', function () {
     return view('mexico');
 });
 
-Route::get('executives', function(){
+Route::get('executives', function () {
     return view('executives');
 });
 
@@ -493,22 +487,22 @@ Route::get('expenditures/{id}/delete', [
     'uses' => 'ExpenditureController@destroy',
 ]);
 
-Route::get('updatephoto/{id}', function($id) {
+Route::get('updatephoto/{id}', function ($id) {
     $client = App\Models\Client::find($id);
     return view('clients.upload')
     ->with('client', $client);
 });
-Route::get('updatephotos/{id}', function($id) {
+Route::get('updatephotos/{id}', function ($id) {
     $document = App\Models\Clientdocuments::find($id);
     return view('clientdocuments.uploads')
     ->with('document', $document);
 });
-Route::get('ine/{id}', function($id) {
+Route::get('ine/{id}', function ($id) {
     $document = App\Models\Clientdocuments::find($id);
     return view('clientdocuments.ine')
     ->with('document', $document);
 });
-Route::get('curps/{id}', function($id) {
+Route::get('curps/{id}', function ($id) {
     $document = App\Models\Clientdocuments::find($id);
     return view('clientdocuments.curps')
     ->with('document', $document);
@@ -517,19 +511,27 @@ Route::post('updatephoto', 'PhotoController@update');
 Route::post('ine', 'PhotoController@ine');
 Route::post('curps', 'PhotoController@curps');
 Route::post('updatephotos', 'PhotoController@cfe');
-Route::post('avatar','PhotoController@avatar');
+Route::post('avatar', 'PhotoController@avatar');
 
 
-Route::get('ajax', function(){
+Route::get('ajax', function () {
     $date = \Carbon\Carbon::now();
     $dues = 25;
     $amount = 39;
-    for ($i=0; $i <= $dues ; $i++) { 
-        echo $dues; echo "&nbsp;";echo "&nbsp;";echo "&nbsp;";
-        echo $date->addDay(); echo "&nbsp;";echo "&nbsp;";echo "&nbsp;";
-        echo $amount; echo "&nbsp;";echo "&nbsp;";echo "&nbsp;";
+    for ($i=0; $i <= $dues; $i++) {
+        echo $dues;
+        echo "&nbsp;";
+        echo "&nbsp;";
+        echo "&nbsp;";
+        echo $date->addDay();
+        echo "&nbsp;";
+        echo "&nbsp;";
+        echo "&nbsp;";
+        echo $amount;
+        echo "&nbsp;";
+        echo "&nbsp;";
+        echo "&nbsp;";
         echo "<br>";
-
     }
 });
 
@@ -555,12 +557,12 @@ Route::get('regions/{id}/delete', [
     'uses' => 'RegionController@destroy',
 ]);
 
-Route::get('usuarios',function(){
- $now = \Carbon\Carbon::now()->toDateString();
- $quincena= \Carbon\Carbon::now()->addDays(15);
- echo "De: ".$now;
- echo "<br>";
- echo "hasta: ".$quincena;
+Route::get('usuarios', function () {
+    $now = \Carbon\Carbon::now()->toDateString();
+    $quincena= \Carbon\Carbon::now()->addDays(15);
+    echo "De: ".$now;
+    echo "<br>";
+    echo "hasta: ".$quincena;
 });
 
 
@@ -590,27 +592,55 @@ Route::get('purseAccesses/{id}/delete', [
 /*========================================
 =            Download reports            =
 ========================================*/
-Route::get('report-vault', function(){
-    $pdf = PDF::loadView('reports.vault')->setPaper('a4', 'landscape');
-    return $pdf->download('reporte-bovéda.pdf');
+Route::get('report-vault', function () {
+    // $pdf = PDF::loadView('reports.vault')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-bovéda.pdf');
+    return view('reports.vault');
 });
 
-Route::get('report-clients', function(){
-    $pdf = PDF::loadView('reports.clients')->setPaper('a4', 'landscape');
-    return $pdf->download('reporte-clientes.pdf');
+Route::get('report-clients', function () {
+    // $pdf = PDF::loadView('reports.clients')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-clientes.pdf');
+    return view('reports.clients');
 });
 
-Route::get('report-credits', function(){
-    $pdf = PDF::loadView('reports.credits')->setPaper('a4', 'landscape');
-    return $pdf->download('reporte-créditos.pdf');
+Route::get('report-credits', function () {
+    // $pdf = PDF::loadView('reports.credits')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-créditos.pdf');
+    return view('reports.credits');
 });
 
-Route::get('report-expenditures', function(){
-    $pdf = PDF::loadView('reports.expenditures')->setPaper('a4', 'landscape');
-    return $pdf->download('reporte-gastos.pdf');
+Route::get('report-credits-month', function () {
+    // $pdf = PDF::loadView('reports.credits')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-créditos.pdf');
+    return view('reports.credits-month');
 });
 
-Route::get('report-payments', function(){
+Route::get('report-rosters-month', function () {
+    // $pdf = PDF::loadView('reports.credits')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-créditos.pdf');
+    return view('reports.rosters-month');
+});
+
+Route::get('report-expenditures-month', function () {
+    // $pdf = PDF::loadView('reports.expenditures')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-gastos.pdf');
+    return view('reports.expenditures-month');
+});
+
+Route::get('report-credits-day', function () {
+    // $pdf = PDF::loadView('reports.expenditures')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-gastos.pdf');
+    return view('reports.credits-day');
+});
+
+Route::get('report-payments-day', function () {
+    // $pdf = PDF::loadView('reports.expenditures')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-gastos.pdf');
+    return view('reports.collection_day');
+});
+
+Route::get('report-payments', function () {
     $pdf = PDF::loadView('reports.payments')->setPaper('a4', 'landscape');
     return $pdf->download('reporte-cobranza.pdf');
 });
@@ -634,7 +664,7 @@ Route::get('closes/{id}/delete', [
     'uses' => 'CloseController@destroy',
 ]);
 
-Route::get('unlock', function(){
+Route::get('unlock', function () {
     //return "Hello, world!";
 
     $date_now = \Carbon\Carbon::now()->toDateString();
@@ -652,7 +682,7 @@ Route::get('unlock', function(){
 
             // $debt = $payment->debt;
             // $debt->ammount = $debt->ammount - 20;
-            // $debt->save();         
+            // $debt->save();
     }
 
     Toastr::info('Se han anulado los pagos con mora del día de hoy.', 'INFO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
@@ -664,7 +694,7 @@ Route::get('unlock', function(){
 // });
 Route::get('movements', 'GeneralController@movements');
 
-Route::get('expenses-admin', function(){
+Route::get('expenses-admin', function () {
     return view('partials.expenses');
 });
 
@@ -674,7 +704,7 @@ Route::get('rosters/{id}/delete', [
     'as' => 'rosters.delete',
     'uses' => 'RosterController@destroy',
 ]);
-Route::get('roster/{id}', function($id){
+Route::get('roster/{id}', function ($id) {
     $roster = App\Models\Roster::find($id);
     $pdf = PDF::loadView('rosters.roster', compact('roster'));
     return $pdf->download('Nomina.pdf');
@@ -696,7 +726,7 @@ Route::get('retreats/{id}/delete', [
     'uses' => 'RetreatController@destroy',
 ]);
 
-Route::get('/transfer', function(){
+Route::get('/transfer', function () {
     //$users = App\User::all();
     $collection = App\Role::all();
     $role = $collection->where('name', 'ejecutivo-de-credito')->first();
@@ -706,188 +736,81 @@ Route::get('/transfer', function(){
     ->with('users', $users);
 });
 
-Route::get('transferClients', function(){
+Route::get('transferClients', function () {
     $branch = App\Models\Branch::find(4);
     $clients = $branch->clients;
     foreach ($clients as $key => $value) {
-     $value->region_id = 4;
-     $value->save();
- }
- $branch = App\Models\Branch::find(9);
- $clients = $branch->clients;
- foreach ($clients as $key => $value) {
-     $value->region_id = 4;
-     $value->save();
- }
+        $value->region_id = 4;
+        $value->save();
+    }
+    $branch = App\Models\Branch::find(9);
+    $clients = $branch->clients;
+    foreach ($clients as $key => $value) {
+        $value->region_id = 4;
+        $value->save();
+    }
 });
 
-Route::get('transferCredits', function(){
+Route::get('transferCredits', function () {
     $branch = App\Models\Branch::find(4);
     $credits = $branch->credits;
     foreach ($credits as $key => $value) {
-     $value->region_id = 4;
-     $value->save();
- }
- $branch = App\Models\Branch::find(9);
- $credits = $branch->credits;
- foreach ($credits as $key => $value) {
-     $value->region_id = 4;
-     $value->save();
- }
+        $value->region_id = 4;
+        $value->save();
+    }
+    $branch = App\Models\Branch::find(9);
+    $credits = $branch->credits;
+    foreach ($credits as $key => $value) {
+        $value->region_id = 4;
+        $value->save();
+    }
 });
 
 Route::post('transferProcess', 'GeneralController@transferProcess');
 
-Route::get('moratorio',function(){
- $credit = App\Models\Credit::all();
-
- $date_now = \Carbon\Carbon::now()->toDateString();
- $hour_now = \Carbon\Carbon::now()->toTimeString();
-
- foreach ($credit as $key => $credit) {
-
-     $debt = $credit->debt;
-     $payments = $debt->payments;
-     if ($credit->periodicity == "CREDISEMANA") {
-       $payments = App\Models\Payment::where('status', 'Pendiente')->get();
-       foreach ($payments as $key => $value) {
-           if ($value->date <= $date_now) {
-            $payment = App\Models\Payment::find($value->id);
-            $payment->status = 'Vencido';
-            $payment->moratorium = 20;
-            $payment->total = $payment->ammount + $payment->moratorium;
-            $payment->balance = $payment->balance + 20;
-            $payment->save();
-
-            $debt = $payment->debt;
-            $debt->ammount = $debt->ammount + 20;
-            $debt->save();
-        }
-    }
-}
-else{
-   $payments = App\Models\Payment::where('status', 'Pendiente')->where('status','Parcial')->get();
-   foreach ($payments as $key => $value) {
-       if ($value->date <= $date_now) {
-        $payment = App\Models\Payment::find($value->id);
-        $payment->status = 'Vencido';
-        $payment->moratorium = 20;
-        $payment->total = $payment->ammount + $payment->moratorium;
-        $payment->balance = $payment->balance + 20;
-        $payment->save();
-
-        $debt = $payment->debt;
-        $debt->ammount = $debt->ammount + 20;
-        $debt->save();
-    }
-}
-
-}
-if ($value->status == 'Vencido') {
-    $latePayments = new App\Models\LatePayments;
-    $latePayments->late_number = $payment->number;
-    $latePayments->late_ammount = $payment->total;
-    $latePayments->late_payment = $payment->payment;
-    $latePayments->payment_id = $payment->id;
-    $latePayments->debt_id    = $debt->id;
-    $latePayments->save();
-}
-}
-echo "moratorio aplicado";
-});
-
-Route::get('walletExpired', 'GeneralController@walletExpired');
-
-Route::post('processPayments', 'PaymentController@processPayments');
-Route::get('totalVault', 'GeneralController@totalVault');
-Route::get('currentCredits', 'GeneralController@currentCredits');
-
-
-Route::get('adviser', function(){
-
-   $user_allocation = Auth::user();
-   $region_allocation = $user_allocation->region;
-   $collection = App\Role::all();
-   $role = $collection->where('name', 'ejecutivo-de-credito')->first(); 
-   $filtered = App\User::where('id', '!=', Auth::id())->get();
-   $users = $filtered->where('region_id', $region_allocation->id);
-
-   foreach ($users as $key => $value) {
-       echo $value->name;
-       echo "<br>";
-   }
-
-});
-
-Route::get('proyeccion',function(){
- $date_now = Carbon\Carbon::today();
- $payments = Auth::user()->payments;
- $date = \Carbon\Carbon::now()->toDateString();
- $payment = App\Models\Payment::where('date', $date)->sum('ammount');
-
- echo $payment;
-
-}); 
-
-Route::get('najera',function(){
-
-    $credits = App\Models\Credit::all();
-
-    foreach ($credits as $key => $value) {
-        if ($value->adviser == "CARLOS EDUARDO TRUJILLO CORDERO") {
-            $value->adviser = "IVAN MOISES HERNANDEZ NAJERA";
-            $value->save();
-
-        }
-
-    }
-    foreach ($credits as $key => $value) {
-        if ($value->adviser == "SELVIN ANTONIO HERNANDEZ JIMENEZ") {
-           $value->adviser = "IVAN MOISES HERNANDEZ NAJERA";
-           $value->save();
-       }
-
-   }
-   echo "chido se cambio el nombre del promotor";
-});
-
-
-Route::get('reportPayment', 'GeneralController@reportPayment');
-
-Route::get('moratorium',function(){
+Route::get('moratorio', function () {
     $credit = App\Models\Credit::all();
+
     $date_now = \Carbon\Carbon::now()->toDateString();
     $hour_now = \Carbon\Carbon::now()->toTimeString();
+
     foreach ($credit as $key => $credit) {
-       $debt = $credit->debt;
-       $payments = $debt->payments;
+        $debt = $credit->debt;
+        $payments = $debt->payments;
+        if ($credit->periodicity == "CREDISEMANA") {
+            $payments = App\Models\Payment::where('status', 'Pendiente')->get();
+            foreach ($payments as $key => $value) {
+                if ($value->date <= $date_now) {
+                    $payment = App\Models\Payment::find($value->id);
+                    $payment->status = 'Vencido';
+                    $payment->moratorium = 20;
+                    $payment->total = $payment->ammount + $payment->moratorium;
+                    $payment->balance = $payment->balance + 20;
+                    $payment->save();
 
-       foreach ($payments as $key => $payment) {
-        if ($payment->date <= $date_now && $payment->status == 'Pendiente' && $hour_now >= '11:00:00') {
-            $payment = App\Models\Payment::find($payment->id);
-            $payment->status = 'Vencido';
-            $payment->moratorium = 20;
-            $payment->total = $payment->ammount + $payment->moratorium;
-            $payment->balance = $payment->balance + 20;
-            $payment->save();
+                    $debt = $payment->debt;
+                    $debt->ammount = $debt->ammount + 20;
+                    $debt->save();
+                }
+            }
+        } else {
+            $payments = App\Models\Payment::where('status', 'Pendiente')->where('status', 'Parcial')->get();
+            foreach ($payments as $key => $value) {
+                if ($value->date <= $date_now) {
+                    $payment = App\Models\Payment::find($value->id);
+                    $payment->status = 'Vencido';
+                    $payment->moratorium = 20;
+                    $payment->total = $payment->ammount + $payment->moratorium;
+                    $payment->balance = $payment->balance + 20;
+                    $payment->save();
 
-            $debt = $payment->debt;
-            $debt->ammount = $debt->ammount + 20;
-            $debt->save();
+                    $debt = $payment->debt;
+                    $debt->ammount = $debt->ammount + 20;
+                    $debt->save();
+                }
+            }
         }
-        if ($payment->date <= $date_now && $payment->status == 'Parcial' && $hour_now >= '11:00:00') {
-            $payment = App\Models\Payment::find($payment->id);
-            $payment->status = 'Vencido';
-            $payment->moratorium = 20;
-            $payment->total = $payment->ammount + $payment->moratorium;
-            $payment->balance = $payment->balance + 20;
-            $payment->save();
-
-            $debt = $payment->debt;
-            $debt->ammount = $debt->ammount + 20;
-            $debt->save();
-        }
-        if ($payment->status == 'Vencido') {
+        if ($value->status == 'Vencido') {
             $latePayments = new App\Models\LatePayments;
             $latePayments->late_number = $payment->number;
             $latePayments->late_ammount = $payment->total;
@@ -897,8 +820,107 @@ Route::get('moratorium',function(){
             $latePayments->save();
         }
     }
-}
-echo "MORATORIO APLICADO CORRECTAMENTE";
+    echo "moratorio aplicado";
+});
+
+Route::get('walletExpired', 'GeneralController@walletExpired');
+
+Route::post('processPayments', 'PaymentController@processPayments');
+Route::get('totalVault', 'GeneralController@totalVault');
+Route::get('currentCredits', 'GeneralController@currentCredits');
+
+
+Route::get('adviser', function () {
+
+    $user_allocation = Auth::user();
+    $region_allocation = $user_allocation->region;
+    $collection = App\Role::all();
+    $role = $collection->where('name', 'ejecutivo-de-credito')->first();
+    $filtered = App\User::where('id', '!=', Auth::id())->get();
+    $users = $filtered->where('region_id', $region_allocation->id);
+
+    foreach ($users as $key => $value) {
+        echo $value->name;
+        echo "<br>";
+    }
+});
+
+Route::get('proyeccion', function () {
+    $date_now = Carbon\Carbon::today();
+    $payments = Auth::user()->payments;
+    $date = \Carbon\Carbon::now()->toDateString();
+    $payment = App\Models\Payment::where('date', $date)->sum('ammount');
+
+    echo $payment;
+});
+
+Route::get('najera', function () {
+
+    $credits = App\Models\Credit::all();
+
+    foreach ($credits as $key => $value) {
+        if ($value->adviser == "CARLOS EDUARDO TRUJILLO CORDERO") {
+            $value->adviser = "IVAN MOISES HERNANDEZ NAJERA";
+            $value->save();
+        }
+    }
+    foreach ($credits as $key => $value) {
+        if ($value->adviser == "SELVIN ANTONIO HERNANDEZ JIMENEZ") {
+            $value->adviser = "IVAN MOISES HERNANDEZ NAJERA";
+            $value->save();
+        }
+    }
+    echo "chido se cambio el nombre del promotor";
+});
+
+
+Route::get('reportPayment', 'GeneralController@reportPayment');
+
+Route::get('moratorium', function () {
+    $credit = App\Models\Credit::all();
+    $date_now = \Carbon\Carbon::now()->toDateString();
+    $hour_now = \Carbon\Carbon::now()->toTimeString();
+    foreach ($credit as $key => $credit) {
+        $debt = $credit->debt;
+        $payments = $debt->payments;
+
+        foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' && $hour_now >= '11:00:00') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial' && $hour_now >= '11:00:00') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->status == 'Vencido') {
+                $latePayments = new App\Models\LatePayments;
+                $latePayments->late_number = $payment->number;
+                $latePayments->late_ammount = $payment->total;
+                $latePayments->late_payment = $payment->payment;
+                $latePayments->payment_id = $payment->id;
+                $latePayments->debt_id    = $debt->id;
+                $latePayments->save();
+            }
+        }
+    }
+    echo "MORATORIO APLICADO CORRECTAMENTE";
 });
 
 Route::resource('clientReferences', 'ClientReferencesController');
@@ -908,28 +930,28 @@ Route::get('clientReferences/{id}/delete', [
     'uses' => 'ClientReferencesController@destroy',
 ]);
 
-Route::get('muertos',function(){
- $payments = App\Models\Payment::all();
- foreach ($payments as $key => $payment) {
-    if ($payment->day == '2017-11-02 00:00:00' AND $payment->status == "Pendiente" OR $payment->status == "Parcial") {
-     echo "dia de muertos";
-     echo "<br>";
-     echo "Pago #".$payment->number;
-     echo "<br>";
-     echo "Deuda: ".$payment->debt_id;
-     echo "<br>";
-     echo "===========";
-     echo "<br>";
- }
-}
+Route::get('muertos', function () {
+    $payments = App\Models\Payment::all();
+    foreach ($payments as $key => $payment) {
+        if ($payment->day == '2017-11-02 00:00:00' and $payment->status == "Pendiente" or $payment->status == "Parcial") {
+            echo "dia de muertos";
+            echo "<br>";
+            echo "Pago #".$payment->number;
+            echo "<br>";
+            echo "Deuda: ".$payment->debt_id;
+            echo "<br>";
+            echo "===========";
+            echo "<br>";
+        }
+    }
 });
 
-Route::get('totalSueldos',function(){
+Route::get('totalSueldos', function () {
     
     $date = \Carbon\Carbon::now();
     $rosters = App\Models\Roster::whereMonth('created_at', '>=', 11)->whereMonth('created_at', '<=', 12)->get();
     foreach ($rosters as $key => $value) {
-       echo $value->id;
-       echo "<br>";
+        echo $value->id;
+        echo "<br>";
     }
 });

@@ -187,7 +187,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 	<!-- ./col -->
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
-		<div class="small-box bg-gray">
+		<div class="small-box bg-black	">
 			<div class="inner">
 				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
 

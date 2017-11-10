@@ -143,7 +143,7 @@ Route::get('join', function () {
 
 Route::get('/', function () {
     if ($user = Auth::user()) {
-            return view('home');
+        return view('home');
     }
     if (Auth::guest()) {
         return redirect('login');
@@ -946,12 +946,15 @@ Route::get('muertos', function () {
     }
 });
 
-Route::get('totalSueldos', function () {
+Route::get('productos', function () {
     
-    $date = \Carbon\Carbon::now();
-    $rosters = App\Models\Roster::whereMonth('created_at', '>=', 11)->whereMonth('created_at', '<=', 12)->get();
-    foreach ($rosters as $key => $value) {
-        echo $value->id;
-        echo "<br>";
-    }
+ $credit = App\Models\Credit::all();
+ foreach ($credit as $key => $credit) {
+    if ($credit->periodicity == "SEMANAL") {
+     echo $credit->periodicity;
+     echo $credit->adviser;
+     echo "<br>";
+ }
+ 
+}
 });

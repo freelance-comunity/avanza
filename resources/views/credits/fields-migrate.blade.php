@@ -141,7 +141,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
             </div>
             
 
-            <input type="text" name="user_id" value="">
+            <input type="hidden" name="user_id" value="">
             <script>
               $(document).ready(function(){
                 $("select[name=adviser]").change(function(){

@@ -640,6 +640,13 @@ Route::get('report-payments-day', function () {
     return view('reports.collection_day');
 });
 
+Route::get('report-payments-now', function () {
+    // $pdf = PDF::loadView('reports.expenditures')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-gastos.pdf');
+    return view('reports.payments_now');
+});
+
+
 Route::get('report-payments', function () {
     $pdf = PDF::loadView('reports.payments')->setPaper('a4', 'landscape');
     return $pdf->download('reporte-cobranza.pdf');
@@ -947,7 +954,7 @@ Route::get('muertos', function () {
 });
 
 Route::get('productos', function () {
-    
+
  $credit = App\Models\Credit::all();
  foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
@@ -955,6 +962,6 @@ Route::get('productos', function () {
      echo $credit->adviser;
      echo "<br>";
  }
- 
+
 }
 });

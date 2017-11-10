@@ -183,7 +183,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 			<div class="icon">
 				<i class="fa fa-line-chart"></i>
 			</div>
-			<a  class="small-box-footer">Ver
+			<a href="{{ url('/report-payments-now') }}"  class="small-box-footer">Ver
 				<i class="fa fa-eye"></i>
 			</a>
 		</div>

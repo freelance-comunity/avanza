@@ -26,12 +26,13 @@ Lista de Créditos @endsection
 					<th class="service">PROMOTOR</th>
 					<th class="service">FRECUENCIA</th>
 					<th class="service">MONTO</th>
+					<th>ESTATUS</th>
 				</thead>
 				<tbody>
 					@foreach ($credits_this_month as $credit) @php $debt = $credit->debt; $filtered_payments = $debt->payments; $late_payments = $filtered_payments->where('status','Vencido');
 					@endphp
 					<tr>
-						<td class="service">{{ $credit->folio }}</td>
+						<td class="service"><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->folio }}</a></td>
 						<td class="service">{{ $credit->branch }}</td>
 						<td class="service">{{ $credit->created_at->toFormattedDateString() }}</td>
 						<td class="service">{{ number_format($debt->ammount - $late_payments->sum('ammount'),2) }}</td>
@@ -42,6 +43,7 @@ Lista de Créditos @endsection
 						<td class="service">{{ $credit->adviser }}</td>
 						<td class="service">{{ $credit->periodicity }}</td>
 						<td class="service">${{ number_format($credit->ammount,2) }}</td>
+						<td>{{$credit->debt->status}}</td>
 					</tr>
 					@endforeach
 				</tbody>

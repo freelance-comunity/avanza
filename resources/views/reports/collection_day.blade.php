@@ -33,7 +33,7 @@ Lista de Créditos @endsection
 						<td>$ {{ number_format($pay->capital, 2) }}</td>
 						<td>$ {{ number_format($pay->interest, 2) }}</td>
 						<td>$ {{ number_format($pay->total)}}</td>
-						<td class="bg-green">$ {{ number_format($pay->payment)}}</td>
+						<td class="bg-primary">$ {{ number_format($pay->payment)}}</td>
 						<td>{{ $pay->status}}</td>
 					</tr>
 					@endforeach

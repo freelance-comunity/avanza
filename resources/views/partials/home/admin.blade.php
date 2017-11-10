@@ -1,35 +1,22 @@
-@php 
-$month = \Carbon\Carbon::now()->month; 
-$vault = App\Models\Vault::all(); 
-$clients = App\Models\Client::all(); 
-$credits_collection = App\Models\Credit::all(); 
-$credits = $credits_collection->where('status', 'MINISTRADO'); 
+@php
+$month = \Carbon\Carbon::now()->month;
+$vault = App\Models\Vault::all();
+$clients = App\Models\Client::all();
+$credits_collection = App\Models\Credit::all();
+$credits = $credits_collection->where('status', 'MINISTRADO');
 $credits_this_month = App\Models\Credit::where(DB::raw('MONTH(created_at)'), '=', date($month) )->get();
 $rosters_this_month = App\Models\Roster::where( DB::raw('MONTH(created_at)'), '=', date($month) )->get();
-$expenditures_this_month = App\Models\Expenditure::where( DB::raw('MONTH(created_at)'), '=', date($month) )->get(); 
+$expenditures_this_month = App\Models\Expenditure::where( DB::raw('MONTH(created_at)'), '=', date($month) )->get();
 $expenditures = App\Models\Expenditure::all();
-$now = Carbon\Carbon::now()->toDateString(); 
-$collection_payments = App\Models\IncomePayment::all(); 
-$payments = $collection_payments->where('date', $now); 
+$now = Carbon\Carbon::now()->toDateString();
+$collection_payments = App\Models\IncomePayment::all();
+$payments = $collection_payments->where('date', $now);
 $payment = App\Models\Payment::where('date',$now)->sum('ammount');
 $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
 $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
-})->get(); 
+})->get();
  @endphp
-<!-- Small boxes (Stat box) -->
-{{--
-<style>
-	@media only screen and (max-width: 500px) {
-		p {
-			font-size: 5px;
-		}
-		h3 {
-			font-size: 50%;
-			background-color: red;
-		}
-	}
-</style> --}}
 <div class="row">
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
@@ -277,87 +264,6 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 				<a href="javascript:void(0)" class="uppercase">View All Users</a>
 			</div> --}}
 			<!-- /.box-footer -->
-		</div>
-		<!--/.box -->
-	</div>
-	<!-- /.col -->
-	<div class="col-md-3">
-		<!-- USERS LIST -->
-		<div class="box box-info">
-			<div class="box-header with-border">
-				<h3 class="box-title">Cierres de operación</h3>
-
-				<div class="box-tools pull-right">
-					<button type="button" class="btn btn-box-tool" data-widget="collapse">
-						<i class="fa fa-minus"></i>
-					</button>
-					<button type="button" class="btn btn-box-tool" data-widget="remove">
-						<i class="fa fa-times"></i>
-					</button>
-				</div>
-			</div>
-			<!-- /.box-header -->
-			<div class="box-body no-padding">
-				@if($closes->isEmpty())
-				<div class="well text-center">No hay registros.</div>
-				@else
-				<table class="table">
-					<thead>
-						<th>Usuario</th>
-						<th>Fecha/hora</th>
-						{{--
-						<th width="50px">Acción</th> --}}
-					</thead>
-					<tbody>
-						@foreach($closes as $close)
-						<tr>
-							<td>{!! $close->name_user !!}</td>
-							<td>{!! $close->created_at !!}</td>
-							{{--
-							<td>
-								<a href="{!! route('closes.edit', [$close->id]) !!}">
-									<i class="glyphicon glyphicon-edit"></i>
-								</a>
-								<a href="{!! route('closes.delete', [$close->id]) !!}" onclick="return confirm('Are you sure wants to delete this Close?')">
-									<i class="glyphicon glyphicon-remove"></i>
-								</a>
-							</td> --}}
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-				@endif
-				<!-- /.closes-list -->
-			</div>
-			<div class="box-footer text-center">
-				<a href="{{ url('closes') }}" class="uppercase">Ver más</a>
-			</div>
-			<!-- /.box-footer -->
-		</div>
-		<!--/.box -->
-	</div>
-	<!-- /.col -->
-	<div class="col-md-3">
-		<div class="box box-default">
-			<div class="box-header with-border">
-				<h3 class="box-title">Cerrar operación</h3>
-
-				<div class="box-tools pull-right">
-					<button type="button" class="btn btn-box-tool" data-widget="collapse">
-						<i class="fa fa-minus"></i>
-					</button>
-					<button type="button" class="btn btn-box-tool" data-widget="remove">
-						<i class="fa fa-times"></i>
-					</button>
-				</div>
-			</div>
-			<!-- /.box-header -->
-			<div class="box-body no-padding">
-				<a href="{{ url('lock-payments') }}" class="btn btn-default btn-block" onclick="return confirm('¿Seguro que quieres cerrar operación?')">
-					<i class="fa fa-3x fa-clock-o"></i>
-					<h3>Cerrar operación</h3>
-				</a>
-			</div>
 		</div>
 		<!--/.box -->
 	</div>

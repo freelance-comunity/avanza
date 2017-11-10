@@ -1,5 +1,11 @@
-@extends('layouts.app') @section('main-content') @section('message_level') Créditos @endsection @section('message_level_here')
-Lista de Créditos @endsection
+@extends('layouts.app')
+@section('main-content')
+	@section('message_level')
+		Créditos
+	@endsection
+	 	@section('message_level_here')
+Lista de Créditos
+@endsection
 <div class="container">
 	@php $filtered_date_now_credits = App\Models\Credit::where(function ($query) { $query->whereRaw('DATE(created_at) = CURRENT_DATE');
 	})->get(); @endphp @include('flash::message')
@@ -26,7 +32,7 @@ Lista de Créditos @endsection
 					@foreach ($filtered_date_now_credits as $credit) @php $debt = $credit->debt; $filtered_payments = $debt->payments; $late_payments
 					= $filtered_payments->where('status','Vencido'); @endphp
 					<tr>
-						<td class="service">{{ $credit->folio }}</td>
+						<td class="service"><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->folio }}</a></td>
 						<td class="service">{{ $credit->branch }}</td>
                         <td>{{$credit->created_at}}</td>
 						<td class="service">${{ number_format($credit->ammount,2) }}</td>

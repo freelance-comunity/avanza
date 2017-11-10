@@ -17,7 +17,6 @@ Lista de Créditos @endsection
 				<thead class="bg-success">
 					<th style="width: 15px;">No. Cuota</th>
 					<th>Fecha</th>
-					<th>Crédito</th>
 					<th>Monto</th>
 					<th>Capital</th>
 					<th>Interés</th>

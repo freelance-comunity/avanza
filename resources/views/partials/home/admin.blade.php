@@ -228,7 +228,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 <!-- /.row -->
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<!-- USERS LIST -->
 		<div class="box box-success">
 			<div class="box-header with-border">

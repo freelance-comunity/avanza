@@ -84,7 +84,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 	<!-- ./col -->
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
-		<div class="small-box bg-red">
+		<div class="small-box bg-navy">
 			<div class="inner">
 				<h3>${{ number_format($credits_this_month->sum('ammount'),2) }}</h3>
 
@@ -101,7 +101,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 	<!-- ./col -->
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
-		<div class="small-box bg-red">
+		<div class="small-box bg-maroon">
 			<div class="inner">
 				<h3>{{ $credits_this_month->count() }}</h3>
 
@@ -125,7 +125,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 				<p>Total Sueldos en el Mes</p>
 			</div>
 			<div class="icon">
-				<i class="fa fa-shopping-cart"></i>
+				<i class="fa fa-credit-card"></i>
 			</div>
 			<a href="{{ url('/report-rosters-month') }}" class="small-box-footer">Ver
 				<i class="fa fa-eye"></i>
@@ -187,7 +187,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 	<!-- ./col -->
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
-		<div class="small-box bg-orange">
+		<div class="small-box bg-black	">
 			<div class="inner">
 				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
 

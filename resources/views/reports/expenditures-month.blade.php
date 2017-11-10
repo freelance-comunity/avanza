@@ -24,7 +24,7 @@ Lista de Gastos @endsection
 					'=', $vault->user_id)->first(); @endphp
 					<tr>
 						<td class="service">{{ $expenditure->concept }}</td>
-						<td class="desc">{{ $user->name }}</td>
+						<td class="desc">{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}</td>
 						<td class="desc">{{ $expenditure->date }}</td>
 						<td class="desc">{{ $expenditure->description }}</td>
 						<td class="total">${{ number_format($expenditure->ammount,2) }}</td>

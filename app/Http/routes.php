@@ -930,31 +930,3 @@ Route::get('clientReferences/{id}/delete', [
     'uses' => 'ClientReferencesController@destroy',
 ]);
 
-Route::get('muertos', function () {
-    $payments = App\Models\Payment::all();
-    foreach ($payments as $key => $payment) {
-        if ($payment->day == '2017-11-02 00:00:00' and $payment->status == "Pendiente" or $payment->status == "Parcial") {
-            echo "dia de muertos";
-            echo "<br>";
-            echo "Pago #".$payment->number;
-            echo "<br>";
-            echo "Deuda: ".$payment->debt_id;
-            echo "<br>";
-            echo "===========";
-            echo "<br>";
-        }
-    }
-});
-
-Route::get('productos', function () {
-    
- $credit = App\Models\Credit::all();
- foreach ($credit as $key => $credit) {
-    if ($credit->periodicity == "SEMANAL") {
-     echo $credit->periodicity;
-     echo $credit->adviser;
-     echo "<br>";
- }
- 
-}
-});

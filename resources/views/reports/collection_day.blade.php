@@ -1,8 +1,8 @@
 @extends('layouts.app') @section('main-content') @section('message_level') Créditos @endsection @section('message_level_here')
 Lista de Créditos @endsection
 <div class="container">
-	@php 
-	$now = Carbon\Carbon::now()->toDateString(); 
+	@php
+	$now = Carbon\Carbon::now()->toDateString();
 	$payments = DB::table('payments')->where('date', '=', $now)->get(); @endphp
 	@include('flash::message')
 	<div class="row">
@@ -17,18 +17,24 @@ Lista de Créditos @endsection
 				<thead class="bg-success">
 					<th style="width: 15px;">No. Cuota</th>
 					<th>Fecha</th>
+					<th>Folio Crédito</th>
 					<th>Monto</th>
 					<th>Capital</th>
 					<th>Interés</th>
 					<th>Total</th>
 					<th>Pagado</th>
-					<th>Estatus</th>
+					<th>Estatus</th
 				</thead>
 				<tbody>
 					@foreach ($payments as $pay)
+					@php
+					$debt = App\Models\Debt::findOrFail($pay->debt_id);
+					$credit = App\Models\Credit::findOrFail($debt->credit_id);
+				  @endphp
 					<tr>
-						<td>{{ $pay->number }}</td>
-						<td>{{$pay->date}}</td>
+						<td>{{ $pay->number }} de {{ $credit->dues }}</td>
+						<td>{{ $pay->date }}</td>
+						<td><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->folio}}</a></td>
 						<td>$ {{ number_format($pay->ammount, 2) }}</td>
 						<td>$ {{ number_format($pay->capital, 2) }}</td>
 						<td>$ {{ number_format($pay->interest, 2) }}</td>

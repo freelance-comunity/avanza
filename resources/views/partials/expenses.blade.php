@@ -25,11 +25,31 @@ Detalles
 					<input type="hidden"  name="user_id" value="{{ Auth::user()->id }}">
 				</div>
 				<div class="form-group col-sm-6 col-lg-4">
+					{!! Form::label('type', 'Tipo de Gasto:') !!}
+          <select name="type" class="form-control input-lg">
+            <option>Artículos de Limpieza</option>
+            <option>Botiquín</option>
+            <option>Cafetería</option>
+            <option>Combustible</option>
+            <option>Fotocopias</option>
+            <option>Refacciones</option>
+            <option>Mantenimiento Vehículos</option>
+            <option>Papelería y Artículos de Oficina</option>
+            <option>Pasajes</option>
+            <option>Recargar Celular</option>
+            <option>Renta de Inmuebles</option>
+            <option>Renta de Internet</option>
+            <option>Renta Teléfono</option>
+            <option>Toner o Cartuchos de Impresora</option>
+            <option>Viáticos</option>
+          </select>
+				</div>
+				<div class="form-group col-sm-6 col-lg-4">
 					{!! Form::label('description', 'Descripción:') !!}
 					<input type="text" name="description" placeholder="ESCRIBE DESCRIPCIÓN" required="required" data-parsley-trigger="input focusin" class="form-control input-lg">
 				</div>
 				<input type="hidden"  name="user_id" value="{{ Auth::user()->id }}">
-				<div class="form-group col-sm-6 col-lg-4">
+				<div class="form-group col-sm-6 col-lg-12">
 					{!! Form::label('voucher', 'Coprobante:') !!}
 					<input type="file" name="voucher" required="required" data-parsley-trigger="input focusin" class="form-control input-lg">
 				</div>

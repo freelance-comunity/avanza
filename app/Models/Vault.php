@@ -4,13 +4,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\DatesTranslator;
 
 class Vault extends Model
-{	
+{
 	use DatesTranslator;
-    
+
 	public $table = "vaults";
 
 	public $primaryKey = "id";
-    
+
 	public $timestamps = true;
 
 	public $fillable = [
@@ -33,6 +33,12 @@ class Vault extends Model
 	{
 		return $this->hasMany('App\Models\Expenditure');
 	}
+
+	public function actives()
+	{
+		return $this->hasMany('App\Models\Active');
+	}
+
 	public function expendituresCredit()
 	{
 		return $this->hasMany('App\Models\ExpenditureCredit');

@@ -239,6 +239,8 @@ Route::post('addCash', 'GeneralController@addCash');
 
 Route::post('recordExpense', 'GeneralController@recordExpense');
 
+Route::post('recordActive', 'GeneralController@recordActive');
+
 Route::post('purseAccess', 'GeneralController@purseAccess');
 
 /*=====  End of Routes for Employee  ======*/
@@ -705,6 +707,10 @@ Route::get('expenses-admin', function () {
     return view('partials.expenses');
 });
 
+Route::get('actives-admin', function () {
+    return view('partials.actives');
+});
+
 Route::resource('rosters', 'RosterController');
 
 Route::get('rosters/{id}/delete', [
@@ -965,3 +971,11 @@ Route::get('productos', function () {
 
 }
 });
+
+
+Route::resource('actives', 'ActiveController');
+
+Route::get('actives/{id}/delete', [
+    'as' => 'actives.delete',
+    'uses' => 'ActiveController@destroy',
+]);

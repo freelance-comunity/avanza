@@ -16,12 +16,13 @@ $date = new Date();
 @include('executives.c')
 @include('executives.g')
 @include('executives.ra')
+@include('executives.actives')
 <div class="box box-danger">
 	<div class="box-header with-border">
 		<div class="col-md-12">
 			<h3 class="box-title"><i class="fa fa-university"></i>BOVÉDA</h3>
 		</div><br><br>
-		<div class="col-md-4">   
+		<div class="col-md-4">
 			<div class="info-box bg-navy">
 				<span class="info-box-icon"><i class="fa fa-dollar"></i></span>
 				<div class="info-box-content">
@@ -37,7 +38,7 @@ $date = new Date();
 				</div>
 			</div>
 		</div>
-		<div class="col-md-8">   
+		<div class="col-md-8">
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<tr>
@@ -66,12 +67,14 @@ $date = new Date();
 					<tr>
 						<td colspan="4">
 							<a data-toggle="modal" data-target="#record_expense" class="btn bg-primary btn-lg btn-block">REGISTRAR GASTO</a>
-							<a data-toggle="modal" data-target="#purse_access" class="btn bg-primary btn-lg btn-block">REGISTRAR COBROS ACCESS</a>
+							<a data-toggle="modal" data-target="#record_actives" class="btn bg-yellow btn-lg btn-block">REGISTRAR INVERSIÓN EN ACTIVO</a>
+							<a data-toggle="modal" data-target="#purse_access" class="btn bg-green btn-lg btn-block">REGISTRAR COBROS ACCESS</a>
 						</td>
 						@include('executives.record_expense')
 						@include('executives.purse_access')
+						@include('executives.record_actives')
 					</tr>
-					
+
 					@endrole
 				</table>
 			</div>
@@ -79,14 +82,14 @@ $date = new Date();
 		<hr>
 		<br><br>
 		<br><br><br>
-		<div class="col-md-6">  
-			<h4 align="center">INGRESOS</h4> 
+		<div class="col-md-6">
+			<h4 align="center">INGRESOS</h4>
 			<div class="table-responsive">
 				@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 				<table class="table"  id="example">
 					@else
 					<table class="table"  id="pagos_promotor">
-						@endif  
+						@endif
 						<thead class="thead-inverse">
 							<th>CONCEPTO</th>
 							<th>IMPORTE</th>
@@ -130,19 +133,19 @@ $date = new Date();
 									<a data-toggle="modal" data-target="#ra"><i class="fa fa-eye fa-2x"></i></a>
 								</td>
 								@endif
-							</tr> 
+							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<div class="col-md-6">  
-				<h4 align="center">EGRESOS</h4> 
+			<div class="col-md-6">
+				<h4 align="center">EGRESOS</h4>
 				<div class="table-responsive">
 					@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 					<table class="table"  id="example2">
 						@else
 						<table class="table"  id="pagos_promotor2">
-							@endif  
+							@endif
 							<thead class="thead-inverse">
 								<th>IMPORTE</th>
 								<th>CONCEPTO</th>
@@ -170,6 +173,15 @@ $date = new Date();
 									@endif
 								</tr>
 								<tr>
+									<td>Inversión en Activos</td>
+									<td>${{ number_format($actives->sum('ammount')) }}</td>
+									@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
+									<td style="text-align: center;">
+										<a data-toggle="modal" data-target="#actives"><i class="fa fa-eye fa-2x"></i></a>
+									</td>
+									@endif
+								</tr>
+								<tr>
 									<td>Devolución</td>
 									<td>$0.00</td>
 									@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
@@ -188,9 +200,8 @@ $date = new Date();
 					</div>
 				</div>
 
-			</div>  	
+			</div>
 		</div>
 
 
 		@endsection
-

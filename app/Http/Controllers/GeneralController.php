@@ -26,6 +26,7 @@ use App\Models\Close;
 use App\Models\IncomePayment;
 use App\Models\BoxCut;
 use App\Models\Roster;
+use App\Models\Active;
 
 class GeneralController extends Controller
 {
@@ -83,6 +84,7 @@ class GeneralController extends Controller
 		$user = User::find($id);
 		$vault = $user->vault;
 		$incomes = $vault->incomes->where('date', $current);
+		$actives = $vault->actives->where('date', $current);
 		$si = $incomes->where('concept', 'Saldo Inicial')->where('date', $current);
 		$af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
 
@@ -111,7 +113,8 @@ class GeneralController extends Controller
 		->with('c', $c)
 		->with('g', $g)
 		->with('purseAccess',$purseAccess)
-		->with('ra',$ra);
+		->with('ra',$ra)
+		->with('actives', $actives);
 	}
 
 	public function addVault(Request $request)
@@ -256,6 +259,58 @@ class GeneralController extends Controller
 			return redirect()->back();
 		}
 	}
+
+	public function recordActive(Request $request)
+	{
+		$user = Auth::user();
+		$vault = $user->vault;
+		if ($vault->ammount == 0) {
+			Toastr::error('No puedes registrar un gasto, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		}
+		else{
+			$validator = Validator::make($request->all(), [
+				'ammount' => 'required|numeric',
+				'voucher' => 'required|image|mimes:jpeg,png,jpg',
+			]);
+
+			if ($validator->fails()) {
+				Toastr::error('Favor de introducir cantidad valida ó la imagen correctamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+				return redirect()->back();
+			}
+
+			if ($request->hasFile('voucher')) {
+				$voucher = $request->file('voucher');
+				$filename = time() . '.' . $voucher->getClientOriginalExtension();
+				Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
+			}
+
+			$current = Carbon::today();
+			$ammount = $request->input('ammount');
+			$concept = $request->input('concept');
+			$user = Auth::user();
+			$vault = $user->vault;
+			$data_active['ammount'] = $ammount;
+			$data_active['concept'] = 'Inversión en Activos';
+			$data_active['voucher'] = $filename;
+			$data_active['date']    = $current;
+			$data_active['description']= $request->input('description');
+			$data_active['type']= $request->input('type');
+			$data_active['vault_id'] = $vault->id;
+
+			// dd($data_active);
+			$active = Active::create($data_active);
+
+			$vault->ammount = $vault->ammount - $active->ammount;
+			$vault->save();
+
+			Toastr::success('Inversión en activo agregada exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
+	}
+
 	public function purseAccess(Request $request)
 	{
 

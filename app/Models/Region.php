@@ -4,11 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Region extends Model
 {
-    
+
 	public $table = "regions";
 
 	public $primaryKey = "id";
-    
+
 	public $timestamps = true;
 
 	public $fillable = [
@@ -39,6 +39,26 @@ class Region extends Model
 	public function users()
 	{
 		return $this->hasMany('App\User');
+	}
+
+  public function payments()
+	{
+		return $this->hasMany('App\Models\Payment');
+	}
+
+	public function debts()
+	{
+		return $this->hasMany('App\Models\Debt');
+	}
+
+	public function incomePayments()
+	{
+		return $this->hasMany('App\Models\IncomePayment');
+	}
+
+	public function expenditureCredits()
+	{
+		return $this->hasMany('App\Models\ExpenditureCredit');
 	}
 
 }

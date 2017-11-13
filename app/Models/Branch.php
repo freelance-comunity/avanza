@@ -4,11 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
 {
-	
+
 	public $table = "branches";
 
 	public $primaryKey = "id";
-	
+
 	public $timestamps = true;
 
 	public $fillable = [
@@ -48,6 +48,26 @@ class Branch extends Model
 	public function users()
 	{
 		return $this->hasMany('App\User');
+	}
+
+	public function payments()
+	{
+		return $this->hasMany('App\Models\Payment');
+	}
+
+	public function debts()
+	{
+		return $this->hasMany('App\Models\Debt');
+	}
+
+	public function incomePayments()
+	{
+		return $this->hasMany('App\Models\IncomePayment');
+	}
+
+	public function expenditureCredits()
+	{
+		return $this->hasMany('App\Models\ExpenditureCredit');
 	}
 
 }

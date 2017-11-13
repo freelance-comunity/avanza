@@ -9,8 +9,9 @@
 			<th>Mora</th>
 			<th align="center">Total</th>
 			<th>Pagado</th>
-			<th>Saldo</th>				
+			<th>Saldo</th>
 			<th>Estatus</th>
+			<th>Fecha y hora de cobro</th>
 		</thead>
 		<tbody>
 			@foreach($payments as $payment)
@@ -36,6 +37,11 @@
 				<td>${{ number_format($payment->payment, 2)}}</td>
 				<td>${{ number_format($payment->balance, 2) }}</td>
 				<td><p style="color:gray;">{{$payment->status}}</p></td>
+				@if ($payment->status == 'Pagado')
+					<td>{{$payment->updated_at}}</td>
+				@else
+					<td>Pago no realizado aún</td>
+				@endif
 			</tr>
 			@elseif($payment->status == "Parcial")
 			<tr class="info">
@@ -66,7 +72,11 @@
 					<td>${{ number_format($payment->payment, 2)}}</td>
 					<td>${{ number_format($payment->balance, 2) }}</td>
 					<td><p>{{$payment->status}}</p></td>
-
+					@if ($payment->status == 'Pagado')
+						<td>{{$payment->updated_at}}</td>
+					@else
+						<td>Pago no realizado aún</td>
+					@endif
 				</tr>
 				@elseif($payment->status == "Pagado")
 				<tr class="success">
@@ -81,11 +91,13 @@
 					<td>${{ number_format($payment->payment, 2)}}</td>
 					<td>${{ number_format($payment->balance, 2) }}</td>
 					<td><p style="color:green;">{{$payment->status}}</p></td>
-
+					@if ($payment->status == 'Pagado')
+						<td>{{$payment->updated_at}}</td>
+					@else
+						<td>Pago no realizado aún</td>
+					@endif
 				</tr>
 				@endif
 				@endforeach
 			</tbody>
 		</table>
-
-		

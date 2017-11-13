@@ -1,7 +1,7 @@
 <?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\DatesTranslator;	
+use App\Traits\DatesTranslator;
 
 class Payment extends Model
 {
@@ -56,6 +56,16 @@ class Payment extends Model
 	public function incomePayment()
 	{
 		return $this->hasOne('App\Models\IncomePayment');
+	}
+
+	public function region()
+	{
+			return $this->belongsTo('App\Models\Region');
+	}
+
+	public function branch()
+	{
+			return $this->belongsTo('App\Models\Branch');
 	}
 
 }

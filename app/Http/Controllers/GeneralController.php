@@ -26,17 +26,18 @@ use App\Models\Close;
 use App\Models\IncomePayment;
 use App\Models\BoxCut;
 use App\Models\Roster;
+use App\Models\Active;
 
 class GeneralController extends Controller
-{	
+{
 	public function __construct()
 	{
 		$this->middleware('auth');
 		$this->middleware('login_mid');
 	}
-	
+
 	public function getPromoter()
-	{	
+	{
 
 		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
 			$users = User::where('id', '!=', Auth::id())->get();
@@ -65,7 +66,7 @@ class GeneralController extends Controller
 			return view('executives.index')
 			->with('employees', $users);
 		}
-		
+
 		elseif(Auth::user()->hasRole('ejecutivo-de-credito')) {
 
 			$user = Auth::user();
@@ -73,16 +74,17 @@ class GeneralController extends Controller
 			return view('executives.index')
 			->with('user', $user);
 		}
-		
+
 	}
-	
+
 
 	public function showVault($id)
-	{	
+	{
 		$current = Carbon::today()->toDateString();
 		$user = User::find($id);
 		$vault = $user->vault;
 		$incomes = $vault->incomes->where('date', $current);
+		$actives = $vault->actives->where('date', $current);
 		$si = $incomes->where('concept', 'Saldo Inicial')->where('date', $current);
 		$af = $incomes->where('concept', 'Asignación de efectivo')->where('date', $current);
 
@@ -111,11 +113,12 @@ class GeneralController extends Controller
 		->with('c', $c)
 		->with('g', $g)
 		->with('purseAccess',$purseAccess)
-		->with('ra',$ra);
+		->with('ra',$ra)
+		->with('actives', $actives);
 	}
 
 	public function addVault(Request $request)
-	{	
+	{
 		$current = Carbon::today();
 
 		$validator = Validator::make($request->all(), [
@@ -162,7 +165,7 @@ class GeneralController extends Controller
 	}
 
 	public function addCash(Request $request)
-	{	
+	{
 		$current = Carbon::today();
 
 		$validator = Validator::make($request->all(), [
@@ -207,9 +210,9 @@ class GeneralController extends Controller
 	}
 
 	public function recordExpense(Request $request)
-	{	
+	{
 		$user = Auth::user();
-		$vault = $user->vault;	
+		$vault = $user->vault;
 		if ($vault->ammount == 0) {
 			Toastr::error('No puedes registrar un gasto, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();
@@ -236,14 +239,16 @@ class GeneralController extends Controller
 			$ammount = $request->input('ammount');
 			$concept = $request->input('concept');
 			$user = Auth::user();
-			$vault = $user->vault;	
+			$vault = $user->vault;
 			$data_expenditure['ammount'] = $ammount;
 			$data_expenditure['concept'] = 'Gasto';
 			$data_expenditure['voucher'] = $filename;
 			$data_expenditure['date']    = $current;
-			$data_expenditure['description']= $request->input('description');;
+			$data_expenditure['description']= $request->input('description');
+			$data_expenditure['type']= $request->input('type');
 			$data_expenditure['vault_id'] = $vault->id;
 
+			// dd($data_expenditure);
 			$expenditure = Expenditure::create($data_expenditure);
 
 			$vault->ammount = $vault->ammount - $expenditure->ammount;
@@ -254,9 +259,61 @@ class GeneralController extends Controller
 			return redirect()->back();
 		}
 	}
+
+	public function recordActive(Request $request)
+	{
+		$user = Auth::user();
+		$vault = $user->vault;
+		if ($vault->ammount == 0) {
+			Toastr::error('No puedes registrar un gasto, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		}
+		else{
+			$validator = Validator::make($request->all(), [
+				'ammount' => 'required|numeric',
+				'voucher' => 'required|image|mimes:jpeg,png,jpg',
+			]);
+
+			if ($validator->fails()) {
+				Toastr::error('Favor de introducir cantidad valida ó la imagen correctamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+				return redirect()->back();
+			}
+
+			if ($request->hasFile('voucher')) {
+				$voucher = $request->file('voucher');
+				$filename = time() . '.' . $voucher->getClientOriginalExtension();
+				Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
+			}
+
+			$current = Carbon::today();
+			$ammount = $request->input('ammount');
+			$concept = $request->input('concept');
+			$user = Auth::user();
+			$vault = $user->vault;
+			$data_active['ammount'] = $ammount;
+			$data_active['concept'] = 'Inversión en Activos';
+			$data_active['voucher'] = $filename;
+			$data_active['date']    = $current;
+			$data_active['description']= $request->input('description');
+			$data_active['type']= $request->input('type');
+			$data_active['vault_id'] = $vault->id;
+
+			// dd($data_active);
+			$active = Active::create($data_active);
+
+			$vault->ammount = $vault->ammount - $active->ammount;
+			$vault->save();
+
+			Toastr::success('Inversión en activo agregada exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
+	}
+
 	public function purseAccess(Request $request)
-	{	
-		
+	{
+
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric',
 			'voucher' => 'required|image|mimes:jpeg,png,jpg',
@@ -320,7 +377,7 @@ class GeneralController extends Controller
 				$latePayments->payment_id = $payment->id;
 				$latePayments->debt_id    = $debt->id;
 				$latePayments->save();
-			}			
+			}
 		}
 
 		$user_close = Auth::user();
@@ -339,7 +396,7 @@ class GeneralController extends Controller
 		$receiver = User::find($request->input('receiver'));
 
 		$clients  = $transmitter->clients;
-		
+
 		// echo $transmitter->name;
 		// echo "<br>";
 		// echo $receiver->name;
@@ -378,11 +435,11 @@ class GeneralController extends Controller
 
 		$vaults = Vault::all()->sortByDesc('updated_at');;
 		$starts_collection = Income::all();
-		$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at'); 
-		$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at'); 
-		$recoverys = IncomePayment::all()->sortByDesc('created_at'); 
-		$accesses  = PurseAccess::all()->sortByDesc('created_at'); 
-		$credits   = ExpenditureCredit::all()->sortByDesc('created_at'); 
+		$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at');
+		$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at');
+		$recoverys = IncomePayment::all()->sortByDesc('created_at');
+		$accesses  = PurseAccess::all()->sortByDesc('created_at');
+		$credits   = ExpenditureCredit::all()->sortByDesc('created_at');
 		$expenses  = Expenditure::all()->sortByDesc('created_at');
 		$cuts      = BoxCut::all()->sortByDesc('created_at');
 		$rosters   = Roster::all()->sortByDesc('created_at');
@@ -562,19 +619,19 @@ class GeneralController extends Controller
 
 	public function reportPayment()
 	{
-		$recoverys = IncomePayment::all()->sortByDesc('created_at'); 
+		$recoverys = IncomePayment::all()->sortByDesc('created_at');
 		return view('partials.reportPayment')
 		->with('recoverys', $recoverys);
 	}
 	public function totalVault()
 	{
-		$vault = Vault::all(); 
+		$vault = Vault::all();
 		return view('reports.totalVault')
 		->with('vault', $vault);
 	}
 	public function currentCredits()
 	{
-		$credits = Credit::all(); 
+		$credits = Credit::all();
 		return view('reports.currentCredits')
 		->with('credits', $credits);
 	}

@@ -1,8 +1,8 @@
-<div class="modal fade" id="g" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="actives" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">DETALLES DE GASTOS</h5>
+        <h5 class="modal-title" id="exampleModalLabel">DETALLES DE INVERSIÓN EN ACTIVOS</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -20,16 +20,16 @@
               <th>Fecha</th>
             </thead>
             <tbody>
-              @foreach ($g as $g)
+              @foreach ($actives as $a)
               <tr>
-                <td>${{ number_format($g->ammount,2) }}</td>
-                <td>{{ $g->concept }}</td>
-                <td>{{ $g->description}}</td>
-                <td>{{ $g->type }}</td>
+                <td>${{ number_format($a->ammount,2) }}</td>
+                <td>{{ $a->concept }}</td>
+                <td>{{ $a->description}}</td>
+                <td>{{ $a->type }}</td>
                 <td>
-                  <img src="{{ asset('uploads/voucher/') }}{{ $g->voucher }}" style="width: 50px; height: 50px; float: left; border-radius: 10%; margin-right: 25px;">
+                  <img src="{{ asset('uploads/voucher/') }}{{ $a->voucher }}" style="width: 50px; height: 50px; float: left; border-radius: 10%; margin-right: 25px;">
                 </td>
-                <td>{{ $g->created_at }}</td>
+                <td>{{ $a->created_at }}</td>
               </tr>
               @endforeach
             </tbody>

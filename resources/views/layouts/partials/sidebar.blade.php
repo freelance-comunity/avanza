@@ -39,6 +39,7 @@
           @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>
+          <li><a href="{{ url('actives-admin') }}">Inversiones en Activos</a></li>
         </ul>
       </li>
       <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li>
@@ -46,7 +47,7 @@
       <li><a href="{{ url('graphics2') }}"><i class='fa fa-line-chart'></i> <span>Graficas 2</span></a></li>
       <li class="treeview">
         <a href="#"><i class='fa fa-pie-chart'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
-        <ul class="treeview-menu">   
+        <ul class="treeview-menu">
          <li><a href="{{ url('walletExpired') }}">Cartera</a></li>
         {{--  <li><a href="{{ url('reportPayment') }}">Reporte pagos</a></li> --}}
          <li><a href="{{ url('totalVault') }}">Total bovéda</a></li>

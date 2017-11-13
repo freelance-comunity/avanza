@@ -190,7 +190,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 		</div>
 	</div>
 	<!-- ./col -->
-	<div class="col-lg-3 col-md-4">
+	{{-- <div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-green">
 			<div class="inner">
@@ -205,9 +205,9 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 				<i class="fa fa-eye"></i>
 			</a>
 		</div>
-	</div>
+	</div> --}}
 	<!-- ./col -->
-	<div class="col-lg-3 col-md-4">
+	{{-- <div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-teal">
 			<div class="inner">
@@ -222,9 +222,9 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 				<i class="fa fa-eye"></i>
 			</a>
 		</div>
-	</div>
+	</div> --}}
 	<!-- ./col -->
-	<div class="col-lg-3 col-md-4">
+	{{-- <div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-red">
 			<div class="inner">
@@ -239,7 +239,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 				<i class="fa fa-eye"></i>
 			</a>
 		</div>
-	</div>
+	</div> --}}
 	<!-- ./col -->
 	{{--
 	<div class="col-lg-3 col-xs-6">

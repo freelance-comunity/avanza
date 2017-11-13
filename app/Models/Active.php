@@ -1,13 +1,11 @@
 <?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-//use App\Traits\DatesTranslator;
 
-class Expenditure extends Model
+class Active extends Model
 {
-	//use DatesTranslator;
 
-	public $table = "expenditures";
+	public $table = "actives";
 
 	public $primaryKey = "id";
 
@@ -18,9 +16,8 @@ class Expenditure extends Model
 		"concept",
 		"voucher",
 		"date",
+		"type",
 		"description",
-    "type",
-		"credit_id",
 		"vault_id"
 	];
 
@@ -28,10 +25,12 @@ class Expenditure extends Model
 	    "ammount" => "required",
 		"concept" => "required",
 		"voucher" => "required",
+		"date" => "required",
+		"type" => "required",
 		"description" => "required"
 	];
 
-	public function vault()
+  public function vault()
 	{
 		return $this->belongsTo('App\Models\Vault');
 	}

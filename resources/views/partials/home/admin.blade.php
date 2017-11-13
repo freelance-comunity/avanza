@@ -9,6 +9,7 @@ $rosters_this_month = App\Models\Roster::where( DB::raw('MONTH(created_at)'), '=
 $expenditures_this_month = App\Models\Expenditure::where( DB::raw('MONTH(created_at)'), '=', date($month) )->get();
 $expenditures = App\Models\Expenditure::all();
 $now = Carbon\Carbon::now()->toDateString();
+
 $collection_payments = App\Models\IncomePayment::all();
 $payments = $collection_payments->where('date', $now);
 $payment = App\Models\Payment::where('date',$now)->sum('ammount');
@@ -183,7 +184,58 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 			<div class="icon">
 				<i class="fa fa-line-chart"></i>
 			</div>
-			<a  class="small-box-footer">Ver
+			<a href="{{ url('/report-payments-now') }}"  class="small-box-footer">Ver
+				<i class="fa fa-eye"></i>
+			</a>
+		</div>
+	</div>
+	<!-- ./col -->
+	<div class="col-lg-3 col-md-4">
+		<!-- small box -->
+		<div class="small-box bg-green">
+			<div class="inner">
+				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+
+				<p>Cartera Vencida (1 a 15 días)</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-exclamation-triangle"></i>
+			</div>
+			<a href="{{ url('/report-payments-now') }}"  class="small-box-footer">Ver
+				<i class="fa fa-eye"></i>
+			</a>
+		</div>
+	</div>
+	<!-- ./col -->
+	<div class="col-lg-3 col-md-4">
+		<!-- small box -->
+		<div class="small-box bg-teal">
+			<div class="inner">
+				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+
+				<p>Cartera Vencida (16 a 30 días)</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-exclamation-triangle"></i>
+			</div>
+			<a href="{{ url('/report-payments-now') }}"  class="small-box-footer">Ver
+				<i class="fa fa-eye"></i>
+			</a>
+		</div>
+	</div>
+	<!-- ./col -->
+	<div class="col-lg-3 col-md-4">
+		<!-- small box -->
+		<div class="small-box bg-red">
+			<div class="inner">
+				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+
+				<p>Cartera Vencida (Más de 30 días)</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-exclamation-triangle"></i>
+			</div>
+			<a href="{{ url('/report-payments-now') }}"  class="small-box-footer">Ver
 				<i class="fa fa-eye"></i>
 			</a>
 		</div>

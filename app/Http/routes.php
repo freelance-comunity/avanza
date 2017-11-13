@@ -640,6 +640,13 @@ Route::get('report-payments-day', function () {
     return view('reports.collection_day');
 });
 
+Route::get('report-payments-now', function () {
+    // $pdf = PDF::loadView('reports.expenditures')->setPaper('a4', 'landscape');
+    // return $pdf->download('reporte-gastos.pdf');
+    return view('reports.payments_now');
+});
+
+
 Route::get('report-payments', function () {
     $pdf = PDF::loadView('reports.payments')->setPaper('a4', 'landscape');
     return $pdf->download('reporte-cobranza.pdf');
@@ -935,4 +942,33 @@ Route::get('clientReferences/{id}/delete', [
     'as' => 'clientReferences.delete',
     'uses' => 'ClientReferencesController@destroy',
 ]);
+
+Route::get('muertos', function () {
+    $payments = App\Models\Payment::all();
+    foreach ($payments as $key => $payment) {
+        if ($payment->day == '2017-11-02 00:00:00' and $payment->status == "Pendiente" or $payment->status == "Parcial") {
+            echo "dia de muertos";
+            echo "<br>";
+            echo "Pago #".$payment->number;
+            echo "<br>";
+            echo "Deuda: ".$payment->debt_id;
+            echo "<br>";
+            echo "===========";
+            echo "<br>";
+        }
+    }
+});
+
+Route::get('productos', function () {
+
+ $credit = App\Models\Credit::all();
+ foreach ($credit as $key => $credit) {
+    if ($credit->periodicity == "SEMANAL") {
+     echo $credit->periodicity;
+     echo $credit->adviser;
+     echo "<br>";
+ }
+
+}
+});
 

@@ -4,11 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExpenditureCredit extends Model
 {
-    
+
 	public $table = "expenditure_credits";
 
 	public $primaryKey = "id";
-    
+
 	public $timestamps = true;
 
 	public $fillable = [
@@ -31,6 +31,16 @@ class ExpenditureCredit extends Model
 	public function credit()
 	{
 		return $this->belongsTo('App\Models\Credit');
+	}
+
+  public function region()
+	{
+			return $this->belongsTo('App\Models\Region');
+	}
+
+	public function branch()
+	{
+			return $this->belongsTo('App\Models\Branch');
 	}
 
 }

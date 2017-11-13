@@ -35,5 +35,15 @@ class Debt extends Model
 		return $this->hasOne('App\Models\IncomePayment');
 	}
 
-	
+	public function region()
+	{
+			return $this->belongsTo('App\Models\Region');
+	}
+
+	public function branch()
+	{
+			return $this->belongsTo('App\Models\Branch');
+	}
+
+
 }

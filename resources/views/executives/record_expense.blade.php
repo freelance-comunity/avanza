@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        {!! Form::open(['url' => 'recordExpense','data-parsley-validate' => '',  'files' => 'true','onsubmit'=>'return enviado()']) !!}  
+        {!! Form::open(['url' => 'recordExpense','data-parsley-validate' => '',  'files' => 'true','onsubmit'=>'return enviado()']) !!}
         <p>
           {!! Form::label('ammount', 'Monto:') !!}
           <input type="number" name="ammount" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
@@ -20,7 +20,24 @@
         </p>-->
         <p>
           {!! Form::label('description', 'Descripción:') !!}
-          <input type="text" name="description" class="form-control input-lg">
+          {{-- <input type="text" name="description" class="form-control input-lg"> --}}
+          <select name="description" class="form-control input-lg">
+            <option>Artículos de Limpieza</option>
+            <option>Botiquín</option>
+            <option>Cafetería</option>
+            <option>Combustible</option>
+            <option>Fotocopias</option>
+            <option>Refacciones</option>
+            <option>Mantenimiento Vehículos</option>
+            <option>Papelería y Artículos de Oficina</option>
+            <option>Pasajes</option>
+            <option>Recargar Celular</option>
+            <option>Renta de Inmuebles</option>
+            <option>Renta de Internet</option>
+            <option>Renta Teléfono</option>
+            <option>Toner o Cartuchos de Impresora</option>
+            <option>Viáticos</option>
+          </select>
         </p>
         <input type="hidden"  name="user_id" value="{{ $user->id }}">
         <p>
@@ -42,13 +59,13 @@
 <script>
 
   var cuenta=0;
-  function enviado() { 
+  function enviado() {
     if (cuenta == 0)
     {
       cuenta++;
       return true;
     }
-    else 
+    else
     {
       alert("El formulario ya está siendo enviado, por favor aguarde un instante.");
       return false;

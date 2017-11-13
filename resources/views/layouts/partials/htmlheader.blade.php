@@ -47,13 +47,13 @@
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
-   
+
 
         <!--ChartJs-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
-        
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js">
 
 
@@ -76,11 +76,6 @@
         <link rel="stylesheet" href="{{asset('/rangeSlider/css/ion.rangeSlider.skinFlat.css')}}" />
         <script src="{{asset('/rangeSlider/js/ion.rangeSlider.js')}}" type="text/javascript"></script>
         <!--pace-->
-
-        {{-- <script src="{{ asset('/pace/pace.js') }}"></script>
-        <link href="{{ asset('/pace/themes/pace-theme-barber-shop.css') }}"  rel="stylesheet" /> --}}
-        
-
         <style>
         canvas {
           width: 100%;
@@ -189,7 +184,7 @@
           vertical-align: top;
           cursor: pointer;
           background-color: none;
-          border: 0px solid 
+          border: 0px solid
           #c8c8c8;
           border-radius: 3px;
           color: #c8c8c8;

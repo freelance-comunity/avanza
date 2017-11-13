@@ -14,14 +14,9 @@
           <input type="number" name="ammount" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
           <input type="hidden"  name="user_id" value="{{ $user->id }}">
         </p>
-        <!--<p>
-        {!! Form::label('concept', 'Concepto:') !!}
-          <input type="text" name="concept" class="form-control input-lg" placeholder="ESCRIBE CONCEPTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
-        </p>-->
         <p>
-          {!! Form::label('description', 'Descripción:') !!}
-          {{-- <input type="text" name="description" class="form-control input-lg"> --}}
-          <select name="description" class="form-control input-lg">
+          {!! Form::label('type', 'Tipo de Gasto:') !!}
+          <select name="type" class="form-control input-lg">
             <option>Artículos de Limpieza</option>
             <option>Botiquín</option>
             <option>Cafetería</option>
@@ -38,6 +33,10 @@
             <option>Toner o Cartuchos de Impresora</option>
             <option>Viáticos</option>
           </select>
+        </p>
+        <p>
+        {!! Form::label('concept', 'Descripción:') !!}
+          <input type="text" name="description" class="form-control input-lg" placeholder="ESCRIBE DESCRIPCIÓN" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
         </p>
         <input type="hidden"  name="user_id" value="{{ $user->id }}">
         <p>

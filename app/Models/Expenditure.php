@@ -4,13 +4,13 @@ use Illuminate\Database\Eloquent\Model;
 //use App\Traits\DatesTranslator;
 
 class Expenditure extends Model
-{	
+{
 	//use DatesTranslator;
-    
+
 	public $table = "expenditures";
 
 	public $primaryKey = "id";
-    
+
 	public $timestamps = true;
 
 	public $fillable = [
@@ -19,6 +19,7 @@ class Expenditure extends Model
 		"voucher",
 		"date",
 		"description",
+    "type",
 		"credit_id",
 		"vault_id"
 	];
@@ -34,5 +35,5 @@ class Expenditure extends Model
 	{
 		return $this->belongsTo('App\Models\Vault');
 	}
-	
+
 }

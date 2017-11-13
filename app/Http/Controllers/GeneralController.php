@@ -28,15 +28,15 @@ use App\Models\BoxCut;
 use App\Models\Roster;
 
 class GeneralController extends Controller
-{	
+{
 	public function __construct()
 	{
 		$this->middleware('auth');
 		$this->middleware('login_mid');
 	}
-	
+
 	public function getPromoter()
-	{	
+	{
 
 		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
 			$users = User::where('id', '!=', Auth::id())->get();
@@ -65,7 +65,7 @@ class GeneralController extends Controller
 			return view('executives.index')
 			->with('employees', $users);
 		}
-		
+
 		elseif(Auth::user()->hasRole('ejecutivo-de-credito')) {
 
 			$user = Auth::user();
@@ -73,12 +73,12 @@ class GeneralController extends Controller
 			return view('executives.index')
 			->with('user', $user);
 		}
-		
+
 	}
-	
+
 
 	public function showVault($id)
-	{	
+	{
 		$current = Carbon::today()->toDateString();
 		$user = User::find($id);
 		$vault = $user->vault;
@@ -115,7 +115,7 @@ class GeneralController extends Controller
 	}
 
 	public function addVault(Request $request)
-	{	
+	{
 		$current = Carbon::today();
 
 		$validator = Validator::make($request->all(), [
@@ -162,7 +162,7 @@ class GeneralController extends Controller
 	}
 
 	public function addCash(Request $request)
-	{	
+	{
 		$current = Carbon::today();
 
 		$validator = Validator::make($request->all(), [
@@ -207,9 +207,9 @@ class GeneralController extends Controller
 	}
 
 	public function recordExpense(Request $request)
-	{	
+	{
 		$user = Auth::user();
-		$vault = $user->vault;	
+		$vault = $user->vault;
 		if ($vault->ammount == 0) {
 			Toastr::error('No puedes registrar un gasto, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();
@@ -236,14 +236,16 @@ class GeneralController extends Controller
 			$ammount = $request->input('ammount');
 			$concept = $request->input('concept');
 			$user = Auth::user();
-			$vault = $user->vault;	
+			$vault = $user->vault;
 			$data_expenditure['ammount'] = $ammount;
 			$data_expenditure['concept'] = 'Gasto';
 			$data_expenditure['voucher'] = $filename;
 			$data_expenditure['date']    = $current;
-			$data_expenditure['description']= $request->input('description');;
+			$data_expenditure['description']= $request->input('description');
+			$data_expenditure['type']= $request->input('type');
 			$data_expenditure['vault_id'] = $vault->id;
 
+			// dd($data_expenditure);
 			$expenditure = Expenditure::create($data_expenditure);
 
 			$vault->ammount = $vault->ammount - $expenditure->ammount;
@@ -255,8 +257,8 @@ class GeneralController extends Controller
 		}
 	}
 	public function purseAccess(Request $request)
-	{	
-		
+	{
+
 		$validator = Validator::make($request->all(), [
 			'ammount' => 'required|numeric',
 			'voucher' => 'required|image|mimes:jpeg,png,jpg',
@@ -320,7 +322,7 @@ class GeneralController extends Controller
 				$latePayments->payment_id = $payment->id;
 				$latePayments->debt_id    = $debt->id;
 				$latePayments->save();
-			}			
+			}
 		}
 
 		$user_close = Auth::user();
@@ -339,7 +341,7 @@ class GeneralController extends Controller
 		$receiver = User::find($request->input('receiver'));
 
 		$clients  = $transmitter->clients;
-		
+
 		// echo $transmitter->name;
 		// echo "<br>";
 		// echo $receiver->name;
@@ -378,11 +380,11 @@ class GeneralController extends Controller
 
 		$vaults = Vault::all()->sortByDesc('updated_at');;
 		$starts_collection = Income::all();
-		$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at'); 
-		$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at'); 
-		$recoverys = IncomePayment::all()->sortByDesc('created_at'); 
-		$accesses  = PurseAccess::all()->sortByDesc('created_at'); 
-		$credits   = ExpenditureCredit::all()->sortByDesc('created_at'); 
+		$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at');
+		$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at');
+		$recoverys = IncomePayment::all()->sortByDesc('created_at');
+		$accesses  = PurseAccess::all()->sortByDesc('created_at');
+		$credits   = ExpenditureCredit::all()->sortByDesc('created_at');
 		$expenses  = Expenditure::all()->sortByDesc('created_at');
 		$cuts      = BoxCut::all()->sortByDesc('created_at');
 		$rosters   = Roster::all()->sortByDesc('created_at');
@@ -412,19 +414,19 @@ class GeneralController extends Controller
 
 	public function reportPayment()
 	{
-		$recoverys = IncomePayment::all()->sortByDesc('created_at'); 
+		$recoverys = IncomePayment::all()->sortByDesc('created_at');
 		return view('partials.reportPayment')
 		->with('recoverys', $recoverys);
 	}
 	public function totalVault()
 	{
-		$vault = Vault::all(); 
+		$vault = Vault::all();
 		return view('reports.totalVault')
 		->with('vault', $vault);
 	}
 	public function currentCredits()
 	{
-		$credits = Credit::all(); 
+		$credits = Credit::all();
 		return view('reports.currentCredits')
 		->with('credits', $credits);
 	}

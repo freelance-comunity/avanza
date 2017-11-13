@@ -979,3 +979,443 @@ Route::get('actives/{id}/delete', [
     'as' => 'actives.delete',
     'uses' => 'ActiveController@destroy',
 ]);
+
+// Ruta para modificar créditos a Carlos
+
+Route::get('carlos', function(){
+$credit = App\Models\Credit::find(480);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(484);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(508);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(543);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(31);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(549);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(559);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(568);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(583);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(588);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(601);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(611);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(612);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(677);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(686);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(37);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(714);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(715);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(716);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(720);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(724);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(725);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(726);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(727);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(733);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(743);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(755);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(796);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(801);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(802);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(803);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(804);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(814);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(833);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(840);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(55);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(890);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(896);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(925);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(930);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(939);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(966);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(369);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(387);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(414);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(422);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(426);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+$credit = App\Models\Credit::find(429);
+$debt = $credit->debt;
+$payments = $debt->payments;
+$credit->user_id = 13;
+$credit->save();
+foreach ($payments as $key => $value) {
+   $value->user_id =13;
+   $value->save();
+}
+
+echo "se cambio el user_id al credito y pagos";
+
+});

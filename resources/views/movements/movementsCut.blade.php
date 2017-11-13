@@ -14,30 +14,28 @@ Detalles
 		<div class="box box-danger">
 			<div class="box-body">
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#menu1"><i class="fa fa-reply"></i>Saldo Inicial</a></li>
+					<li class="active"><a data-toggle="tab" href="#menu1"><i class="fa fa-scissors"></i> Cortes de Caja</a></li>
 				</ul>
 				<div class="tab-content">
 					<div id="menu1" class="tab-pane fade in active">
-						@if($starts->isEmpty())
+						@if($cuts->isEmpty())
 						<div class="well text-center">Ho hay registros.</div>
 						@else
 						<div class="table-responsive">
-							<table class="table" id="start">
+							<table class="table" id="corte">
 								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
-									<th>Concepto</th>
-									<th>Fecha/Hora asignación</th>
+									<th>Fecha/Hora corte</th>
 								</thead>
 								<tbody>
-									@foreach($starts as $start)
+									@foreach($cuts as $cut)
 									<tr>
-										<td>{{ $start->vault->user->branch['name'] }}</td>
-										<td>{{ $start->vault->user['name'] }} {{ $start->vault->user['father_last_name'] }} {{ $start->vault->user['mother_last_name'] }}</td>
-										<td>${{ number_format($start->ammount) }}</td>
-										<td>{{ $start->concept }}</td>
-										<td>{{ $start->vault->created_at->toDateTimeString() }}</td>
+										<td>{{ $cut->user->branch['name'] }}</td>
+										<td>{{ $cut->user['name'] }} {{ $cut->user['father_last_name'] }} {{ $cut->user['mother_last_name'] }}</td>
+										<td>${{ number_format($cut->amount) }}</td>
+										<td>{{ $cut->created_at }}</td>
 									</tr>
 									@endforeach
 								</tbody>

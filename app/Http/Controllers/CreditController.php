@@ -89,15 +89,15 @@ class CreditController extends AppBaseController
 		$product = Product::find($request->input('type_product'));
 		// $LatePayments = LatePayments::where('debt_id', $debt->id)->where('status', 'Bloqueado')->count();
 		//Restriccion de Números de creditos con un producto
-		// $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
-		// if ($typecredit) {
-		// 	Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-		// 	return redirect(route('clients.index'));
-		// }
+		$typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
+		if ($typecredit) {
+			Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+			return redirect(route('clients.index'));
+		}
 		$ammount = $request->input('ammount');
 		// $id_user = $request->input('adviser');
 		// $user = User::find($id_user);
-		if ($request->input('periodicity') == 'TRADICIONAL') {
+		if ($product == "MIGRADOS") {
 			$id_user = $request->input('user_id');
 			$user = User::find($id_user);
 			$vault = $user->vault;
@@ -596,22 +596,22 @@ class CreditController extends AppBaseController
 				$data_expendituresCredits['credit_id']= $credit->id;
 				$data_expendituresCredits['vault_id'] = $vault->id;
 				$expendituresCredit = ExpenditureCredit::create($data_expendituresCredits);
-				if ($periodicity == 'TRADICIONAL') {
-					$vault->ammount = $vault->ammount;
+				if ($product == 'MIGRADOS') {
+					$vault->ammount = $vault->ammount + 0;
 					$vault->save();
 				}
-				elseif ($periodicity == 'SEMANAL') {
-					$vault->ammount = $vault->ammount;
-					$vault->save();
-				}
-				if ($periodicity == 'DIARIO4') {
-					$vault->ammount = $vault->ammount;
-					$vault->save();
-				}
-				if ($periodicity == 'DIARIO25') {
-					$vault->ammount = $vault->ammount;
-					$vault->save();
-				}
+				// elseif ($periodicity == 'SEMANAL') {
+				// 	$vault->ammount = $vault->ammount + 0;
+				// 	$vault->save();
+				// }
+				// if ($periodicity == 'DIARIO4') {
+				// 	$vault->ammount = $vault->ammount + 0;
+				// 	$vault->save();
+				// }
+				// if ($periodicity == 'DIARIO25') {
+				// 	$vault->ammount = $vault->ammount + 0;
+				// 	$vault->save();
+				// }
 				else{
 					$vault->ammount = $vault->ammount - $expendituresCredit->ammount;
 					$vault->save();

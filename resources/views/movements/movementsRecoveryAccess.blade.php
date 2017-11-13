@@ -14,15 +14,15 @@ Detalles
 		<div class="box box-danger">
 			<div class="box-body">
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#menu1"><i class="fa fa-reply"></i>Saldo Inicial</a></li>
+					<li class="active"><a data-toggle="tab" href="#menu1"><i class="fa fa-money"></i> Recuperación Access</a></li>
 				</ul>
 				<div class="tab-content">
 					<div id="menu1" class="tab-pane fade in active">
-						@if($starts->isEmpty())
+						@if($accesses->isEmpty())
 						<div class="well text-center">Ho hay registros.</div>
 						@else
 						<div class="table-responsive">
-							<table class="table" id="start">
+							<table class="table" id="acces">
 								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
@@ -31,13 +31,13 @@ Detalles
 									<th>Fecha/Hora asignación</th>
 								</thead>
 								<tbody>
-									@foreach($starts as $start)
+									@foreach($accesses as $acces)
 									<tr>
-										<td>{{ $start->vault->user->branch['name'] }}</td>
-										<td>{{ $start->vault->user['name'] }} {{ $start->vault->user['father_last_name'] }} {{ $start->vault->user['mother_last_name'] }}</td>
-										<td>${{ number_format($start->ammount) }}</td>
-										<td>{{ $start->concept }}</td>
-										<td>{{ $start->vault->created_at->toDateTimeString() }}</td>
+										<td>{{ $acces->user->branch['name'] }}</td>
+										<td>{{ $acces->user['name'] }} {{ $acces->user['father_last_name'] }} {{ $acces->user['mother_last_name'] }}</td>
+										<td>${{ number_format($acces->ammount) }}</td>
+										<td>{{ $acces->concept }}</td>
+										<td>{{ $acces->created_at }}</td>
 									</tr>
 									@endforeach
 								</tbody>

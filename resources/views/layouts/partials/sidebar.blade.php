@@ -54,19 +54,19 @@
        </ul>
      </li>
      @endif
-     <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li>
+     {{-- <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li> --}}
      <li class="treeview">
         <a href="#"><i class='fa fa-external-link'></i><span> Movimientos</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">   
          <li><a href="{{ url('movementsBalance') }}">Saldo en Caja</a></li>
          <li><a href="{{ url('movementsBeginning') }}">Saldo Inicial</a></li>
-         <li><a href="{{ url('currentCredits') }}">Asignacion en Efectivo</a></li>
-         <li><a href="{{ url('currentCredits') }}">Recuperación</a></li>
-         <li><a href="{{ url('currentCredits') }}">Recuperación Access</a></li>
-         <li><a href="{{ url('currentCredits') }}">Colocación</a></li>
-         <li><a href="{{ url('currentCredits') }}">Gastos</a></li>
-         <li><a href="{{ url('currentCredits') }}">Sueldos</a></li>
-         <li><a href="{{ url('currentCredits') }}">Cortes de Caja</a></li>
+         <li><a href="{{ url('movementsEffective') }}">Asignacion en Efectivo</a></li>
+         {{-- <li><a href="{{ url('movementsRecovery') }}">Recuperación</a></li> --}}
+         <li><a href="{{ url('movementsRecoveryAccess') }}">Recuperación Access</a></li>
+         <li><a href="{{ url('movementsPlacement') }}">Colocación</a></li>
+         <li><a href="{{ url('movementsExpenses') }}">Gastos</a></li>
+         <li><a href="{{ url('movementsSalaries') }}">Sueldos</a></li>
+         <li><a href="{{ url('movementsCut') }}">Cortes de Caja</a></li>
        </ul>
      </li>
      @endif

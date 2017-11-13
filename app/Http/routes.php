@@ -702,10 +702,13 @@ Route::get('unlock', function () {
 Route::get('movements', 'GeneralController@movements');
 Route::get('movementsBalance', 'GeneralController@movementsBalance');
 Route::get('movementsBeginning', 'GeneralController@movementsBeginning');
-Route::get('movements', 'GeneralController@movements');
-Route::get('movements', 'GeneralController@movements');
-Route::get('movements', 'GeneralController@movements');
-Route::get('movements', 'GeneralController@movements');
+Route::get('movementsEffective', 'GeneralController@movementsEffective');
+Route::get('movementsRecovery', 'GeneralController@movementsRecovery');
+Route::get('movementsRecoveryAccess', 'GeneralController@movementsRecoveryAccess');
+Route::get('movementsPlacement', 'GeneralController@movementsPlacement');
+Route::get('movementsExpenses', 'GeneralController@movementsExpenses');
+Route::get('movementsSalaries', 'GeneralController@movementsSalaries');
+Route::get('movementsCut', 'GeneralController@movementsCut');
 
 Route::get('expenses-admin', function () {
     return view('partials.expenses');
@@ -971,4 +974,5 @@ Route::get('productos', function () {
 
 }
 });
+
 

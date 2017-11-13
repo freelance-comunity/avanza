@@ -132,7 +132,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
                 <option selected="">Elige Promotor</option>
                 @foreach ($users as $user)
                 @if ($user->hasRole(['ejecutivo-de-credito']))
-                <option value=" {{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}">
+                <option value=" {{ $user->id  }}">
                   {{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}
                 </option>
                 @endif   

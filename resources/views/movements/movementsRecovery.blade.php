@@ -14,30 +14,34 @@ Detalles
 		<div class="box box-danger">
 			<div class="box-body">
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#menu1"><i class="fa fa-reply"></i>Saldo Inicial</a></li>
+					<li class="active"><a data-toggle="tab" href="#menu1"><i class="fa fa-dollar"></i> Recuperación</a></li>
 				</ul>
 				<div class="tab-content">
 					<div id="menu1" class="tab-pane fade in active">
-						@if($starts->isEmpty())
+						@if($recoverys->isEmpty())
 						<div class="well text-center">Ho hay registros.</div>
 						@else
 						<div class="table-responsive">
-							<table class="table" id="start">
+							<table class="table" id="recovery">
 								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
 									<th>Concepto</th>
+									<th>Cliente</th>
+									<th>Folio crédito</th>
 									<th>Fecha/Hora asignación</th>
 								</thead>
 								<tbody>
-									@foreach($starts as $start)
+									@foreach($recoverys as $recovery)
 									<tr>
-										<td>{{ $start->vault->user->branch['name'] }}</td>
-										<td>{{ $start->vault->user['name'] }} {{ $start->vault->user['father_last_name'] }} {{ $start->vault->user['mother_last_name'] }}</td>
-										<td>${{ number_format($start->ammount) }}</td>
-										<td>{{ $start->concept }}</td>
-										<td>{{ $start->vault->created_at->toDateTimeString() }}</td>
+										<td>{{ $recovery->vault->user->branch['name'] }}</td>
+										<td>{{ $recovery->vault->user['name'] }} {{ $recovery->vault->user['father_last_name'] }} {{ $recovery->vault->user['mother_last_name'] }}</td>
+										<td>${{ number_format($recovery->ammount) }}</td>
+										<td>{{ $recovery->concept }}</td>
+										<td>{{ $recovery->debt->credit['firts_name'] }} {{ $recovery->debt->credit['last_name'] }} {{ $recovery->debt->credit['mothers_last_name'] }}</td>
+										<td>{{ $recovery->debt->credit['folio'] }}</td>
+										<td>{{ $recovery->created_at }}</td>
 									</tr>
 									@endforeach
 								</tbody>

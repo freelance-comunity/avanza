@@ -18,7 +18,6 @@ Detalles
 				</ul>
 				<div class="tab-content">
 					<div id="menu1" class="tab-pane fade in active">
-						<h3>Registro saldo en cajas</h3>
 						@if($vaults->isEmpty())
 						<div class="well text-center">Ho hay registros.</div>
 						@else

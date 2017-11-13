@@ -1,5 +1,4 @@
 <?php namespace App\Http\Controllers;
-
 use App\Http\Requests;
 use App\Http\Requests\CreateCreditRequest;
 use App\Models\Credit;
@@ -22,11 +21,8 @@ use App\Models\Expenditure;
 use Image;
 use App\Models\ExpenditureCredit;
 use App\User;
-
-
 class CreditController extends AppBaseController
 {
-
 	/**
 	 * Display a listing of the Post.
 	 *
@@ -40,7 +36,6 @@ class CreditController extends AppBaseController
 		$this->middleware('login_mid');
 		$this->middleware('credits',['only'=>['create','creditsClient']]);
 	}
-
 	public function index(Request $request)
 	{	
 		// New
@@ -53,13 +48,11 @@ class CreditController extends AppBaseController
 		elseif (Auth::user()->hasRole('coordinador-regional')) {
 			$user_allocation = Auth::user();
 			$region_allocation = $user_allocation->region;
-
 			$credits = $region_allocation->credits;		
 		}
 		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
 			$user_allocation = Auth::user();
 			$branch_allocation = $user_allocation->branch;
-
 			$credits = $branch_allocation->credits;
 		}
 		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
@@ -70,11 +63,9 @@ class CreditController extends AppBaseController
 		{
 			$credits = Credit::all();
 		}
-
 		return view('credits.index')
 		->with('credits', $credits);
 	}
-
 	/**
 	 * Show the form for creating a new Credit.
 	 *
@@ -86,7 +77,6 @@ class CreditController extends AppBaseController
 		return view('credits.create');
 		
 	}
-
 	/**
 	 * Store a newly created Credit in storage.
 	 *
@@ -104,7 +94,6 @@ class CreditController extends AppBaseController
 		// 	Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
 		// 	return redirect(route('clients.index'));
 		// }
-
 		$ammount = $request->input('ammount');
 		// $id_user = $request->input('adviser');
 		// $user = User::find($id_user);
@@ -117,7 +106,6 @@ class CreditController extends AppBaseController
 			$user = Auth::user();
 			$vault = $user->vault;	
 		}
-
 		if ($vault->ammount == 0 AND $product->name == "CREDIDIARIO25" ) {
 			Toastr::error('No puedes registrar un crédito, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();	
@@ -160,7 +148,6 @@ class CreditController extends AppBaseController
 					$encoded_image = explode(",", $data_uri)[1];
 					$decoded_image = base64_decode($encoded_image);
 					$url = 'signature'. '-id-'. $request->input('client_id') . rand(111,9999).'.png';
-
 					file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
 				}
 				/* End get signature */
@@ -172,7 +159,6 @@ class CreditController extends AppBaseController
 				// // }
 				// $new = Client::find($request->input('client_id'))->credits()->count();
 				$client = Client::find($request->input('client_id'));
-
 				$input = $request->all();
 				// $product = Product::find($request->input('type_product'));
 				// if ($request->input('ammount') > $product->ammount_max) {
@@ -212,7 +198,6 @@ class CreditController extends AppBaseController
 					// 	Toastr::error('Solo puedes aumentar: $500.00 para renovar', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);			
 					// 	return redirect()->back()->withInput($request->all());
 					// }
-
 				$number = Credit::max('id') + 1;
 				$input['folio'] = $client->branch->nomenclature.'00'.$number;	
 				$input['civil_status'] = $client->civil_status;
@@ -249,8 +234,6 @@ class CreditController extends AppBaseController
 					$input['state_aval'] = $client->aval->state_aval;
 					$input['postal_code_aval'] = $client->aval->postal_code_aval;
 				}
-
-
 				if( $request->input('firm')){
 					$input['firm']   = $url;
 				}
@@ -258,10 +241,7 @@ class CreditController extends AppBaseController
 				// 	$input['user_id'] = $id_user;
 				// }
 				$input['status'] = "MINISTRADO";
-
-
 				$credit = Credit::create($input);
-
 				$ammount= $credit->ammount;
 				$dues = $credit->dues;
 				$periodicity = $credit->periodicity;
@@ -306,10 +286,8 @@ class CreditController extends AppBaseController
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -327,7 +305,6 @@ class CreditController extends AppBaseController
 						$payment->user_id = $credit->user_id;
 						$payment->branch_id = $user->branch_id;
 						$payment->save();
-
 					}
 				}
 				if ($periodicity == 'DIARIO25' ) {
@@ -336,13 +313,11 @@ class CreditController extends AppBaseController
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
 						if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
 							$date->addDay(); 
 						}
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -360,7 +335,6 @@ class CreditController extends AppBaseController
 						$payment->user_id = $credit->user_id;
 						$payment->branch_id = $user->branch_id;
 						$payment->save();
-
 					}
 				}
 				if ($periodicity == 'DIARIO4') {
@@ -369,11 +343,8 @@ class CreditController extends AppBaseController
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addWeek();
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -391,21 +362,16 @@ class CreditController extends AppBaseController
 						$payment->user_id = $credit->user_id;
 						$payment->branch_id = $user->branch_id;
 						$payment->save();
-
 					}
 				}
-
 				if ($periodicity == 'SEMANAL') {
 					$debt = new Debt;
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addWeek();
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -423,22 +389,16 @@ class CreditController extends AppBaseController
 						$payment->user_id = $credit->user_id;
 						$payment->branch_id = $user->branch_id;
 						$payment->save();
-
 					}
 				}
-
-
-
 				if ($periodicity == 'DIARIO' && $dues == 30) {
 					$debt = new Debt;
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -456,7 +416,6 @@ class CreditController extends AppBaseController
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
 						$payment->save();
-
 					}
 				}
 				if ($periodicity == 'DIARIO' && $dues == 25) {
@@ -465,13 +424,11 @@ class CreditController extends AppBaseController
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
 						if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
 							$date->addDay(); 
 						}
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -489,7 +446,6 @@ class CreditController extends AppBaseController
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
 						$payment->save();
-
 					}
 				}
 				if ($periodicity == 'DIARIO' && $dues == 52) {
@@ -498,14 +454,11 @@ class CreditController extends AppBaseController
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
 						if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
 							$date->addDay(); 
 						}
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -523,7 +476,6 @@ class CreditController extends AppBaseController
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
 						$payment->save();
-
 					}
 				}
 				if ($periodicity == 'DIARIO' && $dues == 60) {
@@ -532,11 +484,8 @@ class CreditController extends AppBaseController
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -554,7 +503,6 @@ class CreditController extends AppBaseController
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
 						$payment->save();
-
 					}
 				}
 				if ($periodicity == 'CREDIDIARIO25' && $dues == 25) {
@@ -563,13 +511,11 @@ class CreditController extends AppBaseController
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
 						if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
 							$date->addDay(); 
 						}
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -587,7 +533,6 @@ class CreditController extends AppBaseController
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
 						$payment->save();
-
 					}
 				}
 				if ($periodicity == 'CREDIDIARIO4') {
@@ -596,11 +541,8 @@ class CreditController extends AppBaseController
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addWeek();
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -618,21 +560,16 @@ class CreditController extends AppBaseController
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
 						$payment->save();
-
 					}
 				}
-
 				if ($periodicity == 'CREDISEMANA') {
 					$debt = new Debt;
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
 					$debt->save();
-
-
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addWeek();
-
 						$fechaPago[$i] = $date->toDateString();
 						$payment = new Payment;
 						$payment->number = $i;
@@ -650,7 +587,6 @@ class CreditController extends AppBaseController
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
 						$payment->save();
-
 					}
 				}
 				$current = Carbon::today();
@@ -659,9 +595,7 @@ class CreditController extends AppBaseController
 				$data_expendituresCredits['date']    = $current;
 				$data_expendituresCredits['credit_id']= $credit->id;
 				$data_expendituresCredits['vault_id'] = $vault->id;
-
 				$expendituresCredit = ExpenditureCredit::create($data_expendituresCredits);
-
 				if ($periodicity == 'TRADICIONAL') {
 					$vault->ammount = $vault->ammount;
 					$vault->save();
@@ -682,13 +616,11 @@ class CreditController extends AppBaseController
 					$vault->ammount = $vault->ammount - $expendituresCredit->ammount;
 					$vault->save();
 				}
-
 				Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				return redirect(route('credits.index'));
 			}
 		}
 	}
-
 	/**
 	 * Display the specified Credit.
 	 *
@@ -703,16 +635,13 @@ class CreditController extends AppBaseController
 			return redirect(route('credits.index'));
 		}
 		$credit = Credit::find($id);
-
 		if(empty($credit))
 		{
 			Flash::error('Credit not found');
 			return redirect(route('credits.index'));
 		}
-
 		return view('credits.show')->with('credit', $credit);
 	}
-
 	
 	/**
 	 * Show the form for editing the specified Credit.
@@ -723,16 +652,13 @@ class CreditController extends AppBaseController
 	public function edit($id)
 	{
 		$credit = Credit::find($id);
-
 		if(empty($credit))
 		{
 			Flash::error('Credit not found');
 			return redirect(route('credits.index'));
 		}
-
 		return view('credits.edit')->with('credit', $credit);
 	}
-
 	/**
 	 * Update the specified Credit in storage.
 	 *
@@ -745,21 +671,16 @@ class CreditController extends AppBaseController
 	{
 		/** @var Credit $credit */
 		$credit = Credit::find($id);
-
 		if(empty($credit))
 		{
 			Flash::error('Credit not found');
 			return redirect(route('credits.index'));
 		}
-
 		$credit->fill($request->all());
 		$credit->save();
-
 		Flash::message('Credit updated successfully.');
-
 		return redirect(route('credits.index'));
 	}
-
 	/**
 	 * Remove the specified Credit from storage.
 	 *
@@ -771,17 +692,13 @@ class CreditController extends AppBaseController
 	{
 		/** @var Credit $credit */
 		$credit = Credit::find($id);
-
 		if(empty($credit))
 		{
 			Flash::error('Credit not found');
 			return redirect(route('credits.index'));
 		}
-
 		$credit->delete();
-
 		Flash::message('Credit deleted successfully.');
-
 		return redirect(route('credits.index'));
 	}
 	public function renovation(Request $request)
@@ -792,12 +709,10 @@ class CreditController extends AppBaseController
 			$encoded_image = explode(",", $data_uri)[1];
 			$decoded_image = base64_decode($encoded_image);
 			$url = 'signature'. '-id-'. $request->input('client_id') . rand(111,9999).'.png';
-
 			file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
 		}
 		$client = Client::find($request->input('client_id'));
 		$input = $request->all();
-
 		
 		$number = Credit::max('id') + 1;
 		$input['folio'] = $client->branch->nomenclature.'00'.$number;	
@@ -835,8 +750,6 @@ class CreditController extends AppBaseController
 			$input['state_aval'] = $client->aval->state_aval;
 			$input['postal_code_aval'] = $client->aval->postal_code_aval;
 		}
-
-
 		if( $request->input('firm')){
 			$input['firm']   = $url;
 		}
@@ -844,8 +757,6 @@ class CreditController extends AppBaseController
 				// 	$input['user_id'] = $id_user;
 				// }
 		$input['status'] = "MINISTRADO";
-
-
 		$credit = Credit::create($input);
 		$ammount= $credit->ammount;
 		$dues = $credit->dues;
@@ -865,11 +776,8 @@ class CreditController extends AppBaseController
 			$debt->status = "VIGENTE";
 			$debt->credit_id = $credit->id;
 			$debt->save();
-
-
 			for ($i=1; $i <= $credit->dues; $i++) { 
 				$var = $date->addWeek();
-
 				$fechaPago[$i] = $date->toDateString();
 				$payment = new Payment;
 				$payment->number = $i;
@@ -887,7 +795,6 @@ class CreditController extends AppBaseController
 				$payment->user_id = Auth::User()->id;
 				$payment->branch_id = Auth::User()->branch_id;
 				$payment->save();
-
 			}
 		}
 		Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);

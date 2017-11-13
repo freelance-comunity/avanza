@@ -693,6 +693,12 @@ Route::get('unlock', function () {
 //     return view('partials.movements');
 // });
 Route::get('movements', 'GeneralController@movements');
+Route::get('movementsBalance', 'GeneralController@movementsBalance');
+Route::get('movementsBeginning', 'GeneralController@movementsBeginning');
+Route::get('movements', 'GeneralController@movements');
+Route::get('movements', 'GeneralController@movements');
+Route::get('movements', 'GeneralController@movements');
+Route::get('movements', 'GeneralController@movements');
 
 Route::get('expenses-admin', function () {
     return view('partials.expenses');

@@ -132,15 +132,13 @@ $users = $filtered->where('region_id', $region_allocation->id);
                 <option selected="">Elige Promotor</option>
                 @foreach ($users as $user)
                 @if ($user->hasRole(['ejecutivo-de-credito']))
-                <option value=" {{ $user->id}}">
+                <option value=" {{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}">
                   {{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}
                 </option>
                 @endif   
                 @endforeach
               </select>
             </div>
-            
-
             <input type="hidden" name="user_id" value="">
             <script>
               $(document).ready(function(){
@@ -149,7 +147,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
                 });
               });
             </script>
-        
+
              {{-- <select style="visibility:hidden" name="xxx"  id="" class="form-control input-lg">
                 <option selected="">Elige Promotor</option>
                 @foreach ($users as $user)

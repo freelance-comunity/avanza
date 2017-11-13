@@ -403,6 +403,46 @@ class GeneralController extends Controller
 		->with('empleados', $empleados);
 	}
 
+	public function movementsBalance()
+	{
+		$user_allocation = Auth::user();
+		$region_allocation = $user_allocation->region;
+		$branch_allocation = $user_allocation->branch;
+		$collection = Role::all();
+		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+		$empleados = $region_allocation->users;
+
+		$vaults = Vault::all()->sortByDesc('updated_at');
+		
+		// $rosters   = $vault_allocation->rosters;
+
+		return view('movements.movementsBalance')
+		->with('region_allocation', $region_allocation)
+		->with('vaults', $vaults)
+		->with('empleados', $empleados);
+		
+	}
+	public function movementsBeginning()
+	{
+		$user_allocation = Auth::user();
+		$region_allocation = $user_allocation->region;
+		$branch_allocation = $user_allocation->branch;
+		$collection = Role::all();
+		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+		$empleados = $region_allocation->users;
+
+		$starts_collection = Income::all();
+		$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at'); 
+		$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at'); 
+		return view('movements.movementsBeginning')
+		->with('region_allocation', $region_allocation)
+		->with('starts_collection', $starts_collection)
+		->with('starts', $starts)
+		->with('empleados', $empleados);
+		
+	}
 	public function walletExpired()
 	{
 		$credits = Credit::all();

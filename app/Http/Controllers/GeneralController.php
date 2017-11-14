@@ -462,22 +462,45 @@ class GeneralController extends Controller
 
 	public function movementsBalance()
 	{
-		$user_allocation = Auth::user();
-		$region_allocation = $user_allocation->region;
-		$branch_allocation = $user_allocation->branch;
-		$collection = Role::all();
-		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$empleados = $region_allocation->users;
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$vaults = Vault::all()->sortByDesc('updated_at');
-		
+			$empleados = User::all();
+
+			$vaults = Vault::all()->sortByDesc('updated_at');
+			
 		// $rosters   = $vault_allocation->rosters;
 
-		return view('movements.movementsBalance')
-		->with('region_allocation', $region_allocation)
-		->with('vaults', $vaults)
-		->with('empleados', $empleados);
+			return view('movements.movementsBalance')
+			->with('region_allocation', $region_allocation)
+			->with('vaults', $vaults)
+			->with('empleados', $empleados);
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+			$empleados = $region_allocation->users;
+
+			$vaults = Vault::all()->sortByDesc('updated_at');
+			
+		// $rosters   = $vault_allocation->rosters;
+
+			return view('movements.movementsBalance')
+			->with('region_allocation', $region_allocation)
+			->with('vaults', $vaults)
+			->with('empleados', $empleados);
+		}
+
+
 		
 	}
 	public function movementsBeginning()

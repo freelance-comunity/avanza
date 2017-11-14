@@ -13,7 +13,7 @@ class AlterRetreatsTable extends Migration
     public function up()
     {
         Schema::table('retreats', function (Blueprint $table) {
-          $table->integer('branch_id')->unsigned()->default(1)->after('debt_id');
+          $table->integer('branch_id')->unsigned()->default(1)->after('vault_id');
           $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
           $table->integer('region_id')->unsigned()->default(1)->after('branch_id');
           $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');

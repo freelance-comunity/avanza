@@ -12,16 +12,18 @@ class PurseAccess extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "ammount",
+		"ammount",
 		"concept",
 		"voucher",
 		"date",
 		"vault_id",
-		"user_id"
+		"user_id",
+		"branch_id",
+		"region_id"
 	];
 
 	public static $rules = [
-	    "ammount" => "required",
+		"ammount" => "required",
 		"concept" => "required",
 		"voucher" => "required",
 		"date" => "required",
@@ -37,14 +39,14 @@ class PurseAccess extends Model
 		return $this->belongsTo('App\User');
 	}
 
-  public function region()
-  {
-      return $this->belongsTo('App\Models\Region');
-  }
+	public function region()
+	{
+		return $this->belongsTo('App\Models\Region');
+	}
 
-  public function branch()
-  {
-      return $this->belongsTo('App\Models\Branch');
-  }
+	public function branch()
+	{
+		return $this->belongsTo('App\Models\Branch');
+	}
 
 }

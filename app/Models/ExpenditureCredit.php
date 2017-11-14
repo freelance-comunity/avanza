@@ -12,15 +12,17 @@ class ExpenditureCredit extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "ammount",
+		"ammount",
 		"concept",
 		"date",
 		"credit_id",
-		"vault_id"
+		"vault_id",
+		"branch_id",
+		"region_id"
 	];
 
 	public static $rules = [
-	    "ammount" => "required",
+		"ammount" => "required",
 		"concept" => "required",
 		"date" => "required"
 	];
@@ -33,14 +35,14 @@ class ExpenditureCredit extends Model
 		return $this->belongsTo('App\Models\Credit');
 	}
 
-  public function region()
+	public function region()
 	{
-			return $this->belongsTo('App\Models\Region');
+		return $this->belongsTo('App\Models\Region');
 	}
 
 	public function branch()
 	{
-			return $this->belongsTo('App\Models\Branch');
+		return $this->belongsTo('App\Models\Branch');
 	}
 
 }

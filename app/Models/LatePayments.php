@@ -12,16 +12,18 @@ class LatePayments extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "late_number",
-	    "late_ammount",
-	    "late_payment",
-	    "status",
-	    "payment_id",
-	    "debt_id"
+		"late_number",
+		"late_ammount",
+		"late_payment",
+		"status",
+		"payment_id",
+		"debt_id",
+		"branch_id",
+		"region_id"
 	];
 
 	public static $rules = [
-	    "late_payment" => "required"
+		"late_payment" => "required"
 	];
 
 	public function payment()
@@ -29,20 +31,20 @@ class LatePayments extends Model
 		return $this->belongsTo('App\Models\Payment');
 	}
 
-  public function debt()
+	public function debt()
 	{
 		return $this->belongsTo('App\Models\Debt');
 	}
 
-  public function region()
-  {
-      return $this->belongsTo('App\Models\Region');
-  }
+	public function region()
+	{
+		return $this->belongsTo('App\Models\Region');
+	}
 
-  public function branch()
-  {
-      return $this->belongsTo('App\Models\Branch');
-  }
+	public function branch()
+	{
+		return $this->belongsTo('App\Models\Branch');
+	}
 
 
 }

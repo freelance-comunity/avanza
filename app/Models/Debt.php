@@ -14,7 +14,9 @@ class Debt extends Model
 	public $fillable = [
 	"ammount",
 	"status",
-	"credit_id"
+	"credit_id",
+	"branch_id",
+	"region_id"
 	];
 
 	public static $rules = [

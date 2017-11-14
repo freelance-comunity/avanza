@@ -27,6 +27,7 @@ class Payment extends Model
 	"debt_id",
 	"user_id",
 	"branch_id",
+	"region_id"
 	];
 
 	public static $rules = [

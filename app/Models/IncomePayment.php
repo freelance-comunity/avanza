@@ -12,16 +12,18 @@ class IncomePayment extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "ammount",
+		"ammount",
 		"concept",
 		"date",
 		"payment_id",
 		"debt_id",
-		"vault_id"
+		"vault_id",
+		"branch_id",
+		"region_id"
 	];
 
 	public static $rules = [
-	    "ammount" => "required",
+		"ammount" => "required",
 		"concept" => "required",
 		"date" => "required"
 	];
@@ -38,14 +40,14 @@ class IncomePayment extends Model
 		return $this->belongsTo('App\Models\Debt');
 	}
 
-  public function region()
+	public function region()
 	{
-			return $this->belongsTo('App\Models\Region');
+		return $this->belongsTo('App\Models\Region');
 	}
 
 	public function branch()
 	{
-			return $this->belongsTo('App\Models\Branch');
+		return $this->belongsTo('App\Models\Branch');
 	}
 
 }

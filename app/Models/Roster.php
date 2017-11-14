@@ -12,7 +12,7 @@ class Roster extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "date",
+		"date",
 		"coordinating_name",
 		"coordination",
 		"branch_office",
@@ -26,11 +26,13 @@ class Roster extends Model
 		"grandchild_pay",
 		"coordinating_firm",
 		"employee_firm",
-		"user_id"
+		"user_id",
+		"branch_id",
+		"region_id"
 	];
 
 	public static $rules = [
-	    "date" => "required",
+		"date" => "required",
 		"coordinating_name" => "required",
 		"coordination" => "required",
 		"branch_office" => "required",
@@ -46,24 +48,24 @@ class Roster extends Model
 		"employee_firm" => "required"
 	];
 
-	 public function vault()
-    {
-        return $this->hasOne('App\Models\Vault');
-    }
+	public function vault()
+	{
+		return $this->hasOne('App\Models\Vault');
+	}
 
-		public function user()
-	  {
-	        return $this->belongsTo('App\User');
-	  }
+	public function user()
+	{
+		return $this->belongsTo('App\User');
+	}
 
-    public function region()
-  	{
-  			return $this->belongsTo('App\Models\Region');
-  	}
+	public function region()
+	{
+		return $this->belongsTo('App\Models\Region');
+	}
 
-  	public function branch()
-  	{
-  			return $this->belongsTo('App\Models\Branch');
-  	}
+	public function branch()
+	{
+		return $this->belongsTo('App\Models\Branch');
+	}
 
 }

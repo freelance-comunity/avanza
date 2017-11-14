@@ -4,11 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class LatePayments extends Model
 {
-    
+
 	public $table = "late_payments";
 
 	public $primaryKey = "id";
-    
+
 	public $timestamps = true;
 
 	public $fillable = [
@@ -28,6 +28,21 @@ class LatePayments extends Model
 	{
 		return $this->belongsTo('App\Models\Payment');
 	}
-	
+
+  public function debt()
+	{
+		return $this->belongsTo('App\Models\Debt');
+	}
+
+  public function region()
+  {
+      return $this->belongsTo('App\Models\Region');
+  }
+
+  public function branch()
+  {
+      return $this->belongsTo('App\Models\Branch');
+  }
+
 
 }

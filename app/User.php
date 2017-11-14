@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
-use App\Traits\DatesTranslator; 
+use App\Traits\DatesTranslator;
 
 class User extends Authenticatable
-{   
+{
     use EntrustUserTrait, DatesTranslator; // add this trait to your user model
     /**
      * The attributes that are mass assignable.
@@ -16,7 +16,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
     "name",
-    "email", 
+    "email",
     "password",
     "mother_last_name",
     "father_last_name",
@@ -91,7 +91,7 @@ class User extends Authenticatable
     }
     public function payments()
     {
-        return $this->hasMany('App\Models\Payment');       
+        return $this->hasMany('App\Models\Payment');
     }
 
     public function vault()
@@ -109,14 +109,21 @@ class User extends Authenticatable
 
     public function closes()
     {
-        return $this->hasMany('App\Models\Close');       
+        return $this->hasMany('App\Models\Close');
     }
     public function investments()
     {
-        return $this->hasMany('App\Models\Investment');       
+        return $this->hasMany('App\Models\Investment');
     }
+
     public function retreats()
     {
-        return $this->hasMany('App\Models\Retreat');       
+        return $this->hasMany('App\Models\Retreat');
     }
+
+    public function rosters()
+    {
+        return $this->hasMany('App\Models\Roster');       
+    }
+
 }

@@ -36,4 +36,14 @@ class Expenditure extends Model
 		return $this->belongsTo('App\Models\Vault');
 	}
 
+	public function region()
+	{
+			return $this->belongsTo('App\Models\Region');
+	}
+
+	public function branch()
+	{
+			return $this->belongsTo('App\Models\Branch');
+	}
+
 }

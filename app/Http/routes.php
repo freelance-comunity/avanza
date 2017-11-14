@@ -980,6 +980,7 @@ Route::get('actives/{id}/delete', [
     'uses' => 'ActiveController@destroy',
 ]);
 
+// Routes for change foreign keys
 Route::get('changeDebts', function(){
   $debts = App\Models\Debt::all();
 
@@ -1015,6 +1016,102 @@ Route::get('expenditureCredits', function(){
     $ec->branch_id = $credit->branch_id;
     $ec->region_id = $credit->region_id;
     $ec->save();
+  }
+  echo "Listo";
+});
+
+Route::get('expendituresChange', function(){
+  $expenditures = App\Models\Expenditure::all();
+
+  foreach ($expenditures as $key => $ex) {
+    $vault = $ex->vault;
+    $user  = $vault->user;
+
+    $ex->branch_id = $user->branch_id;
+    $ex->region_id = $user->region_id;
+    $ex->save();
+  }
+  echo "Listo";
+});
+
+Route::get('incomesChange', function(){
+  $incomes = App\Models\Income::all();
+
+  foreach ($incomes as $key => $in) {
+    $vault = $in->vault;
+    $user  = $vault->user;
+
+    $in->branch_id = $user->branch_id;
+    $in->region_id = $user->region_id;
+    $in->save();
+  }
+  echo "Listo";
+});
+
+Route::get('rostersChange', function(){
+  $rosters = App\Models\Roster::all();
+
+  foreach ($rosters as $key => $ro) {
+    $user = $ro->user;
+
+    $ro->branch_id = $user->branch_id;
+    $ro->region_id = $user->region_id;
+    $ro->save();
+  }
+  echo "Listo";
+});
+
+Route::get('retreatsChange', function(){
+  $retreats = App\Models\Retreat::all();
+
+  foreach ($retreats as $key => $re) {
+    $vault = $re->vault;
+    $user  = $vault->user;
+
+    $re->branch_id = $user->branch_id;
+    $re->region_id = $user->region_id;
+    $re->save();
+  }
+  echo "Listo";
+});
+
+Route::get('accessChange', function(){
+  $purses = App\Models\PurseAccess::all();
+
+  foreach ($purses as $key => $pur) {
+    $vault = $pur->vault;
+    $user  = $vault->user;
+
+    $pur->branch_id = $user->branch_id;
+    $pur->region_id = $user->region_id;
+    $pur->save();
+  }
+  echo "Listo";
+});
+
+Route::get('latesChange', function(){
+  $lates = App\Models\LatePayments::all();
+
+  foreach ($lates as $key => $la) {
+    $debt = $la->debt;
+
+    $la->branch_id = $debt->branch_id;
+    $la->region_id = $debt->region_id;
+    $la->save();
+  }
+  echo "Listo";
+});
+
+Route::get('investmnetsChange', function(){
+  $investments = App\Models\Investment::all();
+
+  foreach ($investments as $key => $inv) {
+    $vault = $inv->vault;
+    $user  = $vault->user;
+
+    $inv->branch_id = $user->branch_id;
+    $inv->region_id = $user->region_id;
+    $inv->save();
   }
   echo "Listo";
 });

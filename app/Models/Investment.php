@@ -4,11 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Investment extends Model
 {
-    
+
 	public $table = "investments";
 
 	public $primaryKey = "id";
-    
+
 	public $timestamps = true;
 
 	public $fillable = [
@@ -29,4 +29,14 @@ class Investment extends Model
 	{
 		return $this->belongsTo('App\Models\Vault');
 	}
+
+  public function region()
+  {
+      return $this->belongsTo('App\Models\Region');
+  }
+
+  public function branch()
+  {
+      return $this->belongsTo('App\Models\Branch');
+  }
 }

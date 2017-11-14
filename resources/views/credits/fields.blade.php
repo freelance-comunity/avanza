@@ -10,21 +10,21 @@ $users = $filtered->where('region_id', $region_allocation->id);
 <div class="box box-danger">
   <div class="box-header with-border">
     <h3 class="box-title">Solicitud de Crédito</h3>
-  </div>  
+  </div>
 
   <div class="box-body">
 
     <div class="form-group col-sm-6 col-lg-12">
      <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('date', 'Fecha:') !!}
-      <input type="date" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin">
+      <input type="date" value="{{ Carbon\Carbon::now()->toDateString() }}" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin" readonly>
     </div>
     <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('ammount', 'Monto Crédito:') !!}
       <input type="number" name="ammount" placeholder="ESCRIBA EL MONTO" id="ammount" class="form-control formulario input-lg" data-parsley-trigger="input focusin" required="required">
     </div>
-    
-    
+
+
 
 
     @if ($product->name == 'CREDIDIARIO25')
@@ -32,7 +32,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
       {!! Form::label('dues', 'No. Cuotas:') !!}
       {!! Form::select('dues', ['25'=>'25'],null, [
         'style' => 'text-transform:uppercase',
-        'class' => 'form-control input-lg formulario', 
+        'class' => 'form-control input-lg formulario',
         'required'=>'required',
         'id' => 'dues',
         'data-parsley-trigger ' => 'input focusin',
@@ -43,19 +43,19 @@ $users = $filtered->where('region_id', $region_allocation->id);
         {!! Form::label('dues', 'No. Cuotas:') !!}
         {!! Form::select('dues', ['4'=>'4'],null, [
           'style' => 'text-transform:uppercase',
-          'class' => 'form-control input-lg formulario', 
+          'class' => 'form-control input-lg formulario',
           'required'=>'required',
           'id' => 'dues',
           'data-parsley-trigger ' => 'input focusin',
           'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
-        
+
         @elseif ($product->name == 'DIARIO')
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('dues', 'No. Cuotas:') !!}
           {!! Form::select('dues', ['25'=>'25', '30'=>'30','52'=>'52','60'=>'60'],null, [
             'style' => 'text-transform:uppercase',
-            'class' => 'form-control input-lg formulario', 
+            'class' => 'form-control input-lg formulario',
             'required'=>'required',
             'id' => 'dues',
             'data-parsley-trigger ' => 'input focusin',
@@ -65,7 +65,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
           <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('dues', 'No. Cuotas:') !!}
             {!! Form::text('dues',null, [
-              'class' => 'form-control input-lg', 
+              'class' => 'form-control input-lg',
               'placeholder' => 'NO. CUOTAS',
               'data-parsley-trigger ' => 'input focusin',
 
@@ -76,7 +76,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
               {!! Form::label('dues', 'No. Cuotas:') !!}
               {!! Form::select('dues', ['1'=>'1'],null, [
                 'style' => 'text-transform:uppercase',
-                'class' => 'form-control input-lg', 
+                'class' => 'form-control input-lg',
                 'required'=>'required',
                 'data-parsley-trigger ' => 'input focusin',
                 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
@@ -91,7 +91,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('interest_rate', 'Tasa:') !!}
                 {!! Form::text('interest_rate',null, [
-                  'class' => 'form-control input-lg', 
+                  'class' => 'form-control input-lg',
                   'data-parsley-trigger ' => 'input focusin',
                   ]) !!}
                 </div>
@@ -106,8 +106,8 @@ $users = $filtered->where('region_id', $region_allocation->id);
                     @endforeach
                   </select>
                 </div>
-              </div> 
-              
+              </div>
+
               <input type="text" name="user_id" value="">
               <script>
                 $(document).ready(function(){
@@ -133,7 +133,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
                 {!! Form::label('collection_period', 'Horario Sugerido de Cobro:') !!}
                 {!! Form::select('collection_period',['MAÑANA'=>'MAÑANA','MEDIO DÍA'=>'MEDIO DIA','TARDE'=>'TARDE'],null, [
                   'style' => 'text-transform:uppercase',
-                  'class' => 'form-control input-lg', 
+                  'class' => 'form-control input-lg',
                   'required'=>'required',
                   'data-parsley-trigger ' => 'input focusin',
                   'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
@@ -141,7 +141,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
                 <div class="form-group col-sm-6 col-lg-4">
                   {!! Form::label('firm', 'Firma:') !!}
                   {!! Form::text('firm',null, [
-                    'class' => 'form-control input-lg', 
+                    'class' => 'form-control input-lg',
                     'id'    => 'signature',
                     'data-parsley-trigger ' => 'input focusin',
                     'readonly'
@@ -182,7 +182,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
                   <div class="btn-group">
                    {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-block btn-primary', 'id' => 'save']) !!}
                  </div>
-               </div> 
+               </div>
              </div>
              <div class="form-group col-sm-12 col-lg-4 ">
                <div class="row">
@@ -227,7 +227,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
 
           <script>
             function capturar()
-            { 
+            {
               var table=$("#resultado");
               var date =document.getElementById("date").value;
               var ammount= document.getElementById("ammount").value;

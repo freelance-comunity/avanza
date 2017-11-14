@@ -4,11 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Roster extends Model
 {
-    
+
 	public $table = "rosters";
 
 	public $primaryKey = "id";
-    
+
 	public $timestamps = true;
 
 	public $fillable = [
@@ -50,5 +50,20 @@ class Roster extends Model
     {
         return $this->hasOne('App\Models\Vault');
     }
+
+		public function user()
+	  {
+	        return $this->belongsTo('App\User');
+	  }
+
+    public function region()
+  	{
+  			return $this->belongsTo('App\Models\Region');
+  	}
+
+  	public function branch()
+  	{
+  			return $this->belongsTo('App\Models\Branch');
+  	}
 
 }

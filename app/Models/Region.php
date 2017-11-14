@@ -61,4 +61,39 @@ class Region extends Model
 		return $this->hasMany('App\Models\ExpenditureCredit');
 	}
 
+	public function expenditures()
+	{
+		return $this->hasMany('App\Models\Expenditure');
+	}
+
+	public function incomes()
+	{
+		return $this->hasMany('App\Models\Income');
+	}
+
+	public function rosters()
+	{
+		return $this->hasMany('App\Models\Roster');
+	}
+
+	public function retreats()
+	{
+		return $this->hasMany('App\Models\Retreat');
+	}
+
+	public function purseAccess()
+	{
+		return $this->hasMany('App\Models\PurseAccess');
+	}
+
+	public function latePayments()
+	{
+		return $this->hasMany('App\Models\LatePayments');
+	}
+
+	public function investments()
+	{
+		return $this->hasMany('App\Models\Investment');
+	}
+
 }

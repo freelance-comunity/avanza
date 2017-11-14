@@ -4,11 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class PurseAccess extends Model
 {
-    
+
 	public $table = "purse_accesses";
 
 	public $primaryKey = "id";
-    
+
 	public $timestamps = true;
 
 	public $fillable = [
@@ -25,7 +25,7 @@ class PurseAccess extends Model
 		"concept" => "required",
 		"voucher" => "required",
 		"date" => "required",
-	
+
 	];
 	public function vault()
 	{
@@ -36,5 +36,15 @@ class PurseAccess extends Model
 	{
 		return $this->belongsTo('App\User');
 	}
+
+  public function region()
+  {
+      return $this->belongsTo('App\Models\Region');
+  }
+
+  public function branch()
+  {
+      return $this->belongsTo('App\Models\Branch');
+  }
 
 }

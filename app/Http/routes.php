@@ -989,11 +989,7 @@ Route::get('actives/{id}/delete', [
     'uses' => 'ActiveController@destroy',
 ]);
 
-<<<<<<< HEAD
-// Routes for change foreign keys
-=======
 
->>>>>>> 7195351b4b7d89b6af60eab3010101403120dac9
 Route::get('changeDebts', function(){
   $debts = App\Models\Debt::all();
 
@@ -1020,7 +1016,7 @@ Route::get('changeIncomePayments', function(){
   echo "Listo";
 });
 
-Route::get('expenditureCredits', function(){
+Route::get('expenditureCreditsChange', function(){
   $expenditureCredits = App\Models\ExpenditureCredit::all();
 
   foreach ($expenditureCredits as $key => $ec) {
@@ -1032,7 +1028,6 @@ Route::get('expenditureCredits', function(){
   echo "Listo";
 });
 
-<<<<<<< HEAD
 Route::get('expendituresChange', function(){
   $expenditures = App\Models\Expenditure::all();
 
@@ -1128,5 +1123,3 @@ Route::get('investmnetsChange', function(){
   }
   echo "Listo";
 });
-=======
->>>>>>> 7195351b4b7d89b6af60eab3010101403120dac9

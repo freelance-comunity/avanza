@@ -7,7 +7,7 @@ Créditos
 Detalles
 @endsection
 <div class="container">
-	<div class="row">
+	<div class="row"> 
 		<!-- ./col -->
 		<div class="col-md-12">
 			<div class="box box-danger">

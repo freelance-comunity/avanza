@@ -702,6 +702,15 @@ Route::get('unlock', function () {
 //     return view('partials.movements');
 // });
 Route::get('movements', 'GeneralController@movements');
+Route::get('movementsBalance', 'GeneralController@movementsBalance');
+Route::get('movementsBeginning', 'GeneralController@movementsBeginning');
+Route::get('movementsEffective', 'GeneralController@movementsEffective');
+Route::get('movementsRecovery', 'GeneralController@movementsRecovery');
+Route::get('movementsRecoveryAccess', 'GeneralController@movementsRecoveryAccess');
+Route::get('movementsPlacement', 'GeneralController@movementsPlacement');
+Route::get('movementsExpenses', 'GeneralController@movementsExpenses');
+Route::get('movementsSalaries', 'GeneralController@movementsSalaries');
+Route::get('movementsCut', 'GeneralController@movementsCut');
 
 Route::get('expenses-admin', function () {
     return view('partials.expenses');
@@ -961,13 +970,13 @@ Route::get('muertos', function () {
 
 Route::get('productos', function () {
 
- $credit = App\Models\Credit::all();
- foreach ($credit as $key => $credit) {
+   $credit = App\Models\Credit::all();
+   foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
-     echo $credit->periodicity;
-     echo $credit->adviser;
-     echo "<br>";
- }
+       echo $credit->periodicity;
+       echo $credit->adviser;
+       echo "<br>";
+   }
 
 }
 });
@@ -980,7 +989,11 @@ Route::get('actives/{id}/delete', [
     'uses' => 'ActiveController@destroy',
 ]);
 
+<<<<<<< HEAD
 // Routes for change foreign keys
+=======
+
+>>>>>>> 7195351b4b7d89b6af60eab3010101403120dac9
 Route::get('changeDebts', function(){
   $debts = App\Models\Debt::all();
 
@@ -1012,7 +1025,6 @@ Route::get('expenditureCredits', function(){
 
   foreach ($expenditureCredits as $key => $ec) {
     $credit = $ec->credit;
-
     $ec->branch_id = $credit->branch_id;
     $ec->region_id = $credit->region_id;
     $ec->save();
@@ -1020,6 +1032,7 @@ Route::get('expenditureCredits', function(){
   echo "Listo";
 });
 
+<<<<<<< HEAD
 Route::get('expendituresChange', function(){
   $expenditures = App\Models\Expenditure::all();
 
@@ -1115,3 +1128,5 @@ Route::get('investmnetsChange', function(){
   }
   echo "Listo";
 });
+=======
+>>>>>>> 7195351b4b7d89b6af60eab3010101403120dac9

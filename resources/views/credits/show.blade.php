@@ -7,7 +7,7 @@ Créditos
 Detalles
 @endsection
 <div class="container">
-	<div class="row"> 
+	<div class="row">
 		<!-- ./col -->
 		<div class="col-md-12">
 			<div class="box box-danger">
@@ -45,7 +45,7 @@ Detalles
 						@else
 						<p><strong>FRECUENCIA:</strong> {{$credit->periodicity}}</p>
 						@endif
-						
+
 						<p><strong>MONTO:</strong>$ {{ number_format($credit->ammount, 2) }}</p>
 						<p><strong>TASA:</strong> {{$credit->interest_rate}}%</p>
 						<p><strong>CUOTAS:</strong> {{$credit->dues}}</p>
@@ -53,6 +53,7 @@ Detalles
 					</div>
 					@php
 					$debt = $credit->debt;
+					$lates = $debt->latePayments;
 					$payments = $debt->payments;
 					$client = $credit->client;
 					$product = App\Models\Product::all();
@@ -63,6 +64,7 @@ Detalles
 						<p><strong>TOTAL PAGADO:</strong> ${{ number_format($total_payment,2) }}</p>
 						<p><strong>TOTAL RESTANTE:</strong> ${{ number_format($debt->ammount,2) }}</p>
 						<p><strong>ESTATUS DEL CRÉDITO: </strong> {{ strtoupper($debt->status) }}</p>
+						<p><strong>TOTAL DE ATRASOS ACUMULADOS: </strong>{{$lates->count()}}</p>
 					</div>
 					<div class="col-md-4">
 						<p style="color:red;"><strong>INTERÉS:</strong>$ {{ number_format($late_interest, 2) }}</p>
@@ -113,14 +115,14 @@ Detalles
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									
+
 									<div class="modal-footer">
 										<div class="form-group col-sm-6 col-lg-12">
 											<a href="{{ url('renovate') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
 										</div>
 									</div>
 
-									
+
 								</div>
 							</div>
 						</div>
@@ -187,7 +189,7 @@ Detalles
 						@endrole
 						@endif
 						<hr>
-					</div>					
+					</div>
 					<div class="col-md-12">
 						<div class="table-responsive">
 							@role('administrador')

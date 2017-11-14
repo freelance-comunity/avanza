@@ -544,6 +544,7 @@ class GeneralController extends Controller
 	}
 	public function movementsRecovery()
 	{
+		$current = Carbon::today()->toDateString();
 		$user_allocation = Auth::user();
 		$region_allocation = $user_allocation->region;
 		$branch_allocation = $user_allocation->branch;
@@ -552,7 +553,7 @@ class GeneralController extends Controller
 
 		$empleados = $region_allocation->users;
 
-		$recoverys = IncomePayment::all()->sortByDesc('created_at'); 
+		$recoverys = IncomePayment::all()->sortByDesc('created_at')->where('date', $current); 
 		return view('movements.movementsRecovery')
 		->with('recoverys', $recoverys);
 		

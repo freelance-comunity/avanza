@@ -62,7 +62,7 @@
          <li><a href="{{ url('movementsBalance') }}">Saldo en Caja</a></li>
          <li><a href="{{ url('movementsBeginning') }}">Saldo Inicial</a></li>
          <li><a href="{{ url('movementsEffective') }}">Asignacion en Efectivo</a></li>
-         {{-- <li><a href="{{ url('movementsRecovery') }}">Recuperación</a></li> --}}
+         <li><a href="{{ url('movementsRecovery') }}">Recuperación</a></li>
          <li><a href="{{ url('movementsRecoveryAccess') }}">Recuperación Access</a></li>
          <li><a href="{{ url('movementsPlacement') }}">Colocación</a></li>
          <li><a href="{{ url('movementsExpenses') }}">Gastos</a></li>

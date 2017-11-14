@@ -1022,6 +1022,17 @@ Route::get('actives/{id}/delete', [
     'uses' => 'ActiveController@destroy',
 ]);
 
+Route::get('changePayments', function(){
+  $payments = App\Models\Payment::all();
+
+  foreach ($payments as $key => $py) {
+    $branch = $py->branch;
+
+    $py->region_id = $branch->region_id;
+    $py->save();
+  }
+  echo "Listo";
+});
 
 Route::get('changeDebts', function(){
   $debts = App\Models\Debt::all();

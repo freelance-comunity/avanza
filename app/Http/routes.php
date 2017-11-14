@@ -953,20 +953,52 @@ Route::get('clientReferences/{id}/delete', [
     'uses' => 'ClientReferencesController@destroy',
 ]);
 
-Route::get('muertos', function () {
-    $payments = App\Models\Payment::all();
-    foreach ($payments as $key => $payment) {
-        if ($payment->day == '2017-11-02 00:00:00' and $payment->status == "Pendiente" or $payment->status == "Parcial") {
-            echo "dia de muertos";
-            echo "<br>";
-            echo "Pago #".$payment->number;
-            echo "<br>";
-            echo "Deuda: ".$payment->debt_id;
-            echo "<br>";
-            echo "===========";
-            echo "<br>";
+Route::get('applyMoratorium',function(){
+    $credit = App\Models\Credit::all();
+    $date_now = \Carbon\Carbon::now()->toDateString();
+    $hour_now = \Carbon\Carbon::now()->toTimeString();
+    foreach ($credit as $key => $credit) {
+        $debt = $credit->debt;
+        $payments = $debt->payments;
+
+        foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' && $hour_now >= '11:00:00') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial' && $hour_now >= '11:00:00') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->status == 'Vencido') {
+                $latePayments = new App\Models\LatePayments;
+                $latePayments->late_number = $payment->number;
+                $latePayments->late_ammount = $payment->total;
+                $latePayments->late_payment = $payment->payment;
+                $latePayments->status = "Atrasado";
+                $latePayments->payment_id = $payment->id;
+                $latePayments->debt_id    = $debt->id;
+                $latePayments->save();
+            }
         }
     }
+    echo "MORATORIO APLICADO CORRECTAMENTE";
 });
 
 Route::get('productos', function () {

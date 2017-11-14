@@ -1021,8 +1021,6 @@ Route::get('expenditureCredits', function(){
 
   foreach ($expenditureCredits as $key => $ec) {
     $credit = $ec->credit;
-
-
     $ec->branch_id = $credit->branch_id;
     $ec->region_id = $credit->region_id;
     $ec->save();

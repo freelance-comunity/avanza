@@ -936,6 +936,7 @@ Route::get('moratorium', function () {
                 $latePayments->late_number = $payment->number;
                 $latePayments->late_ammount = $payment->total;
                 $latePayments->late_payment = $payment->payment;
+                $latePayments->status = "Atrasado";
                 $latePayments->payment_id = $payment->id;
                 $latePayments->debt_id    = $debt->id;
                 $latePayments->save();
@@ -970,13 +971,13 @@ Route::get('muertos', function () {
 
 Route::get('productos', function () {
 
-   $credit = App\Models\Credit::all();
-   foreach ($credit as $key => $credit) {
+ $credit = App\Models\Credit::all();
+ foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
-       echo $credit->periodicity;
-       echo $credit->adviser;
-       echo "<br>";
-   }
+     echo $credit->periodicity;
+     echo $credit->adviser;
+     echo "<br>";
+ }
 
 }
 });
@@ -998,8 +999,8 @@ Route::get('changeDebts', function(){
     $debt->branch_id = $credit->branch_id;
     $debt->region_id = $credit->region_id;
     $debt->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('changeIncomePayments', function(){
@@ -1012,8 +1013,8 @@ Route::get('changeIncomePayments', function(){
     $ip->branch_id = $credit->branch_id;
     $ip->region_id = $credit->region_id;
     $ip->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('expenditureCreditsChange', function(){
@@ -1024,8 +1025,8 @@ Route::get('expenditureCreditsChange', function(){
     $ec->branch_id = $credit->branch_id;
     $ec->region_id = $credit->region_id;
     $ec->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('expendituresChange', function(){
@@ -1038,8 +1039,8 @@ Route::get('expendituresChange', function(){
     $ex->branch_id = $user->branch_id;
     $ex->region_id = $user->region_id;
     $ex->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('incomesChange', function(){
@@ -1052,8 +1053,8 @@ Route::get('incomesChange', function(){
     $in->branch_id = $user->branch_id;
     $in->region_id = $user->region_id;
     $in->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('rostersChange', function(){
@@ -1065,8 +1066,8 @@ Route::get('rostersChange', function(){
     $ro->branch_id = $user->branch_id;
     $ro->region_id = $user->region_id;
     $ro->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('retreatsChange', function(){
@@ -1079,8 +1080,8 @@ Route::get('retreatsChange', function(){
     $re->branch_id = $user->branch_id;
     $re->region_id = $user->region_id;
     $re->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('accessChange', function(){
@@ -1093,8 +1094,8 @@ Route::get('accessChange', function(){
     $pur->branch_id = $user->branch_id;
     $pur->region_id = $user->region_id;
     $pur->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('latesChange', function(){
@@ -1106,8 +1107,8 @@ Route::get('latesChange', function(){
     $la->branch_id = $debt->branch_id;
     $la->region_id = $debt->region_id;
     $la->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('investmnetsChange', function(){
@@ -1120,6 +1121,6 @@ Route::get('investmnetsChange', function(){
     $inv->branch_id = $user->branch_id;
     $inv->region_id = $user->region_id;
     $inv->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });

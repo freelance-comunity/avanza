@@ -42,7 +42,7 @@ Detalles del Cliente
           <!-- /.col -->
           <div class="col-sm-4 border-right">
             <div class="description-block">
-              <h5 class="description-header">CURP</h5>
+              <h5 class="description-header">CURP:</h5>
               <span class="description-text">{{ $client->curp}}</span>
             </div>
             <!-- /.description-block -->
@@ -50,7 +50,7 @@ Detalles del Cliente
           <!-- /.col -->
           <div class="col-sm-4">
             <div class="description-block">
-              <h5 class="description-header">INE</h5>
+              <h5 class="description-header">INE:</h5>
               <span class="description-text">{{$client->ine}}</span>
 
             </div>

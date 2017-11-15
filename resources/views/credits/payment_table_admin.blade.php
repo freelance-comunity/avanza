@@ -57,7 +57,11 @@
 					<td>${{ number_format($payment->payment, 2)}}</td>
 					<td style="color: blue;">${{ number_format($payment->balance, 2) }}</td>
 					<td><p style="color:blue;">{{$payment->status}}</p></td>
-
+					@if ($payment->status == 'Pagado')
+						<td>{{$payment->updated_at}}</td>
+					@else
+						<td>Pago no realizado aún</td>
+					@endif
 				</tr>
 				@elseif($payment->status == "Vencido")
 				<tr class="danger">

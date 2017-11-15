@@ -6,7 +6,7 @@
 			<th>Monto</th>
 			<th>Mora</th>
 			<th>Pagado</th>
-			<th>Adeudo</th>				
+			<th>Adeudo</th>
 			<th>Estatus</th>
 		</thead>
 		<tbody>
@@ -16,7 +16,7 @@
 			<tr class="active">
 				<td>{{ $payment->number }}</td>
 				<td>{{$payment->date->format('d F Y')}}</td>
-				<td> 
+				<td>
 					@if ($payment->date == $date_now)
 					<button type="button" class="btn btn-success btn-lg disabled">$ {{ number_format($payment->total, 2) }}
 					</button>
@@ -24,7 +24,7 @@
 					<button type="button" class="btn bg-yellow btn-lg disabled">$ {{ number_format($payment->total, 2) }}
 					</button>
 					@endif
-					
+
 				</td>
 				<td>$ {{ number_format($payment->ammount, 2) }}</td>
 				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
@@ -42,6 +42,11 @@
 				<td>${{ number_format($payment->payment, 2)}}</td>
 				<td style="color: blue;">${{ number_format($payment->balance, 2) }}</td>
 				<td><p style="color:blue;">{{$payment->status}}</p></td>
+				@if ($payment->status == 'Pagado')
+					<td>{{$payment->updated_at}}</td>
+				@else
+					<td>Pago no realizado aún</td>
+				@endif
 			</tr>
 			@elseif($payment->status == "Parcial")
 			<tr class="warning">
@@ -53,6 +58,11 @@
 				<td>${{ number_format($payment->payment, 2)}}</td>
 				<td style="color: blue;">${{ number_format($payment->balance, 2) }}</td>
 				<td><p style="color:blue;">{{$payment->status}}</p></td>
+				@if ($payment->status == 'Pagado')
+					<td>{{$payment->updated_at}}</td>
+				@else
+					<td>Pago no realizado aún</td>
+				@endif
 			</tr>
 			@elseif($payment->status == "Vencido")
 			<tr class="danger">
@@ -75,6 +85,11 @@
 				<td>${{ number_format($payment->payment, 2)}}</td>
 				<td>${{ number_format($payment->balance, 2) }}</td>
 				<td><p style="color:green;">{{$payment->status}}</p></td>
+				@if ($payment->status == 'Pagado')
+					<td>{{$payment->updated_at}}</td>
+				@else
+					<td>Pago no realizado aún</td>
+				@endif
 			</tr>
 			@endif
 			@endforeach

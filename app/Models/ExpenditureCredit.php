@@ -18,7 +18,7 @@ class ExpenditureCredit extends Model
 		"credit_id",
 		"vault_id",
 		"branch_id",
-		"region_id"
+		"region_id",
 	];
 
 	public static $rules = [

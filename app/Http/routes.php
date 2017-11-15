@@ -994,6 +994,8 @@ Route::get('applyMoratorium',function(){
                 $latePayments->status = "Atrasado";
                 $latePayments->payment_id = $payment->id;
                 $latePayments->debt_id    = $debt->id;
+                $latePayments->branch_id = $debt->branch_id;
+                $latePayments->region_id = $debt->region_id;
                 $latePayments->save();
             }
         }

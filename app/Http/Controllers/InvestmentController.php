@@ -85,6 +85,8 @@ class InvestmentController extends AppBaseController
 		$data_investment['ammount'] = $request->input('ammount');
 		$data_investment['vault_id'] = $vault->id;
 		$data_investment['user_id'] = $user->id;
+		$data_investment['branch_id'] = $user->branch_id;
+		$data_investment['region_id'] = $user->region_id;
 		$investment = Investment::create($data_investment);
 
 		$vault->ammount = $vault->ammount + $investment->ammount;

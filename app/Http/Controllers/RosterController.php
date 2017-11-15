@@ -93,8 +93,8 @@ class RosterController extends AppBaseController
 		$input['position'] = $employee->roles;
 		$input['coordinating_firm']   = $url_coordinating;
 		$input['employee_firm']   = $url_employee;
-		// $input['branch_id'] = $employee->branch_id;
-		// $input['region_id'] = $employee->region_id;
+		$input['branch_id'] = $employee->branch_id;
+		$input['region_id'] = $employee->region_id;
 
 		$user_collector = Auth::user();
 		$vault = $user_collector->vault;

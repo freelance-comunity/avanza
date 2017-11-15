@@ -476,8 +476,8 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['payment_id'] = $payment->id;
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
-					// $data_incomePayment['branch_id'] = $debt->branch_id;
-					// $data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['branch_id'] = $debt->branch_id;
+					$data_incomePayment['region_id'] = $debt->region_id; 	
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
@@ -497,8 +497,8 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['payment_id'] = $payment->id;
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
-					// $data_incomePayment['branch_id'] = $debt->branch_id;
-					// $data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['branch_id'] = $debt->branch_id;
+					$data_incomePayment['region_id'] = $debt->region_id; 	
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
@@ -523,8 +523,8 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['payment_id'] = $payment->id;
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
-					// $data_incomePayment['branch_id'] = $debt->branch_id;
-					// $data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['branch_id'] = $debt->branch_id;
+					$data_incomePayment['region_id'] = $debt->region_id; 	
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
@@ -544,8 +544,8 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['payment_id'] = $payment->id;
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
-					// $data_incomePayment['branch_id'] = $debt->branch_id;
-					// $data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['branch_id'] = $debt->branch_id;
+					$data_incomePayment['region_id'] = $debt->region_id; 	
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
@@ -570,8 +570,8 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['payment_id'] = $payment->id;
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
-					// $data_incomePayment['branch_id'] = $debt->branch_id;
-					// $data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['branch_id'] = $debt->branch_id;
+					$data_incomePayment['region_id'] = $debt->region_id; 	
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
@@ -591,8 +591,8 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['payment_id'] = $payment->id;
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
-					// $data_incomePayment['branch_id'] = $debt->branch_id;
-					// $data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['branch_id'] = $debt->branch_id;
+					$data_incomePayment['region_id'] = $debt->region_id; 	
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;

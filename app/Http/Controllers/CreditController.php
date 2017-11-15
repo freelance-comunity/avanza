@@ -89,11 +89,11 @@ class CreditController extends AppBaseController
 		$product = Product::find($request->input('type_product'));
 		// $LatePayments = LatePayments::where('debt_id', $debt->id)->where('status', 'Bloqueado')->count();
 		//Restriccion de Números de creditos con un producto
-		$typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
-		if ($typecredit) {
-			Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-			return redirect(route('clients.index'));
-		}
+		// $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
+		// if ($typecredit) {
+		// 	Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+		// 	return redirect(route('clients.index'));
+		// }
 		$ammount = $request->input('ammount');
 		// $id_user = $request->input('adviser');
 		// $user = User::find($id_user);

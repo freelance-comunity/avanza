@@ -20,6 +20,7 @@
 					<table class="table" id="example">
 						<thead class="bg-success">
 							<th class="service">FOLIO</th>
+							<th>REGION</th>
 							<th class="service">SUCURSAL</th>
 							<th class="service">FECHA <br> HORA</th>
 							<th class="service">MONTO</th>
@@ -33,6 +34,7 @@
 							= $filtered_payments->where('status','Vencido'); @endphp
 							<tr>
 								<td class="service"><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->folio }}</a></td>
+								<td>{{$credit->region->name}}</td>
 								<td class="service">{{ $credit->branch }}</td>
 								<td>{{$credit->created_at}}</td>
 								<td class="service">${{ number_format($credit->ammount,2) }}</td>

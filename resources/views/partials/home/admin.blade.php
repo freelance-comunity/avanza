@@ -161,7 +161,7 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 			<div class="inner">
 				<h3>${{ number_format($payment,2) }}</h3>
 
-				<p>Recuperación Programada del Día</p>
+				<p>Recuperación Restante del Día</p>
 			</div>
 			<div class="icon">
 				<i class="fa fa-dollar"></i>

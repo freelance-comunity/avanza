@@ -14,8 +14,11 @@ Lista de Gastos @endsection
 			<table class="table" id="example">
 				<thead class="bg-success">
 					<th class="desc">CONCEPTO</th>
-					<th class="desc">NOMBRE DE USUARIO</th>
+					<th>REGION</th>
+					<th>SUCURSAL</th>
+					<th class="desc">NOMBRE COLABORADOR</th>
 					<th class="desc">FECHA</th>
+					<th>TIPO DE GASTO</th>
 					<th class="desc">DESCRIPCIÓN</th>
 					<th>IMPORTE</th>
 				</thead>
@@ -24,8 +27,11 @@ Lista de Gastos @endsection
 					'=', $vault->user_id)->first(); @endphp
 					<tr>
 						<td class="service">{{ $expenditure->concept }}</td>
+						<td>{{$expenditure->region->name}}</td>
+						<td>{{$expenditure->branch->name}}</td>
 						<td class="desc">{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}</td>
 						<td class="desc">{{ $expenditure->date }}</td>
+						<td>{{$expenditure->type}}</td>
 						<td class="desc">{{ $expenditure->description }}</td>
 						<td class="total">${{ number_format($expenditure->ammount,2) }}</td>
 					</tr>

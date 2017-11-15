@@ -251,7 +251,7 @@ Detalles del Cliente
 <!--REFERENCIAS-->
 @if ($references->isEmpty())
 <div class="box-body">
-  <a  style="margin-right: 25px" href="{!! route('client.referencesClient', [$client->id])!!}"><h3>Este empleado no tiene referencias.</h3></a>
+  <a  style="margin-right: 25px" href="{!! route('client.referencesClient', [$client->id])!!}"><h3>Este cliente no tiene referencias.</h3></a>
 </div>
 @else
 <div class="col-md-12">
@@ -290,7 +290,7 @@ Detalles del Cliente
 
 @if (is_null($aval))
 <div class="box-body">
-  <a  style="margin-right: 25px" href="{!! route('client.avalClient', [$client->id])!!}"><h3>Este empleado no tiene aval registrado.</h3></a>
+  <a  style="margin-right: 25px" href="{!! route('client.avalClient', [$client->id])!!}"><h3>Este cliente no tiene aval registrado.</h3></a>
   
 </div>
 @else
@@ -348,7 +348,7 @@ Detalles del Cliente
 
 @if (is_null($document))
 <div class="box-body">
- <h3>Este empleado no tiene documentos registrado.</h3> 
+ <h3>Este cliente no tiene documentos registrado.</h3> 
 </div>
 @else
 <div class="col-md-6">

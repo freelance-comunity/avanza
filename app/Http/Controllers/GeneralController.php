@@ -1,7 +1,4 @@
-
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -483,7 +480,7 @@ class GeneralController extends Controller
 			$empleados = User::all();
 
 			$vaults = Vault::all()->sortByDesc('updated_at');
-			
+
 		// $rosters   = $vault_allocation->rosters;
 
 			return view('movements.movementsBalance')
@@ -501,7 +498,7 @@ class GeneralController extends Controller
 			$empleados = $region_allocation->users;
 
 			$vaults = Vault::all()->sortByDesc('updated_at');
-			
+
 		// $rosters   = $vault_allocation->rosters;
 
 			return view('movements.movementsBalance')
@@ -511,7 +508,7 @@ class GeneralController extends Controller
 		}
 
 
-		
+
 	}
 	public function movementsBeginning()
 	{
@@ -524,13 +521,13 @@ class GeneralController extends Controller
 		$empleados = $region_allocation->users;
 
 		$starts_collection = Income::all();
-		$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at'); 
+		$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at');
 		return view('movements.movementsBeginning')
 		->with('region_allocation', $region_allocation)
 		->with('starts_collection', $starts_collection)
 		->with('starts', $starts)
 		->with('empleados', $empleados);
-		
+
 	}
 	public function movementsEffective()
 	{
@@ -543,14 +540,14 @@ class GeneralController extends Controller
 		$empleados = $region_allocation->users;
 
 		$starts_collection = Income::all();
-		
-		$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at'); 
+
+		$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at');
 		return view('movements.movementsEffective')
 		->with('region_allocation', $region_allocation)
 		->with('starts_collection', $starts_collection)
 		->with('assignments', $assignments)
 		->with('empleados', $empleados);
-		
+
 	}
 	public function movementsRecovery()
 	{
@@ -563,10 +560,10 @@ class GeneralController extends Controller
 
 		$empleados = $region_allocation->users;
 
-		$recoverys = IncomePayment::all()->sortByDesc('created_at')->where('date', $current); 
+		$recoverys = IncomePayment::all()->sortByDesc('created_at')->where('date', $current);
 		return view('movements.movementsRecovery')
 		->with('recoverys', $recoverys);
-		
+
 	}
 	public function movementsRecoveryAccess()
 	{
@@ -578,10 +575,10 @@ class GeneralController extends Controller
 
 		$empleados = $region_allocation->users;
 
-		$accesses  = PurseAccess::all()->sortByDesc('created_at'); 
+		$accesses  = PurseAccess::all()->sortByDesc('created_at');
 		return view('movements.movementsRecoveryAccess')
 		->with('accesses', $accesses);
-		
+
 	}
 	public function movementsPlacement()
 	{
@@ -593,10 +590,10 @@ class GeneralController extends Controller
 
 		$empleados = $region_allocation->users;
 
-		$credits   = ExpenditureCredit::all()->sortByDesc('created_at'); 
+		$credits   = ExpenditureCredit::all()->sortByDesc('created_at');
 		return view('movements.movementsPlacement')
 		->with('credits', $credits);
-		
+
 	}
 	public function movementsExpenses()
 	{
@@ -611,7 +608,7 @@ class GeneralController extends Controller
 		$expenses  = Expenditure::all()->sortByDesc('created_at');
 		return view('movements.movementsExpenses')
 		->with('expenses', $expenses);
-		
+
 	}
 	public function movementsSalaries()
 	{
@@ -626,7 +623,7 @@ class GeneralController extends Controller
 		$rosters   = Roster::all()->sortByDesc('created_at');
 		return view('movements.movementsSalaries')
 		->with('rosters', $rosters);
-		
+
 	}
 	public function movementsCut()
 	{
@@ -641,7 +638,7 @@ class GeneralController extends Controller
 		$cuts = BoxCut::all()->sortByDesc('created_at');
 		return view('movements.movementsCut')
 		->with('cuts', $cuts);
-		
+
 	}
 
 	public function walletExpired()

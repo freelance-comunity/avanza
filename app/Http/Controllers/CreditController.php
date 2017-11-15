@@ -285,8 +285,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
@@ -306,7 +306,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = $credit->user_id;
 						$payment->branch_id = $user->branch_id;
-						$payment->region_id = $user->region_id;
+						// $payment->region_id = $user->region_id;
 						$payment->save();
 					}
 				}
@@ -315,8 +315,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
@@ -339,7 +339,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = $credit->user_id;
 						$payment->branch_id = $user->branch_id;
-						$payment->region_id = $user->region_id;
+						// $payment->region_id = $user->region_id;
 						$payment->save();
 					}
 				}
@@ -348,8 +348,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addWeek();
@@ -369,7 +369,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = $credit->user_id;
 						$payment->branch_id = $user->branch_id;
-						$payment->region_id = $user->region_id;
+						// $payment->region_id = $user->region_id;
 						$payment->save();
 					}
 				}
@@ -378,8 +378,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addWeek();
@@ -399,7 +399,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = $credit->user_id;
 						$payment->branch_id = $user->branch_id;
-						$payment->region_id = $user->region_id;
+						// $payment->region_id = $user->region_id;
 						$payment->save();
 					}
 				}
@@ -408,8 +408,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
@@ -429,7 +429,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
-						$payment->region_id = Auth::User()->region_id;
+						// $payment->region_id = Auth::User()->region_id;
 						$payment->save();
 					}
 				}
@@ -438,8 +438,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
@@ -462,7 +462,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
-						$payment->region_id = Auth::User()->region_id;
+						// $payment->region_id = Auth::User()->region_id;
 						$payment->save();
 					}
 				}
@@ -471,8 +471,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
@@ -495,7 +495,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
-						$payment->region_id = Auth::User()->region_id;
+						// $payment->region_id = Auth::User()->region_id;
 						$payment->save();
 					}
 				}
@@ -504,8 +504,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
@@ -525,7 +525,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
-						$payment->region_id = Auth::User()->region_id;
+						// $payment->region_id = Auth::User()->region_id;
 						$payment->save();
 					}
 				}
@@ -534,8 +534,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addDay();
@@ -558,7 +558,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
-						$payment->region_id = Auth::User()->region_id;
+						// $payment->region_id = Auth::User()->region_id;
 						$payment->save();
 					}
 				}
@@ -567,8 +567,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addWeek();
@@ -588,7 +588,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
-						$payment->region_id = Auth::User()->region_id;
+						// $payment->region_id = Auth::User()->region_id;
 						$payment->save();
 					}
 				}
@@ -597,8 +597,8 @@ class CreditController extends AppBaseController
 					$debt->ammount = ceil($total);
 					$debt->status = "VIGENTE";
 					$debt->credit_id = $credit->id;
-					$debt->branch_id =  $user->branch_id;
-					$debt->region_id = $user->region_id;
+					// $debt->branch_id =  $user->branch_id;
+					// $debt->region_id = $user->region_id;
 					$debt->save();
 					for ($i=1; $i <= $credit->dues; $i++) { 
 						$var = $date->addWeek();
@@ -618,7 +618,7 @@ class CreditController extends AppBaseController
 						$payment->debt_id = $debt->id;
 						$payment->user_id = Auth::User()->id;
 						$payment->branch_id = Auth::User()->branch_id;
-						$payment->region_id = Auth::User()->region_id;
+						// $payment->region_id = Auth::User()->region_id;
 						$payment->save();
 					}
 				}
@@ -628,8 +628,8 @@ class CreditController extends AppBaseController
 				$data_expendituresCredits['date']    = $current;
 				$data_expendituresCredits['credit_id']= $credit->id;
 				$data_expendituresCredits['vault_id'] = $vault->id;
-				$data_expendituresCredits['branch_id'] = $credit->branch_id;
-				$data_expendituresCredits['region_id'] = $credit->region_id;
+				// $data_expendituresCredits['branch_id'] = $credit->branch_id;
+				// $data_expendituresCredits['region_id'] = $credit->region_id;
 				$expendituresCredit = ExpenditureCredit::create($data_expendituresCredits);
 				if ($product == 'MIGRADOS') {
 					$vault->ammount = $vault->ammount + 0;

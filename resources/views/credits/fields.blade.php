@@ -9,7 +9,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
 
 <div class="box box-danger">
   <div class="box-header with-border">
-    <h3 class="box-title">Solicitud de Crédito</h3>
+    <h3 class="box-title">Solicitud de Crédito con fecha <strong>{{ Carbon\Carbon::now()->toDateString() }}</strong> </h3>
   </div>
 
   <div class="box-body">
@@ -19,7 +19,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
       {!! Form::label('date', 'Fecha:') !!}
       <input type="date" value="{{ Carbon\Carbon::now()->toDateString() }}" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin" readonly>
     </div> --}}
-    <div class="form-group col-sm-6 col-lg-4">
+    <div class="form-group col-sm-6 col-lg-8">
       {!! Form::label('ammount', 'Monto Crédito:') !!}
       <input type="number" name="ammount" placeholder="ESCRIBA EL MONTO" id="ammount" class="form-control formulario input-lg" data-parsley-trigger="input focusin" required="required">
       <input type="hidden" value="{{ Carbon\Carbon::now()->toDateString() }}" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin" readonly>

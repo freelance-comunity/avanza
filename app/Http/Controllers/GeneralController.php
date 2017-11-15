@@ -149,6 +149,8 @@ class GeneralController extends Controller
 			$data_income['concept'] = 'Saldo Inicial';
 			$data_income['date']    = $current;
 			$data_income['vault_id'] = $vault->id;
+			$data_income['branch_id'] = $user->branch_id;
+			$data_income['region_id'] = $user->region_id;
 			$income = Income::create($data_income);
 
 			$vault->ammount = $vault->ammount + $income->ammount;
@@ -195,6 +197,9 @@ class GeneralController extends Controller
 		$data_income['concept'] = 'Asignación de efectivo';
 		$data_income['date']    = $current;
 		$data_income['vault_id'] = $vault->id;
+		$data_income['branch_id'] = $user->branch_id;
+		$data_income['region_id'] = $user->region_id;
+
 		$income = Income::create($data_income);
 
 		$vault->ammount = $vault->ammount + $income->ammount;
@@ -247,6 +252,8 @@ class GeneralController extends Controller
 			$data_expenditure['description']= $request->input('description');
 			$data_expenditure['type']= $request->input('type');
 			$data_expenditure['vault_id'] = $vault->id;
+			$data_expenditure['branch_id'] = Auth::user()->branch_id;
+			$data_expenditure['region_id'] = Auth::user()->region_id;
 
 			// dd($data_expenditure);
 			$expenditure = Expenditure::create($data_expenditure);
@@ -339,6 +346,8 @@ class GeneralController extends Controller
 		$data_purseAccess['date']    = $current;
 		$data_purseAccess['vault_id'] = $vault->id;
 		$data_purseAccess['user_id'] = $user->id;
+		$data_purseAccess['branch_id'] = $user->branch_id;
+		$data_purseAccess['region_id'] = $user->region_id;
 		$purseAccess = PurseAccess::create($data_purseAccess);
 
 		$vault->ammount = $vault->ammount + $purseAccess->ammount;

@@ -90,6 +90,8 @@ class RetreatController extends AppBaseController
 		$data_retreat['ammount'] = $request->input('ammount');
 		$data_retreat['vault_id'] = $vault->id;
 		$data_retreat['user_id'] = $user->id;
+		$data_retreat['branch_id'] = $user->branch_id;
+		$data_retreat['region_id'] = $user->region_id;
 		$retreat = Retreat::create($data_retreat);
 
 		$vault->ammount = $vault->ammount - $retreat->ammount;

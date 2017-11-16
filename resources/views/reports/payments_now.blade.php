@@ -2,9 +2,17 @@
 Lista de Créditos @endsection
 <div class="container">
 	@php
-  $now = Carbon\Carbon::now()->toDateString();
-  $collection_payments = App\Models\IncomePayment::all();
-  $payments = $collection_payments->where('date', $now);
+	if (Entrust::hasRole('coordinador-regional')) {
+		$user_allocation = Auth::user();
+		$now = Carbon\Carbon::now()->toDateString();
+		$region_allocation = $user_allocation->region;
+	  $collection_payments = App\Models\IncomePayment::all();
+	  $payments = $collection_payments->where('date', $now)->where('region_id', $region_allocation->id);
+	}else {
+		$now = Carbon\Carbon::now()->toDateString();
+	  $collection_payments = App\Models\IncomePayment::all();
+	  $payments = $collection_payments->where('date', $now);
+	}
   @endphp
 	@include('flash::message')
 	<div class="row">

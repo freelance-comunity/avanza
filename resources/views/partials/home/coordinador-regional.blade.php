@@ -5,11 +5,11 @@ $clients = $region_allocation->clients;
 
 $filtered_date_now = App\Models\Client::where('region_id',$region_allocation->id)->where(function ($query) {
 	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
-})->get(); 
+})->get();
 $credits = $region_allocation->credits;
 $filtered_date_now_credits = App\Models\Credit::where('region_id',$region_allocation->id)->where(function ($query) {
 	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
-})->get(); 
+})->get();
 
 $vault = $user_allocation->vault;
 $expenditures_collection = App\Models\Expenditure::all();
@@ -21,6 +21,11 @@ $region = $user->region;
 $branches = $region->branches;
 $total_promoter = 0;
 
+$user_allocation = Auth::user();
+$region_allocation = $user_allocation->region;
+$collection_payments = App\Models\IncomePayment::all();
+$payments = $collection_payments->where('date', $now)->where('region_id', $region_allocation->id);
+$payment = App\Models\Payment::where('date',$now)->where('status', 'Pendiente')->where('region_id', $region_allocation->id)->sum('ammount');
 @endphp
 <!-- Small boxes (Stat box) -->
 <div class="row">
@@ -118,6 +123,45 @@ $total_promoter = 0;
 			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
 		</div>
 	</div>
+	<div class="col-lg-3 col-md-4">
+		<!-- small box -->
+		<div class="small-box bg-blue">
+			<div class="inner">
+				@php
+					$sum_payments = $payments->sum('ammount');
+					$total_day = $sum_payments + $payment;
+				@endphp
+				<h3>${{ number_format($payment,2) }}</h3>
+
+				<p>Recuperación Restante del Día</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-dollar"></i>
+			</div>
+			<a href="{{ url('/report-payments-day') }}" class="small-box-footer">Ver
+				<i class="fa fa-eye"></i>
+			</a>
+		</div>
+	</div>
+	<!-- ./col -->
+	<!-- ./col -->
+	<div class="col-lg-3 col-md-4">
+		<!-- small box -->
+		<div class="small-box bg-black	">
+			<div class="inner">
+				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
+
+				<p>Avance Cobranza del Día</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-line-chart"></i>
+			</div>
+			<a href="{{ url('/report-payments-now') }}"  class="small-box-footer">Ver
+				<i class="fa fa-eye"></i>
+			</a>
+		</div>
+	</div>
+	<!-- ./col -->
 	<hr>
 	<div class="col-lg-12 col-md-4">
 		<!-- USERS LIST -->
@@ -145,7 +189,7 @@ $total_promoter = 0;
 							<th>Recuperado</th>
 						</thead>
 						<tbody>
-							@foreach ($branches as $branch)		
+							@foreach ($branches as $branch)
 							@php
 							$total_payments = DB::table('payments')->where([
 								['branch_id', '=', $branch->id],
@@ -258,5 +302,3 @@ $total_promoter = 0;
 	</div> --}}
 </div>
 <!-- /.row -->
-
-

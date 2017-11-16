@@ -2,11 +2,19 @@
 Lista de Créditos @endsection
 <div class="container">
 	@php
-	$now = Carbon\Carbon::now()->toDateString();
-	$payments = DB::table('payments')->where('date', '=', $now)->get(); @endphp
+	if (Entrust::hasRole('coordinador-regional')) {
+		$user_allocation = Auth::user();
+		$now = Carbon\Carbon::now()->toDateString();
+		$region_allocation = $user_allocation->region;
+		$payments = DB::table('payments')->where('date', '=', $now)->where('region_id', $region_allocation->id)->get();
+	}else {
+		$now = Carbon\Carbon::now()->toDateString();
+		$payments = DB::table('payments')->where('date', '=', $now)->get();
+	}
+ @endphp
 	@include('flash::message')
 	<div class="row">
-		<h1 class="pull-left">Reporte de Pagos</h1>
+		<h1 class="pull-left">Reporte de Pagos Restantes del Día</h1>
 	</div>
 	<div class="row">
 		{{-- @if($payment->isEmpty())

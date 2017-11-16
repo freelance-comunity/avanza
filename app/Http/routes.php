@@ -1169,3 +1169,17 @@ Route::get('investmnetsChange', function(){
 }
 echo "Listo";
 });
+
+Route::get('boxCutsChange', function(){
+  $boxcut = App\Models\BoxCut::all();
+
+  foreach ($boxcut as $key => $box) {
+   
+    $user  = $box->user;
+
+    $box->branch_id = $user->branch_id;
+    $box->region_id = $user->region_id;
+    $box->save();
+}
+echo "Listo";
+});

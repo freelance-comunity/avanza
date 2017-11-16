@@ -14,6 +14,8 @@ class BoxCut extends Model
 	public $fillable = [
 	    "amount",
 		"vault_id",
+		"branch_id",
+		"region_id",
 		"user_id"
 	];
 

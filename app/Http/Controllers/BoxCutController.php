@@ -265,6 +265,8 @@ class BoxCutController extends AppBaseController
 
 		$data_boxcut['amount'] = $request->input('amount');
 		$data_boxcut['vault_id'] = $vault->id;
+		$data_boxcut['branch_id'] = $user->branch_id;
+		$data_boxcut['region_id'] = $user->region_id;
 		$data_boxcut['user_id'] = $user->id;
 		$boxCut = BoxCut::create($data_boxcut);
 

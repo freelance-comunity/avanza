@@ -513,133 +513,282 @@ class GeneralController extends Controller
 	}
 	public function movementsBeginning()
 	{
-		$user_allocation = Auth::user();
-		$region_allocation = $user_allocation->region;
-		$branch_allocation = $user_allocation->branch;
-		$collection = Role::all();
-		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$empleados = $region_allocation->users;
+			$empleados = $region_allocation->users;
 
-		$starts_collection = Income::all();
-		$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at');
-		return view('movements.movementsBeginning')
-		->with('region_allocation', $region_allocation)
-		->with('starts_collection', $starts_collection)
-		->with('starts', $starts)
-		->with('empleados', $empleados);
+			$starts_collection = Income::all();
+			$starts = $starts_collection->where('concept', 'Saldo Inicial')->sortByDesc('created_at');
+			return view('movements.movementsBeginning')
+			->with('region_allocation', $region_allocation)
+			->with('starts_collection', $starts_collection)
+			->with('starts', $starts)
+			->with('empleados', $empleados);
+		}
+
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+			$empleados = $region_allocation->users;
+			$region = $user_allocation->region->id;
+			$starts_collection = Income::all();
+			$starts = $starts_collection->where('concept', 'Saldo Inicial')->where('region_id',$region)->sortByDesc('created_at');
+			return view('movements.movementsBeginning')
+			->with('region_allocation', $region_allocation)
+			->with('starts_collection', $starts_collection)
+			->with('starts', $starts)
+			->with('empleados', $empleados);
+		}	
 
 	}
 	public function movementsEffective()
 	{
-		$user_allocation = Auth::user();
-		$region_allocation = $user_allocation->region;
-		$branch_allocation = $user_allocation->branch;
-		$collection = Role::all();
-		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$empleados = $region_allocation->users;
+			$empleados = $region_allocation->users;
 
-		$starts_collection = Income::all();
+			$starts_collection = Income::all();
 
-		$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at');
-		return view('movements.movementsEffective')
-		->with('region_allocation', $region_allocation)
-		->with('starts_collection', $starts_collection)
-		->with('assignments', $assignments)
-		->with('empleados', $empleados);
+			$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at');
+			return view('movements.movementsEffective')
+			->with('region_allocation', $region_allocation)
+			->with('starts_collection', $starts_collection)
+			->with('assignments', $assignments)
+			->with('empleados', $empleados);
+		}
+
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+			$empleados = $region_allocation->users;
+			$region = $user_allocation->region->id;
+			$starts_collection = Income::all();
+
+			$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->where('region_id',$region_id)->sortByDesc('created_at');
+			return view('movements.movementsEffective')
+			->with('region_allocation', $region_allocation)
+			->with('starts_collection', $starts_collection)
+			->with('assignments', $assignments)
+			->with('empleados', $empleados);
+		}	
+
+
+
+
 
 	}
 	public function movementsRecovery()
-	{
-		$current = Carbon::today()->toDateString();
-		$user_allocation = Auth::user();
-		$region_allocation = $user_allocation->region;
-		$branch_allocation = $user_allocation->branch;
-		$collection = Role::all();
-		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+	{	
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$current = Carbon::today()->toDateString();
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$empleados = $region_allocation->users;
+			$empleados = $region_allocation->users;
+			$region = $user_allocation->region->id;
+			$recoverys = IncomePayment::all()->where('region_id',$region)->sortByDesc('created_at');
+			return view('movements.movementsRecovery')
+			->with('recoverys', $recoverys);
 
-		$recoverys = IncomePayment::all()->sortByDesc('created_at')->where('date', $current);
-		return view('movements.movementsRecovery')
-		->with('recoverys', $recoverys);
+		}
 
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+
+			$current = Carbon::today()->toDateString();
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+			$empleados = $region_allocation->users;
+			$region = $user_allocation->region->id;
+			$recoverys = IncomePayment::all()->where('region_id',$region)->sortByDesc('created_at');
+			return view('movements.movementsRecovery')
+			->with('recoverys', $recoverys);
+
+		}	
 	}
 	public function movementsRecoveryAccess()
 	{
-		$user_allocation = Auth::user();
-		$region_allocation = $user_allocation->region;
-		$branch_allocation = $user_allocation->branch;
-		$collection = Role::all();
-		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$empleados = $region_allocation->users;
+			$empleados = $region_allocation->users;
 
-		$accesses  = PurseAccess::all()->sortByDesc('created_at');
-		return view('movements.movementsRecoveryAccess')
-		->with('accesses', $accesses);
+			$accesses  = PurseAccess::all()->sortByDesc('created_at');
+			return view('movements.movementsRecoveryAccess')
+			->with('accesses', $accesses);
 
+		}
+
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+			$empleados = $region_allocation->users;
+			$region = $user_allocation->region->id;
+			$accesses  = PurseAccess::all()->where('region_id',$region)->sortByDesc('created_at');
+			return view('movements.movementsRecoveryAccess')
+			->with('accesses', $accesses);
+			
+			
+		}
 	}
 	public function movementsPlacement()
 	{
-		$user_allocation = Auth::user();
-		$region_allocation = $user_allocation->region;
-		$branch_allocation = $user_allocation->branch;
-		$collection = Role::all();
-		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$empleados = $region_allocation->users;
+			$empleados = $region_allocation->users;
 
-		$credits   = ExpenditureCredit::all()->sortByDesc('created_at');
-		return view('movements.movementsPlacement')
-		->with('credits', $credits);
+			$credits = ExpenditureCredit::all()->sortByDesc('created_at');
+			return view('movements.movementsPlacement')
+			->with('credits', $credits);
+		}
 
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+			$empleados = $region_allocation->users;
+			$region = $user_allocation->region->id;
+			$credits = ExpenditureCredit::all()->where('region_id',$region)->sortByDesc('created_at');
+			return view('movements.movementsPlacement')
+			->with('credits', $credits);
+		}
 	}
 	public function movementsExpenses()
 	{
-		$user_allocation = Auth::user();
-		$region_allocation = $user_allocation->region;
-		$branch_allocation = $user_allocation->branch;
-		$collection = Role::all();
-		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$empleados = $region_allocation->users;
+			$empleados = $region_allocation->users;
 
-		$expenses  = Expenditure::all()->sortByDesc('created_at');
-		return view('movements.movementsExpenses')
-		->with('expenses', $expenses);
+			$expenses  = Expenditure::all()->sortByDesc('created_at');
+			return view('movements.movementsExpenses')
+			->with('expenses', $expenses);
 
+		}
+
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+			$empleados = $region_allocation->users;
+			$region = $user_allocation->region->id;
+			$expenses  = Expenditure::all()->where('region_id',$region)->sortByDesc('created_at');
+			return view('movements.movementsExpenses')
+			->with('expenses', $expenses);
+
+		}	
+		
 	}
 	public function movementsSalaries()
 	{
-		$user_allocation = Auth::user();
-		$region_allocation = $user_allocation->region;
-		$branch_allocation = $user_allocation->branch;
-		$collection = Role::all();
-		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$empleados = $region_allocation->users;
+			$empleados = $region_allocation->users;
 
-		$rosters   = Roster::all()->sortByDesc('created_at');
-		return view('movements.movementsSalaries')
-		->with('rosters', $rosters);
+			$rosters   = Roster::all()->sortByDesc('created_at');
+			return view('movements.movementsSalaries')
+			->with('rosters', $rosters);
 
+		}
+
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+			$empleados = $region_allocation->users;
+			$region = $user_allocation->region->id;
+			$rosters   = Roster::all()->where('region_id',$region)->sortByDesc('created_at');
+			return view('movements.movementsSalaries')
+			->with('rosters', $rosters);
+		}
 	}
 	public function movementsCut()
 	{
-		$user_allocation = Auth::user();
-		$region_allocation = $user_allocation->region;
-		$branch_allocation = $user_allocation->branch;
-		$collection = Role::all();
-		$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
 
-		$empleados = $region_allocation->users;
+			$empleados = $region_allocation->users;
 
-		$cuts = BoxCut::all()->sortByDesc('created_at');
-		return view('movements.movementsCut')
-		->with('cuts', $cuts);
+			$cuts = BoxCut::all()->sortByDesc('created_at');
+			return view('movements.movementsCut')
+			->with('cuts', $cuts);
+		}
 
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$branch_allocation = $user_allocation->branch;
+			$collection = Role::all();
+			$role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+			$empleados = $region_allocation->users;
+			$region = $user_allocation->region->id;
+			$cuts = BoxCut::all()->where('region_id',$region)->sortByDesc('created_at');
+			return view('movements.movementsCut')
+			->with('cuts', $cuts);
+		}
 	}
 
 	public function walletExpired()

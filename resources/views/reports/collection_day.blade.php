@@ -29,6 +29,7 @@ Lista de Créditos @endsection
 					<th>Promotor</th>
 					<th>Fecha</th>
 					<th>Folio Crédito</th>
+					<th>Cliente</th>
 					<th>Monto</th>
 					<th>Capital</th>
 					<th>Interés</th>
@@ -49,6 +50,7 @@ Lista de Créditos @endsection
 						<td>{{$credit->user['name']}} {{$credit->user['father_last_name']}} {{$credit->user['mother_last_name']}}</td>
 						<td>{{ $pay->date }}</td>
 						<td><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->folio}}</a></td>
+						<td>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</td>
 						<td>$ {{ number_format($pay->ammount, 2) }}</td>
 						<td>$ {{ number_format($pay->capital, 2) }}</td>
 						<td>$ {{ number_format($pay->interest, 2) }}</td>

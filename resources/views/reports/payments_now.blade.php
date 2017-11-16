@@ -26,6 +26,7 @@ Lista de Créditos @endsection
 			<table class="table" id="example">
 				<thead class="bg-success">
           <th>Folio Crédito</th>
+					<th>Cliente</th>
 					<th>Región</th>
 					<th>Sucursal</th>
 					<th>Promotor</th>
@@ -43,6 +44,7 @@ Lista de Créditos @endsection
 					  @endphp
             <tr>
               <td><a href="{!! route('credits.show', [$pay->debt->credit->id]) !!}">{{$pay->debt->credit->folio}}</a></td>
+							<td>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</td>
 							<td>{{$debt->region['name']}}</td>
 							<td>{{$debt->branch['name']}}</td>
 							<td>{{$credit->user['name']}} {{$credit->user['father_last_name']}} {{$credit->user['mother_last_name']}}</td>

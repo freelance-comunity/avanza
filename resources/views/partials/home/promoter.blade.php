@@ -9,6 +9,7 @@ $payments_now = $payments->where('day',$now);
 $total_payments = DB::table('payments')->where([
     ['user_id', '=', $user->id],
     ['date', '=', $now],
+    ['status', '=', 'Pendiente'],
 ])->sum('total');
 
 $total_payments_losers = DB::table('payments')->where([
@@ -30,16 +31,16 @@ $total_incomes = DB::table('income_payments')->where([
     ['date', '=', $now],
 ])->sum('ammount');
 
-if($total_incomes > 0 && $total_payments >0) 
-{ 
+if($total_incomes > 0 && $total_payments >0)
+{
     $porcent = $total_incomes / $total_payments;
     $porcent_friendly = number_format($porcent * 100,2);
-} 
-else 
-{ 
-    //Método para controlar el error 
+}
+else
+{
+    //Método para controlar el error
     $porcent_friendly = number_format(0,2);
-}  
+}
 @endphp
 <div class="row">
     <div class="col-md-4">
@@ -49,7 +50,7 @@ else
                 <i class="icon fa fa-money"></i>
                 Monto a Recuperar Vigente
             </h4>
-            ${{ number_format($total_payments,2) }} 
+            ${{ number_format($total_payments,2) }}
         </div>
     </div>
     <div class="col-md-4">
@@ -57,9 +58,9 @@ else
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-money"></i>
-                Monto Vencido 
+                Monto Vencido
             </h4>
-            ${{ number_format($total_payments_losers + $total_payments_partials,2) }} 
+            ${{ number_format($total_payments_losers + $total_payments_partials,2) }}
         </div>
     </div>
     <div class="col-md-4">
@@ -67,9 +68,9 @@ else
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-money"></i>
-                Monto Recuperado 
+                Monto Recuperado
             </h4>
-            ${{ number_format($total_incomes,2) }} 
+            ${{ number_format($total_incomes,2) }}
         </div>
     </div>
     <div class="col-md-4">
@@ -103,10 +104,10 @@ else
         <table class="table" id="pagos_promotor">
             <thead class="bg-default">
                 <th style="width: 15px;">No. Cuota</th>
-                <th>Total</th>      
-                <th>Cliente</th>   
-                <th>Crédito</th>   
-               {{--  <th>Horario de cobro</th>   
+                <th>Total</th>
+                <th>Cliente</th>
+                <th>Crédito</th>
+               {{--  <th>Horario de cobro</th>
                 <th>Estatus</th> --}}
                 <th {{-- width="50px;" --}}>Acción</th>
             </thead>

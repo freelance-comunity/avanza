@@ -18,6 +18,7 @@ Lista de Créditos @endsection
 					<th style="width: 15px;">No. Cuota</th>
 					<th>Región</th>
 					<th>Sucursal</th>
+					<th>Promotor</th>
 					<th>Fecha</th>
 					<th>Folio Crédito</th>
 					<th>Monto</th>
@@ -37,6 +38,7 @@ Lista de Créditos @endsection
 						<td>{{ $pay->number }} de {{ $credit->dues }}</td>
 						<td>{{$debt->region['name']}}</td>
 						<td>{{$debt->branch['name']}}</td>
+						<td>{{$credit->user['name']}} {{$credit->user['father_last_name']}} {{$credit->user['mother_last_name']}}</td>
 						<td>{{ $pay->date }}</td>
 						<td><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->folio}}</a></td>
 						<td>$ {{ number_format($pay->ammount, 2) }}</td>

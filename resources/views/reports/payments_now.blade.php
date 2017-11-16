@@ -18,6 +18,8 @@ Lista de Créditos @endsection
 			<table class="table" id="example">
 				<thead class="bg-success">
           <th>Folio Crédito</th>
+					<th>Región</th>
+					<th>Sucursal</th>
           <th>Importe</th>
           <th>Concepto</th>
           <th>Fecha</th>
@@ -26,8 +28,14 @@ Lista de Créditos @endsection
 				</thead>
 				<tbody>
 					@foreach ($payments as $pay)
+						@php
+						$debt = App\Models\Debt::findOrFail($pay->debt_id);
+						$credit = App\Models\Credit::findOrFail($debt->credit_id);
+					  @endphp
             <tr>
               <td><a href="{!! route('credits.show', [$pay->debt->credit->id]) !!}">{{$pay->debt->credit->folio}}</a></td>
+							<td>{{$debt->region['name']}}</td>
+							<td>{{$debt->branch['name']}}</td>
               <td>${{ number_format($pay->ammount,2) }}</td>
               <td>{{ $pay->concept }}</td>
               <td>{{ $pay->created_at }}</td>

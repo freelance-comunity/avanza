@@ -16,6 +16,8 @@ Lista de Créditos @endsection
 			<table class="table" id="example">
 				<thead class="bg-success">
 					<th style="width: 15px;">No. Cuota</th>
+					<th>Región</th>
+					<th>Sucursal</th>
 					<th>Fecha</th>
 					<th>Folio Crédito</th>
 					<th>Monto</th>
@@ -33,6 +35,8 @@ Lista de Créditos @endsection
 				  @endphp
 					<tr>
 						<td>{{ $pay->number }} de {{ $credit->dues }}</td>
+						<td>{{$debt->region['name']}}</td>
+						<td>{{$debt->branch['name']}}</td>
 						<td>{{ $pay->date }}</td>
 						<td><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->folio}}</a></td>
 						<td>$ {{ number_format($pay->ammount, 2) }}</td>

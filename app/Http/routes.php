@@ -1194,3 +1194,5 @@ Route::get('restructures', function()
   return view('restructures.index')
   ->with('clients', $clients);
 });
+
+

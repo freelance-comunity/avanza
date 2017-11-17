@@ -38,8 +38,6 @@ class Happy extends Command
      */
     public function handle()
     {
-       $user = User::find(2);
-       $user->name = "wili";
-       $user->save();
+      return view('happy');
    }
 }

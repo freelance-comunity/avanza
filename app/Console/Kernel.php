@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // Commands\Inspire::class,
         Commands\LockPayments::class,
-       'AppConsoleCommandHappy'
+        Commands\Happy::class,
     ];
 
     /**

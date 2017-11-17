@@ -16,7 +16,7 @@ $total_payments_losers = DB::table('payments')->where([
     ['user_id', '=', $user->id],
     ['date', '<=', $now],
     ['status', '=', 'Vencido'],
-])->sum('total');
+])->sum('balance');
 
 $total_payments_partials = DB::table('payments')->where([
     ['user_id', '=', $user->id],

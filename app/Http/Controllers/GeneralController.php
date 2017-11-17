@@ -585,7 +585,7 @@ class GeneralController extends Controller
 			$starts_collection = Income::all()->where('region_id',$region);
 
 			$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at');
-		
+
 			return view('movements.movementsEffective')
 			->with('region_allocation', $region_allocation)
 			->with('starts_collection', $starts_collection)
@@ -849,12 +849,14 @@ class GeneralController extends Controller
 			$global_interest = $global_interest + $late_interest;
 			$global_moratorium = $global_moratorium + $late_moratorium;
 		}
-		echo "Total Capital: ".$global_capital;
-		echo "<br>";
-		echo "Total Interes: ".$global_interest;
-		echo "<br>";
-		echo "Total Moratorio: ".$global_moratorium;
-		echo "<br>";
+
+		return view('restructures.process');
+		// echo "Total Capital: ".$global_capital;
+		// echo "<br>";
+		// echo "Total Interes: ".$global_interest;
+		// echo "<br>";
+		// echo "Total Moratorio: ".$global_moratorium;
+		// echo "<br>";
 	}
 
 }

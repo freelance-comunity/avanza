@@ -21,6 +21,7 @@ Detalles
 				$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 				$late_interest = $late_payments->sum('interest');
 				$late_capital = $late_payments->sum('capital');
+        $late_balance = $late_payments->sum('balance');
 				$late_moratorium = $late_payments->sum('moratorium');
 				$late_total = $late_interest + $late_capital + $late_moratorium;
 				$pay =  App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pagado')->count();
@@ -67,10 +68,10 @@ Detalles
 						<p><strong>TOTAL DE ATRASOS ACUMULADOS: </strong>{{$lates->count()}}</p>
 					</div>
 					<div class="col-md-4">
-						<p style="color:red;"><strong>INTERÉS:</strong>$ {{ number_format($late_interest, 2) }}</p>
+						{{-- <p style="color:red;"><strong>INTERÉS:</strong>$ {{ number_format($late_interest, 2) }}</p>
 						<p style="color:red;"><strong>CAPITAL:</strong>$ {{ number_format($late_capital, 2) }}</p>
-						<p style="color:red;"><strong>MORA:</strong>$ {{ number_format($late_moratorium, 2)	 }}</p>
-						<p style="color:red;"><strong>TOTAL:</strong>$ {{ number_format($late_total, 2) }}</p>
+						<p style="color:red;"><strong>MORA:</strong>$ {{ number_format($late_moratorium, 2)	 }}</p> --}}
+						<p style="color:red;"><strong>TOTAL VENCIDO:</strong>$ {{ number_format($late_balance, 2) }}</p>
 						<p>
 							<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#processPayments">PAGAR</button>
 							@include('credits.processPayments')

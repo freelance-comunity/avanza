@@ -82,7 +82,7 @@ cursor: pointer;
 {{-- Credits all --}}
 <div class="container">
 	<div class="row">
-		<h1 class="pull-left">Créditos</h1>
+		<h1 class="pull-left">Selecciona los créditosa a reestructurar</h1>
 	</div>
 	<div class="row">
 		@if($credits->isEmpty())

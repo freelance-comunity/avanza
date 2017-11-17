@@ -49,7 +49,6 @@
         <a href="#"><i class='fa fa-pie-chart'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
          <li><a href="{{ url('walletExpired') }}">Cartera</a></li>
-        {{--  <li><a href="{{ url('reportPayment') }}">Reporte pagos</a></li> --}}
          <li><a href="{{ url('totalVault') }}">Total bovéda</a></li>
          <li><a href="{{ url('currentCredits') }}">Créditos Vigentes</a></li>
        </ul>
@@ -72,6 +71,14 @@
      </li>
      @endif
      <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
+       <li class="treeview">
+        <a href="#"><i class='fa fa-money'></i><span> Créditos</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+         <li><a href="{{ url('credits') }}">Todos</a></li>
+         <li><a href="{{ url('creditsValid') }}">Vigentes</a></li>
+         <li><a href="{{ url('creditsPaidOut') }}">Pagados</a></li>
+       </ul>
+     </li>
      <li><a href="{{ url('credits') }}"><i class="fa fa-money"></i> <span>Créditos</span></a></li>
      <li class="treeview">
         <a href="#"><i class='fa fa-external-link'></i><span> Créditos Reestructurados</span><i class="fa fa-angle-left pull-right"></i></a>

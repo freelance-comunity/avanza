@@ -58,7 +58,7 @@
      {{-- <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li> --}}
      <li class="treeview">
         <a href="#"><i class='fa fa-external-link'></i><span> Movimientos</span> <i class="fa fa-angle-left pull-right"></i></a>
-        <ul class="treeview-menu">   
+        <ul class="treeview-menu">
          <li><a href="{{ url('movementsBalance') }}">Saldo en Caja</a></li>
          <li><a href="{{ url('movementsBeginning') }}">Saldo Inicial</a></li>
          <li><a href="{{ url('movementsEffective') }}">Asignacion en Efectivo</a></li>
@@ -73,6 +73,13 @@
      @endif
      <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
      <li><a href="{{ url('credits') }}"><i class="fa fa-money"></i> <span>Créditos</span></a></li>
+     <li class="treeview">
+        <a href="#"><i class='fa fa-external-link'></i><span> Créditos Reestructurados</span><i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+         <li><a href="{{ url('restructures')}}">Crear</a></li>
+         <li><a href="#">Ver</a></li>
+       </ul>
+     </li>
      @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
       {{-- <li class="treeview">
         <a href="#"><i class='fa fa-book'></i>  <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>

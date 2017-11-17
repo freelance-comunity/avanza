@@ -1174,7 +1174,7 @@ Route::get('boxCutsChange', function(){
   $boxcut = App\Models\BoxCut::all();
 
   foreach ($boxcut as $key => $box) {
-   
+
     $user  = $box->user;
 
     $box->branch_id = $user->branch_id;
@@ -1182,4 +1182,13 @@ Route::get('boxCutsChange', function(){
     $box->save();
 }
 echo "Listo";
+});
+
+// Routes credits restructures
+
+Route::get('restructures', function()
+{
+  $clients = App\Models\Client::all();
+  return view('restructures.index')
+  ->with('clients', $clients);
 });

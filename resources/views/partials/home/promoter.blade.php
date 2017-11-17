@@ -60,7 +60,7 @@ else
                 <i class="icon fa fa-money"></i>
                 Monto Vencido
             </h4>
-            ${{ number_format($total_payments_losers + $total_payments_partials,2) }}
+            ${{ number_format($total_payments_losers,2) }}
         </div>
     </div>
     <div class="col-md-4">

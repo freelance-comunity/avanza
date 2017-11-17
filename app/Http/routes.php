@@ -359,6 +359,8 @@ Route::get('credits/{id}/delete', [
     'uses' => 'CreditController@destroy',
 ]);
 
+Route::resource('creditsValid', 'CreditController@creditsValid');
+Route::resource('creditsPaidOut','CreditController@creditsPaidOut');
 
 Route::get('creditsClient/{id}/{product}', [
     'as' => 'client.creditsClient',

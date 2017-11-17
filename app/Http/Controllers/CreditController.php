@@ -71,6 +71,22 @@ class CreditController extends AppBaseController
 	 *
 	 * @return Response
 	 */
+	public function creditsValid()
+	{	
+
+		$credits = Credit::all();
+		return view('credits.creditsValid')
+		->with('credits',$credits);
+
+	}
+	public function creditsPaidOut()
+	{	
+
+		$credits = Credit::all();
+		return view('credits.creditsPaidOut')
+		->with('credits',$credits);
+
+	}
 	public function create()
 	{
 		
@@ -97,7 +113,7 @@ class CreditController extends AppBaseController
 		$ammount = $request->input('ammount');
 		// $id_user = $request->input('adviser');
 		// $user = User::find($id_user);
-		if ($product == "MIGRADOS") {
+		if ($product->name == "MIGRADOS") {
 			$id_user = $request->input('user_id');
 			$user = User::find($id_user);
 			$vault = $user->vault;
@@ -631,7 +647,7 @@ class CreditController extends AppBaseController
 				$data_expendituresCredits['branch_id'] = $credit->branch_id;
 				$data_expendituresCredits['region_id'] = $credit->region_id;
 				$expendituresCredit = ExpenditureCredit::create($data_expendituresCredits);
-				if ($product == 'MIGRADOS') {
+				if ($product->name == 'MIGRADOS') {
 					$vault->ammount = $vault->ammount + 0;
 					$vault->save();
 				}

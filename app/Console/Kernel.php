@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // Commands\Inspire::class,
         Commands\LockPayments::class,
+       'AppConsoleCommandHappy'
     ];
 
     /**
@@ -28,6 +29,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('lock:payments')
-                ->everyMinute();
+        ->everyMinute();
+
+        $schedule->command('w:hayppy')
+        ->everyMinute();
     }
 }

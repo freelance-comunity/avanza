@@ -2,11 +2,19 @@
 Lista de Créditos @endsection
 <div class="container">
 	@php
-	$now = Carbon\Carbon::now()->toDateString();
-	$payments = DB::table('payments')->where('date', '=', $now)->get(); @endphp
+	if (Entrust::hasRole('coordinador-regional')) {
+		$user_allocation = Auth::user();
+		$now = Carbon\Carbon::now()->toDateString();
+		$region_allocation = $user_allocation->region;
+		$payments = DB::table('payments')->where('date', '=', $now)->where('region_id', $region_allocation->id)->get();
+	}else {
+		$now = Carbon\Carbon::now()->toDateString();
+		$payments = DB::table('payments')->where('date', '=', $now)->get();
+	}
+ @endphp
 	@include('flash::message')
 	<div class="row">
-		<h1 class="pull-left">Reporte de Pagos</h1>
+		<h1 class="pull-left">Reporte de Pagos Restantes del Día</h1>
 	</div>
 	<div class="row">
 		{{-- @if($payment->isEmpty())
@@ -21,6 +29,7 @@ Lista de Créditos @endsection
 					<th>Promotor</th>
 					<th>Fecha</th>
 					<th>Folio Crédito</th>
+					<th>Cliente</th>
 					<th>Monto</th>
 					<th>Capital</th>
 					<th>Interés</th>
@@ -41,6 +50,7 @@ Lista de Créditos @endsection
 						<td>{{$credit->user['name']}} {{$credit->user['father_last_name']}} {{$credit->user['mother_last_name']}}</td>
 						<td>{{ $pay->date }}</td>
 						<td><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->folio}}</a></td>
+						<td>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</td>
 						<td>$ {{ number_format($pay->ammount, 2) }}</td>
 						<td>$ {{ number_format($pay->capital, 2) }}</td>
 						<td>$ {{ number_format($pay->interest, 2) }}</td>

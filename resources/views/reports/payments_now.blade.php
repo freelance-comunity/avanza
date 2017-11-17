@@ -2,9 +2,17 @@
 Lista de Créditos @endsection
 <div class="container">
 	@php
-  $now = Carbon\Carbon::now()->toDateString();
-  $collection_payments = App\Models\IncomePayment::all();
-  $payments = $collection_payments->where('date', $now);
+	if (Entrust::hasRole('coordinador-regional')) {
+		$user_allocation = Auth::user();
+		$now = Carbon\Carbon::now()->toDateString();
+		$region_allocation = $user_allocation->region;
+	  $collection_payments = App\Models\IncomePayment::all();
+	  $payments = $collection_payments->where('date', $now)->where('region_id', $region_allocation->id);
+	}else {
+		$now = Carbon\Carbon::now()->toDateString();
+	  $collection_payments = App\Models\IncomePayment::all();
+	  $payments = $collection_payments->where('date', $now);
+	}
   @endphp
 	@include('flash::message')
 	<div class="row">
@@ -18,6 +26,7 @@ Lista de Créditos @endsection
 			<table class="table" id="example">
 				<thead class="bg-success">
           <th>Folio Crédito</th>
+					<th>Cliente</th>
 					<th>Región</th>
 					<th>Sucursal</th>
 					<th>Promotor</th>
@@ -35,6 +44,7 @@ Lista de Créditos @endsection
 					  @endphp
             <tr>
               <td><a href="{!! route('credits.show', [$pay->debt->credit->id]) !!}">{{$pay->debt->credit->folio}}</a></td>
+							<td>{{$credit->firts_name}} {{$credit->last_name}} {{$credit->mothers_last_name}}</td>
 							<td>{{$debt->region['name']}}</td>
 							<td>{{$debt->branch['name']}}</td>
 							<td>{{$credit->user['name']}} {{$credit->user['father_last_name']}} {{$credit->user['mother_last_name']}}</td>

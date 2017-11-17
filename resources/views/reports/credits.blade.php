@@ -18,37 +18,41 @@ Lista de Créditos @endsection
 					<th class="service">REGISTRO</th>
 					<th class="service">SALDO
 						<br> VIGENTE</th>
-					<th class="service">SALDO
-						<br> VENCIDO</th>
-					<th class="service">SALDO
-						<br> TOTAL</th>
-					<th class="service">NOMBRE</th>
-					<th class="service">APELLIDOS</th>
-					<th class="service">PROMOTOR</th>
-					<th class="service">FRECUENCIA</th>
-					<th class="service">MONTO</th>
-				</thead>
-				<tbody>
-					@foreach ($credits as $credit) @php $debt = $credit->debt; $filtered_payments = $debt->payments; $late_payments
-					= $filtered_payments->where('status','Vencido'); @endphp
-					<tr>
-						<td class="service">{{ $credit->folio }}</td>
-						<td class="service">{{ $credit->branch }}</td>
-						<td class="service">{{ $credit->created_at->toFormattedDateString() }}</td>
-						<td class="service">{{ number_format($debt->ammount - $late_payments->sum('ammount'),2) }}</td>
-						<td class="service">{{ number_format($late_payments->sum('ammount'),2) }}</td>
-						<td class="service">{{ number_format($debt->ammount,2) }}</td>
-						<td class="service">{{ $credit->firts_name }}</td>
-						<td class="service">{{ $credit->last_name }} {{ $credit->mothers_last_name }}</td>
-						<td class="service">{{ $credit->adviser }}</td>
-						<td class="service">{{ $credit->periodicity }}</td>
-						<td class="service">${{ number_format($credit->ammount,2) }}</td>
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
-		</div>
-		@endif
-	</div>
-</div>
-@endsection
+						<th class="service">SALDO
+							<br> VENCIDO</th>
+							<th class="service">SALDO
+								<br> TOTAL</th>
+								<th class="service">NOMBRE</th>
+								<th class="service">APELLIDOS</th>
+								<th class="service">PROMOTOR</th>
+								<th class="service">FRECUENCIA</th>
+								<th class="service">MONTO</th>
+							</thead>
+							<tbody>
+								@foreach ($credits as $credit) @php $debt = $credit->debt; $filtered_payments = $debt->payments; $late_payments
+								= $filtered_payments->where('status','Vencido'); @endphp
+								<tr>
+									<td class="service">{{ $credit->folio }}</td>
+									<td class="service">{{ $credit->branch }}</td>
+									<td class="service">{{ $credit->created_at->toFormattedDateString() }}</td>
+									<td class="service">{{ number_format($debt->ammount - $late_payments->sum('ammount'),2) }}</td>
+									<td class="service">{{ number_format($late_payments->sum('ammount'),2) }}</td>
+									<td class="service">{{ number_format($debt->ammount,2) }}</td>
+									<td class="service">{{ $credit->firts_name }}</td>
+									<td class="service">{{ $credit->last_name }} {{ $credit->mothers_last_name }}</td>
+									<td class="service">{{ $credit->adviser }}</td>
+									@if ($credit->periodicity == "TRADICIONAL" OR $credit->periodicity == "DIARIO4" OR $credit->periodicity == "25" OR  $credit->periodicity == "SEMANAL")
+									<td class="service">MIGRADOS</td>
+									@else
+									<td class="service">{{ $credit->periodicity }}</td>
+									@endif
+									<td class="service">${{ number_format($credit->ammount,2) }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+					@endif
+				</div>
+			</div>
+			@endsection

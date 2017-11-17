@@ -582,9 +582,10 @@ class GeneralController extends Controller
 
 			$empleados = $region_allocation->users;
 			$region = $user_allocation->region->id;
-			$starts_collection = Income::all();
+			$starts_collection = Income::all()->where('region_id',$region);
 
 			$assignments = $starts_collection->where('concept', 'Asignación de efectivo')->sortByDesc('created_at');
+		
 			return view('movements.movementsEffective')
 			->with('region_allocation', $region_allocation)
 			->with('starts_collection', $starts_collection)

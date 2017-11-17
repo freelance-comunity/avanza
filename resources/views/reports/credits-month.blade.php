@@ -41,7 +41,11 @@ Lista de Créditos @endsection
 						<td class="service">{{ $credit->firts_name }}</td>
 						<td class="service">{{ $credit->last_name }} {{ $credit->mothers_last_name }}</td>
 						<td class="service">{{ $credit->adviser }}</td>
+						@if ($credit->periodicity == "TRADICIONAL" OR $credit->periodicity == "DIARIO4" OR $credit->periodicity == "25" OR  $credit->periodicity == "SEMANAL")
+						<td class="service">MIGRADOS</td>
+						@else
 						<td class="service">{{ $credit->periodicity }}</td>
+						@endif
 						<td class="service">${{ number_format($credit->ammount,2) }}</td>
 						<td>{{$credit->debt->status}}</td>
 					</tr>

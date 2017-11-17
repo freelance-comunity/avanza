@@ -27,6 +27,7 @@ Detalles
 								<thead class="bg-success">
 									<th>Sucursal</th>
 									<th>Usuario</th>
+									<th>Tipo de Crédito</th>
 									<th>Monto</th>
 									<th>Concepto</th>
 									<th>Cliente</th>
@@ -49,10 +50,15 @@ Detalles
 									<tr>
 										<td>{{ $credit->vault->user->branch['name'] }}</td>
 										<td>{{ $credit->vault->user['name'] }} {{ $credit->vault->user['father_last_name'] }} {{ $credit->vault->user['mother_last_name'] }}</td>
+										@if ($credit->credit['periodicity'] == "TRADICIONAL" OR  $credit->credit['periodicity'] == "DIARIO4" OR $credit->credit['periodicity'] == "DIARIO25" OR $credit->credit['periodicity'] == "SEMANAL")
+											<td>MIGRADOS</td>
+										@else
+										<td>{{ $credit->credit['periodicity'] }}</td>
+										@endif
 										<td>${{ number_format($credit->ammount) }}</td>
 										<td>{{ $credit->concept }}</td>
 										<td>{{ $credit->credit['firts_name'] }} {{ $credit->credit['last_name'] }} {{ $credit->credit['mothers_last_name'] }}</td>
-										<td>{{ $credit->credit['folio'] }}</td>
+										<td><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->credit['folio'] }}</a></td>
 										<td>{{ $credit->created_at }}</td>
 									</tr>
 									{{-- @endif --}}

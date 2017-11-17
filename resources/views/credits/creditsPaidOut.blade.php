@@ -42,6 +42,7 @@ Lista de créditos
 						$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 						$late_balance = $late_payments->sum('balance');
 						@endphp
+						@if ($credit->debt->status == 'Pagado')
 						<tr>
 							<td>#{{ ++$key }}</td>
 							<td>{!! $credit->folio !!}</td>
@@ -62,6 +63,7 @@ Lista de créditos
 								<a href="{!! route('credits.show', [$credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>
 							</td>
 						</tr>
+						@endif
 						@endforeach
 					</tbody>
 				</table>

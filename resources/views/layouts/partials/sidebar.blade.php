@@ -73,6 +73,7 @@
      @endif
      <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
      <li><a href="{{ url('credits') }}"><i class="fa fa-money"></i> <span>Créditos</span></a></li>
+     @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
      <li class="treeview">
         <a href="#"><i class='fa fa-external-link'></i><span> Créditos Reestructurados</span><i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
@@ -80,24 +81,8 @@
          <li><a href="#">Ver</a></li>
        </ul>
      </li>
+     @endif
      @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
-      {{-- <li class="treeview">
-        <a href="#"><i class='fa fa-book'></i>  <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>
-        <ul class="treeview-menu">
-          <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-          <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-        </ul>
-      </li> --}}
-      <!--<li><a href="#"><i class="fa fa-th"></i> <span>Corte de Caja</span></a></li>
-      <li><a href="#"><i class="fa fa-calendar"></i> <span>Cobranza del día</span></a></li>
-      <li><a href="#"><i class="fa fa-dollar"></i> <span>Gastos</span></a></li>-->
-      {{-- <li class="treeview">
-        <a href="#"><i class='fa fa-line-chart'></i>  <span>Inversiones</span> <i class="fa fa-angle-left pull-right"></i></a>
-        <ul class="treeview-menu">
-          <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-          <li><a href="#">Retiros</a></li>
-        </ul>
-      </li> --}}
       <li class="treeview">
         <a href="#"><i class='fa fa-cogs'></i>  <span>Configuración</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">

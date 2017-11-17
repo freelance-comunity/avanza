@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -26,6 +25,7 @@ use App\Models\IncomePayment;
 use App\Models\BoxCut;
 use App\Models\Roster;
 use App\Models\Active;
+use DB;
 
 class GeneralController extends Controller
 {
@@ -548,7 +548,7 @@ class GeneralController extends Controller
 			->with('starts_collection', $starts_collection)
 			->with('starts', $starts)
 			->with('empleados', $empleados);
-		}	
+		}
 
 	}
 	public function movementsEffective()
@@ -590,7 +590,7 @@ class GeneralController extends Controller
 			->with('starts_collection', $starts_collection)
 			->with('assignments', $assignments)
 			->with('empleados', $empleados);
-		}	
+		}
 
 
 
@@ -598,7 +598,7 @@ class GeneralController extends Controller
 
 	}
 	public function movementsRecovery()
-	{	
+	{
 		if (Auth::user()->hasRole(['administrador', 'director-general'])) {
 			$current = Carbon::today()->toDateString();
 			$user_allocation = Auth::user();
@@ -630,7 +630,7 @@ class GeneralController extends Controller
 			return view('movements.movementsRecovery')
 			->with('recoverys', $recoverys);
 
-		}	
+		}
 	}
 	public function movementsRecoveryAccess()
 	{
@@ -662,8 +662,8 @@ class GeneralController extends Controller
 			$accesses  = PurseAccess::all()->where('region_id',$region)->sortByDesc('created_at');
 			return view('movements.movementsRecoveryAccess')
 			->with('accesses', $accesses);
-			
-			
+
+
 		}
 	}
 	public function movementsPlacement()
@@ -726,8 +726,8 @@ class GeneralController extends Controller
 			return view('movements.movementsExpenses')
 			->with('expenses', $expenses);
 
-		}	
-		
+		}
+
 	}
 	public function movementsSalaries()
 	{
@@ -816,4 +816,44 @@ class GeneralController extends Controller
 		return view('reports.currentCredits')
 		->with('credits', $credits);
 	}
+
+	public function consolidate(Request $request)
+	{
+		//echo "Hello World!";
+		$input = $request->all();
+		$global_capital = 0;
+		$global_interest = 0;
+		$global_moratorium = 0;
+
+		foreach ($input['rows'] as $row) {
+			$id_credit = $row['id'];
+			$credit = Credit::find($id_credit);
+
+			$debt = $credit->debt;
+			$late_capital = DB::table('payments')->where([
+			['debt_id', '=', $debt->id],
+			['status', '!=', 'Pagado'],
+			])->sum('capital');
+			$late_interest = DB::table('payments')->where([
+			['debt_id', '=', $debt->id],
+			['status', '!=', 'Pagado'],
+			])->sum('interest');
+			$late_moratorium = DB::table('payments')->where([
+			['debt_id', '=', $debt->id],
+			['status', '!=', 'Pagado'],
+			])->sum('moratorium');
+			$late_total = $late_interest + $late_capital + $late_moratorium;
+
+			$global_capital = $global_capital + $late_capital;
+			$global_interest = $global_interest + $late_interest;
+			$global_moratorium = $global_moratorium + $late_moratorium;
+		}
+		echo "Total Capital: ".$global_capital;
+		echo "<br>";
+		echo "Total Interes: ".$global_interest;
+		echo "<br>";
+		echo "Total Moratorio: ".$global_moratorium;
+		echo "<br>";
+	}
+
 }

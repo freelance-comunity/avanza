@@ -1192,3 +1192,16 @@ Route::get('restructures', function()
   return view('restructures.index')
   ->with('clients', $clients);
 });
+
+Route::get('view-restructures/{id}', function($id)
+{
+  $client = App\Models\Client::find($id);
+  $collection_credits = $client->credits;
+  $credits = $collection_credits->where('status', 'MINISTRADO');
+  // echo $client->folio;
+  // dd($credits);
+  return view('restructures.index-credits')
+  ->with('credits', $credits);
+});
+
+Route::Post('consolidate', 'GeneralController@consolidate');

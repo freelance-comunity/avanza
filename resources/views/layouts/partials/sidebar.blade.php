@@ -79,7 +79,6 @@
          <li><a href="{{ url('creditsPaidOut') }}">Pagados</a></li>
        </ul>
      </li>
-     <li><a href="{{ url('credits') }}"><i class="fa fa-money"></i> <span>Créditos</span></a></li>
      <li class="treeview">
         <a href="#"><i class='fa fa-external-link'></i><span> Créditos Reestructurados</span><i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">

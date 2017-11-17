@@ -964,7 +964,7 @@ Route::get('applyMoratorium',function(){
         $payments = $debt->payments;
 
         foreach ($payments as $key => $payment) {
-            if ($payment->date <= $date_now && $payment->status == 'Pendiente' && $hour_now >= '11:00:00') {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
                 $payment = App\Models\Payment::find($payment->id);
                 $payment->status = 'Vencido';
                 $payment->moratorium = 20;
@@ -976,7 +976,7 @@ Route::get('applyMoratorium',function(){
                 $debt->ammount = $debt->ammount + 20;
                 $debt->save();
             }
-            if ($payment->date <= $date_now && $payment->status == 'Parcial' && $hour_now >= '11:00:00') {
+            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
                 $payment = App\Models\Payment::find($payment->id);
                 $payment->status = 'Vencido';
                 $payment->moratorium = 20;
@@ -988,7 +988,7 @@ Route::get('applyMoratorium',function(){
                 $debt->ammount = $debt->ammount + 20;
                 $debt->save();
             }
-            if ($payment->status == 'Vencido') {
+            if ($payment->status == 'Vencido' && $payment->date == $date_now) {
                 $latePayments = new App\Models\LatePayments;
                 $latePayments->late_number = $payment->number;
                 $latePayments->late_ammount = $payment->total;

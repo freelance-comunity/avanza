@@ -72,17 +72,16 @@ class CreditController extends AppBaseController
 	 * @return Response
 	 */
 	public function creditsValid()
-	{	
-
-		$credits = Credit::all();
+	{
+		$user_allocation = Auth::user();
+		$credits = $user_allocation->credits;
 		return view('credits.creditsValid')
 		->with('credits',$credits);
-
 	}
 	public function creditsPaidOut()
 	{	
-
-		$credits = Credit::all();
+		$user_allocation = Auth::user();
+		$credits = $user_allocation->credits;
 		return view('credits.creditsPaidOut')
 		->with('credits',$credits);
 

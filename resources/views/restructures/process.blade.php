@@ -1,3 +1,12 @@
+@extends('layouts.app')
+
+@section('main-content')
+@section('message_level')
+Reestructura de créditos
+@endsection
+@section('message_level_here')
+Crear
+@endsection
 <div class="box box-danger">
 	<div class="box-header with-border">
 		<h3 class="box-title">Proceso de reestructura de créditos</h3>
@@ -22,3 +31,4 @@
 		</div>
 	</div>
 </div>
+@endsection

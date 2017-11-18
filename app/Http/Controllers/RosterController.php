@@ -24,26 +24,54 @@ class RosterController extends AppBaseController
 	 * @return Response
 	 */
 	public function index(Request $request)
-	{
-		$query = Roster::query();
-		$columns = Schema::getColumnListing('$TABLE_NAME$');
-		$attributes = array();
-
-		foreach($columns as $attribute){
-			if($request[$attribute] == true)
-			{
-				$query->where($attribute, $request[$attribute]);
-				$attributes[$attribute] =  $request[$attribute];
-			}else{
-				$attributes[$attribute] =  null;
-			}
-		};
-
-		$rosters = $query->get();
-
+	{	
+		if (Auth::user()->hasRole('director-general')) {
+			$rosters = Roster::all();
+		}
+		elseif (Auth::user()->hasRole('administrador')) {
+			$rosters = Roster::all();
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$rosters = $region_allocation->rosters;		
+		}
+		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
+			$user_allocation = Auth::user();
+			$branch_allocation = $user_allocation->branch;
+			$rosters = $branch_allocation->rosters;
+		}
+		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
+			$user_allocation = Auth::user();
+			$rosters = $user_allocation->rosters;
+		}
+		else
+		{
+			$rosters = Roster::all();
+		}
 		return view('rosters.index')
-		->with('rosters', $rosters)
-		->with('attributes', $attributes);
+		->with('rosters', $rosters);
+
+
+		// $query = Roster::query();
+		// $columns = Schema::getColumnListing('$TABLE_NAME$');
+		// $attributes = array();
+
+		// foreach($columns as $attribute){
+		// 	if($request[$attribute] == true)
+		// 	{
+		// 		$query->where($attribute, $request[$attribute]);
+		// 		$attributes[$attribute] =  $request[$attribute];
+		// 	}else{
+		// 		$attributes[$attribute] =  null;
+		// 	}
+		// };
+
+		// $rosters = $query->get();
+
+		// return view('rosters.index')
+		// ->with('rosters', $rosters)
+		// ->with('attributes', $attributes);
 	}
 
 	/**

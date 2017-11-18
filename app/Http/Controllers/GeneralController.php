@@ -851,12 +851,6 @@ class GeneralController extends Controller
 		}
 
 		return view('restructures.process');
-		// echo "Total Capital: ".$global_capital;
-		// echo "<br>";
-		// echo "Total Interes: ".$global_interest;
-		// echo "<br>";
-		// echo "Total Moratorio: ".$global_moratorium;
-		// echo "<br>";
 	}
 
 }

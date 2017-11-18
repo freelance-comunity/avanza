@@ -21,7 +21,7 @@ use Carbon\Carbon;
 
 class PaymentController extends AppBaseController
 {
-	
+
 	/**
 	 * Display a listing of the Post.
 	 *
@@ -35,7 +35,7 @@ class PaymentController extends AppBaseController
 		$this->middleware('auth');
 		$this->middleware('login_mid');
 	}
-	
+
 	public function index(Request $request)
 	{
 		$query = Payment::query();
@@ -179,7 +179,7 @@ class PaymentController extends AppBaseController
 	}
 
 	public function process(Request $request)
-	{	
+	{
 		// Valitador
 		$validator = Validator::make($request->all(), [
 			'payment' => 'required|numeric',
@@ -190,10 +190,10 @@ class PaymentController extends AppBaseController
 			Toastr::error('Por favor introduce una cantidad correcta.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();
 		}
-		//End 
+		//End
 
 		//Get data payment, debt and ammount input
-		$ammount = $request->input('payment'); 
+		$ammount = $request->input('payment');
 		$payment = Payment::find($request->input('payment_id'));
 		if ($request->input('payment')) {
 			# code...
@@ -203,10 +203,10 @@ class PaymentController extends AppBaseController
 		$debt = $payment->debt;
 		//End
 
-		// Check debt 
+		// Check debt
 		if ($request->input('payment') > $debt->ammount) {
 			Toastr::error('Estas introduciendo una cantitad mayor a tu adeudo, la cuota solicitada es de $'.$debt->ammount.' pesos', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			return redirect()->back();	
+			return redirect()->back();
 		}
 		// else
 		else
@@ -220,7 +220,7 @@ class PaymentController extends AppBaseController
 				// Process debt
 				$debt->ammount = $debt->ammount - $ammount;
 				$debt->save();
-				// show message 
+				// show message
 				Toastr::success('Pago procesado exitosamente.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				$current = Carbon::today();
 				$user = Auth::user();
@@ -242,11 +242,11 @@ class PaymentController extends AppBaseController
 					$debt->status = "Pagado";
 					$debt->credit->status = "Pagado";
 					$debt->credit->save();
-					$debt->save();	
+					$debt->save();
 
 				}
 
-				return redirect()->back();	
+				return redirect()->back();
 			}
 
 			elseif ($ammount < $ammount_payment) {
@@ -258,7 +258,7 @@ class PaymentController extends AppBaseController
 				// Process debt
 				$debt->ammount = $debt->ammount - $ammount;
 				$debt->save();
-				// show message 
+				// show message
 				Toastr::warning('Pago incompleto realizado.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 				$current = Carbon::today();
 				$user = Auth::user();
@@ -280,17 +280,17 @@ class PaymentController extends AppBaseController
 					$debt->status = "Pagado";
 					$debt->credit->status = "Pagado";
 					$debt->credit->save();
-					$debt->save();	
+					$debt->save();
 
 				}else if ($debt->credit->periodicity == 'CREDISEMANA') {
 					$debt->status = "Renovación";
 					$debt->credit->status = "Pagado";
 					$debt->credit->save();
-					$debt->save();	
+					$debt->save();
 
 				}
 
-				return redirect()->back();	
+				return redirect()->back();
 			}
 
 			elseif ($ammount > $ammount_payment) {
@@ -309,7 +309,7 @@ class PaymentController extends AppBaseController
 				// Process news payments
 				$budget  = intdiv($extra, $ammount_payment_total);
 				$r       = fmod($extra, $ammount_payment_total);
-				// 
+				//
 				// get id payment online and next request
 				$id_online = $payment->id;
 				$id_next   = $id_online + 1;
@@ -335,7 +335,7 @@ class PaymentController extends AppBaseController
 				}
 				if ($r > 0) {
 					$payment_extra = Payment::find($id_next);
-					// 
+					//
 					$payment_extra->payment = $payment_extra->payment + $r;
 					$payment_extra->balance = $payment_extra->balance - $r;
 					$payment_extra->status  = 'Parcial';
@@ -358,7 +358,7 @@ class PaymentController extends AppBaseController
 				$data_incomePayment['debt_id'] = $debt->id;
 				$data_incomePayment['vault_id'] = $vault->id;
 				$data_incomePayment['branch_id'] = $debt->branch_id;
-				$data_incomePayment['region_id'] = $debt->region_id; 	
+				$data_incomePayment['region_id'] = $debt->region_id;
 				$incomePayment = IncomePayment::create($data_incomePayment);
 
 				$vault->ammount = $vault->ammount + $incomePayment->ammount;
@@ -367,7 +367,7 @@ class PaymentController extends AppBaseController
 					$debt->status = "Pagado";
 					$debt->credit->status = "Pagado";
 					$debt->credit->save();
-					$debt->save();	
+					$debt->save();
 
 				}
 
@@ -376,10 +376,10 @@ class PaymentController extends AppBaseController
 
 		//end else
 		}
-		
+
 
 	}
-	
+
 	public function unlocked($id)
 	{
 		$locked = LatePayments::where('debt_id',$id)->where('status','bloqueado')->get();
@@ -388,17 +388,17 @@ class PaymentController extends AppBaseController
 			$value->status = "Acreditado";
 			$value->save();
 		}
-		return redirect()->back();	
+		return redirect()->back();
 	}
 	public function cancel($id)
-	{	
+	{
 		$payment = Payment::find($id);
 
 		if(empty($payment))
 		{
 			Flash::error('Payment not found');
 			return redirect(route('payments.index'));
-		}	
+		}
 
 		$payment->moratorium = 0;
 		$payment->payment = 0;
@@ -412,26 +412,26 @@ class PaymentController extends AppBaseController
 		$vault->ammount = $vault->ammount - 50;
 		$vault->save();
 
-		
-		return redirect()->back();	
+
+		return redirect()->back();
 	}
 
 	public function mora($id)
-	{	
+	{
 		$payment = Payment::find($id);
 
 		if(empty($payment))
 		{
 			Flash::error('Payment not found');
 			return redirect(route('payments.index'));
-		}	
+		}
 
 		$payment->moratorium = 0;
 		$payment->balance = $payment->balance - 20;
 		$payment->total = $payment->ammount;
 		$payment->save();
 
-		return redirect()->back();	
+		return redirect()->back();
 	}
 
 	public function processPayments(Request $request)
@@ -445,7 +445,7 @@ class PaymentController extends AppBaseController
 			Toastr::error('Por favor introduce una cantidad correcta.', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();
 		}
-		//End 
+		//End
 		$amountAvailable = $request->input('payment');
 		$discount = $request->input('payment');
 		$credit = Credit::find($request->input('credit'));
@@ -458,7 +458,7 @@ class PaymentController extends AppBaseController
 
 		if ($amountAvailable > $debt->ammount) {
 			Toastr::error('Estas introduciendo una cantitad mayor a tu adeudo, la cuota solicitada es de $'.number_format($debt->ammount,2).' pesos', 'PAGOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-			return redirect()->back();    
+			return redirect()->back();
 		}
 
 		foreach ($payments as $payment) {
@@ -466,6 +466,9 @@ class PaymentController extends AppBaseController
 			if ($payment->status == 'Pendiente') {
 				if ($amountAvailable >= $payment->balance) {
 					$payment->status  = 'Pagado';
+					$payment->capital = 0;
+					$payment->interest = 0;
+					$payment->moratorium = 0;
 					$payment->payment = $payment->total;
 					$payment->balance = $payment->balance - $payment->total;
 					$payment->save();
@@ -477,7 +480,7 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
 					$data_incomePayment['branch_id'] = $debt->branch_id;
-					$data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['region_id'] = $debt->region_id;
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
@@ -488,6 +491,27 @@ class PaymentController extends AppBaseController
 				elseif ($amountAvailable < $payment->balance) {
 					$payment->status  = 'Parcial';
 					$payment->payment = $amountAvailable;
+					$cuota = $amountAvailable;
+					if ($cuota > 0) {
+						if ($cuota >= $payment->interest ) {
+								$cuota = $cuota - $payment->interest;
+								$payment->interest = 0;
+						}
+						else {
+								$payment->interest = $payment->interest - $cuota;
+								$cuota = 0;
+						}
+					}
+					if ($cuota > 0) {
+						if ($cuota >= $payment->capital ) {
+								$cuota = $cuota - $payment->capital;
+								$payment->capital = 0;
+						}
+						else {
+								$payment->capital = $payment->capital - $cuota;
+								$cuota = 0;
+						}
+					}
 					$payment->balance = $payment->balance - $payment->payment;
 					$payment->save();
 
@@ -498,14 +522,14 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
 					$data_incomePayment['branch_id'] = $debt->branch_id;
-					$data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['region_id'] = $debt->region_id;
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
 					$vault->save();
 
 					$amountAvailable = $amountAvailable - $payment->payment;
-				}		
+				}
 			}
 			// Fin pendiente
 			// Parcial
@@ -513,6 +537,9 @@ class PaymentController extends AppBaseController
 				if ($amountAvailable >= $payment->balance) {
 					$rest = $payment->balance;
 					$payment->status  = 'Pagado';
+					$payment->capital = 0;
+					$payment->interest = 0;
+					$payment->moratorium = 0;
 					$payment->payment = $payment->total;
 					$payment->balance = 0;
 					$payment->save();
@@ -524,7 +551,7 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
 					$data_incomePayment['branch_id'] = $debt->branch_id;
-					$data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['region_id'] = $debt->region_id;
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
@@ -536,6 +563,31 @@ class PaymentController extends AppBaseController
 					$payment->status  = 'Parcial';
 					$payment->payment = $payment->payment + $amountAvailable;
 					$payment->balance = $payment->balance - $amountAvailable;
+					$cuota = $amountAvailable;
+					if ($cuota > 0) {
+					  if ($payment->interest > 0) {
+							if ($cuota >= $payment->interest ) {
+						      $cuota = $cuota - $payment->interest;
+						      $payment->interest = 0;
+						  }
+						  else {
+						      $payment->interest = $payment->interest - $cuota;
+						      $cuota = 0;
+						  }
+					  }
+					}
+					if ($cuota > 0) {
+					  if ($payment->capital > 0) {
+							if ($cuota >= $payment->capital ) {
+						      $cuota = $cuota - $payment->capital;
+						      $payment->capital = 0;
+						  }
+						  else {
+						      $payment->capital = $payment->capital - $cuota;
+						      $cuota = 0;
+						  }
+					  }
+					}
 					$payment->save();
 
 					$data_incomePayment['ammount'] = $amountAvailable;
@@ -545,14 +597,14 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
 					$data_incomePayment['branch_id'] = $debt->branch_id;
-					$data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['region_id'] = $debt->region_id;
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
 					$vault->save();
 
 					$amountAvailable = $amountAvailable - $discount;
-				}	
+				}
 			}
 			// Fin parcial
 			// Vencido
@@ -560,6 +612,9 @@ class PaymentController extends AppBaseController
 				if ($amountAvailable >= $payment->balance) {
 					$rest = $payment->balance;
 					$payment->status  = 'Pagado';
+					$payment->capital = 0;
+					$payment->interest = 0;
+					$payment->moratorium = 0;
 					$payment->payment = $payment->total;
 					$payment->balance = 0;
 					$payment->save();
@@ -571,7 +626,7 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
 					$data_incomePayment['branch_id'] = $debt->branch_id;
-					$data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['region_id'] = $debt->region_id;
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
@@ -582,6 +637,43 @@ class PaymentController extends AppBaseController
 				elseif ($amountAvailable < $payment->balance) {
 					$payment->status  = 'Vencido';
 					$payment->payment = $payment->payment + $amountAvailable;
+					$cuota = $amountAvailable;
+					if ($cuota > 0) {
+					  if ($payment->moratorium > 0) {
+							if ($cuota >= $payment->moratorium ) {
+						      $cuota = $cuota - $payment->moratorium;
+						      $payment->moratorium = 0;
+						  }
+						  else {
+						      $payment->moratorium = $payment->moratorium - $cuota;
+						      $cuota = 0;
+						  }
+					  }
+					}
+					if ($cuota > 0) {
+					  if ($payment->interest > 0) {
+							if ($cuota >= $payment->interest ) {
+						      $cuota = $cuota - $payment->interest;
+						      $payment->interest = 0;
+						  }
+						  else {
+						      $payment->interest = $payment->interest - $cuota;
+						      $cuota = 0;
+						  }
+					  }
+					}
+					if ($cuota > 0) {
+					  if ($payment->capital > 0) {
+							if ($cuota >= $payment->capital ) {
+						      $cuota = $cuota - $payment->capital;
+						      $payment->capital = 0;
+						  }
+						  else {
+						      $payment->capital = $payment->capital - $cuota;
+						      $cuota = 0;
+						  }
+					  }
+					}
 					$payment->balance = $payment->balance - $amountAvailable;
 					$payment->save();
 
@@ -592,14 +684,14 @@ class PaymentController extends AppBaseController
 					$data_incomePayment['debt_id'] = $debt->id;
 					$data_incomePayment['vault_id'] = $vault->id;
 					$data_incomePayment['branch_id'] = $debt->branch_id;
-					$data_incomePayment['region_id'] = $debt->region_id; 	
+					$data_incomePayment['region_id'] = $debt->region_id;
 					$incomePayment = IncomePayment::create($data_incomePayment);
 
 					$vault->ammount = $vault->ammount + $incomePayment->ammount;
 					$vault->save();
 
 					$amountAvailable = $amountAvailable - $discount;
-				}	
+				}
 			}
 			// Fin vencido
 			if ($amountAvailable <= 0) {
@@ -610,7 +702,7 @@ class PaymentController extends AppBaseController
 					$debt->status = "Pagado";
 					$debt->credit->status = "Pagado";
 					$debt->credit->save();
-					$debt->save();    
+					$debt->save();
 
 				}
 
@@ -623,5 +715,5 @@ class PaymentController extends AppBaseController
 		return redirect()->back();
 
 	}
-	
+
 }

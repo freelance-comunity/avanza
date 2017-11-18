@@ -988,7 +988,7 @@ Route::get('applyMoratorium',function(){
                 $debt->ammount = $debt->ammount + 20;
                 $debt->save();
             }
-            if ($payment->status == 'Vencido' && $payment->date == $date_now) {
+            if ($payment->status == 'Vencido') {
                 $latePayments = new App\Models\LatePayments;
                 $latePayments->late_number = $payment->number;
                 $latePayments->late_ammount = $payment->total;

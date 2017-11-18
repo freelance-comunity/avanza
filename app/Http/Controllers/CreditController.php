@@ -72,16 +72,59 @@ class CreditController extends AppBaseController
 	 * @return Response
 	 */
 	public function creditsValid()
-	{
-		$user_allocation = Auth::user();
-		$credits = $user_allocation->credits;
+	{if (Auth::user()->hasRole('director-general')) {
+			$credits = Credit::all();
+		}
+		elseif (Auth::user()->hasRole('administrador')) {
+			$credits = Credit::all();
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$credits = $region_allocation->credits;		
+		}
+		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
+			$user_allocation = Auth::user();
+			$branch_allocation = $user_allocation->branch;
+			$credits = $branch_allocation->credits;
+		}
+		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
+			$user_allocation = Auth::user();
+			$credits = $user_allocation->credits;
+		}
+		else
+		{
+			$credits = Credit::all();
+		}
 		return view('credits.creditsValid')
 		->with('credits',$credits);
 	}
 	public function creditsPaidOut()
 	{	
-		$user_allocation = Auth::user();
-		$credits = $user_allocation->credits;
+		if (Auth::user()->hasRole('director-general')) {
+			$credits = Credit::all();
+		}
+		elseif (Auth::user()->hasRole('administrador')) {
+			$credits = Credit::all();
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$credits = $region_allocation->credits;		
+		}
+		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
+			$user_allocation = Auth::user();
+			$branch_allocation = $user_allocation->branch;
+			$credits = $branch_allocation->credits;
+		}
+		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
+			$user_allocation = Auth::user();
+			$credits = $user_allocation->credits;
+		}
+		else
+		{
+			$credits = Credit::all();
+		}
 		return view('credits.creditsPaidOut')
 		->with('credits',$credits);
 

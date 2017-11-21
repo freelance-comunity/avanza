@@ -802,25 +802,34 @@ class GeneralController extends Controller
 	public function reportPayment()
 	{
 		$recoverys = IncomePayment::all()->sortByDesc('created_at');
-			return view('partials.reportPayment')
-			->with('recoverys', $recoverys);
-		// if (Auth::user()->hasRole(['administrador', 'director-general'])) {
-		// 	$recoverys = IncomePayment::all()->sortByDesc('created_at');
-		// 	return view('partials.reportPayment')
-		// 	->with('recoverys', $recoverys);
-		// }
-
-		// elseif (Auth::user()->hasRole('coordinador-regional')) {
-		// 	$user_allocation = Auth::user();	
-		// 	$region = $user_allocation->region->id;
-
-		// 	$recoverys = IncomePayment::all()->where('region_id',$region)->sortByDesc('created_at');
-		// 	return view('partials.reportPayment')
-		// 	->with('recoverys', $recoverys);
-		// }
-
-		
+		return view('partials.reportPayment')
+		->with('recoverys', $recoverys);
 	}
+	public function reportPaymentCentro()
+	{
+		$recoverys = IncomePayment::all()->where('region_id',2)->sortByDesc('created_at');
+		return view('partials.reportPaymentCentro')
+		->with('recoverys', $recoverys);
+	}
+	public function reportPaymentAltos()
+	{
+		$recoverys = IncomePayment::all()->where('region_id',3)->sortByDesc('created_at');
+		return view('partials.reportPaymentAltos')
+		->with('recoverys', $recoverys);
+	}
+	public function reportPaymentMezcalapa()
+	{
+		$recoverys = IncomePayment::all()->where('region_id',4)->sortByDesc('created_at');
+		return view('partials.reportPaymentMezcalapa')
+		->with('recoverys', $recoverys);
+	}
+	public function reportPaymentNorte()
+	{
+		$recoverys = IncomePayment::all()->where('region_id',1)->sortByDesc('created_at');
+		return view('partials.reportPaymentNorte')
+		->with('recoverys', $recoverys);
+	}
+
 	public function totalVault()
 	{
 		$vault = Vault::all();

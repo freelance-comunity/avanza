@@ -1228,3 +1228,8 @@ $payment->save();
 echo "CORRECCION DE PAGOS VENCIDOS LISTO";
 
 });
+
+Route::get('reportPaymentCentro', 'GeneralController@reportPaymentCentro');
+Route::get('reportPaymentAltos', 'GeneralController@reportPaymentAltos');
+Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa');
+Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');

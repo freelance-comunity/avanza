@@ -943,8 +943,8 @@ Route::get('applyMoratorium',function(){
                 $debt->save();
             }             
             $latePayments = $payment->latePayments;
-           
-              if ($payment->status == "Vencido") {
+
+            if ($payment->status == "Vencido") {
                 if ($latePayments->count() == 0) {
                     $latePayments = new App\Models\LatePayments;
                     $latePayments->late_number = $payment->number;
@@ -960,20 +960,20 @@ Route::get('applyMoratorium',function(){
 
             }
 
+        }
     }
-}
-echo "MORATORIO APLICADO CORRECTAMENTE";
+    echo "MORATORIO APLICADO CORRECTAMENTE";
 });
 
 Route::get('productos', function () {
 
-   $credit = App\Models\Credit::all();
-   foreach ($credit as $key => $credit) {
+ $credit = App\Models\Credit::all();
+ foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
-       echo $credit->periodicity;
-       echo $credit->adviser;
-       echo "<br>";
-   }
+     echo $credit->periodicity;
+     echo $credit->adviser;
+     echo "<br>";
+ }
 
 }
 });
@@ -1168,5 +1168,63 @@ Route::get('view-restructures/{id}', function($id)
 
 Route::Post('consolidate', 'GeneralController@consolidate');
 
+Route::get('paymentsCorrection', function(){
+    $payments = App\Models\Payment::all()->where('status','Pagado');
+    foreach ($payments as $key => $payment) {
+     $payment->capital = 0;
+     $payment->interest = 0;
+     $payment->moratorium = 0;
+     $payment->save();
+ }
+ echo "Pagos Pagados corregidos";
+});
+
+Route::get('paymentsCorrectionVencido', function(){
+    $payments = App\Models\Payment::all()->where('status','Vencido');
+    foreach ($payments as $key => $payment) {
+        $cuota = $payment->payment;
+        if ($cuota > 0) {
+          if ($payment->moratorium > 0) {
+            if ($cuota >= $payment->moratorium ) {
+              $cuota = $cuota - $payment->moratorium;
+              $payment->moratorium = 0;
+          }
+          else {
+              $payment->moratorium = $payment->moratorium - $cuota;
+              $cuota = 0;
+          }
+      }
+  }
+  if ($cuota > 0) {
+      if ($payment->interest > 0) {
+        if ($cuota >= $payment->interest ) {
+          $cuota = $cuota - $payment->interest;
+          $payment->interest = 0;
+      }
+      else {
+          $payment->interest = $payment->interest - $cuota;
+          $cuota = 0;
+      }
+  }
+}
+if ($cuota > 0) {
+  if ($payment->capital > 0) {
+    if ($cuota >= $payment->capital ) {
+      $cuota = $cuota - $payment->capital;
+      $payment->capital = 0;
+  }
+  else {
+      $payment->capital = $payment->capital - $cuota;
+      $cuota = 0;
+  }
+}
+}
+
+$payment->save();
 
 
+
+}
+echo "CORRECCION DE PAGOS VENCIDOS LISTO";
+
+});

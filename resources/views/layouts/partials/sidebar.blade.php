@@ -29,6 +29,7 @@
       @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
       <li><a href="{{ url('vault') }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
       <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Corte de Caja</span></a></li>
+      {{-- <li><a href="{{ url('reportPayment') }}"><i class="fa fa-scissors"></i> <span>Historial de pagos</span></a></li> --}}
       <li class="treeview">
         <a href="#"><i class='fa fa-cubes'></i><span> Administración</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
@@ -42,15 +43,16 @@
           <li><a href="{{ url('actives-admin') }}">Inversiones en Activos</a></li>
         </ul>
       </li>
-      <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li>
+      {{-- <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li> --}}
       @if(Auth::user()->hasRole(['administrador', 'director-general']))
-      <li><a href="{{ url('graphics2') }}"><i class='fa fa-line-chart'></i> <span>Graficas 2</span></a></li>
+      {{--   <li><a href="{{ url('graphics2') }}"><i class='fa fa-line-chart'></i> <span>Graficas 2</span></a></li> --}}
       <li class="treeview">
         <a href="#"><i class='fa fa-pie-chart'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
          <li><a href="{{ url('walletExpired') }}">Cartera</a></li>
          <li><a href="{{ url('totalVault') }}">Total bovéda</a></li>
          <li><a href="{{ url('currentCredits') }}">Créditos Vigentes</a></li>
+        {{--  <li><a href="{{ url('reportPayment') }}">Historial de Pagos</a></li> --}}
        </ul>
      </li>
      @endif

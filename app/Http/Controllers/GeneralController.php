@@ -802,8 +802,24 @@ class GeneralController extends Controller
 	public function reportPayment()
 	{
 		$recoverys = IncomePayment::all()->sortByDesc('created_at');
-		return view('partials.reportPayment')
-		->with('recoverys', $recoverys);
+			return view('partials.reportPayment')
+			->with('recoverys', $recoverys);
+		// if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+		// 	$recoverys = IncomePayment::all()->sortByDesc('created_at');
+		// 	return view('partials.reportPayment')
+		// 	->with('recoverys', $recoverys);
+		// }
+
+		// elseif (Auth::user()->hasRole('coordinador-regional')) {
+		// 	$user_allocation = Auth::user();	
+		// 	$region = $user_allocation->region->id;
+
+		// 	$recoverys = IncomePayment::all()->where('region_id',$region)->sortByDesc('created_at');
+		// 	return view('partials.reportPayment')
+		// 	->with('recoverys', $recoverys);
+		// }
+
+		
 	}
 	public function totalVault()
 	{
@@ -832,16 +848,16 @@ class GeneralController extends Controller
 
 			$debt = $credit->debt;
 			$late_capital = DB::table('payments')->where([
-			['debt_id', '=', $debt->id],
-			['status', '!=', 'Pagado'],
+				['debt_id', '=', $debt->id],
+				['status', '!=', 'Pagado'],
 			])->sum('capital');
 			$late_interest = DB::table('payments')->where([
-			['debt_id', '=', $debt->id],
-			['status', '!=', 'Pagado'],
+				['debt_id', '=', $debt->id],
+				['status', '!=', 'Pagado'],
 			])->sum('interest');
 			$late_moratorium = DB::table('payments')->where([
-			['debt_id', '=', $debt->id],
-			['status', '!=', 'Pagado'],
+				['debt_id', '=', $debt->id],
+				['status', '!=', 'Pagado'],
 			])->sum('moratorium');
 			$late_total = $late_interest + $late_capital + $late_moratorium;
 

@@ -854,7 +854,7 @@ class GeneralController extends Controller
                 return redirect()->back();
             }
         } else {
-            if ($debt->ammount < $total) {
+            if ($debt->ammount == $total) {
                 $credit->delete();
                 $expenditure->delete();
                 $vault->ammount = $vault->ammount + $amount_credit;

@@ -26,6 +26,7 @@ use App\Models\BoxCut;
 use App\Models\Roster;
 use App\Models\Active;
 use DB;
+use Yajra\DataTables\DataTables;
 
 class GeneralController extends Controller
 {

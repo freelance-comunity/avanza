@@ -900,53 +900,7 @@ Route::get('najera', function () {
 
 Route::get('reportPayment', 'GeneralController@reportPayment');
 
-Route::get('moratorium', function () {
-    $credit = App\Models\Credit::all();
-    $date_now = \Carbon\Carbon::now()->toDateString();
-    $hour_now = \Carbon\Carbon::now()->toTimeString();
-    foreach ($credit as $key => $credit) {
-        $debt = $credit->debt;
-        $payments = $debt->payments;
 
-        foreach ($payments as $key => $payment) {
-            if ($payment->date <= $date_now && $payment->status == 'Pendiente' && $hour_now >= '11:00:00') {
-                $payment = App\Models\Payment::find($payment->id);
-                $payment->status = 'Vencido';
-                $payment->moratorium = 20;
-                $payment->total = $payment->ammount + $payment->moratorium;
-                $payment->balance = $payment->balance + 20;
-                $payment->save();
-
-                $debt = $payment->debt;
-                $debt->ammount = $debt->ammount + 20;
-                $debt->save();
-            }
-            if ($payment->date <= $date_now && $payment->status == 'Parcial' && $hour_now >= '11:00:00') {
-                $payment = App\Models\Payment::find($payment->id);
-                $payment->status = 'Vencido';
-                $payment->moratorium = 20;
-                $payment->total = $payment->ammount + $payment->moratorium;
-                $payment->balance = $payment->balance + 20;
-                $payment->save();
-
-                $debt = $payment->debt;
-                $debt->ammount = $debt->ammount + 20;
-                $debt->save();
-            }
-            if ($payment->status == 'Vencido') {
-                $latePayments = new App\Models\LatePayments;
-                $latePayments->late_number = $payment->number;
-                $latePayments->late_ammount = $payment->total;
-                $latePayments->late_payment = $payment->payment;
-                $latePayments->status = "Atrasado";
-                $latePayments->payment_id = $payment->id;
-                $latePayments->debt_id    = $debt->id;
-                $latePayments->save();
-            }
-        }
-    }
-    echo "MORATORIO APLICADO CORRECTAMENTE";
-});
 
 Route::resource('clientReferences', 'ClientReferencesController');
 
@@ -987,19 +941,25 @@ Route::get('applyMoratorium',function(){
                 $debt = $payment->debt;
                 $debt->ammount = $debt->ammount + 20;
                 $debt->save();
+            }             
+            $latePayments = $payment->latePayments;
+
+            if ($payment->status == "Vencido") {
+                if ($latePayments->count() == 0) {
+                    $latePayments = new App\Models\LatePayments;
+                    $latePayments->late_number = $payment->number;
+                    $latePayments->late_ammount = $payment->total;
+                    $latePayments->late_payment = $payment->payment;
+                    $latePayments->status = "Atrasado";
+                    $latePayments->payment_id = $payment->id;
+                    $latePayments->debt_id    = $debt->id;
+                    $latePayments->branch_id = $debt->branch_id;
+                    $latePayments->region_id = $debt->region_id;
+                    $latePayments->save();
+                }
+
             }
-            if ($payment->status == 'Vencido') {
-                $latePayments = new App\Models\LatePayments;
-                $latePayments->late_number = $payment->number;
-                $latePayments->late_ammount = $payment->total;
-                $latePayments->late_payment = $payment->payment;
-                $latePayments->status = "Atrasado";
-                $latePayments->payment_id = $payment->id;
-                $latePayments->debt_id    = $debt->id;
-                $latePayments->branch_id = $debt->branch_id;
-                $latePayments->region_id = $debt->region_id;
-                $latePayments->save();
-            }
+
         }
     }
     echo "MORATORIO APLICADO CORRECTAMENTE";
@@ -1034,8 +994,8 @@ Route::get('changePayments', function(){
 
     $py->region_id = $branch->region_id;
     $py->save();
-  }
-  echo "Listo";
+}
+echo "Listo";
 });
 
 Route::get('changeDebts', function(){
@@ -1208,3 +1168,70 @@ Route::get('view-restructures/{id}', function($id)
 
 Route::Post('consolidate', 'GeneralController@consolidate');
 
+Route::get('paymentsCorrection', function(){
+    $payments = App\Models\Payment::all()->where('status','Pagado');
+    foreach ($payments as $key => $payment) {
+     $payment->capital = 0;
+     $payment->interest = 0;
+     $payment->moratorium = 0;
+     $payment->save();
+ }
+ echo "Pagos Pagados corregidos";
+});
+
+Route::get('paymentsCorrectionVencido', function(){
+    $payments = App\Models\Payment::all()->where('status','Vencido');
+    foreach ($payments as $key => $payment) {
+        $cuota = $payment->payment;
+        if ($cuota > 0) {
+          if ($payment->moratorium > 0) {
+            if ($cuota >= $payment->moratorium ) {
+              $cuota = $cuota - $payment->moratorium;
+              $payment->moratorium = 0;
+          }
+          else {
+              $payment->moratorium = $payment->moratorium - $cuota;
+              $cuota = 0;
+          }
+      }
+  }
+  if ($cuota > 0) {
+      if ($payment->interest > 0) {
+        if ($cuota >= $payment->interest ) {
+          $cuota = $cuota - $payment->interest;
+          $payment->interest = 0;
+      }
+      else {
+          $payment->interest = $payment->interest - $cuota;
+          $cuota = 0;
+      }
+  }
+}
+if ($cuota > 0) {
+  if ($payment->capital > 0) {
+    if ($cuota >= $payment->capital ) {
+      $cuota = $cuota - $payment->capital;
+      $payment->capital = 0;
+  }
+  else {
+      $payment->capital = $payment->capital - $cuota;
+      $cuota = 0;
+  }
+}
+}
+
+$payment->save();
+
+
+
+}
+echo "CORRECCION DE PAGOS VENCIDOS LISTO";
+
+});
+
+Route::get('reportPaymentCentro', 'GeneralController@reportPaymentCentro');
+Route::get('reportPaymentAltos', 'GeneralController@reportPaymentAltos');
+Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa');
+Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');
+
+Route::get('reportPaymentCentroAjax','GeneralController@reportPaymentCentroAjax');

@@ -49,11 +49,6 @@ Crear
 		</div>
 
 		<div class="form-group col-sm-6 col-lg-4">
-			{!! Form::label('capital', ' Capital:') !!}
-			{!! Form::text('capital', $global_capital, ['class' => 'form-control input-lg ','required' => 'required',
-			'data-parsley-trigger ' => 'input focusin','onchange'=>'sumar(this.value);' ,'readonly' ,'id'=>'capital']) !!}
-		</div>
-		<div class="form-group col-sm-6 col-lg-4">
 			{!! Form::label('condone_capital', 'Condonar Capital:') !!}
 			{!! Form::text('condone_capital', 0, ['class' => 'form-control input-lg ','required' => 'required',
 			'data-parsley-trigger ' => 'input focusin','onchange'=>'sumar(this.value);' ]) !!}
@@ -90,7 +85,7 @@ Crear
 
     /* Esta es la suma. */
     total = (parseInt(total) + parseInt(valor));
-    
+
     // Colocar el resultado de la suma en el control "span".
     document.getElementById('spTotal').innerHTML = total;
 }

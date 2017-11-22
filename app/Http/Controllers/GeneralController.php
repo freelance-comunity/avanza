@@ -800,4 +800,72 @@ class GeneralController extends Controller
 
         return view('restructures.process');
     }
+
+    public function reverse($id)
+    {
+        $credit = Credit::find($id);
+        $debt = $credit->debt;
+        $expenditure = $credit->expendituresCredit;
+        $promoter = $credit->user;
+        $vault = $promoter->vault;
+
+        $amount_credit = $credit->ammount;
+        $interest_credit = $credit->interest_rate/100;
+        $plus = $amount_credit * $interest_credit;
+        $total = ceil($amount_credit + $plus);
+        if ($credit->periodicity == 'SEMANAL') {
+            if ($debt->ammount < $total) {
+                Toastr::error('Este crédito ya cuenta con cuotas pagadas por lo que no es posible revertir.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            } else {
+                $credit->delete();
+                $expenditure->delete();
+                $expenditure->delete();
+                Toastr::success('Crédito revertido exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            }
+        } elseif ($credit->periodicity == 'TRADICIONAL') {
+            if ($debt->ammount < $total) {
+                Toastr::error('Este crédito ya cuenta con cuotas pagadas por lo que no es posible revertir.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            } else {
+                $credit->delete();
+                $expenditure->delete();
+                Toastr::success('Crédito revertido exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            }
+        } elseif ($credit->periodicity == 'DIARIO25') {
+            if ($debt->ammount < $total) {
+                Toastr::error('Este crédito ya cuenta con cuotas pagadas por lo que no es posible revertir.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            } else {
+                $credit->delete();
+                $expenditure->delete();
+                Toastr::success('Crédito revertido exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            }
+        } elseif ($credit->periodicity == 'DIARIO4') {
+            if ($debt->ammount < $total) {
+                Toastr::error('Este crédito ya cuenta con cuotas pagadas por lo que no es posible revertir.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            } else {
+                $credit->delete();
+                $expenditure->delete();
+                Toastr::success('Crédito revertido exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            }
+        } else {
+            if ($debt->ammount < $total) {
+                Toastr::error('Este crédito ya cuenta con cuotas pagadas por lo que no es posible revertir.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            } else {
+                $credit->delete();
+                $expenditure->delete();
+                $vault->ammount = $vault->ammount + $amount_credit;
+                $vault->save();
+                Toastr::success('Crédito revertido exitosamente.', '', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                return redirect()->back();
+            }
+        }
+    }
 }

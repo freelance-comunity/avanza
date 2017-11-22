@@ -893,7 +893,11 @@ class GeneralController extends Controller
 			$global_moratorium = $global_moratorium + $late_moratorium;
 		}
 
-		return view('restructures.process');
+		return view('restructures.process')
+		->with('late_total',$late_total)
+		->with('global_capital',$global_capital)
+		->with('global_interest',$global_interest)
+		->with('global_moratorium',$global_moratorium);
 	}
 
 }

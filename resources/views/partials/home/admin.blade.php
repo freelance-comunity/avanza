@@ -194,95 +194,8 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 		</div>
 	</div>
 	<!-- ./col -->
-	{{-- <div class="col-lg-3 col-md-4">
-		<!-- small box -->
-		<div class="small-box bg-green">
-			<div class="inner">
-				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
-
-				<p>Cartera Vencida (1 a 15 días)</p>
-			</div>
-			<div class="icon">
-				<i class="fa fa-exclamation-triangle"></i>
-			</div>
-			<a href="{{ url('/report-payments-now') }}"  class="small-box-footer">Ver
-				<i class="fa fa-eye"></i>
-			</a>
-		</div>
-	</div> --}}
-	<!-- ./col -->
-	{{-- <div class="col-lg-3 col-md-4">
-		<!-- small box -->
-		<div class="small-box bg-teal">
-			<div class="inner">
-				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
-
-				<p>Cartera Vencida (16 a 30 días)</p>
-			</div>
-			<div class="icon">
-				<i class="fa fa-exclamation-triangle"></i>
-			</div>
-			<a href="{{ url('/report-payments-now') }}"  class="small-box-footer">Ver
-				<i class="fa fa-eye"></i>
-			</a>
-		</div>
-	</div> --}}
-	<!-- ./col -->
-	{{-- <div class="col-lg-3 col-md-4">
-		<!-- small box -->
-		<div class="small-box bg-red">
-			<div class="inner">
-				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
-
-				<p>Cartera Vencida (Más de 30 días)</p>
-			</div>
-			<div class="icon">
-				<i class="fa fa-exclamation-triangle"></i>
-			</div>
-			<a href="{{ url('/report-payments-now') }}"  class="small-box-footer">Ver
-				<i class="fa fa-eye"></i>
-			</a>
-		</div>
-	</div> --}}
-	<!-- ./col -->
-	{{--
-	<div class="col-lg-3 col-xs-6">
-		<!-- small box -->
-		<div class="small-box bg-navy">
-			<div class="inner">
-				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
-
-				<p>Saldo Cartera Vigente</p>
-			</div>
-			<div class="icon">
-				<i class="fa fa-retweet"></i>
-			</div>
-			<a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar
-				<i class="fa fa-file-pdf-o"></i>
-			</a>
-		</div>
-	</div> --}}
-	<!-- ./col -->
-	{{--
-	<div class="col-lg-3 col-xs-6">
-		<!-- small box -->
-		<div class="small-box bg-maroon">
-			<div class="inner">
-				<h3>${{ number_format($payments->sum('ammount'),2) }}</h3>
-
-				<p>Saldo Cartera Vencida</p>
-			</div>
-			<div class="icon">
-				<i class="fa fa-exclamation"></i>
-			</div>
-			<a href="{{ url('/report-payments') }}" class="small-box-footer">Descargar
-				<i class="fa fa-file-pdf-o"></i>
-			</a>
-		</div>
-	</div> --}}
 </div>
 <!-- /.row -->
-
 <div class="row">
 	<div class="col-md-6">
 		<!-- USERS LIST -->
@@ -314,12 +227,6 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 				</ul>
 				<!-- /.users-list -->
 			</div>
-			<!-- /.box-body -->
-			{{--
-			<div class="box-footer text-center">
-				<a href="javascript:void(0)" class="uppercase">View All Users</a>
-			</div> --}}
-			<!-- /.box-footer -->
 		</div>
 		<!--/.box -->
 	</div>

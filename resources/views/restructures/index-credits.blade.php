@@ -98,12 +98,12 @@ cursor: pointer;
 						<th>Cliente</th>
 						<th>Fecha de Contrato</th>
 						<th>Sucursal</th>
-						<th>$ Monto</th>
+						<th>Ministrado</th>
 						<th>No. Cuotas</th>
-						<th>Total Capital</th>
-            <th>Total Intereses</th>
-            <th>Total Mora</th>
-            <th>Total por Restante</th>
+						<th>Saldo Capital</th>
+            <th>Saldo Intereses</th>
+            <th>Saldo Mora</th>
+            <th>Saldo Total</th>
 						<th>Estatus</th>
 					</thead>
 					<tbody>

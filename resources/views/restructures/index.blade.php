@@ -15,7 +15,6 @@ Todos los Clientes
   @if (Auth::user()->can('crear-cliente'))
   <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('clients.create') !!}">Agregar Nuevo Cliente</a>
   @endif
-  <!--<button type="button" class="btn bg-navy pull-right" style="margin-top: 25px" data-toggle="modal" data-target="#inputExcel"><i class="fa fa-file-excel-o"></i> Importar Excel</button>-->
 </div>
 @include('clients.input-excel')
 <div class="row">

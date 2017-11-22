@@ -34,6 +34,9 @@ Lista de créditos
 						<th>Vencido</th>
 						<th>Estatus</th>
 						<th width="50px">Acción</th>
+						@if (Auth::user()->hasRole(['administrador', 'director-general']))
+						<th width="50px">Reversar</th>
+						@endif
 					</thead>
 					<tbody>
 						@foreach($credits as $key=>$credit)
@@ -62,6 +65,11 @@ Lista de créditos
 								<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Solicitud"></i></a>
 								<a href="{!! route('credits.show', [$credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>
 							</td>
+							@if (Auth::user()->hasRole(['administrador', 'director-general']))
+							<td>
+								<a href="{{ url('reverse') }}/{{ $credit->id }}"><i class="fa fa-trash-o fa-2x" onclick="return confirm('¿Estas seguro de revertir este crédito?')" data-toggle="tooltip" title="Reversar Crédito"></i></a>
+							</td>
+						  @endif
 						</tr>
 						@endif
 						@endforeach

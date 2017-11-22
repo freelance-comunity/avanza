@@ -21,7 +21,7 @@ Lista de créditos
 			@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 			<table class="table"  id="example">
 				@else
-				<table class="table"  id="pagos_promotor">
+				<table class="table"  id="example">
 					@endif
 					<thead class="bg-primary">
 						<th>No.</th>
@@ -34,6 +34,9 @@ Lista de créditos
 						<th>Vencido</th>
 						<th>Estatus</th>
 						<th width="50px">Acción</th>
+						@if (Auth::user()->hasRole(['administrador', 'director-general']))
+						<th width="50px">Reversar</th>
+						@endif
 					</thead>
 					<tbody>
 						@foreach($credits as $key=>$credit)
@@ -61,6 +64,11 @@ Lista de créditos
 								<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Solicitud"></i></a>
 								<a href="{!! route('credits.show', [$credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>
 							</td>
+							@if (Auth::user()->hasRole(['administrador', 'director-general']))
+							<td>
+								<a href="{{ url('reverse') }}/{{ $credit->id }}"><i class="fa fa-trash-o fa-2x" data-toggle="tooltip" title="Reversar Crédito"></i></a>
+							</td>
+						  @endif
 						</tr>
 						@endforeach
 					</tbody>

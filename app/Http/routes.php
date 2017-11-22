@@ -941,7 +941,7 @@ Route::get('applyMoratorium',function(){
                 $debt = $payment->debt;
                 $debt->ammount = $debt->ammount + 20;
                 $debt->save();
-            }             
+            }
             $latePayments = $payment->latePayments;
 
             if ($payment->status == "Vencido") {
@@ -1235,3 +1235,5 @@ Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa')
 Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');
 
 Route::get('reportPaymentCentroAjax','GeneralController@reportPaymentCentroAjax');
+
+Route::get('reverse/{id}','GeneralController@reverse');

@@ -1233,3 +1233,5 @@ Route::get('reportPaymentCentro', 'GeneralController@reportPaymentCentro');
 Route::get('reportPaymentAltos', 'GeneralController@reportPaymentAltos');
 Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa');
 Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');
+
+Route::get('reportPaymentCentroAjax','GeneralController@reportPaymentCentroAjax');

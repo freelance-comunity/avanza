@@ -492,5 +492,32 @@ $('#control').keyup(function() {
 
 
 
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#ajax').DataTable({
+           "processing": true,
+           "serverSide": true,
+           "ajax": "{{ url('reportPaymentCentroAjax') }}",
+           "columns":[
+           {data: 'id', name: 'id'},
+           {data: 'ammount', name: 'ammount' },
+           {data: 'concept', name: 'concept'},
+           {data: 'date', name: 'date'},
+           {data: 'payment_id', name: 'payment_id'},
+           {data: 'debt_id', name: 'debt_id'},
+           
+           ],
+           "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+          },
+          columnDefs: [{
+            targets: [0],
+            visible: false,
+            searchable: false
+        },
+        ],
+        order: [[0, "asc"]],
+    });
+    });
+</script>
 

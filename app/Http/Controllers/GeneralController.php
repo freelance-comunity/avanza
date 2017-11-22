@@ -26,6 +26,7 @@ use App\Models\BoxCut;
 use App\Models\Roster;
 use App\Models\Active;
 use DB;
+use Yajra\DataTables\DataTables;
 
 class GeneralController extends Controller
 {
@@ -829,6 +830,23 @@ class GeneralController extends Controller
 		return view('partials.reportPaymentNorte')
 		->with('recoverys', $recoverys);
 	}
+	public function reportPaymentCentroAjax()
+	{	
+		$collection = IncomePayment::select(['id', 'ammount', 'concept', 'date', 'payment_id','debt_id'])->orderBy('debt_id');
+
+		$recoverys = $collection;
+		return view('partials.reportPaymentCentroAjax')
+		->with('recoverys', $recoverys);
+		// return DataTables::of($recoverys)
+		// ->with('recoverys', $recoverys);
+
+
+
+		// $recoverys = IncomePayment::all()->where('region_id',2)->sortByDesc('created_at');
+		// return view('partials.reportPaymentCentroAjax')
+		// ->with('recoverys', $recoverys);
+	}
+
 
 	public function totalVault()
 	{

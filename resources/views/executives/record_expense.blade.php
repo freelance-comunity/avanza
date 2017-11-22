@@ -21,6 +21,7 @@
             <option>Botiquín</option>
             <option>Cafetería</option>
             <option>Combustible</option>
+            <option>Energía Eléctrica</option>
             <option>Fotocopias</option>
             <option>Refacciones</option>
             <option>Mantenimiento Vehículos</option>

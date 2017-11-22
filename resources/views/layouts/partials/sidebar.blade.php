@@ -61,6 +61,7 @@
        <li><a href="{{ url('reportPaymentAltos') }}">Región Altos</a></li>
        <li><a href="{{ url('reportPaymentMezcalapa') }}">Región Mezcalapa</a></li>
        <li><a href="{{ url('reportPaymentNorte') }}">Región Norte</a></li>
+        {{-- <li><a href="{{ url('reportPaymentCentroAjax') }}">Región Centro Ajax</a></li> --}}
      </ul>
    </li>
    @endif

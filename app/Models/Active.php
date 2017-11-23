@@ -12,7 +12,7 @@ class Active extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "ammount",
+		"ammount",
 		"concept",
 		"voucher",
 		"date",
@@ -24,7 +24,7 @@ class Active extends Model
 	];
 
 	public static $rules = [
-	    "ammount" => "required",
+		"ammount" => "required",
 		"concept" => "required",
 		"voucher" => "required",
 		"date" => "required",
@@ -32,9 +32,18 @@ class Active extends Model
 		"description" => "required"
 	];
 
-  public function vault()
+	public function vault()
 	{
 		return $this->belongsTo('App\Models\Vault');
+	}
+	public function region()
+	{
+		return $this->belongsTo('App\Models\Region');
+	}
+
+	public function branch()
+	{
+		return $this->belongsTo('App\Models\Branch');
 	}
 
 }

@@ -95,5 +95,9 @@ class Region extends Model
 	{
 		return $this->hasMany('App\Models\Investment');
 	}
+	public function actives()
+	{
+		return $this->hasMany('App\Models\Active');
+	}
 
 }

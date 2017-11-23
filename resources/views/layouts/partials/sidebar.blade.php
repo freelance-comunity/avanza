@@ -69,9 +69,9 @@
    <li class="treeview">
     <a href="#"><i class='fa fa-external-link'></i><span> Movimientos</span> <i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
-     <li><a href="{{ url('movementsBalance') }}">Saldo en Caja</a></li>
-     <li><a href="{{ url('movementsBeginning') }}">Saldo Inicial</a></li>
-     <li><a href="{{ url('movementsEffective') }}">Asignacion en Efectivo</a></li>
+     {{-- <li><a href="{{ url('movementsBalance') }}">Saldo en Caja</a></li> --}}
+     <li><a href="{{ url('movementsBeginning') }}">Asignacion en Efectivo</a></li>
+     {{-- <li><a href="{{ url('movementsEffective') }}">Asignacion en Efectivo</a></li> --}}
      <li><a href="{{ url('movementsRecovery') }}">Recuperación</a></li>
      <li><a href="{{ url('movementsRecoveryAccess') }}">Recuperación Access</a></li>
      <li><a href="{{ url('movementsPlacement') }}">Colocación</a></li>

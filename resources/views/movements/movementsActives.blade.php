@@ -14,7 +14,7 @@ Detalles
 		<div class="box box-danger">
 			<div class="box-body">
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#menu1"><i class="fa fa-credit-card"></i> Gastos</a></li>
+					<li class="active"><a data-toggle="tab" href="#menu1"><i class="fa fa-credit-card"></i> Inversión en Activos</a></li>
 				</ul>
 				<div class="tab-content">
 					<div id="menu1" class="tab-pane fade in active">

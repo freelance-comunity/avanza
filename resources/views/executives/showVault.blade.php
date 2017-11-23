@@ -53,7 +53,7 @@ $date = new Date();
 					</tr>
 					@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 					<tr>
-						<td colspan="2">
+						<td colspan="4">
 							<a data-toggle="modal" data-target="#start_of_day" class="btn bg-primary btn-lg btn-block">ASIGNAR EFECTIVO</a>
 						</td>
 						{{-- <td colspan="2">
@@ -90,7 +90,7 @@ $date = new Date();
 					@else --}}
 					<table class="table" >
 						{{-- @endif --}}
-						<thead class="thead-inverse">
+						<thead class="bg-success"">
 							<th>CONCEPTO</th>
 							<th>IMPORTE</th>
 							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
@@ -99,7 +99,7 @@ $date = new Date();
 						</thead>
 						<tbody>
 							<tr>
-								<td>Saldo inicial</td>
+								<td>Asignación Efectivo</td>
 								<td>${{ number_format($si->sum('ammount')) }}</td>
 								@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 								<td style="text-align: center;">
@@ -107,7 +107,7 @@ $date = new Date();
 								</td>
 								@endif
 							</tr>
-							<tr>
+							{{-- <tr>
 								<td>Asignación de efectivo</td>
 								<td>${{ number_format($af->sum('ammount')) }}</td>
 								@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
@@ -115,7 +115,7 @@ $date = new Date();
 									<a data-toggle="modal" data-target="#af"><i class="fa fa-eye fa-2x"></i></a>
 								</td>
 								@endif
-							</tr>
+							</tr> --}}
 							<tr>
 								<td>Recuperación</td>
 								<td>${{ number_format($rc->sum('ammount')) }}</td>
@@ -146,7 +146,7 @@ $date = new Date();
 						@else --}}
 						<table class="table" >
 							{{-- @endif --}}
-							<thead class="thead-inverse">
+							<thead class="bg-success"">
 								<th>IMPORTE</th>
 								<th>CONCEPTO</th>
 								@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))

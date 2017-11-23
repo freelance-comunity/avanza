@@ -20,6 +20,7 @@
                  <thead class="thead-inverse">
                     <th>NÚMERO</th>
                     <th>MONTO DE LA INVERSIÓN</th>
+                    <th>CONCEPTO DE INVERSIÓN</th>
                     <th>FECHA Y HORA</th>
                     {{--  <th width="50px">Acción</th> --}}
                 </thead>
@@ -29,6 +30,7 @@
                     <tr>
                         <td>{!! $investment->id!!}</td>
                         <td>${!! number_format($investment->ammount, 2, '.', ',') !!}</td>
+                        <td>{{$investment->concept}}</td>
                         <td>{!! $investment->created_at !!}</td>
                             {{-- <td>
                                 <a href="{!! route('investments.edit', [$investment->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>

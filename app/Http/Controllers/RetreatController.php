@@ -88,6 +88,7 @@ class RetreatController extends AppBaseController
 			return redirect()->back();
 		}
 		$data_retreat['ammount'] = $request->input('ammount');
+		$data_retreat['concept'] = $request->input('concept');
 		$data_retreat['vault_id'] = $vault->id;
 		$data_retreat['user_id'] = $user->id;
 		$data_retreat['branch_id'] = $user->branch_id;

@@ -784,6 +784,30 @@ class GeneralController extends Controller
         return view('partials.reportPayment')
         ->with('recoverys', $recoverys);
     }
+     public function reportPaymentAltos()
+    {
+        $recoverys = IncomePayment::all()->where('region_id',3)->sortByDesc('created_at');
+        return view('partials.reportPayment')
+        ->with('recoverys', $recoverys);
+    }
+     public function reportPaymentNorte()
+    {
+        $recoverys = IncomePayment::all()->where('region_id',1)->sortByDesc('created_at');
+        return view('partials.reportPayment')
+        ->with('recoverys', $recoverys);
+    }
+     public function reportPaymentCentro()
+    {
+        $recoverys = IncomePayment::all()->where('region_id',2)->sortByDesc('created_at');
+        return view('partials.reportPayment')
+        ->with('recoverys', $recoverys);
+    }
+    public function reportPaymentMezcalapa()
+    {
+        $recoverys = IncomePayment::all()->where('region_id',4)->sortByDesc('created_at');
+        return view('partials.reportPayment')
+        ->with('recoverys', $recoverys);
+    }
     public function totalVault()
     {
         $vault = Vault::all();

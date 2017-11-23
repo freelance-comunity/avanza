@@ -13,6 +13,7 @@ class Retreat extends Model
 
 	public $fillable = [
 		"ammount",
+		"concept",
 		"user_id",
 		"vault_id",
 		"branch_id",

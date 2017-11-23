@@ -22,7 +22,7 @@ Lista de créditos
 			<table class="table"  id="example">
 				@else
 				<table class="table"  id="carteraVencida">
-					@endif  
+					@endif
 					<thead class="bg-primary">
 						<th>Folio</th>
 						<th>Región</th>
@@ -32,7 +32,7 @@ Lista de créditos
 						<th>Fecha de Contrato</th>
 						<th>Sucursal</th>
 						<th>$ Monto</th>
-						<th>Cuotas pagadas</th>	
+						<th>Cuotas pagadas</th>
 						<th>Cuotas parciales</th>
 						<th>Cuotas vencidas</th>
 						<th>Total Pagado</th>
@@ -44,7 +44,7 @@ Lista de créditos
 						<th>Total Vigente</th>
 						<th>Total Capital Vigente</th>
 						<th>Total Interes Vigente</th>
-						<th>Estatus</th>			
+						<th>Estatus</th>
 					</thead>
 					<tbody>
 						@foreach($credits as $key=>$credit)
@@ -53,7 +53,8 @@ Lista de créditos
 						$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 						$current_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pagado')->get();
 						$partial_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Parcial')->get();
-						$pending_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pendiente')->get();$late_interest = $late_payments->sum('interest');
+						$pending_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pendiente')->get();
+						//$late_interest = $late_payments->sum('interest');
 
 						$late_interest = $late_payments->sum('interest');
 						$late_capital = $late_payments->sum('capital');
@@ -80,7 +81,7 @@ Lista de créditos
 							<td>{!! $current_payments->count() !!}</td>
 							<td>{!! $partial_payments->count() !!}</td>
 							<td>{!! $late_payments->count() !!}</td>
-							<th class="info">${{ number_format($current_payments->sum('total'),2) }}</th>
+							<th class="info">${{ number_format($current_payments->sum('payment'),2) }}</th>
 							@if ($late_total==0)
 							<td class="success">${!! number_format($late_total, 2) !!}</td>
 							@elseif($late_total > 0)

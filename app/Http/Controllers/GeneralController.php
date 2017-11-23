@@ -292,6 +292,8 @@ class GeneralController extends Controller
             $data_active['description']= $request->input('description');
             $data_active['type']= $request->input('type');
             $data_active['vault_id'] = $vault->id;
+            $data_active['branch_id'] = $user->branch_id;
+            $data_active['region_id'] = $user->region_id;
 
             // dd($data_active);
             $active = Active::create($data_active);
@@ -780,16 +782,16 @@ class GeneralController extends Controller
 
             $debt = $credit->debt;
             $late_capital = DB::table('payments')->where([
-            ['debt_id', '=', $debt->id],
-            ['status', '!=', 'Pagado'],
+                ['debt_id', '=', $debt->id],
+                ['status', '!=', 'Pagado'],
             ])->sum('capital');
             $late_interest = DB::table('payments')->where([
-            ['debt_id', '=', $debt->id],
-            ['status', '!=', 'Pagado'],
+                ['debt_id', '=', $debt->id],
+                ['status', '!=', 'Pagado'],
             ])->sum('interest');
             $late_moratorium = DB::table('payments')->where([
-            ['debt_id', '=', $debt->id],
-            ['status', '!=', 'Pagado'],
+                ['debt_id', '=', $debt->id],
+                ['status', '!=', 'Pagado'],
             ])->sum('moratorium');
             $late_total = $late_interest + $late_capital + $late_moratorium;
 

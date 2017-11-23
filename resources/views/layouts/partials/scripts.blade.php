@@ -401,6 +401,10 @@
            "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
           },
+          dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ],
           "order": [[ 4, "desc" ]] });
 
         })

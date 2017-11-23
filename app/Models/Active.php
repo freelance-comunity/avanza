@@ -18,7 +18,9 @@ class Active extends Model
 		"date",
 		"type",
 		"description",
-		"vault_id"
+		"vault_id",
+		"branch_id",
+		"region_id"
 	];
 
 	public static $rules = [

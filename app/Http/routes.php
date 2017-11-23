@@ -714,6 +714,7 @@ Route::get('movementsPlacement', 'GeneralController@movementsPlacement');
 Route::get('movementsExpenses', 'GeneralController@movementsExpenses');
 Route::get('movementsSalaries', 'GeneralController@movementsSalaries');
 Route::get('movementsCut', 'GeneralController@movementsCut');
+Route::get('movementsActives', 'GeneralController@movementsActives');
 
 Route::get('expenses-admin', function () {
     return view('partials.expenses');

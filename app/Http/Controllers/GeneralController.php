@@ -740,6 +740,35 @@ class GeneralController extends Controller
         }
     }
 
+    public function movementsActives()
+    {
+        if (Auth::user()->hasRole(['administrador', 'director-general'])) {
+            $user_allocation = Auth::user();
+            $region_allocation = $user_allocation->region;
+            $branch_allocation = $user_allocation->branch;
+            $collection = Role::all();
+            $role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+            $empleados = $region_allocation->users;
+
+            $actives = Active::all()->sortByDesc('created_at');
+            return view('movements.movementsActives')
+            ->with('actives', $actives);
+        } elseif (Auth::user()->hasRole('coordinador-regional')) {
+            $user_allocation = Auth::user();
+            $region_allocation = $user_allocation->region;
+            $branch_allocation = $user_allocation->branch;
+            $collection = Role::all();
+            $role = $collection->where('name', 'ejecutivo-de-credito')->first();
+
+            $empleados = $region_allocation->users;
+            $region = $user_allocation->region->id;
+            $actives = Active::all()->where('region_id', $region)->sortByDesc('created_at');
+            return view('movements.movementsActives')
+            ->with('actives', $actives);
+        }
+    }
+
     public function walletExpired()
     {
         $credits = Credit::all();
@@ -799,9 +828,9 @@ class GeneralController extends Controller
         }
 
         return view('restructures.process')
-        ->with('global_capital',$global_capital)
-        ->with('global_interest',$global_interest)
-        ->with('global_moratorium',$global_moratorium);
+        ->with('global_capital', $global_capital)
+        ->with('global_interest', $global_interest)
+        ->with('global_moratorium', $global_moratorium);
     }
 
     public function reverse($id)

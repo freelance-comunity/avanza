@@ -36,7 +36,7 @@
           @if(Auth::user()->hasRole(['administrador', 'director-general']))
           <li><a href="{{ url('showInvestments') }}/{{ Auth::user()->id }}">Inversiones</a></li>
           <li><a href="{{ url('showRetreats') }}/{{ Auth::user()->id }}">Retiros</a></li>
-          <li><a href="{{ url('transfer') }}">Traspasos</a></li>
+          <li><a href="{{ url('transfer') }}">Reasignación de Cartera</a></li>
           @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>

@@ -19,7 +19,7 @@ Detalles
 				<div class="tab-content">
 					<div id="menu1" class="tab-pane fade in active">
 
-						@if($expenses->isEmpty())
+						@if($actives->isEmpty())
 						<div class="well text-center">Ho hay registros.</div>
 						@else
 						<div class="table-responsive">

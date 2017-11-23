@@ -28,7 +28,7 @@
       @endrole
       @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
       <li><a href="{{ url('vault') }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
-      <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Corte de Caja</span></a></li>
+     {{--  <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Corte de Caja</span></a></li> --}}
       {{-- <li><a href="{{ url('reportPayment') }}"><i class="fa fa-scissors"></i> <span>Historial de pagos</span></a></li> --}}
       <li class="treeview">
         <a href="#"><i class='fa fa-cubes'></i><span> Administración</span> <i class="fa fa-angle-left pull-right"></i></a>

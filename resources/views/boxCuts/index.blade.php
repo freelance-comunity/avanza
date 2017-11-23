@@ -22,11 +22,11 @@ Lista de personal
         <div class="table-responsive">
             <table class="table" id="example">
                 <thead class="bg-primary">
-                    <th>Nombre</th>
+                    <th>Nombre Completo</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
                     <th>Sucursal</th>
-                    <th width="100px">Acción</th>
+                    <th width="100px">Detalle Caja</th>
                 </thead>
                 <tbody>
                     @foreach($employees as $employee)

@@ -53,14 +53,19 @@ $date = new Date();
 					</tr>
 					@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 					<tr>
-						<td colspan="4">
+						<td colspan="2">
 							<a data-toggle="modal" data-target="#start_of_day" class="btn bg-primary btn-lg btn-block">ASIGNAR EFECTIVO</a>
 						</td>
+
 						{{-- <td colspan="2">
 							<a data-toggle="modal" data-target="#cash_allocation" class="btn bg-primary btn-lg btn-block">ASIGNAR EFECTIVO</a>
 						</td> --}}
+						<td colspan="2">
+							<a data-toggle="modal" data-target="#cut" class="btn bg-red btn-lg btn-block">CORTE DE CAJA</a>
+						</td>
 						@include('executives.cash_allocation')
 						@include('executives.start_of_day')
+						@include('boxCuts.cut')
 					</tr>
 					@endif
 					@role('ejecutivo-de-credito')

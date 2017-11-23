@@ -9,11 +9,14 @@
       </div>
       <div class="modal-body">
 
-      {{-- {!! Form::open(['url' => 'process','data-parsley-validate' => '','onsubmit'=>'return enviado()']) !!}  --}} 
+      {{-- {!! Form::open(['url' => 'process','data-parsley-validate' => '','onsubmit'=>'return enviado()']) !!}  --}}
        {!! Form::open(['route' => 'investments.store']) !!}
         <p>
           {!! Form::label('ammount', 'Monto:') !!}
             <input type="text" name="ammount" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
+            <br>
+            {!! Form::label('ammount', 'Concepto:') !!}
+            <input type="text" name="concept" class="form-control input-lg" placeholder="ESCRIBE CONCEPTO" required="required" data-parsley-trigger="input focusin">
              <input type="hidden"  name="user_id" value="{{ Auth::user()->id }}">
           </p>
           <p>
@@ -28,4 +31,3 @@
       </div>
     </div>
   </div>
-  

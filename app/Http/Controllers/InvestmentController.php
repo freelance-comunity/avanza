@@ -67,7 +67,7 @@ class InvestmentController extends AppBaseController
 	{
 
 		$validator = Validator::make($request->all(), [
-			'ammount' => 'required|numeric',	
+			'ammount' => 'required|numeric',
 		]);
 
 		if ($validator->fails()) {
@@ -83,6 +83,7 @@ class InvestmentController extends AppBaseController
 			return redirect()->back();
 		}
 		$data_investment['ammount'] = $request->input('ammount');
+		$data_investment['concept'] = $request->input('concept');
 		$data_investment['vault_id'] = $vault->id;
 		$data_investment['user_id'] = $user->id;
 		$data_investment['branch_id'] = $user->branch_id;
@@ -98,7 +99,7 @@ class InvestmentController extends AppBaseController
 
 
 
-	
+
 	/**
 	 * Display the specified Investment.
 	 *

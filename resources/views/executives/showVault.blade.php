@@ -54,11 +54,11 @@ $date = new Date();
 					@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 					<tr>
 						<td colspan="2">
-							<a data-toggle="modal" data-target="#start_of_day" class="btn bg-primary btn-lg btn-block">ASIGNAR SALDO INICIAL</a>
+							<a data-toggle="modal" data-target="#start_of_day" class="btn bg-primary btn-lg btn-block">ASIGNAR EFECTIVO</a>
 						</td>
-						<td colspan="2">
+						{{-- <td colspan="2">
 							<a data-toggle="modal" data-target="#cash_allocation" class="btn bg-primary btn-lg btn-block">ASIGNAR EFECTIVO</a>
-						</td>
+						</td> --}}
 						@include('executives.cash_allocation')
 						@include('executives.start_of_day')
 					</tr>
@@ -85,16 +85,16 @@ $date = new Date();
 		<div class="col-md-6">
 			<h4 align="center">INGRESOS</h4>
 			<div class="table-responsive">
-				@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
+				{{-- @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 				<table class="table"  id="example">
-					@else
-					<table class="table"  id="pagos_promotor">
-						@endif
+					@else --}}
+					<table class="table" >
+						{{-- @endif --}}
 						<thead class="thead-inverse">
 							<th>CONCEPTO</th>
 							<th>IMPORTE</th>
 							@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-							<th style="width: 30px;">DETALLES</th>
+							<th style="width: 30px;">DETALLE</th>
 							@endif
 						</thead>
 						<tbody>
@@ -141,16 +141,16 @@ $date = new Date();
 			<div class="col-md-6">
 				<h4 align="center">EGRESOS</h4>
 				<div class="table-responsive">
-					@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
+					{{-- @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 					<table class="table"  id="example2">
-						@else
-						<table class="table"  id="pagos_promotor2">
-							@endif
+						@else --}}
+						<table class="table" >
+							{{-- @endif --}}
 							<thead class="thead-inverse">
 								<th>IMPORTE</th>
 								<th>CONCEPTO</th>
 								@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
-								<th style="width: 30px;">DETALLES</th>
+								<th style="width: 30px;">DETALLE</th>
 								@endif
 							</thead>
 							<tbody>
@@ -181,20 +181,20 @@ $date = new Date();
 									</td>
 									@endif
 								</tr>
-								<tr>
+{{-- 								<tr>
 									<td>Devolución</td>
 									<td>$0.00</td>
 									@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 									<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
 									@endif
-								</tr>
-								<tr>
+								</tr> --}}
+								{{-- <tr>
 									<td>Inversión</td>
 									<td>$0.00</td>
 									@if (Auth::user()->hasRole(['administrador', 'director-general','coordinador-regional', 'coordinador-sucursal']))
 									<td style="text-align: center;"><a href=""><i class="fa fa-eye fa-2x"></i></a></td>
 									@endif
-								</tr>
+								</tr> --}}
 							</tbody>
 						</table>
 					</div>

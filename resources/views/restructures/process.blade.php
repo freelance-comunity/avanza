@@ -47,11 +47,12 @@ Crear
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="capital" id="capital" value="{{$global_capital}}">
 
 		<div class="form-group col-sm-6 col-lg-4">
 			{!! Form::label('condone_capital', 'Condonar Capital:') !!}
 			{!! Form::text('condone_capital', 0, ['class' => 'form-control input-lg ','required' => 'required',
-			'data-parsley-trigger ' => 'input focusin','onchange'=>'sumar(this.value);' ]) !!}
+			'data-parsley-trigger ' => 'input focusin','onchange'=>'calcular()' ,'id'=>'condone_capital']) !!}
 		</div>
 		
 		<div class="form-group col-sm-6 col-lg-4">
@@ -65,7 +66,8 @@ Crear
 			'data-parsley-trigger ' => 'input focusin','onchange'=>'sumar(this.value);']) !!}
 		</div>
 
-
+		{!! Form::label('total', 'Total a pagar:') !!}  
+		{!! Form::text('total', null, ['class' => 'form-control input-lg', 'id' => 'totaln', 'readonly' => 'readonly']) !!}
 		<span>El resultado es: </span> <span id="spTotal"></span>
 		<div class="form-group col-sm-12">
 			{!! Form::submit('Guardar', ['class' => 'btn btn-lg btn-primary']) !!}
@@ -91,4 +93,19 @@ Crear
 }
 </script>
 
+<script>
+	function calcular()
+	{
+		condone_capital = eval(document.getElementById('condone_capital').value);
+		document.getElementById('capital').value=capital;
+		total = condone_capital + capital;
+		var formatter = new Intl.NumberFormat('en-US', {
+			style: 'currency',
+			currency: 'USD',
+			minimumFractionDigits: 2,
+		});
+		
+		document.getElementById('totaln').value=formatter.format(Math.ceil(total));       
+	}
+</script>
 @endsection

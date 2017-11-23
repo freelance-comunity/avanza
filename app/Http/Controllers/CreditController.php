@@ -71,6 +71,35 @@ class CreditController extends AppBaseController
 	 *
 	 * @return Response
 	 */
+	public function creditsAll()
+	{
+		if (Auth::user()->hasRole('director-general')) {
+			$credits = Credit::all();
+		}
+		elseif (Auth::user()->hasRole('administrador')) {
+			$credits = Credit::all();
+		}
+		elseif (Auth::user()->hasRole('coordinador-regional')) {
+			$user_allocation = Auth::user();
+			$region_allocation = $user_allocation->region;
+			$credits = $region_allocation->credits;		
+		}
+		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
+			$user_allocation = Auth::user();
+			$branch_allocation = $user_allocation->branch;
+			$credits = $branch_allocation->credits;
+		}
+		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
+			$user_allocation = Auth::user();
+			$credits = $user_allocation->credits;
+		}
+		else
+		{
+			$credits = Credit::all();
+		}
+		return view('credits.creditsAll')
+		->with('credits',$credits);
+	}
 	public function creditsValid()
 	{if (Auth::user()->hasRole('director-general')) {
 			$credits = Credit::all();

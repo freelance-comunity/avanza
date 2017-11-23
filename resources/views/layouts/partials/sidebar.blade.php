@@ -22,7 +22,7 @@
       <li class="header">Menú</li>
       <!-- Optionally, you can add icons to the links -->
       <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
-      <li><a data-toggle="modal" data-target="#cotizador"><i class="fa fa-calculator"></i><span>Cotizador</span></a></li>
+  {{--     <li><a data-toggle="modal" data-target="#cotizador"><i class="fa fa-calculator"></i><span>Cotizador</span></a></li> --}}
       @role('ejecutivo-de-credito')
       <li><a href="{{ url('showVault') }}/{{ Auth::user()->id }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
       @endrole
@@ -61,7 +61,7 @@
        <li><a href="{{ url('reportPaymentAltos') }}">Región Altos</a></li>
        <li><a href="{{ url('reportPaymentMezcalapa') }}">Región Mezcalapa</a></li>
        <li><a href="{{ url('reportPaymentNorte') }}">Región Norte</a></li>
-       {{-- <li><a href="{{ url('reportPaymentCentroAjax') }}">Región Centro Ajax</a></li> --}}
+       <li><a href="{{ url('reportPayment') }}">Todos los Pagos</a></li>
      </ul>
    </li>
    @endif
@@ -85,7 +85,7 @@
  <li class="treeview">
   <a href="#"><i class='fa fa-money'></i><span> Créditos</span><i class="fa fa-angle-left pull-right"></i></a>
   <ul class="treeview-menu">
-   <li><a href="{{ url('credits') }}">Todos</a></li>
+   <li><a href="{{ url('creditsAll') }}">Todos</a></li>
    <li><a href="{{ url('creditsValid') }}">Vigentes</a></li>
    <li><a href="{{ url('creditsPaidOut') }}">Pagados</a></li>
  </ul>

@@ -66,10 +66,10 @@ Lista de créditos
 							</td>
 							@if (Auth::user()->hasRole(['administrador', 'director-general']))
 							<td>
-								<a href="{{ url('reverse') }}/{{ $credit->id }}"><i class="fa  fa-reply fa-2x" data-toggle="tooltip" title="Reversar Crédito"></i></a>
+								<a href="{{ url('reverse') }}/{{ $credit->id }}"><i class="fa fa-reply fa-2x" onclick="return confirm('¿Estas seguro de revertir este crédito?')" data-toggle="tooltip" title="Reversar Crédito"></i></a>
 							</td>
-						  @endif
 						</tr>
+						@endif
 						@endforeach
 					</tbody>
 				</table>
@@ -77,4 +77,5 @@ Lista de créditos
 			@endif
 		</div>
 	</div>
+
 	@endsection

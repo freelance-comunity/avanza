@@ -40,7 +40,7 @@ Lista de créditos
 						$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 						$late_balance = $late_payments->sum('balance');
 						@endphp
-						@if ($credit->debt->status == 'VIGENTE')
+						@if ($credit->debt->status == 'Pagado')
 						<tr>
 							<td>{!! $credit->folio !!}</td>
 							<td>{!! $credit->firts_name !!} {!! $credit->last_name !!} {!! $credit->mothers_last_name !!}</td>

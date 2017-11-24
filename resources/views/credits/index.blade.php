@@ -33,9 +33,10 @@ Lista de créditos
 						<th>No. Cuotas</th>
 						<th>Vencido</th>
 						<th>Estatus</th>
-						<th width="50px">Acción</th>
+						<th width="50px">Detalle crédito</th>
 						@if (Auth::user()->hasRole(['administrador', 'director-general']))
 						<th width="50px">Reversar</th>
+						<th width="50px">Condonar</th>
 						@endif
 					</thead>
 					<tbody>
@@ -45,6 +46,7 @@ Lista de créditos
 						$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 						$late_balance = $late_payments->sum('balance');
 						@endphp
+						@if ($credit->debt->status == 'VIGENTE')
 						<tr>
 							<td>#{{ ++$key }}</td>
 							<td>{!! $credit->folio !!}</td>
@@ -60,16 +62,20 @@ Lista de créditos
 							@endif
 							<td>{{ $credit->debt['status'] }}</td>
 							<td>
-								<a href="{{ url('account') }}/{{ $credit->id }}"><i class="fa fa-align-left fa-2x" data-toggle="tooltip" title="Ver Estado de Cuenta"></i></a>
-								<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Solicitud"></i></a>
+								{{-- <a href="{{ url('account') }}/{{ $credit->id }}"><i class="fa fa-align-left fa-2x" data-toggle="tooltip" title="Ver Estado de Cuenta"></i></a>
+								<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Solicitud"></i></a> --}}
 								<a href="{!! route('credits.show', [$credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>
 							</td>
 							@if (Auth::user()->hasRole(['administrador', 'director-general']))
 							<td>
-								<a href="{{ url('reverse') }}/{{ $credit->id }}"><i class="fa  fa-reply fa-2x" data-toggle="tooltip" title="Reversar Crédito"></i></a>
+								<a href="{{ url('reverse') }}/{{ $credit->id }}"><i class="fa fa-reply fa-2x" onclick="return confirm('¿Estas seguro de revertir este crédito?')" data-toggle="tooltip" title="Reversar Crédito"></i></a>
+							</td>
+							<td>
+								<a href="{{ url('reverse') }}/{{ $credit->id }}"><i class="fa fa-trash fa-2x" onclick="return confirm('¿Estas seguro de revertir este crédito?')" data-toggle="tooltip" title="Condonar Crédito"></i></a>
 							</td>
 						  @endif
 						</tr>
+						@endif
 						@endforeach
 					</tbody>
 				</table>

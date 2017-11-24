@@ -2,7 +2,7 @@
   <meta charset="UTF-8">
   <title>CREDIEFECTIVO</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
   <link rel="icon" href="{{ asset('/img/icon.png') }}" type="image/x-icon" />
 
   <!-- Bootstrap 3.3.4 -->
@@ -45,7 +45,7 @@
         <link rel="stylesheet" href="{{ asset('css/toasts/toastr.min.css') }}">
         {{--  Datatables --}}
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> --}}
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
 
 

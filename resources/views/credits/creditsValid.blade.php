@@ -21,7 +21,7 @@ Lista de créditos
 			@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 			<table class="table"  id="example">
 				@else
-				<table class="table"  id="pagos_promotor">
+				<table class="table"  id="creditsValid">
 					@endif
 					<thead class="bg-primary">
 						<th>No.</th>
@@ -83,4 +83,17 @@ Lista de créditos
 			@endif
 		</div>
 	</div>
+	<script type="text/javascript">
+			$(document).ready(function(){
+					$('#creditsValid').DataTable({
+							columnDefs: [{
+									targets: [0],
+									visible: false,
+									searchable: false
+									},
+							],
+							order: [[0, "asc"]],
+					});
+			});
+	</script>
 	@endsection

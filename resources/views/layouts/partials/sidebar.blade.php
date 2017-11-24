@@ -129,5 +129,4 @@
 </section>
 <!-- /.sidebar -->
 </aside>
-
 @include('cotizador')

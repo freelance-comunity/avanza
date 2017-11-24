@@ -850,4 +850,29 @@ class CreditController extends AppBaseController
         Toastr::success('Solicitud creada exitosamente.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
         return redirect(route('credits.index'));
     }
+
+    public function punish($id)
+    {
+        $credit = Credit::find($id);
+        $debt = $credit->debt;
+        $payments = $debt->payments;
+        foreach ($payments as $payment) {
+            if ($payment != 'Pagado') {
+                $payment->status  = 'Pagado';
+                $payment->capital = 0;
+                $payment->interest = 0;
+                $payment->moratorium = 0;
+                $payment->payment = $payment->total;
+                $payment->balance = 0;
+                $payment->save();
+            }
+        }
+        $debt->status = "Pagado";
+        $debt->ammount = 0;
+        $debt->credit->status = "Pagado";
+        $debt->credit->save();
+        $debt->save();
+        Toastr::success('Crédito condonado exitosamente.', 'CREDITOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+        return redirect()->back();
+    }
 }

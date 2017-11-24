@@ -1239,3 +1239,5 @@ Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');
 Route::get('reportPaymentCentroAjax','GeneralController@reportPaymentCentroAjax');
 
 Route::get('reverse/{id}','GeneralController@reverse');
+
+Route::get('punishCredit/{id}', 'CreditController@punish');

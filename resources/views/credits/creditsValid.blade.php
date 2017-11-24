@@ -24,7 +24,6 @@ Lista de créditos
 				<table class="table"  id="creditsValid">
 					@endif
 					<thead class="bg-primary">
-						<th>No.</th>
 						<th>Folio</th>
 						<th>Cliente</th>
 						<th>Fecha de Contrato</th>
@@ -48,7 +47,6 @@ Lista de créditos
 						@endphp
 						@if ($credit->debt->status == 'VIGENTE')
 						<tr>
-							<td>#{{ ++$key }}</td>
 							<td>{!! $credit->folio !!}</td>
 							<td>{!! $credit->firts_name !!} {!! $credit->last_name !!} {!! $credit->mothers_last_name !!}</td>
 							<td>{!! strtoupper($credit->date->format('d F Y')) !!}</td>

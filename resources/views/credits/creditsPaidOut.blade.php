@@ -30,9 +30,8 @@ Lista de créditos
 						<th>Sucursal</th>
 						<th>$ Monto</th>
 						<th>No. Cuotas</th>
-						<th>Vencido</th>
 						<th>Estatus</th>
-						<th width="50px">Acción</th>
+						<th width="50px">Detalle crédito</th>
 					</thead>
 					<tbody>
 						@foreach($credits as $key=>$credit)
@@ -41,7 +40,7 @@ Lista de créditos
 						$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
 						$late_balance = $late_payments->sum('balance');
 						@endphp
-						@if ($credit->debt->status == 'Pagado')
+						@if ($credit->debt->status == 'VIGENTE')
 						<tr>
 							<td>{!! $credit->folio !!}</td>
 							<td>{!! $credit->firts_name !!} {!! $credit->last_name !!} {!! $credit->mothers_last_name !!}</td>
@@ -49,15 +48,10 @@ Lista de créditos
 							<td>{!! $credit->branch !!}</td>
 							<td>${!! number_format($credit->ammount, 2) !!}</td>
 							<td>{!! $credit->dues !!}</td>
-							@if ($late_balance==0)
-							<td class="success">${!! number_format($late_balance, 2) !!}</td>
-							@elseif($late_balance > 0)
-							<td class="danger">$ {{ number_format($late_balance, 2) }}</td>
-							@endif
 							<td>{{ $credit->debt['status'] }}</td>
 							<td>
-								<a href="{{ url('account') }}/{{ $credit->id }}"><i class="fa fa-align-left fa-2x" data-toggle="tooltip" title="Ver Estado de Cuenta"></i></a>
-								<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Solicitud"></i></a>
+								{{-- <a href="{{ url('account') }}/{{ $credit->id }}"><i class="fa fa-align-left fa-2x" data-toggle="tooltip" title="Ver Estado de Cuenta"></i></a>
+								<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Solicitud"></i></a> --}}
 								<a href="{!! route('credits.show', [$credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>
 							</td>
 						</tr>

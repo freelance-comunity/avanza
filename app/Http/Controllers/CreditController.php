@@ -889,62 +889,21 @@ class CreditController extends AppBaseController
 }
 public function reestructureCredit(Request $request)
 {
-        $credit = new Credit;
-        if ($request->input('firm')) {
-            $data_uri = $request->input('firm');
-            $encoded_image = explode(",", $data_uri)[1];
-            $decoded_image = base64_decode($encoded_image);
-            $url = 'signature'. '-id-'. $request->input('client_id') . rand(111, 9999).'.png';
-            file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
-        }
-      
-        $input = $request->all();
+    $credit = new Credit;
+    if ($request->input('firm')) {
+        $data_uri = $request->input('firm');
+        $encoded_image = explode(",", $data_uri)[1];
+        $decoded_image = base64_decode($encoded_image);
+        $url = 'signature'. '-id-'. $request->input('client_id') . rand(111, 9999).'.png';
+        file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
+    }
+    $input['firm']   = $url;
 
-        $number = Credit::max('id') + 1;
-        $input['folio'] = 'RESTRUCTURADO'.'00'.$number;
-        $input['civil_status'] = $credit->civil_status;
-        $input['phone'] = $credit->phone;
-        $input['no_familys'] = $credit->no_familys;
-        $input['type_of_housing'] = $credit->type_of_housing;
-        $input['street'] = $credit->street;
-        $input['number'] = $credit->number;
-        $input['colony'] = $credit->colony;
-        $input['municipality'] = $credit->municipality;
-        $input['state'] = $credit->state;
-        $input['postal_code'] = $credit->postal_code;
-        $input['references'] = $credit->references;
-        $input['street_company'] = $credit->street_company;
-        $input['number_company'] = $credit->number_company;
-        $input['colony_company'] = $credit->colony_company;
-        $input['municipality_company'] = $credit->municipality_company;
-        $input['state_company'] = $credit->state_company;
-        $input['postal_code_company'] = $credit->postal_code_company;
-        $input['phone_company'] = $credit->phone_company;
-        $input['name_company'] = $credit->name_company;
-        if (count($credit->aval) > 0) {
-            $input['name_aval'] = $credit->name_aval;
-            $input['last_name_aval'] = $credit->last_name_aval;
-            $input['mothers_name_aval'] = $credit->mothers_name_aval;
-            $input['curp_aval'] = $credit->curp_aval;
-            $input['phone_aval'] = $credit->phone_aval;
-            $input['civil_status_aval'] = $credit->civil_status_aval;
-            $input['scholarship_aval'] = $credit->scholarship_aval;
-            $input['street_aval'] = $credit->street_aval;
-            $input['number_aval'] = $credit->number_aval;
-            $input['colony_aval'] = $credit->colony_aval;
-            $input['municipality_aval'] = $credit->municipality_aval;
-            $input['state_aval'] = $credit->state_aval;
-            $input['postal_code_aval'] = $credit->postal_code_aval;
-        }
-        if ($request->input('firm')) {
-            $input['firm']   = $url;
-        }
-        // if ($product->name = "REESTRUCTURACIÓN") {
-        //  $input['user_id'] = $id_user;
-        // }
-        // $input['status'] = "MINISTRADO";
-        $credit = Credit::create($input);
-            Toastr::success('Crédito Reestructurado Creado Exitosamente.', 'CREDITOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-        return redirect()->back();
+    $input['folio'] = '1';
+    $input = $request->all();
+
+    $credit = Credit::create($input);
+    Toastr::success('Crédito Reestructurado Creado Exitosamente.', 'CREDITOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+    return redirect()->back();
 }   
 }

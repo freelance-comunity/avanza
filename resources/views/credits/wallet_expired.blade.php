@@ -33,6 +33,7 @@ Lista de créditos
 						<th>Sucursal</th>
 						<th>$ Monto</th>
 						<th>Tasa</th>
+						<th># Cuotas</th>
 						<th>Cuotas pagadas</th>
 						<th>Cuotas parciales</th>
 						<th>Cuotas vencidas</th>
@@ -80,6 +81,7 @@ Lista de créditos
 							<td>{!! $credit->branch !!}</td>
 							<td>${!! number_format($credit->ammount, 2) !!}</td>
 							<td>{!! $credit->interest_rate!!}%</td>
+							<td>{!!$credit->dues!!}</td>
 							<td>{!! $current_payments->count() !!}</td>
 							<td>{!! $partial_payments->count() !!}</td>
 							<td>{!! $late_payments->count() !!}</td>

@@ -94,13 +94,13 @@
  </ul>
 </li>
 @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
-{{-- <li class="treeview">
+<li class="treeview">
   <a href="#"><i class='fa fa-external-link'></i><span> Créditos Reestructurados</span><i class="fa fa-angle-left pull-right"></i></a>
   <ul class="treeview-menu">
    <li><a href="{{ url('restructures')}}">Crear</a></li>
    <li><a href="#">Ver</a></li>
  </ul>
-</li> --}}
+</li>
 @endif
 @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 <li class="treeview">

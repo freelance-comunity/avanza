@@ -37,6 +37,8 @@
           <li><a href="{{ url('showInvestments') }}/{{ Auth::user()->id }}">Inversiones</a></li>
           <li><a href="{{ url('showRetreats') }}/{{ Auth::user()->id }}">Retiros</a></li>
           <li><a href="{{ url('transfer') }}">Reasignación de Cartera</a></li>
+          {{-- <li><a href="{{ url('moveCredits') }}">Transferir Credito</a></li> --}}
+           <li><a data-toggle="modal" data-target="#move"><span>Transferir Crédito</span></a></li>
           @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>
@@ -47,7 +49,7 @@
       @if(Auth::user()->hasRole(['administrador', 'director-general']))
       {{--   <li><a href="{{ url('graphics2') }}"><i class='fa fa-line-chart'></i> <span>Graficas 2</span></a></li> --}}
       <li class="treeview">
-        <a href="#"><i class='fa fa-pie-chart'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <a href="#"><i class='ion ion-pie-graph'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
          <li><a href="{{ url('walletExpired') }}">Cartera</a></li>
          <li><a href="{{ url('totalVault') }}">Total bovéda</a></li>
@@ -92,13 +94,13 @@
  </ul>
 </li>
 @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
-<li class="treeview">
+{{-- <li class="treeview">
   <a href="#"><i class='fa fa-external-link'></i><span> Créditos Reestructurados</span><i class="fa fa-angle-left pull-right"></i></a>
   <ul class="treeview-menu">
    <li><a href="{{ url('restructures')}}">Crear</a></li>
    <li><a href="#">Ver</a></li>
  </ul>
-</li>
+</li> --}}
 @endif
 @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 <li class="treeview">
@@ -130,3 +132,4 @@
 <!-- /.sidebar -->
 </aside>
 @include('cotizador')
+@include('partials.move')

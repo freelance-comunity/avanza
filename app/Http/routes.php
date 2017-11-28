@@ -761,7 +761,12 @@ Route::get('/transfer', function () {
     return view('partials.transfer')
     ->with('users', $users);
 });
-
+Route::get('/moveCredits',function(){
+    $credits= App\Models\Credit::all()->where('status','MINISTRADO');
+   return view('partials.moveCredits')
+   ->with('credits',$credits);
+});
+Route::Post('move', 'CreditController@move');
 Route::get('transferClients', function () {
     $branch = App\Models\Branch::find(4);
     $clients = $branch->clients;
@@ -969,13 +974,13 @@ Route::get('applyMoratorium',function(){
 
 Route::get('productos', function () {
 
- $credit = App\Models\Credit::all();
- foreach ($credit as $key => $credit) {
+   $credit = App\Models\Credit::all();
+   foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
-     echo $credit->periodicity;
-     echo $credit->adviser;
-     echo "<br>";
- }
+       echo $credit->periodicity;
+       echo $credit->adviser;
+       echo "<br>";
+   }
 
 }
 });
@@ -1169,16 +1174,17 @@ Route::get('view-restructures/{id}', function($id)
 });
 
 Route::Post('consolidate', 'GeneralController@consolidate');
+Route::Post('reestructureCredit','CreditController@reestructureCredit');
 
 Route::get('paymentsCorrection', function(){
     $payments = App\Models\Payment::all()->where('status','Pagado');
     foreach ($payments as $key => $payment) {
-     $payment->capital = 0;
-     $payment->interest = 0;
-     $payment->moratorium = 0;
-     $payment->save();
- }
- echo "Pagos Pagados corregidos";
+       $payment->capital = 0;
+       $payment->interest = 0;
+       $payment->moratorium = 0;
+       $payment->save();
+   }
+   echo "Pagos Pagados corregidos";
 });
 
 Route::get('paymentsCorrectionVencido', function(){

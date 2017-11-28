@@ -125,11 +125,11 @@ class CreditController extends AppBaseController
         $product = Product::find($request->input('type_product'));
         // $LatePayments = LatePayments::where('debt_id', $debt->id)->where('status', 'Bloqueado')->count();
         //Restriccion de Números de creditos con un producto
-        // $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
-        // if ($typecredit) {
-        // 	Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
-        // 	return redirect(route('clients.index'));
-        // }
+        $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
+        if ($typecredit) {
+        	Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
+        	return redirect(route('clients.index'));
+        }
         $ammount = $request->input('ammount');
         // $id_user = $request->input('adviser');
         // $user = User::find($id_user);
@@ -182,39 +182,39 @@ class CreditController extends AppBaseController
                 // 	Image::make($firm_ine)->resize(300, 300)->save( public_path('/uploads/firms/' . $filename ) );
                 // 	$input['firm_ine'] = $filename;
                 // // }
-                // $new = Client::find($request->input('client_id'))->credits()->count();
+                $new = Client::find($request->input('client_id'))->credits()->count();
                 $client = Client::find($request->input('client_id'));
                 $input = $request->all();
-                // $product = Product::find($request->input('type_product'));
-                // if ($request->input('ammount') > $product->ammount_max) {
-                // 	Toastr::warning('El monto máximo es del producto: ' .$product->ammount_max, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                // 	return redirect()->back()->withInput($request->all());
-                // }elseif ($request->input('ammount') < $product->ammount_min) {
-                // 	Toastr::warning('El monto mínimo es del producto: '.$product->ammount_min, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                // 	return redirect()->back()->withInput($request->all());
-                // }
-                // //Restricciión de Monto Máximo del Cliente
-                // elseif ($request->input('ammount') > $client->maximun_amount) {
-                // 	Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                // 	return redirect()->back()->withInput($request->all());
-                // }
-                // 	//Restriccion de Cliente Nuevo
-                // elseif ($new == 0 && $request->input('ammount') > 3000 && $request->input('periodicity')== "CREDIDIARIO25") {
-                // 	Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                // 	return redirect()->back()->withInput($request->all());
-                // }
-                // elseif ($new == 0 && $request->input('ammount') > 3000 && $request->input('periodicity') == "DIARIO") {
-                // 	Toastr::error('El monto máximo de un cliente nuevo: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                // 	return redirect()->back()->withInput($request->all());
-                // }
-                // elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDISEMANA") {
-                // 	Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                // 	return redirect()->back()->withInput($request->all());
-                // }
-                // elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDIDIARIO4") {
-                // 	Toastr::error('El monto máximo de un cliente nuevo: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                // 	return redirect()->back()->withInput($request->all());
-                // }
+                $product = Product::find($request->input('type_product'));
+                if ($request->input('ammount') > $product->ammount_max) {
+                	Toastr::warning('El monto máximo es del producto: ' .$product->ammount_max, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                	return redirect()->back()->withInput($request->all());
+                }elseif ($request->input('ammount') < $product->ammount_min) {
+                	Toastr::warning('El monto mínimo es del producto: '.$product->ammount_min, 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                	return redirect()->back()->withInput($request->all());
+                }
+                //Restricciión de Monto Máximo del Cliente
+                elseif ($request->input('ammount') > $client->maximun_amount) {
+                	Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                	return redirect()->back()->withInput($request->all());
+                }
+                	//Restriccion de Cliente Nuevo
+                elseif ($new == 0 && $request->input('ammount') > 3000 && $request->input('periodicity')== "CREDIDIARIO25") {
+                	Toastr::error('El monto máximo de un cliente nuevo es: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                	return redirect()->back()->withInput($request->all());
+                }
+                elseif ($new == 0 && $request->input('ammount') > 3000 && $request->input('periodicity') == "DIARIO") {
+                	Toastr::error('El monto máximo de un cliente nuevo es: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                	return redirect()->back()->withInput($request->all());
+                }
+                elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDISEMANA") {
+                	Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                	return redirect()->back()->withInput($request->all());
+                }
+                elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDIDIARIO4") {
+                	Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                	return redirect()->back()->withInput($request->all());
+                }
                 // elseif ($LatePayments >=3){
                 // 	Toastr::error('No le puedes aumentar el monto a este cliente ya que cuenta con 3 ó más pagos atrasados','MONTO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
                 // 	return redirect(route('clients.index'));
@@ -875,4 +875,76 @@ class CreditController extends AppBaseController
         Toastr::success('Crédito condonado exitosamente.', 'CREDITOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
         return redirect()->back();
     }
+    public function move(Request $request)
+    {
+      $input = $request->all();
+      foreach ($input['rows'] as $row) 
+      {
+        $id_credit = $row['id'];
+        $credit = Credit::find($id_credit);
+        echo $credit->folio;
+        echo "<br>";
+    }
+    
+}
+public function reestructureCredit(Request $request)
+{
+        $credit = new Credit;
+        if ($request->input('firm')) {
+            $data_uri = $request->input('firm');
+            $encoded_image = explode(",", $data_uri)[1];
+            $decoded_image = base64_decode($encoded_image);
+            $url = 'signature'. '-id-'. $request->input('client_id') . rand(111, 9999).'.png';
+            file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
+        }
+      
+        $input = $request->all();
+
+        $number = Credit::max('id') + 1;
+        $input['folio'] = 'RESTRUCTURADO'.'00'.$number;
+        $input['civil_status'] = $credit->civil_status;
+        $input['phone'] = $credit->phone;
+        $input['no_familys'] = $credit->no_familys;
+        $input['type_of_housing'] = $credit->type_of_housing;
+        $input['street'] = $credit->street;
+        $input['number'] = $credit->number;
+        $input['colony'] = $credit->colony;
+        $input['municipality'] = $credit->municipality;
+        $input['state'] = $credit->state;
+        $input['postal_code'] = $credit->postal_code;
+        $input['references'] = $credit->references;
+        $input['street_company'] = $credit->street_company;
+        $input['number_company'] = $credit->number_company;
+        $input['colony_company'] = $credit->colony_company;
+        $input['municipality_company'] = $credit->municipality_company;
+        $input['state_company'] = $credit->state_company;
+        $input['postal_code_company'] = $credit->postal_code_company;
+        $input['phone_company'] = $credit->phone_company;
+        $input['name_company'] = $credit->name_company;
+        if (count($credit->aval) > 0) {
+            $input['name_aval'] = $credit->name_aval;
+            $input['last_name_aval'] = $credit->last_name_aval;
+            $input['mothers_name_aval'] = $credit->mothers_name_aval;
+            $input['curp_aval'] = $credit->curp_aval;
+            $input['phone_aval'] = $credit->phone_aval;
+            $input['civil_status_aval'] = $credit->civil_status_aval;
+            $input['scholarship_aval'] = $credit->scholarship_aval;
+            $input['street_aval'] = $credit->street_aval;
+            $input['number_aval'] = $credit->number_aval;
+            $input['colony_aval'] = $credit->colony_aval;
+            $input['municipality_aval'] = $credit->municipality_aval;
+            $input['state_aval'] = $credit->state_aval;
+            $input['postal_code_aval'] = $credit->postal_code_aval;
+        }
+        if ($request->input('firm')) {
+            $input['firm']   = $url;
+        }
+        // if ($product->name = "REESTRUCTURACIÓN") {
+        //  $input['user_id'] = $id_user;
+        // }
+        // $input['status'] = "MINISTRADO";
+        $credit = Credit::create($input);
+            Toastr::success('Crédito Reestructurado Creado Exitosamente.', 'CREDITOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+        return redirect()->back();
+}   
 }

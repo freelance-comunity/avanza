@@ -856,7 +856,8 @@ class GeneralController extends Controller
         return view('restructures.process')
         ->with('global_capital', $global_capital)
         ->with('global_interest', $global_interest)
-        ->with('global_moratorium', $global_moratorium);
+        ->with('global_moratorium', $global_moratorium)
+        ->with('credit',$credit);
     }
 
     public function reverse($id)

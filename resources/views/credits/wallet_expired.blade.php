@@ -24,6 +24,7 @@ Lista de créditos
 				<table class="table"  id="carteraVencida">
 					@endif
 					<thead class="bg-primary">
+						<th>ID</th>
 						<th>Folio</th>
 						<th>Región</th>
 						<th>Tipo de Crédito</th>
@@ -68,6 +69,7 @@ Lista de créditos
 						$pending_total = $pending_interest + $pending_capital;
 						@endphp
 						<tr>
+							<td>{!!$credit->client_id!!}</td>
 							<td><a href="{!! route('credits.show', [$credit->id]) !!}">{!! $credit->folio !!}</a></td>
 							<td>{!! $credit->region['name'] !!}</td>
 							@if ($credit->periodicity == "TRADICIONAL" OR $credit->periodicity == "DIARIO4" OR $credit->periodicity == "25" OR  $credit->periodicity == "SEMANAL")

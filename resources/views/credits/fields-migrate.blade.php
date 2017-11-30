@@ -127,8 +127,8 @@ $users = $filtered->where('region_id', $region_allocation->id);
               ]) !!}
             </div>
             <div class="form-group col-sm-6 col-lg-8">
-              {!! Form::label('adviser', 'Nombre del Ejecutivo:') !!}
-              <select name="adviser"  id="" class="form-control input-lg">
+              {!! Form::label('user_id', 'Nombre del Ejecutivo:') !!}
+              <select name="user_id"  id="" class="form-control input-lg">
                 <option selected="">Elige Promotor</option>
                 @foreach ($users as $user)
                 @if ($user->hasRole(['ejecutivo-de-credito']))
@@ -139,14 +139,14 @@ $users = $filtered->where('region_id', $region_allocation->id);
                 @endforeach
               </select>
             </div>
-            <input type="hidden" name="user_id" value="">
+           {{--  <input type="hidden" name="user_id" value="">
             <script>
               $(document).ready(function(){
                 $("select[name=adviser]").change(function(){
                   $('input[name=user_id]').val($(this).val());
                 });
               });
-            </script>
+            </script> --}}
 
              {{-- <select style="visibility:hidden" name="xxx"  id="" class="form-control input-lg">
                 <option selected="">Elige Promotor</option>

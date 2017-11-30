@@ -832,8 +832,9 @@ class GeneralController extends Controller
         foreach ($input['rows'] as $row) {
             $id_credit = $row['id'];
             $credit = Credit::find($id_credit);
-
+            $client = Client::find($id_credit);
             $debt = $credit->debt;
+            $client = $credit->client;
             $late_capital = DB::table('payments')->where([
                 ['debt_id', '=', $debt->id],
                 ['status', '!=', 'Pagado'],
@@ -857,7 +858,8 @@ class GeneralController extends Controller
         ->with('global_capital', $global_capital)
         ->with('global_interest', $global_interest)
         ->with('global_moratorium', $global_moratorium)
-        ->with('credit',$credit);
+        ->with('credit',$credit)
+        ->with('client',$client);
     }
 
     public function reverse($id)

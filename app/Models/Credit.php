@@ -71,7 +71,7 @@ class Credit extends Model
 	];
 
 	public static $rules = [
-	    "adviser" => "required",
+	    // "adviser" => "required",
 		"date" => "required",
 		"branch" => "required",
 		"ammount" => "required",

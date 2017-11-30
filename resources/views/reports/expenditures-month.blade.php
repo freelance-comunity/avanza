@@ -31,11 +31,16 @@ Lista de Gastos @endsection
 						<td>{{$expenditure->branch->name}}</td>
 						<td class="desc">{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}</td>
 						<td class="desc">{{ $expenditure->date }}</td>
+						@if ($expenditure->type)
 						<td>{{$expenditure->type}}</td>
+						@else
+						<td>Sin especificar</td>
+						@endif
+						
 						<td class="desc">{{ $expenditure->description }}</td>
 						<td class="total">${{ number_format($expenditure->ammount,2) }}</td>
 					</tr>
-                    @endforeach
+					@endforeach
 				</tbody>
 			</table>
 		</div>

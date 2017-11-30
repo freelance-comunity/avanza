@@ -41,6 +41,7 @@ Detalles
 						<option>Renta de Inmuebles</option>
 						<option>Renta de Internet</option>
 						<option>Renta Teléfono</option>
+						<option>Servicio Agua Oficinas</option>
 						<option>Toner o Cartuchos de Impresora</option>
 						<option>Viáticos</option>
 					</select>

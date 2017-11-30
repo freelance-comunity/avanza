@@ -65,7 +65,7 @@ Detalles
 						<p><strong>TOTAL PAGADO:</strong> ${{ number_format($total_payment,2) }}</p>
 						<p><strong>TOTAL RESTANTE:</strong> ${{ number_format($debt->ammount,2) }}</p>
 						<p><strong>ESTATUS DEL CRÉDITO: </strong> {{ strtoupper($debt->status) }}</p>
-						<p><strong>TOTAL DE ATRASOS ACUMULADOS: </strong>{{$lates->count()}}</p>
+						
 					</div>
 					<div class="col-md-4">
 						<p style="color:red;"><strong>CAPITAL:</strong>$ {{ number_format($late_capital, 2) }}</p>

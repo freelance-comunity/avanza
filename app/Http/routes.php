@@ -1170,7 +1170,8 @@ Route::get('view-restructures/{id}', function($id)
   // echo $client->folio;
   // dd($credits);
   return view('restructures.index-credits')
-  ->with('credits', $credits);
+  ->with('credits', $credits)
+  ->with('client',$client);
 });
 
 Route::Post('consolidate', 'GeneralController@consolidate');

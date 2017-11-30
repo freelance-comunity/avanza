@@ -182,6 +182,7 @@ class CreditController extends AppBaseController
                 // 	Image::make($firm_ine)->resize(300, 300)->save( public_path('/uploads/firms/' . $filename ) );
                 // 	$input['firm_ine'] = $filename;
                 // // }
+               
                 $new = Client::find($request->input('client_id'))->credits()->count();
                 $client = Client::find($request->input('client_id'));
                 $input = $request->all();
@@ -224,6 +225,7 @@ class CreditController extends AppBaseController
                 // 	return redirect()->back()->withInput($request->all());
                 // }
                 $number = Credit::max('id') + 1;
+                $input['adviser']   = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
                 $input['folio'] = $client->branch->nomenclature.'00'.$number;
                 $input['civil_status'] = $client->civil_status;
                 $input['phone'] = $client->phone;
@@ -897,13 +899,102 @@ public function reestructureCredit(Request $request)
         $url = 'signature'. '-id-'. $request->input('client_id') . rand(111, 9999).'.png';
         file_put_contents('../public/uploads/signatures/' . $url, $decoded_image);
     }
-    $input['firm']   = $url;
 
-    $input['folio'] = '1';
+    $id_user = $request->input('user_id');
+    $user = User::find($id_user);
+    $client = Client::find($request->input('client_id'));
     $input = $request->all();
 
+    $number = Credit::max('id') + 1;
+    $input['adviser']   = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
+    $input['folio'] = $client->branch->nomenclature.'00'.$number;
+    $input['civil_status'] = $client->civil_status;
+    $input['phone'] = $client->phone;
+    $input['no_familys'] = $client->no_familys;
+    $input['type_of_housing'] = $client->type_of_housing;
+    $input['street'] = $client->location->street;
+    $input['number'] = $client->location->number;
+    $input['colony'] = $client->location->colony;
+    $input['municipality'] = $client->location->municipality;
+    $input['state'] = $client->location->state;
+    $input['postal_code'] = $client->location->postal_code;
+    $input['references'] = $client->location->references;
+    $input['street_company'] = $client->company->street_company;
+    $input['number_company'] = $client->company->number_company;
+    $input['colony_company'] = $client->company->colony_company;
+    $input['municipality_company'] = $client->company->municipality_company;
+    $input['state_company'] = $client->company->state_company;
+    $input['postal_code_company'] = $client->company->postal_code_company;
+    $input['phone_company'] = $client->company->phone_company;
+    $input['name_company'] = $client->company->name_company;
+    if (count($client->aval) > 0) {
+        $input['name_aval'] = $client->aval->name_aval;
+        $input['last_name_aval'] = $client->aval->last_name_aval;
+        $input['mothers_name_aval'] = $client->aval->mothers_name_aval;
+        $input['curp_aval'] = $client->aval->curp_aval;
+        $input['phone_aval'] = $client->aval->phone_aval;
+        $input['civil_status_aval'] = $client->aval->civil_status_aval;
+        $input['scholarship_aval'] = $client->aval->scholarship_aval;
+        $input['street_aval'] = $client->aval->street_aval;
+        $input['number_aval'] = $client->aval->number_aval;
+        $input['colony_aval'] = $client->aval->colony_aval;
+        $input['municipality_aval'] = $client->aval->municipality_aval;
+        $input['state_aval'] = $client->aval->state_aval;
+        $input['postal_code_aval'] = $client->aval->postal_code_aval;
+    }
+    if ($request->input('firm')) {
+        $input['firm']   = $url;
+    }
+        // if ($product->name = "REESTRUCTURACIÓN") {
+        //  $input['user_id'] = $id_user;
+        // }
+    $input['status'] = "MINISTRADO";
     $credit = Credit::create($input);
+    $ammount= $credit->ammount;
+    $dues = $credit->dues;
+    $periodicity = $credit->periodicity;
+    $tasa = $request->input('interest_rate') / 100;
+    $interes = $ammount * $tasa;
+    $capital = $ammount/$dues;
+    $total = $ammount + $interes;
+    $pago = $total/$dues;
+    $intpago = $pago-$capital;
+    $date = new Carbon($credit->date);
+    if ($periodicity == 'REESTRUCTURADOS') {
+        $debt = new Debt;
+        $debt->ammount = ceil($total);
+        $debt->status = "VIGENTE";
+        $debt->credit_id = $credit->id;
+        $debt->branch_id =  $credit->branch_id;
+        $debt->region_id = $credit->region_id;
+        $debt->save();
+        for ($i=1; $i <= $credit->dues; $i++) {
+            $var = $date->addDay();
+            if ($date->dayOfWeek === \Carbon\Carbon::SUNDAY) {
+                $date->addDay();
+            }
+            $fechaPago[$i] = $date->toDateString();
+            $payment = new Payment;
+            $payment->number = $i;
+            $payment->day = $fechaPago[$i];
+            $payment->date =$fechaPago[$i];
+            $payment->ammount = ceil($pago);
+            $payment->capital = ceil($capital);
+            $payment->interest= $intpago;
+            $payment->moratorium = '0';
+            $payment->total = ceil($pago) + 0;
+            $payment->payment = 0;
+            $payment->balance = ceil($pago) + 0;
+            $payment->status = "Pendiente";
+            $payment->debt_id = $debt->id;
+            $payment->user_id = $credit->user_id;
+            $payment->branch_id = $credit->branch_id;
+            $payment->region_id = $credit->region_id;
+            $payment->save();
+        }
+    }
+
     Toastr::success('Crédito Reestructurado Creado Exitosamente.', 'CREDITOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-    return redirect()->back();
+    return redirect(route('credits.index'));
 }   
 }

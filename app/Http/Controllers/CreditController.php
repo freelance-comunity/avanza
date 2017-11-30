@@ -183,7 +183,7 @@ class CreditController extends AppBaseController
                 // 	$input['firm_ine'] = $filename;
                 // // }
                
-                $new = Client::find($request->input('client_id'))->credits()->count();
+                // $new = Client::find($request->input('client_id'))->credits()->count();
                 $client = Client::find($request->input('client_id'));
                 $input = $request->all();
                 $product = Product::find($request->input('type_product'));
@@ -200,22 +200,22 @@ class CreditController extends AppBaseController
                 	return redirect()->back()->withInput($request->all());
                 }
                 	//Restriccion de Cliente Nuevo
-                elseif ($new == 0 && $request->input('ammount') > 3000 && $request->input('periodicity')== "CREDIDIARIO25") {
-                	Toastr::error('El monto máximo de un cliente nuevo es: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                	return redirect()->back()->withInput($request->all());
-                }
-                elseif ($new == 0 && $request->input('ammount') > 3000 && $request->input('periodicity') == "DIARIO") {
-                	Toastr::error('El monto máximo de un cliente nuevo es: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                	return redirect()->back()->withInput($request->all());
-                }
-                elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDISEMANA") {
-                	Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                	return redirect()->back()->withInput($request->all());
-                }
-                elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDIDIARIO4") {
-                	Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-                	return redirect()->back()->withInput($request->all());
-                }
+                // elseif ($new == 0 && $request->input('ammount') > 3000 && $request->input('periodicity')== "CREDIDIARIO25") {
+                // 	Toastr::error('El monto máximo de un cliente nuevo es: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                // 	return redirect()->back()->withInput($request->all());
+                // }
+                // elseif ($new == 0 && $request->input('ammount') > 3000 && $request->input('periodicity') == "DIARIO") {
+                // 	Toastr::error('El monto máximo de un cliente nuevo es: $3000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                // 	return redirect()->back()->withInput($request->all());
+                // }
+                // elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDISEMANA") {
+                // 	Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                // 	return redirect()->back()->withInput($request->all());
+                // }
+                // elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDIDIARIO4") {
+                // 	Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+                // 	return redirect()->back()->withInput($request->all());
+                // }
                 // elseif ($LatePayments >=3){
                 // 	Toastr::error('No le puedes aumentar el monto a este cliente ya que cuenta con 3 ó más pagos atrasados','MONTO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
                 // 	return redirect(route('clients.index'));

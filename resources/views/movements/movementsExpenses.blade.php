@@ -25,7 +25,7 @@ Detalles
 						<div class="table-responsive">
 							<table class="table" id="expensees">
 								<thead class="bg-success">
-									<th>Region</th>
+									<th>Región</th>
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>

@@ -25,18 +25,26 @@ Detalles
 						<div class="table-responsive">
 							<table class="table" id="expensees">
 								<thead class="bg-success">
+									<th>Region</th>
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
+									<th>Tipo de Gasto</th>
 									<th>Concepto</th>
 									<th>Fecha/Hora asignación</th>
 								</thead>
 								<tbody>
 									@foreach($expenses as $expense)
 									<tr>
+										<td>{{ $expense->vault->user->region['name'] }}</td>
 										<td>{{ $expense->vault->user->branch['name'] }}</td>
 										<td>{{ $expense->vault->user['name'] }} {{ $expense->vault->user['father_last_name'] }} {{ $expense->vault->user['mother_last_name'] }}</td>
 										<td>${{ number_format($expense->ammount) }}</td>
+										@if ($expense->type)
+										<th>{{$expense->type}}</th>
+										@else
+										<th>Sin especificar</th>
+										@endif
 										<td>{{ $expense->description }}</td>
 										<td>{{ $expense->created_at }}</td>
 									</tr>
@@ -46,7 +54,7 @@ Detalles
 						</div>
 						@endif
 					</div>
-				
+
 				</div>
 			</div>
 		</div>

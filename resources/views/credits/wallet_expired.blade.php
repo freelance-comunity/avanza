@@ -57,6 +57,8 @@ Lista de créditos
 						$current_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pagado')->get();
 						$partial_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Parcial')->get();
 						$pending_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Pendiente')->get();
+						$total = $current_payments->sum('payment') + $partial_payments->sum('payment');
+
 						//$late_interest = $late_payments->sum('interest');
 
 						$late_interest = $late_payments->sum('interest');
@@ -87,7 +89,7 @@ Lista de créditos
 							<td>{!! $current_payments->count() !!}</td>
 							<td>{!! $partial_payments->count() !!}</td>
 							<td>{!! $late_payments->count() !!}</td>
-							<th class="info">${{ number_format($current_payments->sum('payment'),2) }}</th>
+							<th class="info">${{ number_format($total,2) }}</th>
 							@if ($late_total==0)
 							<td class="success">${!! number_format($late_total, 2) !!}</td>
 							@elseif($late_total > 0)

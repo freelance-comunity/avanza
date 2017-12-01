@@ -42,7 +42,7 @@
           @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>
-          <li><a href="{{ url('actives-admin') }}">Inversiones en Activos</a></li>
+        {{--   <li><a href="{{ url('actives-admin') }}">Inversiones en Activos</a></li> --}}
         </ul>
       </li>
       {{-- <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li> --}}
@@ -80,7 +80,7 @@
      <li><a href="{{ url('movementsExpenses') }}">Gastos</a></li>
      <li><a href="{{ url('movementsSalaries') }}">Sueldos</a></li>
      <li><a href="{{ url('movementsCut') }}">Cortes de Caja</a></li>
-     <li><a href="{{ url('movementsActives') }}">Inversión en Activos</a></li>
+    {{--  <li><a href="{{ url('movementsActives') }}">Inversión en Activos</a></li> --}}
    </ul>
  </li>
  @endif

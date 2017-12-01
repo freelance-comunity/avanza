@@ -763,8 +763,8 @@ Route::get('/transfer', function () {
 });
 Route::get('/moveCredits',function(){
     $credits= App\Models\Credit::all()->where('status','MINISTRADO');
-   return view('partials.moveCredits')
-   ->with('credits',$credits);
+    return view('partials.moveCredits')
+    ->with('credits',$credits);
 });
 Route::Post('move', 'CreditController@move');
 Route::get('transferClients', function () {
@@ -974,13 +974,13 @@ Route::get('applyMoratorium',function(){
 
 Route::get('productos', function () {
 
-   $credit = App\Models\Credit::all();
-   foreach ($credit as $key => $credit) {
+ $credit = App\Models\Credit::all();
+ foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
-       echo $credit->periodicity;
-       echo $credit->adviser;
-       echo "<br>";
-   }
+     echo $credit->periodicity;
+     echo $credit->adviser;
+     echo "<br>";
+ }
 
 }
 });
@@ -1180,12 +1180,12 @@ Route::Post('reestructureCredit','CreditController@reestructureCredit');
 Route::get('paymentsCorrection', function(){
     $payments = App\Models\Payment::all()->where('status','Pagado');
     foreach ($payments as $key => $payment) {
-       $payment->capital = 0;
-       $payment->interest = 0;
-       $payment->moratorium = 0;
-       $payment->save();
-   }
-   echo "Pagos Pagados corregidos";
+     $payment->capital = 0;
+     $payment->interest = 0;
+     $payment->moratorium = 0;
+     $payment->save();
+ }
+ echo "Pagos Pagados corregidos";
 });
 
 Route::get('paymentsCorrectionVencido', function(){
@@ -1248,3 +1248,19 @@ Route::get('reportPaymentCentroAjax','GeneralController@reportPaymentCentroAjax'
 Route::get('reverse/{id}','GeneralController@reverse');
 
 Route::get('punishCredit/{id}', 'CreditController@punish');
+
+Route::get('update',function(){
+
+    $payments = App\Models\Payment::all();
+    $dt = \Carbon\Carbon::create();
+   
+    foreach ($payments as $key => $value) {
+       //  if ($value->updated_at == "2017-11-29 09:07:32" ) {
+       //     echo $value->ammount;
+       //     echo "<br>";
+       // }
+        echo $value->ammount;
+           echo "<br>";
+
+   }
+});

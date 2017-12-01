@@ -43,6 +43,7 @@ Lista de créditos
 						@php
 						$debt = $credit->debt;
 						$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
+						$late_status = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->count();
 						$late_balance = $late_payments->sum('balance');
 						@endphp
 						@if ($credit->debt->status == 'VIGENTE')
@@ -58,7 +59,11 @@ Lista de créditos
 							@elseif($late_balance > 0)
 							<td class="danger">$ {{ number_format($late_balance, 2) }}</td>
 							@endif
+							@if ($late_status >=1)
+							<td>VENCIDO</td>
+							@else
 							<td>{{ $credit->debt['status'] }}</td>
+							@endif
 							<td>
 								{{-- <a href="{{ url('account') }}/{{ $credit->id }}"><i class="fa fa-align-left fa-2x" data-toggle="tooltip" title="Ver Estado de Cuenta"></i></a>
 								<a href="{{ url('solicitud') }}/{{ $credit->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Solicitud"></i></a> --}}
@@ -71,7 +76,7 @@ Lista de créditos
 							<td>
 								<a href="{{ url('punishCredit') }}/{{ $credit->id }}"><i class="fa fa-trash fa-2x" onclick="return confirm('¿Estas seguro de condonar este crédito?')" data-toggle="tooltip" title="Condonar Crédito"></i></a>
 							</td>
-						  @endif
+							@endif
 						</tr>
 						@endif
 						@endforeach
@@ -82,16 +87,16 @@ Lista de créditos
 		</div>
 	</div>
 	<script type="text/javascript">
-			$(document).ready(function(){
-					$('#creditsValid').DataTable({
-							columnDefs: [{
-									targets: [0],
-									visible: false,
-									searchable: false
-									},
-							],
-							order: [[0, "asc"]],
-					});
+		$(document).ready(function(){
+			$('#creditsValid').DataTable({
+				columnDefs: [{
+					targets: [0],
+					visible: false,
+					searchable: false
+				},
+				],
+				order: [[0, "asc"]],
 			});
+		});
 	</script>
 	@endsection

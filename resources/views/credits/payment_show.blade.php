@@ -8,6 +8,7 @@
 			<th>Pagado</th>
 			<th>Adeudo</th>
 			<th>Estatus</th>
+			<th>Fecha de Pago</th>
 		</thead>
 		<tbody>
 			@foreach($payments as $payment)

@@ -9,6 +9,7 @@
 		<th>Saldo Intereses</th>
 		<th>Saldo Moratorios</th>
 		<th>Estatus</th>
+		<th>Fecha de Pago</th>
 	</thead>
 	<tbody>
 		@foreach($payments as $payment)
@@ -24,6 +25,11 @@
 			<td>$ {{ number_format($payment->interest, 2) }}</td>
 			<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 			<td><p>{{$payment->status}}</p></td>
+			@if ($payment->status == 'Pagado' OR $payment->status == 'Parcial')
+					<td>{{$payment->updated_at}}</td>
+				@else
+					<td>Pago no realizado aún</td>
+				@endif
 		</tr>
 		@elseif($debt->credit->periodicity == "CREDISEMANA" && $payment->status == "Parcial")
 		<tr class="warning">
@@ -36,6 +42,11 @@
 			<td>$ {{ number_format($payment->interest, 2) }}</td>
 			<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 			<td><p>{{$payment->status}}</p></td>
+			@if ($payment->status == 'Pagado' OR $payment->status == 'Parcial')
+					<td>{{$payment->updated_at}}</td>
+				@else
+					<td>Pago no realizado aún</td>
+				@endif
 		</tr>
 		@elseif($payment->status == "Parcial")
 		<tr class="warning">
@@ -48,6 +59,11 @@
 			<td>$ {{ number_format($payment->interest, 2) }}</td>
 			<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 			<td><p>{{$payment->status}}</p></td>
+			@if ($payment->status == 'Pagado' OR $payment->status == 'Parcial')
+					<td>{{$payment->updated_at}}</td>
+				@else
+					<td>Pago no realizado aún</td>
+				@endif
 		</tr>
 		@elseif($payment->status == "Vencido")
 		<tr class="danger">
@@ -60,6 +76,11 @@
 			<td>$ {{ number_format($payment->interest, 2) }}</td>
 			<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 			<td><p>{{$payment->status}}</p></td>
+			@if ($payment->status == 'Pagado' OR $payment->status == 'Parcial')
+					<td>{{$payment->updated_at}}</td>
+				@else
+					<td>Pago no realizado aún</td>
+				@endif
 		</tr>
 		@elseif($payment->status == "Pagado")
 		<tr class="success">
@@ -72,6 +93,11 @@
 			<td>$ {{ number_format($payment->interest, 2) }}</td>
 			<td>$ {{ number_format($payment->moratorium, 2) }}</td>
 			<td><p>{{$payment->status}}</p></td>
+			@if ($payment->status == 'Pagado' OR $payment->status == 'Parcial')
+					<td>{{$payment->updated_at}}</td>
+				@else
+					<td>Pago no realizado aún</td>
+				@endif
 		</tr>
 		@endif
 		@endforeach

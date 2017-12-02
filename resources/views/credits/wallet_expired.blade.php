@@ -69,6 +69,8 @@ Lista de créditos
 						$pending_interest = $pending_payments->sum('interest');
 						$pending_capital = $pending_payments->sum('capital');
 						$pending_total = $pending_interest + $pending_capital;
+
+						
 						@endphp
 						<tr>
 							<td>{!!$credit->client_id!!}</td>

@@ -27,21 +27,29 @@ Detalles
 				<div class="form-group col-sm-6 col-lg-4">
 					{!! Form::label('type', 'Tipo de Gasto:') !!}
 					<select name="type" class="form-control input-lg">
+						<option>Accesorios Celulares</option>
+						<option>Amortización Vehículos</option>
 						<option>Artículos de Limpieza</option>
-						<option>Botiquín</option>
+						<option>Bicicletas (Compra de)</option>
 						<option>Cafetería</option>
+						<option>Celulares (Compre de)</option>
 						<option>Combustible</option>
-						<option>Energía Eléctrica</option>
+						<option>Computadora y Accesorios (Compra de)</option>
+						<option>Energía Eléctrica (Luz)</option>
 						<option>Fotocopias</option>
-						<option>Refacciones</option>
+						<option>Impresoras (Compra de)</option>
+						<option>Letreros y Anuncios Oficinas</option>
 						<option>Mantenimiento Vehículos</option>
+						<option>Mantenimiento/Adecuaciones Oficinas</option>
+						<option>Mobiliario y Equipo Oficinas</option>
+						<option>Motos (Compra de)</option>
 						<option>Papelería y Artículos de Oficina</option>
 						<option>Pasajes</option>
 						<option>Recargar Celular</option>
 						<option>Renta de Inmuebles</option>
-						<option>Renta de Internet</option>
-						<option>Renta Teléfono</option>
+						<option>Renta Internet y Telefonía Fija</option>
 						<option>Servicio Agua Oficinas</option>
+						<option>Software (Compra de)</option>
 						<option>Toner o Cartuchos de Impresora</option>
 						<option>Viáticos</option>
 					</select>

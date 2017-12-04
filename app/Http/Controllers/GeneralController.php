@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\User;
 use App\Role;
 use App\Models\Vault;
+use App\Models\Region;
 use App\Models\Income;
 use App\Models\Expenditure;
 use App\Models\ExpenditureCredit;
@@ -788,7 +789,7 @@ class GeneralController extends Controller
     {
 
         $payments = Payment::all()->where('region_id',3)->sortByDesc('created_at');
-        return view('partials.reportPayment')
+        return view('partials.reportPaymentAltos')
         ->with('payments',$payments);
         // $recoverys = IncomePayment::all()->where('region_id',3)->sortByDesc('created_at');
         // return view('partials.reportPayment')
@@ -796,8 +797,9 @@ class GeneralController extends Controller
     }
      public function reportPaymentNorte()
     {
+
         $payments = Payment::all()->where('region_id',1)->sortByDesc('created_at');
-        return view('partials.reportPayment')
+        return view('partials.reportPaymentNorte')
         ->with('payments',$payments);
     
         // $recoverys = IncomePayment::all()->where('region_id',3)->sortByDesc('created_at');
@@ -807,8 +809,9 @@ class GeneralController extends Controller
      public function reportPaymentCentro()
     {
 
+        
         $payments = Payment::all()->where('region_id',2)->sortByDesc('created_at');
-        return view('partials.reportPayment')
+        return view('partials.reportPaymentCentro')
         ->with('payments',$payments);
         // $recoverys = IncomePayment::all()->where('region_id',2)->sortByDesc('created_at');
         // return view('partials.reportPayment')
@@ -818,7 +821,7 @@ class GeneralController extends Controller
     {
 
         $payments = Payment::all()->where('region_id',4)->sortByDesc('created_at');
-        return view('partials.reportPayment')
+        return view('partials.reportPaymentMezcalapa')
         ->with('payments',$payments);
         // $recoverys = IncomePayment::all()->where('region_id',4)->sortByDesc('created_at');
         // return view('partials.reportPayment')

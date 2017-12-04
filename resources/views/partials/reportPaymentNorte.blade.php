@@ -14,7 +14,7 @@ Pagos
 	<div class="col-md-12">
 		<div class="box box-danger">
 			<div class="box-header with-border">
-				<h3 class="box-title">Historial de pagos Región Norte</h3>
+				<h3 class="box-title">Historial de pagos Norte</h3>
 			</div>  
 			<div class="box-body">
 				@if($payments->isEmpty())
@@ -23,28 +23,46 @@ Pagos
 				<div class="table-responsive">
 					<table class="table" id="recovery">
 						<thead class="bg-success">
+							<th># Cuota</th>
 							<th>Región</th>
 							<th>Sucursal</th>
 							<th>Promotor</th>
 							{{-- <th>Concepto</th> --}}
 							<th>Cliente</th>
-							<th>Folio crédito</th>
+							<th>Folio</th>
+							<th>Tipo de Crédito</th>
+							<th>Cuotas</th>
+							<th>Tasa</th>
 							<th>Monto</th>
 							<th>Capital</th>
 							<th>Intereses</th>
 							<th>Moratorio</th>
 							<th>Fecha/Hora asignación</th>
-						{{-- 	<th>status</th> --}}
+							{{-- 	<th>status</th> --}}
 						</thead>
 						<tbody>
 							@foreach($payments as $payment)
 							@if ($payment->status == 'Pagado' OR $payment->status == 'Parcial')
-								<tr>
+							<tr>
+								<td>{{$payment->number}}</td>
 								<td>{{$payment->region['name']}}</td>
 								<td>{{$payment->branch['name']}}</td>
 								<td>{{$payment->debt->credit->user['name']}} {{$payment->debt->credit->user['father_last_name']}}									{{$payment->debt->credit->user['mother_last_name']}}</td>
 								<td>{{$payment->debt->credit->firts_name}} {{$payment->debt->credit->last_name}} {{$payment->debt->credit->mothers_last_name}}</td>
 								<td>{{$payment->debt->credit->folio}}</td>
+								@if ($payment->debt->credit->periodicity == 'TRADICIONAL')
+								<td>MIGRADOS</td>
+								@elseif($payment->debt->credit->periodicity == 'DIARIO25')
+								<td>MIGRADOS</td>
+								@elseif($payment->debt->credit->periodicity == 'DIARIO4')
+								<td>MIGRADOS</td>
+								@elseif($payment->debt->credit->periodicity == 'SEMANAL')
+								<td>MIGRADOS</td>
+								@else
+								<td>{{$payment->debt->credit->periodicity}}</td>
+								@endif
+								<td>{{$payment->debt->credit->dues}}</td>
+								<td>{{$payment->debt->credit->interest_rate}}</td>
 								<td class="bg-green">{{$payment->payment}}</td>
 								<td class="bg-primary">{{$payment->capital}}</td>
 								<td class="bg-yellow">{{$payment->interest}}</td>

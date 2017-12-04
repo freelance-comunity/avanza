@@ -22,13 +22,13 @@
       <li class="header">Menú</li>
       <!-- Optionally, you can add icons to the links -->
       <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
-  {{--     <li><a data-toggle="modal" data-target="#cotizador"><i class="fa fa-calculator"></i><span>Cotizador</span></a></li> --}}
+      {{--     <li><a data-toggle="modal" data-target="#cotizador"><i class="fa fa-calculator"></i><span>Cotizador</span></a></li> --}}
       @role('ejecutivo-de-credito')
       <li><a href="{{ url('showVault') }}/{{ Auth::user()->id }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
       @endrole
       @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
       <li><a href="{{ url('vault') }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
-     {{--  <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Corte de Caja</span></a></li> --}}
+      {{--  <li><a href="{{ url('boxcut') }}"><i class="fa fa-scissors"></i> <span>Corte de Caja</span></a></li> --}}
       {{-- <li><a href="{{ url('reportPayment') }}"><i class="fa fa-scissors"></i> <span>Historial de pagos</span></a></li> --}}
       <li class="treeview">
         <a href="#"><i class='fa fa-cubes'></i><span> Administración</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -38,11 +38,11 @@
           <li><a href="{{ url('showRetreats') }}/{{ Auth::user()->id }}">Retiros</a></li>
           <li><a href="{{ url('transfer') }}">Reasignación de Cartera</a></li>
           {{-- <li><a href="{{ url('moveCredits') }}">Transferir Credito</a></li> --}}
-           <li><a data-toggle="modal" data-target="#move"><span>Transferir Crédito</span></a></li>
+          <li><a data-toggle="modal" data-target="#move"><span>Transferir Crédito</span></a></li>
           @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>
-        {{--   <li><a href="{{ url('actives-admin') }}">Inversiones en Activos</a></li> --}}
+          {{--   <li><a href="{{ url('actives-admin') }}">Inversiones en Activos</a></li> --}}
         </ul>
       </li>
       {{-- <li><a href="{{ url('graphics') }}"><i class='fa fa-line-chart'></i> <span>Graficas</span></a></li> --}}
@@ -59,45 +59,56 @@
      <li class="treeview">
       <a href="#"><i class='fa fa-dollar'></i><span> Historial De Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>
       <ul class="treeview-menu">
-       <li><a href="{{ url('reportPaymentCentro') }}">Región Centro</a></li>
-       <li><a href="{{ url('reportPaymentAltos') }}">Región Altos</a></li>
-       <li><a href="{{ url('reportPaymentMezcalapa') }}">Región Mezcalapa</a></li>
-       <li><a href="{{ url('reportPaymentNorte') }}">Región Norte</a></li>
-     {{--   <li><a href="{{ url('reportPayment') }}">Todos los Pagos</a></li> --}}
+        <li class="treeview">
+          <a>{{-- <i class="fa fa-circle-o"></i> --}} Región Centro
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('reportPaymentTeran') }}"><i class="fa fa-circle-o"></i>Terán</a></li>
+            <li><a href="{{ url('reportPayment24') }}"><i class="fa fa-circle-o"></i>24 de Junio</a></li>
+          </ul>
+        </li>
+        {{-- <li><a href="{{ url('reportPaymentCentro') }}">Región Centro</a></li> --}}
+        <li><a href="{{ url('reportPaymentAltos') }}">Región Altos</a></li>
+        <li><a href="{{ url('reportPaymentMezcalapa') }}">Región Mezcalapa</a></li>
+        <li><a href="{{ url('reportPaymentNorte') }}">Región Norte</a></li>
+        {{--   <li><a href="{{ url('reportPayment') }}">Todos los Pagos</a></li> --}}
+      </ul>
+    </li>
+    @endif
+    {{-- <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li> --}}
+    <li class="treeview">
+      <a href="#"><i class='fa fa-external-link'></i><span> Movimientos</span> <i class="fa fa-angle-left pull-right"></i></a>
+      <ul class="treeview-menu">
+       {{-- <li><a href="{{ url('movementsBalance') }}">Saldo en Caja</a></li> --}}
+       <li><a href="{{ url('movementsBeginning') }}">Asignacion en Efectivo</a></li>
+       {{-- <li><a href="{{ url('movementsEffective') }}">Asignacion en Efectivo</a></li> --}}
+       <li><a href="{{ url('movementsRecovery') }}">Recuperación</a></li>
+       <li><a href="{{ url('movementsRecoveryAccess') }}">Recuperación Access</a></li>
+       <li><a href="{{ url('movementsPlacement') }}">Colocación</a></li>
+       <li><a href="{{ url('movementsExpenses') }}">Gastos</a></li>
+       <li><a href="{{ url('movementsSalaries') }}">Sueldos</a></li>
+       <li><a href="{{ url('movementsCut') }}">Cortes de Caja</a></li>
+       {{--  <li><a href="{{ url('movementsActives') }}">Inversión en Activos</a></li> --}}
      </ul>
    </li>
    @endif
-   {{-- <li><a href="{{ url('movements') }}"><i class='fa fa-external-link'></i> <span>Movimientos</span></a></li> --}}
+   <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
    <li class="treeview">
-    <a href="#"><i class='fa fa-external-link'></i><span> Movimientos</span> <i class="fa fa-angle-left pull-right"></i></a>
+    <a href="#"><i class='fa fa-money'></i><span> Créditos</span><i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
-     {{-- <li><a href="{{ url('movementsBalance') }}">Saldo en Caja</a></li> --}}
-     <li><a href="{{ url('movementsBeginning') }}">Asignacion en Efectivo</a></li>
-     {{-- <li><a href="{{ url('movementsEffective') }}">Asignacion en Efectivo</a></li> --}}
-     <li><a href="{{ url('movementsRecovery') }}">Recuperación</a></li>
-     <li><a href="{{ url('movementsRecoveryAccess') }}">Recuperación Access</a></li>
-     <li><a href="{{ url('movementsPlacement') }}">Colocación</a></li>
-     <li><a href="{{ url('movementsExpenses') }}">Gastos</a></li>
-     <li><a href="{{ url('movementsSalaries') }}">Sueldos</a></li>
-     <li><a href="{{ url('movementsCut') }}">Cortes de Caja</a></li>
-    {{--  <li><a href="{{ url('movementsActives') }}">Inversión en Activos</a></li> --}}
+     <li><a href="{{ url('credits') }}">Todos</a></li>
+     <li><a href="{{ url('creditsValid') }}">Vigentes</a></li>
+     <li><a href="{{ url('creditsPaidOut') }}">Pagados</a></li>
    </ul>
  </li>
- @endif
- <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
- <li class="treeview">
-  <a href="#"><i class='fa fa-money'></i><span> Créditos</span><i class="fa fa-angle-left pull-right"></i></a>
-  <ul class="treeview-menu">
-   <li><a href="{{ url('credits') }}">Todos</a></li>
-   <li><a href="{{ url('creditsValid') }}">Vigentes</a></li>
-   <li><a href="{{ url('creditsPaidOut') }}">Pagados</a></li>
- </ul>
-</li>
-@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
+ @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
  <li><a href="{{ url('restructures')}}"><i class="fa fa-dollar"></i> <span>Reestructurados</span></a></li>
-@endif
-@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
-<li class="treeview">
+ @endif
+ @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
+ <li class="treeview">
   <a href="#"><i class='fa fa-cogs'></i>  <span>Configuración</span> <i class="fa fa-angle-left pull-right"></i></a>
   <ul class="treeview-menu">
     @if (Auth::user()->can('region'))

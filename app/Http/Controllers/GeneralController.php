@@ -808,14 +808,24 @@ class GeneralController extends Controller
     }
      public function reportPaymentCentro()
     {
-
-        
         $payments = Payment::all()->where('region_id',2)->sortByDesc('created_at');
         return view('partials.reportPaymentCentro')
         ->with('payments',$payments);
         // $recoverys = IncomePayment::all()->where('region_id',2)->sortByDesc('created_at');
         // return view('partials.reportPayment')
         // ->with('recoverys', $recoverys);
+    }
+    public function reportPaymentTeran()
+    {
+        $payments = Payment::all()->where('branch_id',12)->sortByDesc('created_at');
+        return view('partials.reportPaymentTeran')
+        ->with('payments',$payments);
+    }
+     public function reportPayment24()
+    {
+        $payments = Payment::all()->where('branch_id',3)->sortByDesc('created_at');
+        return view('partials.reportPayment24')
+        ->with('payments',$payments);
     }
     public function reportPaymentMezcalapa()
     {

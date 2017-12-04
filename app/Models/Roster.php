@@ -48,6 +48,14 @@ class Roster extends Model
 		"employee_firm" => "required"
 	];
 
+	public static $rules_edit = [
+		"date" => "required",
+		"coordinating_name" => "required",
+		"coordination" => "required",
+		"branch_office" => "required",
+		"name_employee" => "required",
+		
+	];
 	public function vault()
 	{
 		return $this->hasOne('App\Models\Vault');

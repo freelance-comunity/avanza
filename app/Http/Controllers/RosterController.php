@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Requests\CreateRosterRequest;
+use App\Http\Requests\CreateRosterRequestEdit;
 use App\Models\Roster;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
@@ -189,23 +190,31 @@ class RosterController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function update($id, CreateRosterRequest $request)
+	public function update($id, CreateRosterRequestEdit $request)
 	{
 		/** @var Roster $roster */
 		$roster = Roster::find($id);
-
+		$id_user = $request->input('name_employee');
+		$employee = User::find($id_user);
 		if(empty($roster))
 		{
 			Flash::error('Roster not found');
 			return redirect(route('rosters.index'));
 		}
 
+		$input['user_id'] = $id_user;
+		$input['name_employee'] = $employee->name." ".$employee->father_last_name." ".$employee->mother_last_name;
+		$input['number_employee'] = $employee->id;
+		$input['position'] = $employee->roles;
+		
 		$roster->fill($request->all());
 		$roster->save();
 
-		Flash::message('Roster updated successfully.');
+		Toastr::success('Sueldo Editado Correctamente', 'SUELDOS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
 		return redirect(route('rosters.index'));
+
+		
 	}
 
 	/**

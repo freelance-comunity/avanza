@@ -197,11 +197,12 @@ return [
 
         Kim\Activity\ActivityServiceProvider::class,
         
+        Yajra\Datatables\DatatablesServiceProvider::class
         
         
         
 
-        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -216,63 +217,63 @@ return [
 
     'aliases' => [
 
-    'App' => Illuminate\Support\Facades\App::class,
-    'Artisan' => Illuminate\Support\Facades\Artisan::class,
-    'Auth' => Illuminate\Support\Facades\Auth::class,
-    'Blade' => Illuminate\Support\Facades\Blade::class,
-    'Cache' => Illuminate\Support\Facades\Cache::class,
-    'Config' => Illuminate\Support\Facades\Config::class,
-    'Cookie' => Illuminate\Support\Facades\Cookie::class,
-    'Crypt' => Illuminate\Support\Facades\Crypt::class,
-    'DB' => Illuminate\Support\Facades\DB::class,
-    'Eloquent' => Illuminate\Database\Eloquent\Model::class,
-    'Event' => Illuminate\Support\Facades\Event::class,
-    'File' => Illuminate\Support\Facades\File::class,
-    'Gate' => Illuminate\Support\Facades\Gate::class,
-    'Hash' => Illuminate\Support\Facades\Hash::class,
-    'Lang' => Illuminate\Support\Facades\Lang::class,
-    'Log' => Illuminate\Support\Facades\Log::class,
-    'Mail' => Illuminate\Support\Facades\Mail::class,
-    'Password' => Illuminate\Support\Facades\Password::class,
-    'Queue' => Illuminate\Support\Facades\Queue::class,
-    'Redirect' => Illuminate\Support\Facades\Redirect::class,
-    'Redis' => Illuminate\Support\Facades\Redis::class,
-    'Request' => Illuminate\Support\Facades\Request::class,
-    'Response' => Illuminate\Support\Facades\Response::class,
-    'Route' => Illuminate\Support\Facades\Route::class,
-    'Schema' => Illuminate\Support\Facades\Schema::class,
-    'Session' => Illuminate\Support\Facades\Session::class,
-    'Storage' => Illuminate\Support\Facades\Storage::class,
-    'URL' => Illuminate\Support\Facades\URL::class,
-    'Validator' => Illuminate\Support\Facades\Validator::class,
-    'View' => Illuminate\Support\Facades\View::class,
+        'App' => Illuminate\Support\Facades\App::class,
+        'Artisan' => Illuminate\Support\Facades\Artisan::class,
+        'Auth' => Illuminate\Support\Facades\Auth::class,
+        'Blade' => Illuminate\Support\Facades\Blade::class,
+        'Cache' => Illuminate\Support\Facades\Cache::class,
+        'Config' => Illuminate\Support\Facades\Config::class,
+        'Cookie' => Illuminate\Support\Facades\Cookie::class,
+        'Crypt' => Illuminate\Support\Facades\Crypt::class,
+        'DB' => Illuminate\Support\Facades\DB::class,
+        'Eloquent' => Illuminate\Database\Eloquent\Model::class,
+        'Event' => Illuminate\Support\Facades\Event::class,
+        'File' => Illuminate\Support\Facades\File::class,
+        'Gate' => Illuminate\Support\Facades\Gate::class,
+        'Hash' => Illuminate\Support\Facades\Hash::class,
+        'Lang' => Illuminate\Support\Facades\Lang::class,
+        'Log' => Illuminate\Support\Facades\Log::class,
+        'Mail' => Illuminate\Support\Facades\Mail::class,
+        'Password' => Illuminate\Support\Facades\Password::class,
+        'Queue' => Illuminate\Support\Facades\Queue::class,
+        'Redirect' => Illuminate\Support\Facades\Redirect::class,
+        'Redis' => Illuminate\Support\Facades\Redis::class,
+        'Request' => Illuminate\Support\Facades\Request::class,
+        'Response' => Illuminate\Support\Facades\Response::class,
+        'Route' => Illuminate\Support\Facades\Route::class,
+        'Schema' => Illuminate\Support\Facades\Schema::class,
+        'Session' => Illuminate\Support\Facades\Session::class,
+        'Storage' => Illuminate\Support\Facades\Storage::class,
+        'URL' => Illuminate\Support\Facades\URL::class,
+        'Validator' => Illuminate\Support\Facades\Validator::class,
+        'View' => Illuminate\Support\Facades\View::class,
 
     //laravel collective
-    'Form' => Collective\Html\FormFacade::class,
-    'Html' => Collective\Html\HtmlFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     //Crud Generator
-    'Form'  => 'Illuminate\Html\FormFacade',
-    'HTML'  => 'Illuminate\Html\HtmlFacade',
-    'Flash' => 'Laracasts\Flash\Flash',
+        'Form'  => 'Illuminate\Html\FormFacade',
+        'HTML'  => 'Illuminate\Html\HtmlFacade',
+        'Flash' => 'Laracasts\Flash\Flash',
 
     //AdminLTE
-    'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
+        'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
 
     //Entrust
-    'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     //Toastr
-    'Toastr'  => Whossun\Toastr\Facades\Toastr::class,
+        'Toastr'  => Whossun\Toastr\Facades\Toastr::class,
 
-    /* Intervention Image */
-    'Image' => Intervention\Image\Facades\Image::class,
+        /* Intervention Image */
+        'Image' => Intervention\Image\Facades\Image::class,
 
-    /* DOMPDF */
-    'PDF' => Barryvdh\DomPDF\Facade::class,
-    
-    /*carbon español*/
-    'Date' => Jenssegers\Date\Date::class,
+        /* DOMPDF */
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        
+        /*carbon español*/
+        'Date' => Jenssegers\Date\Date::class,
 
     /**
      *
@@ -289,9 +290,9 @@ return [
 
     'Activity' => Kim\Activity\ActivityFacade::class,
     
-
+   'Datatables' => Yajra\Datatables\Facades\Datatables::class,
     
 
-    ],
+],
 
-    ];
+];

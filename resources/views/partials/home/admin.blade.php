@@ -243,7 +243,7 @@ $vigente = App\Models\Credit::all()->where('status','MINISTRADO');
 				<h3 class="box-title">Usuarios en Linea</h3>
 
 				<div class="box-tools pull-right">
-					<span class="label label-success">{{ $activities->count() }} en linea</span>
+					{{-- <span class="label label-success">{{ $activities->count() }} en linea</span> --}}
 					<button type="button" class="btn btn-box-tool" data-widget="collapse">
 						<i class="fa fa-minus"></i>
 					</button>

@@ -1,0 +1,18 @@
+Public funtion showPaciente($id)
+{
+if ($request->ajax())
+{
+$paciente = Paciente::find(Request $request, $id)
+
+return response()->json(['success'=> true, 'dataValue'=> $paciente);
+}
+}
+
+
+$collection = Archive::select(['id', 'client_id', 'credit_id', 'group', 'status','source_of_funding', 'brach'])->orderBy('client_id');
+        $archives = $collection->where('source_of_funding', 'ABC CAPITAL LINEA 1');
+        return Datatables::of($archives)
+        ->addColumn('actions', function ($archive) {
+            return '<a href="admin/archives/'.$archive->id.'" class="btn btn-block btn-xs btn-primary"><i class="fa fa-eye"></i>VER</a>';
+        })->rawColumns(['actions'])
+        ->make(true);  

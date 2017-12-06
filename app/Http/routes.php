@@ -14,6 +14,38 @@ Route::get('signature', function () {
     return view('signature');
 });
 
+Route::get('totalPayments',function(){
+ return view('totalPayments');
+});
+
+Route::get('api/payments', function(){
+    // return Datatables::eloquent(App\Models\Payment::query()->where('status','<>','Pendiente'))->make(true);
+    // return Datatables::queryBuilder(DB::table('payments')->where('status','<>','Pendiente'))
+    // ->make(true);
+
+  // $payments = App\Models\Payment::leftJoin('debts','payments.debt_id','=','debts.id')
+  // ->leftJoin('credits','debts.credit_id','=','credits.id')
+  // ->leftJoin('regions','payments.region_id','=','regions.id')
+  // ->leftJoin('branches','payments.branch_id','=','branches.id')
+  // ->select(['payments.number','regions.name','branches.name','credits.adviser','credits.firts_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
+
+
+    $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
+  ->leftJoin('credits','debts.credit_id','=','credits.id')
+  ->leftJoin('regions','payments.region_id','=','regions.id')
+  ->leftJoin('branches','payments.branch_id','=','branches.id')
+  ->where('payments.status','<>','Pendiente')
+  ->select(['payments.number','regions.name','branches.name','credits.adviser','credits.firts_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
+  return Datatables::of($payments)
+  ->editColumn('updated_at', '{!! $updated_at !!}')
+
+  ->make(true);
+
+
+
+});
+
+
 Route::post('save-signature', function (Illuminate\Http\Request  $request) {
     $data_uri = $request->input('signature');
     $encoded_image = explode(",", $data_uri)[1];
@@ -519,26 +551,7 @@ Route::post('updatephotos', 'PhotoController@cfe');
 Route::post('avatar', 'PhotoController@avatar');
 
 
-Route::get('ajax', function () {
-    $date = \Carbon\Carbon::now();
-    $dues = 25;
-    $amount = 39;
-    for ($i=0; $i <= $dues; $i++) {
-        echo $dues;
-        echo "&nbsp;";
-        echo "&nbsp;";
-        echo "&nbsp;";
-        echo $date->addDay();
-        echo "&nbsp;";
-        echo "&nbsp;";
-        echo "&nbsp;";
-        echo $amount;
-        echo "&nbsp;";
-        echo "&nbsp;";
-        echo "&nbsp;";
-        echo "<br>";
-    }
-});
+
 
 Route::resource('boxCuts', 'BoxCutController');
 
@@ -1250,19 +1263,3 @@ Route::get('reportPaymentCentroAjax','GeneralController@reportPaymentCentroAjax'
 Route::get('reverse/{id}','GeneralController@reverse');
 
 Route::get('punishCredit/{id}', 'CreditController@punish');
-
-Route::get('update',function(){
-
-    $payments = App\Models\Payment::all();
-    $dt = \Carbon\Carbon::create();
-   
-    foreach ($payments as $key => $value) {
-       //  if ($value->updated_at == "2017-11-29 09:07:32" ) {
-       //     echo $value->ammount;
-       //     echo "<br>";
-       // }
-        echo $value->ammount;
-           echo "<br>";
-
-   }
-});

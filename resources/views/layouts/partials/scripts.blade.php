@@ -315,7 +315,7 @@
           } );
         });
       </script>
- 
+
       <script>
         $(document).ready(function() {
           $('#example2').DataTable( {
@@ -372,6 +372,40 @@
           });
         });
       </script>
+
+
+      <script>
+        $(document).ready(function() {
+          $('#chale').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print','csv',
+            ],
+            "processing": true,
+            "serverSide": true,
+            "ajax": "api/payments",
+            "columns":[
+            {data: 'number', name: 'payments.number'},
+            {data: 'name',name:'regions.name'},
+            {data: 'name',name:'branches.name'},
+            {data: 'adviser', name: 'credits.adviser'},
+            {data: 'firts_name', name: 'credits.firts_name'},
+            {data: 'folio', name: 'credits.folio'},
+            {data: 'periodicity', name: 'credits.periodicity'},
+            {data: 'dues', name: 'credits.dues'},
+            {data: 'interest_rate', name: 'credits.interest_rate'},
+            {data: 'payment', name:'payments.payment'},
+            {data: 'capital' , name:'payments.capital'},
+            {data: 'interest', name: 'payments.interest'},
+            {data: 'moratorium', name: 'payments.moratorium'},
+            {data: 'updated_at', name:'payments.updated_at'},
+            ]
+          });
+        });
+      </script>
       {{-- <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> --}}
 
       <script>
@@ -402,9 +436,9 @@
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
           },
           dom: 'Bfrtip',
-            buttons: [
-            'excel', 'pdf', 'print',
-            ],
+          buttons: [
+          'excel', 'pdf', 'print',
+          ],
           "order": [[ 4, "desc" ]] });
 
         })

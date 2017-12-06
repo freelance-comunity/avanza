@@ -29,6 +29,7 @@ use App\Models\Active;
 use DB;
 use Yajra\DataTables\DataTables;
 
+
 class GeneralController extends Controller
 {
     public function __construct()
@@ -837,6 +838,7 @@ class GeneralController extends Controller
         // return view('partials.reportPayment')
         // ->with('recoverys', $recoverys);
     }
+
     public function totalVault()
     {
         $vault = Vault::all();

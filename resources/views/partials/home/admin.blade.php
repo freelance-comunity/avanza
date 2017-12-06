@@ -221,6 +221,7 @@ $vigente = $pendent+ $partial + $vencid;
 		</div>
 	</div>
 	<!-- ./col -->
+
 	{{-- <!-- ./col -->
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->

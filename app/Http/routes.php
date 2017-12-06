@@ -15,7 +15,7 @@ Route::get('signature', function () {
 });
 
 Route::get('totalPayments',function(){
- return view('totalPayments');
+   return view('totalPayments');
 });
 
 Route::get('api/payments', function(){
@@ -31,16 +31,16 @@ Route::get('api/payments', function(){
 
 
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
-  ->leftJoin('credits','debts.credit_id','=','credits.id')
-  ->leftJoin('regions','payments.region_id','=','regions.id')
-  ->leftJoin('branches','payments.branch_id','=','branches.id')
-  ->where('payments.status','<>','Pendiente')
-  ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
-  
-  return Datatables::of($payments)
-  ->editColumn('updated_at', '{!! $updated_at !!}')
+    ->leftJoin('credits','debts.credit_id','=','credits.id')
+    ->leftJoin('regions','payments.region_id','=','regions.id')
+    ->leftJoin('branches','payments.branch_id','=','branches.id')
+    ->where('payments.status','<>','Pendiente')
+    ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
 
-  ->make(true);
+    return Datatables::of($payments)
+    ->editColumn('updated_at', '{!! $updated_at !!}')
+
+    ->make(true);
 
 
 
@@ -930,6 +930,386 @@ Route::get('clientReferences/{id}/delete', [
     'uses' => 'ClientReferencesController@destroy',
 ]);
 
+Route::get('CSTPC001411',function(){
+   $credit = App\Models\Credit::find(1411);
+   $date_now = \Carbon\Carbon::now()->toDateString();
+   $debt = $credit->debt;
+   $payments = $debt->payments;
+   foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            $latePayments = $payment->latePayments;
+
+            if ($payment->status == "Vencido") {
+                if ($latePayments->count() == 0) {
+                    $latePayments = new App\Models\LatePayments;
+                    $latePayments->late_number = $payment->number;
+                    $latePayments->late_ammount = $payment->total;
+                    $latePayments->late_payment = $payment->payment;
+                    $latePayments->status = "Atrasado";
+                    $latePayments->payment_id = $payment->id;
+                    $latePayments->debt_id    = $debt->id;
+                    $latePayments->branch_id = $debt->branch_id;
+                    $latePayments->region_id = $debt->region_id;
+                    $latePayments->save();
+                }
+            }
+        }
+echo "CSTPC001411";
+});
+Route::get('CSTPC001431',function(){
+   $credit = App\Models\Credit::find(1431);
+   $date_now = \Carbon\Carbon::now()->toDateString();
+   $debt = $credit->debt;
+   $payments = $debt->payments;
+   foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            $latePayments = $payment->latePayments;
+
+            if ($payment->status == "Vencido") {
+                if ($latePayments->count() == 0) {
+                    $latePayments = new App\Models\LatePayments;
+                    $latePayments->late_number = $payment->number;
+                    $latePayments->late_ammount = $payment->total;
+                    $latePayments->late_payment = $payment->payment;
+                    $latePayments->status = "Atrasado";
+                    $latePayments->payment_id = $payment->id;
+                    $latePayments->debt_id    = $debt->id;
+                    $latePayments->branch_id = $debt->branch_id;
+                    $latePayments->region_id = $debt->region_id;
+                    $latePayments->save();
+                }
+            }
+        }
+echo "CSTPC001431";
+ $credit = App\Models\Credit::find(1432);
+   $date_now = \Carbon\Carbon::now()->toDateString();
+   $debt = $credit->debt;
+   $payments = $debt->payments;
+   foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            $latePayments = $payment->latePayments;
+
+            if ($payment->status == "Vencido") {
+                if ($latePayments->count() == 0) {
+                    $latePayments = new App\Models\LatePayments;
+                    $latePayments->late_number = $payment->number;
+                    $latePayments->late_ammount = $payment->total;
+                    $latePayments->late_payment = $payment->payment;
+                    $latePayments->status = "Atrasado";
+                    $latePayments->payment_id = $payment->id;
+                    $latePayments->debt_id    = $debt->id;
+                    $latePayments->branch_id = $debt->branch_id;
+                    $latePayments->region_id = $debt->region_id;
+                    $latePayments->save();
+                }
+            }
+        }
+echo "CSTPC001432";
+ $credit = App\Models\Credit::find(1412);
+   $date_now = \Carbon\Carbon::now()->toDateString();
+   $debt = $credit->debt;
+   $payments = $debt->payments;
+   foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            $latePayments = $payment->latePayments;
+
+            if ($payment->status == "Vencido") {
+                if ($latePayments->count() == 0) {
+                    $latePayments = new App\Models\LatePayments;
+                    $latePayments->late_number = $payment->number;
+                    $latePayments->late_ammount = $payment->total;
+                    $latePayments->late_payment = $payment->payment;
+                    $latePayments->status = "Atrasado";
+                    $latePayments->payment_id = $payment->id;
+                    $latePayments->debt_id    = $debt->id;
+                    $latePayments->branch_id = $debt->branch_id;
+                    $latePayments->region_id = $debt->region_id;
+                    $latePayments->save();
+                }
+            }
+        }
+echo "CSTPC001412";
+ $credit = App\Models\Credit::find(1419);
+   $date_now = \Carbon\Carbon::now()->toDateString();
+   $debt = $credit->debt;
+   $payments = $debt->payments;
+   foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            $latePayments = $payment->latePayments;
+
+            if ($payment->status == "Vencido") {
+                if ($latePayments->count() == 0) {
+                    $latePayments = new App\Models\LatePayments;
+                    $latePayments->late_number = $payment->number;
+                    $latePayments->late_ammount = $payment->total;
+                    $latePayments->late_payment = $payment->payment;
+                    $latePayments->status = "Atrasado";
+                    $latePayments->payment_id = $payment->id;
+                    $latePayments->debt_id    = $debt->id;
+                    $latePayments->branch_id = $debt->branch_id;
+                    $latePayments->region_id = $debt->region_id;
+                    $latePayments->save();
+                }
+            }
+        }
+echo "CSTPC001419";
+ $credit = App\Models\Credit::find(1452);
+   $date_now = \Carbon\Carbon::now()->toDateString();
+   $debt = $credit->debt;
+   $payments = $debt->payments;
+   foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            $latePayments = $payment->latePayments;
+
+            if ($payment->status == "Vencido") {
+                if ($latePayments->count() == 0) {
+                    $latePayments = new App\Models\LatePayments;
+                    $latePayments->late_number = $payment->number;
+                    $latePayments->late_ammount = $payment->total;
+                    $latePayments->late_payment = $payment->payment;
+                    $latePayments->status = "Atrasado";
+                    $latePayments->payment_id = $payment->id;
+                    $latePayments->debt_id    = $debt->id;
+                    $latePayments->branch_id = $debt->branch_id;
+                    $latePayments->region_id = $debt->region_id;
+                    $latePayments->save();
+                }
+            }
+        }
+echo "CSTPC001452";
+ $credit = App\Models\Credit::find(1424);
+   $date_now = \Carbon\Carbon::now()->toDateString();
+   $debt = $credit->debt;
+   $payments = $debt->payments;
+   foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            $latePayments = $payment->latePayments;
+
+            if ($payment->status == "Vencido") {
+                if ($latePayments->count() == 0) {
+                    $latePayments = new App\Models\LatePayments;
+                    $latePayments->late_number = $payment->number;
+                    $latePayments->late_ammount = $payment->total;
+                    $latePayments->late_payment = $payment->payment;
+                    $latePayments->status = "Atrasado";
+                    $latePayments->payment_id = $payment->id;
+                    $latePayments->debt_id    = $debt->id;
+                    $latePayments->branch_id = $debt->branch_id;
+                    $latePayments->region_id = $debt->region_id;
+                    $latePayments->save();
+                }
+            }
+        }
+echo "CSTPC001424";
+ $credit = App\Models\Credit::find(1460);
+   $date_now = \Carbon\Carbon::now()->toDateString();
+   $debt = $credit->debt;
+   $payments = $debt->payments;
+   foreach ($payments as $key => $payment) {
+            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            $latePayments = $payment->latePayments;
+
+            if ($payment->status == "Vencido") {
+                if ($latePayments->count() == 0) {
+                    $latePayments = new App\Models\LatePayments;
+                    $latePayments->late_number = $payment->number;
+                    $latePayments->late_ammount = $payment->total;
+                    $latePayments->late_payment = $payment->payment;
+                    $latePayments->status = "Atrasado";
+                    $latePayments->payment_id = $payment->id;
+                    $latePayments->debt_id    = $debt->id;
+                    $latePayments->branch_id = $debt->branch_id;
+                    $latePayments->region_id = $debt->region_id;
+                    $latePayments->save();
+                }
+            }
+        }
+echo "CSTPC001460";
+});
 Route::get('applyMoratorium',function(){
     $credit = App\Models\Credit::all();
     $date_now = \Carbon\Carbon::now()->toDateString();
@@ -988,13 +1368,13 @@ Route::get('applyMoratorium',function(){
 
 Route::get('productos', function () {
 
- $credit = App\Models\Credit::all();
- foreach ($credit as $key => $credit) {
+   $credit = App\Models\Credit::all();
+   foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
-     echo $credit->periodicity;
-     echo $credit->adviser;
-     echo "<br>";
- }
+       echo $credit->periodicity;
+       echo $credit->adviser;
+       echo "<br>";
+   }
 
 }
 });
@@ -1194,12 +1574,12 @@ Route::Post('reestructureCredit','CreditController@reestructureCredit');
 Route::get('paymentsCorrection', function(){
     $payments = App\Models\Payment::all()->where('status','Pagado');
     foreach ($payments as $key => $payment) {
-     $payment->capital = 0;
-     $payment->interest = 0;
-     $payment->moratorium = 0;
-     $payment->save();
- }
- echo "Pagos Pagados corregidos";
+       $payment->capital = 0;
+       $payment->interest = 0;
+       $payment->moratorium = 0;
+       $payment->save();
+   }
+   echo "Pagos Pagados corregidos";
 });
 
 Route::get('paymentsCorrectionVencido', function(){

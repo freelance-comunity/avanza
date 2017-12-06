@@ -376,7 +376,7 @@
 
       <script>
         $(document).ready(function() {
-          $('#chale').DataTable( {
+          $('#totalpayments').DataTable( {
             "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -389,7 +389,7 @@
             "ajax": "api/payments",
             "columns":[
             {data: 'number', name: 'payments.number'},
-            {data: 'regionName',name:'regionName'},
+            {data: 'regions', name:'regions.name'},
             {data: 'name',name:'branches.name'},
             {data: 'adviser', name: 'credits.adviser'},
             {data: 'firts_name', name: 'credits.firts_name'},
@@ -404,6 +404,7 @@
             {data: 'updated_at', name:'payments.updated_at'},
             ]
           });
+           // $.fn.dataTable.ext.errMode = 'throw';
         });
       </script>
       {{-- <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> --}}

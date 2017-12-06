@@ -35,7 +35,7 @@ Route::get('api/payments', function(){
   ->leftJoin('regions','payments.region_id','=','regions.id')
   ->leftJoin('branches','payments.branch_id','=','branches.id')
   ->where('payments.status','<>','Pendiente')
-  ->select(['payments.number','regions.name as regionName','branches.name','credits.adviser','credits.firts_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
+  ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
   
   return Datatables::of($payments)
   ->editColumn('updated_at', '{!! $updated_at !!}')

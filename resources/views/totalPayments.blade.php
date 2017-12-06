@@ -20,7 +20,7 @@ Pagos
             <div class="box-body">
 
                 <div class="table-responsive">
-                    <table class="table" id="chale">
+                    <table class="table" id="totalpayments">
                         <thead class="bg-success">
                             <th># Cuota</th>
                             <th>Región</th>

@@ -38,7 +38,7 @@ Pagos
 							<th>Intereses</th>
 							<th>Moratorio</th>
 							<th>Fecha/Hora asignación</th>
-								<th>status</th>
+							{{-- 	<th>status</th> --}}
 						</thead>
 						<tbody>
 							@foreach($payments as $payment)
@@ -69,7 +69,7 @@ Pagos
 								<td class="bg-yellow">{{$payment->interest}}</td>
 								<td class="bg-red">{{$payment->moratorium}}</td>
 								<td>{{$payment->updated_at}}</td>
-								<td>{{$payment->status}}</td>
+								{{-- <td>{{$payment->status}}</td> --}}
 								{{-- <td>{{ $recovery->vault->user->branch->region['name'] }}</td>
 								<td>{{ $recovery->vault->user->branch['name'] }}</td>
 								<td>{{ $recovery->vault->user['name'] }} {{ $recovery->vault->user['father_last_name'] }} {{ $recovery->vault->user['mother_last_name'] }}</td>

@@ -18,7 +18,13 @@ $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
 })->get();
 
-$vigente = App\Models\Credit::all()->where('status','MINISTRADO');
+$pendent = App\Models\Payment::where('status', 'Pendiente')->sum('balance');
+$partial = App\Models\Payment::where('status', 'Parcial')->sum('balance');
+$vencid = App\Models\Payment::where('status', 'Vencido')->sum('balance');
+
+$vigente = $pendent+ $partial + $vencid;
+
+// $vigente = App\Models\Credit::all()->where('status','MINISTRADO');
  @endphp
 <div class="row">
 	<div class="col-lg-3 col-md-4">
@@ -202,7 +208,7 @@ $vigente = App\Models\Credit::all()->where('status','MINISTRADO');
 		<!-- small box -->
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3>${{ number_format($vigente->sum('ammount'),2) }}</h3>
+				<h3>${{ number_format($vigente,2) }}</h3>
 
 				<p>Total Cartera Vigente</p>
 			</div>

@@ -17,11 +17,11 @@ Pagos
 				<h3 class="box-title">Historial de pagos Centro</h3>
 			</div>  
 			<div class="box-body">
-				@if($payments->isEmpty())
+				{{-- @if($payments->isEmpty())
 				<div class="well text-center">Ho hay registros.</div>
-				@else
+				@else --}}
 				<div class="table-responsive">
-					<table class="table" id="recovery">
+					<table class="table" id="reportPaymentCentro">
 						<thead class="bg-success">
 							<th># Cuota</th>
 							<th>Región</th>
@@ -40,9 +40,10 @@ Pagos
 							<th>Fecha/Hora asignación</th>
 							{{-- 	<th>status</th> --}}
 						</thead>
-						<tbody>
-							@foreach($payments as $payment)
-							@if ($payment->status == 'Pagado' OR $payment->status == 'Parcial')
+					{{-- 	<tbody>
+							@foreach($payments as $payment) --}}
+							{{-- @if ($payment->status == 'Pagado' OR $payment->status == 'Parcial') --}}
+							{{-- @if ($payment->status <> "Pendiente")
 							<tr>
 								<td>{{$payment->number}}</td>
 								<td>{{$payment->region['name']}}</td>
@@ -68,26 +69,15 @@ Pagos
 								<td class="bg-yellow">{{$payment->interest}}</td>
 								<td class="bg-red">{{$payment->moratorium}}</td>
 								<td>{{$payment->updated_at}}</td>
-								{{-- <td>{{$payment->status}}</td> --}}
-								{{-- <td>{{ $recovery->vault->user->branch->region['name'] }}</td>
-								<td>{{ $recovery->vault->user->branch['name'] }}</td>
-								<td>{{ $recovery->vault->user['name'] }} {{ $recovery->vault->user['father_last_name'] }} {{ $recovery->vault->user['mother_last_name'] }}</td>
-								<td>{{ $recovery->concept }}</td>
-								<td>{{ $recovery->debt->credit['firts_name'] }} {{ $recovery->debt->credit['last_name'] }} {{ $recovery->debt->credit['mothers_last_name'] }}</td>
-								<td>{{ $recovery->debt->credit['folio'] }}</td>
-								<td class="bg-green">${{ number_format($recovery->ammount) }}</td>
-								<td class="bg-primary">${{ number_format($recovery->payment['capital']) }}</td>
-								<td class="bg-yellow">${{ number_format($recovery->payment['interest']) }}</td>
-								<td class="bg-red">${{ number_format($recovery->payment['moratorium']) }}</td>
-								<td>{{ $recovery->created_at }}</td> --}}
+								
 							</tr>
 							@endif
 							
 							@endforeach
-						</tbody>
+						</tbody> --}}
 					</table>
 				</div>
-				@endif
+				{{-- @endif --}}
 			</div>
 		</div>
 	</div>

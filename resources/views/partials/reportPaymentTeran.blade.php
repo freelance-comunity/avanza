@@ -43,7 +43,8 @@ Pagos
 						</thead>
 						<tbody>
 							@foreach($payments as $payment)
-							@if ($payment->status == 'Pagado' OR $payment->status == 'Parcial' AND $payment->user_id = 9)
+							{{-- @if ($payment->status == 'Pagado' OR $payment->status == 'Parcial' AND $payment->user_id = 9) --}}
+							@if ($payment->status <> "Pendiente")
 							<tr>
 								<td>{{$payment->number}}</td>
 								<td>{{$payment->region['name']}}</td>

@@ -41,9 +41,6 @@ Route::get('api/payments', function(){
     ->editColumn('updated_at', '{!! $updated_at !!}')
 
     ->make(true);
-
-
-
 });
 
 
@@ -1254,7 +1251,26 @@ echo "CORRECCION DE PAGOS VENCIDOS LISTO";
 
 });
 
-Route::get('reportPaymentCentro', 'GeneralController@reportPaymentCentro');
+// Route::get('reportPaymentCentro', 'GeneralController@reportPaymentCentro');
+Route::get('reportPaymentCentro',function(){
+   return view('partials.reportPaymentCentro');
+});
+
+Route::get('api/reportPaymentCentro', function(){
+    $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
+    ->leftJoin('credits','debts.credit_id','=','credits.id')
+    ->leftJoin('regions','payments.region_id','=','regions.id')
+    ->leftJoin('branches','payments.branch_id','=','branches.id')
+    ->where('payments.status','<>','Pendiente')
+    ->where('payments.region_id','=',2)
+    ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
+
+    return Datatables::of($payments)
+    ->editColumn('updated_at', '{!! $updated_at !!}')
+
+    ->make(true);
+});
+
 Route::get('reportPaymentAltos', 'GeneralController@reportPaymentAltos');
 Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa');
 Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');

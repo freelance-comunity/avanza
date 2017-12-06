@@ -61,8 +61,8 @@
       
       <ul class="treeview-menu">
         <li><a href="{{ url('totalPayments') }}">Todos los Pagos</a></li>
-        <li class="treeview">
-          <a>{{-- <i class="fa fa-circle-o"></i> --}} Región Centro
+        {{-- <li class="treeview">
+          <a>Región Centro
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -71,8 +71,8 @@
             <li><a href="{{ url('reportPaymentTeran') }}"><i class="fa fa-circle-o"></i>Terán</a></li>
             <li><a href="{{ url('reportPayment24') }}"><i class="fa fa-circle-o"></i>24 de Junio</a></li>
           </ul>
-        </li>
-       
+        </li> --}}
+       <li><a href="{{ url('reportPaymentCentro') }}">Región Centro</a></li>
         <li><a href="{{ url('reportPaymentAltos') }}">Región Altos</a></li>
         <li><a href="{{ url('reportPaymentMezcalapa') }}">Región Mezcalapa</a></li>
         <li><a href="{{ url('reportPaymentNorte') }}">Región Norte</a></li>

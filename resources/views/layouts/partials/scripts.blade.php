@@ -389,7 +389,7 @@
             "ajax": "api/payments",
             "columns":[
             {data: 'number', name: 'payments.number'},
-            {data: 'name',name:'regions.name'},
+            {data: 'regionName',name:'regionName'},
             {data: 'name',name:'branches.name'},
             {data: 'adviser', name: 'credits.adviser'},
             {data: 'firts_name', name: 'credits.firts_name'},

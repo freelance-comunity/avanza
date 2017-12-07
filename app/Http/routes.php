@@ -938,7 +938,7 @@ Route::get('applyMoratorium',function(){
         $payments = $debt->payments;
 
         foreach ($payments as $key => $payment) {
-            if ($payment->date <= $date_now && $payment->status == 'Pendiente' ) {
+            if ($payment->date < $date_now && $payment->status == 'Pendiente' && $hour_now > 20 ) {
                 $payment = App\Models\Payment::find($payment->id);
                 $payment->status = 'Vencido';
                 $payment->moratorium = 20;
@@ -950,7 +950,7 @@ Route::get('applyMoratorium',function(){
                 $debt->ammount = $debt->ammount + 20;
                 $debt->save();
             }
-            if ($payment->date <= $date_now && $payment->status == 'Parcial') {
+            if ($payment->date == $date_now && $payment->status == 'Pendiente' && $hour_now > 20 ) {
                 $payment = App\Models\Payment::find($payment->id);
                 $payment->status = 'Vencido';
                 $payment->moratorium = 20;
@@ -962,6 +962,31 @@ Route::get('applyMoratorium',function(){
                 $debt->ammount = $debt->ammount + 20;
                 $debt->save();
             }
+            if ($payment->date < $date_now && $payment->status == 'Parcial' && $hour_now > 20) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+            if ($payment->date == $date_now && $payment->status == 'Parcial' && $hour_now > 20) {
+                $payment = App\Models\Payment::find($payment->id);
+                $payment->status = 'Vencido';
+                $payment->moratorium = 20;
+                $payment->total = $payment->ammount + $payment->moratorium;
+                $payment->balance = $payment->balance + 20;
+                $payment->save();
+
+                $debt = $payment->debt;
+                $debt->ammount = $debt->ammount + 20;
+                $debt->save();
+            }
+
             $latePayments = $payment->latePayments;
 
             if ($payment->status == "Vencido") {

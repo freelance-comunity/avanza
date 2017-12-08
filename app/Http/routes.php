@@ -35,11 +35,11 @@ Route::get('api/payments', function(){
     ->leftJoin('regions','payments.region_id','=','regions.id')
     ->leftJoin('branches','payments.branch_id','=','branches.id')
     ->where('payments.status','<>','Pendiente')
-    ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
+    ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.last_name',
+        'credits.mothers_last_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
 
     return Datatables::of($payments)
     ->editColumn('updated_at', '{!! $updated_at !!}')
-
     ->make(true);
 });
 
@@ -995,24 +995,24 @@ Route::get('applyMoratoriumDate',function(){
         $payments = $debt->payments;
 
         foreach ($payments as $key => $payment) {
-             if ($payment->date >= $date_now && $payment->status == 'Vencido' ) {
-                $payment = App\Models\Payment::find($payment->id);
-                $payment->status = 'Pendiente';
-                $payment->moratorium = 0;
-                $payment->total = $payment->ammount;
-                $payment->balance = $payment->balance - 20;
-                $payment->save();
+         if ($payment->date >= $date_now && $payment->status == 'Vencido' ) {
+            $payment = App\Models\Payment::find($payment->id);
+            $payment->status = 'Pendiente';
+            $payment->moratorium = 0;
+            $payment->total = $payment->ammount;
+            $payment->balance = $payment->balance - 20;
+            $payment->save();
 
-                $debt = $payment->debt;
-                $debt->ammount = $debt->ammount - 20;
-                $debt->save();
-            }
-           
-      
-
+            $debt = $payment->debt;
+            $debt->ammount = $debt->ammount - 20;
+            $debt->save();
         }
+
+
+
     }
-    echo "MORATORIO APLICADO CORRECTAMENTE";
+}
+echo "MORATORIO APLICADO CORRECTAMENTE";
 });
 
 
@@ -1296,21 +1296,65 @@ Route::get('api/reportPaymentCentro', function(){
     ->leftJoin('branches','payments.branch_id','=','branches.id')
     ->where('payments.status','<>','Pendiente')
     ->where('payments.region_id','=',2)
-    ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
-
+    ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.last_name',
+        'credits.mothers_last_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
     return Datatables::of($payments)
     ->editColumn('updated_at', '{!! $updated_at !!}')
-
     ->make(true);
 });
 
-Route::get('reportPaymentAltos', 'GeneralController@reportPaymentAltos');
-Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa');
-Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');
-Route::get('reportPayment24', 'GeneralController@reportPayment24');
-Route::get('reportPaymentTeran', 'GeneralController@reportPaymentTeran');
-
-Route::get('reportPaymentCentroAjax','GeneralController@reportPaymentCentroAjax');
+// Route::get('reportPaymentAltos', 'GeneralController@reportPaymentAltos');
+Route::get('reportPaymentAltos',function(){
+   return view('partials.reportPaymentAltos');
+});
+Route::get('api/reportPaymentAltos', function(){
+    $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
+    ->leftJoin('credits','debts.credit_id','=','credits.id')
+    ->leftJoin('regions','payments.region_id','=','regions.id')
+    ->leftJoin('branches','payments.branch_id','=','branches.id')
+    ->where('payments.status','<>','Pendiente')
+    ->where('payments.region_id','=',3)
+    ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.last_name',
+        'credits.mothers_last_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
+    return Datatables::of($payments)
+    ->editColumn('updated_at', '{!! $updated_at !!}')
+    ->make(true);
+});
+// Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa');
+Route::get('reportPaymentMezcalapa',function(){
+   return view('partials.reportPaymentMezcalapa');
+});
+Route::get('api/reportPaymentMezcalapa', function(){
+    $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
+    ->leftJoin('credits','debts.credit_id','=','credits.id')
+    ->leftJoin('regions','payments.region_id','=','regions.id')
+    ->leftJoin('branches','payments.branch_id','=','branches.id')
+    ->where('payments.status','<>','Pendiente')
+    ->where('payments.region_id','=',4)
+    ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.last_name',
+        'credits.mothers_last_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
+    return Datatables::of($payments)
+    ->editColumn('updated_at', '{!! $updated_at !!}')
+    ->make(true);
+});
+// Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');
+Route::get('reportPaymentNorte',function(){
+   return view('partials.reportPaymentNorte');
+});
+Route::get('api/reportPaymentNorte', function(){
+    $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
+    ->leftJoin('credits','debts.credit_id','=','credits.id')
+    ->leftJoin('regions','payments.region_id','=','regions.id')
+    ->leftJoin('branches','payments.branch_id','=','branches.id')
+    ->where('payments.status','<>','Pendiente')
+    ->where('payments.region_id','=',1)
+    ->select(['payments.number','regions.name as regions','branches.name','credits.adviser','credits.firts_name','credits.last_name',
+        'credits.mothers_last_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at'])->groupBy('payments.updated_at');
+    return Datatables::of($payments)
+    ->editColumn('updated_at', '{!! $updated_at !!}')
+   
+    ->make(true);
+});
 
 Route::get('reverse/{id}','GeneralController@reverse');
 

@@ -36,7 +36,7 @@ Pagos
                             <th>Intereses</th>
                             <th>Moratorio</th>
                             <th>Fecha/Hora asignación</th>
-
+                            
                         </thead>
                     
                         

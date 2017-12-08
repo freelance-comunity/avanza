@@ -788,33 +788,22 @@ class GeneralController extends Controller
     }
      public function reportPaymentAltos()
     {
-
         $payments = Payment::all()->where('region_id',3)->sortByDesc('created_at');
         return view('partials.reportPaymentAltos')
         ->with('payments',$payments);
-        // $recoverys = IncomePayment::all()->where('region_id',3)->sortByDesc('created_at');
-        // return view('partials.reportPayment')
-        // ->with('recoverys', $recoverys);
     }
      public function reportPaymentNorte()
     {
-
         $payments = Payment::all()->where('region_id',1)->sortByDesc('created_at');
         return view('partials.reportPaymentNorte')
         ->with('payments',$payments);
     
-        // $recoverys = IncomePayment::all()->where('region_id',3)->sortByDesc('created_at');
-        // return view('partials.reportPaymentNorte')
-        // ->with('recoverys', $recoverys);
     }
      public function reportPaymentCentro()
     {
         $payments = Payment::all()->where('region_id',2)->sortByDesc('created_at');
         return view('partials.reportPaymentCentro')
         ->with('payments',$payments);
-        // $recoverys = IncomePayment::all()->where('region_id',2)->sortByDesc('created_at');
-        // return view('partials.reportPayment')
-        // ->with('recoverys', $recoverys);
     }
     public function reportPaymentTeran()
     {

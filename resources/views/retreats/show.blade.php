@@ -20,7 +20,7 @@
                <thead class="thead-inverse">
                 <th>FECHA Y HORA</th>
                 <th>MONTO RETIRADO</th>
-                <th>RETIROS</th>
+                <th>CONCEPTO</th>
             </thead>
             <tbody>
                

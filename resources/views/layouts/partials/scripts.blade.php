@@ -392,7 +392,9 @@
             {data: 'regions', name:'regions.name'},
             {data: 'name',name:'branches.name'},
             {data: 'adviser', name: 'credits.adviser'},
-            {data: 'firts_name', name: 'credits.firts_name'},
+           {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
+                    return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+                }},
             {data: 'folio', name: 'credits.folio'},
             {data: 'periodicity', name: 'credits.periodicity'},
             {data: 'dues', name: 'credits.dues'},
@@ -402,12 +404,13 @@
             {data: 'interest', name: 'payments.interest'},
             {data: 'moratorium', name: 'payments.moratorium'},
             {data: 'updated_at', name:'payments.updated_at'},
+
             ]
           });
            // $.fn.dataTable.ext.errMode = 'throw';
-        });
-      </script>
-      <script>
+         });
+       </script>
+       <script>
         $(document).ready(function() {
           $('#reportPaymentCentro').DataTable( {
             "language": {
@@ -425,7 +428,9 @@
             {data: 'regions', name:'regions.name'},
             {data: 'name',name:'branches.name'},
             {data: 'adviser', name: 'credits.adviser'},
-            {data: 'firts_name', name: 'credits.firts_name'},
+            {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
+                    return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+                }},
             {data: 'folio', name: 'credits.folio'},
             {data: 'periodicity', name: 'credits.periodicity'},
             {data: 'dues', name: 'credits.dues'},
@@ -438,100 +443,205 @@
             ]
           });
            // $.fn.dataTable.ext.errMode = 'throw';
-        });
-      </script>
-      {{-- <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> --}}
+         });
+       </script>
+       <script>
+        $(document).ready(function() {
+          $('#reportPaymentAltos').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print','csv',
+            ],
+            "processing": true,
+            "serverSide": true,
+            "ajax": "api/reportPaymentAltos",
+            "columns":[
+            {data: 'number', name: 'payments.number'},
+            {data: 'regions', name:'regions.name'},
+            {data: 'name',name:'branches.name'},
+            {data: 'adviser', name: 'credits.adviser'},
+            {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
+                    return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+                }},
+            {data: 'folio', name: 'credits.folio'},
+            {data: 'periodicity', name: 'credits.periodicity'},
+            {data: 'dues', name: 'credits.dues'},
+            {data: 'interest_rate', name: 'credits.interest_rate'},
+            {data: 'payment', name:'payments.payment'},
+            {data: 'capital' , name:'payments.capital'},
+            {data: 'interest', name: 'payments.interest'},
+            {data: 'moratorium', name: 'payments.moratorium'},
+            {data: 'updated_at', name:'payments.updated_at'},
+            ]
+          });
+           // $.fn.dataTable.ext.errMode = 'throw';
+         });
+       </script>
+       <script>
+        $(document).ready(function() {
+          $('#reportPaymentMezcalapa').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print','csv',
+            ],
+            "processing": true,
+            "serverSide": true,
+            "ajax": "api/reportPaymentMezcalapa",
+            "columns":[
+            {data: 'number', name: 'payments.number'},
+            {data: 'regions', name:'regions.name'},
+            {data: 'name',name:'branches.name'},
+            {data: 'adviser', name: 'credits.adviser'},
+            {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
+              return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+            }},
+            {data: 'folio', name: 'credits.folio'},
+            {data: 'periodicity', name: 'credits.periodicity'},
+            {data: 'dues', name: 'credits.dues'},
+            {data: 'interest_rate', name: 'credits.interest_rate'},
+            {data: 'payment', name:'payments.payment'},
+            {data: 'capital' , name:'payments.capital'},
+            {data: 'interest', name: 'payments.interest'},
+            {data: 'moratorium', name: 'payments.moratorium'},
+            {data: 'updated_at', name:'payments.updated_at'},
+            ]
+          });
+           // $.fn.dataTable.ext.errMode = 'throw';
+         });
+       </script>
+       <script>
+        $(document).ready(function() {
+          $('#reportPaymentNorte').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print','csv',
+            ],
+            "processing": true,
+            "serverSide": true,
+            "ajax": "api/reportPaymentNorte",
+            "columns":[
+            {data: 'number', name: 'payments.number'},
+            {data: 'regions', name:'regions.name'},
+            {data: 'name',name:'branches.name'},
+            {data: 'adviser', name: 'credits.adviser'},
+            {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
+              return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+            }},
+            {data: 'folio', name: 'credits.folio'},
+            {data: 'periodicity', name: 'credits.periodicity'},
+            {data: 'dues', name: 'credits.dues'},
+            {data: 'interest_rate', name: 'credits.interest_rate'},
+            {data: 'payment', name:'payments.payment'},
+            {data: 'capital' , name:'payments.capital'},
+            {data: 'interest', name: 'payments.interest'},
+            {data: 'moratorium', name: 'payments.moratorium'},
+            {data: 'updated_at', name:'payments.updated_at'},
+            ]
+          });
+           // $.fn.dataTable.ext.errMode = 'throw';
+         });
+       </script>
+       {{-- <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> --}}
 
-      <script>
-       var changeDateFormat = $('#date').each(function(i,e) {
-        var dateTD = $(this).find('td:eq(4)');
-        var date = dateTD.text().trim();
-        var parts = date.split('/');
-        dateTD.text(parts[0]+'/'+parts[2]+'/'+parts[1]);
-      });
-
-       $.when(changeDateFormat).done(function() {
-        processDates(); 
-      })
-       /* THIS IS ONLY FOR EXAMPLE TO CHANGE THE DATE FORMAT */
-
-
-       function processDates() {
-        var process = $('#date').each(function(i,e) {
+       <script>
+         var changeDateFormat = $('#date').each(function(i,e) {
           var dateTD = $(this).find('td:eq(4)');
           var date = dateTD.text().trim();
           var parts = date.split('/');
-          dateTD.prepend('<span>'+parts[0]+parts[2]+parts[1]+'</span>');
+          dateTD.text(parts[0]+'/'+parts[2]+'/'+parts[1]);
         });
 
-        $.when(process).done(function() {
-          $('#pagoss').DataTable({ 
-           "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-          },
-          dom: 'Bfrtip',
-          buttons: [
-          'excel', 'pdf', 'print',
-          ],
-          "order": [[ 4, "desc" ]] });
-
+         $.when(changeDateFormat).done(function() {
+          processDates(); 
         })
-      }
+         /* THIS IS ONLY FOR EXAMPLE TO CHANGE THE DATE FORMAT */
+
+
+         function processDates() {
+          var process = $('#date').each(function(i,e) {
+            var dateTD = $(this).find('td:eq(4)');
+            var date = dateTD.text().trim();
+            var parts = date.split('/');
+            dateTD.prepend('<span>'+parts[0]+parts[2]+parts[1]+'</span>');
+          });
+
+          $.when(process).done(function() {
+            $('#pagoss').DataTable({ 
+             "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf', 'print',
+            ],
+            "order": [[ 4, "desc" ]] });
+
+          })
+        }
+      </script>
+
+      {{-- Form Wizard Validation --}}
+
+      <script>
+       $(document).ready(function () {
+
+        var navListItems = $('div.setup-panel div a'),
+        allWells = $('.setup-content'),
+        allNextBtn = $('.nextBtn');
+
+        allWells.hide();
+
+        navListItems.click(function (e) {
+          e.preventDefault();
+          var $target = $($(this).attr('href')),
+          $item = $(this);
+
+          if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('btn-primary').addClass('btn-default');
+            $item.addClass('btn-primary');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+          }
+        });
+
+        allNextBtn.click(function(){
+          var curStep = $(this).closest(".setup-content"),
+          curStepBtn = curStep.attr("id"),
+          nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+          curInputs = curStep.find("input[type='text'],input[type='url'],input[type='date'],input[type='email'],input[type='file'], select"),
+          isValid = true;
+
+          $(".form-group").removeClass("has-error");
+          for(var i=0; i<curInputs.length; i++){
+            if (!curInputs[i].validity.valid){
+              isValid = false;
+              $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+          }
+
+          if (isValid)
+            nextStepWizard.removeAttr('disabled').trigger('click');
+        });
+
+        $('div.setup-panel div a.btn-primary').trigger('click');
+      });
     </script>
 
-    {{-- Form Wizard Validation --}}
+    <script src="{{ asset('/js/jquery.loader.js') }}"></script>
+    <script type="text/javascript">
 
-    <script>
-     $(document).ready(function () {
-
-      var navListItems = $('div.setup-panel div a'),
-      allWells = $('.setup-content'),
-      allNextBtn = $('.nextBtn');
-
-      allWells.hide();
-
-      navListItems.click(function (e) {
-        e.preventDefault();
-        var $target = $($(this).attr('href')),
-        $item = $(this);
-
-        if (!$item.hasClass('disabled')) {
-          navListItems.removeClass('btn-primary').addClass('btn-default');
-          $item.addClass('btn-primary');
-          allWells.hide();
-          $target.show();
-          $target.find('input:eq(0)').focus();
-        }
-      });
-
-      allNextBtn.click(function(){
-        var curStep = $(this).closest(".setup-content"),
-        curStepBtn = curStep.attr("id"),
-        nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-        curInputs = curStep.find("input[type='text'],input[type='url'],input[type='date'],input[type='email'],input[type='file'], select"),
-        isValid = true;
-
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-          if (!curInputs[i].validity.valid){
-            isValid = false;
-            $(curInputs[i]).closest(".form-group").addClass("has-error");
-          }
-        }
-
-        if (isValid)
-          nextStepWizard.removeAttr('disabled').trigger('click');
-      });
-
-      $('div.setup-panel div a.btn-primary').trigger('click');
-    });
-  </script>
-
-  <script src="{{ asset('/js/jquery.loader.js') }}"></script>
-  <script type="text/javascript">
-
-    (function ($) {
-      "use strict";
+      (function ($) {
+        "use strict";
 
         $(function () { // short document ready
 

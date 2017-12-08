@@ -17,11 +17,11 @@ Pagos
 				<h3 class="box-title">Historial de pagos Mezcalapa</h3>
 			</div>  
 			<div class="box-body">
-				@if($payments->isEmpty())
+			{{-- 	@if($payments->isEmpty())
 				<div class="well text-center">Ho hay registros.</div>
-				@else
+				@else --}}
 				<div class="table-responsive">
-					<table class="table" id="recovery">
+					<table class="table" id="reportPaymentMezcalapa">
 						<thead class="bg-success">
 							<th># Cuota</th>
 							<th>Región</th>
@@ -41,9 +41,9 @@ Pagos
 							{{-- 	<th>status</th> --}}
 						</thead>
 						<tbody>
-							@foreach($payments as $payment)
+							{{-- @foreach($payments as $payment) --}}
 							{{-- @if ($payment->status == 'Pagado' OR $payment->status == 'Parcial') --}}
-							@if ($payment->status <> "Pendiente")
+							{{-- @if ($payment->status <> "Pendiente")
 							<tr>
 								<td>{{$payment->number}}</td>
 								<td>{{$payment->region['name']}}</td>
@@ -68,7 +68,7 @@ Pagos
 								<td class="bg-primary">{{$payment->capital}}</td>
 								<td class="bg-yellow">{{$payment->interest}}</td>
 								<td class="bg-red">{{$payment->moratorium}}</td>
-								<td>{{$payment->updated_at}}</td>
+								<td>{{$payment->updated_at}}</td> --}}
 								{{-- <td>{{$payment->status}}</td> --}}
 								{{-- <td>{{ $recovery->vault->user->branch->region['name'] }}</td>
 								<td>{{ $recovery->vault->user->branch['name'] }}</td>
@@ -81,14 +81,14 @@ Pagos
 								<td class="bg-yellow">${{ number_format($recovery->payment['interest']) }}</td>
 								<td class="bg-red">${{ number_format($recovery->payment['moratorium']) }}</td>
 								<td>{{ $recovery->created_at }}</td> --}}
-							</tr>
+							{{-- </tr>
 							@endif
 							
 							@endforeach
-						</tbody>
+						</tbody> --}}
 					</table>
 				</div>
-				@endif
+			{{-- 	@endif --}}
 			</div>
 		</div>
 	</div>

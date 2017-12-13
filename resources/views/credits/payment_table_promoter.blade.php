@@ -19,10 +19,10 @@
 				<td>{{$payment->date->format('d F Y')}}</td>
 				<td>${{number_format($payment->total,2)}}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
-				<td>$ {{ number_format($payment->balance, 2) }}</td>
-				<td>$ {{ number_format($payment->capital, 2) }}</td>
-				<td>$ {{ number_format($payment->interest, 2) }}</td>
-				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
+				<td>${{ number_format($payment->balance, 2) }}</td>
+				<td>${{ number_format($payment->capital, 2) }}</td>
+				<td>${{ number_format($payment->interest, 2) }}</td>
+				<td>${{ number_format($payment->moratorium, 2) }}</td>
 				<td><p>{{$payment->status}}</p></td>
 			</tr>
 			@elseif($debt->credit->periodicity == "CREDISEMANA" && $payment->status == "Parcial")
@@ -31,10 +31,10 @@
 				<td>{{$payment->date->format('d F Y')}}</td>
 				<td>${{number_format($payment->total,2)}}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
-				<td>$ {{ number_format($payment->balance, 2) }}</td>
-				<td>$ {{ number_format($payment->capital, 2) }}</td>
-				<td>$ {{ number_format($payment->interest, 2) }}</td>
-				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
+				<td>${{ number_format($payment->balance, 2) }}</td>
+				<td>${{ number_format($payment->capital, 2) }}</td>
+				<td>${{ number_format($payment->interest, 2) }}</td>
+				<td>${{ number_format($payment->moratorium, 2) }}</td>
 				<td><p>{{$payment->status}}</p></td>
 			</tr>
 			@elseif($payment->status == "Parcial")
@@ -43,10 +43,10 @@
 				<td>{{$payment->date->format('d F Y')}}</td>
 				<td>${{number_format($payment->total,2)}}</td>
 				<td>${{ number_format($payment->payment, 2)}}</td>
-				<td>$ {{ number_format($payment->balance, 2) }}</td>
-				<td>$ {{ number_format($payment->capital, 2) }}</td>
-				<td>$ {{ number_format($payment->interest, 2) }}</td>
-				<td>$ {{ number_format($payment->moratorium, 2) }}</td>
+				<td>${{ number_format($payment->balance, 2) }}</td>
+				<td>${{ number_format($payment->capital, 2) }}</td>
+				<td>${{ number_format($payment->interest, 2) }}</td>
+				<td>${{ number_format($payment->moratorium, 2) }}</td>
 				<td><p>{{$payment->status}}</p></td>
 			</tr>
 			@elseif($payment->status == "Vencido")

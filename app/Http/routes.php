@@ -9,7 +9,29 @@ Route::get('pdf/{id}', function ($id) {
     return $pdf->download('documents.pdf');
 });
 
+Route::get('promotores', function(){
+    $clients = App\Models\Client::all();
 
+    foreach ($clients as $key => $client) {
+        if ($client->user_id = Auth::user()->id) {
+           if ($client->credits->count() > 1 ) {
+            echo $client->firts_name;
+            echo "2 o mayor";
+            echo "<br>";
+            echo "===========";
+            echo "<br>";
+        }
+        else {
+            echo $client->firts_name;
+            echo "uno";
+            echo "<br>";
+            echo "===========";
+            echo "<br>";
+        }
+    }
+    
+}
+});
 Route::get('signature', function () {
     return view('signature');
 });
@@ -39,6 +61,7 @@ Route::get('api/payments', function(){
         'credits.mothers_last_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at']);
 
     return Datatables::of($payments)
+
     ->editColumn('updated_at', '{!! $updated_at !!}')
     ->make(true);
 });
@@ -718,6 +741,8 @@ Route::get('unlock', function () {
 Route::get('movements', 'GeneralController@movements');
 Route::get('movementsBalance', 'GeneralController@movementsBalance');
 Route::get('movementsBeginning', 'GeneralController@movementsBeginning');
+
+Route::get('api/movementsBeginning','GeneralController@movementsBeginning');
 Route::get('movementsEffective', 'GeneralController@movementsEffective');
 Route::get('movementsRecovery', 'GeneralController@movementsRecovery');
 Route::get('movementsRecoveryAccess', 'GeneralController@movementsRecoveryAccess');
@@ -772,12 +797,16 @@ Route::get('/transfer', function () {
     return view('partials.transfer')
     ->with('users', $users);
 });
-Route::get('/moveCredits',function(){
-    $credits= App\Models\Credit::all()->where('status','MINISTRADO');
-    return view('partials.moveCredits')
-    ->with('credits',$credits);
-});
+// Route::get('/moveCredits',function(){
+//     $credits= App\Models\Credit::all()->where('status','MINISTRADO');
+//     return view('partials.moveCredits')
+//     ->with('credits',$credits);
+// });
+
+Route::Post('moveCredits', 'CreditController@moveCredits');
+Route::Post('moveClient', 'GeneralController@moveClient');
 Route::Post('move', 'CreditController@move');
+Route::Post('moveClientAll', 'GeneralController@moveClientAll');
 Route::get('transferClients', function () {
     $branch = App\Models\Branch::find(4);
     $clients = $branch->clients;
@@ -1039,6 +1068,7 @@ Route::get('actives/{id}/delete', [
     'uses' => 'ActiveController@destroy',
 ]);
 
+
 Route::get('changePayments', function(){
   $payments = App\Models\Payment::all();
 
@@ -1061,6 +1091,17 @@ Route::get('changeDebts', function(){
     $debt->save();
 }
 echo "Listo";
+});
+
+Route::get('debtsChange', function(){
+  $debts = App\Models\Debt::all();
+
+  foreach ($debts as $key => $debt) {
+    $credit = $debt->credit;
+    $debt->client_id = $credit->client_id;
+    $debt->save();
+}
+echo "Listo Client_id";
 });
 
 Route::get('changeIncomePayments', function(){
@@ -1352,10 +1393,56 @@ Route::get('api/reportPaymentNorte', function(){
         'credits.mothers_last_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at'])->groupBy('payments.updated_at');
     return Datatables::of($payments)
     ->editColumn('updated_at', '{!! $updated_at !!}')
-   
+
     ->make(true);
 });
 
 Route::get('reverse/{id}','GeneralController@reverse');
 
 Route::get('punishCredit/{id}', 'CreditController@punish');
+
+Route::get('view-credits/{id}', function($id)
+{
+  $client = App\Models\Client::find($id);
+  $collection_credits = $client->credits;
+  $credits = $collection_credits->where('status', 'MINISTRADO');
+  // echo $client->folio;
+  // dd($credits);
+  return view('partials.home.view-credits')
+  ->with('credits', $credits)
+  ->with('client',$client);
+});
+
+Route::get('epale',function(){
+    $credit = App\Models\Credit::all();
+    $date_now = \Carbon\Carbon::now()->toDateString();
+    $hour_now = \Carbon\Carbon::now()->toTimeString();
+    foreach ($credit as $key => $credit) {
+        $debt = $credit->debt;
+        $payments = $debt->payments;
+
+        foreach ($payments as $key => $payment) {
+            if ($payment->day <= $date_now  && $hour_now >= '17:14:00' && $payment->status == 'Pendiente') {
+                $payment = App\Models\Payment::find($payment->id);
+
+                echo  $payment->date;
+                echo "<br>";
+                echo "moratorio";
+                echo "<br>";
+                echo $payment->status;
+                echo "<br>";
+                echo "===================";
+                echo "<br>";
+
+            }
+
+        }
+    }
+
+});
+Route::get('ruta', function(){
+    $credits = App\Models\Credit::all();
+
+    return view('partials.home.ruta')
+    ->with('credits',$credits);
+});

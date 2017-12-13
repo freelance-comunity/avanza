@@ -14,6 +14,7 @@ class Debt extends Model
 	public $fillable = [
 	"ammount",
 	"status",
+	"client_id",
 	"credit_id",
 	"branch_id",
 	"region_id"
@@ -51,6 +52,10 @@ class Debt extends Model
 	{
 			return $this->belongsTo('App\Models\Branch');
 	}
+	 public function client()
+    {
+        return $this->belongsTo('App\Models\Client');
+    }
 
 
 }

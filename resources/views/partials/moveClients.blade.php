@@ -86,15 +86,15 @@ html {
 	<div class="col-md-12">
 		<div class="box box-danger">
 			<div class="box-header with-border">
-				<h3 class="box-title">Realizar transferencia de Crédito</h3>
+				<h3 class="box-title">Realizar transferencia de Cliente</h3>
 			</div>  
 
 
-			@if($credits->isEmpty())
+			@if($clients->isEmpty())
 			<div class="well text-center">No se encontraron créditos.</div>
 			@else
 			<div class="table-responsive">
-				{!! Form::open(['url' => 'move','data-parsley-validate' => '']) !!}
+				{!! Form::open(['url' => 'moveClientAll','data-parsley-validate' => '']) !!}
 				{{ csrf_field() }}
 				@if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
 				<table class="table"  id="example">
@@ -103,26 +103,26 @@ html {
 						@endif
 						<thead class="bg-primary">
 							<th>Seleccionar</th>
-							<th>Folio</th>
+							<th>Promotor Actual</th>
 							<th>Cliente</th>
-							<th>Fecha de Contrato</th>
 							<th>Sucursal</th>
 
 						</thead>
 						<tbody>
-							@foreach($credits as $key=>$credit)
-							@if ($user->id != $credit->user_id)
+							@foreach($clients as $key=>$client)
+							@if ($user->id != $client->user_id)
 							<tr>
 								<td>
 									<label class="custom-control custom-checkbox">
-										<input type="checkbox" data-parsley-multiple="checkbox" data-parsley-mincheck="1" data-parsley-required data-parsley-error-message="Por favor selecciona al menos un crédito" name="rows[{{$credit->id}}][id]" value="{{$credit->id}}" class="custom-control-input">
+										<input type="checkbox" data-parsley-multiple="checkbox" data-parsley-mincheck="1" data-parsley-required data-parsley-error-message="Por favor selecciona al menos un crédito" name="rows[{{$client->id}}][id]" value="{{$client->id}}" class="custom-control-input">
 										<span class="custom-control-indicator"></span>
 									</label>
+
 								</td>
-								<td><a href="{!! route('credits.show', [$credit->id]) !!}">{!! $credit->folio !!}</a></td>
-								<td>{!! $credit->firts_name !!} {!! $credit->last_name !!} {!! $credit->mothers_last_name !!}</td>
-								<td>{!! strtoupper($credit->date->format('d-F-Y')) !!}</td>
-								<td>{!! $credit->branch !!}</td>
+								<td>{{$client->user->name}} {{$client->user->father_last_name}} {{$client->user->mother_last_name}}</td>
+								<td>{!! $client->firts_name !!} {!! $client->last_name !!} {!! $client->mothers_last_name !!}</td>
+								
+								<td>{!! $client->branch['name'] !!}</td>
 
 							</tr>
 							@endif

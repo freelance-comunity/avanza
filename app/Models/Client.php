@@ -86,6 +86,10 @@ class Client extends Model
 	{
 		return $this->belongsTo('App\User');
 	}
+	 public function debts()
+    {
+        return $this->hasMany('App\Models\Debt');
+    }
 	
 
 	

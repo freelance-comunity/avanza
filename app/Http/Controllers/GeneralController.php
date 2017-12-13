@@ -500,6 +500,8 @@ class GeneralController extends Controller
     }
     public function movementsBeginning()
     {
+
+
         if (Auth::user()->hasRole(['administrador', 'director-general'])) {
             $user_allocation = Auth::user();
             $region_allocation = $user_allocation->region;
@@ -786,20 +788,20 @@ class GeneralController extends Controller
         return view('partials.reportPayment')
         ->with('recoverys', $recoverys);
     }
-     public function reportPaymentAltos()
+    public function reportPaymentAltos()
     {
         $payments = Payment::all()->where('region_id',3)->sortByDesc('created_at');
         return view('partials.reportPaymentAltos')
         ->with('payments',$payments);
     }
-     public function reportPaymentNorte()
+    public function reportPaymentNorte()
     {
         $payments = Payment::all()->where('region_id',1)->sortByDesc('created_at');
         return view('partials.reportPaymentNorte')
         ->with('payments',$payments);
-    
+
     }
-     public function reportPaymentCentro()
+    public function reportPaymentCentro()
     {
         $payments = Payment::all()->where('region_id',2)->sortByDesc('created_at');
         return view('partials.reportPaymentCentro')
@@ -811,7 +813,7 @@ class GeneralController extends Controller
         return view('partials.reportPaymentTeran')
         ->with('payments',$payments);
     }
-     public function reportPayment24()
+    public function reportPayment24()
     {
         $payments = Payment::all()->where('branch_id',3)->sortByDesc('created_at');
         return view('partials.reportPayment24')
@@ -948,4 +950,54 @@ class GeneralController extends Controller
             }
         }
     }
+    public function moveClient(Request $request)
+    {
+       $clients= Client::all();
+       $id_user = $request->input('user_id');
+       $user = User::find($id_user);
+       return view('partials.moveClients')
+       ->with('clients',$clients)
+       ->with('user',$user);
+   }
+   public function moveClientAll(Request $request)
+   {
+       $id_user = $request->input('user_id');
+       $user = User::find($id_user);
+       $input = $request->all();
+
+       foreach ($input['rows'] as $row) 
+       {
+        $id_client = $row['id'];
+        $client = Client::find($id_client);
+        $client->branch_id = $user->branch_id;
+        $client->user_id = $user->id;
+        $client->region_id = $user->region_id;
+        $client->save();
+        $credits = $client->credits;
+        foreach ($credits as $key => $credit) {
+         $credit->adviser = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
+         $credit->user_id = $user->id;
+         $credit->branch_id = $user->branch_id;
+         $credit->region_id = $user->region_id;
+         $credit->save();
+
+         $debt = $credit->debt;
+         $debt->branch_id = $user->branch_id;
+         $debt->region_id = $user->region_id;
+         $debt->save();
+
+         $payments = $debt->payments;
+         foreach ($payments as $key => $payment) {
+             $payment->user_id = $user->id;
+             $payment->branch_id = $user->branch_id;
+             $payment->region_id = $user->region_id;
+            $payment->save();
+         }
+     }
+
+ }
+
+ Toastr::success('Cliente o Clientes Transferido Exitosamente.', 'Transferencia de Cliente', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+ return view('home');
+}
 }

@@ -6,7 +6,7 @@ $role = $collection->where('name', 'ejecutivo-de-credito')->first();
 $filtered = App\User::where('id', '!=', Auth::id())->get();
 $users = $filtered->all();
 @endphp
-<div class="modal fade" id="move" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="moveClient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,7 +16,7 @@ $users = $filtered->all();
         </button>
       </div>
       <div class="modal-body">
-        {!! Form::open(['url' => 'moveCredits','data-parsley-validate' => '',  'files' => 'true','onsubmit'=>'return enviado()']) !!}
+        {!! Form::open(['url' => 'moveClient','data-parsley-validate' => '',  'files' => 'true','onsubmit'=>'return enviado()']) !!}
         <div class="form-group col-sm-6 col-lg-12">
               {!! Form::label('user_id', 'Nombre del Ejecutivo:') !!}
               <select name="user_id"  id="" class="form-control input-lg">

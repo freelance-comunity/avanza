@@ -54,9 +54,8 @@
       <li class="treeview">
         <a><i class='ion ion-pie-graph'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-         <li><a href="{{ url('walletExpired') }}">Cartera</a></li>
-         <li><a href="{{ url('totalVault') }}">Total bovéda</a></li>
-         <li><a href="{{ url('currentCredits') }}">Créditos Vigentes</a></li>
+         <li><a href="{{ url('walletExpired') }}">Cartera Total</a></li>
+         {{-- <li><a href="{{ url('totalVault') }}">Total bovéda</a></li> --}}s
        </ul>
      </li>
      <li class="treeview">
@@ -90,7 +89,9 @@
        {{-- <li><a href="{{ url('movementsBalance') }}">Saldo en Caja</a></li> --}}
        <li><a href="{{ url('movementsBeginning') }}">Asignacion en Efectivo</a></li>
        {{-- <li><a href="{{ url('movementsEffective') }}">Asignacion en Efectivo</a></li> --}}
+       @if(Auth::user()->hasRole(['coordinador-regional']))
        <li><a href="{{ url('movementsRecovery') }}">Recuperación</a></li>
+       @endif
        <li><a href="{{ url('movementsRecoveryAccess') }}">Recuperación Access</a></li>
        <li><a href="{{ url('movementsPlacement') }}">Colocación</a></li>
        <li><a href="{{ url('movementsExpenses') }}">Gastos</a></li>

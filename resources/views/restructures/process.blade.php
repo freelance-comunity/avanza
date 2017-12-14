@@ -99,7 +99,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
 				]) !!}
 			</div>
 			<div class="form-group col-sm-6 col-lg-4">
-				{!! Form::label('interest_rate', 'Interés:') !!}
+				{!! Form::label('interest_rate', 'Interés Global:') !!}
 				{!! Form::text('interest_rate',null, [
 					'class' => 'form-control input-lg',
 					'placeholder' => 'INTERÉS',

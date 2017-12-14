@@ -28,7 +28,7 @@ Detalles
 									<th>Usuario</th>
 									<th>Monto</th>
 									<th>Concepto</th>
-									<th>Fecha/Hora asignación</th>
+									<th>Fecha/Hora pago</th>
 								</thead>
 								<tbody>
 									@foreach($accesses as $acces)

@@ -30,7 +30,7 @@ Detalles
 									<th>Concepto</th>
 									<th>Cliente</th>
 									<th>Folio crédito</th>
-									<th>Fecha/Hora asignación</th>
+									<th>Fecha/Hora pago</th>
 								</thead>
 								<tbody>
 									@foreach($recoverys as $recovery)

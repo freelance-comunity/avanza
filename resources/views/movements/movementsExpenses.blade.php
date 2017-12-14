@@ -31,7 +31,7 @@ Detalles
 									<th>Monto</th>
 									<th>Tipo de Gasto</th>
 									<th>Concepto</th>
-									<th>Fecha/Hora asignación</th>
+									<th>Fecha/Hora gasto</th>
 								</thead>
 								<tbody>
 									@foreach($expenses as $expense)

@@ -8,11 +8,19 @@ $payments_now = $payments->where('day',$now);
 
 
 
-$total_payments = DB::table('payments')->where([
+$pendent = DB::table('payments')->where([
     ['user_id', '=', $user->id],
     ['date', '=', $now],
     ['status', '=', 'Pendiente'],
 ])->sum('total');
+
+$partial = DB::table('payments')->where([
+    ['user_id', '=', $user->id],
+    ['date', '=', $now],
+    ['status', '=', 'Parcial'],
+])->sum('total');
+
+$total_payments = $partial + $pendent;
 
 $total_payments_losers = DB::table('payments')->where([
     ['user_id', '=', $user->id],
@@ -33,9 +41,12 @@ $total_incomes = DB::table('income_payments')->where([
     ['date', '=', $now],
 ])->sum('ammount');
 
+
+
+ $total_porcent = $pendent + $partial + $total_payments_losers;
 if($total_incomes > 0 && $total_payments >0)
 {
-    $porcent = $total_incomes / $total_payments;
+    $porcent = $total_incomes / $total_porcent;
     $porcent_friendly = number_format($porcent * 100,2);
 }
 else
@@ -50,7 +61,7 @@ else
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-money"></i>
-                Monto a Recuperar Vigente
+                Programado para cobrar hoy
             </h4>
             ${{ number_format($total_payments,2) }}
         </div>
@@ -60,7 +71,7 @@ else
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-money"></i>
-                Monto Vencido
+               Lo que traes vencido
             </h4>
             ${{ number_format($total_payments_losers,2) }}
         </div>
@@ -70,7 +81,7 @@ else
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-money"></i>
-                Monto Recuperado
+                Lo que has recuperado hoy
             </h4>
             ${{ number_format($total_incomes,2) }}
         </div>

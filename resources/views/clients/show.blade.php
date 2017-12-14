@@ -5,6 +5,7 @@ $company= $client->company;
 $aval= $client->aval;
 $document= $client->document;
 $references = $client->references;
+$user = $client->user;
 @endphp
 @extends('layouts.app')
 
@@ -98,6 +99,13 @@ Detalles del Cliente
           <td>GARANTÍA:</td>
           <td>
             {{$client->warranty}}
+          </td>
+        </tr>
+        <tr>
+          <td>6.</td>
+          <td>PROMOTOR:</td>
+          <td>
+            {{$user->name}} {{$user->father_last_name}} {{$user->mother_last_name}}
           </td>
         </tr>
         @endif

@@ -37,7 +37,7 @@ Detalles
 										<td>{{ $start->vault->user['name'] }} {{ $start->vault->user['father_last_name'] }} {{ $start->vault->user['mother_last_name'] }}</td>
 										<td>${{ number_format($start->ammount) }}</td>
 										<td>{{ $start->concept }}</td>
-										<td>{{ $start->vault->created_at->toDateTimeString() }}</td>
+										<td>{{ $start->created_at->toDateTimeString() }}</td>
 									</tr>
 									@endforeach
 								</tbody>

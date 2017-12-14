@@ -39,6 +39,9 @@ Lista de créditos
 						<th>Cuotas parciales</th>
 						<th>Cuotas vencidas</th>
 						<th>Total Pagado</th>
+						<th>Capital Cobrado</th>
+						<th>Interés Cobrado</th>
+						<th>Mora Cobrado</th>
 						<th>Total Vencido</th>
 						<th>Capital Vencido</th>
 						<th>Intereses vencidos</th>
@@ -94,6 +97,10 @@ Lista de créditos
 							<td>{!! $partial_payments->count() !!}</td>
 							<td>{!! $late_payments->count() !!}</td>
 							<th class="info">${{ number_format($totales->sum('payment'),2) }}</th>
+
+							<th>C</th>
+							<th>M</th>
+							<th>t</th>
 							@if ($late_total==0)
 							<td class="success">${!! number_format($late_total, 2) !!}</td>
 							@elseif($late_total > 0)

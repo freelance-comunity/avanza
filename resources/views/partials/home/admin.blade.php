@@ -24,8 +24,15 @@ $vencid = App\Models\Payment::where('status', 'Vencido')->sum('balance');
 
 $vigente = $pendent+ $partial + $vencid;
 
+
+
+
+
+$credits = $client->credits;
+$credits_collection = $client->credits;
+$credits = $credits_collection->where('status', 'MINISTRADO');
 // $vigente = App\Models\Credit::all()->where('status','MINISTRADO');
- @endphp
+@endphp
 <div class="row">
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
@@ -168,8 +175,8 @@ $vigente = $pendent+ $partial + $vencid;
 		<div class="small-box bg-blue">
 			<div class="inner">
 				@php
-					$sum_payments = $payments->sum('ammount');
-					$total_day = $sum_payments + $payment;
+				$sum_payments = $payments->sum('ammount');
+				$total_day = $sum_payments + $payment;
 				@endphp
 				<h3>${{ number_format($payment,2) }}</h3>
 
@@ -267,14 +274,14 @@ $vigente = $pendent+ $partial + $vencid;
 						<img src="{{asset('/uploads/avatars')}}/{{ $activity->user->avatar }}" alt="User Image" class="online">
 						<a class="users-list-name" href="#">{{ $activity->user->name }}</a>
 						{{--
-						<span class="users-list-date">{{ Carbon\Carbon::now() }}</span> --}}
-					</li>
-					@endif @endforeach
-				</ul>
-				<!-- /.users-list -->
+							<span class="users-list-date">{{ Carbon\Carbon::now() }}</span> --}}
+						</li>
+						@endif @endforeach
+					</ul>
+					<!-- /.users-list -->
+				</div>
 			</div>
+			<!--/.box -->
 		</div>
-		<!--/.box -->
+		<!-- /.col -->
 	</div>
-	<!-- /.col -->
-</div>

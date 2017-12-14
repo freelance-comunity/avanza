@@ -225,7 +225,7 @@ Detalles
 					</div>
 					<div class="col-md-12">
 						<div class="table-responsive">
-							@if(Auth::user()->hasRole(['administrador', 'director-general']))
+							@if(Auth::user()->hasRole(['administrador']))
 							@include('credits.payment_table_admin')
 							@endif
 							@if (Auth::user()->can('ver-pagos'))

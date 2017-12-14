@@ -587,7 +587,7 @@ class GeneralController extends Controller
 
             $empleados = $region_allocation->users;
             $region = $user_allocation->region->id;
-            $recoverys = IncomePayment::all()->where('region_id', $region)->sortByDesc('created_at');
+            $recoverys = IncomePayment::all()->sortByDesc('created_at');
             return view('movements.movementsRecovery')
             ->with('recoverys', $recoverys);
         } elseif (Auth::user()->hasRole('coordinador-regional')) {

@@ -24,13 +24,9 @@ $vencid = App\Models\Payment::where('status', 'Vencido')->sum('balance');
 
 $vigente = $pendent+ $partial + $vencid;
 
-
-
-
-
-$credits = $client->credits;
-$credits_collection = $client->credits;
-$credits = $credits_collection->where('status', 'MINISTRADO');
+// $credits = $client->credits;
+// $credits_collection = $client->credits;
+// $credits = $credits_collection->where('status', 'MINISTRADO');
 // $vigente = App\Models\Credit::all()->where('status','MINISTRADO');
 @endphp
 <div class="row">

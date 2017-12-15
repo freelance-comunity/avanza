@@ -14,7 +14,7 @@ Route::get('promotores', function(){
 
     foreach ($clients as $key => $client) {
         if ($client->user_id = Auth::user()->id) {
-           if ($client->credits->count() > 1 ) {
+         if ($client->credits->count() > 1 ) {
             echo $client->firts_name;
             echo "2 o mayor";
             echo "<br>";
@@ -37,7 +37,7 @@ Route::get('signature', function () {
 });
 
 Route::get('totalPayments',function(){
-   return view('totalPayments');
+ return view('totalPayments');
 });
 
 Route::get('api/payments', function(){
@@ -1024,7 +1024,7 @@ Route::get('applyMoratoriumDate',function(){
         $payments = $debt->payments;
 
         foreach ($payments as $key => $payment) {
-         if ($payment->date >= $date_now && $payment->status == 'Vencido' ) {
+           if ($payment->date >= $date_now && $payment->status == 'Vencido' ) {
             $payment = App\Models\Payment::find($payment->id);
             $payment->status = 'Pendiente';
             $payment->moratorium = 0;
@@ -1049,13 +1049,13 @@ echo "MORATORIO APLICADO CORRECTAMENTE";
 
 Route::get('productos', function () {
 
-   $credit = App\Models\Credit::all();
-   foreach ($credit as $key => $credit) {
+ $credit = App\Models\Credit::all();
+ foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
-       echo $credit->periodicity;
-       echo $credit->adviser;
-       echo "<br>";
-   }
+     echo $credit->periodicity;
+     echo $credit->adviser;
+     echo "<br>";
+ }
 
 }
 });
@@ -1267,12 +1267,12 @@ Route::Post('reestructureCredit','CreditController@reestructureCredit');
 Route::get('paymentsCorrection', function(){
     $payments = App\Models\Payment::all()->where('status','Pagado');
     foreach ($payments as $key => $payment) {
-       $payment->capital = 0;
-       $payment->interest = 0;
-       $payment->moratorium = 0;
-       $payment->save();
-   }
-   echo "Pagos Pagados corregidos";
+     $payment->capital = 0;
+     $payment->interest = 0;
+     $payment->moratorium = 0;
+     $payment->save();
+ }
+ echo "Pagos Pagados corregidos";
 });
 
 Route::get('paymentsCorrectionVencido', function(){
@@ -1327,7 +1327,7 @@ echo "CORRECCION DE PAGOS VENCIDOS LISTO";
 
 // Route::get('reportPaymentCentro', 'GeneralController@reportPaymentCentro');
 Route::get('reportPaymentCentro',function(){
-   return view('partials.reportPaymentCentro');
+ return view('partials.reportPaymentCentro');
 });
 
 Route::get('api/reportPaymentCentro', function(){
@@ -1346,7 +1346,7 @@ Route::get('api/reportPaymentCentro', function(){
 
 // Route::get('reportPaymentAltos', 'GeneralController@reportPaymentAltos');
 Route::get('reportPaymentAltos',function(){
-   return view('partials.reportPaymentAltos');
+ return view('partials.reportPaymentAltos');
 });
 Route::get('api/reportPaymentAltos', function(){
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
@@ -1363,7 +1363,7 @@ Route::get('api/reportPaymentAltos', function(){
 });
 // Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa');
 Route::get('reportPaymentMezcalapa',function(){
-   return view('partials.reportPaymentMezcalapa');
+ return view('partials.reportPaymentMezcalapa');
 });
 Route::get('api/reportPaymentMezcalapa', function(){
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
@@ -1380,7 +1380,7 @@ Route::get('api/reportPaymentMezcalapa', function(){
 });
 // Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');
 Route::get('reportPaymentNorte',function(){
-   return view('partials.reportPaymentNorte');
+ return view('partials.reportPaymentNorte');
 });
 Route::get('api/reportPaymentNorte', function(){
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
@@ -1446,3 +1446,38 @@ Route::get('ruta', function(){
     return view('partials.home.ruta')
     ->with('credits',$credits);
 });
+
+
+Route::get('wallet',function(){
+ return view('credits.wallet');
+});
+
+Route::get('api/wallet', function(){
+    $credits = App\Models\Credit::join('debts','credits.id','=','debts.credit_id')
+    ->leftJoin('regions','credits.region_id','=','regions.id')
+    ->leftJoin('branches','credits.branch_id','=','branches.id')
+    ->select(['credits.id','credits.folio','regions.name as regions','credits.periodicity','credits.adviser','credits.firts_name','credits.last_name','credits.mothers_last_name','credits.date','branches.name','credits.ammount','credits.interest_rate','credits.dues',\DB::raw('count(payments.debt_id) as count'),\DB::raw('count(payments.debt_id) as partials, status'),'debts.status'])
+    ->join('payments','debts.id','=','payments.debt_id')
+    ->where('payments.status','=','Pagado')
+    ->where('status','=','Parcial')
+    ->groupBy('id');
+     return Datatables::of($credits)
+     ->editColumn('date', '{!! $date !!}')
+    ->make(true);
+});
+
+
+
+Route::get('clientes',function(){
+$clients = App\Models\Client::all();
+ return view('clients.clientes')
+ ->with('clients',$clients);
+});
+
+// Route::get('api/clientes',function(){
+//     $clients = DB::table('clients')
+//     ->join('client_locations','clients.id','=','client_locations.client_id')
+//     ->select(['firts_name','last_name','mothers_last_name','curp','ine','client_locations.street','client_locations.number','client_locations.colony','client_locations.municipality','client_locations.state']);
+//     return Datatables::of($clients)
+//     ->make(true);
+// });

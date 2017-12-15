@@ -392,9 +392,9 @@
             {data: 'regions', name:'regions.name'},
             {data: 'name',name:'branches.name'},
             {data: 'adviser', name: 'credits.adviser'},
-           {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
-                    return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
-                }},
+            {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
+              return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+            }},
             {data: 'folio', name: 'credits.folio'},
             {data: 'periodicity', name: 'credits.periodicity'},
             {data: 'dues', name: 'credits.dues'},
@@ -429,8 +429,8 @@
             {data: 'name',name:'branches.name'},
             {data: 'adviser', name: 'credits.adviser'},
             {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
-                    return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
-                }},
+              return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+            }},
             {data: 'folio', name: 'credits.folio'},
             {data: 'periodicity', name: 'credits.periodicity'},
             {data: 'dues', name: 'credits.dues'},
@@ -464,8 +464,8 @@
             {data: 'name',name:'branches.name'},
             {data: 'adviser', name: 'credits.adviser'},
             {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
-                    return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
-                }},
+              return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+            }},
             {data: 'folio', name: 'credits.folio'},
             {data: 'periodicity', name: 'credits.periodicity'},
             {data: 'dues', name: 'credits.dues'},
@@ -550,98 +550,160 @@
            // $.fn.dataTable.ext.errMode = 'throw';
          });
        </script>
-       {{-- <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> --}}
-
        <script>
-         var changeDateFormat = $('#date').each(function(i,e) {
-          var dateTD = $(this).find('td:eq(4)');
-          var date = dateTD.text().trim();
-          var parts = date.split('/');
-          dateTD.text(parts[0]+'/'+parts[2]+'/'+parts[1]);
-        });
-
-         $.when(changeDateFormat).done(function() {
-          processDates(); 
-        })
-         /* THIS IS ONLY FOR EXAMPLE TO CHANGE THE DATE FORMAT */
-
-
-         function processDates() {
-          var process = $('#date').each(function(i,e) {
-            var dateTD = $(this).find('td:eq(4)');
-            var date = dateTD.text().trim();
-            var parts = date.split('/');
-            dateTD.prepend('<span>'+parts[0]+parts[2]+parts[1]+'</span>');
-          });
-
-          $.when(process).done(function() {
-            $('#pagoss').DataTable({ 
-             "language": {
+        $(document).ready(function() {
+          $('#wallet').DataTable( {
+            "language": {
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print',
+            'excel', 'pdf', 'print','csv',
             ],
-            "order": [[ 4, "desc" ]] });
-
-          })
-        }
+            "processing": true,
+            "serverSide": true,
+            "ajax": "api/wallet",
+            "columns":[
+            {data: 'id', name: 'credits.id'},
+            {data: 'folio', name: 'credits.folio'},
+            {data: 'regions', name:'regions.name'},
+            {data: 'periodicity', name: 'credits.periodicity'},
+            {data: 'adviser', name: 'credits.adviser'},
+            {data: 'firts_name', name: 'credits.firts_name', render: function (data, type, row, meta) {
+              return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+            }},
+            {data: 'date', name: 'credits.date'},
+            {data: 'name',name:'branches.name'},
+            {data: 'ammount', name:'credits.ammount'},
+            {data: 'interest_rate', name:'credits.interest_rate'},
+            {data: 'dues',name:'credits.dues'}, 
+            {data: 'count', name: 'count', searchable: false},
+            {data: 'partials', name: 'partials', searchable: false},
+            {data: 'status', name:'debts.status'},
+            ]
+          });
+        });
       </script>
 
-      {{-- Form Wizard Validation --}}
 
       <script>
-       $(document).ready(function () {
-
-        var navListItems = $('div.setup-panel div a'),
-        allWells = $('.setup-content'),
-        allNextBtn = $('.nextBtn');
-
-        allWells.hide();
-
-        navListItems.click(function (e) {
-          e.preventDefault();
-          var $target = $($(this).attr('href')),
-          $item = $(this);
-
-          if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-primary').addClass('btn-default');
-            $item.addClass('btn-primary');
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
-          }
+        $(document).ready(function() {
+          $('#clientes').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+             buttons: [
+                'csv', 'excel', 'pdf', 'print', 
+            ],
+            "processing": true,
+            "serverSide": true,
+            "ajax": "api/clientes",
+            "columns":[
+            {data: 'firts_name', name: 'firts_name', render: function (data, type, row, meta) {
+              return row.firts_name + ' ' + row.last_name + ' ' + row.mothers_last_name;
+            }},
+            {data: 'curp', name: 'curp'},
+            {data: 'ine',name:'ine'},
+            {data: 'street',name:'street', render: function (data, type, row, meta) {
+              return row.street + ' ' + row.number + ', ' + row.colony + ', ' + row.municipality + '; ' + row.state ;
+            }},
+            ]
+          });
         });
+      </script>
+      {{-- <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> --}}
 
-        allNextBtn.click(function(){
-          var curStep = $(this).closest(".setup-content"),
-          curStepBtn = curStep.attr("id"),
-          nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-          curInputs = curStep.find("input[type='text'],input[type='url'],input[type='date'],input[type='email'],input[type='file'], select"),
-          isValid = true;
-
-          $(".form-group").removeClass("has-error");
-          for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-              isValid = false;
-              $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-          }
-
-          if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
-        });
-
-        $('div.setup-panel div a.btn-primary').trigger('click');
+      <script>
+       var changeDateFormat = $('#date').each(function(i,e) {
+        var dateTD = $(this).find('td:eq(4)');
+        var date = dateTD.text().trim();
+        var parts = date.split('/');
+        dateTD.text(parts[0]+'/'+parts[2]+'/'+parts[1]);
       });
+
+       $.when(changeDateFormat).done(function() {
+        processDates(); 
+      })
+       /* THIS IS ONLY FOR EXAMPLE TO CHANGE THE DATE FORMAT */
+
+
+       function processDates() {
+        var process = $('#date').each(function(i,e) {
+          var dateTD = $(this).find('td:eq(4)');
+          var date = dateTD.text().trim();
+          var parts = date.split('/');
+          dateTD.prepend('<span>'+parts[0]+parts[2]+parts[1]+'</span>');
+        });
+
+        $.when(process).done(function() {
+          $('#pagoss').DataTable({ 
+           "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+          },
+          dom: 'Bfrtip',
+          buttons: [
+          'excel', 'pdf', 'print',
+          ],
+          "order": [[ 4, "desc" ]] });
+
+        })
+      }
     </script>
 
-    <script src="{{ asset('/js/jquery.loader.js') }}"></script>
-    <script type="text/javascript">
+    {{-- Form Wizard Validation --}}
 
-      (function ($) {
-        "use strict";
+    <script>
+     $(document).ready(function () {
+
+      var navListItems = $('div.setup-panel div a'),
+      allWells = $('.setup-content'),
+      allNextBtn = $('.nextBtn');
+
+      allWells.hide();
+
+      navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+        $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+          navListItems.removeClass('btn-primary').addClass('btn-default');
+          $item.addClass('btn-primary');
+          allWells.hide();
+          $target.show();
+          $target.find('input:eq(0)').focus();
+        }
+      });
+
+      allNextBtn.click(function(){
+        var curStep = $(this).closest(".setup-content"),
+        curStepBtn = curStep.attr("id"),
+        nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+        curInputs = curStep.find("input[type='text'],input[type='url'],input[type='date'],input[type='email'],input[type='file'], select"),
+        isValid = true;
+
+        $(".form-group").removeClass("has-error");
+        for(var i=0; i<curInputs.length; i++){
+          if (!curInputs[i].validity.valid){
+            isValid = false;
+            $(curInputs[i]).closest(".form-group").addClass("has-error");
+          }
+        }
+
+        if (isValid)
+          nextStepWizard.removeAttr('disabled').trigger('click');
+      });
+
+      $('div.setup-panel div a.btn-primary').trigger('click');
+    });
+  </script>
+
+  <script src="{{ asset('/js/jquery.loader.js') }}"></script>
+  <script type="text/javascript">
+
+    (function ($) {
+      "use strict";
 
         $(function () { // short document ready
 
@@ -713,4 +775,6 @@ $('#control').keyup(function() {
   });
   });
 </script>
+
+
 

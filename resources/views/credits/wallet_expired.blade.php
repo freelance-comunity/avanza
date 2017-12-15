@@ -12,7 +12,6 @@ Lista de créditos
 	<div class="row">
 		<h1 class="pull-left">Créditos</h1>
 	</div>
-
 	<div class="row">
 		@if($credits->isEmpty())
 		<div class="well text-center">No se encontraron créditos.</div>
@@ -39,9 +38,9 @@ Lista de créditos
 						<th>Cuotas parciales</th>
 						<th>Cuotas vencidas</th>
 						<th>Total Pagado</th>
-						<th>Capital Cobrado</th>
+					{{-- 	<th>Capital Cobrado</th>
 						<th>Interés Cobrado</th>
-						<th>Mora Cobrado</th>
+						<th>Mora Cobrado</th> --}}
 						<th>Total Vencido</th>
 						<th>Capital Vencido</th>
 						<th>Intereses vencidos</th>
@@ -74,8 +73,6 @@ Lista de créditos
 						$pending_interest = $pending_payments->sum('interest');
 						$pending_capital = $pending_payments->sum('capital');
 						$pending_total = $pending_interest + $pending_capital;
-
-						
 						@endphp
 						<tr>
 							<td>{!!$credit->client_id!!}</td>
@@ -98,9 +95,9 @@ Lista de créditos
 							<td>{!! $late_payments->count() !!}</td>
 							<th class="info">${{ number_format($totales->sum('payment'),2) }}</th>
 
-							<th>C</th>
+							{{-- <th>C</th>
 							<th>M</th>
-							<th>t</th>
+							<th>t</th> --}}
 							@if ($late_total==0)
 							<td class="success">${!! number_format($late_total, 2) !!}</td>
 							@elseif($late_total > 0)

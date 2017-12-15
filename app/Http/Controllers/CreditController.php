@@ -305,7 +305,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -336,7 +336,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -370,7 +370,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -401,7 +401,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -432,7 +432,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -463,7 +463,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -497,7 +497,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -531,7 +531,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -562,7 +562,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -596,7 +596,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -627,7 +627,7 @@ class CreditController extends AppBaseController
                     $debt = new Debt;
                     $debt->ammount = ceil($total);
                     $debt->status = "VIGENTE";
-                    // $debt->client_id = $credit->client_id;
+                    $debt->client_id = $credit->client_id;
                     $debt->credit_id = $credit->id;
                     $debt->branch_id =  $user->branch_id;
                     $debt->region_id = $user->region_id;
@@ -837,7 +837,7 @@ class CreditController extends AppBaseController
             $debt = new Debt;
             $debt->ammount = ceil($total);
             $debt->status = "VIGENTE";
-            // $debt->client_id = $credit->client_id;
+            $debt->client_id = $credit->client_id;
             $debt->credit_id = $credit->id;
             $debt->branch_id =  $user->branch_id;
             $debt->region_id = $user->region_id;
@@ -967,7 +967,7 @@ class CreditController extends AppBaseController
             $debt = new Debt;
             $debt->ammount = ceil($total);
             $debt->status = "VIGENTE";
-            // $debt->client_id = $credit->client_id;
+            $debt->client_id = $credit->client_id;
             $debt->credit_id = $credit->id;
             $debt->branch_id =  $user->branch_id;
             $debt->region_id = $user->region_id;
@@ -1014,12 +1014,12 @@ class CreditController extends AppBaseController
 
     public function move(Request $request)
     {
-     $id_user = $request->input('user_id');
-     $user = User::find($id_user);
-     $input = $request->all();
+       $id_user = $request->input('user_id');
+       $user = User::find($id_user);
+       $input = $request->all();
 
-     foreach ($input['rows'] as $row) 
-     {
+       foreach ($input['rows'] as $row) 
+       {
         $id_credit = $row['id'];
         $credit = Credit::find($id_credit);
         $credit->adviser = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;

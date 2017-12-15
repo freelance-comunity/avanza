@@ -38,8 +38,8 @@
           <li><a href="{{ url('showRetreats') }}/{{ Auth::user()->id }}">Retiros</a></li>
           <li><a href="{{ url('transfer') }}">Reasignación de Cartera</a></li>
           {{-- <li><a href="{{ url('moveCredits') }}">Transferir Credito</a></li> --}}
-         {{--  <li><a data-toggle="modal" data-target="#move"><span>Transferir Crédito</span></a></li>
-          <li><a data-toggle="modal" data-target="#moveClient"><span>Transferir Cliente</span></a></li> --}}
+          <li><a data-toggle="modal" data-target="#move"><span>Transferir Crédito</span></a></li>
+          <li><a data-toggle="modal" data-target="#moveClient"><span>Transferir Cliente</span></a></li>
           @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>
@@ -55,7 +55,8 @@
         <a><i class='ion ion-pie-graph'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
          <li><a href="{{ url('walletExpired') }}">Cartera Total</a></li>
-         {{-- <li><a href="{{ url('totalVault') }}">Total bovéda</a></li> --}}s
+         {{-- <li><a href="{{ url('wallet') }}">Cartera ajax</a></li> --}}
+         {{-- <li><a href="{{ url('totalVault') }}">Total bovéda</a></li> --}}
        </ul>
      </li>
      <li class="treeview">

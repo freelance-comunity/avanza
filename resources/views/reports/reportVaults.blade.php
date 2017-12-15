@@ -37,37 +37,38 @@ $users = App\User::all();
         <tbody>
          @foreach ($users as $user)
          @php
+         $current =  \Carbon\Carbon::today()->toDateString();
          $vault = $user->vault;
          $vault_total = App\Models\Vault::all();
-         $incomes = $vault->incomes;
-         $incomePayment = $vault->incomePayment;
-         $purseAccess = $vault->purseAccess;
-         $expendituresCredit = $vault->expendituresCredit;
-         $expenditures = $vault->expenditures;
-         $actives = $vault->actives;
+         $incomes = $vault->incomes->where('date', $current);
+         $incomePayment = $vault->incomePayment->where('date', $current);
+         $purseAccess = $vault->purseAccess->where('date', $current);
+         $expendituresCredit = $vault->expendituresCredit->where('date', $current);
+         $expenditures = $vault->expenditures->where('date', $current);
+         $actives = $vault->actives->where('date', $current);
          @endphp
          <tr>
-         <th>{{$user->region['name']}}</th>
-         <th>{{$user->branch['name']}}</th>
-         <td>{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}</td>
-         <td>${{ number_format($vault->ammount,2) }}</td>
-         <td>${{number_format($incomes->sum('ammount',2))}}</td>
-         <td>${{number_format($incomePayment->sum('ammount',2))}}</td>
-         <td>${{number_format($purseAccess->sum('ammount',2))}}</td>
-         <td>${{number_format($expendituresCredit->sum('ammount',2))}}</td>
-         <td>${{number_format($expenditures->sum('ammount',2))}}</td>
-         <td>${{number_format($actives->sum('ammount',2))}}</td>
+           <th>{{$user->region['name']}}</th>
+           <th>{{$user->branch['name']}}</th>
+           <td>{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}</td>
+           <td>${{ number_format($vault->ammount,2) }}</td>
+           <td>${{number_format($incomes->sum('ammount',2))}}</td>
+           <td>${{number_format($incomePayment->sum('ammount',2))}}</td>
+           <td>${{number_format($purseAccess->sum('ammount',2))}}</td>
+           <td>${{number_format($expendituresCredit->sum('ammount',2))}}</td>
+           <td>${{number_format($expenditures->sum('ammount',2))}}</td>
+           <td>${{number_format($actives->sum('ammount',2))}}</td>
 
          </tr>
          @endforeach
-         </tbody>
-         </table>
-         </div>
-         </div>
-         </div>
-         </div>
+       </tbody>
+     </table>
+   </div>
+ </div>
+</div>
+</div>
 
 
 
-         @endsection
+@endsection
 

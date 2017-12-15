@@ -56,6 +56,7 @@
         <ul class="treeview-menu">
          <li><a href="{{ url('walletExpired') }}">Cartera Total</a></li>
          {{-- <li><a href="{{ url('wallet') }}">Cartera ajax</a></li> --}}
+         <li><a href="{{ url('reportVaults') }}">Bóveda</a></li>
          {{-- <li><a href="{{ url('totalVault') }}">Total bovéda</a></li> --}}
        </ul>
      </li>

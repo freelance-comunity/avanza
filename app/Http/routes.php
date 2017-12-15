@@ -1393,7 +1393,6 @@ Route::get('api/reportPaymentNorte', function(){
         'credits.mothers_last_name','credits.folio','credits.periodicity','credits.dues','credits.interest_rate','payments.payment','payments.capital','payments.interest','payments.moratorium','payments.updated_at'])->groupBy('payments.updated_at');
     return Datatables::of($payments)
     ->editColumn('updated_at', '{!! $updated_at !!}')
-
     ->make(true);
 });
 
@@ -1456,10 +1455,9 @@ Route::get('api/wallet', function(){
     $credits = App\Models\Credit::join('debts','credits.id','=','debts.credit_id')
     ->leftJoin('regions','credits.region_id','=','regions.id')
     ->leftJoin('branches','credits.branch_id','=','branches.id')
-    ->select(['credits.id','credits.folio','regions.name as regions','credits.periodicity','credits.adviser','credits.firts_name','credits.last_name','credits.mothers_last_name','credits.date','branches.name','credits.ammount','credits.interest_rate','credits.dues',\DB::raw('count(payments.debt_id) as count'),\DB::raw('count(payments.debt_id) as partials, status'),'debts.status'])
+    ->select(['credits.id','credits.folio','regions.name as regions','credits.periodicity','credits.adviser','credits.firts_name','credits.last_name','credits.mothers_last_name','credits.date','branches.name','credits.ammount','credits.interest_rate','credits.dues',\DB::raw( 'count(payments.debt_id) as count'),'debts.status'])
     ->join('payments','debts.id','=','payments.debt_id')
     ->where('payments.status','=','Pagado')
-    ->where('status','=','Parcial')
     ->groupBy('id');
      return Datatables::of($credits)
      ->editColumn('date', '{!! $date !!}')
@@ -1481,3 +1479,7 @@ $clients = App\Models\Client::all();
 //     return Datatables::of($clients)
 //     ->make(true);
 // });
+
+Route::get('reportVaults',function(){
+ return view('reports.reportVaults');
+});

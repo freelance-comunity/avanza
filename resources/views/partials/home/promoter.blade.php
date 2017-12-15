@@ -1,7 +1,7 @@
 @php
 $user = Auth::user();
 $vault = $user->vault;
-$date_now = Carbon\Carbon::today();
+$date_now = \Carbon\Carbon::today();
 $payments = Auth::user()->payments;
 $now = Carbon\Carbon::today()->toDateString();
 $payments_now = $payments->where('day',$now);
@@ -126,6 +126,7 @@ else
       $debts_collection = $client->debts;
       $debts = $debts_collection->where('status','VIGENTE');
       @endphp
+
       @if (Auth::user()->id == $client->user_id AND $credits->count() > 1)
       <tr>
        <td>{!! $client->firts_name !!} {!! $client->last_name !!} {!! $client->mothers_last_name !!}</td>
@@ -136,7 +137,6 @@ else
         <a href="{{ url('view-credits')}}/{{$client->id}}" class="btn bg-navy btn-lg btn-block">Pagar Créditos
         </a>
       </td>
-      
     </tr>
     @elseif(Auth::user()->id == $client->user_id AND $credits->count() == 1)
     @foreach ($credits as $credit)
@@ -147,7 +147,6 @@ else
      <td>{{ $credit->phone }}</td>
      <td><a href="{!! route('credits.show', [$credit->id]) !!}" class="btn bg-navy btn-lg btn-block">Pagar
      </a></td>
-
    </tr>
    @endforeach
    @endif

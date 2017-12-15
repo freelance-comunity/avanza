@@ -115,7 +115,9 @@ class RosterController extends AppBaseController
 			file_put_contents('../public/uploads/rosters/' . $url_employee, $decoded_image);
 		}
 		
-
+		$input['perceptions'] = trim($input['perceptions']);
+		$input['deductions'] = trim($input['deductions']);
+		$input['grandchild_pay'] = trim($input['grandchild_pay']);
 		$input['user_id'] = $id_user;
 		$input['name_employee'] = $employee->name." ".$employee->father_last_name." ".$employee->mother_last_name;
 		$input['number_employee'] = $employee->id;

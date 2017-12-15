@@ -41,7 +41,8 @@ class GeneralController extends Controller
     public function getPromoter()
     {
         if (Auth::user()->hasRole(['administrador', 'director-general'])) {
-            $users = User::where('id', '!=', Auth::id())->get();
+            $users = User::all();
+            // $users = User::where('id', '!=', Auth::id())->get();
             // $users = User::all();
             return view('executives.index')
             ->with('employees', $users);

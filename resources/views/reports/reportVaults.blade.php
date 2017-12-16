@@ -52,12 +52,12 @@ $users = App\User::all();
            <th>{{$user->branch['name']}}</th>
            <td>{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}</td>
            <td>${{ number_format($vault->ammount,2) }}</td>
-           <td>${{number_format($incomes->sum('ammount',2))}}</td>
-           <td>${{number_format($incomePayment->sum('ammount',2))}}</td>
-           <td>${{number_format($purseAccess->sum('ammount',2))}}</td>
-           <td>${{number_format($expendituresCredit->sum('ammount',2))}}</td>
-           <td>${{number_format($expenditures->sum('ammount',2))}}</td>
-           <td>${{number_format($actives->sum('ammount',2))}}</td>
+           <td class="bg-yellow">${{number_format($incomes->sum('ammount',2))}}</td>
+           <td class="bg-success">${{number_format($incomePayment->sum('ammount',2))}}</td>
+           <td class="bg-blue">${{number_format($purseAccess->sum('ammount',2))}}</td>
+           <td class="bg-primary">${{number_format($expendituresCredit->sum('ammount',2))}}</td>
+           <td class="bg-red">${{number_format($expenditures->sum('ammount',2))}}</td>
+           <td class="bg-purple">${{number_format($actives->sum('ammount',2))}}</td>
 
          </tr>
          @endforeach

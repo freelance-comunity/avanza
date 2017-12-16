@@ -281,3 +281,4 @@ $vigente = $pendent+ $partial + $vencid;
 		</div>
 		<!-- /.col -->
 	</div>
+

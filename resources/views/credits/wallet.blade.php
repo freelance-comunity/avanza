@@ -15,7 +15,7 @@ Pagos
     <div class="col-md-12">
         <div class="box box-danger">
             <div class="box-header with-border">
-                <h3 class="box-title">Historial de pagos</h3>
+                <h3 class="box-title">Cartera</h3>
             </div>  
             <div class="box-body">
 
@@ -34,7 +34,7 @@ Pagos
                             <th>Tasa</th>
                             <th># Cuotas</th>  
                             <th>Cuotas Pagadas</th>
-                            <th>Cuotas Parciales</th>
+                            <th>Cuotas Vencidas</th>
                             <th>Estatus</th>
                         </thead>
                     

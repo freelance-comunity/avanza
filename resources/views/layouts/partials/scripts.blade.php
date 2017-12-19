@@ -578,7 +578,7 @@
             {data: 'interest_rate', name:'credits.interest_rate'},
             {data: 'dues',name:'credits.dues'}, 
             {data: 'count', name: 'count', searchable: false},
-            {data: 'count', name: 'count', searchable: false},
+            {data: 'partials', name: 'partials', searchable: false},
             {data: 'status', name:'debts.status'},
             ]
           });

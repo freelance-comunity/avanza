@@ -25,18 +25,21 @@ Pagos
                             <th>Nombre del Cliente</th>
                             <th>Curp</th>
                             <th>Ine</th>
-                            <th>Domicilio</th>
+                            <th>Sucursal</th>
+                           
                         </thead>
                      <tbody>
                         @foreach ($clients as $client)
                         @php
                             $location = $client->location;
+                            $document= $client->document;
                         @endphp
                             <tr>
                                 <td>{{$client->firts_name}} {{$client->last_name}} {{$client->mothers_last_name}}</td>
                                 <td>{{$client->curp}}</td>
                                 <td>{{$client->ine}}</td>
-                                <td>{{$location->street}} {{$location->number}} {{$location->colony}}, {{$location->municipality}}, {{$location->state}}</td>
+                                <td>{{$client->branch['name']}}</td>
+                                
                             </tr>
                         @endforeach
                         

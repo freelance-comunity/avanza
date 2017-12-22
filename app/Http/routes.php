@@ -1473,14 +1473,6 @@ Route::get('clientes',function(){
     ->with('clients',$clients);
 });
 
-// Route::get('api/clientes',function(){
-//     $clients = DB::table('clients')
-//     ->join('client_locations','clients.id','=','client_locations.client_id')
-//     ->select(['firts_name','last_name','mothers_last_name','curp','ine','client_locations.street','client_locations.number','client_locations.colony','client_locations.municipality','client_locations.state']);
-//     return Datatables::of($clients)
-//     ->make(true);
-// });
-
 Route::get('reportVaults',function(){
    return view('reports.reportVaults');
 });

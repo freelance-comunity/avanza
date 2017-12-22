@@ -1015,37 +1015,6 @@ Route::get('applyMoratorium',function(){
 });
 
 
-Route::get('applyMoratoriumDate',function(){
-    $credit = App\Models\Credit::all();
-    $date_now = \Carbon\Carbon::now()->toDateString();
-    $hour_now = \Carbon\Carbon::now()->toTimeString();
-    foreach ($credit as $key => $credit) {
-        $debt = $credit->debt;
-        $payments = $debt->payments;
-
-        foreach ($payments as $key => $payment) {
-         if ($payment->date >= $date_now && $payment->status == 'Vencido' ) {
-            $payment = App\Models\Payment::find($payment->id);
-            $payment->status = 'Pendiente';
-            $payment->moratorium = 0;
-            $payment->total = $payment->ammount;
-            $payment->balance = $payment->balance - 20;
-            $payment->save();
-
-            $debt = $payment->debt;
-            $debt->ammount = $debt->ammount - 20;
-            $debt->save();
-        }
-
-
-
-    }
-}
-echo "MORATORIO APLICADO CORRECTAMENTE";
-});
-
-
-
 
 Route::get('productos', function () {
 

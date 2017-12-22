@@ -884,7 +884,7 @@ class CreditController extends AppBaseController
             }
         }
         $debt->status = "Pagado";
-        $debt->ammount = 0;
+        $debt->ammount = $debt->ammount;
         $debt->credit->status = "Pagado";
         $debt->credit->save();
         $debt->save();

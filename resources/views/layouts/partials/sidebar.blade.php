@@ -55,7 +55,7 @@
         <a><i class='ion ion-pie-graph'></i><span> Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
          <li><a href="{{ url('walletExpired') }}">Cartera Total</a></li>
-         {{-- <li><a href="{{ url('wallet') }}">Cartera ajax</a></li> --}}
+        {{--  <li><a href="{{ url('wallet') }}">Cartera ajax</a></li> --}}
          <li><a href="{{ url('reportVaults') }}">Bóveda</a></li>
          {{-- <li><a href="{{ url('totalVault') }}">Total bovéda</a></li> --}}
        </ul>
@@ -113,6 +113,8 @@
      <li><a href="{{ url('creditsPaidOut') }}">Pagados</a></li>
    </ul>
  </li>
+
+  {{-- <li><a href="{{ url('transfers')}}"><i class="fa fa-paper-plane"></i> <span>Tranferencias</span></a></li> --}}
  @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
  <li><a href="{{ url('restructures')}}"><i class="fa fa-dollar"></i> <span>Reestructurados</span></a></li>
  @endif

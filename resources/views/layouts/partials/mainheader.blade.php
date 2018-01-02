@@ -73,41 +73,48 @@
                         <li class="footer"><a href="#">{{ trans('adminlte_lang::message.viewall') }}</a></li>
                     </ul>
                 </li>
+                @if (Auth::user()->hasRole(['administrador', 'director-general']))
+                @php
+                $vaults = App\Models\Vault::all();
+
+                $count = $vaults->where('ammount',10000);
+                @endphp
                 <!-- Tasks Menu -->
                 <li class="dropdown tasks-menu">
                     <!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-flag-o"></i>
-                        <span class="label label-danger">9</span>
+                    <a  class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-dollar"></i>
+                        <span class="label label-danger">{{$count->count()}}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">{{ trans('adminlte_lang::message.tasks') }}</li>
+                        <li class="header">Alerta de Bóvedas</li>
                         <li>
-                            <!-- Inner menu: contains the tasks -->
+                            @foreach ($vaults as $vault)
+                            @php
+                            $user = $vault->user;
+                            @endphp
+                            @if ($vault->ammount > 10000)
                             <ul class="menu">
-                                <li><!-- Task item -->
-                                    <a href="#">
-                                        <!-- Task title and progress text -->
+                                <li>
+                                    <a href="{{ url('showVault') }}/{{ $user->id }}">
                                         <h3>
-                                            {{ trans('adminlte_lang::message.tasks') }}
-                                            <small class="pull-right">20%</small>
+                                            {{$user->name}} {{$user->father_last_name}}
+                                            <span style="color:red;font-weight:bold" class="pull-right">${{number_format($vault->ammount,2)}}</span>
                                         </h3>
-                                        <!-- The progress bar -->
-                                        <div class="progress xs">
-                                            <!-- Change the css width attribute to simulate progress -->
-                                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">20% {{ trans('adminlte_lang::message.complete') }}</span>
-                                            </div>
-                                        </div>
+
                                     </a>
                                 </li><!-- end task item -->
                             </ul>
+                            @endif
+                            @endforeach
+
                         </li>
                         <li class="footer">
-                            <a href="#">{{ trans('adminlte_lang::message.alltasks') }}</a>
+                            <a href="{{ url('vault') }}">Ver más</a>
                         </li>
                     </ul>
                 </li>
+                @endif
                 @if (Auth::guest())
                 <li><a href="{{ url('/register') }}">{{ trans('adminlte_lang::message.register') }}</a></li>
                 <li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
@@ -131,10 +138,10 @@
                                     {{ Auth::user()->region['name'] }}
                                     <br>
                                     {{ Auth::user()->branch['name'] }}
-                            </small>
-                        </p>
-                    </li>
-                    <!-- Menu Body -->
+                                </small>
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
                     {{-- <li class="user-body">
                         <div class="col-xs-4 text-center">
                             <a href="#">{{ trans('adminlte_lang::message.followers') }}</a>

@@ -67,7 +67,10 @@ Detalles
 						<p><strong>TOTAL PAGADO:</strong> ${{ number_format($total_payment,2) }}</p>
 						<p><strong>TOTAL RESTANTE:</strong> ${{ number_format($debt->ammount,2) }}</p>
 						<p><strong>ESTATUS DEL CRÉDITO: </strong> {{ strtoupper($debt->status) }}</p>
-						<p><strong>TOTAL CONDONADO: </strong>${{ number_format($debt->ammount,2) }}</p>
+						@if ($debt->status == 'Pagado')
+							<p><strong>TOTAL CONDONADO: </strong>${{ number_format($debt->ammount,2) }}</p>
+						@endif
+						
 						
 					</div>
 					<div class="col-md-4">

@@ -22,7 +22,7 @@
           apply the skin class to the body tag so the changes take effect.
         -->
         <link href="{{ asset('/css/skins/skin-blue.css') }}" rel="stylesheet" type="text/css" />
-         <link href="{{ asset('/css/skins/skin-green.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('/css/skins/skin-green.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('/css/skins/skin-red.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('/css/skins/skin-purple.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('/css/skins/skin-black.css') }}" rel="stylesheet" type="text/css" />
@@ -50,6 +50,9 @@
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
         {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> --}}
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
+        
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/cr-1.4.1/fc-3.2.4/fh-3.1.3/kt-2.3.2/r-2.2.1/rg-1.0.2/rr-1.2.3/sc-1.4.3/sl-1.2.4/datatables.min.css"/>
+
 
 
         <!--ChartJs-->

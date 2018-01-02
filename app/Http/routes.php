@@ -1445,3 +1445,84 @@ Route::get('clientes',function(){
 Route::get('reportVaults',function(){
    return view('reports.reportVaults');
 });
+
+
+Route::get('try', function(){
+    $credit = App\Models\Credit::find(1852);
+    $debt = $credit->debt;
+    $payments = $debt->payments;
+    foreach ($payments as $key => $payment) {
+      try {
+          if($payment->status != 'Pendiente'){
+            echo $payment->status;
+            echo "<br>";
+        }
+    } catch (Exception $e) {
+        echo "error";
+
+    }
+}
+});
+
+
+
+
+
+Route::resource('transfers', 'TransferController');
+
+Route::get('transfers/{id}/delete', [
+    'as' => 'transfers.delete',
+    'uses' => 'TransferController@destroy',
+]);
+
+
+
+Route::resource('excel','ExcelController');
+
+Route::get('chale',function(){
+ $date_now = \Carbon\Carbon::now()->toDateString();
+ $hour_now = \Carbon\Carbon::now()->toTimeString();
+ $payments = App\Models\Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
+ 
+ foreach ($payments as $key => $payment) {
+    if ($hour_now >= '10:05:00') {
+      echo "Estamos listos para bloquear";
+      echo "<br>";
+      $payment = App\Models\Payment::find($payment->id);
+      $payment->status = 'Vencido';
+      $payment->moratorium = 20;
+      $payment->total = $payment->ammount + $payment->moratorium;
+      $payment->balance = $payment->balance + 20;
+      $payment->save();
+
+      $debt = $payment->debt;
+      $debt->ammount = $debt->ammount + 20;
+      $debt->save();
+
+  }
+  $latePayments = $payment->latePayments;
+
+  if ($payment->status == "Vencido") {
+    if ($latePayments->count() == 0) {
+        $latePayments = new App\Models\LatePayments;
+        $latePayments->late_number = $payment->number;
+        $latePayments->late_ammount = $payment->total;
+        $latePayments->late_payment = $payment->payment;
+        $latePayments->status = "Atrasado";
+        $latePayments->payment_id = $payment->id;
+        $latePayments->debt_id    = $debt->id;
+        $latePayments->branch_id = $debt->branch_id;
+        $latePayments->region_id = $debt->region_id;
+        $latePayments->save();
+    }
+
+}
+
+}
+echo "Morosos";
+});
+
+
+
+
+

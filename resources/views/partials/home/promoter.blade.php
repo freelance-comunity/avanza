@@ -118,20 +118,13 @@ else
                 $credit = $debt->credit;
                 @endphp
                 @if ($payment->status === 'Vencido')
-                <tr {{-- class="bg-danger" --}}>
+                <tr>
                     <td>{{ $payment->number }} de {{ $credit->dues }}</td>
                     <td>$ {{ number_format($payment->balance, 2) }}</td>
                     <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
                     </td>
                     <td>{{ $credit->folio }}</td>
-                    {{-- <td>{{ $credit->collection_period }}</td>
-                    <td>
-                        @if ($payment->status == 'Vencido')
-                        <p style="color:red;">{{$payment->status}}</p>
-                        @else
-                        <p style="color:gray;">{{$payment->status}}</p>
-                        @endif
-                    </td> --}}
+                   
                     <td>
                         <a href="{!! route('credits.show', [$credit->id]) !!}" class="btn btn-primary btn-lg btn-block">PAGAR</a>
                     </td>

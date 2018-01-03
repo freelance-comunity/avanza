@@ -14,7 +14,7 @@ Route::get('promotores', function(){
 
     foreach ($clients as $key => $client) {
         if ($client->user_id = Auth::user()->id) {
-           if ($client->credits->count() > 1 ) {
+         if ($client->credits->count() > 1 ) {
             echo $client->firts_name;
             echo "2 o mayor";
             echo "<br>";
@@ -37,7 +37,7 @@ Route::get('signature', function () {
 });
 
 Route::get('totalPayments',function(){
-   return view('totalPayments');
+ return view('totalPayments');
 });
 
 Route::get('api/payments', function(){
@@ -839,60 +839,7 @@ Route::get('transferCredits', function () {
 
 Route::post('transferProcess', 'GeneralController@transferProcess');
 
-Route::get('moratorio', function () {
-    $credit = App\Models\Credit::all();
 
-    $date_now = \Carbon\Carbon::now()->toDateString();
-    $hour_now = \Carbon\Carbon::now()->toTimeString();
-
-    foreach ($credit as $key => $credit) {
-        $debt = $credit->debt;
-        $payments = $debt->payments;
-        if ($credit->periodicity == "CREDISEMANA") {
-            $payments = App\Models\Payment::where('status', 'Pendiente')->get();
-            foreach ($payments as $key => $value) {
-                if ($value->date <= $date_now) {
-                    $payment = App\Models\Payment::find($value->id);
-                    $payment->status = 'Vencido';
-                    $payment->moratorium = 20;
-                    $payment->total = $payment->ammount + $payment->moratorium;
-                    $payment->balance = $payment->balance + 20;
-                    $payment->save();
-
-                    $debt = $payment->debt;
-                    $debt->ammount = $debt->ammount + 20;
-                    $debt->save();
-                }
-            }
-        } else {
-            $payments = App\Models\Payment::where('status', 'Pendiente')->where('status', 'Parcial')->get();
-            foreach ($payments as $key => $value) {
-                if ($value->date <= $date_now) {
-                    $payment = App\Models\Payment::find($value->id);
-                    $payment->status = 'Vencido';
-                    $payment->moratorium = 20;
-                    $payment->total = $payment->ammount + $payment->moratorium;
-                    $payment->balance = $payment->balance + 20;
-                    $payment->save();
-
-                    $debt = $payment->debt;
-                    $debt->ammount = $debt->ammount + 20;
-                    $debt->save();
-                }
-            }
-        }
-        if ($value->status == 'Vencido') {
-            $latePayments = new App\Models\LatePayments;
-            $latePayments->late_number = $payment->number;
-            $latePayments->late_ammount = $payment->total;
-            $latePayments->late_payment = $payment->payment;
-            $latePayments->payment_id = $payment->id;
-            $latePayments->debt_id    = $debt->id;
-            $latePayments->save();
-        }
-    }
-    echo "moratorio aplicado";
-});
 
 Route::get('walletExpired', 'GeneralController@walletExpired');
 
@@ -1018,13 +965,13 @@ Route::get('applyMoratorium',function(){
 
 Route::get('productos', function () {
 
-   $credit = App\Models\Credit::all();
-   foreach ($credit as $key => $credit) {
+ $credit = App\Models\Credit::all();
+ foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
-       echo $credit->periodicity;
-       echo $credit->adviser;
-       echo "<br>";
-   }
+     echo $credit->periodicity;
+     echo $credit->adviser;
+     echo "<br>";
+ }
 
 }
 });
@@ -1236,12 +1183,12 @@ Route::Post('reestructureCredit','CreditController@reestructureCredit');
 Route::get('paymentsCorrection', function(){
     $payments = App\Models\Payment::all()->where('status','Pagado');
     foreach ($payments as $key => $payment) {
-       $payment->capital = 0;
-       $payment->interest = 0;
-       $payment->moratorium = 0;
-       $payment->save();
-   }
-   echo "Pagos Pagados corregidos";
+     $payment->capital = 0;
+     $payment->interest = 0;
+     $payment->moratorium = 0;
+     $payment->save();
+ }
+ echo "Pagos Pagados corregidos";
 });
 
 Route::get('paymentsCorrectionVencido', function(){
@@ -1296,7 +1243,7 @@ echo "CORRECCION DE PAGOS VENCIDOS LISTO";
 
 // Route::get('reportPaymentCentro', 'GeneralController@reportPaymentCentro');
 Route::get('reportPaymentCentro',function(){
-   return view('partials.reportPaymentCentro');
+ return view('partials.reportPaymentCentro');
 });
 
 Route::get('api/reportPaymentCentro', function(){
@@ -1315,7 +1262,7 @@ Route::get('api/reportPaymentCentro', function(){
 
 // Route::get('reportPaymentAltos', 'GeneralController@reportPaymentAltos');
 Route::get('reportPaymentAltos',function(){
-   return view('partials.reportPaymentAltos');
+ return view('partials.reportPaymentAltos');
 });
 Route::get('api/reportPaymentAltos', function(){
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
@@ -1332,7 +1279,7 @@ Route::get('api/reportPaymentAltos', function(){
 });
 // Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa');
 Route::get('reportPaymentMezcalapa',function(){
-   return view('partials.reportPaymentMezcalapa');
+ return view('partials.reportPaymentMezcalapa');
 });
 Route::get('api/reportPaymentMezcalapa', function(){
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
@@ -1349,7 +1296,7 @@ Route::get('api/reportPaymentMezcalapa', function(){
 });
 // Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');
 Route::get('reportPaymentNorte',function(){
-   return view('partials.reportPaymentNorte');
+ return view('partials.reportPaymentNorte');
 });
 Route::get('api/reportPaymentNorte', function(){
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
@@ -1381,33 +1328,7 @@ Route::get('view-credits/{id}', function($id)
   ->with('client',$client);
 });
 
-Route::get('epale',function(){
-    $credit = App\Models\Credit::all();
-    $date_now = \Carbon\Carbon::now()->toDateString();
-    $hour_now = \Carbon\Carbon::now()->toTimeString();
-    foreach ($credit as $key => $credit) {
-        $debt = $credit->debt;
-        $payments = $debt->payments;
 
-        foreach ($payments as $key => $payment) {
-            if ($payment->day <= $date_now  && $hour_now >= '17:14:00' && $payment->status == 'Pendiente') {
-                $payment = App\Models\Payment::find($payment->id);
-
-                echo  $payment->date;
-                echo "<br>";
-                echo "moratorio";
-                echo "<br>";
-                echo $payment->status;
-                echo "<br>";
-                echo "===================";
-                echo "<br>";
-
-            }
-
-        }
-    }
-
-});
 Route::get('ruta', function(){
     $credits = App\Models\Credit::all();
 
@@ -1417,7 +1338,7 @@ Route::get('ruta', function(){
 
 
 Route::get('wallet',function(){
-   return view('credits.wallet');
+ return view('credits.wallet');
 });
 
 Route::get('api/wallet', function(){
@@ -1443,7 +1364,7 @@ Route::get('clientes',function(){
 });
 
 Route::get('reportVaults',function(){
-   return view('reports.reportVaults');
+ return view('reports.reportVaults');
 });
 
 
@@ -1480,12 +1401,12 @@ Route::get('transfers/{id}/delete', [
 Route::resource('excel','ExcelController');
 
 Route::get('chale',function(){
- $date_now = \Carbon\Carbon::now()->toDateString();
- $hour_now = \Carbon\Carbon::now()->toTimeString();
- $payments = App\Models\Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
- 
- foreach ($payments as $key => $payment) {
-    if ($hour_now >= '10:05:00') {
+   $date_now = \Carbon\Carbon::now()->toDateString();
+   $hour_now = \Carbon\Carbon::now()->toTimeString();
+   $payments = App\Models\Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
+
+   foreach ($payments as $key => $payment) {
+    if ($hour_now >= '20:15:00') {
       echo "Estamos listos para bloquear";
       echo "<br>";
       $payment = App\Models\Payment::find($payment->id);
@@ -1522,7 +1443,26 @@ Route::get('chale',function(){
 echo "Morosos";
 });
 
+Route::get('fecha', function(){
+    $date_now = \Carbon\Carbon::now()->toDateString();
+    $payments = App\Models\Payment::where('status', 'Vencido')->get();
+    foreach ($payments as $key => $payment) {
+        if ($payment->date = $date_now) {
+            $payment = App\Models\Payment::find($payment->id);
+            $payment->status = 'Pendiente';
+            $payment->moratorium = 0;
+            $payment->total = $payment->ammount + $payment->moratorium;
+            $payment->balance = $payment->balance - 20;
+            $payment->save();
 
+
+            $debt = $payment->debt;
+            $debt->ammount = $debt->ammount -20;
+            $debt->save();
+        }
+    }
+
+});
 
 
 

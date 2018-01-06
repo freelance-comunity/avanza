@@ -26,7 +26,7 @@ Pagos
                             <th>Curp</th>
                             <th>Ine</th>
                             <th>Sucursal</th>
-                           
+                           <th>Documentos</th>
                         </thead>
                      <tbody>
                         @foreach ($clients as $client)
@@ -39,7 +39,7 @@ Pagos
                                 <td>{{$client->curp}}</td>
                                 <td>{{$client->ine}}</td>
                                 <td>{{$client->branch['name']}}</td>
-                                
+                                <td> <a href="{{ url('pdf') }}/{{ $client->id }}"><i class="fa fa-file-pdf-o fa-5x"></i></a></td>
                             </tr>
                         @endforeach
                         

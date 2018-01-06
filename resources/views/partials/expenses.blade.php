@@ -32,7 +32,7 @@ Detalles
 						<option>Artículos de Limpieza</option>
 						<option>Bicicletas (Compra de)</option>
 						<option>Cafetería</option>
-						<option>Celulares (Compre de)</option>
+						<option>Celulares (Compra de)</option>
 						<option>Combustible</option>
 						<option>Computadora y Accesorios (Compra de)</option>
 						<option>Energía Eléctrica (Luz)</option>

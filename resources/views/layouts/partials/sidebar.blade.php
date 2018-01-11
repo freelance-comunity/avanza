@@ -76,6 +76,7 @@
             <li><a href="{{ url('reportPayment24') }}"><i class="fa fa-circle-o"></i>24 de Junio</a></li>
           </ul>
         </li> --}}
+        {{-- <li><a href="{{ url('excel') }}">Descargar Pagos</a></li> --}}
         <li><a href="{{ url('reportPaymentCentro') }}">Región Centro</a></li>
         <li><a href="{{ url('reportPaymentAltos') }}">Región Altos</a></li>
         <li><a href="{{ url('reportPaymentMezcalapa') }}">Región Mezcalapa</a></li>

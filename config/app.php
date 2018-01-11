@@ -158,6 +158,7 @@ return [
         //laravel collective
         Collective\Html\HtmlServiceProvider::class,
         
+        
         //Crud Generator
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
@@ -198,6 +199,8 @@ return [
         Kim\Activity\ActivityServiceProvider::class,
         
         Yajra\Datatables\DatatablesServiceProvider::class
+
+
         
         
         
@@ -290,7 +293,9 @@ return [
 
     'Activity' => Kim\Activity\ActivityFacade::class,
     
-   'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+    'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+
+
     
 
 ],

@@ -26,14 +26,14 @@ Pagos
                             <th>Curp</th>
                             <th>Ine</th>
                             <th>Sucursal</th>
-                           <th>Documentos</th>
+                            <th>Documentos</th>
                         </thead>
-                     <tbody>
-                        @foreach ($clients as $client)
-                        @php
+                        <tbody>
+                            @foreach ($clients as $client)
+                            @php
                             $location = $client->location;
                             $document= $client->document;
-                        @endphp
+                            @endphp
                             <tr>
                                 <td>{{$client->firts_name}} {{$client->last_name}} {{$client->mothers_last_name}}</td>
                                 <td>{{$client->curp}}</td>
@@ -41,9 +41,9 @@ Pagos
                                 <td>{{$client->branch['name']}}</td>
                                 <td> <a href="{{ url('pdf') }}/{{ $client->id }}"><i class="fa fa-file-pdf-o fa-5x"></i></a></td>
                             </tr>
-                        @endforeach
-                        
-                    </tbody>
+                            @endforeach
+                            
+                        </tbody>
                         
                     </table>
                 </div>

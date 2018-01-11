@@ -5,7 +5,7 @@ namespace App\DataTables;
 use App\User;
 use Yajra\Datatables\Services\DataTable;
 
-class UserDataTable extends DataTable
+class UsersDataTable extends DataTable
 {
     /**
      * Display ajax response.
@@ -41,14 +41,17 @@ class UserDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-        ->columns($this->getColumns())
-        ->ajax('')
-        ->addAction(['width' => '80px'])
+        ->columns([
+            'id',
+            'name',
+            'email',
+            'created_at',
+            'updated_at',
+        ])
         ->parameters([
             'dom' => 'Bfrtip',
-            'buttons' => ['csv', 'excel', 'pdf', 'print', 'reset', 'reload'],
+            'buttons' => ['csv', 'excel'],
         ]);
-
     }
 
     /**

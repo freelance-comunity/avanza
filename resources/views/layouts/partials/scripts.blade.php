@@ -458,7 +458,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print','csv',
+            'excel', 'print','csv',
             ],
             "processing": true,
             "serverSide": true,
@@ -493,7 +493,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print','csv',
+            'excel', 'print','csv',
             ],
             "processing": true,
             "serverSide": true,
@@ -528,7 +528,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print','csv',
+            'excel', 'print','csv',
             ],
             "processing": true,
             "serverSide": true,
@@ -563,7 +563,7 @@
             },
             dom: 'Bfrtip',
             buttons: [
-            'excel', 'pdf', 'print','csv',
+            'excel', 'print','csv',
             ],
             "processing": true,
             "serverSide": true,

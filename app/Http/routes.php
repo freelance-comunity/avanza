@@ -1464,5 +1464,5 @@ Route::get('fecha', function(){
 
 });
 
-
+Route::resource('users', 'UsersController');
 

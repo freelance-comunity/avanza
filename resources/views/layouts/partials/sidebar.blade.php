@@ -38,8 +38,8 @@
           <li><a href="{{ url('showRetreats') }}/{{ Auth::user()->id }}">Retiros</a></li>
           <li><a href="{{ url('transfer') }}">Reasignación de Cartera</a></li>
           {{-- <li><a href="{{ url('moveCredits') }}">Transferir Credito</a></li> --}}
-          <li><a data-toggle="modal" data-target="#move"><span>Transferir Crédito</span></a></li>
-          <li><a data-toggle="modal" data-target="#moveClient"><span>Transferir Cliente</span></a></li>
+          {{-- <li><a data-toggle="modal" data-target="#move"><span>Transferir Crédito</span></a></li>
+ --}}          <li><a data-toggle="modal" data-target="#moveClient"><span>Transferir Cliente</span></a></li>
           @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>

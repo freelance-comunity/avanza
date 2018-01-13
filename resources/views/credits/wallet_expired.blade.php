@@ -28,7 +28,7 @@ Lista de créditos
 						<th>Región</th>
 						<th>Estado</th>
 						<th>Municipio</th>
-						<th>Teléfono</th>
+						{{-- <th>Teléfono</th> --}}
 						<th>Tipo de Crédito</th>
 						<th>Promotor</th>
 						<th>Cliente</th>
@@ -83,7 +83,7 @@ Lista de créditos
 							<td>{!! $credit->region['name'] !!}</td>
 							<td>{{$credit->state}}</td>
 							<td>{{$credit->municipality}}</td>
-							<td>{{$credit->phone}}</td>
+						{{-- 	<td>{{$credit->phone}}</td> --}}
 							@if ($credit->periodicity == "TRADICIONAL" OR $credit->periodicity == "DIARIO4" OR $credit->periodicity == "25" OR  $credit->periodicity == "SEMANAL")
 							<td class="service">MIGRADOS</td>
 							@else

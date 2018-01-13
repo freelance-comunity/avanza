@@ -48,6 +48,9 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
           <th>Apellido Materno</th>
           <th>Sucursal</th>
           <th>Teléfono</th>
+          <th>Estado</th>
+          <th>Municipio</th>
+          <th>Dirección</th>
           @if (Auth::user()->can('crear-credito'))
           <th width="50px">Crédito</th>
           @endif
@@ -127,6 +130,9 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
            <td>{!! $client->mothers_last_name !!}</td>
            <td>{{ $branch->name }}</td>
            <td>{{ $client->phone }}</td>
+           <td>{{$client->location->state}}</td>
+           <td>{{$client->location->municipality}}</td>
+           <td>{{$client->location->street}} {{$client->location->number}}, {{$client->location->colony}}</td>
           {{-- @php
            $deuda = false;
            @endphp

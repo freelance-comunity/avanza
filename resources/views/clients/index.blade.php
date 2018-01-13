@@ -92,12 +92,23 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
                  </div>
                  @endif
                  @endforeach --}}
-                 <div class="form-group col-sm-6 col-lg-6">
+               {{--   <div class="form-group col-sm-6 col-lg-6">
                    <a href="{{ url('creditsClient') }}/{{$client->id}}/3"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper('credisemana')}}</button></a>
                  </div>
                  <div class="form-group col-sm-6 col-lg-6">
                    <a href="{{ url('creditsClient') }}/{{$client->id}}/1"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper('credidiario 25')}}</button></a>
+                 </div> --}}
+                 @foreach ($products as $key => $product)
+                 @if($product->id == 3)
+                 <div class="form-group col-sm-12 col-lg-6">
+                   <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
                  </div>
+                 @elseif($product->id == 1)
+                 <div class="form-group col-sm-12 col-lg-6">
+                   <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
+                 </div>
+                 @endif
+                 @endforeach
                  @endrole
                  @endif
                </div>

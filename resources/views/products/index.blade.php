@@ -29,7 +29,7 @@ Lista de productos
                     <th>Monto  Máximo</th>
                     <th>Monto Mínimo</th>
                     <th>Recargo</th>
-                    <th width="50px">Acción</th>
+                    {{-- <th width="50px">Acción</th> --}}
                 </thead>
                 <tbody>
 
@@ -41,10 +41,10 @@ Lista de productos
                         <td>MXN {!! number_format($product->ammount_max, 2) !!}</td>
                         <td>MXN {!! number_format($product->ammount_min, 2) !!}</td>
                         <td>MXN {!! number_format($product->surcharge, 2) !!}</td>
-                        <td>
+                       {{--  <td>
                             <a href="{!! route('products.edit', [$product->id]) !!}"><i class="fa fa-edit fa-2x" data-toggle="tooltip" title="Editar"></i></a>
                             <a href="{!! route('products.delete', [$product->id]) !!}" onclick="return confirm('¿Esta seguro de eliminar este producto?')"><i class="fa fa-trash fa-2x" data-toggle="tooltip" title="Eliminar"></i></a>
-                        </td>
+                        </td> --}}
                     </tr>
                     @endforeach
                 </tbody>

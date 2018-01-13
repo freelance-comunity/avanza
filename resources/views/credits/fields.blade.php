@@ -25,9 +25,6 @@ $users = $filtered->where('region_id', $region_allocation->id);
      {{--  <input type="hidden" value="{{ Carbon\Carbon::now()->toDateString() }}" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin" readonly> --}}
     </div>
 
-
-
-
     @if ($product->name == 'CREDIDIARIO25')
     <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('dues', 'No. Cuotas:') !!}

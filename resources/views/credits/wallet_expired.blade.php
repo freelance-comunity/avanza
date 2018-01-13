@@ -76,9 +76,11 @@ Lista de créditos
 						$pending_interest = $pending_payments->sum('interest');
 						$pending_capital = $pending_payments->sum('capital');
 						$pending_total = $pending_interest + $pending_capital;
+
+						$client = $credit->client;
 						@endphp
 						<tr>
-							<td>{!!$credit->client_id!!}</td>
+							<td>{!!$client->folio!!}</td>
 							<td><a href="{!! route('credits.show', [$credit->id]) !!}">{!! $credit->folio !!}</a></td>
 							<td>{!! $credit->region['name'] !!}</td>
 							<td>{{$credit->state}}</td>

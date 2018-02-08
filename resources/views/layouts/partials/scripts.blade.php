@@ -386,8 +386,20 @@
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             dom: 'Bfrtip',
+            lengthMenu: [[100000, 100, -1], [100000, 100, "All"]],
+
+            // buttons: [
+            // 'csv', 'excel', 'print', 
+            // ],
             buttons: [
-            'csv', 'excel', 'print', 
+            {
+              extend: 'excelHtml5',
+              title: 'Historial de Pagos'
+            },
+            {
+              extend: 'csvHtml5',
+              title: 'Historial de Pagos'
+            }
             ],
             processing: true,
             serverSide: true,
@@ -422,8 +434,16 @@
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             dom: 'Bfrtip',
+            lengthMenu: [[100000, 100, -1], [100000, 100, "All"]],
             buttons: [
-            'excel', 'print','csv',
+            {
+              extend: 'excelHtml5',
+              title: 'Historial de Pagos Centro'
+            },
+            {
+              extend: 'csvHtml5',
+              title: 'Historial de Pagos Centro'
+            }
             ],
             "processing": true,
             "serverSide": true,
@@ -457,8 +477,16 @@
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             dom: 'Bfrtip',
+            lengthMenu: [[100000, 100, -1], [100000, 100, "All"]],
             buttons: [
-            'excel', 'print','csv',
+            {
+              extend: 'excelHtml5',
+              title: 'Historial de Pagos Altos'
+            },
+            {
+              extend: 'csvHtml5',
+              title: 'Historial de Pagos Altos'
+            }
             ],
             "processing": true,
             "serverSide": true,
@@ -492,8 +520,16 @@
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             dom: 'Bfrtip',
+            lengthMenu: [[100000, 100, -1], [100000, 100, "All"]],
             buttons: [
-            'excel', 'print','csv',
+            {
+              extend: 'excelHtml5',
+              title: 'Historial de Pagos Mezcalapa'
+            },
+            {
+              extend: 'csvHtml5',
+              title: 'Historial de Pagos Mezcalapa'
+            }
             ],
             "processing": true,
             "serverSide": true,
@@ -527,8 +563,16 @@
               "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             dom: 'Bfrtip',
+            lengthMenu: [[100000, 100, -1], [100000, 100, "All"]],
             buttons: [
-            'excel', 'print','csv',
+            {
+              extend: 'excelHtml5',
+              title: 'Historial de Pagos Norte'
+            },
+            {
+              extend: 'csvHtml5',
+              title: 'Historial de Pagos Norte'
+            }
             ],
             "processing": true,
             "serverSide": true,
@@ -589,9 +633,40 @@
           });
         });
       </script>
-
-
       <script>
+        $(document).ready(function() {
+          $('#movementsBeginningNorte').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            lengthMenu: [[100000, 100, -1], [100000, 100, "All"]],
+            buttons: [
+            {
+              extend: 'excelHtml5',
+              title: 'SALDO INICIAL'
+            },
+            {
+              extend: 'csvHtml5',
+              title: 'SALDO INICIAL'
+            }
+            ],
+            "processing": true,
+            "serverSide": true,
+            "ajax": "api/movementsBeginningNorte",
+            "columns":[
+            {data: 'name', name: 'branches.name'},
+            {data: 'vault_id', name:'incomes.vault_id'},
+            {data: 'ammount',name:'incomes.ammount'},
+            {data: 'concept', name: 'incomes.concept'},
+            {data: 'created_at', name: 'incomes.created_at'},
+            ]
+          });
+            // $.fn.dataTable.ext.errMode = 'throw';
+         });
+       </script>
+
+       <script>
         $(document).ready(function() {
           $('#clientes').DataTable( {
             "language": {

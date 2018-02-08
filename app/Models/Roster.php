@@ -44,8 +44,6 @@ class Roster extends Model
 		"perceptions" => "required",
 		"deductions" => "required",
 		"grandchild_pay" => "required",
-		"coordinating_firm" => "required",
-		"employee_firm" => "required"
 	];
 
 	public static $rules_edit = [

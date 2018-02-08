@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('htmlheader_title')
@@ -63,11 +64,13 @@ Detalles
 					{!! Form::label('voucher', 'Coprobante:') !!}
 					<input type="file" name="voucher" required="required" data-parsley-trigger="input focusin" class="form-control input-lg">
 				</div>
-				<div class="form-group col-sm-12 col-lg-12">
-					{!! Form::submit('ASIGNAR', ['class' => 'btn btn-lg btn-block bg-primary']) !!}
+
+
+					<div class="form-group col-sm-12 col-lg-12">
+						{!! Form::submit('ASIGNAR', ['class' => 'btn btn-lg btn-block bg-primary']) !!}
+					</div>
+					{!! Form::close() !!}
 				</div>
-				{!! Form::close() !!}
 			</div>
 		</div>
-	</div>
-	@endsection
+		@endsection

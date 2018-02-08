@@ -98,22 +98,22 @@ class RosterController extends AppBaseController
 		$input = $request->all();
 		$id_user = $request->input('name_employee');
 		$employee = User::find($id_user);
-		if($request->input('coordinating_firm')){
-			$data_uri = $request->input('coordinating_firm');
-			$encoded_image = explode(",", $data_uri)[1];
-			$decoded_image = base64_decode($encoded_image);
-			$url_coordinating = 'signature_coordinating'. '-id-'. $request->input('user_id') . rand(111,9999).'.png';
+		// if($request->input('coordinating_firm')){
+		// 	$data_uri = $request->input('coordinating_firm');
+		// 	$encoded_image = explode(",", $data_uri)[1];
+		// 	$decoded_image = base64_decode($encoded_image);
+		// 	$url_coordinating = 'signature_coordinating'. '-id-'. $request->input('user_id') . rand(111,9999).'.png';
 
-			file_put_contents('../public/uploads/rosters/' . $url_coordinating, $decoded_image);
-		}
-		if($request->input('employee_firm')){
-			$data_uri = $request->input('employee_firm');
-			$encoded_image = explode(",", $data_uri)[1];
-			$decoded_image = base64_decode($encoded_image);
-			$url_employee = 'signature_employee'. '-id-'. $request->input('user_id') . rand(111,9999).'.png';
+		// 	file_put_contents('../public/uploads/rosters/' . $url_coordinating, $decoded_image);
+		// }
+		// if($request->input('employee_firm')){
+		// 	$data_uri = $request->input('employee_firm');
+		// 	$encoded_image = explode(",", $data_uri)[1];
+		// 	$decoded_image = base64_decode($encoded_image);
+		// 	$url_employee = 'signature_employee'. '-id-'. $request->input('user_id') . rand(111,9999).'.png';
 
-			file_put_contents('../public/uploads/rosters/' . $url_employee, $decoded_image);
-		}
+		// 	file_put_contents('../public/uploads/rosters/' . $url_employee, $decoded_image);
+		// }
 		
 		$input['perceptions'] = trim($input['perceptions']);
 		$input['deductions'] = trim($input['deductions']);
@@ -122,8 +122,8 @@ class RosterController extends AppBaseController
 		$input['name_employee'] = $employee->name." ".$employee->father_last_name." ".$employee->mother_last_name;
 		$input['number_employee'] = $employee->id;
 		$input['position'] = $employee->roles;
-		$input['coordinating_firm']   = $url_coordinating;
-		$input['employee_firm']   = $url_employee;
+		// $input['coordinating_firm']   = $url_coordinating;
+		// $input['employee_firm']   = $url_employee;
 		$input['branch_id'] = $employee->branch_id;
 		$input['region_id'] = $employee->region_id;
 

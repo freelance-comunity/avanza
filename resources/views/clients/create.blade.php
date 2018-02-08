@@ -16,7 +16,7 @@ Crear Nuevo Cliente
 
 	{!! Form::open(['route' => 'clients.store', 'files' => 'true', 'data-parsley-validate' => '', 'id'=>'formclient','onsubmit'=>'return checkSubmit();']) !!}
 
-	@include('clients.fields')
+	@include('clients.fieldsClient')
 
 
 	{!! Form::close() !!}

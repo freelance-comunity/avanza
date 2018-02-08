@@ -34,7 +34,7 @@
                             <th>Percepciones</th>
                             <th>Deducciones</th>
                             <th>Neto a Pagar</th>
-                            <th>Acción</th>
+                            
                         </thead>
                         <tbody>
 
@@ -50,7 +50,7 @@
                                 <td>${!! number_format($roster->perceptions,2) !!}</td>
                                 <td>${!! number_format($roster->deductions,2) !!}</td>
                                 <td>${!! number_format($roster->grandchild_pay,2) !!}</td>
-                                <td><a href="{{ url('roster') }}/{{ $roster->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Nomina"></i></a>
+                               {{--  <td><a href="{{ url('roster') }}/{{ $roster->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Nomina"></i></a> --}}
                                  {{-- <a href="{!! route('rosters.edit', [$roster->id]) !!}"><i class="glyphicon glyphicon-edit fa-2x" data-toggle="tooltip" title="Editar"></i></a> --}}
                                </td>
                            </tr>

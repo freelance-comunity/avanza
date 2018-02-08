@@ -29,7 +29,7 @@ Detalles
 									<th>Usuario</th>
 									<th>Tipo de Crédito</th>
 									<th>Monto</th>
-									<th>Concepto</th>
+									
 									<th>Cliente</th>
 									<th>Folio crédito</th>
 									<th>Fecha/Hora asignación</th>
@@ -56,7 +56,7 @@ Detalles
 										<td>{{ $credit->credit['periodicity'] }}</td>
 										@endif
 										<td>${{ number_format($credit->ammount) }}</td>
-										<td>{{ $credit->concept }}</td>
+										
 										<td>{{ $credit->credit['firts_name'] }} {{ $credit->credit['last_name'] }} {{ $credit->credit['mothers_last_name'] }}</td>
 										<td><a href="{!! route('credits.show', [$credit->id]) !!}">{{ $credit->credit['folio'] }}</a></td>
 										<td>{{ $credit->created_at }}</td>

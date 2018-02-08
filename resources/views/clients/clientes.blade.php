@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('htmlheader_title')
@@ -23,10 +22,13 @@ Pagos
                     <table class="table" id="example">
                         <thead class="bg-success">
                             <th>Nombre del Cliente</th>
-                            <th>Curp</th>
-                            <th>Ine</th>
+                           {{--  <th>Curp</th>
+                            <th>Ine</th> --}}
                             <th>Sucursal</th>
-                            <th>Documentos</th>
+                           {{--  <th>Documentos</th> --}}
+                           {{--  <th>colonia</th> --}}
+                            <th>ife</th>
+                            <th>fecha</th>
                         </thead>
                         <tbody>
                             @foreach ($clients as $client)
@@ -36,10 +38,17 @@ Pagos
                             @endphp
                             <tr>
                                 <td>{{$client->firts_name}} {{$client->last_name}} {{$client->mothers_last_name}}</td>
-                                <td>{{$client->curp}}</td>
-                                <td>{{$client->ine}}</td>
+                               {{--  <td>{{$client->curp}}</td>
+                                <td>{{$client->ine}}</td> --}}
                                 <td>{{$client->branch['name']}}</td>
-                                <td> <a href="{{ url('pdf') }}/{{ $client->id }}"><i class="fa fa-file-pdf-o fa-5x"></i></a></td>
+                               {{--  <td> <a href="{{ url('pdf') }}/{{ $client->id }}"><i class="fa fa-file-pdf-o fa-5x"></i></a></td> --}}
+                                {{-- <td>{{$client->location->street}} {{$client->location->number}}, {{$client->location->colony}}</td> --}}
+                                @if (is_null($document))
+                                <td>No hay </td>
+                                @else
+                                <td>{{ $document->ine }}</td>
+                                @endif
+                                <th>{{ $client->created_at}}</th>
                             </tr>
                             @endforeach
                             

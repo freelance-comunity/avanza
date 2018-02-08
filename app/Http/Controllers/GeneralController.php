@@ -242,6 +242,9 @@ class GeneralController extends Controller
             $data_expenditure['date']    = $current;
             $data_expenditure['description']= $request->input('description');
             $data_expenditure['type']= $request->input('type');
+            if ($request->input('type') == 'Accesorios Celulares' ) {
+                $data_expenditure['category']= 'Activo';
+            }
             $data_expenditure['vault_id'] = $vault->id;
             $data_expenditure['branch_id'] = Auth::user()->branch_id;
             $data_expenditure['region_id'] = Auth::user()->region_id;

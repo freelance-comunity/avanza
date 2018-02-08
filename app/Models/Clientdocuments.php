@@ -19,9 +19,9 @@ class Clientdocuments extends Model
 	];
 
 	public static $rules = [
-	    "ine" => "required",
-		"curp" => "required",
-		"proof_of_addres" => "required"
+	 //    "ine" => "required",
+		// "curp" => "required",
+		// "proof_of_addres" => "required"
 	];
 
 	public function client()

@@ -98,7 +98,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
         {{-- </div> --}}
     </div>
 
-    <div class="form-group col-sm-6 col-lg-6">
+  {{--   <div class="form-group col-sm-6 col-lg-6">
         {!! Form::label('coordinating_firm', 'Firma Coordinador:') !!}
         {!! Form::text('coordinating_firm', null, ['class' => 'form-control input-lg','id' => 'signature', 'readonly']) !!}
     </div>
@@ -106,9 +106,9 @@ $users = $filtered->where('region_id', $region_allocation->id);
     <div class="form-group col-sm-6 col-lg-6">
         {!! Form::label('employee_firm', 'Firma Empleado:') !!}
         {!! Form::text('employee_firm', null, ['class' => 'form-control input-lg','id' => 'signature2','readonly']) !!}
-    </div>
+    </div> --}}
     {{-- Firma coordinador --}}
-    <div class="form-group col-sm-6 col-lg-6">
+  {{--   <div class="form-group col-sm-6 col-lg-6">
         <div class="form-group col-sm-12 col-lg-12">
           <div id="signature-pad" class="m-signature-pad">
             <div class="m-signature-pad--body">
@@ -121,11 +121,11 @@ $users = $filtered->where('region_id', $region_allocation->id);
       </div>
 
   </div>
-</div>
+</div> --}}
 {{-- End --}}
 
 {{-- Firma empleado --}}
-<div class="form-group col-sm-6 col-lg-6">
+{{-- <div class="form-group col-sm-6 col-lg-6">
     <div class="form-group col-sm-12 col-lg-12">
       <div id="signature-pad2" class="m-signature-pad">
         <div class="m-signature-pad--body">
@@ -138,7 +138,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
   </div>
 
 </div>
-</div>
+</div> --}}
 
 {{-- End --}}
 

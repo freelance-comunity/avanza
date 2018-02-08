@@ -60,25 +60,23 @@ class ClientController extends AppBaseController
 		elseif (Auth::user()->hasRole('coordinador-regional')) {
 			$user_allocation = Auth::user();
 			$region_allocation = $user_allocation->region;
-
 			$clients = $region_allocation->clients;		
 		}
 		elseif (Auth::user()->hasRole('coordinador-sucursal')) {
 			$user_allocation = Auth::user();
 			$branch_allocation = $user_allocation->branch;
-
 			$clients = $branch_allocation->clients;
 		}
 		elseif (Auth::user()->hasRole('ejecutivo-de-credito')) {
 			$user_allocation = Auth::user();
 			$branch_allocation = $user_allocation->branch;
-
 			$clients = $branch_allocation->clients;
 		}
 		$products =	Product::all();
 		return view('clients.index')
 		->with('clients', $clients)
 		->with('products',$products);
+		
 	}
 	/**
 	 * Show the form for creating a new Client.
@@ -113,13 +111,17 @@ class ClientController extends AppBaseController
 	public function store(Request $request)
 	{	
 		$curp_validate = $request->input('curp');
+		
 		// Valitador
 		$validator = Validator::make($request->all(), [
 			'curp' => 'required|unique:clients,curp',
 			// 'avatar' => 'required|image|mimes:jpeg,png,jpg',
 			//COJB820320MCSRRL00
 		]);
-
+		if ($request->input('maximun_amount') > '1000') {
+			Toastr::error('El monto maximo no puede se mayor a $1000', 'CLIENTES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		}
 		if ($validator->fails()) {
 			Toastr::error('La CURP: '.$curp_validate.' ya se encuentra registrada en la base de datos ó las imagenes no son validas.', 'CLIENTES', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 			return redirect()->back();
@@ -131,16 +133,16 @@ class ClientController extends AppBaseController
 		$region = $branch->region;
 		$input['region_id'] = $region->id;
 		/* Save avatar client */
-		if($request->hasFile('avatar')){
-			$avatar = $request->file('avatar');
-			$filename = time() . '.' . $avatar->getClientOriginalExtension();
-			Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
-			$input['avatar'] = $filename;
-		}
+		// if($request->hasFile('avatar')){
+		// 	$avatar = $request->file('avatar');
+		// 	$filename = time() . '.' . $avatar->getClientOriginalExtension();
+		// 	Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+		// 	$input['avatar'] = $filename;
+		// }
 		$number = Client::max('id') + 1;
 		
 		$input['folio'] ='CLTE'.$branch->nomenclature.'00'.$number;
-		
+
 		$client = Client::create($input);
 
 
@@ -170,8 +172,8 @@ class ClientController extends AppBaseController
 		$data_company['postal_code_company'] = $request->input('postal_code_company');
 		$data_company['phone_company'] = $request->input('phone_company');
 		$data_company['name_company'] = $request->input('name_company');		
-		$data_company['latitude_company'] = $request->input('latitude_company');
-		$data_company['length_company'] = $request->input('length_company');
+		// $data_company['latitude_company'] = $request->input('latitude_company');
+		// $data_company['length_company'] = $request->input('length_company');
 		$data_company['client_id'] = $client->id;
 
 		$company = ClientCompany::create($data_company);
@@ -296,7 +298,7 @@ class ClientController extends AppBaseController
 			return redirect(route('clients.index'));
 		}
 
-		return view('clients.show')
+		return view('clients.showClient')
 		->with('client', $client);
 	}
 
@@ -434,6 +436,25 @@ class ClientController extends AppBaseController
 		//}
 	}
 
+	public function creditsSemanal($id, $product)
+	{	
+		if (Auth::User()->branch_id == 0) {
+			Toastr::error('Actualmente no cuentas con una sucursal aignada.', 'SUCURSAL', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect(route('clients.index'));
+		}
+		$product = Product::find($product);
+		$client = Client::find($id);
+		$credit = Credit::find($id);
+		$credits = $client->credits;
+
+		return view('credits.create')
+		->with('credits',$credits)
+		->with('product', $product)
+		->with('client', $client)
+		->with('credit',$credit);
+		
+	}
+
 	public function creditsMigrate($id, $product)
 	{	
 		if (Auth::User()->branch_id == 0) {
@@ -444,7 +465,7 @@ class ClientController extends AppBaseController
 		$client = Client::find($id);
 		$credit = Credit::find($id);
 		$credits = $client->credits;
-	
+
 		return view ('credits.migrate')
 		->with('credits',$credits)
 		->with('product', $product)
@@ -477,17 +498,17 @@ class ClientController extends AppBaseController
 				$client->firts_name = $row->firts_name;
 				$client->last_name = $row->last_name;
 				$client->mothers_last_name = $row->mothers_last_name;
-				$client->curp = $row->curp_txt;
-				$client->ine = $row->ine_txt;
+				$client->curp = $row->curp;
+				$client->ine = $row->ine;
 				$client->civil_status = $row->civil_status;
-				$client->scholarship = $row->scholarship;
 				$client->phone = $row->phone;
 				$client->no_economic_dependent = $row->no_economic_dependent;
-				$client->no_familys = $row->no_familys;
 				$client->type_of_housing = $row->type_of_housing;
-				$client->avatar = $row->avatar;
+				$client->maximun_amount = $row->maximun_amount;
+				$client->warranty = $row->warranty;
 				$client->branch_id = $row->branch_id;
-				$client->user_id = 14;
+				$client->user_id = 13;
+				$client->region_id = $row->region_id;
 				$client->save();
 
 				$location = new ClientLocation;
@@ -498,8 +519,6 @@ class ClientController extends AppBaseController
 				$location->state = $row->state;
 				$location->postal_code = $row->postal_code;
 				$location->references = $row->references;
-				$location->latitude = $row->latitude;
-				$location->lenght = $row->lenght;
 				$location->client_id = $client->id;
 				$location->save();
 
@@ -512,25 +531,6 @@ class ClientController extends AppBaseController
 				$company->postal_code_company = $row->postal_code_company;
 				$company->phone_company = $row->phone_company;
 				$company->name_company = $row->name_company;
-				$company->inventory = $row->inventory;
-				$company->machinery_equipment = $row->machinery_equipment;
-				$company->vehicles = $row->vehicles;
-				$company->property = $row->property;
-				$company->box_benck = $row->box_benck;
-				$company->accounts = $row->accounts;
-				$company->suppliers = $row->suppliers;
-				$company->credits = $row->credits;
-				$company->payments = $row->payments;
-				$company->specify = $row->specify;
-				$company->weekday = $row->weekday;
-				$company->weekend = $row->weekend;
-				$company->utility = $row->utility;
-				$company->other_income = $row->other_income;
-				$company->rent = $row->rent;
-				$company->salary = $row->salary;
-				$company->others = $row->others;
-				$company->latitude_company = $row->latitude_company;
-				$company->length_company = $row->length_company;
 				$company->client_id = $client->id;
 				$company->save();
 
@@ -538,11 +538,9 @@ class ClientController extends AppBaseController
 				$aval->name_aval = $row->name_aval;
 				$aval->last_name_aval = $row->last_name_aval;
 				$aval->mothers_name_aval = $row->mothers_name_aval;
-				$aval->birthdate_aval = $row->birthdate_aval;
 				$aval->curp_aval = $row->curp_aval;
 				$aval->phone_aval = $row->phone_aval;
 				$aval->civil_status_aval = $row->civil_status_aval;
-				$aval->scholarship_aval = $row->scholarship_aval;
 				$aval->street_aval = $row->street_aval;
 				$aval->number_aval = $row->number_aval;
 				$aval->colony_aval = $row->colony_aval;
@@ -553,27 +551,29 @@ class ClientController extends AppBaseController
 				$aval->save();
 
 				$reference_1 = new ClientReferences;
-				$reference_1->firts_name_reference = $row->firts_name_reference_1;
-				$reference_1->last_name_reference = $row->last_name_reference_1;
-				$reference_1->mothers_last_name_reference = $row->mothers_last_name_reference_1;
-				$reference_1->phone_reference = $row->phone_reference_1;
+				$reference_1->name_reference = $row->name_reference;
+				$reference_1->last_name_reference = $row->last_name_reference;
+				$reference_1->mothers_name_reference = $row->mothers_name_reference;
+				$reference_1->phone_reference = $row->phone_reference;
+				$reference_1->relationship = $row->relationship;
 				$reference_1->client_id = $client->id;
 				$reference_1->save();
 
 				$reference_2 = new ClientReferences;
-				$reference_2->firts_name_reference = $row->firts_name_reference_2;
+				$reference_2->name_reference = $row->name_reference_2;
 				$reference_2->last_name_reference = $row->last_name_reference_2;
-				$reference_2->mothers_last_name_reference = $row->mothers_last_name_reference_2;
-				$reference_2->phone_reference = $row->phone_reference_2;
+				$reference_2->mothers_name_reference = $row->mothers_name_reference_2;
+				$reference_2->phone_reference = $row->phone_reference2;
+				$reference_2->relationship = $row->relationship_2;
 				$reference_2->client_id = $client->id;
 				$reference_2->save();
 
-				$documents = new Clientdocuments;
-				$documents->ine = $row->ine;
-				$documents->curp = $row->curp;
-				$documents->proof_of_addres = $row->proof_of_addres;
-				$documents->client_id = $client->id;
-				$documents->save();
+				// $documents = new Clientdocuments;
+				// $documents->ine = $row->ine;
+				// $documents->curp = $row->curp;
+				// $documents->proof_of_addres = $row->proof_of_addres;
+				// $documents->client_id = $client->id;
+				// $documents->save();
 
 
 			});
@@ -647,6 +647,38 @@ public function referencesClient($id)
 
 }
 
+// public function importArchives(Request $request)
+//     {   
+//         $this->validate($request, ['excel' => 'required']);
+
+//         \Excel::load($request->excel, function($reader) {
+
+//             $excel = $reader->get();
+
+//             //iteración
+//             $reader->each(function($row) {
+//                 $client = new client;
+//                 $client->credit_id = $row->credit_id;
+//                 $client->client_id = $row->client_id;
+//                 $client->group = $row->group;
+//                 $client->product = $row->product;
+//                 $client->client = $row->client;
+//                 $client->start_date = $row->start_date;
+//                 $client->brach = $row->brach;
+//                 $client->source_of_funding = $row->source_of_funding;
+//                 $client->status = $row->status;
+//                 $client->archivist = $row->archivist;
+//                 $client->drawer = $row->drawer;
+//                 $client->save();
+//             });
+
+//         });
+
+//         Session::flash('message', '¡Expedientes cargados exitosamente!');
+//         Session::flash('status', 'success');
+
+//         return redirect('admin/archives');
+//     }
 
 
 }

@@ -34,8 +34,8 @@ class ClientCompany extends Model
 		"postal_code_company" => "required",
 		"phone_company" => "required",
 		"name_company" => "required",
-		"latitude_company",
-		"length_company"
+		// "latitude_company",
+		// "length_company"
  
 	];
 	public function client()

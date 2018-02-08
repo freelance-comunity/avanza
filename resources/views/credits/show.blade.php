@@ -20,6 +20,7 @@ Detalles
 				$debt = $credit->debt;
 				$mora = App\Models\Payment::where('debt_id', $debt->id);
 				$late_payments = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->get();
+				$late_status = App\Models\Payment::where('debt_id', $debt->id)->where('status', 'Vencido')->count();
 				$late_interest = $late_payments->sum('interest');
 				$late_capital = $late_payments->sum('capital');
 				$late_balance = $late_payments->sum('balance');
@@ -46,7 +47,7 @@ Detalles
 						@elseif($credit->periodicity == 'SEMANAL')
 						<p><strong>FRECUENCIA:</strong> CREDISEMANA</p>
 						@else
-						<p><strong>FRECUENCIA:</strong> {{$credit->periodicity}}</p>
+						<p><strong>TIPO DE CRÉDITO:</strong> {{$credit->periodicity}}</p>
 						@endif
 
 						<p><strong>MONTO:</strong>$ {{ number_format($credit->ammount, 2) }}</p>
@@ -66,24 +67,31 @@ Detalles
 						<p><strong>CUOTAS RESTANTES:</strong> {{ $rest }}</p>
 						<p><strong>TOTAL PAGADO:</strong> ${{ number_format($total_payment,2) }}</p>
 						<p><strong>TOTAL RESTANTE:</strong> ${{ number_format($debt->ammount,2) }}</p>
-						<p><strong>ESTATUS DEL CRÉDITO: </strong> {{ strtoupper($debt->status) }}</p>
-						@if ($debt->status == 'Pagado')
-							<p><strong>TOTAL CONDONADO: </strong>${{ number_format($debt->ammount,2) }}</p>
+
+						@if ($late_status >=1)
+						<p><strong>ESTATUS DEL CRÉDITO: </strong> VENCIDO</p>
+						@else
+						<strong>ESTATUS DEL CRÉDITO: </strong> {{ strtoupper($debt->status) }}</p>
 						@endif
-						
-						
-					</div>
-					<div class="col-md-4">
-						<p style="color:red;"><strong>CAPITAL:</strong>$ {{ number_format($late_capital, 2) }}</p>
-						<p style="color:red;"><strong>INTERÉS:</strong>$ {{ number_format($late_interest, 2) }}</p>
-						<p style="color:red;"><strong>MORA:</strong>$ {{ number_format($mora->sum('moratorium'), 2)	 }}</p>
-						<p style="color:red;"><strong>TOTAL VENCIDO:</strong>$ {{ number_format($late_balance, 2) }}</p>
-						<p>
-							<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#processPayments">PAGAR</button>
-							@include('credits.processPayments')
-						</p>
-						{{-- <button type="button" class="btn btn-lg bg-olive btn-block" data-toggle="modal" data-target="#payment">Saldar Prestamo</button> --}}
-						<!-- Modal -->
+						<td>
+
+							@if ($debt->status == 'Pagado')
+							<p><strong>TOTAL CONDONADO: </strong>${{ number_format($debt->ammount,2) }}</p>
+							@endif
+
+
+						</div>
+						<div class="col-md-4">
+							<p style="color:red;"><strong>CAPITAL:</strong>$ {{ number_format($late_capital, 2) }}</p>
+							<p style="color:red;"><strong>INTERÉS:</strong>$ {{ number_format($late_interest, 2) }}</p>
+							<p style="color:red;"><strong>MORA:</strong>$ {{ number_format($mora->sum('moratorium'), 2)	 }}</p>
+							<p style="color:red;"><strong>TOTAL VENCIDO:</strong>$ {{ number_format($late_balance, 2) }}</p>
+							<p>
+								<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#processPayments">PAGAR</button>
+								@include('credits.processPayments')
+							</p>
+							{{-- <button type="button" class="btn btn-lg bg-olive btn-block" data-toggle="modal" data-target="#payment">Saldar Prestamo</button> --}}
+							<!-- Modal -->
 						{{-- <div class="modal fade" id="myModal{{$client->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">

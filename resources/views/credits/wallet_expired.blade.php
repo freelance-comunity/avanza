@@ -83,9 +83,9 @@ Lista de créditos
 							<td>{!!$client->folio!!}</td>
 							<td><a href="{!! route('credits.show', [$credit->id]) !!}">{!! $credit->folio !!}</a></td>
 							<td>{!! $credit->region['name'] !!}</td>
-							<td>{{$credit->state}}</td>
-							<td>{{$credit->municipality}}</td>
-						{{-- 	<td>{{$credit->phone}}</td> --}}
+							<td>{{$client->location->state}}</td>
+							<td>{{$client->location->municipality}}</td>
+							{{-- 	<td>{{$credit->phone}}</td> --}}
 							@if ($credit->periodicity == "TRADICIONAL" OR $credit->periodicity == "DIARIO4" OR $credit->periodicity == "25" OR  $credit->periodicity == "SEMANAL")
 							<td class="service">MIGRADOS</td>
 							@else

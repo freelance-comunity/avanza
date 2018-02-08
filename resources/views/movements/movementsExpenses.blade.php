@@ -30,6 +30,7 @@ Detalles
 									<th>Usuario</th>
 									<th>Monto</th>
 									<th>Tipo de Gasto</th>
+									<th>Categoría</th>
 									<th>Concepto</th>
 									<th>Fecha/Hora gasto</th>
 								</thead>
@@ -44,7 +45,9 @@ Detalles
 										<th>{{$expense->type}}</th>
 										@else
 										<th>Sin especificar</th>
+
 										@endif
+										<th>{{$expense->category}}</th>
 										<td>{{ $expense->description }}</td>
 										<td>{{ $expense->created_at }}</td>
 									</tr>

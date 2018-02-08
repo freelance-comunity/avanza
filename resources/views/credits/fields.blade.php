@@ -8,25 +8,26 @@ $users = $filtered->where('region_id', $region_allocation->id);
 @endphp
 
 <div class="box box-danger">
- {{--  <div class="box-header with-border">
+  <div class="box-header with-border">
     <h3 class="box-title">Solicitud de Crédito con fecha <strong>{{ Carbon\Carbon::now()->toDateString() }}</strong> </h3>
-  </div> --}}
+  </div>
 
   <div class="box-body">
 
     <div class="form-group col-sm-6 col-lg-12">
-     <div class="form-group col-sm-6 col-lg-4">
+    {{--  <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('date', 'Fecha:') !!}
       <input type="date" value="{{ Carbon\Carbon::now()->toDateString() }}" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin" >
-    </div>
-    <div class="form-group col-sm-6 col-lg-8">
+    </div> --}}
+    <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('ammount', 'Monto Crédito:') !!}
       <input type="number" name="ammount" placeholder="ESCRIBA EL MONTO" id="ammount" class="form-control formulario input-lg" data-parsley-trigger="input focusin" required="required">
-     {{--  <input type="hidden" value="{{ Carbon\Carbon::now()->toDateString() }}" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin" readonly> --}}
+       <input type="hidden" value="{{ Carbon\Carbon::now()->toDateString() }}" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin" readonly>
     </div>
 
     @if ($product->name == 'CREDIDIARIO25')
-    <div class="form-group col-sm-6 col-lg-4">
+    <input type="hidden" name="dues" value="25">
+  {{--   <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('dues', 'No. Cuotas:') !!}
       {!! Form::select('dues', ['25'=>'25'],null, [
         'style' => 'text-transform:uppercase',
@@ -35,7 +36,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
         'id' => 'dues',
         'data-parsley-trigger ' => 'input focusin',
         'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-      </div>
+      </div> --}}
       @elseif ($product->name == 'CREDIDIARIO4')
       <div class="form-group col-sm-6 col-lg-4">
         {!! Form::label('dues', 'No. Cuotas:') !!}
@@ -70,7 +71,8 @@ $users = $filtered->where('region_id', $region_allocation->id);
               ]) !!}
             </div>
             @else
-            <div class="form-group col-sm-6 col-lg-4">
+            <input type="hidden" name="dues" value="1">
+           {{--  <div class="form-group col-sm-6 col-lg-4">
               {!! Form::label('dues', 'No. Cuotas:') !!}
               {!! Form::select('dues', ['1'=>'1'],null, [
                 'style' => 'text-transform:uppercase',
@@ -78,56 +80,9 @@ $users = $filtered->where('region_id', $region_allocation->id);
                 'required'=>'required',
                 'data-parsley-trigger ' => 'input focusin',
                 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-              </div>
+              </div> --}}
               @endif
-            </div>
-            <input type="hidden" name="branch" value="{{ $client->branch->name}}">
-            <input type="hidden" name="branch_id" value="{{ $client->branch->id }}">
-            <input type="hidden" name="region_id" value="{{ $client->branch->region->id }}">
-            @if ($product->name == 'MIGRADOS')
-            <div class="form-group col-sm-6 col-lg-12">
-              <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('interest_rate', 'Tasa:') !!}
-                {!! Form::text('interest_rate',null, [
-                  'class' => 'form-control input-lg',
-                  'data-parsley-trigger ' => 'input focusin',
-                  ]) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-8">
-                  {!! Form::label('adviser', 'Nombre del Ejecutivo:') !!}
-                  <select name="adviser"  id="" class="form-control input-lg">
-                    <option selected="">ELIGE PROMOTOR</option>
-                    @foreach ($users as $user)
-                    <option   value="{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}">
-                      {{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}
-                    </option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-
-              <input type="text" name="user_id" value="">
-              <script>
-                $(document).ready(function(){
-                  $("select[name=adviser]").change(function(){
-                    $('input[name=user_id]').val($(this).val());
-                  });
-                });
-              </script>
-             @else
-             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-             <input type="hidden" name="adviser" value="{{ Auth::user()->name }} {{ Auth::user()->father_last_name }} {{ Auth::user()->mother_last_name }}">
-             <input type="hidden" name="interest_rate" value="{{$product->interest_of_cup}}">
-             @endif
-             <input type="hidden" name="periodicity" value="{{$product->name}}">
-             <input type="hidden" name="firts_name" value="{{$client->firts_name}}">
-             <input type="hidden" name="last_name" value="{{$client->last_name}}">
-             <input type="hidden" name="mothers_last_name" value="{{$client->mothers_last_name}}">
-             <input type="hidden" name="curp" value="{{$client->curp}}">
-             <input type="hidden" name="ine" value="{{$client->ine}}">
-             <input type="hidden" name="client_id" value="{{ $client->id}}">
-             <div class="form-group col-sm-6 col-lg-12">
-              <div class="form-group col-sm-6 col-lg-4">
+              {{-- <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('collection_period', 'Horario Sugerido de Cobro:') !!}
                 {!! Form::select('collection_period',['MAÑANA'=>'MAÑANA','MEDIO DÍA'=>'MEDIO DIA','TARDE'=>'TARDE'],null, [
                   'style' => 'text-transform:uppercase',
@@ -136,7 +91,65 @@ $users = $filtered->where('region_id', $region_allocation->id);
                   'data-parsley-trigger ' => 'input focusin',
                   'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
                 </div>
+
+
+ --}}
                 <div class="form-group col-sm-6 col-lg-4">
+                  {!! Form::label('firm', 'Foto del Pagare:') !!}
+                  {!! Form::file('firm', [
+                    'data-parsley-trigger ' => 'input focusin',
+                    'required'=>'required'
+                    ]) !!}
+                  </div>
+                  
+                </div>
+                <input type="hidden" name="branch" value="{{ $client->branch->name}}">
+                <input type="hidden" name="branch_id" value="{{ $client->branch->id }}">
+                <input type="hidden" name="region_id" value="{{ $client->branch->region->id }}">
+                @if ($product->name == 'MIGRADOS')
+                <div class="form-group col-sm-6 col-lg-12">
+                  <div class="form-group col-sm-6 col-lg-4">
+                    {!! Form::label('interest_rate', 'Tasa:') !!}
+                    {!! Form::text('interest_rate',null, [
+                      'class' => 'form-control input-lg',
+                      'data-parsley-trigger ' => 'input focusin',
+                      ]) !!}
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-8">
+                      {!! Form::label('adviser', 'Nombre del Ejecutivo:') !!}
+                      <select name="adviser"  id="" class="form-control input-lg">
+                        <option selected="">ELIGE PROMOTOR</option>
+                        @foreach ($users as $user)
+                        <option   value="{{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}">
+                          {{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}
+                        </option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+
+                  <input type="text" name="user_id" value="">
+                  <script>
+                    $(document).ready(function(){
+                      $("select[name=adviser]").change(function(){
+                        $('input[name=user_id]').val($(this).val());
+                      });
+                    });
+                  </script>
+                  @else
+                  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                  <input type="hidden" name="adviser" value="{{ Auth::user()->name }} {{ Auth::user()->father_last_name }} {{ Auth::user()->mother_last_name }}">
+                  <input type="hidden" name="interest_rate" value="{{$product->interest_of_cup}}">
+                  @endif
+                  <input type="hidden" name="periodicity" value="{{$product->name}}">
+                  <input type="hidden" name="firts_name" value="{{$client->firts_name}}">
+                  <input type="hidden" name="last_name" value="{{$client->last_name}}">
+                  <input type="hidden" name="mothers_last_name" value="{{$client->mothers_last_name}}">
+                 
+                  <input type="hidden" name="client_id" value="{{ $client->id}}">
+                  <div class="form-group col-sm-6 col-lg-12">
+
+              {{--   <div class="form-group col-sm-6 col-lg-4">
                   {!! Form::label('firm', 'Firma:') !!}
                   {!! Form::text('firm',null, [
                     'class' => 'form-control input-lg',
@@ -144,13 +157,14 @@ $users = $filtered->where('region_id', $region_allocation->id);
                     'data-parsley-trigger ' => 'input focusin',
                     'readonly'
                     ]) !!}
-                  </div>
-                  <div class="form-group col-sm-6 col-lg-4">
+                  </div> --}}
+                 {{--  <div class="form-group col-sm-6 col-lg-4">
                     <label>  &nbsp; </label>
                     <input type="button" class="btn-lg btn-block btn bg-navy" value="SIMULAR TABLA DE PAGOS" onclick="capturar()">
-                  </div>
+                  </div> --}}
                 </div>
-                <div class="form-group col-sm-12 col-lg-12">
+
+               {{--  <div class="form-group col-sm-12 col-lg-12">
                   <div class="form-group col-sm-12 col-lg-12">
                     <div id="signature-pad" class="m-signature-pad">
                       <div class="m-signature-pad--body">
@@ -162,7 +176,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
                       </div>
                     </div>
 
-                  </div>
+                  </div> --}}
                 </div>
               {{-- <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('firm_ine', 'Imagen:') !!}

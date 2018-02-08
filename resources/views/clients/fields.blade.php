@@ -128,7 +128,7 @@
 
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('maximun_amount', 'Monto Máximo') !!}
-          <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
+          <input type="number" name="maximun_amount" class="form-control input-lg" placeholder="MONTO MAXIMO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="4">
         </div>
 
         {{-- @php
@@ -148,14 +148,14 @@
           </select>
         </div>  --}}
       </div> 
-     
+      
       <div class="form-group col-sm-6 col-lg-12">
         <div class="form-group col-sm-6 col-lg-12">
-          {!! Form::label('warranty', 'Garantía') !!}
-          {!! Form::textarea('warranty', null, ['style' => 'text-transform:uppercase','class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          {!! Form::label('warranty', 'Garantía (Descripcción de la Garantía):') !!}
+          {!! Form::textarea('warranty', null, ['style' => 'text-transform:uppercase','placeholder' => 'DESCRIPCCIÓN DE LA GARANTÍA','class' => 'form-control input-lg', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
       </div>
-     
+      
       
 
 
@@ -659,7 +659,7 @@
         </div>
         <div class="form-group col-sm-6 col-lg-4">
           {!! Form::label('relationship', 'Parentesco:') !!}
-           {!! Form::select('relationship',['PADRE' => 'PADRE', 'MADRE' => 'MADRE','SUEGRO(A)'=>'SUEGRO(A)','ESPOSO(A)'=>'ESPOSO(A)','HIJO(A)'=>'HIJO(A)','YERNO'=>'YERNO','NUERA'=>'NUERA','ABUELO(A)'=>'ABUELO(A)','NIETO(A)'=>'NIETO(A)','HERMANO(A)'=>'HERMANO(A)','CUÑADO(A)'=>'CUÑADO(A)','SOBRINO(A)'=>'SOBRINO(A)','TIO(A)'=>'TIO(A)','AMIGO(A)'=>'AMIGO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
+          {!! Form::select('relationship',['PADRE' => 'PADRE', 'MADRE' => 'MADRE','SUEGRO(A)'=>'SUEGRO(A)','ESPOSO(A)'=>'ESPOSO(A)','HIJO(A)'=>'HIJO(A)','YERNO'=>'YERNO','NUERA'=>'NUERA','ABUELO(A)'=>'ABUELO(A)','NIETO(A)'=>'NIETO(A)','HERMANO(A)'=>'HERMANO(A)','CUÑADO(A)'=>'CUÑADO(A)','SOBRINO(A)'=>'SOBRINO(A)','TIO(A)'=>'TIO(A)','AMIGO(A)'=>'AMIGO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
         </div>
       </div>
       <hr>

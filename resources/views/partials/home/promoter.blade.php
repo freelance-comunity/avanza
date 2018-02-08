@@ -50,7 +50,7 @@ else
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
             <h4>
                 <i class="icon fa fa-money"></i>
-                Monto a Recuperar Vigente
+                Monto a recuperar hoy
             </h4>
             ${{ number_format($total_payments,2) }}
         </div>

@@ -20,16 +20,23 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
 }
 @endphp
 @endrole --}}
-
-
 <div class="row">
   <h1 class="pull-left">Clientes</h1>
-  @if (Auth::user()->can('crear-cliente'))
+  @if(Auth::user()->hasRole(['administrador', 'director-general']))
+  @include('clients.charge_excel')
+ {{--  @if (Auth::user()->can('crear-cliente'))
   <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('clients.create') !!}">Agregar Nuevo Cliente</a>
-  @endif
+  @endif --}}
   <!--<button type="button" class="btn bg-navy pull-right" style="margin-top: 25px" data-toggle="modal" data-target="#inputExcel"><i class="fa fa-file-excel-o"></i> Importar Excel</button>-->
+  <button type="button" class="btn bg-navy pull-right" style="margin-top: 25px" data-toggle="modal" data-target="#charge_excel"><i class="fa fa-file-excel-o"></i> Importar Excel</button>
+
+  @endif
 </div>
-@include('clients.input-excel')
+
+{{-- <div class="btn-group"> <a data-toggle="modal" data-target="#charge_excel" class="btn btn-info pull-right btn-sm"><i class="fa fa-file-excel-o" aria-hidden="true"></i> CARGAR EXCEL</a></div>  --}}
+
+
+{{-- @include('clients.input-excel') --}}
 <div class="row">
   @if($clients->isEmpty())
   <div class="well text-center">No se encontraron clientes en el sistema.</div>
@@ -103,13 +110,22 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
                  </div> --}}
                  @foreach ($products as $key => $product)
                  @if($product->id == 3)
-                 <div class="form-group col-sm-12 col-lg-6">
-                   <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
+                 <div class="form-group col-sm-12 col-lg-12">
+                   <a href="{{ url('creditsSemanal') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
                  </div>
-                 @elseif($product->id == 1)
+                 {{-- @elseif($product->id == 1)
                  <div class="form-group col-sm-12 col-lg-6">
-                   <a href="{{ url('creditsClient') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
+                   <a href="{{ url('creditsSemanal') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
+                 </div> --}}
+                 @endif
+
+
+                 @if (Auth::user()->branch_id == 4)
+                 @if($product->id == 1)
+                 <div class="form-group col-sm-12 col-lg-12">
+                   <a href="{{ url('creditsSemanal') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
                  </div>
+                 @endif
                  @endif
                  @endforeach
                  @endrole

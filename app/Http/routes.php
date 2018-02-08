@@ -130,6 +130,7 @@ Route::get('division', function () {
 Route::post('process', 'PaymentController@process');
 
 Route::post('/import-excel', 'ClientController@importClients');
+Route::post('/import-excel-credits', 'CreditController@importCredits');
 
 Route::get('test-boveda', function () {
     $incomes = App\Models\Income::all();
@@ -416,6 +417,11 @@ Route::resource('creditsAll','CreditController@creditsAll');
 Route::get('creditsClient/{id}/{product}', [
     'as' => 'client.creditsClient',
     'uses' => 'ClientController@creditsClient',
+]);
+
+Route::get('creditsSemanal/{id}/{product}', [
+    'as' => 'client.creditsSemanal',
+    'uses' => 'ClientController@creditsSemanal',
 ]);
 
 Route::get('creditsMigrate/{id}/{product}', [
@@ -1485,3 +1491,20 @@ Route::get('errores',function(){
      }
  }
 });
+Route::get('movementsBeginningNorte',function(){
+ return view('movements.movementsBeginningNorte');
+});
+Route::get('api/movementsBeginningNorte', function(){
+    $incomes = DB::table('incomes')->leftJoin('branches','incomes.branch_id','=','branches.id')
+    ->leftJoin('vaults','incomes.vault_id','=','vaults.id')
+    ->leftJoin('users','vaults.user_id','=','users.id')
+    ->where('incomes.concept','=','Saldo Inicial')
+    ->where('incomes.region_id','=',3)
+    ->select(['branches.name','incomes.vault_id','incomes.ammount','incomes.concept','incomes.created_at'])->groupBy('incomes.created_at');
+    return Datatables::of($incomes)
+    ->editColumn('created_at', '{!! $created_at !!}')
+    ->make(true);
+});
+
+
+

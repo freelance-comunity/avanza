@@ -1,16 +1,19 @@
 @php
+$month = \Carbon\Carbon::now()->month;
 $user_allocation = Auth::user();
 $region_allocation = $user_allocation->region;
 $clients = $region_allocation->clients;
-
 $filtered_date_now = App\Models\Client::where('region_id',$region_allocation->id)->where(function ($query) {
 	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
 })->get();
 $credits = $region_allocation->credits;
+$credits_this_month = App\Models\Credit::where('region_id',$region_allocation->id)->where(DB::raw('MONTH(created_at)'), '=', date($month) )->get();
+$expenditures_this_month = App\Models\Expenditure::where('region_id',$region_allocation->id)->where( DB::raw('MONTH(created_at)'), '=', date($month) )->get();
 $filtered_date_now_credits = App\Models\Credit::where('region_id',$region_allocation->id)->where(function ($query) {
 	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
 })->get();
 
+$rosters_this_month = App\Models\Roster::where('region_id',$region_allocation->id)->where( DB::raw('MONTH(created_at)'), '=', date($month) )->get();
 $vault = $user_allocation->vault;
 $expenditures_collection = App\Models\Expenditure::all();
 $expenses = $expenditures_collection->where('vault_id', $vault->id)->sortBy('created_at');
@@ -40,12 +43,26 @@ $payment = App\Models\Payment::where('date',$now)->where('status', 'Pendiente')-
 			<div class="inner">
 				<h3>{{ $clients->count() }}</h3>
 
-				<p>Total Clientes</p>
+				<p>Total Clientes Vigentes</p>
 			</div>
 			<div class="icon">
 				<i class="fa fa-users"></i>
 			</div>
 			<a data-toggle="modal" data-target="#tc" class="small-box-footer">Ver <i class="fa fa-eye"></i></a>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-4">
+		<!-- small box -->
+		<div class="small-box bg-yellow">
+			<div class="inner">
+				<h3>{{ $credits->count() }}</h3>
+
+				<p>Total Créditos Vigentes</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-paperclip"></i>
+			</div>
+			<a data-toggle="modal" data-target="#c" class="small-box-footer">Ver <i class="fa fa-eye"></i></a>
 		</div>
 	</div>
 	<!-- ./col -->
@@ -64,20 +81,7 @@ $payment = App\Models\Payment::where('date',$now)->where('status', 'Pendiente')-
 		</div>
 	</div>
 	<!-- ./col -->
-	<div class="col-lg-3 col-md-4">
-		<!-- small box -->
-		<div class="small-box bg-yellow">
-			<div class="inner">
-				<h3>{{ $credits->count() }}</h3>
-
-				<p>Total Créditos</p>
-			</div>
-			<div class="icon">
-				<i class="fa fa-paperclip"></i>
-			</div>
-			<a data-toggle="modal" data-target="#c" class="small-box-footer">Ver <i class="fa fa-eye"></i></a>
-		</div>
-	</div>
+	
 	<!-- ./col -->
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
@@ -98,9 +102,9 @@ $payment = App\Models\Payment::where('date',$now)->where('status', 'Pendiente')-
 		<!-- small box -->
 		<div class="small-box bg-purple">
 			<div class="inner">
-				<h3>${{ number_format($credits->sum('ammount'),2) }}</h3>
+				<h3>${{ number_format($credits_this_month->sum('ammount'),2) }}</h3>
 
-				<p>Total Ministrado</p>
+				<p>Total Ministrado en el Mes</p>
 			</div>
 			<div class="icon">
 				<i class="fa fa-money"></i>
@@ -123,6 +127,38 @@ $payment = App\Models\Payment::where('date',$now)->where('status', 'Pendiente')-
 			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
 		</div>
 	</div>
+	
+	<div class="col-lg-3 col-md-4">
+		<!-- small box -->
+		<div class="small-box bg-purple">
+			<div class="inner">
+
+				<h3>${{ number_format($expenditures_this_month->sum('ammount'),2) }}</h3>
+
+				<p>Total Gastos en el Mes</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-money"></i>
+			</div>
+			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-4">
+		<!-- small box -->
+		<div class="small-box bg-purple">
+			<div class="inner">
+
+				<h3>${{ number_format($rosters_this_month->sum('grandchild_pay'),2) }}</h3>
+
+				<p>Total Sueldos en el Mes</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-money"></i>
+			</div>
+			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
+		</div>
+	</div>
+	<!-- ./col -->
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-blue">
@@ -144,7 +180,6 @@ $payment = App\Models\Payment::where('date',$now)->where('status', 'Pendiente')-
 		</div>
 	</div>
 	<!-- ./col -->
-	<!-- ./col -->
 	<div class="col-lg-3 col-md-4">
 		<!-- small box -->
 		<div class="small-box bg-black	">
@@ -163,7 +198,7 @@ $payment = App\Models\Payment::where('date',$now)->where('status', 'Pendiente')-
 	</div>
 	<!-- ./col -->
 	<hr>
-	<div class="col-lg-12 col-md-4">
+	{{-- <div class="col-lg-12 col-md-4">
 		<!-- USERS LIST -->
 		<div class="box box-info">
 			<div class="box-header with-border">
@@ -220,56 +255,8 @@ $payment = App\Models\Payment::where('date',$now)->where('status', 'Pendiente')-
 			</div>
 		</div>
 		<!--/.box -->
-	</div>
-	<hr>
-	<div class="col-lg-12 col-md-6">
-		<!-- USERS LIST -->
-		<div class="box box-info">
-			<div class="box-header with-border">
-				<h3 class="box-title">Mis Gastos</h3>
-
-				<div class="box-tools pull-right">
-					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-					</button>
-					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-					</button>
-				</div>
-			</div>
-			<!-- /.box-header -->
-			<div class="box-body no-padding">
-				@if($expenses->isEmpty())
-				<div class="well text-center">No hay registros.</div>
-				@else
-				<div class="table-responsive">
-					<table class="table" id="gastosCoordinador">
-						<thead class="bg-yellow">
-							<th>Monto</th>
-							<th>Concepto</th>
-							<th>Descripción</th>
-							<th>Fecha/Hora</th>
-						</thead>
-						<tbody>
-							@foreach ($expenses as $expense)
-							<tr>
-								<td>${{ number_format($expense->ammount,2) }}</td>
-								<td>{{ $expense->concept }}</td>
-								<td>{{ $expense->description }}</td>
-								<td>{{ $expense->created_at }}</td>
-							</tr>
-							@endforeach
-							{{-- <tr class="bg-navy">
-								<td colspan="2">${{ number_format($expenses->sum('ammount'),2) }}</td>
-								<td></td>
-							</tr> --}}
-						</tbody>
-					</table>
-				</div>
-				@endif
-				<!-- /.closes-list -->
-			</div>
-		</div>
-		<!--/.box -->
-	</div>
+	</div> --}}
+	{{--  --}}
 {{-- 	<!-- ./col -->
 	<div class="col-lg-3 col-xs-6">
 		<!-- small box -->

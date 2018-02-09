@@ -53,7 +53,8 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                     @include('employees.show')
                     @include('employees.roles')
                     @include('employees.addroles')
-                    <tr>
+                    @if ($employee->id > 1)
+                       <tr>
                         <td>{!! $employee->name !!}</td>
                         <td>{!! $employee->father_last_name !!}</td>
                         <td>{!! $employee->mother_last_name !!}</td>
@@ -64,9 +65,9 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                         <td><img src="{{ asset('/uploads/avatars') }}/{!! $employee->avatar !!}" style="width: 50px; height: 50px;"></td>
                         <td>
                             <a data-toggle="tooltip" title="Ver"><i class="fa fa-eye fa-2x" data-toggle="modal" data-target="#detail{{ $employee->id }}"></i></a>
-                              @if(Auth::user()->hasRole(['administrador', 'director-general']))
+                             {{--  @if(Auth::user()->hasRole(['administrador', 'director-general']))
                             <a data-toggle="tooltip" title="Eliminar" href="{!! route('employees.delete', [$employee->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar este empleado?')"><i class="fa fa-trash fa-2x"></i></a>
-                            @endif
+                            @endif --}}
                         </td>
                          {{-- @if (Auth::user()->can('agregar-roles')) --}}
                         <td>
@@ -77,6 +78,8 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                         </td>
                         {{-- @endif --}}
                     </tr>
+                    @endif
+                    
                     @endforeach
                 </tbody>
             </table>

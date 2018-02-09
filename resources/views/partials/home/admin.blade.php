@@ -265,7 +265,7 @@ $vigente = $pendent+ $partial + $vencid;
 			<!-- /.box-header -->
 			<div class="box-body no-padding">
 				<ul class="users-list clearfix">
-					@foreach ($activities as $activity) @if ($activity->user->id > 2)
+					@foreach ($activities as $activity) @if ($activity->user->id > 1)
 					<li>
 						<img src="{{asset('/uploads/avatars')}}/{{ $activity->user->avatar }}" alt="User Image" class="online">
 						<a class="users-list-name" href="#">{{ $activity->user->name }}</a>

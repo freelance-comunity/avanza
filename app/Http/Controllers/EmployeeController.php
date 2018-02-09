@@ -59,9 +59,7 @@ class EmployeeController extends AppBaseController
 		elseif (Auth::user()->hasRole('administrador')) {
 			$employees = User::all();
 		}
-		else{
-			$employees = User::all();
-		}
+		
 		
 
 		return view('employees.index')

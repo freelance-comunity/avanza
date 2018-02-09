@@ -41,7 +41,7 @@ $branches = App\Models\Branch::where('id', Auth::user()->branch_id)->get();
                     <th>Dirección</th>
                     <th>Región</th>
                     <th>Nomenclatura</th>
-                    <th width="100px">Acción</th>
+                   {{--  <th width="100px">Acción</th> --}}
                 </thead>
                 <tbody>
 
@@ -52,11 +52,11 @@ $branches = App\Models\Branch::where('id', Auth::user()->branch_id)->get();
                         <td>{!! $branch->address !!}</td>
                         <td>{!! $branch->region['name'] !!}</td>
                         <td>{!! $branch->nomenclature!!}</td>
-                        <td>
+                       {{--  <td>
                             <a href="{!! route('branches.edit', [$branch->id]) !!}"><i class="fa fa-edit fa-2x" data-toggle="tooltip" title="Editar"></i></a>
                             <a href="{!! route('branches.delete', [$branch->id]) !!}" onclick="return confirm('¿Estas seguro de eliminar esta sucursal?')"><i class="fa fa-trash fa-2x" data-toggle="tooltip" title="Eliminar"></i></a> 
                             <a href="{!! route('branches.show', [$branch->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>    
-                        </td>
+                        </td> --}}
                     </tr>
                     
                     @endforeach

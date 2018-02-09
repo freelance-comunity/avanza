@@ -25,7 +25,7 @@ Lista de regiones
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Area abarcada</th>
-                <th width="50px">Acción</th>
+                {{-- <th width="50px">Acción</th> --}}
             </thead>
             <tbody>
 
@@ -34,10 +34,10 @@ Lista de regiones
                     <td>{!! $region->id !!}</td>
                     <td>{!! $region->name !!}</td>
                     <td>{!! $region->area !!}</td>
-                    <td>
+                   {{--  <td>
                         <a href="{!! route('regions.edit', [$region->id]) !!}"><i class="glyphicon glyphicon-edit fa-2x"></i></a>
                         <a href="{!! route('regions.delete', [$region->id]) !!}" onclick="return confirm('¿Estas segutro de eliminar esta región?')"><i class="glyphicon glyphicon-remove fa-2x"></i></a>
-                    </td>
+                    </td> --}}
                 </tr>
                 @endforeach
             </tbody>

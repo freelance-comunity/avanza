@@ -4,17 +4,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    
+	
 	public $table = "users";
 
 	public $primaryKey = "id";
-    
+	
 	public $timestamps = true;
 
 	public $fillable = [
-	    "name",
-	    "email", 
-	    "password",
+		"name",
+		"email", 
+		"password",
 		"mother_last_name",
 		"father_last_name",
 		"birthdate",
@@ -27,11 +27,13 @@ class Employee extends Model
 		"scholarship",
 		"phone_1",
 		"phone_2",
-		"avatar"
+		"avatar",
+		"branch_id",
+		"region_id"
 	];
 
 	public static $rules = [
-	    "name" => "required",
+		"name" => "required",
 		"mother_last_name" => "required",
 		"father_last_name" => "required",
 		"birthdate" => "required",

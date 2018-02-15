@@ -29,7 +29,7 @@ class AlterBoxCutsTable extends Migration
     {
         Schema::table('box_cuts', function (Blueprint $table) {
            $table->dropForeign('box_cuts_branch_id_foreign');
-           $table->dropForeign('box-cuts_region_id_foreign');
+           $table->dropForeign('box_cuts_region_id_foreign');
        });
     }
 }

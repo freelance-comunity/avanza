@@ -18,14 +18,25 @@ class BranchesTableSeeder extends Seeder
     			'name' => 'SUC MATRIZ',
     			'phone' => '000000000',
     			'address' => 'TGZ',
+                'nomenclature' =>'CSMTZ',
     			'latitude' => '0',
     			'length' => '0',
-    			'region_id' => '1'
+    			'region_id' => '5'
     		],
             [
                 'name' => 'SUC SAN CRISTOBAL',
                 'phone' => '000000000',
                 'address' => 'SAN CRISTOBAL ',
+                'nomenclature' =>'CSCSR',
+                'latitude' => '0',
+                'length' => '0',
+                'region_id' => '3'
+            ],
+            [
+                'name' => 'SUC TEOPISCA',
+                'phone' => '000000000',
+                'address' => 'TEOPISCA ',
+                'nomenclature' =>'CSTPC',
                 'latitude' => '0',
                 'length' => '0',
                 'region_id' => '3'
@@ -34,6 +45,7 @@ class BranchesTableSeeder extends Seeder
                 'name' => 'SUC 24 DE JUNIO',
                 'phone' => '000000000',
                 'address' => 'TGZ',
+                'nomenclature' =>'CSTXT',
                 'latitude' => '0',
                 'length' => '0',
                 'region_id' => '2'
@@ -42,38 +54,16 @@ class BranchesTableSeeder extends Seeder
                 'name' => 'SUC BERRIOZABAL',
                 'phone' => '000000000',
                 'address' => 'BERRIOZABAL',
+                'nomenclature' =>'CSBRB',
                 'latitude' => '0',
                 'length' => '0',
-                'region_id' => '2'
-            ],
-            [
-                'name' => 'SUC COMITAN',
-                'phone' => '000000000',
-                'address' => 'COMITAN',
-                'latitude' => '0',
-                'length' => '0',
-                'region_id' => '3'
-            ],
-            [
-                'name' => 'SUC NICOLAS V',
-                'phone' => '000000000',
-                'address' => 'NICOLAS BRAVO',
-                'latitude' => '0',
-                'length' => '0',
-                'region_id' => '3'
-            ],
-            [
-                'name' => 'SUC PANTEPEC',
-                'phone' => '000000000',
-                'address' => 'PANTEPEC',
-                'latitude' => '0',
-                'length' => '0',
-                'region_id' => '1'
+                'region_id' => '4'
             ],
             [
                 'name' => 'SUC RAYON',
                 'phone' => '000000000',
                 'address' => 'RAYON',
+                'nomenclature' =>'CSRYN',
                 'latitude' => '0',
                 'length' => '0',
                 'region_id' => '1'
@@ -82,27 +72,38 @@ class BranchesTableSeeder extends Seeder
                 'name' => 'SUC SAN FERNANDO',
                 'phone' => '000000000',
                 'address' => 'SAN FERNANDO',
+                'nomenclature' =>'CSSFD',
+                'latitude' => '0',
+                'length' => '0',
+                'region_id' => '4'
+            ],
+            [
+                'name' => 'SUC JIQUIPILAS',
+                'phone' => '000000000',
+                'address' => 'JIQUIPILAS',
+                'nomenclature' =>'CSJPS',
                 'latitude' => '0',
                 'length' => '0',
                 'region_id' => '2'
             ],
             [
-                'name' => 'SUC TAPALAPA',
+                'name' => 'SUC OCOZOCOAUTLA',
                 'phone' => '000000000',
-                'address' => 'TAPALAPA',
+                'address' => 'OCOZOCOAUTLA',
+                'nomenclature' =>'CSOCZ',
                 'latitude' => '0',
                 'length' => '0',
                 'region_id' => '2'
             ],
             [
-                'name' => 'SUC TAPILULA',
+                'name' => 'SUC SUCHIAPA',
                 'phone' => '000000000',
-                'address' => 'TAPILULA',
+                'address' => 'SUCHIAPA',
+                'nomenclature' =>'CSSCP',
                 'latitude' => '0',
                 'length' => '0',
-                'region_id' => '1'
+                'region_id' => '2'
             ],
-
 
     	]);
     }

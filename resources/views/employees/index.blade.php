@@ -53,7 +53,7 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                     @include('employees.show')
                     @include('employees.roles')
                     @include('employees.addroles')
-                    @if ($employee->id > 1)
+                   {{--  @if ($employee->id > 1) --}}
                        <tr>
                         <td>{!! $employee->name !!}</td>
                         <td>{!! $employee->father_last_name !!}</td>
@@ -78,7 +78,7 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                         </td>
                         {{-- @endif --}}
                     </tr>
-                    @endif
+                    {{-- @endif --}}
                     
                     @endforeach
                 </tbody>

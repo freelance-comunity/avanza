@@ -123,12 +123,12 @@
             <input type="hidden" name="total">
           </div>
 
-          <div class="form-group">
+         {{--  <div class="form-group">
             <div class="col-sm-12">
               <a class="btn btn-primary pull-right" id="" style="margin-top: 25px" href="{!! route('clients.create') !!}">SIGUIENTE</a>
-              <input name="findbranch" type="button" id="brancher" value="Find">
+              
             </div>
-          </div>
+          </div> --}}
         </form>
 
         <div class="modal-footer">

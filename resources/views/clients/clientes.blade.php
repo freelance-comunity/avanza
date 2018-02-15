@@ -28,6 +28,8 @@ Pagos
                            {{--  <th>Documentos</th> --}}
                            {{--  <th>colonia</th> --}}
                             <th>ife</th>
+                            <th>Curp</th>
+                            <th>CFE</th>
                             <th>fecha</th>
                         </thead>
                         <tbody>
@@ -45,9 +47,14 @@ Pagos
                                 {{-- <td>{{$client->location->street}} {{$client->location->number}}, {{$client->location->colony}}</td> --}}
                                 @if (is_null($document))
                                 <td>No hay </td>
+                                <td>No hay</td>
+                                <td>no hay</td>
                                 @else
                                 <td>{{ $document->ine }}</td>
+                                <td>{{$document->curp}}</td>
+                                <td>{{$document->proof_of_addres}}</td>
                                 @endif
+
                                 <th>{{ $client->created_at}}</th>
                             </tr>
                             @endforeach

@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->integer('branch_id')->unsigned();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->integer('region_id')->unsigned();
-            $table->foreign('region_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

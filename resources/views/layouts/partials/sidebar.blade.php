@@ -139,9 +139,9 @@
       @if (Auth::user()->can('permisos'))
       <li><a href="{{ url('permissions') }}">Permisos</a></li>
       @endif
-      @if (Auth::user()->can('personal'))
+     {{--  @if (Auth::user()->can('personal')) --}}
       <li><a href="{{ url('employees') }}">Personal</a></li>
-      @endif
+    {{--   @endif --}}
       @if (Auth::user()->can('productos'))
       <li><a href="{{ url('products') }}">Productos</a></li>
       @endif

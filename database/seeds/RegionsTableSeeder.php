@@ -27,6 +27,14 @@ class RegionsTableSeeder extends Seeder
     			'name' => 'REGIÓN ALTOS',
     			'area' => 'SAN CRISTOBAL DE LAS CASAS - TEOPISCA -  NICOLAS BRAVO - COMITÁN'
     		],
+            [
+                'name' => 'REGIÓN MEZCALAPA',
+                'area' => 'MEZCALAPA'
+            ],
+            [
+                'name' => 'REGIÓN CORPORATIVO',
+                'area' => 'CORPORATIVO'
+            ],
 
     	]);
 

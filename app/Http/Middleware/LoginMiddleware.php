@@ -18,9 +18,9 @@ class LoginMiddleware
     public function handle($request, Closure $next)
     {
         $td = Carbon\Carbon::now();
-        if (Auth::user()->name <> 'ADMIN') {
-          if ($td->hour >= 0) {
-            if (\Auth::user()->hasRole(['administrador','director-general','coordinador-regional','coordinador-sucursal','ejecutivo-de-credito']))
+        // if (Auth::user()->name <> 'ADMIN') {
+          if ($td->hour >= 20) {
+            if (\Auth::user()->hasRole(['coordinador-regional','coordinador-sucursal','ejecutivo-de-credito']))
                 {
                     Auth::logout();
                     return abort(503);
@@ -33,10 +33,10 @@ class LoginMiddleware
          {
            return $next($request);
        }
-   }else
-   {
-       return $next($request);
-   }
+   // }else
+   // {
+   //     return $next($request);
+   // }
 
 }
 }

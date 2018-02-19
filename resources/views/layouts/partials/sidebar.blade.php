@@ -133,12 +133,12 @@
       @if (Auth::user()->can('sucursales'))
       <li><a href="{{ url('branches') }}">Sucursales</a></li>
       @endif
-      @if (Auth::user()->can('roles'))
+     {{--  @if (Auth::user()->can('roles')) --}}
       <li><a href="{{ url('roles') }}">Roles</a></li>
-      @endif
-      @if (Auth::user()->can('permisos'))
+      {{-- @endif --}}
+     {{--  @if (Auth::user()->can('permisos')) --}}
       <li><a href="{{ url('permissions') }}">Permisos</a></li>
-      @endif
+    {{--   @endif --}}
      {{--  @if (Auth::user()->can('personal')) --}}
       <li><a href="{{ url('employees') }}">Personal</a></li>
     {{--   @endif --}}

@@ -90,7 +90,7 @@
       <ul class="treeview-menu">
        {{-- <li><a href="{{ url('movementsBalance') }}">Saldo en Caja</a></li> --}}
        <li><a href="{{ url('movementsBeginning') }}">Asignacion en Efectivo</a></li>
-      {{--  <li><a href="{{ url('movementsBeginningNorte') }}">Asignacion en Efectivo</a></li> --}}
+       {{--  <li><a href="{{ url('movementsBeginningNorte') }}">Asignacion en Efectivo</a></li> --}}
        {{-- <li><a href="{{ url('movementsEffective') }}">Asignacion en Efectivo</a></li> --}}
        @if(Auth::user()->hasRole(['coordinador-regional']))
        <li><a href="{{ url('movementsRecovery') }}">Recuperación</a></li>
@@ -106,7 +106,7 @@
    @endif
    {{--  <li><a href="{{ url('ruta') }}"><i class="fa fa-users"></i> <span>Ruta</span></a></li> --}}
    <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
-    @if(Auth::user()->hasRole(['ejecutivo-de-credito']))
+   @if(Auth::user()->hasRole(['ejecutivo-de-credito']))
    <li><a data-toggle="modal" data-target="#selection"><i class="fa fa-user"></i><span>Nuevo Cliente</span></a></li>
    @endif
    <li class="treeview">
@@ -133,15 +133,18 @@
       @if (Auth::user()->can('sucursales'))
       <li><a href="{{ url('branches') }}">Sucursales</a></li>
       @endif
-     {{--  @if (Auth::user()->can('roles')) --}}
+      {{-- @if (Auth::user()->can('roles')) --}}
+      @if (Auth::user()->id == 1)
       <li><a href="{{ url('roles') }}">Roles</a></li>
+      @endif
       {{-- @endif --}}
-     {{--  @if (Auth::user()->can('permisos')) --}}
+      {{--  @if (Auth::user()->can('permisos')) --}}
+      @if (Auth::user()->id == 1)
       <li><a href="{{ url('permissions') }}">Permisos</a></li>
-    {{--   @endif --}}
-     {{--  @if (Auth::user()->can('personal')) --}}
+      @endif
+      @if (Auth::user()->can('personal'))
       <li><a href="{{ url('employees') }}">Personal</a></li>
-    {{--   @endif --}}
+      @endif
       @if (Auth::user()->can('productos'))
       <li><a href="{{ url('products') }}">Productos</a></li>
       @endif

@@ -123,12 +123,11 @@
             <input type="hidden" name="total">
           </div>
 
-         {{--  <div class="form-group">
+          <div class="form-group">
             <div class="col-sm-12">
-              <a class="btn btn-primary pull-right" id="" style="margin-top: 25px" href="{!! route('clients.create') !!}">SIGUIENTE</a>
-              
+              <a class="btn btn-primary pull-right"  id="bu" style="margin-top: 25px" href="{!! route('clients.create') !!}">SIGUIENTE</a>  
             </div>
-          </div> --}}
+          </div>
         </form>
 
         <div class="modal-footer">
@@ -153,21 +152,24 @@
       var numero9 = Number(caja["i"].value);
       var numero10 = Number(caja["j"].value);
       var resultado = numero1 + numero2 + numero3 + numero4 + numero5  + numero6 + numero7 + numero8 + numero9 + numero10;
-
+      var mayor = 70;
       if (numero1 == 0) {
         alert('CLIENTE RECHAZADO');
-        $("#brancher").hide();
         $(function() {
           $('#selection').modal('hide')
         });
-
       }
-      else if(resultado >= 70){
+     
+
+      if(resultado >= 70){
         alert('CLIENTE AUTORIZADO');
-        $("#brancher").show();
+        $("#bu").show();
+      }
+      else if(resultado < 70) {
+        $("#bu").hide();
       }
       else{ 
-        $("#brancher").hide();
+        $("#bu").hide();
       }
       caja["total"].value = resultado;
 

@@ -21,8 +21,7 @@ class CreateClientAvalsTable extends Migration
 			$table->string('mothers_name_aval');
 			$table->string('curp_aval');
 			$table->string('phone_aval');
-			$table->string('civil_status_aval');
-			$table->string('scholarship_aval');			
+			$table->string('civil_status_aval');	
 			$table->string('street_aval');
 			$table->string('number_aval');
 			$table->string('colony_aval');

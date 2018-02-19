@@ -31,6 +31,7 @@ Pagos
                             <th>Curp</th>
                             <th>CFE</th>
                             <th>fecha</th>
+                            <th>avatar</th>
                         </thead>
                         <tbody>
                             @foreach ($clients as $client)
@@ -54,8 +55,8 @@ Pagos
                                 <td>{{$document->curp}}</td>
                                 <td>{{$document->proof_of_addres}}</td>
                                 @endif
-
                                 <th>{{ $client->created_at}}</th>
+                                <th>{{ $client->avatar}}</th>
                             </tr>
                             @endforeach
                             

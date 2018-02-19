@@ -23,8 +23,6 @@ class CreateClientLocationsTable extends Migration
 			$table->string('state');
 			$table->string('postal_code');
 			$table->string('references');
-			$table->string('latitude');
-			$table->string('lenght');
 			$table->integer('client_id')->unsigned();
 			$table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
 			$table->timestamps();

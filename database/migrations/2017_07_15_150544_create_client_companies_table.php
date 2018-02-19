@@ -24,8 +24,6 @@ class CreateClientCompaniesTable extends Migration
 			$table->string('postal_code_company');	
 			$table->string('phone_company');
 			$table->string('name_company');
-			$table->string('latitude_company');
-			$table->string('length_company');
 			$table->integer('client_id')->unsigned();
 			$table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
 			$table->timestamps();

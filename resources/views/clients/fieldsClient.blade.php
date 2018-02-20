@@ -417,7 +417,7 @@
             </div>
             <div class="form-group col-sm-6 col-lg-12">
 
-              <div class="form-group col-sm-6 col-lg-4">
+             {{--  <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('scholarship_aval', 'Grado Escolar:') !!}
                 <select name="scholarship_aval" class="form-control input-lg">
                   <option value="" class="selected">Selecciona</option>
@@ -430,7 +430,7 @@
                   <option value="POSGRADO">POSGRADO</option>
                 </select>
 
-              </div>
+              </div> --}}
               <div class="form-group col-sm-6 col-lg-4">
                 {!! Form::label('state_aval', 'Estado:') !!}
                 <select name="state_aval" id="state_for_aval" onChange="estadotres(this.value);" class="form-control input-lg"> 

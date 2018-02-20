@@ -1020,12 +1020,12 @@ class CreditController extends AppBaseController
 
     public function move(Request $request)
     {
-     $id_user = $request->input('user_id');
-     $user = User::find($id_user);
-     $input = $request->all();
+       $id_user = $request->input('user_id');
+       $user = User::find($id_user);
+       $input = $request->all();
 
-     foreach ($input['rows'] as $row) 
-     {
+       foreach ($input['rows'] as $row) 
+       {
         $id_credit = $row['id'];
         $credit = Credit::find($id_credit);
         $credit->adviser = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
@@ -1124,11 +1124,11 @@ public function importCredits(Request $request)
 
 public function store(CreateCreditRequest $request)
 {
-   $product = Product::find($request->input('type_product'));
+ $product = Product::find($request->input('type_product'));
         // $LatePayments = LatePayments::where('debt_id', $debt->id)->where('status', 'Bloqueado')->count();
         //Restriccion de Números de creditos con un producto
-   $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
-   if ($typecredit) {
+ $typecredit = Client::find($request->input('client_id'))->credits()->where('periodicity',$product->name)->where('status','MINISTRADO')->first();
+ if ($typecredit) {
     Toastr::error('Este cliente ya cuenta con un crédito '.$product->name  ,'CRÉDITO',["positionClass"=>"toast-bottom-right","progressBar"=>"true"]);
     return redirect(route('clients.index'));
 }
@@ -1205,9 +1205,9 @@ if ($vault->ammount == 0 and $product->name == "CREDISEMANA") {
     $debt = new Debt;
     $debt->ammount = ceil($total);
     $debt->status = "VIGENTE";
-    $debt->client_id = $credit->client_id;
+    // $debt->client_id = $credit->client_id;
     $debt->credit_id = $credit->id;
-    $debt->branch_id =  $user->branch_id;
+    $debt->branch_id = $user->branch_id;
     $debt->region_id = $user->region_id;
     $debt->save();
     for ($i=1; $i <= $credit->dues; $i++) {

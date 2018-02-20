@@ -22,7 +22,7 @@
       {!! Form::text('phone_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
   </div>
   <div class="form-group col-sm-6 col-lg-4">
-      {!! Form::label('relationship', 'Teléfono:') !!}
+      {!! Form::label('relationship', 'Parentezco:') !!}
       {!! Form::select('relationship',['PADRE' => 'PADRE', 'MADRE' => 'MADRE','SUEGRO(A)'=>'SUEGRO(A)','ESPOSO(A)'=>'ESPOSO(A)','HIJO(A)'=>'HIJO(A)','YERNO'=>'YERNO','NUERA'=>'NUERA','ABUELO(A)'=>'ABUELO(A)','NIETO(A)'=>'NIETO(A)','HERMANO(A)'=>'HERMANO(A)','CUÑADO(A)'=>'CUÑADO(A)','SOBRINO(A)'=>'SOBRINO(A)','TIO(A)'=>'TIO(A)','AMIGO(A)'=>'AMIGO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
   </div>
 </div>

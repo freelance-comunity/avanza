@@ -206,7 +206,7 @@ class ClientController extends AppBaseController
 			$data_aval['curp_aval'] = $request->input('curp_aval');
 			$data_aval['phone_aval'] = $request->input('phone_aval');
 			$data_aval['civil_status_aval'] = $request->input('civil_status_aval');
-			$data_aval['scholarship_aval'] = $request->input('scholarship_aval');
+			// $data_aval['scholarship_aval'] = $request->input('scholarship_aval');
 			$data_aval['street_aval'] = $request->input('street_aval');
 			$data_aval['number_aval'] = $request->input('number_aval');
 			$data_aval['colony_aval'] = $request->input('colony_aval');

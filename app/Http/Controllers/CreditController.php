@@ -1176,10 +1176,10 @@ if ($vault->ammount == 0 and $product->name == "CREDISEMANA") {
         return redirect()->back()->withInput($request->all());
     }
                     //Restriccion de Cliente Nuevo
-    elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDISEMANA") {
-        Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-        return redirect()->back()->withInput($request->all());
-    }
+    // elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDISEMANA") {
+    //     Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+    //     return redirect()->back()->withInput($request->all());
+    // }
 
     $number = Credit::max('id') + 1;
     $input['adviser']   = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;

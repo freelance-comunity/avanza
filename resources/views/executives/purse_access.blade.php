@@ -15,13 +15,13 @@
           <input type="hidden"  name="user_id" value="{{ $user->id }}">
         </p>
         <!--<p>
-        {!! Form::label('concept', 'Concepto:') !!}
+{{--         {!! Form::label('concept', 'Concepto:') !!} --}}
           <input type="text" name="concept" class="form-control input-lg" placeholder="ESCRIBE CONCEPTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
         </p>-->
-        <p>
+        {{-- <p>
           {!! Form::label('voucher', 'Coprobante:') !!}
           <input type="file" name="voucher" class="form-control input-lg">
-        </p>
+        </p> --}}
         <p>
           {!! Form::submit('ASIGNAR', ['class' => 'btn btn-lg btn-block bg-navy']) !!}
         </p>

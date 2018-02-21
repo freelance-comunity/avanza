@@ -503,8 +503,6 @@
 
       </div>
       <h3>5. REFERENCIAS</h3>
- 
-
         <br>
         <h4>Referencia 1</h4>
         <div class="form-group col-sm-6 col-lg-12">
@@ -557,8 +555,6 @@
             {!! Form::select('relationship2',['PADRE' => 'PADRE', 'MADRE' => 'MADRE','SUEGRO(A)'=>'SUEGRO(A)','ESPOSO(A)'=>'ESPOSO(A)','HIJO(A)'=>'HIJO(A)','YERNO'=>'YERNO','NUERA'=>'NUERA','ABUELO(A)'=>'ABUELO(A)','NIETO(A)'=>'NIETO(A)','HERMANO(A)'=>'HERMANO(A)','CUÑADO(A)'=>'CUÑADO(A)','SOBRINO(A)'=>'SOBRINO(A)','TIO(A)'=>'TIO(A)','AMIGO(A)'=>'AMIGO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
           </div>
         </div>
- 
-
       <div class="col-md-12">
 
         <div class="btn-group">

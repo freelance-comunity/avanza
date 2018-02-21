@@ -318,11 +318,11 @@ class GeneralController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'ammount' => 'required|numeric',
-            'voucher' => 'required|image|mimes:jpeg,png,jpg',
+            // 'voucher' => 'required|image|mimes:jpeg,png,jpg',
         ]);
 
         if ($validator->fails()) {
-            Toastr::error('Favor de introducir cantidad valida ó la imagen correctamente.', 'CARTERA ACCESS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+            Toastr::error('Favor de introducir cantidad valida', 'CARTERA ACCESS', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
             return redirect()->back();
         }
@@ -337,7 +337,7 @@ class GeneralController extends Controller
 
         $data_purseAccess['ammount'] = $request->input('ammount');
         $data_purseAccess['concept']= 'Recuperación Access';
-        $data_purseAccess['voucher'] = $filename;
+        // $data_purseAccess['voucher'] = $filename;
         $data_purseAccess['date']    = $current;
         $data_purseAccess['vault_id'] = $vault->id;
         $data_purseAccess['user_id'] = $user->id;

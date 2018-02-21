@@ -25,7 +25,6 @@ class PurseAccess extends Model
 	public static $rules = [
 		"ammount" => "required",
 		"concept" => "required",
-		"voucher" => "required",
 		"date" => "required",
 
 	];

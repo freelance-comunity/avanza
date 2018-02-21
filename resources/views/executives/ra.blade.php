@@ -14,7 +14,7 @@
             <thead class="thead-inverse">
               <th>Importe</th>
               <th>Concepto</th>
-              <th>Comprobante</th>
+              {{-- <th>Comprobante</th> --}}
               <th>Fecha</th>
             </thead>
             <tbody>
@@ -22,9 +22,9 @@
               <tr>
                 <td>${{ number_format($ra->ammount,2) }}</td>
                 <td>{{ $ra->concept }}</td>
-                <td>
+               {{--  <td>
                   <img src="{{ asset('uploads/voucher/') }}{{ $ra->voucher }}" style="width: 50px; height: 50px; float: left; border-radius: 10%; margin-right: 25px;">
-                </td>
+                </td> --}}
                 <td>{{ $ra->created_at }}</td>
                 <td></td>
                 

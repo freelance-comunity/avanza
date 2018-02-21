@@ -503,125 +503,74 @@
 
       </div>
       <h3>5. REFERENCIAS</h3>
-      <div class="col-xs-12">
-        <div class="col-md-12">
-          <br>
-          <h4>Referencia 1</h4>
-          <div class="form-group col-sm-6 col-lg-12">
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('name_reference', 'Nombre:') !!}
-              {!! Form::text('name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('last_name_reference', 'Apellido Paterno:') !!}
-              {!! Form::text('last_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO PATERNO DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('mothers_name_reference', 'Apellido Materno:') !!}
-              {!! Form::text('mothers_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO MATERNO DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-          </div>
-          <div class="form-group col-sm-6 col-lg-12">
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('phone_reference', 'Teléfono:') !!}
-              <input type="number" name="phone_reference" class="form-control input-lg" id="telefono" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('relationship', 'Parentesco:') !!}
-              {!! Form::select('relationship',['PADRE' => 'PADRE', 'MADRE' => 'MADRE','SUEGRO(A)'=>'SUEGRO(A)','ESPOSO(A)'=>'ESPOSO(A)','HIJO(A)'=>'HIJO(A)','YERNO'=>'YERNO','NUERA'=>'NUERA','ABUELO(A)'=>'ABUELO(A)','NIETO(A)'=>'NIETO(A)','HERMANO(A)'=>'HERMANO(A)','CUÑADO(A)'=>'CUÑADO(A)','SOBRINO(A)'=>'SOBRINO(A)','TIO(A)'=>'TIO(A)','AMIGO(A)'=>'AMIGO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
-            </div>
-          </div>
-          <hr>
-          <h4>Referencia 2</h4>
-          <div class="form-group col-sm-6 col-lg-12">
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('name_reference2', 'Nombre:') !!}
-              {!! Form::text('name_reference2', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('last_name_reference2', 'Apellido Paterno:') !!}
-              {!! Form::text('last_name_reference2', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO PATERNO DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('mothers_name_reference2', 'Apellido Materno:') !!}
-              {!! Form::text('mothers_name_reference2', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO MATERNO DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-          </div>
-          <div class="form-group col-sm-6 col-lg-12">
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('phone_reference2', 'Teléfono:') !!}
-              {!! Form::text('phone_reference2', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('relationship2', 'Parentesco:') !!}
-              {!! Form::select('relationship2',['PADRE' => 'PADRE', 'MADRE' => 'MADRE','SUEGRO(A)'=>'SUEGRO(A)','ESPOSO(A)'=>'ESPOSO(A)','HIJO(A)'=>'HIJO(A)','YERNO'=>'YERNO','NUERA'=>'NUERA','ABUELO(A)'=>'ABUELO(A)','NIETO(A)'=>'NIETO(A)','HERMANO(A)'=>'HERMANO(A)','CUÑADO(A)'=>'CUÑADO(A)','SOBRINO(A)'=>'SOBRINO(A)','TIO(A)'=>'TIO(A)','AMIGO(A)'=>'AMIGO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
-            </div>
-          </div>
+ 
 
-        </div>
-      </div>
-     {{--  <div class="col-md-12">
-        <h3>6. DIGITALIZACIÓN</h3>
-        <div class="form-group col-sm-6 col-lg-4">
-          {!! Form::label('avatar', 'Foto del Acreditado:') !!}
-          {!! Form::file('avatar', [
-            'data-parsley-trigger ' => 'input focusin',
-            ]) !!}
+        <br>
+        <h4>Referencia 1</h4>
+        <div class="form-group col-sm-6 col-lg-12">
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('name_reference', 'Nombre:') !!}
+            {!! Form::text('name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
           </div>
           <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('ine_document', 'INE:') !!}
-            {!! Form::file('ine_document', [
-              'data-parsley-trigger ' => 'input focusin',
-              'required'=>'required'
-              ]) !!}
-            </div>
-            <div class="form-group col-sm-6 col-lg-4">
-              {!! Form::label('curp_document', 'CURP:') !!}
-              {!! Form::file('curp_document', [
-                'data-parsley-trigger ' => 'input focusin',
-                ]) !!}
-              </div>
-              <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('proof_of_addres', 'Comprobante de Domicilio:') !!}
-                {!! Form::file('proof_of_addres', [
-                  'data-parsley-trigger ' => 'input focusin',
-                  'required'=>'required'
-                  ]) !!}
-                </div>
-                <hr> --}}
-              {{-- <h4>Digitalización del Aval</h4>
-              <div class="form-group col-sm-6 col-lg-4">
-                {!! Form::label('photo_ine', 'INE del Aval:') !!}
-                {!! Form::file('photo_ine', [
-                  'data-parsley-trigger ' => 'input focusin',
-                 
-                  ]) !!}
-                </div>
-                <div class="form-group col-sm-6 col-lg-4">
-                  {!! Form::label('photo_curp', 'CURP del Aval:') !!}
-                  {!! Form::file('photo_curp', [
-                    'data-parsley-trigger ' => 'input focusin',
-                    ]) !!}
-                  </div>
-                  <div class="form-group col-sm-6 col-lg-4">
-                    {!! Form::label('photo_cd', 'Comprobante de Domicilio del Aval:') !!}
-                    {!! Form::file('photo_cd', [
-                      'data-parsley-trigger ' => 'input focusin',
-                      
-                      ]) !!}
-                    </div> --}}
-                    <div class="col-md-12">
+            {!! Form::label('last_name_reference', 'Apellido Paterno:') !!}
+            {!! Form::text('last_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO PATERNO DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div>
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('mothers_name_reference', 'Apellido Materno:') !!}
+            {!! Form::text('mothers_name_reference', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO MATERNO DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div>
+        </div>
+        <div class="form-group col-sm-6 col-lg-12">
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('phone_reference', 'Teléfono:') !!}
+            <input type="number" name="phone_reference" class="form-control input-lg" id="telefono" placeholder="TELÉFONO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="10">
+          </div>
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('relationship', 'Parentesco:') !!}
+            {!! Form::select('relationship',['PADRE' => 'PADRE', 'MADRE' => 'MADRE','SUEGRO(A)'=>'SUEGRO(A)','ESPOSO(A)'=>'ESPOSO(A)','HIJO(A)'=>'HIJO(A)','YERNO'=>'YERNO','NUERA'=>'NUERA','ABUELO(A)'=>'ABUELO(A)','NIETO(A)'=>'NIETO(A)','HERMANO(A)'=>'HERMANO(A)','CUÑADO(A)'=>'CUÑADO(A)','SOBRINO(A)'=>'SOBRINO(A)','TIO(A)'=>'TIO(A)','AMIGO(A)'=>'AMIGO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
+          </div>
+        </div>
+        <hr>
+        <h4>Referencia 2</h4>
+        <div class="form-group col-sm-6 col-lg-12">
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('name_reference2', 'Nombre:') !!}
+            {!! Form::text('name_reference2', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div>
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('last_name_reference2', 'Apellido Paterno:') !!}
+            {!! Form::text('last_name_reference2', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO PATERNO DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div>
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('mothers_name_reference2', 'Apellido Materno:') !!}
+            {!! Form::text('mothers_name_reference2', null, ['class' => 'form-control input-lg', 'placeholder' => 'APELLIDO MATERNO DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div>
+        </div>
+        <div class="form-group col-sm-6 col-lg-12">
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('phone_reference2', 'Teléfono:') !!}
+            {!! Form::text('phone_reference2', null, ['class' => 'form-control input-lg', 'placeholder' => 'NOMBRE DE LA REFENCIA', 'data-parsley-trigger ' => 'input focusin', 'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
+          </div>
+          <div class="form-group col-sm-6 col-lg-4">
+            {!! Form::label('relationship2', 'Parentesco:') !!}
+            {!! Form::select('relationship2',['PADRE' => 'PADRE', 'MADRE' => 'MADRE','SUEGRO(A)'=>'SUEGRO(A)','ESPOSO(A)'=>'ESPOSO(A)','HIJO(A)'=>'HIJO(A)','YERNO'=>'YERNO','NUERA'=>'NUERA','ABUELO(A)'=>'ABUELO(A)','NIETO(A)'=>'NIETO(A)','HERMANO(A)'=>'HERMANO(A)','CUÑADO(A)'=>'CUÑADO(A)','SOBRINO(A)'=>'SOBRINO(A)','TIO(A)'=>'TIO(A)','AMIGO(A)'=>'AMIGO(A)'], null, ['class' => 'form-control input-lg', 'required' => 'required','data-parsley-trigger ' => 'input focusin',]) !!}
+          </div>
+        </div>
+ 
 
-                      <div class="btn-group">
-                        {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-primary', 'id' => 'save']) !!}
-                      </div>
-                    </div>
-                  </div>
+      <div class="col-md-12">
+
+        <div class="btn-group">
+          {!! Form::submit('Guardar', ['class' => 'uppercase btn btn-lg btn-primary', 'id' => 'save']) !!}
+        </div>
+      </div>
+    </div>
 
 
-                </div>
-              </div>
-              <script>
+  </div>
+</div>
+<script>
     //Función para validar una CURP
     function curpValida(curp) {
       var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,

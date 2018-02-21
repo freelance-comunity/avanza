@@ -17,6 +17,7 @@ class Income extends Model
 		"ammount",
 		"concept",
 		"date",
+		"emisor",
 		"vault_id",
 		"branch_id",
 		"region_id"

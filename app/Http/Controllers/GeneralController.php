@@ -141,7 +141,8 @@ class GeneralController extends Controller
 
             $data_income['ammount'] = $request->input('ammount');
             $data_income['concept'] = 'Saldo Inicial';
-            $data_income['date']    = $current;
+            $data_income['date'] = $current;
+            $data_income['emisor'] = $request->input('emisor');
             $data_income['vault_id'] = $vault->id;
             $data_income['branch_id'] = $user->branch_id;
             $data_income['region_id'] = $user->region_id;

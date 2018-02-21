@@ -13,6 +13,7 @@
           {!! Form::label('ammount', 'Monto:') !!}
           <input type="text" name="ammount" class="form-control input-lg" placeholder="ESCRIBE MONTO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
           <input type="hidden"  name="user_id" value="{{ $user->id }}">
+          <input type="hidden" name="emisor" value="{{Auth::user()->name}} {{Auth::user()->father_last_name}} {{Auth::user()->mother_last_name}}">
         </p>
         <p>
           {!! Form::submit('ASIGNAR', ['class' => 'btn btn-lg btn-block bg-navy']) !!}

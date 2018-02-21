@@ -1143,13 +1143,13 @@ if ($vault->ammount == 0 and $product->name == "CREDISEMANA") {
     return redirect()->back();
 } else {
     /* Get signature */
-    if($request->hasFile('firm')){
-        $firm = $request->file('firm');
-        $filename = time() . '.'.'signature.' . $firm->getClientOriginalExtension();
-        Image::make($firm)->resize(300, 300)->save( public_path('/uploads/signatures/' . $filename ) );
-        $input['firm'] = $filename;
-    }
-
+    // if($request->hasFile('firm')){
+    //     $firm = $request->file('firm');
+    //     $filename = time() . '.'.'PAGARE.' . $firm->getClientOriginalExtension();
+    //     Image::make($firm)->resize(300, 300)->save( public_path('/uploads/pagares/' . $filename ) );
+    //     $input['firm'] = $filename;
+    // }
+  
 
         // if ($request->input('firm')) {
         //     $data_uri = $request->input('firm');
@@ -1176,17 +1176,22 @@ if ($vault->ammount == 0 and $product->name == "CREDISEMANA") {
         return redirect()->back()->withInput($request->all());
     }
                     //Restriccion de Cliente Nuevo
-    // elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDISEMANA") {
-    //     Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
-    //     return redirect()->back()->withInput($request->all());
-    // }
+    elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDISEMANA") {
+        Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+        return redirect()->back()->withInput($request->all());
+    }
 
     $number = Credit::max('id') + 1;
     $input['adviser']   = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
     $input['folio'] = $client->branch->nomenclature.'00'.$number;
     // $input['municipality'] = $client->location->municipality;
     // $input['state'] = $client->location->state;
-    
+    if($request->hasFile('firm')){
+        $firm = $request->file('firm');
+        $filename = time() . '.' . $firm->getClientOriginalExtension();
+        Image::make($firm)->resize(300, 300)->save( public_path('/uploads/pagares/' . $filename ) );
+        $input['firm'] = $filename;
+    }
     
     $input['status'] = "MINISTRADO";
     $credit = Credit::create($input);

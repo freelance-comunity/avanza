@@ -1175,7 +1175,7 @@ if ($vault->ammount == 0 and $product->name == "CREDISEMANA") {
         Toastr::warning('EL monto máximo de este cliente es: '.$client->maximun_amount,  'CLIENTE', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
         return redirect()->back()->withInput($request->all());
     }
-                    //Restriccion de Cliente Nuevo
+     //Restriccion de Cliente Nuevo
     // elseif ($new == 0 && $request->input('ammount') > 1000 && $request->input('periodicity') == "CREDISEMANA") {
     //     Toastr::error('El monto máximo de un cliente nuevo es: $1000.00', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
     //     return redirect()->back()->withInput($request->all());

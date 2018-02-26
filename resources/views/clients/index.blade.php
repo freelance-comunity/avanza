@@ -118,9 +118,7 @@ $clients = App\Models\Client::where('branch_id', Auth::user()->branch_id)->get()
                    <a href="{{ url('creditsSemanal') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>
                  </div> --}}
                  @endif
-
-
-                 @if (Auth::user()->branch_id == 4)
+                 @if (Auth::user()->branch_id == 5)
                  @if($product->id == 1)
                  <div class="form-group col-sm-12 col-lg-12">
                    <a href="{{ url('creditsSemanal') }}/{{$client->id}}/{{$product->id}}"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper($product->name)}}</button></a>

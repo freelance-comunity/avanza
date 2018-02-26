@@ -424,6 +424,7 @@ Route::get('creditsSemanal/{id}/{product}', [
     'uses' => 'ClientController@creditsSemanal',
 ]);
 
+
 Route::get('creditsMigrate/{id}/{product}', [
     'as' => 'client.creditsMigrate',
     'uses' => 'ClientController@creditsMigrate',

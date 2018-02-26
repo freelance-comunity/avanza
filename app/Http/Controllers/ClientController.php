@@ -455,6 +455,7 @@ class ClientController extends AppBaseController
 		
 	}
 
+
 	public function creditsMigrate($id, $product)
 	{	
 		if (Auth::User()->branch_id == 0) {

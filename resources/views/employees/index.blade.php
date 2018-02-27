@@ -41,7 +41,10 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                     <th>Foto</th>
                     <th width="50px">Acción</th>
                      {{-- @if (Auth::user()->can('agregar-roles')) --}}
-                    <th width="50px">Roles</th>
+                     @if (Auth::user()->id == 1)
+                         <th width="50px">Roles</th>
+                     @endif
+                    
                    {{--  @endif --}}
                 </thead>
                 <tbody>
@@ -70,12 +73,15 @@ $employees = App\User::where('branch_id', Auth::user()->branch_id)->get();
                             @endif --}}
                         </td>
                          {{-- @if (Auth::user()->can('agregar-roles')) --}}
-                        <td>
+                         @if (Auth::user()->id ==1)
+                            <td>
                             <div class="btn-group" data-toggle="buttons">
                             <button type="button" class="btn btn-lg bg-navy btn-block btn-md" data-toggle="modal" data-target="#roles{{$employee->id}}">Ver</button>
                                 <button type="button" class="btn btn-lg bg-teal btn-block btn-md" data-toggle="modal" data-target="#rolesadd{{$employee->id}}">Agregar</button>
                             </div>
                         </td>
+                         @endif
+                       
                         {{-- @endif --}}
                     </tr>
                     @endif

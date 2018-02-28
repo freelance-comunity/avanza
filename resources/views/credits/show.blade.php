@@ -137,9 +137,12 @@ Detalles
 										<div class="form-group col-sm-6 col-lg-12">
 											<a href="{{ url('creditsClient') }}/{{$client->id}}/3"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper('credisemana')}}</button></a>
 										</div>
-										{{-- <div class="form-group col-sm-6 col-lg-6">
+										@if (Auth::user()->branch_id == 5)
+											<div class="form-group col-sm-6 col-lg-12">
 											<a href="{{ url('creditsClient') }}/{{$client->id}}/1"><button type="button" class="btn btn-lg btn-block bg-red">{{mb_strtoupper('credidiario 25')}}</button></a>
-										</div> --}}	
+										</div>
+										@endif
+											
 									</div>
 								</div>
 							</div>

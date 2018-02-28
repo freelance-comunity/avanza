@@ -42,7 +42,7 @@ Detalles
 										<td>{!! $roster->date !!}</td>
 										<td>{!! $roster->coordinating_name !!}</td>
 										<td>{!! $roster->coordination !!}</td>
-										<td>{!! $roster->branch_office !!}</td>
+										<td>{!! $roster->user->branch['name'] !!}</td>
 										<td>{!! $roster->name_employee !!}</td>
 										<td>{!! $roster->payment_scheme !!}</td>
 										<td>{!! $roster->payment_period !!}</td>

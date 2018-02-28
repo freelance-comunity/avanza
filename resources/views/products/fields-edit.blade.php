@@ -10,6 +10,7 @@
           'class' => 'form-control input-lg', 
           'placeholder'=>'ESCRIBE EL CODIGO DEL PRODUCTO',
           'required'=>'required',
+          'readonly'=>'readonly',
           'data-parsley-trigger ' => 'input focusin',
           'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
         </div>
@@ -21,6 +22,7 @@
             'class' => 'form-control input-lg', 
             'placeholder'=>'ESCRIBE EL NOMBRE DEL PRODUCTO',
             'required'=>'required',
+            'readonly'=>'readonly',
             'data-parsley-trigger ' => 'input focusin',
             'onkeyup' => 'javascript:this.value=this.value.toUpperCase();']) !!}
           </div>
@@ -28,7 +30,7 @@
 
           <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('interest_of_cup', 'Interés:') !!}
-            <input type="number" name="interest_of_cup" class="form-control input-lg" placeholder="ESCRIBE EL INTERES" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="2" value="{{ $product->interest_of_cup }}">
+            <input type="number" name="interest_of_cup" class="form-control input-lg" placeholder="ESCRIBE EL INTERES" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="2" readonly="readonly" value="{{ $product->interest_of_cup }}">
             </div> 
 
             <div class="form-group col-sm-6 col-lg-4">
@@ -45,7 +47,7 @@
 
                 <div class="form-group col-sm-6 col-lg-4">
                   {!! Form::label('surcharge', 'Recargo:') !!}
-                  <input type="number" name="surcharge" class="form-control input-lg" placeholder="ESCRIBE EL RECARGO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5" value="{{ $product->surcharge }}">
+                  <input type="number" name="surcharge" class="form-control input-lg" placeholder="ESCRIBE EL RECARGO" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" readonly="readonly" data-parsley-maxlength="5" value="{{ $product->surcharge }}">
                   </div> 
 
 

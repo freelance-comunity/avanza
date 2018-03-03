@@ -38,6 +38,7 @@ Detalles
 						<option>Computadora y Accesorios (Compra de)</option>
 						<option>Energía Eléctrica (Luz)</option>
 						<option>Fotocopias</option>
+						<option>Honorario de Terceros</option>
 						<option>Impresoras (Compra de)</option>
 						<option>Letreros y Anuncios Oficinas</option>
 						<option>Mantenimiento Vehículos</option>

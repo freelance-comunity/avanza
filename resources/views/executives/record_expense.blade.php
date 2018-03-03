@@ -23,6 +23,7 @@
             <option>Combustible</option>
             <option>Energía Eléctrica</option>
             <option>Fotocopias</option>
+            <option>Honorario de Terceros</option>
             <option>Refacciones</option>
             <option>Mantenimiento Vehículos</option>
             <option>Papelería y Artículos de Oficina</option>

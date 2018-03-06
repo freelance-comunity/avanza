@@ -34,7 +34,9 @@ Lista de créditos
 						<th>Estatus</th>
 						<th width="50px">Detalle crédito</th>
 						@if (Auth::user()->hasRole(['administrador', 'director-general']))
+						@if (Auth::user()->id == 1 OR Auth::user()->id == 20)
 						<th width="50px">Reversar</th>
+						@endif
 						<th width="50px">Condonar</th>
 						@endif
 					</thead>
@@ -70,9 +72,12 @@ Lista de créditos
 								<a href="{!! route('credits.show', [$credit->id]) !!}"><i class="fa fa-eye fa-2x" data-toggle="tooltip" title="Ver Detalles" ></i></a>
 							</td>
 							@if (Auth::user()->hasRole(['administrador', 'director-general']))
+							@if (Auth::user()->id == 1 OR Auth::user()->id == 20)
 							<td>
 								<a href="{{ url('reverse') }}/{{ $credit->id }}"><i class="fa fa-reply fa-2x" onclick="return confirm('¿Estas seguro de revertir este crédito?')" data-toggle="tooltip" title="Reversar Crédito"></i></a>
 							</td>
+							@endif
+							
 							<td>
 								<a href="{{ url('punishCredit') }}/{{ $credit->id }}"><i class="fa fa-trash fa-2x" onclick="return confirm('¿Estas seguro de condonar este crédito?')" data-toggle="tooltip" title="Condonar Crédito"></i></a>
 							</td>

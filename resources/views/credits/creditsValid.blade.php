@@ -77,7 +77,6 @@ Lista de créditos
 								<a href="{{ url('reverse') }}/{{ $credit->id }}"><i class="fa fa-reply fa-2x" onclick="return confirm('¿Estas seguro de revertir este crédito?')" data-toggle="tooltip" title="Reversar Crédito"></i></a>
 							</td>
 							@endif
-							
 							<td>
 								<a href="{{ url('punishCredit') }}/{{ $credit->id }}"><i class="fa fa-trash fa-2x" onclick="return confirm('¿Estas seguro de condonar este crédito?')" data-toggle="tooltip" title="Condonar Crédito"></i></a>
 							</td>

@@ -36,10 +36,12 @@
           @if(Auth::user()->hasRole(['administrador', 'director-general']))
           <li><a href="{{ url('showInvestments') }}/{{ Auth::user()->id }}">Inversiones</a></li>
           <li><a href="{{ url('showRetreats') }}/{{ Auth::user()->id }}">Retiros</a></li>
+          @if (Auth::user()->id == 1 OR Auth::user()->id == 20)
           <li><a href="{{ url('transfer') }}">Reasignación de Cartera</a></li>
           {{-- <li><a href="{{ url('moveCredits') }}">Transferir Credito</a></li> --}}
           {{-- <li><a data-toggle="modal" data-target="#move"><span>Transferir Crédito</span></a></li>--}}          
           <li><a data-toggle="modal" data-target="#moveClient"><span>Transferir Cliente</span></a></li>
+          @endif
           @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           <li><a href="{{ url('expenses-admin') }}">Gastos</a></li>
@@ -120,10 +122,11 @@
    </li>
 
    {{-- <li><a href="{{ url('transfers')}}"><i class="fa fa-paper-plane"></i> <span>Tranferencias</span></a></li> --}}
-   @if(Auth::user()->hasRole(['administrador', 'director-general']))
+   {{-- @if(Auth::user()->hasRole(['administrador', 'director-general']))
    <li><a href="{{ url('restructures')}}"><i class="fa fa-dollar"></i> <span>Reestructurados</span></a></li>
-   @endif
+   @endif --}}
    @if(Auth::user()->hasRole(['administrador', 'director-general']))
+   @if (Auth::user()->id == 1 OR Auth::user()->id == 20)
    <li class="treeview">
     <a href="#"><i class='fa fa-cogs'></i>  <span>Configuración</span> <i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
@@ -149,6 +152,7 @@
       <li><a href="{{ url('products') }}">Productos</a></li>
       @endif
     </ul>
+    @endif
   </li>
   @endif
 </ul><!-- /.sidebar-menu -->

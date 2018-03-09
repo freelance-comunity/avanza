@@ -17,6 +17,9 @@ $closes = App\Models\Close::orderBy('created_at', 'desc')->take(3)->get();
 $filtered_date_now_credits = App\Models\Credit::where(function ($query) {
 	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
 })->get();
+$filtered_date_now_credits_ministrado = App\Models\Credit::where(function ($query) {
+	$query->whereRaw('DATE(created_at) = CURRENT_DATE');
+})->get();
 
 $pendent = App\Models\Payment::where('status', 'Pendiente')->sum('balance');
 $partial = App\Models\Payment::where('status', 'Parcial')->sum('balance');
@@ -221,6 +224,20 @@ $vigente = $pendent+ $partial + $vencid;
 			<a href="{{ url('creditsValid') }}"  class="small-box-footer">Ver
 				<i class="fa fa-eye"></i>
 			</a>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-4">
+		<!-- small box -->
+		<div class="small-box bg-yellow">
+			<div class="inner">
+				<h3>${{ number_format($filtered_date_now_credits_ministrado->sum('ammount'),2) }}</h3>
+
+				<p>Total Ministrado del día</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-dollar"></i>
+			</div>
+			{{-- <a href="#" class="small-box-footer">Ver <i class="fa fa-eye"></i></a> --}}
 		</div>
 	</div>
 	<!-- ./col -->

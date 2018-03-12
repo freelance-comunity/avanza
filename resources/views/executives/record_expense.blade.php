@@ -18,6 +18,7 @@
           {!! Form::label('type', 'Tipo de Gasto:') !!}
           <select name="type" class="form-control input-lg">
             <option>Artículos de Limpieza</option>
+            <option>Audio/Visual Marketing</option>
             <option>Botiquín</option>
             <option>Cafetería</option>
             <option>Combustible</option>

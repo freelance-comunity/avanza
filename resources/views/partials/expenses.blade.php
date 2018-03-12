@@ -31,6 +31,7 @@ Detalles
 						<option>Accesorios Celulares</option>
 						<option>Amortización Vehículos</option>
 						<option>Artículos de Limpieza</option>
+						<option>Audio/Visual Marketing</option>
 						<option>Bicicletas (Compra de)</option>
 						<option>Cafetería</option>
 						<option>Celulares (Compra de)</option>

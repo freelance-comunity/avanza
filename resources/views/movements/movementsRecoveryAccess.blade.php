@@ -24,6 +24,7 @@ Detalles
 						<div class="table-responsive">
 							<table class="table" id="acces">
 								<thead class="bg-success">
+									<th>Región</th>
 									<th>Sucursal</th>
 									<th>Usuario</th>
 									<th>Monto</th>
@@ -33,6 +34,7 @@ Detalles
 								<tbody>
 									@foreach($accesses as $acces)
 									<tr>
+										<td>{{ $acces->user->region['name'] }}</td>
 										<td>{{ $acces->user->branch['name'] }}</td>
 										<td>{{ $acces->user['name'] }} {{ $acces->user['father_last_name'] }} {{ $acces->user['mother_last_name'] }}</td>
 										<td>${{ number_format($acces->ammount) }}</td>
@@ -45,7 +47,7 @@ Detalles
 						</div>
 						@endif
 					</div>
-				
+
 				</div>
 			</div>
 		</div>

@@ -9,12 +9,17 @@ Route::get('pdf/{id}', function ($id) {
     return $pdf->download('documents.pdf');
 });
 
+Route::get('images',function(){
+    $credits = App\Models\Credit::where('status','Pagado')->get();
+    return view('credits.images')
+    ->with('credits', $credits);
+});
 Route::get('promotores', function(){
     $clients = App\Models\Client::all();
 
     foreach ($clients as $key => $client) {
         if ($client->user_id = Auth::user()->id) {
-         if ($client->credits->count() > 1 ) {
+           if ($client->credits->count() > 1 ) {
             echo $client->firts_name;
             echo "2 o mayor";
             echo "<br>";
@@ -37,7 +42,7 @@ Route::get('signature', function () {
 });
 
 Route::get('totalPayments',function(){
- return view('totalPayments');
+   return view('totalPayments');
 });
 
 Route::get('api/payments', function(){
@@ -969,13 +974,13 @@ Route::get('applyMoratorium',function(){
 
 Route::get('productos', function () {
 
- $credit = App\Models\Credit::all();
- foreach ($credit as $key => $credit) {
+   $credit = App\Models\Credit::all();
+   foreach ($credit as $key => $credit) {
     if ($credit->periodicity == "SEMANAL") {
-     echo $credit->periodicity;
-     echo $credit->adviser;
-     echo "<br>";
- }
+       echo $credit->periodicity;
+       echo $credit->adviser;
+       echo "<br>";
+   }
 
 }
 });
@@ -1187,12 +1192,12 @@ Route::Post('reestructureCredit','CreditController@reestructureCredit');
 Route::get('paymentsCorrection', function(){
     $payments = App\Models\Payment::all()->where('status','Pagado');
     foreach ($payments as $key => $payment) {
-     $payment->capital = 0;
-     $payment->interest = 0;
-     $payment->moratorium = 0;
-     $payment->save();
- }
- echo "Pagos Pagados corregidos";
+       $payment->capital = 0;
+       $payment->interest = 0;
+       $payment->moratorium = 0;
+       $payment->save();
+   }
+   echo "Pagos Pagados corregidos";
 });
 
 Route::get('paymentsCorrectionVencido', function(){
@@ -1247,7 +1252,7 @@ echo "CORRECCION DE PAGOS VENCIDOS LISTO";
 
 // Route::get('reportPaymentCentro', 'GeneralController@reportPaymentCentro');
 Route::get('reportPaymentCentro',function(){
- return view('partials.reportPaymentCentro');
+   return view('partials.reportPaymentCentro');
 });
 
 Route::get('api/reportPaymentCentro', function(){
@@ -1266,7 +1271,7 @@ Route::get('api/reportPaymentCentro', function(){
 
 // Route::get('reportPaymentAltos', 'GeneralController@reportPaymentAltos');
 Route::get('reportPaymentAltos',function(){
- return view('partials.reportPaymentAltos');
+   return view('partials.reportPaymentAltos');
 });
 Route::get('api/reportPaymentAltos', function(){
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
@@ -1283,7 +1288,7 @@ Route::get('api/reportPaymentAltos', function(){
 });
 // Route::get('reportPaymentMezcalapa', 'GeneralController@reportPaymentMezcalapa');
 Route::get('reportPaymentMezcalapa',function(){
- return view('partials.reportPaymentMezcalapa');
+   return view('partials.reportPaymentMezcalapa');
 });
 Route::get('api/reportPaymentMezcalapa', function(){
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
@@ -1300,7 +1305,7 @@ Route::get('api/reportPaymentMezcalapa', function(){
 });
 // Route::get('reportPaymentNorte', 'GeneralController@reportPaymentNorte');
 Route::get('reportPaymentNorte',function(){
- return view('partials.reportPaymentNorte');
+   return view('partials.reportPaymentNorte');
 });
 Route::get('api/reportPaymentNorte', function(){
     $payments = DB::table('payments')->leftJoin('debts','payments.debt_id','=','debts.id')
@@ -1342,7 +1347,7 @@ Route::get('ruta', function(){
 
 
 Route::get('wallet',function(){
- return view('credits.wallet');
+   return view('credits.wallet');
 });
 
 Route::get('api/wallet', function(){
@@ -1368,7 +1373,7 @@ Route::get('clientes',function(){
 });
 
 Route::get('reportVaults',function(){
- return view('reports.reportVaults');
+   return view('reports.reportVaults');
 });
 
 
@@ -1405,11 +1410,11 @@ Route::get('transfers/{id}/delete', [
 Route::resource('excel','ExcelController');
 
 Route::get('chale',function(){
-   $date_now = \Carbon\Carbon::now()->toDateString();
-   $hour_now = \Carbon\Carbon::now()->toTimeString();
-   $payments = App\Models\Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
+ $date_now = \Carbon\Carbon::now()->toDateString();
+ $hour_now = \Carbon\Carbon::now()->toTimeString();
+ $payments = App\Models\Payment::where('date', $date_now)->where('status', 'Pendiente')->get();
 
-   foreach ($payments as $key => $payment) {
+ foreach ($payments as $key => $payment) {
     if ($hour_now >= '20:15:00') {
       echo "Estamos listos para bloquear";
       echo "<br>";
@@ -1474,7 +1479,7 @@ Route::get('errores',function(){
     $clients = App\Models\Client::all();
 
     foreach ($clients as $key => $client) {
-     
+
         $client = $credits->client;
         echo $client->id;
         echo "<br>";
@@ -1482,18 +1487,18 @@ Route::get('errores',function(){
         echo "<br>";
         echo $client->region_id;
         foreach ($credits as $key => $credit) {
-         echo $credit->client_id;
-         echo "<br>";
-         echo $credit->branch_id;
-         echo "<br>";
-         echo $credit->region_id;
-         echo "<br>";
-         echo "========";
-     }
- }
+           echo $credit->client_id;
+           echo "<br>";
+           echo $credit->branch_id;
+           echo "<br>";
+           echo $credit->region_id;
+           echo "<br>";
+           echo "========";
+       }
+   }
 });
 Route::get('movementsBeginningNorte',function(){
- return view('movements.movementsBeginningNorte');
+   return view('movements.movementsBeginningNorte');
 });
 Route::get('api/movementsBeginningNorte', function(){
     $incomes = DB::table('incomes')->leftJoin('branches','incomes.branch_id','=','branches.id')

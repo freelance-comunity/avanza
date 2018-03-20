@@ -24,7 +24,7 @@ Detalles
 						<div class="table-responsive">
 							<table class="table" id="sueldos">
 								<thead class="bg-success">
-									<th>Fecha</th>
+									
 									<th>Nombre Coordonador</th>
 									<th>Coordinación</th>
 									<th>Sucursal</th>
@@ -35,11 +35,12 @@ Detalles
 									<th>Deducciones</th>
 									<th>Neto a Pagar</th>
 									{{-- <th>Descargar</th> --}}
+									<th>Fecha</th>
 								</thead>
 								<tbody>
 									@foreach($rosters as $roster)
 									<tr>
-										<td>{!! $roster->date !!}</td>
+										
 										<td>{!! $roster->coordinating_name !!}</td>
 										<td>{!! $roster->coordination !!}</td>
 										<td>{!! $roster->user->branch['name'] !!}</td>
@@ -50,6 +51,7 @@ Detalles
 										<td>${!! number_format($roster->deductions,2) !!}</td>
 										<td>${!! number_format($roster->grandchild_pay,2) !!}</td>
 										{{-- <td><a href="{{ url('roster') }}/{{ $roster->id }}"><i class="fa  fa-file-pdf-o fa-2x" data-toggle="tooltip" title="Ver Nomina"></i></a></td> --}}
+										<td>{!! $roster->date !!}</td>
 									</tr>
 									@endforeach
 								</tbody>
@@ -57,7 +59,7 @@ Detalles
 						</div>
 						@endif
 					</div>
-				
+					
 				</div>
 			</div>
 		</div>

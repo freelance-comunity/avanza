@@ -18,30 +18,24 @@
           {!! Form::label('type', 'Tipo de Gasto:') !!}
           <select name="type" class="form-control input-lg">
             <option>Artículos de Limpieza</option>
-            <option>Audio/Visual Marketing</option>
-            <option>Botiquín</option>
-            <option>Cafetería</option>
             <option>Combustible</option>
-            <option>Energía Eléctrica</option>
+            <option>Energía Eléctrica (luz)</option>
             <option>Fotocopias</option>
-            <option>Honorario de Terceros</option>
-            <option>Refacciones</option>
-            <option>Mantenimiento Vehículos</option>
-            <option>Papelería y Artículos de Oficina</option>
+            <option>Papeleria y Articulos de Oficina</option>
             <option>Pasajes</option>
-            <option>Recargar Celular</option>
+            <option>Recarga Celular</option>
             <option>Renta de Inmuebles</option>
-            <option>Renta de Internet</option>
-            <option>Renta Teléfono</option>
-            <option>Toner o Cartuchos de Impresora</option>
+            <option>Renta Internet y Telefonía Fija</option>
+            <option>Servicio Agua Oficinas</option>
+            <option>Toner y Cartuchos Impresora</option>
             <option>Viáticos</option>
           </select>
         </p>
         <p>
-        {!! Form::label('concept', 'Descripción:') !!}
+          {!! Form::label('concept', 'Descripción:') !!}
           <input type="text" name="description" class="form-control input-lg" placeholder="ESCRIBE DESCRIPCIÓN" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
         </p>
-        <input type="hidden"  name="user_id" value="{{ $user->id }}">
+        <input type="hidden" name="employee" value="{{Auth::user()->name}} {{Auth::user()->father_last_name}} {{Auth::user()->mother_last_name}}">
         <p>
           {!! Form::label('voucher', 'Coprobante:') !!}
           <input type="file" name="voucher" class="form-control input-lg">

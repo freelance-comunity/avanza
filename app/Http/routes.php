@@ -1513,4 +1513,20 @@ Route::get('api/movementsBeginningNorte', function(){
 });
 
 
+Route::Post('gastoDA', 'ExpenditureController@gastoDA');
+
+
+Route::get('expendituresEmployee', function(){
+  $expenditures = App\Models\Expenditure::all();
+
+  foreach ($expenditures as $key => $ex) {
+    $vault = $ex->vault;
+    $user  = $vault->user;
+
+    $ex->employee = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
+    $ex->save();
+}
+echo "chido wey";
+});
+
 

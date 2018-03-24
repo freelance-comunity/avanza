@@ -20,6 +20,8 @@ class Expenditure extends Model
 		"date",
 		"description",
 		"type",
+		"category",
+		"employee",
 		"credit_id",
 		"vault_id",
 		"branch_id",

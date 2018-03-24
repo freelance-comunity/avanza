@@ -8,6 +8,12 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use App\User;
+use Toastr;
+use Validator;
+use Auth;
+use Image;
+use Carbon\Carbon;
 
 class ExpenditureController extends AppBaseController
 {
@@ -28,24 +34,24 @@ class ExpenditureController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = Expenditure::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$columns = Schema::getColumnListing('$TABLE_NAME$');
+		$attributes = array();
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
+		foreach($columns as $attribute){
+			if($request[$attribute] == true)
+			{
+				$query->where($attribute, $request[$attribute]);
+				$attributes[$attribute] =  $request[$attribute];
+			}else{
+				$attributes[$attribute] =  null;
+			}
+		};
 
-        $expenditures = $query->get();
+		$expenditures = $query->get();
 
-        return view('expenditures.index')
-            ->with('expenditures', $expenditures)
-            ->with('attributes', $attributes);
+		return view('expenditures.index')
+		->with('expenditures', $expenditures)
+		->with('attributes', $attributes);
 	}
 
 	/**
@@ -67,7 +73,7 @@ class ExpenditureController extends AppBaseController
 	 */
 	public function store(CreateExpenditureRequest $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
 		$expenditure = Expenditure::create($input);
 
@@ -165,5 +171,62 @@ class ExpenditureController extends AppBaseController
 		Flash::message('Expenditure deleted successfully.');
 
 		return redirect(route('expenditures.index'));
+	}
+	public function gastoDA(Request $request)
+	{    
+		$id_user = $request->input('user_id');
+		$user = User::find($id_user);
+		$vault = $user->vault;
+		if ($vault->ammount == 0) {
+			Toastr::error('No puedes registrar un gasto, ya que no cuentas con efectivo.', 'CRÉDITO', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+			return redirect()->back();
+		} else {
+			$validator = Validator::make($request->all(), [
+				'ammount' => 'required|numeric',
+				'voucher' => 'required|image|mimes:jpeg,png,jpg',
+			]);
+
+			if ($validator->fails()) {
+				Toastr::error('Favor de introducir cantidad valida ó la imagen correctamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+				return redirect()->back();
+			}
+
+			if ($request->hasFile('voucher')) {
+				$voucher = $request->file('voucher');
+				$filename = time() . '.' . $voucher->getClientOriginalExtension();
+				Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
+			}
+
+			$current = Carbon::today();
+			$ammount = $request->input('ammount');
+			$concept = $request->input('concept');
+			$id_user = $request->input('user_id');
+			$user = User::find($id_user);
+			$vault = $user->vault;
+			$data_expenditure['ammount'] = $ammount;
+			$data_expenditure['concept'] = 'Gasto';
+			$data_expenditure['voucher'] = $filename;
+			$data_expenditure['date']    = $current;
+			$data_expenditure['description']= $request->input('description');
+			$data_expenditure['type']= $request->input('type');
+			if ($request->input('type') == 'Accesorios Celulares' ) {
+				$data_expenditure['category']= 'Activo';
+			}
+			$data_expenditure['employee']=$request->input('employee');
+			$data_expenditure['vault_id'] = $vault->id;
+			$data_expenditure['branch_id'] = $user->branch_id;
+			$data_expenditure['region_id'] = $user->region_id;
+
+            // dd($data_expenditure);
+			$expenditure = Expenditure::create($data_expenditure);
+
+			$vault->ammount = $vault->ammount - $expenditure->ammount;
+			$vault->save();
+
+			Toastr::success('Gasto agregado exitosamente.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+			return redirect()->back();
+		}
 	}
 }

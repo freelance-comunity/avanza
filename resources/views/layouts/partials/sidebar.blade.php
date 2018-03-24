@@ -30,9 +30,9 @@
 
       @if(Auth::user()->hasRole(['administrador', 'director-general', 'coordinador-regional', 'coordinador-sucursal']))
       <li><a href="{{ url('vault') }}"><i class="fa fa-university"></i> <span>Bóveda</span></a></li>
-      @if(Auth::user()->hasRole(['administrador', 'director-general']))
+     {{--  @if(Auth::user()->hasRole(['administrador', 'director-general']))
       <li><a data-toggle="modal" data-target="#gastoDA"><i class="fa fa-dollar"></i><span>Registrar Gasto </span></a></li>
-      @endif     
+      @endif      --}}
      {{--  @role('coordinador-regional')
       <li><a data-toggle="modal" data-target="#gastoC"><i class="fa fa-dollar"></i><span>Registrar Gasto </span></a></li>    
       @endrole  --}}

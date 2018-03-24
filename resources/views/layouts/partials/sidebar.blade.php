@@ -53,7 +53,12 @@
           @endif
           <li><a href="{{ route('rosters.store') }}">Sueldos</a></li>
           {{-- <li><a href="{{ url('expenses-admin') }}">Gastos</a></li> --}}
-          <li><a data-toggle="modal" data-target="#gastoC"><span>Registrar Gasto </span></a></li> 
+          @if(Auth::user()->hasRole(['administrador', 'director-general']))
+          <li><a data-toggle="modal" data-target="#gastoDA"><span>Registrar Gasto </span></a></li>
+          @endif     
+          @role('coordinador-regional')
+          <li><a data-toggle="modal" data-target="#gastoC"></i><span>Registrar Gasto </span></a></li>    
+          @endrole 
           {{--   <li><a href="{{ url('actives-admin') }}">Inversiones en Activos</a></li> --}}
         </ul>
       </li>

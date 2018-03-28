@@ -1531,14 +1531,14 @@ echo "chido wey";
 
 
 
-Route::get('finalDay',function(){
+// Route::get('finalDay',function(){
    
-    return view('final.boxcut');
+//     return view('final.boxcut');
 
-});
+// });
 
 
-Route::post('finalDay', 'GeneralController@finalDay');
+// Route::post('finalDay', 'GeneralController@finalDay');
 
 
 

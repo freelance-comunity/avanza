@@ -26,9 +26,9 @@ use App\Models\IncomePayment;
 use App\Models\BoxCut;
 use App\Models\Roster;
 use App\Models\Active;
-use App\Models\Final;
 use DB;
 use Yajra\DataTables\DataTables;
+// use App\Models\Final;
 
 
 class GeneralController extends Controller

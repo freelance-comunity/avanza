@@ -94,13 +94,13 @@ $users = $filtered->where('region_id', $region_allocation->id);
 
 
  --}}
-                <div class="form-group col-sm-6 col-lg-4">
+              {{--   <div class="form-group col-sm-6 col-lg-4">
                   {!! Form::label('firm', 'Foto del Pagare:') !!}
                   {!! Form::file('firm', [
                     'data-parsley-trigger ' => 'input focusin',
                     'required'=>'required'
                     ]) !!}
-                  </div>
+                  </div> --}}
                   
                 </div>
                 <input type="hidden" name="branch" value="{{ $client->branch->name}}">

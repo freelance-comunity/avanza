@@ -42,7 +42,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
         {!! Form::label('branch_office', 'Sucursal:') !!}
         <input type="text" name="branch_office" class="form-control input-lg" value="{{ Auth::user()->branch['name'] }}" readonly="">
     </div>
-
+  @if(Auth::user()->hasRole([ 'coordinador-regional', 'coordinador-sucursal','ejecutivo-de-credito']))
     <div class="form-group col-sm-6 col-lg-6">
         {!! Form::label('name_employee', 'Nombre Empleado:') !!}
         <select name="name_employee" id="" class="form-control input-lg">
@@ -53,7 +53,18 @@ $users = $filtered->where('region_id', $region_allocation->id);
             @endforeach
         </select>
     </div>
-
+    @elseif(Auth::user()->hasRole([ 'administrador','director-general']))
+    <div class="form-group col-sm-6 col-lg-6">
+        {!! Form::label('name_employee', 'Nombre Empleado:') !!}
+        <select name="name_employee" id="" class="form-control input-lg">
+            @foreach ($filtered as $user)
+            <option value="{{ $user->id }}">
+                {{ $user->name }} {{ $user->father_last_name }} {{ $user->mother_last_name }}
+            </option>
+            @endforeach
+        </select>
+    </div>
+@endif
     {{-- <div class="form-group col-sm-6 col-lg-4">
         {!! Form::label('number_employee', 'Número Empleado:') !!}
         {!! Form::text('number_employee', null, ['class' => 'form-control input-lg']) !!}

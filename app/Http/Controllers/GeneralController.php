@@ -26,6 +26,7 @@ use App\Models\IncomePayment;
 use App\Models\BoxCut;
 use App\Models\Roster;
 use App\Models\Active;
+use App\Models\Final;
 use DB;
 use Yajra\DataTables\DataTables;
 
@@ -958,21 +959,21 @@ class GeneralController extends Controller
     }
     public function moveClient(Request $request)
     {
-       $clients= Client::all();
-       $id_user = $request->input('user_id');
-       $user = User::find($id_user);
-       return view('partials.moveClients')
-       ->with('clients',$clients)
-       ->with('user',$user);
-   }
-   public function moveClientAll(Request $request)
-   {
-       $id_user = $request->input('user_id');
-       $user = User::find($id_user);
-       $input = $request->all();
+     $clients= Client::all();
+     $id_user = $request->input('user_id');
+     $user = User::find($id_user);
+     return view('partials.moveClients')
+     ->with('clients',$clients)
+     ->with('user',$user);
+ }
+ public function moveClientAll(Request $request)
+ {
+     $id_user = $request->input('user_id');
+     $user = User::find($id_user);
+     $input = $request->all();
 
-       foreach ($input['rows'] as $row) 
-       {
+     foreach ($input['rows'] as $row) 
+     {
         $id_client = $row['id'];
         $client = Client::find($id_client);
         $client->branch_id = $user->branch_id;
@@ -981,29 +982,52 @@ class GeneralController extends Controller
         $client->save();
         $credits = $client->credits;
         foreach ($credits as $key => $credit) {
-         $credit->adviser = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
-         $credit->user_id = $user->id;
-         $credit->branch_id = $user->branch_id;
-         $credit->region_id = $user->region_id;
-         $credit->save();
+           $credit->adviser = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
+           $credit->user_id = $user->id;
+           $credit->branch_id = $user->branch_id;
+           $credit->region_id = $user->region_id;
+           $credit->save();
 
-         $debt = $credit->debt;
-         $debt->branch_id = $user->branch_id;
-         $debt->region_id = $user->region_id;
-         $debt->save();
+           $debt = $credit->debt;
+           $debt->branch_id = $user->branch_id;
+           $debt->region_id = $user->region_id;
+           $debt->save();
 
-         $payments = $debt->payments;
-         foreach ($payments as $key => $payment) {
-             $payment->user_id = $user->id;
-             $payment->branch_id = $user->branch_id;
-             $payment->region_id = $user->region_id;
-            $payment->save();
-         }
-     }
+           $payments = $debt->payments;
+           foreach ($payments as $key => $payment) {
+               $payment->user_id = $user->id;
+               $payment->branch_id = $user->branch_id;
+               $payment->region_id = $user->region_id;
+               $payment->save();
+           }
+       }
 
- }
+   }
 
- Toastr::success('Cliente o Clientes Transferido Exitosamente.', 'Transferencia de Cliente', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
- return view('home');
+   Toastr::success('Cliente o Clientes Transferido Exitosamente.', 'Transferencia de Cliente', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+   return view('home');
 }
+
+public function finalDay(){
+
+    $data_final['date']= $request->input('date');
+    $data_final['region']= $request->input('region');
+    $data_final['branch']= $request->input('branch');
+    $data_final['name']= $request->input('name');
+    $data_final['vault']= $request->input('vault');
+    $data_final['incomes']= $request->input('incomes');
+    $data_final['incomePayment']= $request->input('incomePayment');
+    $data_final['access']= $request->input('access');
+    $data_final['credit']= $request->input('credit');
+    $data_final['expenditures']= $request->input('expenditures');
+    $data_final['actives']= $request->input('actives');
+
+            dd($data_final);
+    // $final = Final::create($data_final);
+
+
+    // Toastr::success('Cierre de Día Exitosamente.', 'Cierre Día', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+    //  return redirect()->back();
+}
+
 }

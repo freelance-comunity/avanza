@@ -218,7 +218,7 @@ class GeneralController extends Controller
         } else {
             $validator = Validator::make($request->all(), [
                 'ammount' => 'required|numeric',
-                'voucher' => 'required|image|mimes:jpeg,png,jpg',
+                // 'voucher' => 'required|image|mimes:jpeg,png,jpg',
             ]);
 
             if ($validator->fails()) {
@@ -227,11 +227,11 @@ class GeneralController extends Controller
                 return redirect()->back();
             }
 
-            if ($request->hasFile('voucher')) {
-                $voucher = $request->file('voucher');
-                $filename = time() . '.' . $voucher->getClientOriginalExtension();
-                Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
-            }
+            // if ($request->hasFile('voucher')) {
+            //     $voucher = $request->file('voucher');
+            //     $filename = time() . '.' . $voucher->getClientOriginalExtension();
+            //     Image::make($voucher)->resize(400, 400)->save(public_path('/uploads/voucher' . $filename));
+            // }
 
             $current = Carbon::today();
             $ammount = $request->input('ammount');
@@ -240,7 +240,7 @@ class GeneralController extends Controller
             $vault = $user->vault;
             $data_expenditure['ammount'] = $ammount;
             $data_expenditure['concept'] = 'Gasto';
-            $data_expenditure['voucher'] = $filename;
+            // $data_expenditure['voucher'] = $filename;
             $data_expenditure['date']    = $current;
             $data_expenditure['description']= $request->input('description');
             $data_expenditure['type']= $request->input('type');

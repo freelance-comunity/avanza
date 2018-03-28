@@ -36,10 +36,10 @@
           <input type="text" name="description" class="form-control input-lg" placeholder="ESCRIBE DESCRIPCIÓN" required="required" data-parsley-trigger="input focusin" data-parsley-type="digits" data-parsley-maxlength="5">
         </p>
         <input type="hidden" name="employee" value="{{Auth::user()->name}} {{Auth::user()->father_last_name}} {{Auth::user()->mother_last_name}}">
-        <p>
+       {{--  <p>
           {!! Form::label('voucher', 'Coprobante:') !!}
           <input type="file" name="voucher" class="form-control input-lg">
-        </p>
+        </p> --}}
         <p>
           {!! Form::submit('ASIGNAR', ['class' => 'btn btn-lg btn-block bg-navy']) !!}
         </p>

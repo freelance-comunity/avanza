@@ -69,10 +69,10 @@ $users = $filtered->where('region_id', $region_allocation->id);
       <input type="text" name="description" class="form-control input-lg" placeholder="ESCRIBE DESCRIPCIÓN" required="required" data-parsley-trigger="input focusin" >
     </p>
 
-    <p>
+   {{--  <p>
       {!! Form::label('voucher', 'Coprobante:') !!}
       <input type="file" name="voucher" class="form-control input-lg">
-    </p>
+    </p> --}}
     <input type="hidden" name="employee" value="{{Auth::user()->name}} {{Auth::user()->father_last_name}} {{Auth::user()->mother_last_name}}">
     <p>
       <div class="form-group col-sm-6 col-lg-12">

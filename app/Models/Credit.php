@@ -45,7 +45,7 @@ class Credit extends Model
 		"firts_name" => "required",
 		"last_name" => "required",
 		"mothers_last_name" => "required",
-		// "firm" =>'required',
+		"firm" =>'required',
 	];
 
 	public function branch()

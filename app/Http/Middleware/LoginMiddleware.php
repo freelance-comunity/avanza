@@ -19,7 +19,7 @@ class LoginMiddleware
     {
         $td = Carbon\Carbon::now();
         // if (Auth::user()->name <> 'ADMIN') {
-          if ($td->hour >= 20) {
+          if ($td->hour >= 10) {
             if (\Auth::user()->hasRole(['coordinador-regional','coordinador-sucursal','ejecutivo-de-credito']))
                 {
                     Auth::logout();

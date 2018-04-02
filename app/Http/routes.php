@@ -1548,3 +1548,22 @@ Route::get('finals/{id}/delete', [
     'as' => 'finals.delete',
     'uses' => 'FinalController@destroy',
 ]);
+
+Route::get('cambioregion', function(){
+    $clients = App\Models\Client::all()->where('region_id', 4);
+    foreach ($clients as $key => $value) {
+       $value->region_id = 2;
+       $value->save();
+       echo "listo";
+    }
+});
+
+Route::get('cambiocreditoregion', function(){
+    $credits = App\Models\Credit::all()->where('region_id', 4);
+    foreach ($credits as $key => $value) {
+       $value->region_id = 2;
+       $value->save();
+       echo "listo";
+       echo "<br>";
+    }
+});

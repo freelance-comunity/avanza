@@ -30,7 +30,8 @@ class Kernel extends ConsoleKernel
     
        // $schedule->command('lock:payments')->dailyAt('20:15');
 
-        $schedule->command('command:cut')->dailyAt(16:30);
+        $schedule->command('command:cut')->everyMinute();
+        // ->dailyAt(16:30);
 
 
     }

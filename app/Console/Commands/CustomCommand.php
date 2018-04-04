@@ -72,8 +72,7 @@ class CustomCommand extends Command
          $final->actives = $actives->sum('ammount');
          $final->save();
 
-         echo "Corte de Caja Realizado exitosamente";
-         echo "<br>";
+       
      }
  }
 }

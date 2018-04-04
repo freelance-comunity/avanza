@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         // Commands\Inspire::class,
         Commands\LockPayments::class,
         Commands\Happy::class,
+        Commands\CustomCommand::class,
     ];
 
     /**
@@ -29,9 +30,12 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('lock:payments')
-        ->everyMinute();
+         ->dailyAt('20:15');
 
         $schedule->command('w:hayppy')
+        ->everyMinute();
+
+        $schedule->command('custom:command')
         ->everyMinute();
     }
 }

@@ -15,7 +15,7 @@ $users = $filtered->where('region_id', $region_allocation->id);
   <div class="box-body">
 
     <div class="form-group col-sm-6 col-lg-12">
-    {{--  <div class="form-group col-sm-6 col-lg-4">
+   {{--   <div class="form-group col-sm-6 col-lg-4">
       {!! Form::label('date', 'Fecha:') !!}
       <input type="date" value="{{ Carbon\Carbon::now()->toDateString() }}" name="date" class="form-control input-lg formulario" id="date" required="required" data-parsley-trigger="input focusin" >
     </div> --}}

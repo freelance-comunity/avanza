@@ -58,19 +58,22 @@
                 <td>${{number_format($expenditures->sum('ammount',2))}}</td>
                 <td>${{number_format($actives->sum('ammount',2))}}</td>
               </tr>
-              <input type="hidden" name="date" value="{{$now}}">
-              <input type="hidden" name="region" value="{{ $user->region['name'] }}">
-              <input type="hidden" name="branch" value="{{ $user->branch['name']}}">
-              <input type="hidden" name="name" value="{{$user->name}} {{$user->father_last_name}} {{$user->mother_last_name}}">
-              <input type="hidden" name="vault" value="{{$vault->ammount}}">
-              <input type="hidden" name="incomes" value="{{$incomes->sum('ammount')}}">
-              <input type="hidden" name="incomePayment" value="{{$incomePayment->sum('ammount')}}">
-              <input type="hidden" name="access" value="{{$purseAccess->sum('ammount')}}">
-              <input type="hidden" name="credit" value="{{$expendituresCredit->sum('ammount')}}">
-              <input type="hidden" name="expenditures" value="{{$expenditures->sum('ammount')}}">
-              <input type="hidden" name="actives" value="{{$actives->sum('ammount')}}">
+              <input type="text" name="date" value="{{$now}}">
+              <input type="text" name="region" value="{{ $user->region['name'] }}">
+              <input type="text" name="branch" value="{{ $user->branch['name']}}">
+              <input type="text" name="name" value="{{$user->name}} {{$user->father_last_name}} {{$user->mother_last_name}}">
+              <input type="text" name="vault" value="{{$vault->ammount}}">
+              <input type="text" name="incomes" value="{{$incomes->sum('ammount')}}">
+              <input type="text" name="incomePayment" value="{{$incomePayment->sum('ammount')}}">
+              <input type="text" name="access" value="{{$purseAccess->sum('ammount')}}">
+              <input type="text" name="credit" value="{{$expendituresCredit->sum('ammount')}}">
+              <input type="text" name="expenditures" value="{{$expenditures->sum('ammount')}}">
+              <input type="text" name="actives" value="{{$actives->sum('ammount')}}"> 
 
               @endforeach
+              
+
+              
             </tbody>
           </table>
         </div>

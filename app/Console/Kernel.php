@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use App\Console\Commands\CustomCommand;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -14,9 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         // Commands\Inspire::class,
-        \App\Console\Commands\LockPayments::class,
-       
-        \App\Console\Commands\CustomCommand::class,
+        App\Console\Commands\LockPayments::class,
+        
+        CustomCommand::class,
     ];
 
     /**
@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('lock:payments')
-         ->dailyAt('20:15');
+        ->dailyAt('20:15');
 
         $schedule->command('custom:command')
         ->everyMinute();

@@ -13,9 +13,9 @@ Lista de personal
 	@include('final.modalBoxCut')
 
 	<div class="row">
-		<h1 class="pull-left">CORTE DE CAJA</h1>
+		<h1 class="pull-left">CIERRE DE BÓVEDA</h1>
 
-		<a class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalBoxCut" >CIERRE BÓVEDA </a>
+		{{-- <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalBoxCut" >CIERRE BÓVEDA </a> --}}
 	</div>
 	<div class="table-inverse">
 		<div class="table-responsive">

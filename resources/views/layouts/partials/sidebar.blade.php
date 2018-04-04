@@ -165,7 +165,7 @@
       @if (Auth::user()->can('productos'))
       <li><a href="{{ url('products') }}">Productos</a></li>
       @endif
-     {{--  <li><a href="{{ url('cortedecaja') }}">Cierre Bóveda</a></li> --}}
+      <li><a href="{{ url('finalDay') }}">Cierre Bóveda</a></li>
     </ul>
     @endif
   </li>

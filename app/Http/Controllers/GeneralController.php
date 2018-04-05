@@ -136,7 +136,12 @@ class GeneralController extends Controller
             Toastr::error('No cuentas con el dinero suficiente para otorgar $'.number_format($request->input('ammount')).' de saldo inicial.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
 
             return redirect()->back();
-        } else {
+        } 
+        elseif ($ammount_add < 0) {
+             Toastr::error('Favor de introducir cantidad valida.', 'BOVÉDA', ["positionClass" => "toast-bottom-right", "progressBar" => "true"]);
+
+            return redirect()->back();
+        }else {
             $user = User::find($request->input('user_id'));
             $vault = $user->vault;
 

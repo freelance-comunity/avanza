@@ -43,36 +43,37 @@ class CustomCommand extends Command
     public function handle()
     {
        $users = User::all();
+       $current =  Carbon::today()->toDateString();
+       $count = Finals::where('date',$current)->count();
+       $usersC = User::all()->count();
+       if ($count == 0) {
+           foreach ($users as $user){
+
+             
+             $vault = $user->vault;
+             $vault_total = Vault::all();
+             $incomes = $vault->incomes->where('date', $current);
+             $incomePayment = $vault->incomePayment->where('date', $current);
+             $purseAccess = $vault->purseAccess->where('date', $current);
+             $expendituresCredit = $vault->expendituresCredit->where('date', $current);
+             $expenditures = $vault->expenditures->where('date', $current);
+             $actives = $vault->actives->where('date', $current);
 
 
-       foreach ($users as $user){
-
-         $current =  Carbon::today()->toDateString();
-         $vault = $user->vault;
-         $vault_total = Vault::all();
-         $incomes = $vault->incomes->where('date', $current);
-         $incomePayment = $vault->incomePayment->where('date', $current);
-         $purseAccess = $vault->purseAccess->where('date', $current);
-         $expendituresCredit = $vault->expendituresCredit->where('date', $current);
-         $expenditures = $vault->expenditures->where('date', $current);
-         $actives = $vault->actives->where('date', $current);
-
-
-         $final = new Finals;
-         $final->date = $current;
-         $final->region = $user->region['name'];
-         $final->branch = $user->branch['name'];
-         $final->name = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
-         $final->vault= $vault->ammount;
-         $final->incomes = $incomes->sum('ammount');
-         $final->incomePayment =  $incomePayment->sum('ammount');
-         $final->access = $purseAccess->sum('ammount');
-         $final->credit = $expendituresCredit->sum('ammount');
-         $final->expenditures = $expenditures->sum('ammount');
-         $final->actives = $actives->sum('ammount');
-         $final->save();
-
-       
+             $final = new Finals;
+             $final->date = $current;
+             $final->region = $user->region['name'];
+             $final->branch = $user->branch['name'];
+             $final->name = $user->name.' '.$user->father_last_name.' '.$user->mother_last_name;
+             $final->vault= $vault->ammount;
+             $final->incomes = $incomes->sum('ammount');
+             $final->incomePayment =  $incomePayment->sum('ammount');
+             $final->access = $purseAccess->sum('ammount');
+             $final->credit = $expendituresCredit->sum('ammount');
+             $final->expenditures = $expenditures->sum('ammount');
+             $final->actives = $actives->sum('ammount');
+             $final->save(); 
+         }
      }
  }
 }

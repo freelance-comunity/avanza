@@ -150,7 +150,7 @@ else
                     </td>
                 </tr>
                 @endif
-                @if ($payment->date == $date_now AND $payment->status === 'Pendiente')
+                @if ($payment->date <= $date_now AND $payment->status === 'Pendiente')
                 <tr {{-- class="bg-success" --}}>
                     <td>{{ $payment->number }} de {{ $credit->dues }}</td>
                     <td>$ {{ number_format($payment->balance, 2) }}</td>

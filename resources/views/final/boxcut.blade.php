@@ -19,7 +19,7 @@ Lista de personal
 	</div>
 	<div class="table-inverse">
 		<div class="table-responsive">
-			<table class="table" id="example">
+			<table class="table" id="finals">
 				<thead class="thead-inverse">
 					<th>Fecha</th>
 					<th>Región</th>
@@ -33,7 +33,7 @@ Lista de personal
 					<th>Gastos</th>
 					<th>Inversión en Activos</th>
 				</thead>
-				<tbody>
+			{{-- 	<tbody>
 					@php
 
 					$finals = App\Models\Finals::all();
@@ -56,7 +56,7 @@ Lista de personal
 
 					@endforeach
 
-				</tbody>
+				</tbody> --}}
 			</table>
 		</div>
 	</div>

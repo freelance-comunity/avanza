@@ -856,5 +856,48 @@ $('#control').keyup(function() {
   });
 </script>
 
+<script>
+        $(document).ready(function() {
+          $('#finals').DataTable( {
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            lengthMenu: [[100000, 100, -1], [100000, 100, "All"]],
 
+            // buttons: [
+            // 'csv', 'excel', 'print', 
+            // ],
+            buttons: [
+            {
+              extend: 'excelHtml5',
+              title: 'Cierre Bóveda'
+            },
+            {
+              extend: 'csvHtml5',
+              title: 'Cierre Bóveda'
+            }
+            ],
+            processing: true,
+            serverSide: true,
+            ajax: "api/finals",
+            columns:[
+            {data: 'date', name: 'finals.date'},
+            {data: 'region', name:'finals.region'},
+            {data: 'branch',name:'finals.branch'},
+            {data: 'name', name: 'finals.name'},
+            {data: 'vault', name: 'finals.vault'},
+            {data: 'incomes', name: 'finals.incomes'},
+            {data: 'incomePayment', name: 'finals.incomePayment'},
+            {data: 'access', name: 'finals.access'},
+            {data: 'credit', name:'finals.credit'},
+            {data: 'expenditures' , name:'finals.expenditures'},
+            {data: 'actives', name: 'finals.actives'},
+            
+
+            ]
+          });
+           // $.fn.dataTable.ext.errMode = 'throw';
+         });
+       </script>
 

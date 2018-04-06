@@ -1624,3 +1624,14 @@ Route::get('contar', function(){
 }
 
 });
+
+
+Route::get('api/finals', function(){
+   
+    $finals = DB::table('finals')
+    ->select(['finals.date','finals.region','finals.branch','finals.name','finals.vault','finals.incomes',
+        'finals.incomePayment','finals.access','finals.credit','finals.expenditures','finals.actives']);
+
+    return Datatables::of($finals)
+    ->make(true);
+});

@@ -27,7 +27,8 @@ Detalles
 									
 									<th>Nombre Coordonador</th>
 									<th>Coordinación</th>
-									<th>Sucursal</th>
+									<th>Sucursal Oficina</th>
+									<th>Sucursal Empleado</th>
 									<th>Nombre Empleado</th>
 									<th>Esquema de Pago</th>
 									<th>Periodo de Pago</th>
@@ -43,7 +44,8 @@ Detalles
 										
 										<td>{!! $roster->coordinating_name !!}</td>
 										<td>{!! $roster->coordination !!}</td>
-										<td>{!! $roster->user->branch['name'] !!}</td>
+										<td>{!! $roster->branch_office !!}</td>
+										<td>{{ $roster->branch['name']}}</td>
 										<td>{!! $roster->name_employee !!}</td>
 										<td>{!! $roster->payment_scheme !!}</td>
 										<td>{!! $roster->payment_period !!}</td>

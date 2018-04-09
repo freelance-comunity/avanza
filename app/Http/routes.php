@@ -1608,7 +1608,7 @@ Route::get('cortedecaja', function(){
 Route::get('contar', function(){
     $current =  \Carbon\Carbon::today()->subDay()->toDateString();
     $count = App\Models\Finals::where('date',$current)->count();
-  
+
     echo $current;
     echo "<br>";
     echo $count;
@@ -1627,11 +1627,20 @@ Route::get('contar', function(){
 
 
 Route::get('api/finals', function(){
-   
+
     $finals = DB::table('finals')
     ->select(['finals.date','finals.region','finals.branch','finals.name','finals.vault','finals.incomes',
         'finals.incomePayment','finals.access','finals.credit','finals.expenditures','finals.actives']);
 
     return Datatables::of($finals)
     ->make(true);
+});
+
+
+Route::get('paymentsDueToday', function(){
+   
+   $payments = App\Models\Payment::all();
+   return view('payments.paymentsDueToday')
+   ->with('payments', $payments);
+
 });

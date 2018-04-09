@@ -74,6 +74,8 @@
          {{--  <li><a href="{{ url('wallet') }}">Cartera ajax</a></li> --}}
          <li><a href="{{ url('reportVaults') }}">Bóveda</a></li>
          {{-- <li><a href="{{ url('totalVault') }}">Total bovéda</a></li> --}}
+         <li><a href="{{ url('finalDay') }}">Cierre Bóveda</a></li>
+         <li><a href="{{ url('paymentsDueToday') }}">Pagos Por Vencer</a></li>
        </ul>
      </li>
      <li class="treeview">
@@ -165,7 +167,7 @@
       @if (Auth::user()->can('productos'))
       <li><a href="{{ url('products') }}">Productos</a></li>
       @endif
-      <li><a href="{{ url('finalDay') }}">Cierre Bóveda</a></li>
+     
     </ul>
     @endif
   </li>

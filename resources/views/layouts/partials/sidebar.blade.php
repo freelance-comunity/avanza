@@ -75,7 +75,7 @@
          <li><a href="{{ url('reportVaults') }}">Bóveda</a></li>
          {{-- <li><a href="{{ url('totalVault') }}">Total bovéda</a></li> --}}
          <li><a href="{{ url('finalDay') }}">Cierre Bóveda</a></li>
-         <li><a href="{{ url('paymentsDueToday') }}">Pagos Por Vencer</a></li>
+         
        </ul>
      </li>
      <li class="treeview">
@@ -121,8 +121,10 @@
        {{--  <li><a href="{{ url('movementsActives') }}">Inversión en Activos</a></li> --}}
      </ul>
    </li>
+    <li><a href="{{ url('paymentsDueToday') }}"><i class="fa fa-exclamation-triangle"></i> <span>Pagos Por Vencer</span></a></li>
    @endif
    {{--  <li><a href="{{ url('ruta') }}"><i class="fa fa-users"></i> <span>Ruta</span></a></li> --}}
+
    <li><a href="{{ url('clients') }}"><i class="fa fa-users"></i> <span>Clientes</span></a></li>
    @if(Auth::user()->hasRole(['ejecutivo-de-credito']))
    <li><a data-toggle="modal" data-target="#selection"><i class="fa fa-user"></i><span>Nuevo Cliente</span></a></li>

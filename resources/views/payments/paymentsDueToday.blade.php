@@ -18,6 +18,7 @@
         <div class="table-responsive">
             <table class="table"  id="example">
                 <thead>
+                    <th>Sucursal</th>
                     <th>Cliente</th>
                     <th>Crédito</th>
                     <th>Fecha</th>
@@ -42,6 +43,7 @@
 
                     @if ( $fecha <= $current AND $payment->status == 'Pendiente' OR $payment->status == 'Parcial' )
                     <tr>
+                        <td>{{$payment->branch['name']}}</td>
                         <td>{{ $credit->firts_name }} {{ $credit->last_name }} {{ $credit->mothers_last_name }}
                         </td>
                         <td>{{ $credit->folio }}</td>

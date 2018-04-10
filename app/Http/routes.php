@@ -1637,10 +1637,12 @@ Route::get('api/finals', function(){
 });
 
 
-Route::get('paymentsDueToday', function(){
+// Route::get('paymentsDueToday', function(){
    
-   $payments = App\Models\Payment::all();
-   return view('payments.paymentsDueToday')
-   ->with('payments', $payments);
+//    $payments = App\Models\Payment::all();
+//    return view('payments.paymentsDueToday')
+//    ->with('payments', $payments);
 
-});
+// });
+
+Route::get('paymentsDueToday','GeneralController@paymentsDueToday');
